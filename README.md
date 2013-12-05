@@ -1,5 +1,8 @@
 # info-f-209 : Quidditch
 
+## Wiki
+GitHub comporte un wiki, ça peut être cool de l'utiliser pour regrouper les informations : [liste des pages existantes](https://github.com/C4ptainCrunch/info-f-209/wiki/_pages)
+
 ## Aide Git
 Cloner le répertoire git (si c'est votre première fois, regardez comment configurer git ici en bas)
 ```bash

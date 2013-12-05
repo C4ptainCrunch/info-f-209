@@ -1,9 +1,10 @@
 # info-f-209 : Quidditch
 
 ## Aide Git
-Cloner le répertoire git
+Cloner le répertoire git (si c'est votre première fois, regardez comment configurer git ici en bas)
 ```bash
-git clone git@github.com:C4ptainCrunch/info-f-209.git
+git clone git@github.com:C4ptainCrunch/info-f-209.git # Si vous utilisez une clé publique
+git clone https://github.com/C4ptainCrunch/info-f-209.git # Si vous n'en avez pas
 cd info-f-209
 ```
 
@@ -25,10 +26,25 @@ Pousser ses changements vers GitHub
 git push origin master
 ```
 
-Récupérer les derniers commits depuis le granf nain ternète
+Récupérer les derniers commits depuis le grand nain ternète
 ```bash
 git pull origin master
 ```
+
+Voir les derniers commits
+```bash
+git log # Version verbeuse et complète
+git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -- # Version coleur cool
+```
+
+### Configurer git
+A ne faire qu'une fois
+```bash
+git config —global user.name "Nom Prénom"
+git config —global user.email "adresse_mail_pas_spécialement@ulb.ac.be" # Celle de votre compte GitHub
+```
+
+Tant qu'on y est, une petite intro à Git : http://try.github.io/
 
 
 ## Because Harry Potter is damn cool

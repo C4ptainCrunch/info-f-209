@@ -1,3 +1,9 @@
+# Ne pas versionner le rendu pdf
+srd/srd.pdf
+
+##########################
+ignores génériques
+##########################
 # Compiled Object files
 *.slo
 *.lo

@@ -1,80 +1,82 @@
+SI QUELQU'UN EST CHAUD POUR RENDRE CE .TXT PLUS JOLI (Latex et/ou meilleur organisation)
+QU'IL LE FASSE !
+
+Les questions avec '??' doivent être répondues rapidement
+"LATER" == osef pour le moment MAIS devra être répondu dans le futur
+"NO" comprend "NOT YET"
+
+
 [GENERAL]
 
 Acteur admin? (Maitre du jeu)
 NO
-Quel pouvoir? (En plus d'avoir son nom apparaitre en bold/coloré?)
-Super-user interface? (ex : détruire des comptes)
 
 Menu d'options?
-NOT YET
-Si oui, quoi? (exemple : volume)
+NO
 
-Mode carrière?(OUI)
-NOT YET
-Freestyle?(différence avec carrière?)
-Godlike?(unlimited $$? //Equipements ultime proposant différents choix?)
+Mode carrière?
+NO
 
-Liste d'amis? (OUI)
-NOT YET
+Liste d'amis?
+NO
 
-Mission log? (OUI POUR CARRIÈRE)
-NOT YET
-//Avec tutoriel inclu? (OUI) Si non, tutoriel?
-//Achievements? (OUI)
-//= Mission logs?
+Mission log?
+NO
 
-Mode spectateur? (SI POSSIBLE)
-NOT YET
+Mode spectateur?
+NO
 
 Historique de tout les joueurs visible? (ex : lolking inclu?)
-NOT YET
+NO
 
-Menu practice vs IA (OUI)
-
+Menu practice vs IA
+??
 
 [PLAY GAME]
 
-//Chat?
-NOT YET
+Chat?
+NO
 
-//Stade de jeu local chez une équipe? Général? Toujours? Pour tournoi?
-Chez locaux
-//Différence entre stades? Upgradable? (exemple : stand de bouff pour ++ income)
-Y
+Stade de jeu local chez une équipe? Général? Toujours? Pour tournoi?
+Stades locaux
+Différence entre stades? Upgradable? (exemple : stand de bouff pour ++ income)
+YES
 
-Tournoi géré par serveur? (OUI)
-Y
-//Quel rythme? (Hebdomadaire)
+Tournoi géré par serveur?
+YES
+
+Quel rythme?
+??
+
 Comment gérer les horaires? (Fixée? Arrangement?)
 Fixée
-Joueurs doivent s'inscrire? (OUI)
-NO
+
+Joueurs doivent s'inscrire?
+??
 
 Système de matching automatique?
 NO
+
 Pour tournoi seulement?
-Y
+YES
+
 Lobby? Matching entre amis?
 NO
 
 
 [MANAGE]
 
-//client de jeu != de client pour le reste? (permet de séparer les modules à charger)
+Client de jeu != de client pour le reste? (permet de séparer les modules à charger)
 NO
-//Si oui, client pour le reste doit être freezé.
 
 Manager peut-il améliorer les équipements?
 YES
 
-1 seul carrière par compte? (OUI)
+1 seul carrière par compte?
 YES
 
-Joueurs échangeable? (OUI)
+Joueurs échangeable?
 NO
-Store de joueurs? (OUI)
+
+Store de joueurs?
 YES
-
-À rajouter --
-
-Cases hexagonales.

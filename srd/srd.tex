@@ -24,8 +24,12 @@ Prénom 4 Nom 4 \and Prénom 5 Nom 5 \and Nikita Marchant}
 [A remplir en résumant le point \ref{enf}]
 \subsection{Exigence de domaine}
 \begin{enumerate}
-\item Multijoueur
-\item Monde persistent
+\item \textbf{Multijoueur} : Le serveur doit pouvoir acceuillir et gérer plusieurs connexions simultannées
+\item \textbf{Monde persistent} : Le jeu continue d'évoluer, même en l'absence d'un ou plusieurs joueurs
+\item \textbf{Connexion internet} : Une connexion internet est requise pour utilisé le programme client
+\item \textbf{Protocole} : Le serveur et le client doivent communiquer avec le même protocole(?) afin de s'échanger des paquets de données
+\item \textbf{Identification utilisateur} : Le serveur doit pouvoir d'identifier/authentifier un utilisateur afin de le connecter à son compte de jeu
+\item \textbf{Vérification données} : Un système de vérification des données reçues (bits de parité, ...) doit être utilisé pour vérifier l'intégrité de celle-ci, et effectuer une correction si besoin
 \end{enumerate}
 \section{Besoin du système}
 \subsection{Exigences fonctionnelles}

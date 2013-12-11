@@ -1,0 +1,80 @@
+[GENERAL]
+
+Acteur admin? (Maitre du jeu)
+NO
+Quel pouvoir? (En plus d'avoir son nom apparaitre en bold/coloré?)
+Super-user interface? (ex : détruire des comptes)
+
+Menu d'options?
+NOT YET
+Si oui, quoi? (exemple : volume)
+
+Mode carrière?(OUI)
+NOT YET
+Freestyle?(différence avec carrière?)
+Godlike?(unlimited $$? //Equipements ultime proposant différents choix?)
+
+Liste d'amis? (OUI)
+NOT YET
+
+Mission log? (OUI POUR CARRIÈRE)
+NOT YET
+//Avec tutoriel inclu? (OUI) Si non, tutoriel?
+//Achievements? (OUI)
+//= Mission logs?
+
+Mode spectateur? (SI POSSIBLE)
+NOT YET
+
+Historique de tout les joueurs visible? (ex : lolking inclu?)
+NOT YET
+
+Menu practice vs IA (OUI)
+
+
+[PLAY GAME]
+
+//Chat?
+NOT YET
+
+//Stade de jeu local chez une équipe? Général? Toujours? Pour tournoi?
+Chez locaux
+//Différence entre stades? Upgradable? (exemple : stand de bouff pour ++ income)
+Y
+
+Tournoi géré par serveur? (OUI)
+Y
+//Quel rythme? (Hebdomadaire)
+Comment gérer les horaires? (Fixée? Arrangement?)
+Fixée
+Joueurs doivent s'inscrire? (OUI)
+NO
+
+Système de matching automatique?
+NO
+Pour tournoi seulement?
+Y
+Lobby? Matching entre amis?
+NO
+
+
+[MANAGE]
+
+//client de jeu != de client pour le reste? (permet de séparer les modules à charger)
+NO
+//Si oui, client pour le reste doit être freezé.
+
+Manager peut-il améliorer les équipements?
+YES
+
+1 seul carrière par compte? (OUI)
+YES
+
+Joueurs échangeable? (OUI)
+NO
+Store de joueurs? (OUI)
+YES
+
+À rajouter --
+
+Cases hexagonales.

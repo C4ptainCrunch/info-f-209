@@ -54,7 +54,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Wed Dec 11 18:53:00 CET 2013'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Wed Dec 11 19:00:27 CET 2013'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -298,8 +298,8 @@
       name="Usecase Diagram"
 >
   <rectangle name="Fig0"
-    x="128"
-    y="48"
+    x="120"
+    y="40"
     width="736"
     height="488"
     fill="1"
@@ -1965,7 +1965,7 @@
     </path>
   </group>
   <group name="Fig25"
-       description="org.argouml.uml.diagram.use_case.ui.FigUseCase[336, 432, 188, 56]pathVisible=false;stereotypeView=0;extensionPointVisible=false"
+       description="org.argouml.uml.diagram.use_case.ui.FigUseCase[360, 432, 188, 56]pathVisible=false;stereotypeView=0;extensionPointVisible=false"
        href="127-0-1-1--1f7fb681:142e2c066a9:-8000:0000000000000989"
        fill="1"
        fillcolor="white"
@@ -1976,7 +1976,7 @@
     </private>
     
     <ellipse name="Fig25.0"
-      x="430"
+      x="454"
       y="460"
       rx="94"
       ry="28"
@@ -1986,7 +1986,7 @@
       strokecolor="black"
     />
     <text name="Fig25.1"
-      x="345"
+      x="369"
       y="449"
       width="169"
       height="22"
@@ -2002,7 +2002,7 @@
       justification="Center"
     >Play tournament matches</text>
     <group name="Fig25.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[347, 442, 92, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[371, 442, 92, 0]"
          href="127-0-1-1--1f7fb681:142e2c066a9:-8000:0000000000000989"
          fill="0"
          fillcolor="white"
@@ -2014,7 +2014,7 @@
       </private>
       
       <rectangle name="Fig25.2.0"
-        x="347"
+        x="371"
         y="442"
         width="92"
         height="0"
@@ -2025,7 +2025,7 @@
       />
     </group>
     <rectangle name="Fig25.3"
-      x="346"
+      x="370"
       y="442"
       width="11"
       height="1"
@@ -2036,7 +2036,7 @@
       visibility="0"
     />
     <group name="Fig25.4"
-         description="org.argouml.uml.diagram.ui.FigExtensionPointsCompartment[346, 442, 64, 19]"
+         description="org.argouml.uml.diagram.ui.FigExtensionPointsCompartment[370, 442, 64, 19]"
          href="127-0-1-1--1f7fb681:142e2c066a9:-8000:0000000000000989"
          fill="1"
          fillcolor="white"
@@ -2048,7 +2048,7 @@
       </private>
       
       <rectangle name="Fig25.4.0"
-        x="346"
+        x="370"
         y="442"
         width="64"
         height="19"
@@ -2085,9 +2085,9 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="444"
-              y="389" />
-      <lineto x="435"
+      <moveto x="452"
+              y="390" />
+      <lineto x="452"
               y="432" />
     </path>
   </group>

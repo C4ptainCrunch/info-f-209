@@ -3,6 +3,12 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
+\usepackage{hyperref}
+
+% Glossaire:
+\usepackage[acronym,xindy,toc]{glossaries}
+\makeglossaries
+\include{glossary}
 
 \title{Quiddich live : \\Software requirements document}
 \author{Prénom 1 Nom 1 \and Prénom 2 Nom 2 \and Prénom 3 Nom 3 \and
@@ -17,6 +23,7 @@ Prénom 4 Nom 4 \and Tsotne Shonia \and Nikita Marchant}
 \section{Introduction}
 \subsection{But du projet}
 \subsection{ Glossaire}
+\printglossaries
 \subsection{Historique}
 \section{Besoin d'utilisation}
 \subsection{Exigence fonctionnelle}

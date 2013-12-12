@@ -6,9 +6,14 @@
 \usepackage{hyperref}
 
 % Glossaire:
-\usepackage[acronym,xindy,toc]{glossaries}
-\makeglossaries
+\usepackage[acronym,xindy,toc,nopostdot]{glossaries}
+\usepackage[xindy]{imakeidx}
 \include{glossary}
+\makeglossaries
+\setglossarysection{subsection}
+\renewcommand*{\glossaryname}{Glossaire}
+\deftranslation{Glossary}{Glossaire}
+
 
 \title{Quiddich live : \\Software requirements document}
 \author{Prénom 1 Nom 1 \and Prénom 2 Nom 2 \and Prénom 3 Nom 3 \and
@@ -22,8 +27,7 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 
 \section{Introduction}
 \subsection{But du projet}
-\subsection{ Glossaire}
-\printglossaries
+\printglossary[numberedsection]
 \subsection{Historique}
 \section{Besoin d'utilisation}
 \subsection{Exigence fonctionnelle}

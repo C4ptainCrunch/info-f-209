@@ -3,6 +3,17 @@
 ## Wiki
 GitHub comporte un wiki, ça peut être cool de l'utiliser pour regrouper les informations : [liste des pages existantes](https://github.com/C4ptainCrunch/info-f-209/wiki/_pages)
 
+## Compiler le srd
+Utiliser latexmk avec la commande suivante (dans le dossier srd):
+```bash
+latexmk srd
+```
+
+Et pour nettoyer le dossier de tous les fichiers de compilation (.aux et autre):
+```bash
+latexmk -c
+```
+
 ## Aide Git
 Cloner le répertoire git (si c'est votre première fois, regardez comment configurer git ici en bas)
 ```bash

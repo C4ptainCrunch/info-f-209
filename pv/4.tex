@@ -1,0 +1,29 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{fullpage}
+
+\author{Présent: Tous (sauf Jérome, excusé par son impossibilité de venir)}
+\title{PV réunion 4}
+\date{13 décembre 2013}
+
+(encore en écriture, brouillon)
+
+
+Changement diagrammes UML
+*************************
+diagramme de sequences
+diagramme d'utilisation
+Diagramme de classes
+-------------------
+Discussion pour enlever la classe team : Elle sert seulement de conteneur et n'a pas de sens telle qu'elle est actuellement -> remplacer par deux listes arguments de club, nonFieldPlayers et team, qui pointent vers des objets nonFieldPlayer, team devant en contenir toujours 7, et nonFieldPlayer contenant l'ensemble des joueurs disponibles au club -> problème, pas de représentation en UML (?)
+Rappel sur le fait que les nonFieldPlayer doivent être cast en fieldPlayer lors de l'entrée en match, en faisant attention à ne pas prendre d'information (permet d'éviter un surplus de méthodes(?) non utilisée dans un cas ou l'autre)
+ 
+Discussion sur le remplacement de argoUML par un autre programme pour travailler
+=> changement pour Umbrello
+
+Communication : IRC (freenode#aucuneidee)

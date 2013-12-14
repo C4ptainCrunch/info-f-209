@@ -41,10 +41,31 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \section{Besoin d'utilisation}
 	\subsection{Exigences fonctionnelles}
 		\begin{description}[style=nextline]
-			\item[Inscription :]L'utilisateur doit pouvoir s'inscrire (s'enregistrer) sur le serveur avec un nom d'utilisateur unique et un mot de passe.\\*\\*\underline{Exception} : L'inscription échouera et l'utilisateur sera invité à recommancer si le nom de compte est déjà enregistré sur le serveur.\\*
-			\item[Connection :]L'utilisateur doit pouvoir se connecter en s'authentifiant au le serveur avec son nom d'utilisateur et son mot de passe.\\*\\*\underline{Exception} : L'authentification échouera et l'utilisateur sera invité à recommancer si le mot de passe n'est pas associé au nom de compte, ou si celui-ci n'est pas enregistré sur le serveur.\\*
-			\item[Management :]L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.\\*Chaque dépense (achat de joueurs, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu). La rentrée d'argent se fait grace aux primes de victoire d'un match, récoltes des ventes aux différentes boutiques, sponsoring et vente d'un joueur.\\*\\*\underline{Exception} : Une dépense est annulée si l'utilisateur ne dispose pas assez d'argent pour l'effectuer.\\*
-			\item[Tournois :]L'utilisateur doit pouvoir s'inscrire à un tournoi en ligne, auquel il devra participer à des matches contre d'autres joueurs.\\*
+			\item[Inscription :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Inscription
+				\item[]
+				\item \underline{Action} : L'utilisateur doit pouvoir s'inscrire (s'enregistrer) sur le serveur avec un nom d'utilisateur unique et un mot de passe.\\*
+				\item \underline{Exception} : L'inscription échouera et l'utilisateur sera invité à recommancer si le nom de compte est déjà enregistré sur le serveur.\\*
+			\end{description}
+			\item[Connection :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Connection
+				\item[]
+				\item \underline{Action} : L'utilisateur doit pouvoir se connecter en s'authentifiant au le serveur avec son nom d'utilisateur et son mot de passe.\\*
+				\item \underline{Exception} : L'authentification échouera et l'utilisateur sera invité à recommancer si le mot de passe n'est pas associé au nom de compte, ou si celui-ci n'est pas enregistré sur le serveur.\\*
+			\end{description}
+			\item[Management :]
+			\begin{description}[leftmargin=] %Descriptions du use case Management
+				\item[]
+				\item \underline{Action} : L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.\\*Chaque dépense (achat de joueurs, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu). La rentrée d'argent se fait grace aux primes de victoire d'un match, récoltes des ventes aux différentes boutiques, sponsoring et vente d'un joueur.\\*
+				\item \underline{Requiert} : L'utilisateur doit être connecté.\\*
+				\item \underline{Exception} : Une dépense est annulée si l'utilisateur ne dispose pas assez d'argent pour l'effectuer.\\*
+			\end{description}
+			\item[Tournois :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Tournois
+				\item[]
+				\item \underline{Action} : L'utilisateur doit pouvoir s'inscrire à un tournoi en ligne, auquel il devra participer à des matches contre d'autres joueurs.\\*
+				\item \underline{Requiert} : L'utilisateur doit être connecté.\\*
+			\end{description}
 		\end{description}
 
 \subsection{Exigences non fonctionnelles}
@@ -62,12 +83,37 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \section{Besoin du système}
 	\subsection{Exigences fonctionnelles}
 		\begin{description}[style=nextline]
-			\item[Vérification d'authentification :]Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que d'authentifier un utilisateur demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du serveur et est bien associé au mot de passe fourni.\\*
-			\item[Interface :]Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.\\*
-			\item[Représentation phase management :]Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.\\*
-			\item[Représentation phase match :]Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.\\*
-			\item[Sauvegarde :]Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.\\*
-			\item[Tournois :]Le système doit génerer et gérer les tournois en ligne, où chaque utilisateurs inscrits devront s'affronter dans des matches organisés dans les stades des clubs.\\*
+			\item[Vérification d'authentification :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Vérification d'authentification
+				\item[]
+				\item \underline{Action} : Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que d'authentifier un utilisateur demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du serveur et est bien associé au mot de passe fourni.\\*
+				\item \underline{Requiert} : Un utilisateur tentant de s'inscrire ou de se connecter.\\*
+			\end{description}
+			\item[Interface :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Vérification d'authentification
+				\item[]
+				\item \underline{Action} : Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.\\*
+			\end{description}
+			\item[Représentation phase management :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Vérification d'authentification
+				\item[]
+				\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.\\*
+			\end{description}
+			\item[Représentation phase match :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Vérification d'authentification
+				\item[]
+				\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.\\*
+			\end{description}
+			\item[Sauvegarde :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Vérification d'authentification
+				\item[]
+				\item \underline{Action} : Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.\\*
+			\end{description}
+			\item[Tournois :]
+			\begin{description}[leftmargin=*] %Descriptions du use case Vérification d'authentification
+				\item[]
+				\item \underline{Action} : Le système doit génerer et gérer les tournois en ligne, où chaque utilisateurs inscrits devront s'affronter dans des matches organisés dans les stades des clubs.\\*
+			\end{description}
 		\end{description}
 
 \subsection{Exigences non fonctionnelles}

@@ -36,16 +36,20 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 % Le glossaire
 \printglossary[numberedsection]
 \subsection{Historique}
+
 \section{Besoin d'utilisation}
+
 \subsection{Exigence fonctionnelle}
-\begin{enumerate}
-\item \textbf{Authentification} : L'utilisateur doit pouvoir s'enregistrer et se connecter sur le serveur avec un authentifiant unique et un mot de passe.
-\item \textbf{Nouvelle carrière} : L'utilisateur doit pouvoir créer une nouvelle partie, lui conférant un nouveau \gls{club} rudimentaire.
-\item \textbf{Management} : L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.
-\item \textbf{Tournois} : L'utilisateur doit pouvoir s'inscrire à un tournoi en ligne, auquel il devra participer à des matches contre d'autres joueurs.
-\end{enumerate}
+\begin{description}
+\item[Authentification] : L'utilisateur doit pouvoir s'enregistrer et se connecter sur le serveur avec un authentifiant unique et un mot de passe.
+\item[Nouvelle carrière] : L'utilisateur doit pouvoir créer une nouvelle partie, lui conférant un nouveau \gls{club} rudimentaire.
+\item[Management] : L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.
+\item[Tournois] : L'utilisateur doit pouvoir s'inscrire à un tournoi en ligne, auquel il devra participer à des matches contre d'autres joueurs.
+\end{description}
+
 \subsection{Exigence non fonctionnelle}
 [A remplir en résumant le point \ref{enf}]
+
 \subsection{Exigence de domaine}
 \begin{description}
 \item[Multijoueur] : Le serveur doit pouvoir accueillir et gérer plusieurs connexions simultanées
@@ -54,20 +58,20 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \item[Protocole] : Le serveur et le client doivent communiquer avec le même protocole(?) afin de s'échanger des paquets de données
 \item[Vérification données] : Un système de vérification des données reçues (bits de parité, ...) doit être utilisé pour vérifier l'intégrité de celle-ci, et effectuer une correction si besoin
 \end{description}
-\section{Besoin du système}
-\subsection{Exigences fonctionnelles}
 
-\begin{enumerate}
-\item \textbf{Interface} : Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.
-\item \textbf{Représentation phase match} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.
-\item \textbf{Représentation phase management} : Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.
-\item \textbf{Sauvegarde} : Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.
-\item \textbf{Tournois} : Le système doit gérer les tournois en ligne, prenant en compte les divers cas possibles (forfait, absence, ...)
-\end{enumerate}
+\section{Besoin du système}
+
+\subsection{Exigences fonctionnelles}
+\begin{description}
+\item[Interface] : Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.
+\item[Représentation phase match} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.
+\item[Représentation phase management] : Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.
+\item[Sauvegarde] : Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.
+\item[Tournois] : Le système doit gérer les tournois en ligne, prenant en compte les divers cas possibles (forfait, absence, ...)
+\end{description}
 
 \subsection{Exigences non fonctionnelles}
 \label{enf}
-
 \begin{enumerate}
 \item Le client et le serveur doivent être écrits en \textbf{C++} seront compliés à l'aide de \textbf{gcc 4.8}
 \item Le client et le serveur doivent être portables et pouvoir fonctionner sur un système \textbf{UNIX} et une architecture x86

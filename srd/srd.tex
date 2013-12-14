@@ -62,11 +62,12 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \section{Besoin du système}
 	\subsection{Exigences fonctionnelles}
 		\begin{description}[style=nextline]
+			\item[Vérification d'authentification :]Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que d'authentifier un utilisateur demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du serveur et est bien associé au mot de passe fourni.\\*
 			\item[Interface :]Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.\\*
-			\item[Représentation phase match :]Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.\\*
 			\item[Représentation phase management :]Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.\\*
+			\item[Représentation phase match :]Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.\\*
 			\item[Sauvegarde :]Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.\\*
-			\item[Tournois :]Le système doit gérer les tournois en ligne, prenant en compte les divers cas possibles (forfait, absence, ...)\\*
+			\item[Tournois :]Le système doit génerer et gérer les tournois en ligne, où chaque utilisateurs inscrits devront s'affronter dans des matches organisés dans les stades des clubs.\\*
 		\end{description}
 
 \subsection{Exigences non fonctionnelles}

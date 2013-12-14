@@ -5,6 +5,7 @@
 \usepackage[francais]{babel}
 \usepackage[xindy,nonewpage]{imakeidx}
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 % Glossaire:
 \usepackage[acronym,xindy,toc,nopostdot]{glossaries}
@@ -38,24 +39,18 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \subsection{Historique}
 
 \section{Besoin d'utilisation}
-	\subsection{Exigence fonctionnelle}
-		\begin{description}
-			\item[Inscription] : L'utilisateur doit pouvoir s'inscrire (s'enregistrer) sur le serveur avec un nom d'utilisateur unique et un mot de passe.
-			\begin{description}
-				\item[Exception] : L'inscription échouera et l'utilisateur sera invité à recommancer si le nom de compte est déjà enregistré sur le serveur.
-			\end{description}
-			\item[Connection] : L'utilisateur doit pouvoir se connecter en s'authentifiant au le serveur avec son nom d'utilisateur et son mot de passe.
-			\begin{description}
-				\item[Exception] : L'authentification échouera et l'utilisateur sera invité à recommancer si le mot de passe n'est pas associé au nom de compte, ou si celui-ci n'est pas enregistré sur le serveur.
-			\end{description}
-			\item[Management] : L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.
-			\item[Tournois] : L'utilisateur doit pouvoir s'inscrire à un tournoi en ligne, auquel il devra participer à des matches contre d'autres joueurs.
+	\subsection{Exigences fonctionnelles}
+		\begin{description}[style=nextline]
+			\item[Inscription :]L'utilisateur doit pouvoir s'inscrire (s'enregistrer) sur le serveur avec un nom d'utilisateur unique et un mot de passe.\\*\\\*\underline{Exception} : L'inscription échouera et l'utilisateur sera invité à recommancer si le nom de compte est déjà enregistré sur le serveur.\\*
+			\item[Connection :]L'utilisateur doit pouvoir se connecter en s'authentifiant au le serveur avec son nom d'utilisateur et son mot de passe.\\*\\\*\underline{Exception} : L'authentification échouera et l'utilisateur sera invité à recommancer si le mot de passe n'est pas associé au nom de compte, ou si celui-ci n'est pas enregistré sur le serveur.\\*
+			\item[Management :]L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.\\*
+			\item[Tournois :]L'utilisateur doit pouvoir s'inscrire à un tournoi en ligne, auquel il devra participer à des matches contre d'autres joueurs.\\*
 		\end{description}
 
-\subsection{Exigence non fonctionnelle}
+\subsection{Exigences non fonctionnelles}
 [A remplir en résumant le point \ref{enf}]
 
-\subsection{Exigence de domaine}
+\subsection{Exigences de domaine}
 \begin{description}
 \item[Multijoueur] : Le serveur doit pouvoir accueillir et gérer plusieurs connexions simultanées
 \item[Monde persistent] : Le jeu continue d'évoluer, même en l'absence d'un ou plusieurs clients
@@ -66,12 +61,12 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 
 \section{Besoin du système}
 	\subsection{Exigences fonctionnelles}
-		\begin{description}
-			\item[Interface] : Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.
-			\item[Représentation phase match} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.
-			\item[Représentation phase management] : Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.
-			\item[Sauvegarde] : Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.
-			\item[Tournois] : Le système doit gérer les tournois en ligne, prenant en compte les divers cas possibles (forfait, absence, ...)
+		\begin{description}[style=nextline]
+			\item[Interface :]Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.\\*
+			\item[Représentation phase match] : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.\\*
+			\item[Représentation phase management] : Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.\\*
+			\item[Sauvegarde :]Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.\\*
+			\item[Tournois :]Le système doit gérer les tournois en ligne, prenant en compte les divers cas possibles (forfait, absence, ...)\\*
 		\end{description}
 
 \subsection{Exigences non fonctionnelles}

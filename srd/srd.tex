@@ -56,7 +56,7 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 			\end{description} %Connection
 			
 			\item[Management :]
-			\begin{description}[leftmargin=] %Management
+			\begin{description}[leftmargin=*] %Management
 				\item[]
 				\item \underline{Action} : L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.\\*Chaque dépense (achat de joueurs, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu). La rentrée d'argent se fait grace aux primes de victoire d'un match, récoltes des ventes aux différentes boutiques, sponsoring et vente d'un joueur.\\*
 				\item \underline{Requiert} : L'utilisateur doit être connecté.\\*
@@ -110,12 +110,14 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 			\begin{description}[leftmargin=*] %Représentation phase match
 				\item[]
 				\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.\\*
+				\item \underline{Exception} : Si un utilisateur se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet utilisateur contre l'utilisateur restant. Le match continuera sans changement apporté.
 			\end{description} %Représentation phase match
 			
 			\item[Sauvegarde :]
 			\begin{description}[leftmargin=*] %Sauvegarde
 				\item[]
-				\item \underline{Action} : Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie.\\*
+				\item \underline{Action} : Le système doit sauvegarder tout changement effectué au \gls{club} durant le management ainsi qu'après une partie avec un module de sauvegarde.\\*
+				\item \underline{Exception} : Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le serveur crash.
 			\end{description} %Sauvegarde
 			
 			\item[Tournois :]

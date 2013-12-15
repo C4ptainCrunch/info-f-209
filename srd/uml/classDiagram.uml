@@ -70,7 +70,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sun Dec 15 15:04:21 CET 2013'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sun Dec 15 15:59:46 CET 2013'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -783,10 +783,10 @@
               visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
               aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
               <UML:AssociationEnd.multiplicity>
-                <UML:Multiplicity xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000090D'>
+                <UML:Multiplicity xmi.id = '127-0-1-1--424c25c7:142f6bfc29e:-8000:0000000000000D46'>
                   <UML:Multiplicity.range>
-                    <UML:MultiplicityRange xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000090C'
-                      lower = '1' upper = '1'/>
+                    <UML:MultiplicityRange xmi.id = '127-0-1-1--424c25c7:142f6bfc29e:-8000:0000000000000D45'
+                      lower = '0' upper = '1'/>
                   </UML:Multiplicity.range>
                 </UML:Multiplicity>
               </UML:AssociationEnd.multiplicity>
@@ -4417,7 +4417,7 @@
                         offset="-10" />
     </private>
     <path name="Fig29.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -4452,7 +4452,7 @@
                         offset="-10" />
     </private>
     <path name="Fig30.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -4513,7 +4513,7 @@
                         offset="5" />
     </private>
     <path name="Fig31.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -4570,7 +4570,7 @@
                         offset="5" />
     </private>
     <path name="Fig32.0"
-      description="org.tigris.gef.presentation.FigPoly"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"

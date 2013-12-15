@@ -91,50 +91,49 @@ Ce qui lui permettra d'être sélectionné pour de matchs et d'y affronter les a
 
 \section{Besoin du système}
 \subsection{Exigences fonctionnelles}
-\begin{description}[style=nextline]
-\item[Enregistrer :]
-\begin{description} %SYS Enregistrer
-\item \underline{Action} : Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
-\item \underline{Requiert} : Un utilisateur effectuant une demande d'inscription.
-\item \underline{Exception} : L'enregistrement échouera si le nom de compte est déjà enregistré sur le fichier.\\*
-\end{description} %SYS Enregistrer
 
-\item[Authentifier :]
-\begin{description} %SYS Authentifier
-\item \underline{Action} : Le système doit être capable d'authentifier un utilisateur demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du serveur et est bien associé au mot de passe fourni.
-\item \underline{Requiert} : Un utilisateur effectuant une demande de connection.
-\item \underline{Exception} : L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le fichier, ou si il est associé à un autre mot de passe que le mot de passe fourni..\\*
-\end{description} %SYS Authentifier
-
-\item[Fournir une interface :]
-\begin{description} %SYS Fournir une interface
-\item \underline{Action} : Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.\\*
-\end{description} %SYS Fournir une interface
-
-\item[Représenter phase management :]
-\begin{description} %SYS Représenter phase management
-\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.\\*
-\end{description} %SYS Représenter phase management
-
-\item[Représenter phase match :]
-\begin{description} %SYS Représenter phase match
-\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.
-\item \underline{Exception} : Si un utilisateur se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet utilisateur contre l'utilisateur restant. Le match continuera sans changement apporté.
-\end{description} %SYS Représenter phase match
-
-\item[Sauvegarder :]
-\begin{description} %SYS Sauvegarder
-\item \underline{Action} : Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
-\item \underline{Requiert} : Une modification du club en phase management, ou un module de fin de match généré par le systeme. 
-\item \underline{Exception} : Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le serveur crash.\\*
-\end{description} %SYS Sauvegarder
-
-\item[Gérer les tournois :]
-\begin{description} %SYS Gérer les tournois
-\item \underline{Action} : Le système doit génerer et gérer les tournois en ligne, où les utilisateurs inscrits devront s'affronter durant des matches organisés dans les stades des clubs.\\*
-\end{description} %SYS Gérer les tournois
-
+\subsubsection{Inscription}
+\begin{description}
+\item[Action] Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
+\item[Requiert] Un utilisateur effectuant une demande d'inscription.
+\item[Exception] L'enregistrement échouera si le nom de compte est déjà enregistré sur le fichier.
 \end{description}
+
+\subsubsection{Authentifier}
+\begin{description}
+\item[Action] Le système doit être capable d'authentifier un utilisateur demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du serveur et est bien associé au mot de passe fourni.
+\item[Requiert] Un utilisateur effectuant une demande de connection.
+\item[Exception] L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le fichier, ou si il est associé à un autre mot de passe que le mot de passe fourni.
+\end{description}
+
+\subsubsection{Fournir une interface}
+\begin{description}
+\item[Action] Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.
+\end{description}
+
+\subsubsection{Représenter phase management}
+\begin{description}
+\item[Action] Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.
+\end{description}
+
+\subsubsection{Représenter phase match}
+\begin{description}
+\item[Action] Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.
+\item[Exception] Si un utilisateur se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet utilisateur contre l'utilisateur restant. Le match continuera sans changement apporté.
+\end{description}
+
+\subsubsection{Sauvegarder}
+\begin{description}
+\item[Action] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
+\item[Requiert] Une modification du club en phase management, ou un module de fin de match généré par le systeme. 
+\item[Exception] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le serveur crash.
+\end{description}
+
+\subsubsection{Gérer les tournois}
+\begin{description}
+\item[Action] Le système doit génerer et gérer les tournois en ligne, où les utilisateurs inscrits devront s'affronter durant des matches organisés dans les stades des clubs.
+\end{description}
+
 
 \subsection{Exigences non fonctionnelles}
 \label{enf}

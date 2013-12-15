@@ -13,24 +13,30 @@
 \newglossaryentry{manager}
 {
     name=manager,
-    description={Utilisateur du programme, il possède un \gls{club} et dois faire en sorte que celui-ci gagne de l'argent.}
+    description={\Gls{utilisateur} du programme, il possède un \gls{club} et dois faire en sorte que celui-ci gagne de l'argent.}
 }
 \newglossaryentry{club}
 {
     name=club,
-    description={Infrastructure contenant une \gls{equipe} et des installations (stade, infirmerie, \ldots).}
+    description={Infrastructure contenant une \gls{equipe} et des installations (stade, infirmerie,\ldots).}
 }
 
 \newglossaryentry{utilisateur}
 {
     name=utilisateur,
-    description={TBD}
+    description={Personnage réel. C'est la personne qui joue au Quiditch manager.\\
+    Elle est aussi appelée \gls{manager}}
 }
 
 \newglossaryentry{serveur}
 {
     name=serveur,
-    description={TBD}
+    description={Programme etant toujours en marche et connecté à internet et qui réceptionne les connections des \glspl{client}. Il a les données de tous les \glspl{utilisateur}.}
+}
+\newglossaryentry{client}
+{
+    name=client,
+    description={Programme que l'\gls{utilisateur} lance pour se connecter au \gls{serveur}. Il permet à l'\gls{utilisateur} de jouer et peut être soit en ligne de commande, soit en mode graphique.}
 }
 
 

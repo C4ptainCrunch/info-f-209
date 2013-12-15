@@ -23,7 +23,7 @@
 \indexsetup{level=\section}
 
 \title{Quiddich live : \\Software requirements document}
-\author{Prénom 1 Nom 1 \and Prénom 2 Nom 2 \and Prénom 3 Nom 3 \and
+\author{Bruno Nom 1 \and Jérome Nom 2 \and Cédric Strebelle \and
 Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \date{\today}
 
@@ -44,19 +44,19 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 
 \subsubsection{Inscription}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'utilisateur unique et un mot de passe.
+\item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
 \item[Exception] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le \gls{serveur}.
 \end{description}
 
 \subsubsection{Connexion}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir se connecter en s'authentifiant auprès du \gls{serveur} avec son nom d'utilisateur et son mot de passe.
-\item[Exception] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'utilisateur, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
+\item[Action] L'\gls{utilisateur} doit pouvoir se connecter en s'authentifiant auprès du \gls{serveur} avec son nom d'\gls{utilisateur} et son mot de passe.
+\item[Exception] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'\gls{utilisateur}, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
 \end{description}
 
 \subsubsection{Gérer le \gls{club} (phase de management)}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et le sponsoring. Chaque dépense (achat de \glspl{joueur}, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu). La rentrée d'argent se fait grace aux primes de victoire d'un match, des récoltes des ventes aux différentes boutiques du sponsoring ansi que de la vente d'un \gls{joueur}.
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et le sponsoring. Chaque dépense (achat de \glspl{joueur}, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu). La rentrée d'argent se fait grâce aux primes de victoire d'un match, des récoltes des ventes aux différentes boutiques du sponsoring ainsi que de la vente d'un \gls{joueur}.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
 \item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
 \end{description}
@@ -66,7 +66,7 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
 Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les autres participants inscrits à ce tournoi.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Un utilisateur ne peut pas se réinscrire dans un tournoi auquel il est déjà inscrit.
+\item[Exception] Un \gls{utilisateur} ne peut pas se réinscrire dans un tournoi auquel il est déjà inscrit.
 \end{description} 
 
 \subsubsection{Participer à un match du tournoi}
@@ -110,8 +110,8 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 
 \subsubsection{Authentifier}
 \begin{description}
-\item[Action] Le système doit être capable d'authentifier un \gls{utilisateur} demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du \gls{serveur} et est bien associé au mot de passe fourni.
-\item[Requiert] Un \gls{utilisateur} effectuant une demande de connection.
+\item[Action] Le système doit être capable d'authentifier un \gls{utilisateur} demandant de se connecter en vérifiant que le nom de compte fourni lors de la connexion est présente dans le fichier du \gls{serveur} et est bien associé au mot de passe fourni.
+\item[Requiert] Un \gls{utilisateur} effectuant une demande de connexion.
 \item[Exception] L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le fichier, ou si il est associé à un autre mot de passe que le mot de passe fourni.
 \end{description}
 
@@ -128,19 +128,19 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \subsubsection{Représenter phase match}
 \begin{description}
 \item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'\gls{utilisateur} pourra déplacer ses \glspl{joueur} et / ou effectuer une action.
-\item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
+\item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connexion est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
 \end{description}
 
 \subsubsection{Sauvegarder}
 \begin{description}
 \item[Action] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
-\item[Requiert] Une modification du \gls{club} en phase management, ou un module de fin de match généré par le systeme. 
+\item[Requiert] Une modification du \gls{club} en phase management, ou un module de fin de match généré par le système. 
 \item[Exception] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
 \end{description}
 
 \subsubsection{Gérer les tournois}
 \begin{description}
-\item[Action] Le système doit génerer et gérer les tournois en ligne, où les \glspl{utilisateur} inscrits devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
+\item[Action] Le système doit générer et gérer les tournois en ligne, où les \glspl{utilisateur} inscrits devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
 \end{description}
 
 

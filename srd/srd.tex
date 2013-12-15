@@ -3,7 +3,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
-\usepackage[xindy,nonewpage]{imakeidx}
+\usepackage[nonewpage]{imakeidx}
 \usepackage{hyperref}
 \usepackage{enumitem}
 
@@ -14,8 +14,9 @@
 \setglossarysection{subsection}
 \deftranslation{Glossary}{Glossaire}
 \renewcommand*{\glossaryname}{Glossaire}
-\renewcommand{\glsdisplay}[4]{\index{#1}\it{#1#4}}
-\renewcommand{\glsdisplayfirst}[4]{\index{#1}\it{#1#4}}
+\renewcommand{\glsdisplay}[4]{\index{\glslabel}\it{#1#4}}
+\renewcommand{\glsdisplayfirst}[4]{\index{\glslabel}\it{#1#4}}
+
 
 % Index:
 \makeindex

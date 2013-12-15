@@ -1,18 +1,17 @@
-# info-f-209 : Quidditch
+## Conventions de commits
+Mettre tous les commits en anglais, précédés d'un tag : `[srd]` pour le srd `[uml]` pour les modifications des schémas uml et `[code]` pour .. le code.
+
+Le jour ou tous les schémas seront mergés dans un seul `xmi` alors on précisera `[uml/nomDuSchéma]`
+
+## Compiler le srd
+```bash
+cd srd && make # compliation
+make clean # Nettoyer le dossier de tous les fichiers de compilation (.aux et autres)
+```
 
 ## Wiki
 GitHub comporte un wiki, ça peut être cool de l'utiliser pour regrouper les informations : [liste des pages existantes](https://github.com/C4ptainCrunch/info-f-209/wiki/_pages)
 
-## Compiler le srd
-Utiliser make (dans le dossier srd):
-```bash
-make
-```
-
-Et pour nettoyer le dossier de tous les fichiers de compilation (.aux et autre):
-```bash
-make clean
-```
 
 ## Aide Git
 Cloner le répertoire git (si c'est votre première fois, regardez comment configurer git ici en bas)

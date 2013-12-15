@@ -123,20 +123,21 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 			\begin{description}[leftmargin=*] %SYS Représenter phase match
 				\item[]
 				\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.
-				\item \underline{Exception} : Si un utilisateur se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet utilisateur contre l'utilisateur restant. Le match continuera sans changement apporté.
+				\item \underline{Exception} : Si un utilisateur se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet utilisateur contre l'utilisateur restant. Le match continuera sans changement apporté.\\*
 			\end{description} %SYS Représenter phase match
 			
 			\item[Sauvegarder :]
 			\begin{description}[leftmargin=*] %SYS Sauvegarder
 				\item[]
-				\item \underline{Action} : Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde.
-				\item \underline{Exception} : Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le serveur crash.
+				\item \underline{Action} : Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
+				\item \underline{Requiert} : Une modification du club en phase management, ou un module de fin de match généré par le systeme. 
+				\item \underline{Exception} : Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le serveur crash.\\*
 			\end{description} %SYS Sauvegarder
 			
 			\item[Gérer les tournois :]
 			\begin{description}[leftmargin=*] %SYS Gérer les tournois
 				\item[]
-				\item \underline{Action} : Le système doit génerer et gérer les tournois en ligne, où chaque utilisateurs inscrits devront s'affronter durant des matches organisés dans les stades des clubs.\\*
+				\item \underline{Action} : Le système doit génerer et gérer les tournois en ligne, où les utilisateurs inscrits devront s'affronter durant des matches organisés dans les stades des clubs.\\*
 			\end{description} %SYS Gérer les tournois
 			
 		\end{description}

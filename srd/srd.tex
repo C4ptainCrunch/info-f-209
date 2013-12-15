@@ -45,7 +45,7 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \subsubsection{Inscription}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'utilisateur unique et un mot de passe.
-\item[Exception] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le serveur.
+\item[Exception] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le \gls{serveur}.
 \end{description}
 
 \subsubsection{Connexion}
@@ -54,11 +54,11 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \item[Exception] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'utilisateur, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
 \end{description}
 
-\subsubsection{Gérer le club (phase de management)}
+\subsubsection{Gérer le \gls{club} (phase de management)}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son club en gérant son argent, son équipe, ses infrastructures et le sponsoring. Chaque dépense (achat de joueurs, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu). La rentrée d'argent se fait grace aux primes de victoire d'un match, des récoltes des ventes aux différentes boutiques du sponsoring ansi que de la vente d'un joueur.
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et le sponsoring. Chaque dépense (achat de \glspl{joueur}, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu). La rentrée d'argent se fait grace aux primes de victoire d'un match, des récoltes des ventes aux différentes boutiques du sponsoring ansi que de la vente d'un \gls{joueur}.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas accepté si le club de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
 \end{description}
 
 \subsubsection{S'inscrire à un tournoi}
@@ -81,10 +81,10 @@ Ce qui lui permettra d'être sélectionné pour de matchs et d'y affronter les a
 \begin{itemize}
 \item Le jeu doit être multi-joueur, les différents joueurs connectés sur un même \gls{serveur} doivent pourvoir interagir entre eux.
 \item Le monde doit être de type persistent, il doit continuer d'évoluer, même en l'absence d'un ou plusieurs \glspl{utilisateur}.
-\item Une équipe doit comporter 7 joueurs au maximum, sans compter les remplaçants
-\item Un match nécessite trois balles : Un souaffle, deux cognard et  et un vif d'or. Le terrain doit comporter deux buts, fait chacun de trois anneaux et placé aux deux extrémités du terrain. Pour participer à un match, chacun joueur doit avoir au moins un balais, et une batte dans le cas des batteurs
-\item Le match ne prend fin que si le vif d'or est attrapé ou une des deux équipes abandonne
-\item Un joueur blessé/mort ne peut être remplacé en plein match 
+\item Une \gls{equipe} doit comporter 7 \glspl{joueur} au maximum, sans compter les remplaçants
+\item Un match nécessite trois balles : Un souaffle, deux cognard et  et un vif d'or. Le terrain doit comporter deux buts, fait chacun de trois anneaux et placé aux deux extrémités du terrain. Pour participer à un match, chacun \gls{joueur} doit avoir au moins un balais, et une batte dans le cas des batteurs
+\item Le match ne prend fin que si le vif d'or est attrapé ou une des deux \glspl{equipe} abandonne
+\item Un \gls{joueur} blessé/mort ne peut être remplacé en plein match 
 \end{itemize}
 
 % fin de "Exigences de domaine"
@@ -93,7 +93,7 @@ Ce qui lui permettra d'être sélectionné pour de matchs et d'y affronter les a
 \section{Besoin du système}
 \subsection{Exigences fonctionnelles}
 
-\subsubsection{Enregistrer une inscription}
+\subsubsection{Inscription}
 \begin{description}
 \item[Action] Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
 \item[Requiert] Un \gls{utilisateur} effectuant une demande d'inscription.
@@ -114,37 +114,37 @@ Ce qui lui permettra d'être sélectionné pour de matchs et d'y affronter les a
 
 \subsubsection{Représenter phase management}
 \begin{description}
-\item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.
+\item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses \glspl{joueur}, ses infrastructures, les améliorations possibles, et l'avancement des tournois.
 \end{description}
 
 \subsubsection{Représenter phase match}
 \begin{description}
-\item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'\gls{utilisateur} pourra déplacer ses joueurs et / ou effectuer une action.
+\item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'\gls{utilisateur} pourra déplacer ses \glspl{joueur} et / ou effectuer une action.
 \item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
 \end{description}
 
 \subsubsection{Sauvegarder}
 \begin{description}
 \item[Action] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
-\item[Requiert] Une modification du club en phase management, ou un module de fin de match généré par le systeme. 
+\item[Requiert] Une modification du \gls{club} en phase management, ou un module de fin de match généré par le systeme. 
 \item[Exception] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
 \end{description}
 
 \subsubsection{Gérer les tournois}
 \begin{description}
-\item[Action] Le système doit génerer et gérer les tournois en ligne, où les \glspl{utilisateur} inscrits devront s'affronter durant des matches organisés dans les stades des clubs.
+\item[Action] Le système doit génerer et gérer les tournois en ligne, où les \glspl{utilisateur} inscrits devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
 \end{description}
 
 
 \subsection{Exigences non fonctionnelles}
 \label{enf}
 \begin{itemize}
-\item Le client et le \gls{serveur} doivent être écrits en \textbf{C++} seront compliés à l'aide de \textbf{gcc 4.8}
-\item Le client et le \gls{serveur} doivent être portables et pouvoir fonctionner sur un système \textbf{UNIX} et une architecture x86
-\item La machine hébergeant le client ainsi que le \gls{serveur} doivent être en mesure de communiquer en permanence via un réseau capable de transporter des paquets \textbf{TCP/IP}
+\item Le \gls{client} et le \gls{serveur} doivent être écrits en \textbf{C++} seront compliés à l'aide de \textbf{gcc 4.8}
+\item Le \gls{client} et le \gls{serveur} doivent être portables et pouvoir fonctionner sur un système \textbf{UNIX} et une architecture x86
+\item La machine hébergeant le \gls{client} ainsi que le \gls{serveur} doivent être en mesure de communiquer en permanence via un réseau capable de transporter des paquets \textbf{TCP/IP}
 \item Le réseau décrit ci-dessus doit pouvoir une latence raisonnablement faible (c'est à dire de plus ou moins 200ms pour un aller retour)
-\item Les machines exécutant le client doivent être équipées d'un écran, d'un clavier et d'une souris et être capables d'afficher des images en mode graphique ainsi qu'au minimum 80 caractères de large en mode console. Elles devront aussi avoir au minimum disposer de 512Mb de mémoire vive ainsi que 500Mb d'espace disque.
-\item La machine exécutant le \gls{serveur} doit être capable de gérer une connexion ouverte constamment vers chaque client ainsi que de stocker l'entièreté des données du jeu en mémoire disque ainsi qu'une grande majorité en mémoire vive.
+\item Les machines exécutant le \gls{client} doivent être équipées d'un écran, d'un clavier et d'une souris et être capables d'afficher des images en mode graphique ainsi qu'au minimum 80 caractères de large en mode console. Elles devront aussi avoir au minimum disposer de 512Mb de mémoire vive ainsi que 500Mb d'espace disque.
+\item La machine exécutant le \gls{serveur} doit être capable de gérer une connexion ouverte constamment vers chaque \gls{client} ainsi que de stocker l'entièreté des données du jeu en mémoire disque ainsi qu'une grande majorité en mémoire vive.
 \end{itemize}
 
 \subsection{Design et fonctionnement}

@@ -14,8 +14,9 @@
 \setglossarysection{subsection}
 \deftranslation{Glossary}{Glossaire}
 \renewcommand*{\glossaryname}{Glossaire}
-\renewcommand{\glsdisplay}[4]{\index{\glslabel}\it{#1#4}}
-\renewcommand{\glsdisplayfirst}[4]{\index{\glslabel}\it{#1#4}}
+\DeclareRobustCommand{\gloss}[1]{\it{#1}\index{\glslabel}}
+\renewcommand{\glsdisplay}[4]{\gloss{#1#4}}
+\renewcommand{\glsdisplayfirst}[4]{\gloss{#1#4}}
 
 
 \makeindex

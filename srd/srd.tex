@@ -42,34 +42,34 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \section{Besoin d'utilisation}
 	\subsection{Exigences fonctionnelles}
 		\begin{description}[style=nextline]
-			\item[Inscription :]
-			\begin{description}[leftmargin=*] %USR Inscription
+			\item[S'inscrire :]
+			\begin{description}[leftmargin=*] %USR S'inscrire
 				\item[]
 				\item \underline{Action} : L'utilisateur doit pouvoir s'inscrire (s'enregistrer) sur le serveur avec un nom d'utilisateur unique et un mot de passe.
 				\item \underline{Exception} : L'inscription échouera et l'utilisateur sera invité à recommancer si le nom de compte est déjà enregistré sur le serveur.\\*
-			\end{description} %USR Inscription
+			\end{description} %USR S'inscrire
 			
-			\item[Connection :]
-			\begin{description}[leftmargin=*] %USR Connection
+			\item[Se connecter :]
+			\begin{description}[leftmargin=*] %USR Se connecter
 				\item[]
 				\item \underline{Action} : L'utilisateur doit pouvoir se connecter en s'authentifiant au le serveur avec son nom d'utilisateur et son mot de passe.
 				\item \underline{Exception} : L'authentification échouera et l'utilisateur sera invité à recommancer si le mot de passe n'est pas associé au nom de compte, ou si celui-ci n'est pas enregistré sur le serveur.\\*
-			\end{description} %USR Connection
+			\end{description} %USR Se connecter
 			
-			\item[Management :]
-			\begin{description}[leftmargin=*] %USR Management
+			\item[Gérer le club (phase management) :]
+			\begin{description}[leftmargin=*] %USR Gérer le club (phase management)
 				\item[]
 				\item \underline{Action} : L'utilisateur doit pouvoir améliorer son \gls{club} en gérant son argent, son \gls{equipe}, ses infrastructures et son sponsoring.\\*Chaque dépense (achat de joueurs, amélioration d'infrastructure, d'équipement ou de sponsoring, infirmerie) coûte de l'argent (monnaie du jeu).\\*La rentrée d'argent se fait grace aux primes de victoire d'un match, récoltes des ventes aux différentes boutiques, sponsoring et vente d'un joueur.
 				\item \underline{Requiert} : L'utilisateur doit être connecté.
 				\item \underline{Exception} : Une dépense est annulée si l'utilisateur ne dispose pas assez d'argent pour l'effectuer.\\*
-			\end{description} %USR Management
+			\end{description} %USR Gérer le club (phase management)
 			
-			\item[Tournois :]
-			\begin{description}[leftmargin=*] %USR Tournois
+			\item[Jouer dans un tournois :]
+			\begin{description}[leftmargin=*] %USR Jouer dans un tournois
 				\item[]
 				\item \underline{Action} : L'utilisateur doit pouvoir s'inscrire à un tournoi en ligne, auquel il devra participer à des matches contre d'autres joueurs.
 				\item \underline{Requiert} : L'utilisateur doit être connecté.\\*
-			\end{description} %USR Tournois
+			\end{description} %USR Jouer dans un tournois
 			
 		\end{description}
 
@@ -91,44 +91,53 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \section{Besoin du système}
 	\subsection{Exigences fonctionnelles}
 		\begin{description}[style=nextline]
-			\item[Vérification d'authentification :]
-			\begin{description}[leftmargin=*] %SYS Vérification d'authentification
+			\item[Enregistrer :]
+			\begin{description}[leftmargin=*] %SYS Enregistrer
 				\item[]
-				\item \underline{Action} : Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que d'authentifier un utilisateur demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du serveur et est bien associé au mot de passe fourni.
-				\item \underline{Requiert} : Un utilisateur effectuant une demande d'inscription ou de connection.\\*
-			\end{description} %SYS Vérification d'authentification
+				\item \underline{Action} : Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
+				\item \underline{Requiert} : Un utilisateur effectuant une demande d'inscription.
+				\item \underline{Exception} : L'enregistrement échouera si le nom de compte est déjà enregistré sur le fichier.\\*
+			\end{description} %SYS Enregistrer
 			
-			\item[Interface :]
-			\begin{description}[leftmargin=*] %SYS Interface
+			\item[Authentifier :]
+			\begin{description}[leftmargin=*] %SYS Authentifier
+				\item[]
+				\item \underline{Action} : Le système doit être capable d'authentifier un utilisateur demandant de se connecter en vérifiant que le nom de compte fourni lors de la connection est présente dans le fichier du serveur et est bien associé au mot de passe fourni.
+				\item \underline{Requiert} : Un utilisateur effectuant une demande de connection.
+				\item \underline{Exception} : L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le fichier, ou si il est associé à un autre mot de passe que le mot de passe fourni..\\*
+			\end{description} %SYS Authentifier
+			
+			\item[Fournir une interface :]
+			\begin{description}[leftmargin=*] %SYS Fournir une interface
 				\item[]
 				\item \underline{Action} : Le système doit fournir à l'utilisateur une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.\\*
-			\end{description} %SYS Interface
+			\end{description} %SYS Fournir une interface
 			
-			\item[Représentation phase management :]
-			\begin{description}[leftmargin=*] %SYS Représentation phase management
+			\item[Représenter phase management :]
+			\begin{description}[leftmargin=*] %SYS Représenter phase management
 				\item[]
 				\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses joueurs, ses infrastructures, les améliorations possibles, et l'avancement des tournois.\\*
-			\end{description} %SYS Représentation phase management
+			\end{description} %SYS Représenter phase management
 			
-			\item[Représentation phase match :]
-			\begin{description}[leftmargin=*] %SYS Représentation phase match
+			\item[Représenter phase match :]
+			\begin{description}[leftmargin=*] %SYS Représenter phase match
 				\item[]
 				\item \underline{Action} : Le système doit fournir à l'utilisateur une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'utilisateur pourra déplacer ses joueurs et / ou effectuer une action.
 				\item \underline{Exception} : Si un utilisateur se déconnecte ou bien si sa connection est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet utilisateur contre l'utilisateur restant. Le match continuera sans changement apporté.
-			\end{description} %SYS Représentation phase match
+			\end{description} %SYS Représenter phase match
 			
-			\item[Sauvegarde :]
-			\begin{description}[leftmargin=*] %SYS Sauvegarde
+			\item[Sauvegarder :]
+			\begin{description}[leftmargin=*] %SYS Sauvegarder
 				\item[]
 				\item \underline{Action} : Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde.
 				\item \underline{Exception} : Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le serveur crash.
-			\end{description} %SYS Sauvegarde
+			\end{description} %SYS Sauvegarder
 			
-			\item[Tournois :]
-			\begin{description}[leftmargin=*] %SYS Tournois
+			\item[Gérer les tournois :]
+			\begin{description}[leftmargin=*] %SYS Gérer les tournois
 				\item[]
 				\item \underline{Action} : Le système doit génerer et gérer les tournois en ligne, où chaque utilisateurs inscrits devront s'affronter durant des matches organisés dans les stades des clubs.\\*
-			\end{description} %SYS Tournois
+			\end{description} %SYS Gérer les tournois
 			
 		\end{description}
 

@@ -63,9 +63,10 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 
 \subsubsection{S'inscrire à un tournoi}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi.
-Ce qui lui permettra d'être sélectionné pour de matchs et d'y affronter les autres joueurs inscrits à ce tournoi. % Je ne suis pas sur que joueurs est bien le bon terme ici
+\item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
+Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les autres participants inscrits à ce tournoi.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
+\item[Exception] Un utilisateur ne peut pas se réinscrire dans un tournoi auquel il est déjà inscrit.
 \end{description} 
 
 % fin de "Exigences fonctionnelles"

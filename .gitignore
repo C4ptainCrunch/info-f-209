@@ -1,6 +1,6 @@
 # Ne pas versionner le rendu pdf
 srd/srd.pdf
-pv/*.pdf
+pv/pv*/*.pdf
 
 ##########################
 ignores génériques

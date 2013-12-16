@@ -36,7 +36,7 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \subsection{But du projet}
 Le développement de cette application se fait dans le cadre du projet d'année de BA2 en sciences informatiques à l'Université Libre de Bruxelles. Il consiste en l'implémentation d'un jeu de Quidditch, sport tiré de la saga Harry Potter de J.K.Rowling. 
 [Expliquer les règles du Quidditch ?]
-Le jeu est de type gestion et stratégie en ligne. Le joueur est le manager d'un club de Quidditch, et son but est de faire progresser son club vers le succès. Pour ce faire, il devra gérer tous les aspects du club, tant au niveau sportif que financié. La saison de Quidditch se déroule sous la forme d'un championnat, durant lequel tous les joueurs font s'affronter entre eux au cours de matches aussi spectaculaires que tactiques. Les matches seront plannifiés dans un calendrier qu'il faudra respecter sous peine de sanction. Un match se joue au tour part tour, mais les deux joueurs jouent simultanément. Il y a donc une notion importante d'anticipation dans la maîtrise de ce jeu. En ce qui concerne la gestion du club, le joueur aura la possibilité de recruter de nouveaux joueurs de Quidditch pour renforcer son équipe, il pourra aussi dévellopper différentes infrastuctures et services, comme son stade, son infirmerie, son terrain d'entraînement, son fanshop etc.
+Le jeu est de type gestion et stratégie en ligne. L'\gls{utilisateur} est le manager d'un club de Quidditch, et son but est de faire progresser son club vers le succès. Pour ce faire, il devra gérer tous les aspects du club, tant au niveau sportif que financier. La saison de Quidditch se déroule sous la forme d'un championnat, durant lequel tous les \glspl{utilisateur} s'affrontent entre eux au cours de matches aussi spectaculaires que tactiques. Les matches seront planifiés dans un calendrier qu'il faudra respecter sous peine de sanction. Un match se joue au tour part tour, mais les deux \glspl{utilisateur} jouent simultanément. Il y a donc une notion importante d'anticipation dans la maîtrise de ce jeu. En ce qui concerne la gestion du club, L'\gls{utilisateur} aura la possibilité de recruter de nouveaux joueurs de Quidditch pour renforcer son équipe, il pourra aussi développer différentes infrastructures et services, comme son stade, son infirmerie, son terrain d'entraînement, son fanshop etc.
 
 % glossaire
 \printglossary[numberedsection]
@@ -61,30 +61,30 @@ Le jeu est de type gestion et stratégie en ligne. Le joueur est le manager d'un
 \subsubsection{Gérer le \gls{club} (phase de management)}
 \paragraph{Améliorer les bâtiments}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer ses divers bâtiments sur plusieurs niveaux. Chaque bâtiment aura sa ou ses spécificités, parmi 3 :
-Améliorer la rentrée d'argent.
-Améliorer l'entrainement (les caractéristiques) des joueurs.
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer ses divers bâtiments sur plusieurs niveaux. Chaque bâtiment aura sa ou ses spécificités, parmi trois :\\
+Améliorer la rentrée d'argent.\\
+Améliorer l'entraînement (les caractéristiques) des joueurs.\\
 Apporter des soins plus efficaces aux joueurs.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas d'assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Améliorer l'équipement}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer l'équipment de ses joueurs (bâtons, ...) pour les caractéristiques de ses joueurs.
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer l'équipement de ses joueurs (bâtons, ...) pour changer leurs caractéristiques.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
 \item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Améliorer le sponsoring}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et détails relatifs pour sa rentrée d'argent.
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et les détails relatifs pour sa rentrée d'argent.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas d'assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Acheter des joueurs}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir acheter des joueurs.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas d'assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Vendre des joueurs}
 \begin{description}
@@ -92,7 +92,7 @@ Apporter des soins plus efficaces aux joueurs.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
 \end{description}
 
-\subsubsection{Jouer en tournoi.}
+\subsubsection{Jouer en tournoi}
 \paragraph{S'inscrire en tournoi}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
@@ -105,7 +105,7 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir participer à un match en ligne du tournoi où il affrontera le participant adverse.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Requiert] L'\gls{utilisateur} doit être selectionné comme étant l'un des deux participant du match.
+\item[Requiert] L'\gls{utilisateur} doit être sélectionné comme étant l'un des deux participant du match.
 \item[Exception] L'\gls{utilisateur} sera considéré comme perdant automatiquement s'il a déclaré forfait.
 \end{description}
 
@@ -122,7 +122,7 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \subsubsection{Jouer à un match}
 \paragraph{Jouer un tour}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir jouer un tour lors d'un match, c'est à dire déplacer ses joueurs et / ou effectuer des actions.
+\item[Action] L'\gls{utilisateur} doit pouvoir jouer un tour lors d'un match, c'est à dire déplacer ses joueurs et/ou effectuer des actions.
 \item[Requiert] L'utilisateur doit être connecté.
 \item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connexion est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
 \end{description}
@@ -145,8 +145,8 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \item Le jeu doit être multi-joueur, les différents \glspl{utilisateur} connectés sur un même \gls{serveur} doivent pourvoir interagir entre eux.
 \item Le monde doit être de type persistent, il doit continuer d'évoluer, même en l'absence d'un ou plusieurs \glspl{utilisateur}.
 \item Une \gls{equipe} doit comporter 7 \glspl{joueur} au maximum, sans compter les remplaçants.
-\item Un match nécessite trois balles : Un souaffle, deux cognard et  et un vif d'or. Le terrain doit comporter deux buts, fait chacun de trois anneaux et placé aux deux extrémités du terrain. Pour participer à un match, chacun \gls{joueur} doit avoir au moins un balais, et une batte dans le cas des batteurs.
-\item Le match ne prend fin que si le vif d'or est attrapé ou une des deux \glspl{equipe} abandonne.
+\item Un match nécessite trois balles : Un souaffle, deux cognards et un vif d'or. Le terrain doit comporter deux buts, fait chacun de trois anneaux, et placé aux deux extrémités. Pour participer à un match, chaque \gls{joueur} doit avoir au moins un balais, et une batte dans le cas des batteurs.
+\item Le match ne prend fin que si le vif d'or est attrapé ou que l'une des deux \glspl{equipe} abandonne.
 \item Un \gls{joueur} blessé/mort ne peut être remplacé en plein match.
 \end{itemize}
 
@@ -196,31 +196,31 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 
 \paragraph{Modifier la liste des participants}
 \begin{description}
-\item[Action] Le système doit gérer une liste des participants, indiquant quel joueur participe ainsi que son état (éliminé, en course). Le système doit être capable de le modifier la liste durant les inscriptions et après que le tournoi soit lancé.
+\item[Action] Le système doit gérer une liste des participants, indiquant quel \gls{utilisateur} participe ainsi que son état (éliminé, en course). Le système doit être capable de le modifier la liste durant les inscriptions et après que le tournoi soit lancé.
 \item[Requiert] Un tournoi en attente ou lancé.
 \end{description}
 
 \paragraph{Lancer le tournoi}
 \begin{description}
-\item[Action] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit génrer l'arbre des matches et lancer le tournoi. L'arbre des matches contient également la date et l'heure de chaque match.
+\item[Action] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit générer l'arbre des matches et lancer le tournoi. L'arbre des matches contient également la date et l'heure de chaque match.
 \item[Requiert] Date limite d'une phase d'inscription.
 \end{description}
 
 \paragraph{Notifier les utilisateurs}
 \begin{description}
-\item[Action] Le système se doit de notifier les deux \glspl{utilisateur} concerné par un match lorsque la date et l'heure de celui-ci est atteint. Si un joueur ne répond pas, après un certain timeout, il est considéré comme perdant.
+\item[Action] Le système se doit de notifier les deux \glspl{utilisateur} concerné par un match lorsque la date et l'heure de celui-ci est atteint. Si un \gls{utilisateur} ne répond pas, après un certain timeout, il est considéré comme perdant.
 \end{description}
 
 \paragraph{Mettre à jour un tournoi}
 \begin{description}
-\item[Action] Le système doit mettre à jour l'arbre des matches du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'a ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
-\item[Requiert] Une fin de match entre deux participants.
+\item[Action] Le système doit mettre à jour l'arbre des matches du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'à ce qu'il ne reste qu'un seul \gls{utilisateur} qui sera élu grand vainqueur.
+\item[Requiert] Une fin de match entre deux \glspl{utilisateur}.
 \end{description}
 
 \subsubsection{Divers}
 \paragraph{Sauvegarder}
 \begin{description}
-\item[Action] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
+\item[Action] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit générer lui même, reprenant toute modification pertinente sur le match.
 \item[Requiert] Une modification du \gls{club} en phase management, ou un module de fin de match généré par le système. 
 \item[Exception] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
 \end{description}
@@ -229,7 +229,7 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 \subsection{Exigences non fonctionnelles}
 \label{enf}
 \begin{itemize}
-\item Le \gls{client} et le \gls{serveur} doivent être écrits en \textbf{C++} seront compliés à l'aide de \textbf{gcc 4.8}
+\item Le \gls{client} et le \gls{serveur} doivent être écrits en \textbf{C++} et seront compilés à l'aide de \textbf{gcc 4.8}
 \item Le \gls{client} et le \gls{serveur} doivent être portables et pouvoir fonctionner sur un système \textbf{UNIX} et une architecture x86
 \item La machine hébergeant le \gls{client} ainsi que le \gls{serveur} doivent être en mesure de communiquer en permanence via un réseau capable de transporter des paquets \textbf{TCP/IP}
 \item Le réseau décrit ci-dessus doit pouvoir une latence raisonnablement faible (c'est à dire de plus ou moins 200ms pour un aller retour)

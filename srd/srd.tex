@@ -113,17 +113,19 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
 \paragraph{Voir l'historique d'un tournoi}
 \item[Action] L'\gls{utilisateur} doit pouvoir voir l'historique d'un tournoi lancé ou terminé, c'est à dire l'arbre de match de ce dernier avec des détails concernant les équipes.
-\item[Requiert] L'\gls{utilisateur} doit être connecté.
+\item[Requiert] L'\gls{utilisateur} doit être connecté et ne doit pas être en plein match.
 \end{description}
 
 \subsubsection{Jouer à un match}
-%%RAJOUTER UNE paragraph ICI AVEC QUELQUES INFO SUR LE JEU
-% où l'\gls{utilisateur} pourra déplacer ses \glspl{joueur} et / ou effectuer une action.
-%\item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connexion est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
+\paragraph{Jouer un tour}
+\begin{description}
+\item[Action] L'\gls{utilisateur} doit pouvoir jouer un tour lors d'un match, c'est à dire déplacer ses joueurs et / ou effectuer des actions.
+\item[Requiert] L'utilisateur doit être connecté.
+\item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connexion est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
+\end{description}
 \paragraph{Déclarer forfait}
 \begin{description}
 \item[Action] L'\gls{utilisateur} peut déclarer forfait durant un match (il sera considéré comme perdant).
-\item[Requiert] L'\gls{utilisateur} doit être entrain de participer à un match.
 \end{description}
 
 % fin de "Exigences fonctionnelles"

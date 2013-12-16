@@ -149,53 +149,57 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \section{Besoin du système}
 \subsection{Exigences fonctionnelles}
 
-\subsubsection{Enregistrer une inscription}
+\subsubsection{Identification}
+\subsubsubsection{Enregistrer une inscription}
 \begin{description}
 \item[Action] Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
 \item[Requiert] Un \gls{utilisateur} effectuant une demande d'inscription.
 \item[Exception] L'enregistrement échouera si le nom de compte est déjà enregistré sur le fichier.
 \end{description}
 
-\subsubsection{Authentifier}
+\subsubsubsection{Authentifier}
 \begin{description}
 \item[Action] Le système doit être capable d'authentifier un \gls{utilisateur} demandant de se connecter en vérifiant que le nom de compte fourni lors de la connexion est présente dans le fichier du \gls{serveur} et est bien associé au mot de passe fourni.
 \item[Requiert] Un \gls{utilisateur} effectuant une demande de connexion.
 \item[Exception] L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le fichier, ou si il est associé à un autre mot de passe que le mot de passe fourni.
 \end{description}
 
-\subsubsection{Fournir une interface}
+\subsubsection{Interface}
+\subsubsubsection{Fournir une interface}
 \begin{description}
 \item[Action] Le système doit fournir à l'\gls{utilisateur} une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.
 \end{description}
 
-\subsubsection{Représenter phase management}
+\subsubsubsection{Représenter phase management}
 \begin{description}
 \item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses \glspl{joueur}, ses infrastructures, les améliorations possibles, et l'avancement des tournois.
 \end{description}
 
-\subsubsection{Représenter phase match}
+\subsubsubsection{Représenter phase match}
 \begin{description}
 \item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain (phase match) ovale, sous forme de cases hexagonales, où l'\gls{utilisateur} pourra déplacer ses \glspl{joueur} et / ou effectuer une action.
 \item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connexion est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
 \end{description}
 
-\subsubsection{Sauvegarder}
-\begin{description}
-\item[Action] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
-\item[Requiert] Une modification du \gls{club} en phase management, ou un module de fin de match généré par le système. 
-\item[Exception] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
-\end{description}
-
-\subsubsection{Créer un tournoi}
+\subsubsection{Gestion de tournois}
+\subsubsubsection{Créer un tournoi}
 \begin{description}
 \item[Action] Le système doit créer les tournois avec un certain intervalle de temps, où les \glspl{utilisateur} pourront s'inscrire et devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
 Durant sa création, il fixera une date limite pour les inscriptions. Une fois la limite passée, le tournoi démarre, et le serveur génèrera l'arbre des matches.
 \end{description}
 
-\subsubsection{Mettre à jour un tournoi}
+\subsubsubsection{Mettre à jour un tournoi}
 \begin{description}
 \item[Action] Le système doit mettre à jour l'arbre des matches du tournoi après chaque match. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'a ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
 \item[Requiert] Une fin de match entre deux participants.
+\end{description}
+
+\subsubsection{Divers}
+\subsubsubsection{Sauvegarder}
+\begin{description}
+\item[Action] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie avec un module de sauvegarde qu'il doit génerer lui même, reprenant toute modification pertinente sur le match.
+\item[Requiert] Une modification du \gls{club} en phase management, ou un module de fin de match généré par le système. 
+\item[Exception] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
 \end{description}
 
 

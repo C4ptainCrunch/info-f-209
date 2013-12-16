@@ -66,7 +66,8 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
 \end{description}
 
-\subsubsection{S'inscrire à un tournoi}
+\subsubsection{Jouer en tournoi.}
+\subsubsubsection{S'inscrire en tournoi}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
 Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les autres participants inscrits à ce tournoi.
@@ -74,12 +75,18 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \item[Exception] Un \gls{utilisateur} ne peut pas se réinscrire dans un tournoi auquel il est déjà inscrit.
 \end{description} 
 
-\subsubsection{Participer à un match du tournoi}
+\subsubsubsection{Participer à un match du tournoi}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir participer à un match en ligne du tournoi où il affrontera le participant adverse.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
 \item[Requiert] L'\gls{utilisateur} doit être selectionné comme étant l'un des deux participant du match.
 \item[Exception] L'\gls{utilisateur} sera considéré comme perdant automatiquement s'il a déclaré forfait.
+\end{description}
+
+\subsubsection{Voir les informations relatives à un tournoi}
+\begin{description}
+\item[Action] L'\gls{utilisateur} doit pouvoir voir les l'historique d'un tournoi (ce comprenant les tournois terminés et les tournois auquel l'utilisateur ne participe pas ou n'a pas participé), ainsi que la liste des participants pour tout les tournois lancés ou terminés.
+\item[Requiert] L'\gls{utilisateur} doit être connecté.
 \end{description}
 
 \subsubsection{Déclarer forfait}

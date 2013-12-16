@@ -197,8 +197,13 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 
 \paragraph{Lancer le tournoi}
 \begin{description}
-\item[Action] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit génrer l'arbre des matches et lancer le tournoi.
+\item[Action] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit génrer l'arbre des matches et lancer le tournoi. L'arbre des matches contient également la date et l'heure de chaque match.
 \item[Requiert] Date limite d'une phase d'inscription.
+\end{description}
+
+\paragraph{Notifier les utilisateurs}
+\begin{description}
+\item[Action] Le système se doit de notifier les deux \glspl{utilisateur} concerné par un match lorsque la date et l'heure de celui-ci est atteint. Si un joueur ne répond pas, après un certain timeout, il est considéré comme perdant.
 \end{description}
 
 \paragraph{Mettre à jour un tournoi}

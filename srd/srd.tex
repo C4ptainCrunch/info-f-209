@@ -189,6 +189,12 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 Durant sa création, il fixera une date limite pour les inscriptions.
 \end{description}
 
+\paragraph{Modifier la liste des participants}
+\begin{description}
+\item[Action] Le système doit gérer une liste des participants, indiquant quel joueur participe ainsi que son état (éliminé, en course). Le système doit être capable de le modifier la liste durant les inscriptions et après que le tournoi soit lancé.
+\item[Requiert] Un tournoi en attente ou lancé.
+\end{description}
+
 \paragraph{Lancer le tournoi}
 \begin{description}
 \item[Action] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit génrer l'arbre des matches et lancer le tournoi.
@@ -197,7 +203,7 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 
 \paragraph{Mettre à jour un tournoi}
 \begin{description}
-\item[Action] Le système doit mettre à jour l'arbre des matches du tournoi après chaque match. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'a ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
+\item[Action] Le système doit mettre à jour l'arbre des matches du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'a ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
 \item[Requiert] Une fin de match entre deux participants.
 \end{description}
 

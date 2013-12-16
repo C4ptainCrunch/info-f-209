@@ -42,28 +42,51 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \section{Besoin d'utilisation}
 \subsection{Exigences fonctionnelles}
 
-\subsubsection{Inscription}
+\subsubsection{Identification}
+\subsubsubsection{Inscription}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
 \item[Exception] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le \gls{serveur}.
 \end{description}
 
-\subsubsection{Connexion}
+\subsubsubsection{Connexion}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir se connecter en s'authentifiant auprès du \gls{serveur} avec son nom d'\gls{utilisateur} et son mot de passe.
 \item[Exception] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'\gls{utilisateur}, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
 \end{description}
 
 \subsubsection{Gérer le \gls{club} (phase de management)}
+\subsubsubsection{Améliorer les bâtiments}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son \gls{club} en gérant divers facteurs. Chaque dépense coûte de l'argent.
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer ses bâtiments pour les rentrées d'argent, les caractéristiques de ses joueurs et les soins.
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer l'équipment de ses joueurs (bâtons, ...) pour les caractéristiques de ses joueurs.
-\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et détails relatifs pour sa rentrée d'argent.
-\item[Action] L'\gls{utilisateur} doit pouvoir acheter des joueurs.
-\item[Action] L'\gls{utilisateur} doit pouvoir vendre des joueurs.
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer ses divers bâtiments sur plusieurs niveaux. Chaque bâtiment aura sa ou ses spécificités, parmi 3 :
+Améliorer la rentrée d'argent.
+Améliorer l'entrainement (les caractéristiques) des joueurs.
+Apporter des soins plus efficaces aux joueurs.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
 \item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\end{description}
+\subsubsubsection{Améliorer l'équipement}
+\begin{description}
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer l'équipment de ses joueurs (bâtons, ...) pour les caractéristiques de ses joueurs.
+\item[Requiert] L'\gls{utilisateur} doit être connecté.
+\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\end{description}
+\subsubsubsection{Améliorer le sponsoring}
+\begin{description}
+\item[Action] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et détails relatifs pour sa rentrée d'argent.
+\item[Requiert] L'\gls{utilisateur} doit être connecté.
+\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\end{description}
+\subsubsubsection{Acheter des joueurs}
+\begin{description}
+\item[Action] L'\gls{utilisateur} doit pouvoir acheter des joueurs.
+\item[Requiert] L'\gls{utilisateur} doit être connecté.
+\item[Exception] Une dépense n'est pas accepté si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\end{description}
+\subsubsubsection{Vendre des joueurs}
+\begin{description}
+\item[Action] L'\gls{utilisateur} doit pouvoir vendre l'un (ou plusieurs) de ses joueurs.
+\item[Requiert] L'\gls{utilisateur} doit être connecté.
 \end{description}
 
 \subsubsection{Jouer en tournoi.}
@@ -84,12 +107,18 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \end{description}
 
 \subsubsection{Voir les informations relatives à un tournoi}
+\subsubsubsection{Voir la liste des participants d'un tournoi}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir voir les l'historique d'un tournoi (ce comprenant les tournois terminés et les tournois auquel l'utilisateur ne participe pas ou n'a pas participé), ainsi que la liste des participants pour tout les tournois lancés ou terminés.
+\item[Action] L'\gls{utilisateur} doit pouvoir voir la liste des participants d'un tournoi lancé ou terminé.
+\item[Requiert] L'\gls{utilisateur} doit être connecté.
+\subsubsubsection{Voir l'historique d'un tournoi}
+\item[Action] L'\gls{utilisateur} doit pouvoir voir l'historique d'un tournoi lancé ou terminé, c'est à dire l'arbre de match de ce dernier avec des détails concernant les équipes.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
 \end{description}
 
-\subsubsection{Déclarer forfait}
+\subsubsection{Jouer à un match}
+%%RAJOUTER UNE subsubsubsection ICI AVEC QUELQUES INFO SUR LE JEU
+\subsubsubsection{Déclarer forfait}
 \begin{description}
 \item[Action] L'\gls{utilisateur} peut déclarer forfait durant un match (il sera considéré comme perdant).
 \item[Requiert] L'\gls{utilisateur} doit être entrain de participer à un match.

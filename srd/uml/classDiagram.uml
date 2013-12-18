@@ -70,7 +70,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Wed Dec 18 11:43:25 CET 2013'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Wed Dec 18 17:35:17 CET 2013'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -2895,7 +2895,7 @@
     </path>
   </group>
   <group name="Fig10"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[568, 184, 136, 66]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[592, 200, 136, 66]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:00000000000008F7"
        fill="1"
        fillcolor="white"
@@ -2906,8 +2906,8 @@
     </private>
     
     <rectangle name="Fig10.0"
-      x="568"
-      y="184"
+      x="592"
+      y="200"
       width="136"
       height="66"
       fill="1"
@@ -2916,8 +2916,8 @@
       strokecolor="black"
     />
     <text name="Fig10.1"
-      x="569"
-      y="185"
+      x="593"
+      y="201"
       width="134"
       height="22"
       fill="0"
@@ -2932,7 +2932,7 @@
       justification="Center"
     >Field</text>
     <group name="Fig10.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[569, 185, 134, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[593, 201, 134, 0]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:00000000000008F7"
          fill="0"
          fillcolor="white"
@@ -2944,8 +2944,8 @@
       </private>
       
       <rectangle name="Fig10.2.0"
-        x="569"
-        y="185"
+        x="593"
+        y="201"
         width="134"
         height="0"
         fill="0"
@@ -2955,8 +2955,8 @@
       />
     </group>
     <rectangle name="Fig10.3"
-      x="568"
-      y="207"
+      x="592"
+      y="223"
       width="136"
       height="1"
       fill="1"
@@ -2965,7 +2965,7 @@
       strokecolor="black"
     />
     <group name="Fig10.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[569, 208, 134, 21]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[593, 224, 134, 21]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:00000000000008F7"
          fill="0"
          fillcolor="white"
@@ -2976,8 +2976,8 @@
       </private>
       
       <rectangle name="Fig10.4.0"
-        x="569"
-        y="208"
+        x="593"
+        y="224"
         width="134"
         height="21"
         fill="0"
@@ -2987,8 +2987,8 @@
       />
     </group>
     <rectangle name="Fig10.5"
-      x="568"
-      y="228"
+      x="592"
+      y="244"
       width="136"
       height="1"
       fill="1"
@@ -2997,7 +2997,7 @@
       strokecolor="black"
     />
     <group name="Fig10.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[569, 229, 134, 21]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[593, 245, 134, 21]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:00000000000008F7"
          fill="0"
          fillcolor="white"
@@ -3008,8 +3008,8 @@
       </private>
       
       <rectangle name="Fig10.6.0"
-        x="569"
-        y="229"
+        x="593"
+        y="245"
         width="134"
         height="21"
         fill="0"
@@ -3211,10 +3211,10 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="568"
+      <moveto x="696"
               y="123" />
-      <lineto x="568"
-              y="184" />
+      <lineto x="696"
+              y="200" />
     </path>
   </group>
   <group name="Fig13"
@@ -4656,7 +4656,7 @@
       strokecolor="black"
     >
       <moveto x="664"
-              y="249" />
+              y="265" />
       <lineto x="664"
               y="640" />
       <lineto x="448"

@@ -13,7 +13,7 @@ class Budger : protected Ball{
 		~Budger();
 		bool operator=(const Ball &ball);
 	    void move();
-		void getSpeed();
+		int getSpeed();
 	
 	private:
 	    super();

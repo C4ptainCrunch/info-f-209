@@ -37,7 +37,7 @@ Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
 \section{Introduction}
 \subsection{But du projet}
 Le développement de cette application se fait dans le cadre du projet d'année de BA2 en sciences informatiques à l'Université Libre de Bruxelles. Il consiste en l'implémentation d'un jeu de Quidditch, sport tiré de la saga Harry Potter de J.K.Rowling. 
-Le quidditch est un sport pratiqué par deux équipes de 7 joueurs évoluant à l'aide de leur balais sur un terrain de forme ovale. Le but de ces 2 équipes est de marquer le plus de point possible grâce au Souaffles et d'attraper le Vif d'or\footnote{Pour pmlus d'informations, se référer au livre J. K. Rowling, Le Quidditch à travers les âges, Gallimard, 2001.}. 
+Le quidditch est un sport pratiqué par deux équipes de 7 joueurs évoluant à l'aide de leur balais sur un terrain de forme ovale. Le but de ces 2 équipes est de marquer le plus de point possible grâce au Souaffles et d'attraper le Vif d'or\footnote{Pour plus d'informations, se référer au livre J. K. Rowling, Le Quidditch à travers les âges, Gallimard, 2001.}. 
 Le jeu est de type gestion et stratégie en ligne. L'\gls{utilisateur} est le manager d'un club de Quidditch, et son but est de faire progresser son club vers le succès. Pour ce faire, il devra gérer tous les aspects du club, tant au niveau sportif que financier. La saison de Quidditch se déroule sous la forme d'un championnat, durant lequel tous les \glspl{utilisateur} s'affrontent entre eux au cours de matches aussi spectaculaires que tactiques. Les matches seront planifiés dans un calendrier qu'il faudra respecter sous peine de sanction. Un match se joue au tour part tour, mais les deux \glspl{utilisateur} jouent simultanément. Il y a donc une notion importante d'anticipation dans la maîtrise de ce jeu. En ce qui concerne la gestion du club, L'\gls{utilisateur} aura la possibilité de recruter de nouveaux joueurs de Quidditch pour renforcer son équipe, il pourra aussi développer différentes infrastructures et services, comme son stade, son infirmerie, son terrain d'entraînement, son fanshop etc.
 
 % glossaire
@@ -80,19 +80,19 @@ Apporter des soins plus efficaces aux joueurs.
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir améliorer l'équipement de ses joueurs (bâtons, ...) pour changer leurs caractéristiques.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Améliorer le sponsoring}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et les détails relatifs pour sa rentrée d'argent.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Acheter des joueurs}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir acheter des joueurs.
 \item[Requiert] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Vendre des joueurs}
 \begin{description}
@@ -125,7 +125,8 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \end{description}
 \paragraph{Voir l'historique d'un tournoi}
 \begin{description}
-\item[Action] L'\gls{utilisateur} doit pouvoir voir l'historique d'un tournoi lancé ou terminé, c'est à dire l'arbre de match de ce dernier avec des détails concernant les équipes.
+\item[Action] L'\gls{utilisateur} doit pouvoir voir l'historique d'un tournoi lancé ou terminé, c'est à dire l'arbre du tournois de ce dernier avec des détails concernant les équipes.
+% mettre l'arbre du tournois dans le glossaire?
 \item[Requiert] L'\gls{utilisateur} doit être connecté et ne doit pas être en plein match.
 \end{description}
 
@@ -153,7 +154,7 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 
 \subsection{Exigences de domaine}
 \begin{itemize}
-\item Le jeu doit être multi-joueur, les différents \glspl{utilisateur} connectés sur un même \gls{serveur} doivent pourvoir interagir entre eux.
+\item Le jeu doit être multijoueur, les différents \glspl{utilisateur} connectés sur un même \gls{serveur} doivent pourvoir interagir entre eux.
 \item Le monde doit être de type persistent, il doit continuer d'évoluer, même en l'absence d'un ou plusieurs \glspl{utilisateur}.
 \item Une \gls{equipe} doit comporter 7 \glspl{joueur} au maximum, sans compter les remplaçants.
 \item Un match nécessite trois balles : Un souaffle, deux cognards et un vif d'or. Le terrain doit comporter deux buts, fait chacun de trois anneaux, et placé aux deux extrémités. Pour participer à un match, chaque \gls{joueur} doit avoir au moins un balais, et une batte dans le cas des batteurs.
@@ -195,7 +196,7 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 
 \paragraph{Représenter phase match}
 \begin{description}
-\item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain (phase match) ovale, sous forme de cases hexagonales.
+\item[Action] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain ovale (phase match), sous forme de cases hexagonales.
 \end{description}
 
 \subsubsection{Gestion de tournois}
@@ -213,7 +214,7 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 
 \paragraph{Lancer le tournoi}
 \begin{description}
-\item[Action] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit générer l'arbre des matches et lancer le tournoi. L'arbre des matches contient également la date et l'heure de chaque match.
+\item[Action] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit générer l'arbre du tournois et lancer le dit tournoi. L'arbre du tournois contient également la date et l'heure de chaque match.
 \item[Requiert] Date limite d'une phase d'inscription.
 \end{description}
 
@@ -224,7 +225,7 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 
 \paragraph{Mettre à jour un tournoi}
 \begin{description}
-\item[Action] Le système doit mettre à jour l'arbre des matches du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'à ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
+\item[Action] Le système doit mettre à jour l'arbre du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'à ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
 \item[Requiert] Une fin de match entre deux participants.
 \end{description}
 

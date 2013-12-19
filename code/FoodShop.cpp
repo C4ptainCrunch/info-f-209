@@ -1,7 +1,22 @@
 #include "FoodShop.h"
 
+FoodShop::FoodShop(){
+}
 
+FoodShop::~FoodShop(){
+}
 
+bool FoodShop::operator=(){
+}
 
-void FoodShop::getIncome(){
+void FoodShop::improve(){
+}
+
+int FoodShop::getLevel(){
+}
+
+int FoodShop::getIncome(){
+}
+
+void FoodShop::setIncome(){
 }

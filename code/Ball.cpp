@@ -12,5 +12,8 @@ bool Ball::operator=(){
 void Ball::move(){
 }
 
-void Ball::getSpeed(){
+int Ball::getSpeed(){
+}
+
+void Ball::setSpeed(){
 }

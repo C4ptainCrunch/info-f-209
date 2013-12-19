@@ -14,3 +14,6 @@ void Budger::move(){
 
 int Budger::getSpeed(){
 }
+
+void Budger::setSpeed(){
+}

@@ -12,6 +12,7 @@ class GoldenSnitch : protected Ball {
 		bool operator=();
 		void move();
 		int getSpeed();
+		void setSpeed();
 
 	private:
 		super();

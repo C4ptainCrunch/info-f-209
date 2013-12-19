@@ -12,3 +12,6 @@ bool Match::operator=(){
 
 int Match::getScore(){
 }
+
+void Match::setScore(){
+}

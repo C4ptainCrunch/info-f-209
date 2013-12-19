@@ -1,17 +1,44 @@
 #include "Player.h"
 
 
-void Player::getSpeed(){
+int Player::getSpeed(){
 }
 
-void Player::getForce(){
+int Player::getForce(){
 }
 
-void Player::getAgility(){
+int Player::getAgility(){
 }
 
-void Player::getReflexes(){
+int Player::getReflexes(){
 }
 
-void Player::getPassPrecision(){
+int Player::getPassPrecision(){
+}
+
+bool Player::isWounded(){
+}
+
+void Player::getInventory(){
+}
+
+void Player::setSpeed(){
+}
+
+void Player::setForce(){
+}
+
+void Player::setAgility(){
+}
+
+void Player::setReflexes(){
+}
+
+void Player::setPassPrecision(){
+}
+
+void Player::setWoundState(){
+}
+
+void Playe::setInventory(){
 }

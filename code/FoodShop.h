@@ -4,13 +4,19 @@
 #include "Installation.h"
 
 
-class FoodShop : public Installation {
+class FoodShop : protected Installation{
 
  public:
-
-    virtual void getIncome();
+	FoodShop();
+	~FoodShop();
+	bool operator=();
+    void improve();
+    int getLevel();
+    int getIncome();
+    void setIncome();
 
  private:
+	super();
     int income;
 };
 

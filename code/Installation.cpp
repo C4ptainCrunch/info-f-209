@@ -13,5 +13,5 @@ bool Installation::operator=(){
 void Installation::improve(){
 }
 
-void Installation::getLevel(){
+int Installation::getLevel(){
 }

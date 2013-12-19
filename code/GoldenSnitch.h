@@ -2,9 +2,7 @@
 #define GoldenSnitch_h
 
 #include "Ball.h"
-#include "Match.h"
 
-class Match;
 
 class GoldenSnitch : protected Ball {
 

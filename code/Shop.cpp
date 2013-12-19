@@ -12,3 +12,9 @@ bool Shop::operator=(){
 
 int Shop::getIncome(){
 }
+
+void Shop::improve(){
+}
+
+int Shop::getLevel(){
+}

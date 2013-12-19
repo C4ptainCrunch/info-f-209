@@ -9,6 +9,8 @@ class TrainingField : protected Installation{
 		TrainingField();
 		~TrainingField();
 		bool operator=();
+		void improve();
+		int getLevel();
 
 	private:
 		super();

@@ -10,6 +10,7 @@ class Field : protected Installation{
 		~Field();
 		bool operator=();
 		void improve();
+		int getLevel();
 	
 	private:
 		super();

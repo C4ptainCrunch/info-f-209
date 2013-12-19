@@ -1,8 +1,6 @@
 #ifndef Player_h
 #define Player_h
 
-class Team;
-class Bench;
 
 class Player {
 
@@ -20,9 +18,7 @@ class Player {
     int agility;
     int reflexes;
     int passPrecision;
-    void inventory[]
-    Team *myTeam;
-    Bench *myBench;
+    void inventory[];
 };
 
 #endif // Player_h

@@ -6,8 +6,14 @@
 class Match;
 
 class Quaffle: protected Ball{
-
- private:
+	public:
+		Quaffle();
+		~Quaffle();
+		bool operator=();
+		void move();
+		int getSpeed();
+	private:
+		super();
 };
 
 #endif // Quaffle_h

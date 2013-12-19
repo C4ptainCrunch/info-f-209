@@ -3,7 +3,7 @@
 
 #include "Installation.h"
 
-class Fanshop : protected Installation{
+class Fanshop : protected Shop{
 	public:
 		Fanshop();
 		~Fanshop();

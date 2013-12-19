@@ -1,46 +1,34 @@
 #ifndef Match_h
 #define Match_h
 
+#include "Team.h"
+#include "Field.h"
+#include "GoldenSnitch.h"
+#include "Quaffle.h"
+#include "Budger.h"
+
 class Team;
 class Field;
-class Ball;
 class GoldenSnitch;
 class Quaffle;
 class Budger;
 
 class Match {
 
- public:
+	public:
+		Match();
+		~Match();
+		bool operator=();
+		int getScore();
 
-    virtual void getScore();
-
-
- private:
-    Integer teamOneScore;
-    Integer teamTwoScore;
-
- public:
-
-    /**
-     * @element-type Team
-     */
-    Team *myTeam[ 2];
-
-    Field ** myField;
-
-    /**
-     * @element-type Ball
-     */
-    Ball *myBall[ 4];
-
-    GoldenSnitch *myGoldenSnitch;
-
-    Quaffle *myQuaffle;
-
-    /**
-     * @element-type Budger
-     */
-    Budger *myBudger[ 2];
+	private:
+		int teamOneScore;
+		int teamTwoScore;
+		Team *myTeam[2];
+		Field *myField;
+		GoldenSnitch *myGoldenSnitch;
+		Quaffle *myQuaffle;
+		Budger *myBudger[2];
 };
 
 #endif // Match_h

@@ -8,52 +8,20 @@ class Player {
 
  public:
 
-    virtual void getSpeed();
-
-    virtual void getForce();
-
-    virtual void getAgility();
-
-    virtual void getReflexes();
-
-    virtual void getPassPrecision();
-
- public:
-    Integer inventory;
+    virtual int getSpeed();
+    virtual int getForce();
+    virtual int getAgility();
+    virtual int getReflexes();
+    virtual int getPassPrecision();
 
  private:
-    Integer speed;
-    Integer force;
-    Integer agility;
-    Integer reflexes;
-    Integer passPrecision;
-
- public:
-
+    int speed;
+    int force;
+    int agility;
+    int reflexes;
+    int passPrecision;
+    void inventory[]
     Team *myTeam;
-
-    /**
-     * @element-type Team
-     */
-    Team *myTeam;
-
-    /**
-     * @element-type Team
-     */
-    Team *myTeam;
-
-    Team *0;
-
-    /**
-     * @element-type Team
-     */
-    Team *myTeam;
-
-    Team *myTeam;
-
-    /**
-     * @element-type Bench
-     */
     Bench *myBench;
 };
 

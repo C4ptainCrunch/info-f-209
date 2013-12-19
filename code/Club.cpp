@@ -30,9 +30,6 @@ Manager& Club::getManager(){
 Team& Club::getTeam(){
 }
 
-Bench& Club::getBench(){
-}
-
 std::vector< Installation* > Club::getInstallations(){
 }
 
@@ -43,9 +40,6 @@ void Club::setManager(){
 }
 
 void Club::setTeam(){
-}
-
-void Club::setBench(){
 }
 
 void Club::setInstallations(){

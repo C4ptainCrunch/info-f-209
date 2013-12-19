@@ -5,13 +5,11 @@
 #include "Installation.h"
 #include "Manager.h"
 #include "Team.h"
-#include "Bench.h"
 #include "NonFieldPlayer.h"
 
 class Installation;
 class Manager;
 class Team;
-class Bench;
 class NonFieldPlayer;
 
 class Club {
@@ -27,12 +25,10 @@ class Club {
 		void levelUp();
 		Manager& getManager();
 		Team& getTeam();
-		Bench& getBench;
 		std::vector< Installation* > getInstallations();
 		std::vector< NonFieldPlayer* > getNonFieldPlayers();
 		void setManager();
 		void setTeam();
-		void setBench();
 		void setInstallations();
 		void setNonFieldPlayers();
 
@@ -42,7 +38,6 @@ class Club {
 		std::vector< Installation* > myInstallation;
 		Manager *myManager;
 		Team *myTeam;
-		Bench *myBench;
 		std::vector< NonFieldPlayer* > myNonFieldPlayer;
 };
 

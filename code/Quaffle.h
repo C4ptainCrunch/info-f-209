@@ -5,11 +5,9 @@
 
 class Match;
 
-class Quaffle : public Ball {
+class Quaffle: protected Ball{
 
- public:
-
-    Match *myMatch;
+ private:
 };
 
 #endif // Quaffle_h

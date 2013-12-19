@@ -13,6 +13,7 @@ class Budger : protected Ball{
 	    void move();
 		int getSpeed();
 		void setSpeed();
+		void hitPlayer();
 	
 	private:
 	    super();

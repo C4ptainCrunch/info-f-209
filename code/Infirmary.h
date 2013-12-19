@@ -4,13 +4,17 @@
 #include "Installation.h"
 
 
-/*
- */
-class Infirmary : public Installation, virtual public Installation {
+class Infirmary : protected Installation{
 
- public:
-
-    virtual void heal();
+	public:
+		Infirmary();
+		~Infirmary();
+		bool operator=();
+		void heal();
+		void improve();
+		int getLevel();
+	private:
+		super();
 };
 
 #endif // Infirmary_h

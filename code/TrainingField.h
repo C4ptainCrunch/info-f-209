@@ -3,7 +3,16 @@
 
 #include "Installation.h"
 
+class TrainingField : protected Installation{
+	
+	public:
+		TrainingField();
+		~TrainingField();
+		bool operator=();
 
-class TrainingField : public Installation, public Installation {};
+	private:
+		super();
+	
+};
 
 #endif // TrainingField_h

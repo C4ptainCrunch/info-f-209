@@ -6,11 +6,17 @@
 
 class Match;
 
-class GoldenSnitch : public Ball {
+class GoldenSnitch : protected Ball {
 
- public:
+	public:
+		GoldenSnitch();
+		~GoldenSnitch();
+		bool operator=();
+		void move();
+		int getSpeed();
 
-    Match *myMatch;
+	private:
+		super();
 };
 
 #endif // GoldenSnitch_h

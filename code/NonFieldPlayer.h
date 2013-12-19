@@ -3,33 +3,21 @@
 
 #include "Player.h"
 
-class Team;
-class Club;
+class NonFieldPlayer : protected Player{
 
-class NonFieldPlayer : public Player, public Player {
+	public:
+		NonFieldPlayer();
+		~NonFieldPlayer();
+		bool operator=();
+		int getLevel();
+		void setExp();
+		void levelUp();
+		void Vocation();
 
- public:
-
-    virtual void getLevel();
-
-    virtual void setExp();
-
-    virtual void levelUp();
-
- private:
-
-    virtual void Vocation();
-
-
- private:
-    Integer level;
-    Integer vocation;
-
- public:
-
-    Team ** myTeam;
-
-    Club ** myClub;
+	private:
+		super();
+		int level;
+		void vocation;
 };
 
 #endif // NonFieldPlayer_h

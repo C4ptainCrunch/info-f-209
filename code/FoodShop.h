@@ -1,10 +1,10 @@
 #ifndef FoodShop_h
 #define FoodShop_h
 
-#include "Installation.h"
+#include "Shop.h"
 
 
-class FoodShop : protected Installation{
+class FoodShop : protected Shop{
 
 	public:
 		FoodShop();

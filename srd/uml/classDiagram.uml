@@ -70,7 +70,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Dec 19 19:45:39 CET 2013'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Dec 19 23:43:52 CET 2013'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -148,6 +148,15 @@
                   name = 'return' isSpecification = 'false' kind = 'return'/>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAE'
+              name = 'setScore' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAF'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
           </UML:Classifier.feature>
         </UML:Class>
         <UML:Class xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000883'
@@ -172,21 +181,6 @@
           name = 'Player' visibility = 'public' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'true' isActive = 'false'>
           <UML:Classifier.feature>
-            <UML:Attribute xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088B'
-              name = 'inventory' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-              changeability = 'changeable' targetScope = 'instance'>
-              <UML:StructuralFeature.multiplicity>
-                <UML:Multiplicity xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088C'>
-                  <UML:Multiplicity.range>
-                    <UML:MultiplicityRange xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088D'
-                      lower = '1' upper = '1'/>
-                  </UML:Multiplicity.range>
-                </UML:Multiplicity>
-              </UML:StructuralFeature.multiplicity>
-              <UML:StructuralFeature.type>
-                <UML:DataType href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#-84-17--56-5-43645a83:11466542d86:-8000:000000000000087C'/>
-              </UML:StructuralFeature.type>
-            </UML:Attribute>
             <UML:Attribute xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:00000000000008F9'
               name = 'speed' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
@@ -307,6 +301,117 @@
                   name = 'return' isSpecification = 'false' kind = 'return'/>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB0'
+              name = 'setSpeed' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB1'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB2'
+              name = 'setForce' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB3'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB4'
+              name = 'setAgility' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB5'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB6'
+              name = 'setReflexes' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB7'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB8'
+              name = 'setPassPrecision' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' concurrency = 'sequential' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BB9'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Attribute xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BBA'
+              name = 'wounded' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              changeability = 'changeable' targetScope = 'instance'>
+              <UML:StructuralFeature.multiplicity>
+                <UML:Multiplicity xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BBB'>
+                  <UML:Multiplicity.range>
+                    <UML:MultiplicityRange xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BBC'
+                      lower = '1' upper = '1'/>
+                  </UML:Multiplicity.range>
+                </UML:Multiplicity>
+              </UML:StructuralFeature.multiplicity>
+              <UML:StructuralFeature.type>
+                <UML:Enumeration href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#-84-17--56-5-43645a83:11466542d86:-8000:0000000000000880'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BBD'
+              name = 'isWounded' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BBE'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BBF'
+              name = 'setWoundState' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BC0'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BC4'
+              name = 'getInventory' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BC5'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BC6'
+              name = 'setInventory' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BC7'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Attribute xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BC8'
+              name = 'inventory' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              changeability = 'changeable' targetScope = 'instance'>
+              <UML:StructuralFeature.multiplicity>
+                <UML:Multiplicity xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BC9'>
+                  <UML:Multiplicity.range>
+                    <UML:MultiplicityRange xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BCA'
+                      lower = '1' upper = '1'/>
+                  </UML:Multiplicity.range>
+                </UML:Multiplicity>
+              </UML:StructuralFeature.multiplicity>
+              <UML:StructuralFeature.type>
+                <UML:DataType href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#-84-17--56-5-43645a83:11466542d86:-8000:000000000000087C'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
           </UML:Classifier.feature>
         </UML:Class>
         <UML:Class xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088E'
@@ -367,6 +472,60 @@
               isAbstract = 'false'>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '127-0-1-1--741708:143053b354d:-8000:0000000000000B52'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B85'
+              name = 'getManager' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B86'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B93'
+              name = 'setManager' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B94'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B95'
+              name = 'getLevel' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B96'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B97'
+              name = 'levelUp' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B98'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B99'
+              name = 'getInstallations' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' concurrency = 'sequential' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9A'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9B'
+              name = 'setInstallations' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' concurrency = 'sequential' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9C'
                   name = 'return' isSpecification = 'false' kind = 'return'/>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
@@ -918,99 +1077,9 @@
             </UML:AssociationEnd>
           </UML:Association.connection>
         </UML:Association>
-        <UML:Class xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910'
-          name = 'Ball' visibility = 'public' isSpecification = 'false' isRoot = 'false'
-          isLeaf = 'false' isAbstract = 'true' isActive = 'false'>
-          <UML:ModelElement.comment>
-            <UML:Comment xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000093C'/>
-          </UML:ModelElement.comment>
-          <UML:Classifier.feature>
-            <UML:Operation xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000914'
-              name = 'move' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
-              isAbstract = 'false'>
-              <UML:BehavioralFeature.parameter>
-                <UML:Parameter xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000915'
-                  name = 'return' isSpecification = 'false' kind = 'return'/>
-              </UML:BehavioralFeature.parameter>
-            </UML:Operation>
-            <UML:Attribute xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000091F'
-              name = 'speed' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
-              changeability = 'changeable' targetScope = 'instance'>
-              <UML:StructuralFeature.multiplicity>
-                <UML:Multiplicity xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000920'>
-                  <UML:Multiplicity.range>
-                    <UML:MultiplicityRange xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000921'
-                      lower = '1' upper = '1'/>
-                  </UML:Multiplicity.range>
-                </UML:Multiplicity>
-              </UML:StructuralFeature.multiplicity>
-              <UML:StructuralFeature.type>
-                <UML:DataType href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#-84-17--56-5-43645a83:11466542d86:-8000:000000000000087C'/>
-              </UML:StructuralFeature.type>
-            </UML:Attribute>
-            <UML:Operation xmi.id = '127-0-1-1-195549bb:1430b7a942f:-8000:0000000000000B80'
-              name = 'getSpeed' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
-              isAbstract = 'false'>
-              <UML:BehavioralFeature.parameter>
-                <UML:Parameter xmi.id = '127-0-1-1-195549bb:1430b7a942f:-8000:0000000000000B81'
-                  name = 'return' isSpecification = 'false' kind = 'return'/>
-              </UML:BehavioralFeature.parameter>
-            </UML:Operation>
-          </UML:Classifier.feature>
-        </UML:Class>
         <UML:Class xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000916'
           name = 'Souafle' visibility = 'public' isSpecification = 'false' isRoot = 'false'
-          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
-          <UML:GeneralizableElement.generalization>
-            <UML:Generalization xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000919'/>
-          </UML:GeneralizableElement.generalization>
-        </UML:Class>
-        <UML:Generalization xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000919'
-          isSpecification = 'false'>
-          <UML:Generalization.child>
-            <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000916'/>
-          </UML:Generalization.child>
-          <UML:Generalization.parent>
-            <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910'/>
-          </UML:Generalization.parent>
-        </UML:Generalization>
-        <UML:Association xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000922'
-          name = '' isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
-          <UML:Association.connection>
-            <UML:AssociationEnd xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000923'
-              visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
-              aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
-              <UML:AssociationEnd.multiplicity>
-                <UML:Multiplicity xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000926'>
-                  <UML:Multiplicity.range>
-                    <UML:MultiplicityRange xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000925'
-                      lower = '1' upper = '1'/>
-                  </UML:Multiplicity.range>
-                </UML:Multiplicity>
-              </UML:AssociationEnd.multiplicity>
-              <UML:AssociationEnd.participant>
-                <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000087A'/>
-              </UML:AssociationEnd.participant>
-            </UML:AssociationEnd>
-            <UML:AssociationEnd xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000924'
-              visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
-              aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
-              <UML:AssociationEnd.multiplicity>
-                <UML:Multiplicity xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000928'>
-                  <UML:Multiplicity.range>
-                    <UML:MultiplicityRange xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000927'
-                      lower = '4' upper = '4'/>
-                  </UML:Multiplicity.range>
-                </UML:Multiplicity>
-              </UML:AssociationEnd.multiplicity>
-              <UML:AssociationEnd.participant>
-                <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910'/>
-              </UML:AssociationEnd.participant>
-            </UML:AssociationEnd>
-          </UML:Association.connection>
-        </UML:Association>
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'/>
         <UML:Abstraction xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000929'
           isSpecification = 'false'>
           <UML:ModelElement.stereotype>
@@ -1050,11 +1119,7 @@
           </UML:Comment.annotatedElement>
         </UML:Comment>
         <UML:Comment xmi.id = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000093C'
-          isSpecification = 'false' body = 'Différencier types de ballons en classes? ou en objets de type Ballon?&#10;'>
-          <UML:Comment.annotatedElement>
-            <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910'/>
-          </UML:Comment.annotatedElement>
-        </UML:Comment>
+          isSpecification = 'false' body = 'Différencier types de ballons en classes? ou en objets de type Ballon?&#10;'/>
         <UML:Class xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000AF5'
           name = 'TrainingField' visibility = 'public' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
@@ -1320,39 +1385,22 @@
           name = 'GoldenSnitch' visibility = 'public' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
           <UML:GeneralizableElement.generalization>
-            <UML:Generalization xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B24'/>
+            <UML:Generalization xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAA'/>
+            <UML:Generalization xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAD'/>
           </UML:GeneralizableElement.generalization>
         </UML:Class>
-        <UML:Generalization xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B24'
-          isSpecification = 'false'>
-          <UML:Generalization.child>
-            <UML:Class xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B23'/>
-          </UML:Generalization.child>
-          <UML:Generalization.parent>
-            <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910'/>
-          </UML:Generalization.parent>
-        </UML:Generalization>
         <UML:Class xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B28'
           name = 'Quaffle' visibility = 'public' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
           <UML:GeneralizableElement.generalization>
-            <UML:Generalization xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B29'/>
+            <UML:Generalization xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAB'/>
           </UML:GeneralizableElement.generalization>
         </UML:Class>
-        <UML:Generalization xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B29'
-          isSpecification = 'false'>
-          <UML:Generalization.child>
-            <UML:Class xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B28'/>
-          </UML:Generalization.child>
-          <UML:Generalization.parent>
-            <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910'/>
-          </UML:Generalization.parent>
-        </UML:Generalization>
         <UML:Class xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2A'
           name = 'Budger' visibility = 'public' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
           <UML:GeneralizableElement.generalization>
-            <UML:Generalization xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B42'/>
+            <UML:Generalization xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAC'/>
           </UML:GeneralizableElement.generalization>
         </UML:Class>
         <UML:Association xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2B'
@@ -1425,15 +1473,6 @@
             </UML:AssociationEnd>
           </UML:Association.connection>
         </UML:Association>
-        <UML:Generalization xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B42'
-          isSpecification = 'false'>
-          <UML:Generalization.child>
-            <UML:Class xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2A'/>
-          </UML:Generalization.child>
-          <UML:Generalization.parent>
-            <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910'/>
-          </UML:Generalization.parent>
-        </UML:Generalization>
         <UML:Association xmi.id = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B43'
           name = '' isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false'>
           <UML:Association.connection>
@@ -1672,6 +1711,93 @@
             <UML:Class xmi.idref = '-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000898'/>
           </UML:Generalization.parent>
         </UML:Generalization>
+        <UML:Class xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B7F'
+          name = '' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'/>
+        <UML:Class xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E'
+          name = 'Ball' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'true' isActive = 'false'>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9F'
+              name = 'speed' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              changeability = 'changeable' targetScope = 'instance'>
+              <UML:StructuralFeature.multiplicity>
+                <UML:Multiplicity xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA0'>
+                  <UML:Multiplicity.range>
+                    <UML:MultiplicityRange xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA1'
+                      lower = '1' upper = '1'/>
+                  </UML:Multiplicity.range>
+                </UML:Multiplicity>
+              </UML:StructuralFeature.multiplicity>
+              <UML:StructuralFeature.type>
+                <UML:DataType href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#-84-17--56-5-43645a83:11466542d86:-8000:000000000000087C'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA2'
+              name = 'move' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA3'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA6'
+              name = 'getSpeed' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA7'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA8'
+              name = 'setSpeed' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BA9'
+                  name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Generalization xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAA'
+          isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B23'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
+        <UML:Generalization xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAB'
+          isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B28'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
+        <UML:Generalization xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAC'
+          isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2A'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
+        <UML:Generalization xmi.id = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAD'
+          isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B23'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
       </UML:Namespace.ownedElement>
     </UML:Model>
   </XMI.content>
@@ -1696,7 +1822,7 @@
       name="Diagramme de classes 4"
 >
   <group name="Fig0"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[568, 32, 174, 92]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[568, 32, 174, 104]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000087A"
        fill="1"
        fillcolor="white"
@@ -1710,7 +1836,7 @@
       x="568"
       y="32"
       width="174"
-      height="92"
+      height="104"
       fill="1"
       fillcolor="white"
       stroke="1"
@@ -1766,7 +1892,7 @@
       strokecolor="black"
     />
     <group name="Fig0.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[569, 56, 172, 41]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[569, 56, 172, 40]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000087A"
          fill="0"
          fillcolor="white"
@@ -1780,7 +1906,7 @@
         x="569"
         y="56"
         width="172"
-        height="41"
+        height="40"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -1821,7 +1947,7 @@
     </group>
     <rectangle name="Fig0.5"
       x="568"
-      y="97"
+      y="95"
       width="174"
       height="1"
       fill="1"
@@ -1830,7 +1956,7 @@
       strokecolor="black"
     />
     <group name="Fig0.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[569, 98, 172, 25]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[569, 96, 172, 40]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000087A"
          fill="0"
          fillcolor="white"
@@ -1842,9 +1968,9 @@
       
       <rectangle name="Fig0.6.0"
         x="569"
-        y="98"
+        y="96"
         width="172"
-        height="25"
+        height="40"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -1852,7 +1978,23 @@
       />
       <text name="Fig0.6.1"
         x="569"
-        y="98"
+        y="96"
+        width="172"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >getScore()</text>
+      <text name="Fig0.6.2"
+        x="569"
+        y="112"
         width="172"
         height="22"
         fill="0"
@@ -1865,11 +2007,11 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >getScore()</text>
+      >setScore()</text>
     </group>
   </group>
   <group name="Fig1"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[416, 248, 105, 71]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[224, 472, 105, 71]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000883"
        fill="1"
        fillcolor="white"
@@ -1880,8 +2022,8 @@
     </private>
     
     <rectangle name="Fig1.0"
-      x="416"
-      y="248"
+      x="224"
+      y="472"
       width="105"
       height="71"
       fill="1"
@@ -1890,8 +2032,8 @@
       strokecolor="black"
     />
     <text name="Fig1.1"
-      x="417"
-      y="249"
+      x="225"
+      y="473"
       width="103"
       height="22"
       fill="0"
@@ -1906,7 +2048,7 @@
       justification="Center"
     >Team</text>
     <group name="Fig1.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[417, 249, 103, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[225, 473, 103, 0]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000883"
          fill="0"
          fillcolor="white"
@@ -1918,8 +2060,8 @@
       </private>
       
       <rectangle name="Fig1.2.0"
-        x="417"
-        y="249"
+        x="225"
+        y="473"
         width="103"
         height="0"
         fill="0"
@@ -1929,8 +2071,8 @@
       />
     </group>
     <rectangle name="Fig1.3"
-      x="416"
-      y="271"
+      x="224"
+      y="495"
       width="105"
       height="1"
       fill="1"
@@ -1939,7 +2081,7 @@
       strokecolor="black"
     />
     <group name="Fig1.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[417, 272, 103, 21]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[225, 496, 103, 21]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000883"
          fill="0"
          fillcolor="white"
@@ -1950,8 +2092,8 @@
       </private>
       
       <rectangle name="Fig1.4.0"
-        x="417"
-        y="272"
+        x="225"
+        y="496"
         width="103"
         height="21"
         fill="0"
@@ -1961,8 +2103,8 @@
       />
     </group>
     <rectangle name="Fig1.5"
-      x="416"
-      y="293"
+      x="224"
+      y="517"
       width="105"
       height="1"
       fill="1"
@@ -1971,7 +2113,7 @@
       strokecolor="black"
     />
     <group name="Fig1.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[417, 294, 103, 24]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[225, 518, 103, 24]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000883"
          fill="0"
          fillcolor="white"
@@ -1982,8 +2124,8 @@
       </private>
       
       <rectangle name="Fig1.6.0"
-        x="417"
-        y="294"
+        x="225"
+        y="518"
         width="103"
         height="24"
         fill="0"
@@ -1992,8 +2134,8 @@
         strokecolor="black"
       />
       <text name="Fig1.6.1"
-        x="417"
-        y="294"
+        x="225"
+        y="518"
         width="103"
         height="22"
         fill="0"
@@ -2010,7 +2152,7 @@
     </group>
   </group>
   <group name="Fig2"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[256, 16, 152, 216]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[208, 0, 152, 376]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088A"
        fill="1"
        fillcolor="white"
@@ -2021,18 +2163,18 @@
     </private>
     
     <rectangle name="Fig2.0"
-      x="256"
-      y="16"
+      x="208"
+      y="0"
       width="152"
-      height="216"
+      height="376"
       fill="1"
       fillcolor="white"
       stroke="1"
       strokecolor="black"
     />
     <text name="Fig2.1"
-      x="257"
-      y="17"
+      x="209"
+      y="1"
       width="150"
       height="22"
       fill="0"
@@ -2047,7 +2189,7 @@
       justification="Center"
     >Player</text>
     <group name="Fig2.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[257, 17, 150, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[209, 1, 150, 0]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088A"
          fill="0"
          fillcolor="white"
@@ -2059,8 +2201,8 @@
       </private>
       
       <rectangle name="Fig2.2.0"
-        x="257"
-        y="17"
+        x="209"
+        y="1"
         width="150"
         height="0"
         fill="0"
@@ -2070,8 +2212,8 @@
       />
     </group>
     <rectangle name="Fig2.3"
-      x="256"
-      y="39"
+      x="208"
+      y="23"
       width="152"
       height="1"
       fill="1"
@@ -2080,7 +2222,7 @@
       strokecolor="black"
     />
     <group name="Fig2.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[257, 40, 150, 104]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[209, 24, 150, 120]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088A"
          fill="0"
          fillcolor="white"
@@ -2091,34 +2233,18 @@
       </private>
       
       <rectangle name="Fig2.4.0"
-        x="257"
-        y="40"
+        x="209"
+        y="24"
         width="150"
-        height="104"
+        height="120"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
       <text name="Fig2.4.1"
-        x="257"
-        y="40"
-        width="150"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >inventory : Integer</text>
-      <text name="Fig2.4.2"
-        x="257"
-        y="56"
+        x="209"
+        y="24"
         width="150"
         height="16"
         fill="0"
@@ -2132,9 +2258,9 @@
         textsize="12"
         justification="Left"
       >speed : Integer</text>
-      <text name="Fig2.4.3"
-        x="257"
-        y="72"
+      <text name="Fig2.4.2"
+        x="209"
+        y="40"
         width="150"
         height="16"
         fill="0"
@@ -2148,9 +2274,9 @@
         textsize="12"
         justification="Left"
       >force : Integer</text>
-      <text name="Fig2.4.4"
-        x="257"
-        y="88"
+      <text name="Fig2.4.3"
+        x="209"
+        y="56"
         width="150"
         height="16"
         fill="0"
@@ -2164,9 +2290,9 @@
         textsize="12"
         justification="Left"
       >agility : Integer</text>
-      <text name="Fig2.4.5"
-        x="257"
-        y="104"
+      <text name="Fig2.4.4"
+        x="209"
+        y="72"
         width="150"
         height="16"
         fill="0"
@@ -2180,8 +2306,40 @@
         textsize="12"
         justification="Left"
       >reflexes : Integer</text>
+      <text name="Fig2.4.5"
+        x="209"
+        y="88"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >passPrecision : Integer</text>
       <text name="Fig2.4.6"
-        x="257"
+        x="209"
+        y="104"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >wounded : Boolean</text>
+      <text name="Fig2.4.7"
+        x="209"
         y="120"
         width="150"
         height="22"
@@ -2195,10 +2353,10 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >passPrecision : Integer</text>
+      >inventory : Integer</text>
     </group>
     <rectangle name="Fig2.5"
-      x="256"
+      x="208"
       y="143"
       width="152"
       height="1"
@@ -2208,7 +2366,7 @@
       strokecolor="black"
     />
     <group name="Fig2.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[257, 144, 150, 88]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[209, 144, 150, 232]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088A"
          fill="0"
          fillcolor="white"
@@ -2219,17 +2377,17 @@
       </private>
       
       <rectangle name="Fig2.6.0"
-        x="257"
+        x="209"
         y="144"
         width="150"
-        height="88"
+        height="232"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
       <text name="Fig2.6.1"
-        x="257"
+        x="209"
         y="144"
         width="150"
         height="16"
@@ -2245,7 +2403,7 @@
         justification="Left"
       >getSpeed()</text>
       <text name="Fig2.6.2"
-        x="257"
+        x="209"
         y="160"
         width="150"
         height="16"
@@ -2261,7 +2419,7 @@
         justification="Left"
       >getForce()</text>
       <text name="Fig2.6.3"
-        x="257"
+        x="209"
         y="176"
         width="150"
         height="16"
@@ -2277,7 +2435,7 @@
         justification="Left"
       >getAgility()</text>
       <text name="Fig2.6.4"
-        x="257"
+        x="209"
         y="192"
         width="150"
         height="16"
@@ -2293,8 +2451,152 @@
         justification="Left"
       >getReflexes()</text>
       <text name="Fig2.6.5"
-        x="257"
+        x="209"
         y="208"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >getPassPrecision()</text>
+      <text name="Fig2.6.6"
+        x="209"
+        y="224"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setSpeed()</text>
+      <text name="Fig2.6.7"
+        x="209"
+        y="240"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setForce()</text>
+      <text name="Fig2.6.8"
+        x="209"
+        y="256"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setAgility()</text>
+      <text name="Fig2.6.9"
+        x="209"
+        y="272"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setReflexes()</text>
+      <text name="Fig2.6.10"
+        x="209"
+        y="288"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setPassPrecision()</text>
+      <text name="Fig2.6.11"
+        x="209"
+        y="304"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >isWounded()</text>
+      <text name="Fig2.6.12"
+        x="209"
+        y="320"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setWoundState()</text>
+      <text name="Fig2.6.13"
+        x="209"
+        y="336"
+        width="150"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >getInventory()</text>
+      <text name="Fig2.6.14"
+        x="209"
+        y="352"
         width="150"
         height="22"
         fill="0"
@@ -2307,11 +2609,11 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >getPassPrecision()</text>
+      >setInventory()</text>
     </group>
   </group>
   <group name="Fig3"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[136, 440, 113, 120]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[8, 392, 115, 228]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088E"
        fill="1"
        fillcolor="white"
@@ -2322,19 +2624,19 @@
     </private>
     
     <rectangle name="Fig3.0"
-      x="136"
-      y="440"
-      width="113"
-      height="120"
+      x="8"
+      y="392"
+      width="115"
+      height="228"
       fill="1"
       fillcolor="white"
       stroke="1"
       strokecolor="black"
     />
     <text name="Fig3.1"
-      x="137"
-      y="441"
-      width="111"
+      x="9"
+      y="393"
+      width="113"
       height="22"
       fill="0"
       fillcolor="white"
@@ -2348,7 +2650,7 @@
       justification="Center"
     >Club</text>
     <group name="Fig3.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[137, 441, 111, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[9, 393, 111, 0]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088E"
          fill="0"
          fillcolor="white"
@@ -2360,8 +2662,8 @@
       </private>
       
       <rectangle name="Fig3.2.0"
-        x="137"
-        y="441"
+        x="9"
+        y="393"
         width="111"
         height="0"
         fill="0"
@@ -2371,9 +2673,9 @@
       />
     </group>
     <rectangle name="Fig3.3"
-      x="136"
-      y="463"
-      width="113"
+      x="8"
+      y="415"
+      width="115"
       height="1"
       fill="1"
       fillcolor="black"
@@ -2381,7 +2683,7 @@
       strokecolor="black"
     />
     <group name="Fig3.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[137, 464, 111, 40]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[9, 416, 113, 45]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088E"
          fill="0"
          fillcolor="white"
@@ -2392,19 +2694,19 @@
       </private>
       
       <rectangle name="Fig3.4.0"
-        x="137"
-        y="464"
-        width="111"
-        height="40"
+        x="9"
+        y="416"
+        width="113"
+        height="45"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
       <text name="Fig3.4.1"
-        x="137"
-        y="464"
-        width="111"
+        x="9"
+        y="416"
+        width="113"
         height="16"
         fill="0"
         fillcolor="white"
@@ -2418,9 +2720,9 @@
         justification="Left"
       >money : Integer</text>
       <text name="Fig3.4.2"
-        x="137"
-        y="480"
-        width="111"
+        x="9"
+        y="432"
+        width="113"
         height="22"
         fill="0"
         fillcolor="white"
@@ -2435,9 +2737,9 @@
       >level : Integer</text>
     </group>
     <rectangle name="Fig3.5"
-      x="136"
-      y="503"
-      width="113"
+      x="8"
+      y="461"
+      width="115"
       height="1"
       fill="1"
       fillcolor="black"
@@ -2445,7 +2747,7 @@
       strokecolor="black"
     />
     <group name="Fig3.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[137, 504, 111, 56]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[9, 462, 113, 157]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000088E"
          fill="0"
          fillcolor="white"
@@ -2456,19 +2758,19 @@
       </private>
       
       <rectangle name="Fig3.6.0"
-        x="137"
-        y="504"
-        width="111"
-        height="56"
+        x="9"
+        y="462"
+        width="113"
+        height="157"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
       <text name="Fig3.6.1"
-        x="137"
-        y="504"
-        width="111"
+        x="9"
+        y="462"
+        width="113"
         height="16"
         fill="0"
         fillcolor="white"
@@ -2482,9 +2784,9 @@
         justification="Left"
       >getMoney()</text>
       <text name="Fig3.6.2"
-        x="137"
-        y="520"
-        width="111"
+        x="9"
+        y="478"
+        width="113"
         height="16"
         fill="0"
         fillcolor="white"
@@ -2498,10 +2800,10 @@
         justification="Left"
       >addMoney()</text>
       <text name="Fig3.6.3"
-        x="137"
-        y="536"
-        width="111"
-        height="22"
+        x="9"
+        y="494"
+        width="113"
+        height="16"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -2513,10 +2815,106 @@
         textsize="12"
         justification="Left"
       >lowerMoney()</text>
+      <text name="Fig3.6.4"
+        x="9"
+        y="510"
+        width="113"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >getManager()</text>
+      <text name="Fig3.6.5"
+        x="9"
+        y="526"
+        width="113"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setManager()</text>
+      <text name="Fig3.6.6"
+        x="9"
+        y="542"
+        width="113"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >getLevel()</text>
+      <text name="Fig3.6.7"
+        x="9"
+        y="558"
+        width="113"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >levelUp()</text>
+      <text name="Fig3.6.8"
+        x="9"
+        y="574"
+        width="113"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >getInstallations()</text>
+      <text name="Fig3.6.9"
+        x="9"
+        y="590"
+        width="113"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setInstallations()</text>
     </group>
   </group>
   <group name="Fig4"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[392, 432, 134, 105]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[488, 496, 134, 105]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000897"
        fill="1"
        fillcolor="white"
@@ -2527,8 +2925,8 @@
     </private>
     
     <rectangle name="Fig4.0"
-      x="392"
-      y="432"
+      x="488"
+      y="496"
       width="134"
       height="105"
       fill="1"
@@ -2537,8 +2935,8 @@
       strokecolor="black"
     />
     <text name="Fig4.1"
-      x="393"
-      y="433"
+      x="489"
+      y="497"
       width="132"
       height="22"
       fill="0"
@@ -2553,7 +2951,7 @@
       justification="Center"
     >Manager</text>
     <group name="Fig4.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[393, 433, 132, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[489, 497, 132, 0]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000897"
          fill="0"
          fillcolor="white"
@@ -2565,8 +2963,8 @@
       </private>
       
       <rectangle name="Fig4.2.0"
-        x="393"
-        y="433"
+        x="489"
+        y="497"
         width="132"
         height="0"
         fill="0"
@@ -2576,8 +2974,8 @@
       />
     </group>
     <rectangle name="Fig4.3"
-      x="392"
-      y="455"
+      x="488"
+      y="519"
       width="134"
       height="1"
       fill="1"
@@ -2586,7 +2984,7 @@
       strokecolor="black"
     />
     <group name="Fig4.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[393, 456, 132, 31]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[489, 520, 132, 31]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000897"
          fill="0"
          fillcolor="white"
@@ -2597,8 +2995,8 @@
       </private>
       
       <rectangle name="Fig4.4.0"
-        x="393"
-        y="456"
+        x="489"
+        y="520"
         width="132"
         height="31"
         fill="0"
@@ -2607,8 +3005,8 @@
         strokecolor="black"
       />
       <text name="Fig4.4.1"
-        x="393"
-        y="456"
+        x="489"
+        y="520"
         width="132"
         height="22"
         fill="0"
@@ -2624,8 +3022,8 @@
       >experience : Integer</text>
     </group>
     <rectangle name="Fig4.5"
-      x="392"
-      y="487"
+      x="488"
+      y="551"
       width="134"
       height="1"
       fill="1"
@@ -2634,7 +3032,7 @@
       strokecolor="black"
     />
     <group name="Fig4.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[393, 488, 132, 47]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[489, 552, 132, 47]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000897"
          fill="0"
          fillcolor="white"
@@ -2645,8 +3043,8 @@
       </private>
       
       <rectangle name="Fig4.6.0"
-        x="393"
-        y="488"
+        x="489"
+        y="552"
         width="132"
         height="47"
         fill="0"
@@ -2655,8 +3053,8 @@
         strokecolor="black"
       />
       <text name="Fig4.6.1"
-        x="393"
-        y="488"
+        x="489"
+        y="552"
         width="132"
         height="16"
         fill="0"
@@ -2671,8 +3069,8 @@
         justification="Left"
       >getExperience()</text>
       <text name="Fig4.6.2"
-        x="393"
-        y="504"
+        x="489"
+        y="568"
         width="132"
         height="22"
         fill="0"
@@ -2912,8 +3310,8 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="184"
-              y="559" />
+      <moveto x="122"
+              y="619" />
       <lineto x="184"
               y="656" />
       <lineto x="336"
@@ -2961,8 +3359,8 @@
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="-87--2--79-32--746c2cb8:142d3a16a65:-8000:00000000000008A4"
-                        angle="135.0"
-                        offset="5" />
+                        angle="75.00000000000001"
+                        offset="4" />
     </private>
     <path name="Fig7.0"
       description="org.argouml.gefext.ArgoFigPoly"
@@ -2971,10 +3369,10 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="392"
-              y="480" />
-      <lineto x="248"
-              y="480" />
+      <moveto x="488"
+              y="560" />
+      <lineto x="122"
+              y="560" />
     </path>
   </group>
   <group name="Fig8"
@@ -3028,12 +3426,10 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="248"
-              y="440" />
-      <lineto x="368"
-              y="440" />
-      <lineto x="416"
-              y="318" />
+      <moveto x="122"
+              y="512" />
+      <lineto x="224"
+              y="512" />
     </path>
   </group>
   <group name="Fig9"
@@ -3088,9 +3484,13 @@
       strokecolor="black"
     >
       <moveto x="568"
-              y="123" />
-      <lineto x="520"
-              y="248" />
+              y="135" />
+      <lineto x="400"
+              y="448" />
+      <lineto x="328"
+              y="448" />
+      <lineto x="328"
+              y="472" />
     </path>
   </group>
   <group name="Fig10"
@@ -3411,185 +3811,12 @@
       strokecolor="black"
     >
       <moveto x="696"
-              y="123" />
+              y="135" />
       <lineto x="696"
               y="200" />
     </path>
   </group>
   <group name="Fig13"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[1416, 64, 109, 88]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
-       href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910"
-       fill="1"
-       fillcolor="white"
-       stroke="1"
-       strokecolor="black"
-  >
-    <private>
-    </private>
-    
-    <rectangle name="Fig13.0"
-      x="1416"
-      y="64"
-      width="109"
-      height="88"
-      fill="1"
-      fillcolor="white"
-      stroke="1"
-      strokecolor="black"
-    />
-    <text name="Fig13.1"
-      x="1417"
-      y="65"
-      width="107"
-      height="22"
-      fill="0"
-      fillcolor="white"
-      stroke="0"
-      strokecolor="black"
-      textcolor="black"
-      font="Dialog"
-      italic="true"
-      bold="false"
-      textsize="12"
-      justification="Center"
-    >Ball</text>
-    <group name="Fig13.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1417, 65, 107, 0]"
-         href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910"
-         fill="0"
-         fillcolor="white"
-         stroke="0"
-         strokecolor="black"
-         visibility="0"
-    >
-      <private>
-      </private>
-      
-      <rectangle name="Fig13.2.0"
-        x="1417"
-        y="65"
-        width="107"
-        height="0"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-      />
-    </group>
-    <rectangle name="Fig13.3"
-      x="1416"
-      y="87"
-      width="109"
-      height="1"
-      fill="1"
-      fillcolor="black"
-      stroke="1"
-      strokecolor="black"
-    />
-    <group name="Fig13.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1417, 88, 107, 24]"
-         href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910"
-         fill="0"
-         fillcolor="white"
-         stroke="0"
-         strokecolor="black"
-    >
-      <private>
-      </private>
-      
-      <rectangle name="Fig13.4.0"
-        x="1417"
-        y="88"
-        width="107"
-        height="24"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-      />
-      <text name="Fig13.4.1"
-        x="1417"
-        y="88"
-        width="107"
-        height="22"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >speed : Integer</text>
-    </group>
-    <rectangle name="Fig13.5"
-      x="1416"
-      y="111"
-      width="109"
-      height="1"
-      fill="1"
-      fillcolor="black"
-      stroke="1"
-      strokecolor="black"
-    />
-    <group name="Fig13.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1417, 112, 107, 40]"
-         href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:0000000000000910"
-         fill="0"
-         fillcolor="white"
-         stroke="0"
-         strokecolor="black"
-    >
-      <private>
-      </private>
-      
-      <rectangle name="Fig13.6.0"
-        x="1417"
-        y="112"
-        width="107"
-        height="40"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-      />
-      <text name="Fig13.6.1"
-        x="1417"
-        y="112"
-        width="107"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >move()</text>
-      <text name="Fig13.6.2"
-        x="1417"
-        y="128"
-        width="107"
-        height="22"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >getSpeed()</text>
-    </group>
-  </group>
-  <group name="Fig14"
        description="org.argouml.uml.diagram.ui.FigGeneralization"
        href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000092B"
        stroke="1"
@@ -3600,14 +3827,14 @@
       destPortFig="Fig5"
       sourceFigNode="Fig11"
       destFigNode="Fig5"
-      <argouml:pathitem figname="Fig14.1"
+      <argouml:pathitem figname="Fig13.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000092B"
                         angle="-225.0"
                         offset="11" />
     </private>
-    <path name="Fig14.0"
+    <path name="Fig13.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -3620,7 +3847,7 @@
               y="703" />
     </path>
   </group>
-  <group name="Fig15"
+  <group name="Fig14"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[640, 680, 143, 67]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000AF5"
        fill="1"
@@ -3631,7 +3858,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig15.0"
+    <rectangle name="Fig14.0"
       x="640"
       y="680"
       width="143"
@@ -3641,7 +3868,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig15.1"
+    <text name="Fig14.1"
       x="641"
       y="681"
       width="141"
@@ -3657,7 +3884,7 @@
       textsize="12"
       justification="Center"
     >TrainingField</text>
-    <group name="Fig15.2"
+    <group name="Fig14.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[641, 681, 141, 0]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000AF5"
          fill="0"
@@ -3669,7 +3896,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig15.2.0"
+      <rectangle name="Fig14.2.0"
         x="641"
         y="681"
         width="141"
@@ -3680,7 +3907,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig15.3"
+    <rectangle name="Fig14.3"
       x="640"
       y="703"
       width="143"
@@ -3690,7 +3917,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig15.4"
+    <group name="Fig14.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[641, 704, 141, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000AF5"
          fill="0"
@@ -3701,7 +3928,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig15.4.0"
+      <rectangle name="Fig14.4.0"
         x="641"
         y="704"
         width="141"
@@ -3712,7 +3939,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig15.5"
+    <rectangle name="Fig14.5"
       x="640"
       y="724"
       width="143"
@@ -3722,7 +3949,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig15.6"
+    <group name="Fig14.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[641, 725, 141, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000AF5"
          fill="0"
@@ -3733,7 +3960,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig15.6.0"
+      <rectangle name="Fig14.6.0"
         x="641"
         y="725"
         width="141"
@@ -3745,25 +3972,25 @@
       />
     </group>
   </group>
-  <group name="Fig16"
+  <group name="Fig15"
        description="org.argouml.uml.diagram.ui.FigGeneralization"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000AF7"
        stroke="1"
        strokecolor="black"
   >
     <private>
-      sourcePortFig="Fig15.0"
+      sourcePortFig="Fig14.0"
       destPortFig="Fig5"
-      sourceFigNode="Fig15"
+      sourceFigNode="Fig14"
       destFigNode="Fig5"
-      <argouml:pathitem figname="Fig16.1"
+      <argouml:pathitem figname="Fig15.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000AF7"
                         angle="-90.0"
                         offset="27" />
     </private>
-    <path name="Fig16.0"
+    <path name="Fig15.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -3776,7 +4003,7 @@
               y="703" />
     </path>
   </group>
-  <group name="Fig17"
+  <group name="Fig16"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[0, 16, 116, 149]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B06"
        fill="1"
@@ -3787,7 +4014,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig17.0"
+    <rectangle name="Fig16.0"
       x="0"
       y="16"
       width="116"
@@ -3797,7 +4024,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig17.1"
+    <text name="Fig16.1"
       x="1"
       y="17"
       width="114"
@@ -3813,7 +4040,7 @@
       textsize="12"
       justification="Center"
     >FieldPlayer</text>
-    <group name="Fig17.2"
+    <group name="Fig16.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1, 17, 114, 0]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B06"
          fill="0"
@@ -3825,7 +4052,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig17.2.0"
+      <rectangle name="Fig16.2.0"
         x="1"
         y="17"
         width="114"
@@ -3836,7 +4063,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig17.3"
+    <rectangle name="Fig16.3"
       x="0"
       y="39"
       width="116"
@@ -3846,7 +4073,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig17.4"
+    <group name="Fig16.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1, 40, 114, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B06"
          fill="0"
@@ -3857,7 +4084,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig17.4.0"
+      <rectangle name="Fig16.4.0"
         x="1"
         y="40"
         width="114"
@@ -3868,7 +4095,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig17.5"
+    <rectangle name="Fig16.5"
       x="0"
       y="60"
       width="116"
@@ -3878,7 +4105,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig17.6"
+    <group name="Fig16.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1, 61, 114, 104]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B06"
          fill="0"
@@ -3889,7 +4116,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig17.6.0"
+      <rectangle name="Fig16.6.0"
         x="1"
         y="61"
         width="114"
@@ -3899,7 +4126,7 @@
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig17.6.1"
+      <text name="Fig16.6.1"
         x="1"
         y="61"
         width="114"
@@ -3915,7 +4142,7 @@
         textsize="12"
         justification="Left"
       >move()</text>
-      <text name="Fig17.6.2"
+      <text name="Fig16.6.2"
         x="1"
         y="77"
         width="114"
@@ -3931,7 +4158,7 @@
         textsize="12"
         justification="Left"
       >hitBludger()</text>
-      <text name="Fig17.6.3"
+      <text name="Fig16.6.3"
         x="1"
         y="93"
         width="114"
@@ -3947,7 +4174,7 @@
         textsize="12"
         justification="Left"
       >catchSnitch()</text>
-      <text name="Fig17.6.4"
+      <text name="Fig16.6.4"
         x="1"
         y="109"
         width="114"
@@ -3963,7 +4190,7 @@
         textsize="12"
         justification="Left"
       >throwQuaffle()</text>
-      <text name="Fig17.6.5"
+      <text name="Fig16.6.5"
         x="1"
         y="125"
         width="114"
@@ -3979,7 +4206,7 @@
         textsize="12"
         justification="Left"
       >catchQuaffle()</text>
-      <text name="Fig17.6.6"
+      <text name="Fig16.6.6"
         x="1"
         y="141"
         width="114"
@@ -3997,7 +4224,7 @@
       >testMove()</text>
     </group>
   </group>
-  <group name="Fig18"
+  <group name="Fig17"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[0, 192, 120, 136]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B1A"
        fill="1"
@@ -4008,7 +4235,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig18.0"
+    <rectangle name="Fig17.0"
       x="0"
       y="192"
       width="120"
@@ -4018,7 +4245,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig18.1"
+    <text name="Fig17.1"
       x="1"
       y="193"
       width="118"
@@ -4034,7 +4261,7 @@
       textsize="12"
       justification="Center"
     >NonFieldPlayer</text>
-    <group name="Fig18.2"
+    <group name="Fig17.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1, 193, 118, 0]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B1A"
          fill="0"
@@ -4046,7 +4273,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig18.2.0"
+      <rectangle name="Fig17.2.0"
         x="1"
         y="193"
         width="118"
@@ -4057,7 +4284,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig18.3"
+    <rectangle name="Fig17.3"
       x="0"
       y="215"
       width="120"
@@ -4067,7 +4294,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig18.4"
+    <group name="Fig17.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1, 216, 118, 40]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B1A"
          fill="0"
@@ -4078,7 +4305,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig18.4.0"
+      <rectangle name="Fig17.4.0"
         x="1"
         y="216"
         width="118"
@@ -4088,7 +4315,7 @@
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig18.4.1"
+      <text name="Fig17.4.1"
         x="1"
         y="216"
         width="118"
@@ -4104,7 +4331,7 @@
         textsize="12"
         justification="Left"
       >level : Integer</text>
-      <text name="Fig18.4.2"
+      <text name="Fig17.4.2"
         x="1"
         y="232"
         width="118"
@@ -4121,7 +4348,7 @@
         justification="Left"
       >vocation : Integer</text>
     </group>
-    <rectangle name="Fig18.5"
+    <rectangle name="Fig17.5"
       x="0"
       y="255"
       width="120"
@@ -4131,7 +4358,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig18.6"
+    <group name="Fig17.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1, 256, 118, 72]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B1A"
          fill="0"
@@ -4142,7 +4369,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig18.6.0"
+      <rectangle name="Fig17.6.0"
         x="1"
         y="256"
         width="118"
@@ -4152,7 +4379,7 @@
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig18.6.1"
+      <text name="Fig17.6.1"
         x="1"
         y="256"
         width="118"
@@ -4168,7 +4395,7 @@
         textsize="12"
         justification="Left"
       >getLevel()</text>
-      <text name="Fig18.6.2"
+      <text name="Fig17.6.2"
         x="1"
         y="272"
         width="118"
@@ -4184,7 +4411,7 @@
         textsize="12"
         justification="Left"
       >setExp()</text>
-      <text name="Fig18.6.3"
+      <text name="Fig17.6.3"
         x="1"
         y="288"
         width="118"
@@ -4200,7 +4427,7 @@
         textsize="12"
         justification="Left"
       >levelUp()</text>
-      <text name="Fig18.6.4"
+      <text name="Fig17.6.4"
         x="1"
         y="304"
         width="118"
@@ -4218,7 +4445,7 @@
       >Vocation()</text>
     </group>
   </group>
-  <group name="Fig19"
+  <group name="Fig18"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[1048, 32, 113, 69]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B23"
        fill="1"
@@ -4229,7 +4456,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig19.0"
+    <rectangle name="Fig18.0"
       x="1048"
       y="32"
       width="113"
@@ -4239,7 +4466,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig19.1"
+    <text name="Fig18.1"
       x="1049"
       y="33"
       width="111"
@@ -4255,7 +4482,7 @@
       textsize="12"
       justification="Center"
     >GoldenSnitch</text>
-    <group name="Fig19.2"
+    <group name="Fig18.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1049, 33, 111, 0]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B23"
          fill="0"
@@ -4267,7 +4494,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig19.2.0"
+      <rectangle name="Fig18.2.0"
         x="1049"
         y="33"
         width="111"
@@ -4278,7 +4505,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig19.3"
+    <rectangle name="Fig18.3"
       x="1048"
       y="55"
       width="113"
@@ -4288,7 +4515,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig19.4"
+    <group name="Fig18.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1049, 56, 111, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B23"
          fill="0"
@@ -4299,7 +4526,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig19.4.0"
+      <rectangle name="Fig18.4.0"
         x="1049"
         y="56"
         width="111"
@@ -4310,7 +4537,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig19.5"
+    <rectangle name="Fig18.5"
       x="1048"
       y="77"
       width="113"
@@ -4320,7 +4547,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig19.6"
+    <group name="Fig18.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1049, 78, 111, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B23"
          fill="0"
@@ -4331,7 +4558,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig19.6.0"
+      <rectangle name="Fig18.6.0"
         x="1049"
         y="78"
         width="111"
@@ -4343,42 +4570,7 @@
       />
     </group>
   </group>
-  <group name="Fig20"
-       description="org.argouml.uml.diagram.ui.FigGeneralization"
-       href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B24"
-       stroke="1"
-       strokecolor="black"
-  >
-    <private>
-      sourcePortFig="Fig19.0"
-      destPortFig="Fig13"
-      sourceFigNode="Fig19"
-      destFigNode="Fig13"
-      <argouml:pathitem figname="Fig20.1"
-                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
-                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
-                        ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B24"
-                        angle="270.0"
-                        offset="-10" />
-    </private>
-    <path name="Fig20.0"
-      description="org.argouml.gefext.ArgoFigPoly"
-      fill="0"
-      fillcolor="white"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="1160"
-              y="64" />
-      <lineto x="1296"
-              y="64" />
-      <lineto x="1296"
-              y="96" />
-      <lineto x="1416"
-              y="96" />
-    </path>
-  </group>
-  <group name="Fig21"
+  <group name="Fig19"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[1048, 144, 112, 67]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B28"
        fill="1"
@@ -4389,7 +4581,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig21.0"
+    <rectangle name="Fig19.0"
       x="1048"
       y="144"
       width="112"
@@ -4399,7 +4591,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig21.1"
+    <text name="Fig19.1"
       x="1049"
       y="145"
       width="110"
@@ -4415,7 +4607,7 @@
       textsize="12"
       justification="Center"
     >Quaffle</text>
-    <group name="Fig21.2"
+    <group name="Fig19.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1049, 145, 110, 0]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B28"
          fill="0"
@@ -4427,7 +4619,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig21.2.0"
+      <rectangle name="Fig19.2.0"
         x="1049"
         y="145"
         width="110"
@@ -4438,7 +4630,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig21.3"
+    <rectangle name="Fig19.3"
       x="1048"
       y="167"
       width="112"
@@ -4448,7 +4640,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig21.4"
+    <group name="Fig19.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1049, 168, 110, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B28"
          fill="0"
@@ -4459,7 +4651,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig21.4.0"
+      <rectangle name="Fig19.4.0"
         x="1049"
         y="168"
         width="110"
@@ -4470,7 +4662,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig21.5"
+    <rectangle name="Fig19.5"
       x="1048"
       y="188"
       width="112"
@@ -4480,7 +4672,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig21.6"
+    <group name="Fig19.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1049, 189, 110, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B28"
          fill="0"
@@ -4491,7 +4683,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig21.6.0"
+      <rectangle name="Fig19.6.0"
         x="1049"
         y="189"
         width="110"
@@ -4503,42 +4695,7 @@
       />
     </group>
   </group>
-  <group name="Fig22"
-       description="org.argouml.uml.diagram.ui.FigGeneralization"
-       href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B29"
-       stroke="1"
-       strokecolor="black"
-  >
-    <private>
-      sourcePortFig="Fig21.0"
-      destPortFig="Fig13"
-      sourceFigNode="Fig21"
-      destFigNode="Fig13"
-      <argouml:pathitem figname="Fig22.1"
-                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
-                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
-                        ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B29"
-                        angle="270.0"
-                        offset="-10" />
-    </private>
-    <path name="Fig22.0"
-      description="org.argouml.gefext.ArgoFigPoly"
-      fill="0"
-      fillcolor="white"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="1159"
-              y="192" />
-      <lineto x="1296"
-              y="192" />
-      <lineto x="1296"
-              y="96" />
-      <lineto x="1416"
-              y="96" />
-    </path>
-  </group>
-  <group name="Fig23"
+  <group name="Fig20"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[1072, 248, 66, 67]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2A"
        fill="1"
@@ -4549,7 +4706,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig23.0"
+    <rectangle name="Fig20.0"
       x="1072"
       y="248"
       width="66"
@@ -4559,7 +4716,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig23.1"
+    <text name="Fig20.1"
       x="1073"
       y="249"
       width="64"
@@ -4575,7 +4732,7 @@
       textsize="12"
       justification="Center"
     >Budger</text>
-    <group name="Fig23.2"
+    <group name="Fig20.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1073, 249, 64, 0]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2A"
          fill="0"
@@ -4587,7 +4744,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig23.2.0"
+      <rectangle name="Fig20.2.0"
         x="1073"
         y="249"
         width="64"
@@ -4598,7 +4755,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig23.3"
+    <rectangle name="Fig20.3"
       x="1072"
       y="271"
       width="66"
@@ -4608,7 +4765,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig23.4"
+    <group name="Fig20.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1073, 272, 64, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2A"
          fill="0"
@@ -4619,7 +4776,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig23.4.0"
+      <rectangle name="Fig20.4.0"
         x="1073"
         y="272"
         width="64"
@@ -4630,7 +4787,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig23.5"
+    <rectangle name="Fig20.5"
       x="1072"
       y="292"
       width="66"
@@ -4640,7 +4797,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig23.6"
+    <group name="Fig20.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1073, 293, 64, 21]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2A"
          fill="0"
@@ -4651,7 +4808,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig23.6.0"
+      <rectangle name="Fig20.6.0"
         x="1073"
         y="293"
         width="64"
@@ -4663,7 +4820,7 @@
       />
     </group>
   </group>
-  <group name="Fig24"
+  <group name="Fig21"
        description="org.argouml.uml.diagram.ui.FigAssociation"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2B"
        sourceConnector="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2C"
@@ -4673,41 +4830,41 @@
   >
     <private>
       sourcePortFig="Fig0"
-      destPortFig="Fig19"
+      destPortFig="Fig18"
       sourceFigNode="Fig0"
-      destFigNode="Fig19"
-      <argouml:pathitem figname="Fig24.1"
+      destFigNode="Fig18"
+      <argouml:pathitem figname="Fig21.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2B"
                         angle="270.0"
                         offset="25" />
-      <argouml:pathitem figname="Fig24.2"
+      <argouml:pathitem figname="Fig21.2"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2C"
                         angle="315.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig24.3"
+      <argouml:pathitem figname="Fig21.3"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2C"
                         angle="45.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig24.4"
+      <argouml:pathitem figname="Fig21.4"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2D"
                         angle="225.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig24.5"
+      <argouml:pathitem figname="Fig21.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B2D"
                         angle="135.0"
                         offset="5" />
     </private>
-    <path name="Fig24.0"
+    <path name="Fig21.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -4720,7 +4877,7 @@
               y="64" />
     </path>
   </group>
-  <group name="Fig25"
+  <group name="Fig22"
        description="org.argouml.uml.diagram.ui.FigAssociation"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B32"
        sourceConnector="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B33"
@@ -4730,41 +4887,41 @@
   >
     <private>
       sourcePortFig="Fig0"
-      destPortFig="Fig21"
+      destPortFig="Fig19"
       sourceFigNode="Fig0"
-      destFigNode="Fig21"
-      <argouml:pathitem figname="Fig25.1"
+      destFigNode="Fig19"
+      <argouml:pathitem figname="Fig22.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B32"
                         angle="270.0"
                         offset="25" />
-      <argouml:pathitem figname="Fig25.2"
+      <argouml:pathitem figname="Fig22.2"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B33"
                         angle="315.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig25.3"
+      <argouml:pathitem figname="Fig22.3"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B33"
                         angle="45.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig25.4"
+      <argouml:pathitem figname="Fig22.4"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B34"
                         angle="225.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig25.5"
+      <argouml:pathitem figname="Fig22.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B34"
                         angle="135.0"
                         offset="5" />
     </private>
-    <path name="Fig25.0"
+    <path name="Fig22.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -4781,42 +4938,7 @@
               y="176" />
     </path>
   </group>
-  <group name="Fig26"
-       description="org.argouml.uml.diagram.ui.FigGeneralization"
-       href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B42"
-       stroke="1"
-       strokecolor="black"
-  >
-    <private>
-      sourcePortFig="Fig23.0"
-      destPortFig="Fig13"
-      sourceFigNode="Fig23"
-      destFigNode="Fig13"
-      <argouml:pathitem figname="Fig26.1"
-                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
-                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
-                        ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B42"
-                        angle="270.0"
-                        offset="-10" />
-    </private>
-    <path name="Fig26.0"
-      description="org.argouml.gefext.ArgoFigPoly"
-      fill="0"
-      fillcolor="white"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="1137"
-              y="288" />
-      <lineto x="1296"
-              y="288" />
-      <lineto x="1296"
-              y="96" />
-      <lineto x="1416"
-              y="96" />
-    </path>
-  </group>
-  <group name="Fig27"
+  <group name="Fig23"
        description="org.argouml.uml.diagram.ui.FigAssociation"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B43"
        sourceConnector="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B44"
@@ -4825,42 +4947,42 @@
        strokecolor="black"
   >
     <private>
-      sourcePortFig="Fig23"
+      sourcePortFig="Fig20"
       destPortFig="Fig0"
-      sourceFigNode="Fig23"
+      sourceFigNode="Fig20"
       destFigNode="Fig0"
-      <argouml:pathitem figname="Fig27.1"
+      <argouml:pathitem figname="Fig23.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B43"
                         angle="270.0"
                         offset="25" />
-      <argouml:pathitem figname="Fig27.2"
+      <argouml:pathitem figname="Fig23.2"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B44"
                         angle="315.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig27.3"
+      <argouml:pathitem figname="Fig23.3"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B44"
                         angle="45.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig27.4"
+      <argouml:pathitem figname="Fig23.4"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B45"
                         angle="225.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig27.5"
+      <argouml:pathitem figname="Fig23.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B45"
                         angle="135.0"
                         offset="5" />
     </private>
-    <path name="Fig27.0"
+    <path name="Fig23.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -4877,7 +4999,7 @@
               y="104" />
     </path>
   </group>
-  <group name="Fig28"
+  <group name="Fig24"
        description="org.argouml.uml.diagram.ui.FigGeneralization"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B50"
        stroke="1"
@@ -4888,14 +5010,14 @@
       destPortFig="Fig5"
       sourceFigNode="Fig10"
       destFigNode="Fig5"
-      <argouml:pathitem figname="Fig28.1"
+      <argouml:pathitem figname="Fig24.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B50"
                         angle="20.0"
                         offset="98" />
     </private>
-    <path name="Fig28.0"
+    <path name="Fig24.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -4910,40 +5032,9 @@
               y="640" />
     </path>
   </group>
-  <group name="Fig29"
+  <group name="Fig25"
        description="org.argouml.uml.diagram.ui.FigGeneralization"
        href="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B39"
-       stroke="1"
-       strokecolor="black"
-  >
-    <private>
-      sourcePortFig="Fig18.0"
-      destPortFig="Fig2"
-      sourceFigNode="Fig18"
-      destFigNode="Fig2"
-      <argouml:pathitem figname="Fig29.1"
-                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
-                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
-                        ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B39"
-                        angle="270.0"
-                        offset="-10" />
-    </private>
-    <path name="Fig29.0"
-      description="org.argouml.gefext.ArgoFigPoly"
-      fill="0"
-      fillcolor="white"
-      stroke="1"
-      strokecolor="black"
-    >
-      <moveto x="119"
-              y="199" />
-      <lineto x="256"
-              y="199" />
-    </path>
-  </group>
-  <group name="Fig30"
-       description="org.argouml.uml.diagram.ui.FigGeneralization"
-       href="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B3A"
        stroke="1"
        strokecolor="black"
   >
@@ -4952,14 +5043,45 @@
       destPortFig="Fig2"
       sourceFigNode="Fig17"
       destFigNode="Fig2"
-      <argouml:pathitem figname="Fig30.1"
+      <argouml:pathitem figname="Fig25.1"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
+                        ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B39"
+                        angle="270.0"
+                        offset="-10" />
+    </private>
+    <path name="Fig25.0"
+      description="org.argouml.gefext.ArgoFigPoly"
+      fill="0"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    >
+      <moveto x="119"
+              y="199" />
+      <lineto x="208"
+              y="199" />
+    </path>
+  </group>
+  <group name="Fig26"
+       description="org.argouml.uml.diagram.ui.FigGeneralization"
+       href="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B3A"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+      sourcePortFig="Fig16.0"
+      destPortFig="Fig2"
+      sourceFigNode="Fig16"
+      destFigNode="Fig2"
+      <argouml:pathitem figname="Fig26.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B3A"
                         angle="140.0"
                         offset="7" />
     </private>
-    <path name="Fig30.0"
+    <path name="Fig26.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -4968,11 +5090,11 @@
     >
       <moveto x="115"
               y="136" />
-      <lineto x="256"
+      <lineto x="208"
               y="136" />
     </path>
   </group>
-  <group name="Fig31"
+  <group name="Fig27"
        description="org.argouml.uml.diagram.ui.FigAssociation"
        href="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B3F"
        sourceConnector="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B40"
@@ -4982,54 +5104,58 @@
   >
     <private>
       sourcePortFig="Fig1"
-      destPortFig="Fig18"
+      destPortFig="Fig17"
       sourceFigNode="Fig1"
-      destFigNode="Fig18"
-      <argouml:pathitem figname="Fig31.1"
+      destFigNode="Fig17"
+      <argouml:pathitem figname="Fig27.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B3F"
                         angle="270.0"
                         offset="25" />
-      <argouml:pathitem figname="Fig31.2"
+      <argouml:pathitem figname="Fig27.2"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B40"
                         angle="315.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig31.3"
+      <argouml:pathitem figname="Fig27.3"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B40"
                         angle="45.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig31.4"
+      <argouml:pathitem figname="Fig27.4"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B41"
                         angle="225.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig31.5"
+      <argouml:pathitem figname="Fig27.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B41"
                         angle="135.0"
                         offset="5" />
     </private>
-    <path name="Fig31.0"
+    <path name="Fig27.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="416"
-              y="262" />
+      <moveto x="224"
+              y="472" />
+      <lineto x="216"
+              y="448" />
+      <lineto x="144"
+              y="448" />
       <lineto x="119"
-              y="262" />
+              y="327" />
     </path>
   </group>
-  <group name="Fig32"
+  <group name="Fig28"
        description="org.argouml.uml.diagram.ui.FigAssociation"
        href="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B46"
        sourceConnector="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B47"
@@ -5038,57 +5164,55 @@
        strokecolor="black"
   >
     <private>
-      sourcePortFig="Fig18"
+      sourcePortFig="Fig17"
       destPortFig="Fig3"
-      sourceFigNode="Fig18"
+      sourceFigNode="Fig17"
       destFigNode="Fig3"
-      <argouml:pathitem figname="Fig32.1"
+      <argouml:pathitem figname="Fig28.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B46"
                         angle="270.0"
                         offset="25" />
-      <argouml:pathitem figname="Fig32.2"
+      <argouml:pathitem figname="Fig28.2"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B47"
-                        angle="315.0"
-                        offset="5" />
-      <argouml:pathitem figname="Fig32.3"
+                        angle="-54.0"
+                        offset="20" />
+      <argouml:pathitem figname="Fig28.3"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B47"
                         angle="45.0"
                         offset="5" />
-      <argouml:pathitem figname="Fig32.4"
+      <argouml:pathitem figname="Fig28.4"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B48"
-                        angle="225.0"
-                        offset="5" />
-      <argouml:pathitem figname="Fig32.5"
+                        angle="236.0"
+                        offset="21" />
+      <argouml:pathitem figname="Fig28.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-663c1741:142f688f069:-8000:0000000000000B48"
                         angle="135.0"
                         offset="5" />
     </private>
-    <path name="Fig32.0"
+    <path name="Fig28.0"
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="119"
-              y="288" />
-      <lineto x="208"
-              y="288" />
-      <lineto x="208"
-              y="440" />
+      <moveto x="56"
+              y="327" />
+      <lineto x="56"
+              y="392" />
     </path>
   </group>
-  <group name="Fig33"
+  <group name="Fig29"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[64, 864, 113, 83]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1--741708:143053b354d:-8000:0000000000000B5E"
        fill="1"
@@ -5099,7 +5223,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig33.0"
+    <rectangle name="Fig29.0"
       x="64"
       y="864"
       width="113"
@@ -5109,7 +5233,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig33.1"
+    <text name="Fig29.1"
       x="65"
       y="865"
       width="111"
@@ -5125,7 +5249,7 @@
       textsize="12"
       justification="Center"
     >Fanshop</text>
-    <group name="Fig33.2"
+    <group name="Fig29.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[65, 865, 111, 0]"
          href="127-0-1-1--741708:143053b354d:-8000:0000000000000B5E"
          fill="0"
@@ -5137,7 +5261,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig33.2.0"
+      <rectangle name="Fig29.2.0"
         x="65"
         y="865"
         width="111"
@@ -5148,7 +5272,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig33.3"
+    <rectangle name="Fig29.3"
       x="64"
       y="887"
       width="113"
@@ -5158,7 +5282,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig33.4"
+    <group name="Fig29.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[65, 888, 111, 28]"
          href="127-0-1-1--741708:143053b354d:-8000:0000000000000B5E"
          fill="0"
@@ -5169,7 +5293,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig33.4.0"
+      <rectangle name="Fig29.4.0"
         x="65"
         y="888"
         width="111"
@@ -5180,7 +5304,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig33.5"
+    <rectangle name="Fig29.5"
       x="64"
       y="916"
       width="113"
@@ -5190,7 +5314,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig33.6"
+    <group name="Fig29.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[65, 917, 111, 28]"
          href="127-0-1-1--741708:143053b354d:-8000:0000000000000B5E"
          fill="0"
@@ -5201,7 +5325,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig33.6.0"
+      <rectangle name="Fig29.6.0"
         x="65"
         y="917"
         width="111"
@@ -5213,7 +5337,7 @@
       />
     </group>
   </group>
-  <group name="Fig34"
+  <group name="Fig30"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[272, 856, 130, 75]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1--741708:143053b354d:-8000:0000000000000B63"
        fill="1"
@@ -5224,7 +5348,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig34.0"
+    <rectangle name="Fig30.0"
       x="272"
       y="856"
       width="130"
@@ -5234,7 +5358,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig34.1"
+    <text name="Fig30.1"
       x="273"
       y="857"
       width="128"
@@ -5250,7 +5374,7 @@
       textsize="12"
       justification="Center"
     >FoodShop</text>
-    <group name="Fig34.2"
+    <group name="Fig30.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[273, 857, 128, 0]"
          href="127-0-1-1--741708:143053b354d:-8000:0000000000000B63"
          fill="0"
@@ -5262,7 +5386,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig34.2.0"
+      <rectangle name="Fig30.2.0"
         x="273"
         y="857"
         width="128"
@@ -5273,7 +5397,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig34.3"
+    <rectangle name="Fig30.3"
       x="272"
       y="879"
       width="130"
@@ -5283,7 +5407,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig34.4"
+    <group name="Fig30.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[273, 880, 128, 24]"
          href="127-0-1-1--741708:143053b354d:-8000:0000000000000B63"
          fill="0"
@@ -5294,7 +5418,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig34.4.0"
+      <rectangle name="Fig30.4.0"
         x="273"
         y="880"
         width="128"
@@ -5305,7 +5429,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig34.5"
+    <rectangle name="Fig30.5"
       x="272"
       y="904"
       width="130"
@@ -5315,7 +5439,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig34.6"
+    <group name="Fig30.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[273, 905, 128, 24]"
          href="127-0-1-1--741708:143053b354d:-8000:0000000000000B63"
          fill="0"
@@ -5326,7 +5450,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig34.6.0"
+      <rectangle name="Fig30.6.0"
         x="273"
         y="905"
         width="128"
@@ -5338,7 +5462,7 @@
       />
     </group>
   </group>
-  <group name="Fig35"
+  <group name="Fig31"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[96, 696, 113, 72]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7D"
        fill="1"
@@ -5349,7 +5473,7 @@
     <private>
     </private>
     
-    <rectangle name="Fig35.0"
+    <rectangle name="Fig31.0"
       x="96"
       y="696"
       width="113"
@@ -5359,7 +5483,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <text name="Fig35.1"
+    <text name="Fig31.1"
       x="97"
       y="697"
       width="111"
@@ -5375,8 +5499,8 @@
       textsize="12"
       justification="Center"
     >Shop</text>
-    <group name="Fig35.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[97, 697, 64, 0]"
+    <group name="Fig31.2"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[97, 697, 111, 0]"
          href="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7D"
          fill="0"
          fillcolor="white"
@@ -5387,10 +5511,10 @@
       <private>
       </private>
       
-      <rectangle name="Fig35.2.0"
+      <rectangle name="Fig31.2.0"
         x="97"
         y="697"
-        width="64"
+        width="111"
         height="0"
         fill="0"
         fillcolor="white"
@@ -5398,7 +5522,7 @@
         strokecolor="black"
       />
     </group>
-    <rectangle name="Fig35.3"
+    <rectangle name="Fig31.3"
       x="96"
       y="719"
       width="113"
@@ -5408,7 +5532,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig35.4"
+    <group name="Fig31.4"
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[97, 720, 111, 24]"
          href="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7D"
          fill="0"
@@ -5419,7 +5543,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig35.4.0"
+      <rectangle name="Fig31.4.0"
         x="97"
         y="720"
         width="111"
@@ -5429,7 +5553,7 @@
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig35.4.1"
+      <text name="Fig31.4.1"
         x="97"
         y="720"
         width="111"
@@ -5446,7 +5570,7 @@
         justification="Left"
       >income : Integer</text>
     </group>
-    <rectangle name="Fig35.5"
+    <rectangle name="Fig31.5"
       x="96"
       y="743"
       width="113"
@@ -5456,7 +5580,7 @@
       stroke="1"
       strokecolor="black"
     />
-    <group name="Fig35.6"
+    <group name="Fig31.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[97, 744, 111, 24]"
          href="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7D"
          fill="0"
@@ -5467,7 +5591,7 @@
       <private>
       </private>
       
-      <rectangle name="Fig35.6.0"
+      <rectangle name="Fig31.6.0"
         x="97"
         y="744"
         width="111"
@@ -5477,7 +5601,7 @@
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig35.6.1"
+      <text name="Fig31.6.1"
         x="97"
         y="744"
         width="111"
@@ -5495,26 +5619,26 @@
       >getIncome()</text>
     </group>
   </group>
-  <group name="Fig36"
+  <group name="Fig32"
        description="org.argouml.uml.diagram.ui.FigGeneralization"
        href="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7E"
        stroke="1"
        strokecolor="black"
   >
     <private>
-      sourcePortFig="Fig33.0"
-      destPortFig="Fig35"
-      sourceFigNode="Fig33"
-      destFigNode="Fig35"
-      <argouml:pathitem figname="Fig36.1"
+      sourcePortFig="Fig29.0"
+      destPortFig="Fig31"
+      sourceFigNode="Fig29"
+      destFigNode="Fig31"
+      <argouml:pathitem figname="Fig32.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7E"
                         angle="270.0"
                         offset="-10" />
     </private>
-    <path name="Fig36.0"
-      description="org.tigris.gef.presentation.FigPoly"
+    <path name="Fig32.0"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -5526,26 +5650,26 @@
               y="767" />
     </path>
   </group>
-  <group name="Fig37"
+  <group name="Fig33"
        description="org.argouml.uml.diagram.ui.FigGeneralization"
        href="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7F"
        stroke="1"
        strokecolor="black"
   >
     <private>
-      sourcePortFig="Fig34.0"
-      destPortFig="Fig35"
-      sourceFigNode="Fig34"
-      destFigNode="Fig35"
-      <argouml:pathitem figname="Fig37.1"
+      sourcePortFig="Fig30.0"
+      destPortFig="Fig31"
+      sourceFigNode="Fig30"
+      destFigNode="Fig31"
+      <argouml:pathitem figname="Fig33.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B7F"
                         angle="270.0"
                         offset="-10" />
     </private>
-    <path name="Fig37.0"
-      description="org.tigris.gef.presentation.FigPoly"
+    <path name="Fig33.0"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -5559,26 +5683,26 @@
               y="752" />
     </path>
   </group>
-  <group name="Fig38"
+  <group name="Fig34"
        description="org.argouml.uml.diagram.ui.FigGeneralization"
        href="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B80"
        stroke="1"
        strokecolor="black"
   >
     <private>
-      sourcePortFig="Fig35.0"
+      sourcePortFig="Fig31.0"
       destPortFig="Fig5"
-      sourceFigNode="Fig35"
+      sourceFigNode="Fig31"
       destFigNode="Fig5"
-      <argouml:pathitem figname="Fig38.1"
+      <argouml:pathitem figname="Fig34.1"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1--d46bb6a:1430c2a5433:-8000:0000000000000B80"
                         angle="270.0"
                         offset="-10" />
     </private>
-    <path name="Fig38.0"
-      description="org.tigris.gef.presentation.FigPoly"
+    <path name="Fig34.0"
+      description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
       stroke="1"
@@ -5592,6 +5716,300 @@
               y="688" />
       <lineto x="336"
               y="688" />
+    </path>
+  </group>
+  <group name="Fig35"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[1288, 96, 113, 109]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       href="127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E"
+       fill="1"
+       fillcolor="white"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+    </private>
+    
+    <rectangle name="Fig35.0"
+      x="1288"
+      y="96"
+      width="113"
+      height="109"
+      fill="1"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    />
+    <text name="Fig35.1"
+      x="1289"
+      y="97"
+      width="111"
+      height="22"
+      fill="0"
+      fillcolor="white"
+      stroke="0"
+      strokecolor="black"
+      textcolor="black"
+      font="Dialog"
+      italic="true"
+      bold="false"
+      textsize="12"
+      justification="Center"
+    >Ball</text>
+    <group name="Fig35.2"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1289, 97, 64, 0]"
+         href="127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+         visibility="0"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig35.2.0"
+        x="1289"
+        y="97"
+        width="64"
+        height="0"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+    </group>
+    <rectangle name="Fig35.3"
+      x="1288"
+      y="119"
+      width="113"
+      height="1"
+      fill="1"
+      fillcolor="black"
+      stroke="1"
+      strokecolor="black"
+    />
+    <group name="Fig35.4"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1289, 120, 111, 25]"
+         href="127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig35.4.0"
+        x="1289"
+        y="120"
+        width="111"
+        height="25"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+      <text name="Fig35.4.1"
+        x="1289"
+        y="120"
+        width="111"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >speed : Integer</text>
+    </group>
+    <rectangle name="Fig35.5"
+      x="1288"
+      y="145"
+      width="113"
+      height="1"
+      fill="1"
+      fillcolor="black"
+      stroke="1"
+      strokecolor="black"
+    />
+    <group name="Fig35.6"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1289, 146, 111, 57]"
+         href="127-0-1-1-2278961b:1430c602574:-8000:0000000000000B9E"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig35.6.0"
+        x="1289"
+        y="146"
+        width="111"
+        height="57"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+      <text name="Fig35.6.1"
+        x="1289"
+        y="146"
+        width="111"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >move()</text>
+      <text name="Fig35.6.2"
+        x="1289"
+        y="162"
+        width="111"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >getSpeed()</text>
+      <text name="Fig35.6.3"
+        x="1289"
+        y="178"
+        width="111"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >setSpeed()</text>
+    </group>
+  </group>
+  <group name="Fig36"
+       description="org.argouml.uml.diagram.ui.FigGeneralization"
+       href="127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAB"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+      sourcePortFig="Fig19.0"
+      destPortFig="Fig35"
+      sourceFigNode="Fig19"
+      destFigNode="Fig35"
+      <argouml:pathitem figname="Fig36.1"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
+                        ownerhref="127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAB"
+                        angle="270.0"
+                        offset="-10" />
+    </private>
+    <path name="Fig36.0"
+      description="org.tigris.gef.presentation.FigPoly"
+      fill="0"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    >
+      <moveto x="1159"
+              y="144" />
+      <lineto x="1216"
+              y="144" />
+      <lineto x="1216"
+              y="112" />
+      <lineto x="1288"
+              y="112" />
+    </path>
+  </group>
+  <group name="Fig37"
+       description="org.argouml.uml.diagram.ui.FigGeneralization"
+       href="127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAC"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+      sourcePortFig="Fig20.0"
+      destPortFig="Fig35"
+      sourceFigNode="Fig20"
+      destFigNode="Fig35"
+      <argouml:pathitem figname="Fig37.1"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
+                        ownerhref="127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAC"
+                        angle="270.0"
+                        offset="-10" />
+    </private>
+    <path name="Fig37.0"
+      description="org.tigris.gef.presentation.FigPoly"
+      fill="0"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    >
+      <moveto x="1137"
+              y="248" />
+      <lineto x="1256"
+              y="248" />
+      <lineto x="1256"
+              y="128" />
+      <lineto x="1288"
+              y="128" />
+    </path>
+  </group>
+  <group name="Fig38"
+       description="org.argouml.uml.diagram.ui.FigGeneralization"
+       href="127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAD"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+      sourcePortFig="Fig18.0"
+      destPortFig="Fig35"
+      sourceFigNode="Fig18"
+      destFigNode="Fig35"
+      <argouml:pathitem figname="Fig38.1"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
+                        ownerhref="127-0-1-1-2278961b:1430c602574:-8000:0000000000000BAD"
+                        angle="-59.0"
+                        offset="93" />
+    </private>
+    <path name="Fig38.0"
+      description="org.tigris.gef.presentation.FigPoly"
+      fill="0"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    >
+      <moveto x="1160"
+              y="40" />
+      <lineto x="1200"
+              y="40" />
+      <lineto x="1200"
+              y="96" />
+      <lineto x="1288"
+              y="96" />
     </path>
   </group>
 </pgml>

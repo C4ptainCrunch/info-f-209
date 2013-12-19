@@ -52,7 +52,7 @@ Le jeu est de type gestion et stratégie en ligne. L'\gls{utilisateur} est le ma
 \begin{figure}[h]
    \caption{\label{1} Inscription}
    \begin{center}
-   \includegraphics[height=100pt]{../pv/pv1/schema1_pv1.jpg}
+   \includegraphics[height=250pt]{uml/id.png}
    \end{center}
 \end{figure}
 \begin{description}
@@ -71,6 +71,12 @@ Le jeu est de type gestion et stratégie en ligne. L'\gls{utilisateur} est le ma
 \end{description}
 
 \subsubsection{Gérer le \gls{club} (phase de management)}
+\begin{figure}[h]
+   \caption{\label{1} Gestion de club}
+   \begin{center}
+   \includegraphics[height=250pt]{uml/mngClub.png}
+   \end{center}
+\end{figure}
 \paragraph{Améliorer les bâtiments}
 \begin{description}
 \item[Cas général :] L'\gls{utilisateur} doit pouvoir améliorer ses divers bâtiments sur plusieurs niveaux. 
@@ -110,6 +116,12 @@ Apporter des soins plus efficaces aux joueurs.
 \end{description}
 
 \subsubsection{Jouer en tournoi}
+\begin{figure}[h]
+   \caption{\label{1} Tournois}
+   \begin{center}
+   \includegraphics[height=250pt]{uml/usrTournoi.png}
+   \end{center}
+\end{figure}
 \paragraph{S'inscrire en tournoi}
 \begin{description}
 \item[Cas général :] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
@@ -221,6 +233,12 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \end{description}
 
 \subsubsection{Gestion de tournois}
+\begin{figure}[h]
+   \caption{\label{1} Gestion de tournois.}
+   \begin{center}
+   \includegraphics[height=250pt]{uml/servTournoi.png}
+   \end{center}
+\end{figure}
 \paragraph{Créer un tournoi}
 \begin{description}
 \item[Cas général :] Le système doit créer les tournois avec un certain intervalle de temps, où les \glspl{utilisateur} pourront s'inscrire et devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
@@ -259,6 +277,12 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 
 \subsubsection{Divers}
 \paragraph{Sauvegarder}
+\begin{figure}[h]
+   \caption{\label{1} Sauvegarde}
+   \begin{center}
+   \includegraphics[height=250pt]{uml/svg.png}
+   \end{center}
+\end{figure}
 \begin{description}
 \item[Cas général :] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie.
 \item[Pré Condition  :] Une modification du \gls{club} en phase management, ou une fin de match.

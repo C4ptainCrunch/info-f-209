@@ -16,8 +16,6 @@ class Ball {
 
  private:
     int speed;
-
- public:
     Match *myMatch;
 };
 #endif // Ball_h

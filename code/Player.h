@@ -4,21 +4,31 @@
 
 class Player {
 
- public:
+	public:
+	    virtual int getSpeed();
+	    virtual int getForce();
+	    virtual int getAgility();
+	    virtual int getReflexes();
+	    virtual int getPassPrecision();
+		virtual bool isWounded();
+	    virtual void getInventory();
+	    virtual void setSpeed();
+	    virtual void setForce();
+	    virtual void setAgility();
+	    virtual void setReflexes();
+	    virtual void setPassPrecision();
+	    virtual void setWoundState();
+	    virtual void setInventory();
+	    
 
-    virtual int getSpeed();
-    virtual int getForce();
-    virtual int getAgility();
-    virtual int getReflexes();
-    virtual int getPassPrecision();
-
- private:
-    int speed;
-    int force;
-    int agility;
-    int reflexes;
-    int passPrecision;
-    void inventory[];
+	private:
+	    int speed;
+	    int force;
+	    int agility;
+	    int reflexes;
+	    int passPrecision;
+	    bool wounded=False;
+	    void inventory[];
 };
 
 #endif // Player_h

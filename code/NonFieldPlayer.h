@@ -6,6 +6,7 @@
 class NonFieldPlayer : protected Player{
 
 	public:
+		super();
 		NonFieldPlayer();
 		~NonFieldPlayer();
 		bool operator=();

@@ -9,6 +9,7 @@ class Ball {
 		virtual bool operator=(const Ball &ball)
 		virtual void move();
 		virtual int getSpeed();
+		virtual void setSpeed();
 
 	private:
 		int speed;

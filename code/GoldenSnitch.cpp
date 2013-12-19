@@ -14,3 +14,6 @@ void GoldenSnitch::move(){
 
 int GoldenSnitch::getSpeed(){
 }
+
+void GoldenSnitch::setSpeed(){
+}

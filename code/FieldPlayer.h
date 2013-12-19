@@ -6,6 +6,7 @@
 class FieldPlayer : protected Player{
 
 	public:
+		super();
 		FieldPlayer();
 		~FieldPlayer();
 		bool operator=();

@@ -11,6 +11,7 @@ class TrainingField : protected Installation{
 		bool operator=();
 		void improve();
 		int getLevel();
+		void training();
 
 	private:
 		super();

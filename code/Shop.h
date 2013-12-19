@@ -10,9 +10,10 @@ class Shop : protected Installation {
 		virtual Shop();
 		virtual ~Shop();
 		virtual bool operator=();
-		void improve();
-		int getLevel();
+		virtual void improve();
+		virtual int getLevel();
 		virtual int getIncome();
+		virtual void setIncome();
 
 	private:
 		super();

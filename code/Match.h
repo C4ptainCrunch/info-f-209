@@ -20,6 +20,7 @@ class Match {
 		~Match();
 		bool operator=();
 		int getScore();
+		void setScore();
 
 	private:
 		int teamOneScore;

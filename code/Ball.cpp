@@ -14,6 +14,3 @@ void Ball::move(){
 
 int Ball::getSpeed(){
 }
-
-void Ball::setSpeed(){
-}

@@ -6,6 +6,7 @@
 \usepackage[nonewpage]{imakeidx}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{graphicx}
 
 % Glossaire:
 \usepackage[acronym,xindy,toc,nopostdot]{glossaries}
@@ -42,11 +43,17 @@ Le jeu est de type gestion et stratégie en ligne. L'\gls{utilisateur} est le ma
 \printglossary[numberedsection]
 \subsection{Historique}
 
-\section{Besoin d'utilisation}
+\section{Besoins d'utilisation}
 \subsection{Exigences fonctionnelles}
 
 \subsubsection{Identification}
 \paragraph{Inscription}
+\begin{figure}[h]
+   \caption{\label{1} Inscription}
+   \begin{center}
+   \includegraphics[height=100pt]{../pv/pv1/schema1_pv1.jpg}
+   \end{center}
+\end{figure}
 \begin{description}
 \item[Action] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
 \item[Exception] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le \gls{serveur}.

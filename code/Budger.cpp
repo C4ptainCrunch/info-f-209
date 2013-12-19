@@ -17,3 +17,6 @@ int Budger::getSpeed(){
 
 void Budger::setSpeed(){
 }
+
+void Budger::hitPlayer(){
+}

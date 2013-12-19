@@ -4,21 +4,18 @@
 #include "Player.h"
 
 
-class FieldPlayer : public Player, public Player, public Player, public Player {
+class FieldPlayer : protected Player{
 
- public:
-
-    virtual void move();
-
-    virtual void hitBludger();
-
-    virtual void catchSnitch();
-
-    virtual void throwQuaffle();
-
-    virtual void catchQuaffle();
-
-    virtual void testMove();
+	public:
+		FieldPlayer();
+		~FieldPlayer();
+		bool operator=();
+		void move();
+		void hitBludger();
+		void catchSnitch();
+		void throwQuaffle();
+		void catchQuaffle();
+		void testMove();
 };
 
 #endif // FieldPlayer_h

@@ -1,5 +1,13 @@
 #include "FieldPlayer.h"
 
+FieldPlayer::FieldPlayer(){
+}
+
+FieldPlayer::~FieldPlayer(){
+}
+
+bool FieldPlayer::operator=(){
+}
 
 void FieldPlayer::move(){
 }

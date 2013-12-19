@@ -1,4 +1,22 @@
 #include "Fanshop.h"
 
-void Fanshop::getIncome(){
+Fanshop::Fanshop(){
+}
+
+Fanshop::~Fanshop(){
+}
+
+bool Fanshop::operator=(){
+}
+
+void Fanshop::improve(){
+}
+
+int Fanshop::getLevel(){
+}
+
+int Fanshop::getIncome(){
+}
+
+void Fanshop::setIncome(){
 }

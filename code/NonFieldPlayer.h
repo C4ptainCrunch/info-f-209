@@ -13,7 +13,7 @@ class NonFieldPlayer : protected Player{
 		int getLevel();
 		void setExp();
 		void levelUp();
-		void Vocation();
+		void vocation();
 
 	private:
 		super();

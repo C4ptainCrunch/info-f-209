@@ -6,18 +6,18 @@
 
 class FoodShop : protected Installation{
 
- public:
-	FoodShop();
-	~FoodShop();
-	bool operator=();
-    void improve();
-    int getLevel();
-    int getIncome();
-    void setIncome();
+	public:
+		FoodShop();
+		~FoodShop();
+		bool operator=();
+		void improve();
+		int getLevel();
+		int getIncome();
+		void setIncome();
 
- private:
-	super();
-    int income;
+	private:
+		super();
+		int income;
 };
 
 #endif // FoodShop_h

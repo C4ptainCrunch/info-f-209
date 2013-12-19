@@ -56,90 +56,104 @@ Le jeu est de type gestion et stratégie en ligne. L'\gls{utilisateur} est le ma
    \end{center}
 \end{figure}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
-\item[Exception] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le \gls{serveur}.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
+\item[Pré Condition  :] Néant.
+\item[Post Condition :] L'utilisateur aura fait une demande d'inscription.
+\item[Cas Exceptionnel :] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le \gls{serveur}.
 \end{description}
 
 \paragraph{Connexion}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir se connecter en s'authentifiant auprès du \gls{serveur} avec son nom d'\gls{utilisateur} et son mot de passe.
-\item[Exception] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'\gls{utilisateur}, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir se connecter en s'authentifiant auprès du \gls{serveur} avec son nom d'\gls{utilisateur} et son mot de passe.
+\item[Pré Condition  :] Néant.
+\item[Post Condition :] L'utilisateur aura fait une demande de connection.
+\item[Cas Exceptionnel :] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'\gls{utilisateur}, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
 \end{description}
 
 \subsubsection{Gérer le \gls{club} (phase de management)}
 \paragraph{Améliorer les bâtiments}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir améliorer ses divers bâtiments sur plusieurs niveaux. Chaque bâtiment aura sa ou ses spécificités, parmi trois :\\
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir améliorer ses divers bâtiments sur plusieurs niveaux. 
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
+\item[Post Condition :] Chaque bâtiment aura sa ou ses spécificités, parmi trois :\\
 Améliorer la rentrée d'argent.\\
 Améliorer l'entraînement (les caractéristiques) des joueurs.\\
 Apporter des soins plus efficaces aux joueurs.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
+\item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Améliorer l'équipement}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir améliorer l'équipement de ses joueurs (bâtons, ...) pour changer leurs caractéristiques.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir améliorer l'équipement de ses joueurs (bâtons, ...).
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
+\item[Post Condition :] L'équipement (et donc les statistiques) des joueurs seront modifiées.
+\item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Améliorer le sponsoring}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et les détails relatifs pour sa rentrée d'argent.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et les détails relatifs pour sa rentrée d'argent.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
+\item[Post Condition :] Le sponsoring, et donc une source de rentrée d'argent sera modifiée.
+\item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Acheter des joueurs}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir acheter des joueurs.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir acheter des joueurs.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
+\item[Post Condition :] L'équipe de l'utilisateur sera modifiée.
+\item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne possède pas assez d'argent pour l'effectuer.
 \end{description}
 \paragraph{Vendre des joueurs}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir vendre l'un (ou plusieurs) de ses joueurs.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir vendre l'un (ou plusieurs) de ses joueurs.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
+\item[Post Condition :] L'utilisateur obtiendra de l'argent. Son équipe sera modifiée.
 \end{description}
 
 \subsubsection{Jouer en tournoi}
 \paragraph{S'inscrire en tournoi}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
 Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les autres participants inscrits à ce tournoi.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
-\item[Exception] Un \gls{utilisateur} ne peut pas se réinscrire dans un tournoi auquel il est déjà inscrit.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
+\item[Post Condition :] L'utilisateur sera inscrit pour le tournoi.
+\item[Cas Exceptionnel :] Un \gls{utilisateur} ne peut pas se réinscrire dans un tournoi auquel il est déjà inscrit.
 \end{description} 
 
 \paragraph{Participer à un match du tournoi}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir participer à un match en ligne du tournoi où il affrontera le participant adverse.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
-\item[Pré condition] L'\gls{utilisateur} doit être sélectionné comme étant l'un des deux participant du match.
-\item[Exception] L'\gls{utilisateur} sera considéré comme perdant automatiquement s'il a déclaré forfait.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir participer à un match en ligne du tournoi où il affrontera le participant adverse.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté et sélectionné comme étant l'un des deux participant du match.
+\item[Post Condition :] L'utilisateur sera en match contre le participant adverse.
+\item[Cas Exceptionnel :] L'\gls{utilisateur} sera considéré comme perdant automatiquement s'il a déclaré forfait.
 \end{description}
 
 \subsubsection{Voir les informations relatives à un tournoi}
 \paragraph{Voir la liste des participants d'un tournoi}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir voir la liste des participants d'un tournoi lancé ou terminé.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir voir la liste des participants d'un tournoi lancé ou terminé.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
+\item[Post Condition :] Néant.
 \end{description}
 \paragraph{Voir l'historique d'un tournoi}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir voir l'historique d'un tournoi lancé ou terminé, c'est à dire l'arbre du tournois de ce dernier avec des détails concernant les équipes.
-\item[Pré condition] L'\gls{utilisateur} doit être connecté et ne doit pas être en plein match.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir voir l'historique d'un tournoi lancé ou terminé, c'est à dire l'arbre du tournois de ce dernier avec des détails concernant les équipes.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté et ne doit pas être en plein match.
+\item[Post Condition :] Néant.
 \end{description}
 
 \subsubsection{Jouer à un match}
 \paragraph{Jouer un tour}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} doit pouvoir jouer un tour lors d'un match, c'est à dire déplacer ses joueurs et/ou effectuer des actions.
-\item[Pré condition] L'utilisateur doit être entrain de jouer à un match.
-\item[Exception] Si un \gls{utilisateur} se déconnecte ou bien si sa connexion est perdue, après un certain timeout, le système doit fournir une IA qui jouera à la place de cet \gls{utilisateur} contre l'\gls{utilisateur} restant. Le match continuera sans changement apporté.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir jouer un tour lors d'un match, c'est à dire déplacer ses joueurs et/ou effectuer des actions.
+\item[Pré Condition  :] L'utilisateur doit être entrain de jouer à un match.
+\item[Post Condition :] L'utilisateur aura joué son mouvement.
+\item[Cas Exceptionnel :] La perte de connection avec un \gls{utilisateur} maintenue durant un certain timeout entrainera son remplacement pour se match par une IA fournie par le système. Le match continuera sans changement.
 \end{description}
 \paragraph{Déclarer forfait}
 \begin{description}
-\item[Cas général] L'\gls{utilisateur} peut déclarer forfait durant un match (il sera considéré comme perdant).
-\item[Pré condition] L'utilisateur doit être entrain de jouer à un match.
+\item[Cas général :] L'\gls{utilisateur} peut déclarer forfait durant un match (il sera considéré comme perdant).
+\item[Pré Condition  :] L'utilisateur doit être entrain de jouer à un match.
+\item[Post Condition :] L'utilisateur sera déclaré comme perdant.
 \end{description}
 
 % fin de "Exigences fonctionnelles"
@@ -170,70 +184,86 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \subsubsection{Identification}
 \paragraph{Enregistrer une inscription}
 \begin{description}
-\item[Cas général] Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
-\item[Pré condition] Un \gls{utilisateur} effectuant une demande d'inscription.
-\item[Exception] L'enregistrement échouera si le nom de compte est déjà enregistré sur le fichier.
+\item[Cas général :] Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
+\item[Pré Condition  :] Un \gls{utilisateur} effectuant une demande d'inscription.
+\item[Post Condition :] Le nom de compte sera enregistré sur le serveur. L'utilisateur sera donc inscrit.
+\item[Cas Exceptionnel :] L'enregistrement échouera si le nom de compte est déjà enregistré sur le fichier.
 \end{description}
 
 \paragraph{Authentifier}
 \begin{description}
-\item[Cas général] Le système doit être capable d'authentifier un \gls{utilisateur} demandant de se connecter en vérifiant que le nom de compte fourni lors de la connexion est présente dans le fichier du \gls{serveur} et est bien associé au mot de passe fourni.
-\item[Pré condition] Un \gls{utilisateur} effectuant une demande de connexion.
-\item[Exception] L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le fichier, ou si il est associé à un autre mot de passe que le mot de passe fourni.
+\item[Cas général :] Le système doit être capable d'authentifier un \gls{utilisateur} demandant de se connecter en vérifiant que le nom de compte fourni lors de la connexion est présente dans le fichier du \gls{serveur} et est bien associé au mot de passe fourni.
+\item[Pré Condition  :] Un \gls{utilisateur} effectuant une demande de connexion.
+\item[Post Condition :] L'utilisateur sera connecté.
+\item[Cas Exceptionnel :] L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le serveur, ou si il est associé à un autre mot de passe que le mot de passe fourni.
 \end{description}
 
 \subsubsection{Interface}
 \paragraph{Fournir une interface}
 \begin{description}
-\item[Cas général] Le système doit fournir à l'\gls{utilisateur} une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.
+\item[Cas général :] Le système doit fournir à l'\gls{utilisateur} une interface jeu simple, complète et interactive, graphique et en console pour les deux phases de jeu.
+\item[Pré Condition  :] Néant.
+\item[Post Condition :] Néant.
 \end{description}
 
 \paragraph{Représenter phase management}
 \begin{description}
-\item[Cas général] Le système doit fournir à l'\gls{utilisateur} une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses \glspl{joueur}, ses infrastructures et les améliorations possibles.
+\item[Cas général :] Le système doit fournir à l'\gls{utilisateur} une représentation du \gls{club} (phase management), comprenant une vue d'ensemble sur son argent, ses rentrées, ses \glspl{joueur}, ses infrastructures et les améliorations possibles.
+\item[Pré Condition  :] Néant.
+\item[Post Condition :] Néant.
 \end{description}
 
 \paragraph{Représenter phase match}
 \begin{description}
-\item[Cas général] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain ovale (phase match), sous forme de cases hexagonales.
+\item[Cas général :] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain ovale (phase match), sous forme de cases hexagonales.
+\item[Pré Condition  :] Néant.
+\item[Post Condition :] Néant.
 \end{description}
 
 \subsubsection{Gestion de tournois}
 \paragraph{Créer un tournoi}
 \begin{description}
-\item[Cas général] Le système doit créer les tournois avec un certain intervalle de temps, où les \glspl{utilisateur} pourront s'inscrire et devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
+\item[Cas général :] Le système doit créer les tournois avec un certain intervalle de temps, où les \glspl{utilisateur} pourront s'inscrire et devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
+\item[Pré Condition  :] Néant.
+\item[Post Condition :] Un tournoi sera crée et mit en phase d'attente.
 Durant sa création, il fixera une date limite pour les inscriptions.
 \end{description}
 
 \paragraph{Modifier la liste des participants}
 \begin{description}
-\item[Cas général] Le système doit gérer une liste des participants, indiquant quel \gls{utilisateur} participe ainsi que son état (éliminé, en course). Le système doit être capable de le modifier la liste durant les inscriptions et après que le tournoi soit lancé.
-\item[Pré condition] Un tournoi en attente ou lancé.
+\item[Cas général :] Le système doit gérer une liste des participants, indiquant quel \gls{utilisateur} participe ainsi que son état (éliminé, en course). Le système doit être capable de le modifier la liste durant les inscriptions et après que le tournoi soit lancé.
+\item[Pré Condition  :] Un tournoi en attente ou lancé.
+\item[Post Condition :] La liste des participants d'un tournoi sera modifiée.
 \end{description}
 
 \paragraph{Lancer le tournoi}
 \begin{description}
-\item[Cas général] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit générer l'arbre du tournois et lancer le dit tournoi. L'arbre du tournois contient également la date et l'heure de chaque match.
-\item[Pré condition] Date limite d'une phase d'inscription.
+\item[Cas général :] Lorsque la date limite d'une phase d'inscription tournoi en attente est atteinte, le système doit générer l'arbre du tournois et lancer le dit tournoi. L'arbre du tournois contient également la date et l'heure de chaque match.
+\item[Pré Condition  :] Être au moment de lancement du tournoi.
+\item[Post Condition :] Le tournoi sera lancé.
 \end{description}
 
 \paragraph{Notifier les utilisateurs}
 \begin{description}
-\item[Cas général] Le système se doit de notifier les deux \glspl{utilisateur} concerné par un match lorsque la date et l'heure de celui-ci est atteint. Si un \gls{utilisateur} ne répond pas, après un certain timeout, il est considéré comme perdant.
+\item[Cas général :] Le système se doit de notifier les deux \glspl{utilisateur} concerné par un match lorsque la date et l'heure de celui-ci est atteint. Si un \gls{utilisateur} ne répond pas, après un certain timeout, il est considéré comme perdant.
+\item[Pré Condition  :] Néant.
+\item[Post Condition :] Les utilisateurs seront notifiés pour participer au match.
 \end{description}
 
 \paragraph{Mettre à jour un tournoi}
 \begin{description}
-\item[Cas général] Le système doit mettre à jour l'arbre du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'à ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
-\item[Pré condition] Une fin de match entre deux participants.
+\item[Cas général :] Le système doit mettre à jour l'arbre du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'à ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
+\item[Pré Condition  :] Une fin de match entre deux participants.
+\item[Post Condition :] L'arbre de tournoi sera mis à jour.
 \end{description}
 
 \subsubsection{Divers}
 \paragraph{Sauvegarder}
 \begin{description}
-\item[Cas général] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie.
-\item[Pré condition] Une modification du \gls{club} en phase management, ou une fin de match.
-\item[Exception] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
+\item[Cas général :] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie.
+\item[Pré Condition  :] Une modification du \gls{club} en phase management, ou une fin de match.
+\item[Post Condition :] Les changements apportés au clubs et au serveur seront sauvegardés.
+\item[Cas Exceptionnel :] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
 \end{description}
 
 

@@ -5,7 +5,13 @@
 
 class Fanshop : protected Installation{
 	public:
+		Fanshop();
+		~Fanshop();
+		bool operator=();
+		void improve();
+		int getLevel();
 		int getIncome();
+		void setIncome();
 
 	private:
 		super();

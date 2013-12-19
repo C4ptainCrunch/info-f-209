@@ -1,15 +1,18 @@
 #ifndef Field_h
 #define Field_h
 
-#include "Match.h"
 #include "Installation.h"
-
-class Match;
 
 class Field : protected Installation{
 
+	public:
+		Field();
+		~Field();
+		bool operator=();
+		void improve();
+	
 	private:
-		Match *myMatch;
+		super();
 };
 
 #endif // Field_h

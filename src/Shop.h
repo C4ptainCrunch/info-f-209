@@ -6,15 +6,15 @@
 
 class Shop : public Installation{
 
-	public:
-		virtual Shop();
-		virtual ~Shop();
-		virtual Shop operator=();
-		virtual int getIncome();
-		virtual void setIncome();
+    public:
+        virtual Shop();
+        virtual ~Shop();
+        virtual Shop operator=();
+        virtual int getIncome();
+        virtual void setIncome();
 
-	protected:
-		int income;
+    protected:
+        int income;
 };
 
 #endif // Shop_h

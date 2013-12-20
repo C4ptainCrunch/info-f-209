@@ -1,20 +1,20 @@
-#ifndef Fanshop_h
-#define Fanshop_h
+#ifndef FANSHOP_H
+#define FANSHOP_H
 
 #include "Installation.h"
 
 class Fanshop : public Shop{
-	public:
-		Fanshop();
-		~Fanshop();
-		Fanshop operator=();
-		void improve();
-		int getLevel();
-		int getIncome();
-		void setIncome();
+    public:
+        Fanshop();
+        ~Fanshop();
+        Fanshop operator=();
+        void improve();
+        int getLevel();
+        int getIncome();
+        void setIncome();
 
-	private:
-		int income;
+    private:
+        int income;
 };
 
-#endif // Fanshop_h
+#endif // FANSHOP_H

@@ -1,19 +1,19 @@
-#ifndef Manager_h
-#define Manager_h
+#ifndef MANAGER_H
+#define MANAGER_H
 
 
 class Manager{
 
-	public:
-		Manager();
-		~Manager();
-		Manager operator=();
-		int getExperience();
-		void setExperience();
+    public:
+        Manager();
+        ~Manager();
+        Manager operator=();
+        int getExperience();
+        void setExperience();
 
-	private:
-		int experience;
+    private:
+        int experience;
 
 };
 
-#endif // Manager_h
+#endif // MANAGER_H

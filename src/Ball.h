@@ -11,7 +11,7 @@ class Ball {
 		virtual int getSpeed();
 		virtual void setSpeed();
 
-	private:
+	protected:
 		int speed;
 };
 #endif // Ball_h

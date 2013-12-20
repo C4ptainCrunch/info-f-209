@@ -24,7 +24,7 @@ class Player {
 	    virtual void setInventory();
 	    
 
-	private:
+	protected:
 	    int speed;
 	    int force;
 	    int agility;

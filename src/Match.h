@@ -26,7 +26,7 @@ class Match{
         Budger& getBudgers();
         void setScore();
         void setTeams();
-        void Match::setGoldenSnitch();
+        void setGoldenSnitch();
 		void setQuaffle();
 		void setBudgers();
 

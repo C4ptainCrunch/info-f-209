@@ -12,11 +12,12 @@ class NonFieldPlayer : public Player{
         int getLevel();
         void setExp();
         void levelUp();
-        void vocation();
+        int getVocation();
+        void setVocation();
 
     private:
         int level;
-        void vocation;
+        int vocation;
 };
 
 #endif // NONFIELDPLAYER_H

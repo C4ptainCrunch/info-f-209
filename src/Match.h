@@ -7,6 +7,12 @@
 #include "Quaffle.h"
 #include "Budger.h"
 
+class Team;
+class Field;
+class GoldenSnitch;
+class Quaffle;
+class Budger;
+
 class Match{
 
 	public:

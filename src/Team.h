@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "NonFieldPlayer.h"
 
+class Player;
+class NonFieldPlayer;
+
 class Team{
 
 	public:

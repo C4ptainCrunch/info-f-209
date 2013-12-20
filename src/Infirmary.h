@@ -1,19 +1,19 @@
-#ifndef Infirmary_h
-#define Infirmary_h
+#ifndef INFIRMARY_H
+#define INFIRMARY_H
 
 #include "Installation.h"
 
 
 class Infirmary : public Installation{
 
-	public:
-		Infirmary();
-		~Infirmary();
-		Infirmary operator=();
-		void heal();
-		void improve();
-		int getLevel();
+    public:
+        Infirmary();
+        ~Infirmary();
+        Infirmary operator=();
+        void heal();
+        void improve();
+        int getLevel();
 
 };
 
-#endif // Infirmary_h
+#endif // INFIRMARY_H

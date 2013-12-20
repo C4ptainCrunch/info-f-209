@@ -19,5 +19,8 @@ void NonFieldPlayer::setExp(){
 void NonFieldPlayer::levelUp(){
 }
 
-void NonFieldPlayer::Vocation(){
+int NonFieldPlayer::getVocation(){
+}
+
+void NonFieldPlayer::setVocation(){
 }

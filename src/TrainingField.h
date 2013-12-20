@@ -1,16 +1,18 @@
-#ifndef TrainingField_h
-#define TrainingField_h
+#ifndef TRAININGFIELD_H
+#define TRAININGFIELD_H
 
 #include "Installation.h"
 
 class TrainingField : public Installation{
-	
-	public:
-		TrainingField();
-		~TrainingField();
-		TrainingField operator=();
-		void training();
-	
+    
+    public:
+        TrainingField();
+        ~TrainingField();
+        TrainingField operator=();
+        void improve();
+        int getLevel();
+        void training();
+
 };
 
-#endif // TrainingField_h
+#endif // TRAININGFIELD_H

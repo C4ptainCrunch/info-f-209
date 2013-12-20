@@ -1,5 +1,5 @@
-#ifndef Team_h
-#define Team_h
+#ifndef TEAM_H
+#define TEAM_H
 
 #include "Player.h"
 #include "NonFieldPlayer.h"
@@ -9,19 +9,17 @@ class NonFieldPlayer;
 
 class Team{
 
-	public:
-		Team();
-		~Team();
-		Team operator=();
-		void newOperation();
-		Player* getPlayers();
-		NonFieldPlayer* getNonFieldPlayers();
-		void getPlayers();
-		void setNonFieldPlayers();
+    public:
+        Team();
+        ~Team();
+        Team operator=();
+        void newOperation();
+        NonFieldPlayer* getNonFieldPlayers();
+        void setNonFieldPlayers();
 
-	private:
-		Player *myPlayer[ 7];
-		NonFieldPlayer *myNonFieldPlayer[ 7];
+    private:
+        Player *myPlayer[ 7];
+        NonFieldPlayer *myNonFieldPlayer[ 7];
 };
 
-#endif // Team_h
+#endif // TEAM_H

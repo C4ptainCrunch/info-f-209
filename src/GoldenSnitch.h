@@ -1,17 +1,17 @@
-#ifndef GoldenSnitch_h
-#define GoldenSnitch_h
+#ifndef GOLDENSNITCH_H
+#define GOLDENSNITCH_H
 
 #include "Ball.h"
 
 
 class GoldenSnitch : public Ball {
 
-	public:
-		GoldenSnitch();
-		~GoldenSnitch();
-		GoldenSnitch operator=();
-		void move();
+    public:
+        GoldenSnitch();
+        ~GoldenSnitch();
+        GoldenSnitch operator=();
+        void move();
 
 };
 
-#endif // GoldenSnitch_h
+#endif // GOLDENSNITCH_H

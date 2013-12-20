@@ -9,7 +9,7 @@ class Infirmary : protected Installation{
 	public:
 		Infirmary();
 		~Infirmary();
-		bool operator=();
+		Infirmary operator=();
 		void heal();
 		void improve();
 		int getLevel();

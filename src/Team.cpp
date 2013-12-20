@@ -7,7 +7,7 @@ Team::Team(){
 Team::~Team(){
 }
 
-bool Team::operator=(){
+Team Team::operator=(){
 }
 
 void Team::newOperation(){

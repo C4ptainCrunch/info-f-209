@@ -1,6 +1,15 @@
 #include "Player.h"
 
 
+Player::Player(){
+}
+
+Player::~Player(){
+}
+
+Player Player::operator=(){
+}
+
 int Player::getSpeed(){
 }
 

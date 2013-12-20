@@ -9,7 +9,7 @@ class FieldPlayer : protected Player{
 		super();
 		FieldPlayer();
 		~FieldPlayer();
-		bool operator=();
+		FieldPlayer operator=();
 		void move();
 		void hitBludger();
 		void catchSnitch();

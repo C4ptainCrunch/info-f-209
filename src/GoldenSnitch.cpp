@@ -6,7 +6,7 @@ GoldenSnitch::GoldenSnitch(){
 GoldenSnitch::~GoldenSnitch(){
 }
 
-bool GoldenSnitch::operator=(){
+GoldenSnitch GoldenSnitch::operator=(){
 }
 
 void GoldenSnitch::move(){

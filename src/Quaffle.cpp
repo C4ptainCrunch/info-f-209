@@ -6,7 +6,7 @@ Quaffle::Quaffle(){
 Quaffle::~Quaffle(){
 }
 
-bool Quaffle::operator=(){
+Quaffle Quaffle::operator=(){
 }
 
 void Quaffle::move(){

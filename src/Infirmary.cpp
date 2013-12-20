@@ -6,7 +6,7 @@ Infirmary::Infirmary(){
 Infirmary::~Infirmary(){
 }
 
-bool Infirmary::operator=(){
+Infirmary Infirmary::operator=(){
 }
 
 void Infirmary::heal(){

@@ -9,7 +9,7 @@ class Team {
 	public:
 		Team();
 		~Team();
-		bool operator=();
+		Team operator=();
 		void newOperation();
 
 	private:

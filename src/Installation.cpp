@@ -7,7 +7,7 @@ Installation::Installation(){
 Installation::~Installation(){
 }
 
-bool Installation::operator=(){
+Installation Installation::operator=(){
 }
 
 void Installation::improve(){

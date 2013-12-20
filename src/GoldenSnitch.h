@@ -9,7 +9,7 @@ class GoldenSnitch : protected Ball {
 	public:
 		GoldenSnitch();
 		~GoldenSnitch();
-		bool operator=();
+		GoldenSnitch operator=();
 		void move();
 		int getSpeed();
 		void setSpeed();

@@ -6,7 +6,7 @@ TrainingField::TrainingField(){
 TrainingField::~TrainingField(){
 }
 
-bool TrainingField::operator=(){
+TrainingField TrainingField::operator=(){
 }
 
 void TrainingField::training();

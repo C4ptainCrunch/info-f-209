@@ -9,7 +9,7 @@ class NonFieldPlayer : protected Player{
 		super();
 		NonFieldPlayer();
 		~NonFieldPlayer();
-		bool operator=();
+		NonFieldPlayer operator=();
 		int getLevel();
 		void setExp();
 		void levelUp();

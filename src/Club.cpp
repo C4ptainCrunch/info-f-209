@@ -6,7 +6,7 @@ Club::Club(){
 Club::~Club(){
 }
 
-bool Club::operator=(){
+Club Club::operator=(){
 }
 
 void Club::getMoney(){

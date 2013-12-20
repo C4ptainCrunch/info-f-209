@@ -6,7 +6,7 @@ FieldPlayer::FieldPlayer(){
 FieldPlayer::~FieldPlayer(){
 }
 
-bool FieldPlayer::operator=(){
+FieldPlayer FieldPlayer::operator=(){
 }
 
 void FieldPlayer::move(){

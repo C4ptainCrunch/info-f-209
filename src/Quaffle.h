@@ -7,7 +7,7 @@ class Quaffle: protected Ball{
 	public:
 		Quaffle();
 		~Quaffle();
-		bool operator=();
+		Quaffle operator=();
 		void move();
 		int getSpeed();
 		void setSpeed();

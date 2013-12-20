@@ -8,7 +8,7 @@ class TrainingField : protected Installation{
 	public:
 		TrainingField();
 		~TrainingField();
-		bool operator=();
+		TrainingField operator=();
 		void improve();
 		int getLevel();
 		void training();

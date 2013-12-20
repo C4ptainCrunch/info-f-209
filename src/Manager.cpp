@@ -7,7 +7,7 @@ Manager::Manager(){
 Manager::~Manager(){
 }
 
-bool Manager::operator=(){
+Manager Manager::operator=(){
 }
 
 int Manager::getExperience(){

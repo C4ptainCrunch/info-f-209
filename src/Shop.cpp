@@ -7,7 +7,7 @@ Shop::Shop(){
 Shop::~Shop(){
 }
 
-bool Shop::operator=(){
+Shop Shop::operator=(){
 }
 
 int Shop::getIncome(){

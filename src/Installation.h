@@ -6,7 +6,7 @@ class Installation {
  public:
 	virtual Installation();
 	virtual ~Installation();
-	virtual bool operator=();
+	virtual Installation operator=();
     virtual void improve();
     virtual int getLevel();
 

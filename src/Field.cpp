@@ -6,7 +6,7 @@ Field::Field(){
 Field::~Field(){
 }
 
-bool Field::operator=(){
+Field Field::operator=(){
 }
 
 void Field::improve(){

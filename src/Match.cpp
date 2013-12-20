@@ -7,7 +7,7 @@ Match::Match(){
 Match::~Match(){
 }
 
-bool Match::operator=(){
+Match Match::operator=(){
 }
 
 int Match::getScore(){

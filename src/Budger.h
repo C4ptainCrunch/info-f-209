@@ -9,7 +9,7 @@ class Budger : protected Ball{
 	public:
 		Budger();
 		~Budger();
-		bool operator=(const Ball &ball);
+		Budger operator=(const Ball &ball);
 	    void move();
 		int getSpeed();
 		void setSpeed();

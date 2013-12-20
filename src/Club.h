@@ -17,7 +17,7 @@ class Club {
 	public:
 		Club();
 		~Club();
-		bool operator=();
+		Club operator=();
 		int getMoney();
 		void addMoney();
 		void lowerMoney();

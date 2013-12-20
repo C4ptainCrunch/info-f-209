@@ -7,7 +7,7 @@ NonFieldPlayer::NonFieldPlayer(){
 NonFieldPlayer::~NonFieldPlayer(){
 }
 
-bool NonFieldPlayer::operator=(){
+NonFieldPlayer NonFieldPlayer::operator=(){
 }
 
 int NonFieldPlayer::getLevel(){

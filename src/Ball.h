@@ -6,7 +6,7 @@ class Ball {
 	public:
 		virtual Ball();
 		virtual ~Ball();
-		virtual bool operator=(const Ball &ball)
+		virtual Ball operator=();
 		virtual void move();
 		virtual int getSpeed();
 		virtual void setSpeed();

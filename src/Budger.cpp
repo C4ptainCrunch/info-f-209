@@ -6,7 +6,7 @@ Budger::Budger(){
 Budger::~Budger(){
 }
 
-bool Budger::operator=(){
+Budger Budger::operator=(){
 }
 
 void Budger::move(){

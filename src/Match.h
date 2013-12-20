@@ -18,7 +18,7 @@ class Match {
 	public:
 		Match();
 		~Match();
-		bool operator=();
+		Match operator=();
 		int getScore();
 		void setScore();
 

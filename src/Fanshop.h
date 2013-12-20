@@ -7,7 +7,7 @@ class Fanshop : protected Shop{
 	public:
 		Fanshop();
 		~Fanshop();
-		bool operator=();
+		Fanshop operator=();
 		void improve();
 		int getLevel();
 		int getIncome();

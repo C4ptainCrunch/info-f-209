@@ -6,7 +6,7 @@ FoodShop::FoodShop(){
 FoodShop::~FoodShop(){
 }
 
-bool FoodShop::operator=(){
+FoodShop FoodShop::operator=(){
 }
 
 void FoodShop::improve(){

@@ -9,7 +9,7 @@ class FoodShop : protected Shop{
 	public:
 		FoodShop();
 		~FoodShop();
-		bool operator=();
+		FoodShop operator=();
 		void improve();
 		int getLevel();
 		int getIncome();

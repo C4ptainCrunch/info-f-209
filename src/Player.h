@@ -5,6 +5,9 @@
 class Player {
 
 	public:
+		virtual Player();
+		virtual ~Player();
+		virtual Player operator=();
 	    virtual int getSpeed();
 	    virtual int getForce();
 	    virtual int getAgility();

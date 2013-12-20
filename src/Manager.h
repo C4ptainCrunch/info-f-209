@@ -7,7 +7,7 @@ class Manager {
 	public:
 		Manager();
 		~Manager();
-		bool operator=();
+		Manager operator=();
 		int getExperience();
 		void setExperience();
 

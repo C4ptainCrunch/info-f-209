@@ -8,7 +8,7 @@ class Field : protected Installation{
 	public:
 		Field();
 		~Field();
-		bool operator=();
+		Field operator=();
 		void improve();
 		int getLevel();
 

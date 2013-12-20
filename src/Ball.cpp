@@ -6,7 +6,7 @@ Ball::Ball(){
 Ball::~Ball(){
 }
 
-bool Ball::operator=(){
+Ball Ball::operator=(){
 }
 
 void Ball::move(){

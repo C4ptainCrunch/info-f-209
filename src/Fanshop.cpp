@@ -6,7 +6,7 @@ Fanshop::Fanshop(){
 Fanshop::~Fanshop(){
 }
 
-bool Fanshop::operator=(){
+Fanshop Fanshop::operator=(){
 }
 
 void Fanshop::improve(){

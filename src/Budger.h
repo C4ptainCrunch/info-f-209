@@ -4,7 +4,7 @@
 #include "Ball.h"
 
 
-class Budger : protected Ball{
+class Budger : public Ball{
 
 	public:
 		Budger();

@@ -3,10 +3,9 @@
 
 #include "Player.h"
 
-class NonFieldPlayer : protected Player{
+class NonFieldPlayer : public Player{
 
 	public:
-		super();
 		NonFieldPlayer();
 		~NonFieldPlayer();
 		NonFieldPlayer operator=();

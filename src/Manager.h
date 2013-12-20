@@ -2,7 +2,7 @@
 #define Manager_h
 
 
-class Manager {
+class Manager{
 
 	public:
 		Manager();

@@ -13,7 +13,7 @@ class GoldenSnitch;
 class Quaffle;
 class Budger;
 
-class Match {
+class Match{
 
 	public:
 		Match();

@@ -1,7 +1,7 @@
 #ifndef Installation_h
 #define Installation_h
 
-class Installation {
+class Installation{
 
  public:
 	virtual Installation();

@@ -14,8 +14,6 @@ class GoldenSnitch : protected Ball {
 		int getSpeed();
 		void setSpeed();
 
-	private:
-		super();
 };
 
 #endif // GoldenSnitch_h

@@ -12,9 +12,6 @@ class TrainingField : protected Installation{
 		void improve();
 		int getLevel();
 		void training();
-
-	private:
-		super();
 	
 };
 

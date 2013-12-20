@@ -16,7 +16,6 @@ class FoodShop : protected Shop{
 		void setIncome();
 
 	private:
-		super();
 		int income;
 };
 

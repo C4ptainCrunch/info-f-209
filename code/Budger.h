@@ -14,9 +14,6 @@ class Budger : protected Ball{
 		int getSpeed();
 		void setSpeed();
 		void hitPlayer();
-	
-	private:
-	    super();
 };
 
 #endif // Budger_h

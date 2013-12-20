@@ -13,8 +13,7 @@ class Infirmary : protected Installation{
 		void heal();
 		void improve();
 		int getLevel();
-	private:
-		super();
+
 };
 
 #endif // Infirmary_h

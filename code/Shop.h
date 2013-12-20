@@ -16,7 +16,6 @@ class Shop : protected Installation {
 		virtual void setIncome();
 
 	private:
-		super();
 		int income;
 };
 

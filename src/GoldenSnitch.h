@@ -11,8 +11,6 @@ class GoldenSnitch : protected Ball {
 		~GoldenSnitch();
 		GoldenSnitch operator=();
 		void move();
-		int getSpeed();
-		void setSpeed();
 
 };
 

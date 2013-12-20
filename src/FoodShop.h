@@ -10,13 +10,7 @@ class FoodShop : public Shop{
 		FoodShop();
 		~FoodShop();
 		FoodShop operator=();
-		void improve();
-		int getLevel();
-		int getIncome();
-		void setIncome();
 
-	private:
-		int income;
 };
 
 #endif // FoodShop_h

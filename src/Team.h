@@ -11,6 +11,10 @@ class Team{
 		~Team();
 		Team operator=();
 		void newOperation();
+		Player* getPlayers();
+		NonFieldPlayer* getNonFieldPlayers();
+		void getPlayers();
+		void setNonFieldPlayers();
 
 	private:
 		Player *myPlayer[ 7];

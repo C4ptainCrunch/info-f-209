@@ -3,7 +3,6 @@
 
 #include "Installation.h"
 
-
 class Shop : public Installation{
 
     public:

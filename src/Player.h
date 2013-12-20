@@ -31,7 +31,7 @@ class Player{
         int reflexes;
         int passPrecision;
         bool wounded=False;
-        void inventory[];
+        int inventory[];
 };
 
 #endif // Player_h

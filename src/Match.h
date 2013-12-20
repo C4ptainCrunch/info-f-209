@@ -7,12 +7,6 @@
 #include "Quaffle.h"
 #include "Budger.h"
 
-class Team;
-class Field;
-class GoldenSnitch;
-class Quaffle;
-class Budger;
-
 class Match{
 
     public:
@@ -37,7 +31,7 @@ class Match{
         Field *myField;
         GoldenSnitch *myGoldenSnitch;
         Quaffle *myQuaffle;
-        Budger *myBudger[2];
+        Budger *myBudgers[2];
 };
 
 #endif // MATCH_H

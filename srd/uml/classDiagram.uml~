@@ -70,7 +70,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Dec 20 18:14:24 CET 2013'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Dec 20 18:12:20 CET 2013'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -1691,20 +1691,11 @@
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
             <UML:Operation xmi.id = '127-0-1-1-195549bb:1430b7a942f:-8000:0000000000000B74'
-              name = 'getVocation' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              name = 'vocation' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
               isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
               isAbstract = 'false'>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '127-0-1-1-195549bb:1430b7a942f:-8000:0000000000000B75'
-                  name = 'return' isSpecification = 'false' kind = 'return'/>
-              </UML:BehavioralFeature.parameter>
-            </UML:Operation>
-            <UML:Operation xmi.id = '127-0-1-1-3b9163ba:14310a968e8:-8000:0000000000000F46'
-              name = 'setVocation' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
-              isAbstract = 'false'>
-              <UML:BehavioralFeature.parameter>
-                <UML:Parameter xmi.id = '127-0-1-1-3b9163ba:14310a968e8:-8000:0000000000000F47'
                   name = 'return' isSpecification = 'false' kind = 'return'/>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
@@ -5124,7 +5115,7 @@
     </group>
   </group>
   <group name="Fig17"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[0, 192, 122, 152]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[0, 192, 122, 136]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B1A"
        fill="1"
        fillcolor="white"
@@ -5138,7 +5129,7 @@
       x="0"
       y="192"
       width="122"
-      height="152"
+      height="136"
       fill="1"
       fillcolor="white"
       stroke="1"
@@ -5258,7 +5249,7 @@
       strokecolor="black"
     />
     <group name="Fig17.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1, 256, 120, 88]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1, 256, 120, 72]"
          href="127-0-1-1-728a9697:142e2f43ac3:-8000:0000000000000B1A"
          fill="0"
          fillcolor="white"
@@ -5272,7 +5263,7 @@
         x="1"
         y="256"
         width="120"
-        height="88"
+        height="72"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -5330,22 +5321,6 @@
         x="1"
         y="304"
         width="120"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >+getVocation()</text>
-      <text name="Fig17.6.5"
-        x="1"
-        y="320"
-        width="120"
         height="22"
         fill="0"
         fillcolor="white"
@@ -5357,7 +5332,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >+setVocation()</text>
+      >-vocation()</text>
     </group>
   </group>
   <group name="Fig18"
@@ -6186,7 +6161,7 @@
       strokecolor="black"
     >
       <moveto x="56"
-              y="343" />
+              y="327" />
       <lineto x="56"
               y="392" />
     </path>

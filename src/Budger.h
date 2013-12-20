@@ -8,7 +8,7 @@ class Budger : public Ball{
     public:
         Budger();
         ~Budger();
-        Budger operator=(const Ball &ball);
+        Budger operator=();
         void move();
         void hitPlayer();
 };

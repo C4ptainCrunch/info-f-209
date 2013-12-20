@@ -13,8 +13,9 @@ class Team{
         Team();
         ~Team();
         Team operator=();
-        void newOperation();
-        NonFieldPlayer* getNonFieldPlayers();
+        Player& getPlayers();
+        NonFieldPlayer& getNonFieldPlayers();
+        void setPlayers();
         void setNonFieldPlayers();
 
     private:

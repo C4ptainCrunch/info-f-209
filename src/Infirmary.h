@@ -11,8 +11,6 @@ class Infirmary : public Installation{
         ~Infirmary();
         Infirmary operator=();
         void heal();
-        void improve();
-        int getLevel();
 };
 
 #endif // INFIRMARY_H

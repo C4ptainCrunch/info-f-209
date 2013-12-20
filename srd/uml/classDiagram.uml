@@ -70,7 +70,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Dec 20 17:20:23 CET 2013'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Dec 20 17:41:35 CET 2013'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -203,7 +203,7 @@
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
             <UML:Operation xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BB3'
-              name = 'getBudger' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              name = 'getBudgers' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
               isAbstract = 'false'>
               <UML:BehavioralFeature.parameter>
@@ -229,26 +229,8 @@
                   name = 'return' isSpecification = 'false' kind = 'return'/>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
-            <UML:Operation xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BB9'
-              name = 'setTeamOne' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
-              isAbstract = 'false'>
-              <UML:BehavioralFeature.parameter>
-                <UML:Parameter xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BBA'
-                  name = 'return' isSpecification = 'false' kind = 'return'/>
-              </UML:BehavioralFeature.parameter>
-            </UML:Operation>
-            <UML:Operation xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BBB'
-              name = 'setTeamTwo' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
-              isAbstract = 'false'>
-              <UML:BehavioralFeature.parameter>
-                <UML:Parameter xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BBC'
-                  name = 'return' isSpecification = 'false' kind = 'return'/>
-              </UML:BehavioralFeature.parameter>
-            </UML:Operation>
             <UML:Operation xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BBD'
-              name = 'getTeamOne' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              name = 'getTeams' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
               isAbstract = 'false'>
               <UML:BehavioralFeature.parameter>
@@ -256,12 +238,12 @@
                   name = 'return' isSpecification = 'false' kind = 'return'/>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
-            <UML:Operation xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BBF'
-              name = 'getTeamTwo' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+            <UML:Operation xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BC1'
+              name = 'setTeams' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
               isAbstract = 'false'>
               <UML:BehavioralFeature.parameter>
-                <UML:Parameter xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BC0'
+                <UML:Parameter xmi.id = '127-0-1-1--7c2a8b00:14310cb9cfc:-8000:0000000000000BC2'
                   name = 'return' isSpecification = 'false' kind = 'return'/>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
@@ -2067,7 +2049,7 @@
       strokecolor="black"
     />
     <group name="Fig0.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[569, 56, 172, 40]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[569, 56, 172, 55]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000087A"
          fill="0"
          fillcolor="white"
@@ -2081,7 +2063,7 @@
         x="569"
         y="56"
         width="172"
-        height="40"
+        height="55"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -2122,7 +2104,7 @@
     </group>
     <rectangle name="Fig0.5"
       x="568"
-      y="95"
+      y="111"
       width="174"
       height="1"
       fill="1"
@@ -2131,7 +2113,7 @@
       strokecolor="black"
     />
     <group name="Fig0.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[569, 96, 172, 232]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[569, 112, 172, 215]"
          href="-87--2--79-32--746c2cb8:142d3a16a65:-8000:000000000000087A"
          fill="0"
          fillcolor="white"
@@ -2143,9 +2125,9 @@
       
       <rectangle name="Fig0.6.0"
         x="569"
-        y="96"
+        y="112"
         width="172"
-        height="232"
+        height="215"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -2153,7 +2135,7 @@
       />
       <text name="Fig0.6.1"
         x="569"
-        y="96"
+        y="112"
         width="172"
         height="16"
         fill="0"
@@ -2169,7 +2151,7 @@
       >+getScore()</text>
       <text name="Fig0.6.2"
         x="569"
-        y="112"
+        y="128"
         width="172"
         height="16"
         fill="0"
@@ -2185,7 +2167,7 @@
       >+setScore()</text>
       <text name="Fig0.6.3"
         x="569"
-        y="128"
+        y="144"
         width="172"
         height="16"
         fill="0"
@@ -2201,7 +2183,7 @@
       >+getGoldenSnitch()</text>
       <text name="Fig0.6.4"
         x="569"
-        y="144"
+        y="160"
         width="172"
         height="16"
         fill="0"
@@ -2217,7 +2199,7 @@
       >+setGoldenSnitch()</text>
       <text name="Fig0.6.5"
         x="569"
-        y="160"
+        y="176"
         width="172"
         height="16"
         fill="0"
@@ -2233,7 +2215,7 @@
       >+setQuaffle()</text>
       <text name="Fig0.6.6"
         x="569"
-        y="176"
+        y="192"
         width="172"
         height="16"
         fill="0"
@@ -2249,7 +2231,7 @@
       >+getQuaffle()</text>
       <text name="Fig0.6.7"
         x="569"
-        y="192"
+        y="208"
         width="172"
         height="16"
         fill="0"
@@ -2265,7 +2247,7 @@
       >+setBudger()</text>
       <text name="Fig0.6.8"
         x="569"
-        y="208"
+        y="224"
         width="172"
         height="16"
         fill="0"
@@ -2278,10 +2260,10 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >+getBudger()</text>
+      >+getBudgers()</text>
       <text name="Fig0.6.9"
         x="569"
-        y="224"
+        y="240"
         width="172"
         height="16"
         fill="0"
@@ -2297,7 +2279,7 @@
       >+setField()</text>
       <text name="Fig0.6.10"
         x="569"
-        y="240"
+        y="256"
         width="172"
         height="16"
         fill="0"
@@ -2313,22 +2295,6 @@
       >+getField()</text>
       <text name="Fig0.6.11"
         x="569"
-        y="256"
-        width="172"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >+setTeamOne()</text>
-      <text name="Fig0.6.12"
-        x="569"
         y="272"
         width="172"
         height="16"
@@ -2342,26 +2308,10 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >+setTeamTwo()</text>
-      <text name="Fig0.6.13"
+      >+getTeams()</text>
+      <text name="Fig0.6.12"
         x="569"
         y="288"
-        width="172"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >+getTeamOne()</text>
-      <text name="Fig0.6.14"
-        x="569"
-        y="304"
         width="172"
         height="22"
         fill="0"
@@ -2374,7 +2324,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >+getTeamTwo()</text>
+      >+setTeams()</text>
     </group>
   </group>
   <group name="Fig1"

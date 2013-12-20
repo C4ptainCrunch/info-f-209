@@ -200,7 +200,7 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \begin{description}
 \item[Cas général :] Le système doit être capable d'enregistrer un nom de compte unique associé à un mot de passe dans un fichier, ainsi que de vérifier que le nom de compte fourni est unique.
 \item[Pré Condition  :] Un \gls{utilisateur} effectuant une demande d'inscription.
-\item[Post Condition :] Le nom de compte sera enregistré sur le serveur. L'\gls{utilisateur} sera donc inscrit.
+\item[Post Condition :] Le nom de compte sera enregistré sur le \gls{serveur}. L'\gls{utilisateur} sera donc inscrit.
 \item[Cas Exceptionnel :] L'enregistrement échouera si le nom de compte est déjà enregistré sur le fichier.
 \end{description}
 
@@ -209,7 +209,7 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 \item[Cas général :] Le système doit être capable d'authentifier un \gls{utilisateur} demandant de se connecter en vérifiant que le nom de compte fourni lors de la connexion est présente dans le fichier du \gls{serveur} et est bien associé au mot de passe fourni.
 \item[Pré Condition  :] Un \gls{utilisateur} effectuant une demande de connexion.
 \item[Post Condition :] L'\gls{utilisateur} sera connecté.
-\item[Cas Exceptionnel :] L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le serveur, ou s'il est associé à un autre mot de passe que le mot de passe fourni.
+\item[Cas Exceptionnel :] L'authentification échouera si le nom de compte fourni n'est pas enregistré sur le \gls{serveur}, ou s'il est associé à un autre mot de passe que le mot de passe fourni.
 \end{description}
 
 \subsubsection{Interface}
@@ -288,7 +288,7 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 \begin{description}
 \item[Cas général :] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie.
 \item[Pré Condition  :] Une modification du \gls{club} en phase management, ou une fin de match.
-\item[Post Condition :] Les changements apportés au \glspl{club} et au serveur seront sauvegardés.
+\item[Post Condition :] Les changements apportés au \glspl{club} et au \gls{serveur} seront sauvegardés.
 \item[Cas Exceptionnel :] Aucune sauvegarde ne sera effectuée par le module de sauvegarde si le \gls{serveur} plante.
 \end{description}
 

@@ -2,7 +2,7 @@
 #define Player_h
 
 
-class Player {
+class Player{
 
 	public:
 		virtual Player();

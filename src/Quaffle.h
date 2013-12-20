@@ -3,7 +3,8 @@
 
 #include "Ball.h"
 
-class Quaffle : protected Ball{
+class Quaffle : public Ball{
+
 	public:
 		Quaffle();
 		~Quaffle();

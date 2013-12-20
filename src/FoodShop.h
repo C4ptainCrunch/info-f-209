@@ -4,7 +4,7 @@
 #include "Shop.h"
 
 
-class FoodShop : protected Shop{
+class FoodShop : public Shop{
 
 	public:
 		FoodShop();

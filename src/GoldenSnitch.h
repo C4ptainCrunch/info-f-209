@@ -4,7 +4,7 @@
 #include "Ball.h"
 
 
-class GoldenSnitch : protected Ball {
+class GoldenSnitch : public Ball {
 
 	public:
 		GoldenSnitch();

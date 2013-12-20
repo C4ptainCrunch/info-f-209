@@ -3,7 +3,7 @@
 
 #include "Installation.h"
 
-class Field : protected Installation{
+class Field : public Installation{
 
 	public:
 		Field();

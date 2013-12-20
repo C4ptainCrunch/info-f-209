@@ -4,7 +4,7 @@
 #include "Installation.h"
 
 
-class Infirmary : protected Installation{
+class Infirmary : public Installation{
 
 	public:
 		Infirmary();

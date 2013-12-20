@@ -4,7 +4,7 @@
 #include "Installation.h"
 
 
-class Shop : protected Installation {
+class Shop : public Installation{
 
 	public:
 		virtual Shop();

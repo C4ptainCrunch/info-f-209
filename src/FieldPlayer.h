@@ -3,7 +3,7 @@
 
 #include "Player.h"
 
-class FieldPlayer : protected Player{
+class FieldPlayer : public Player{
 
 	public:
 		super();

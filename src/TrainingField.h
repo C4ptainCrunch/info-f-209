@@ -3,7 +3,7 @@
 
 #include "Installation.h"
 
-class TrainingField : protected Installation{
+class TrainingField : public Installation{
 	
 	public:
 		TrainingField();

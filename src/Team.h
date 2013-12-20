@@ -1,10 +1,13 @@
 #ifndef Team_h
 #define Team_h
 
+#include "Player.h"
+#include "NonFieldPlayer.h"
+
 class Player;
 class NonFieldPlayer;
 
-class Team {
+class Team{
 
 	public:
 		Team();

@@ -13,16 +13,16 @@ Match Match::operator=(){
 int Match::getScore(){
 }
 
-Team* Match::getTeams(){
+Team& Match::getTeams(){
 }
 
-GoldenSnitch* Match::getGoldenSnitch(){
+GoldenSnitch& Match::getGoldenSnitch(){
 }
 
-Quaffle* Match::getQuaffle(){
+Quaffle& Match::getQuaffle(){
 }
 
-Budger* Match::getBudgers(){
+Budger& Match::getBudgers(){
 }
 
 void Match::setGoldenSnitch(){
@@ -35,4 +35,7 @@ void Match::setBudgers(){
 }
 
 void Match::setScore(){
+}
+
+void Match::setTeams(){
 }

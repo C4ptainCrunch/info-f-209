@@ -8,13 +8,6 @@ class Fanshop : public Shop{
         Fanshop();
         ~Fanshop();
         Fanshop operator=();
-        void improve();
-        int getLevel();
-        int getIncome();
-        void setIncome();
-
-    private:
-        int income;
 };
 
 #endif // FANSHOP_H

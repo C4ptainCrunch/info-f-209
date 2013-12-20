@@ -10,8 +10,6 @@ class Shop : public Installation{
 		virtual Shop();
 		virtual ~Shop();
 		virtual Shop operator=();
-		virtual void improve();
-		virtual int getLevel();
 		virtual int getIncome();
 		virtual void setIncome();
 

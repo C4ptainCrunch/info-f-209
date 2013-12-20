@@ -6,7 +6,6 @@
 class FieldPlayer : public Player{
 
 	public:
-		super();
 		FieldPlayer();
 		~FieldPlayer();
 		FieldPlayer operator=();

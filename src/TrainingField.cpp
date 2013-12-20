@@ -9,4 +9,5 @@ TrainingField::~TrainingField(){
 TrainingField TrainingField::operator=(){
 }
 
-void TrainingField::training();
+void TrainingField::training(){
+}

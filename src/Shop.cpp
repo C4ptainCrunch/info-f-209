@@ -15,9 +15,3 @@ int Shop::getIncome(){
 
 void Shop::setIncome(){
 }
-
-void Shop::improve(){
-}
-
-int Shop::getLevel(){
-}

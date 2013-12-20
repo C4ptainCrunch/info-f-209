@@ -9,8 +9,6 @@ class TrainingField : public Installation{
 		TrainingField();
 		~TrainingField();
 		TrainingField operator=();
-		void improve();
-		int getLevel();
 		void training();
 	
 };

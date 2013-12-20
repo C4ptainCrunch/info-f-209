@@ -9,8 +9,6 @@ class Field : public Installation{
 		Field();
 		~Field();
 		Field operator=();
-		void improve();
-		int getLevel();
 
 };
 

@@ -16,9 +16,7 @@ class FieldPlayer : protected Player{
 		void throwQuaffle();
 		void catchQuaffle();
 		void testMove();
-	
-	private:
-		super();
+
 };
 
 #endif // FieldPlayer_h

@@ -11,8 +11,7 @@ class Quaffle: protected Ball{
 		void move();
 		int getSpeed();
 		void setSpeed();
-	private:
-		super();
+
 };
 
 #endif // Quaffle_h

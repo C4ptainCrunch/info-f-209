@@ -16,7 +16,6 @@ class NonFieldPlayer : protected Player{
 		void vocation();
 
 	private:
-		super();
 		int level;
 		void vocation;
 };

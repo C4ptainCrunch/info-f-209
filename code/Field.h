@@ -11,9 +11,7 @@ class Field : protected Installation{
 		bool operator=();
 		void improve();
 		int getLevel();
-	
-	private:
-		super();
+
 };
 
 #endif // Field_h

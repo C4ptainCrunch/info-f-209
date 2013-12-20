@@ -10,7 +10,7 @@ class Installation {
     virtual void improve();
     virtual int getLevel();
 
- private:
+ protected:
     int level;
 };
 

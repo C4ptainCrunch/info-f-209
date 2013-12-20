@@ -15,7 +15,7 @@ class Shop : protected Installation {
 		virtual int getIncome();
 		virtual void setIncome();
 
-	private:
+	protected:
 		int income;
 };
 

@@ -8,6 +8,7 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{array}
+\usepackage{float}
 
 % Glossaire:
 \usepackage[acronym,toc,nopostdot, nonumberlist]{glossaries}
@@ -66,21 +67,24 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \subsection{Exigences fonctionnelles}
 
 \subsubsection{Identification}
-\paragraph{Inscription}
-\begin{figure}[h]
-   \caption{\label{1} Inscription}
+
+\paragraph{Inscription (fig \ref{diag-use-inscription})}
+
+\begin{figure}[H]
    \begin{center}
    \includegraphics[height=250pt]{uml/id.png}
+   \caption{\label{diag-use-inscription} Système d'identification}
    \end{center}
 \end{figure}
+
 \begin{description}
-\item[Cas général :] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
+\item[Cas général  :] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
 \item[Pré Condition  :] Néant.
 \item[Post Condition :] L'\gls{utilisateur} aura fait une demande d'inscription.
 \item[Cas Exceptionnel :] L'inscription échouera et l'\gls{utilisateur} sera invité à recommencer si le nom de compte est déjà enregistré sur le \gls{serveur}.
 \end{description}
 
-\paragraph{Connection}
+\paragraph{Connection (fig \ref{diag-use-inscription})}
 \begin{description}
 \item[Cas général :] L'\gls{utilisateur} doit pouvoir se connecter en s'authentifiant auprès du \gls{serveur} avec son nom d'\gls{utilisateur} et son mot de passe.
 \item[Pré Condition  :] Néant.
@@ -88,23 +92,28 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \item[Cas Exceptionnel :] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'\gls{utilisateur}, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
 \end{description}
 
-\subsubsection{Gérer le \gls{club} (phase de management)}
-\begin{figure}[h]
-    \caption{\label{1} Gestion de \gls{club}}
+\subsubsection{Gérer le \gls{club} (en phase de management)}
+
+\begin{figure}[H]
    \begin{center}
    \includegraphics[height=250pt]{uml/mngClub.png}
+   \caption{\label{diag-use-management} Gestion d'un \gls{club} pendant la phase de management}
    \end{center}
 \end{figure}
+
 \paragraph{Améliorer les bâtiments}
 \begin{description}
 \item[Cas général :] L'\gls{utilisateur} doit pouvoir améliorer ses divers bâtiments sur plusieurs niveaux. 
 \item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
-\item[Post Condition :] Chaque bâtiment aura sa ou ses spécificités, parmi trois :\\
-Améliorer la rentrée d'argent.\\
-Améliorer l'entraînement (les caractéristiques) des \glspl{joueur}.\\
-Apporter des soins plus efficaces aux \glspl{joueur}.
+\item[Post Condition :] Chaque bâtiment a sa ou ses spécificités, parmi ces trois-ci :
+	\begin{itemize}
+	\item Améliorer la rentrée d'argent.
+	\item  Améliorer l'entraînement (les caractéristiques) des \glspl{joueur}.
+	\item  Apporter des soins plus efficaces aux \glspl{joueur}.
+	\end{itemize}
 \item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas de suffisamment d'argent pour l'effectuer.
 \end{description}
+
 \paragraph{Améliorer l'équipement}
 \begin{description}
     \item[Cas général :] L'\gls{utilisateur} doit pouvoir améliorer l'équipement de ses \glspl{joueur} (bâtons, ...).
@@ -112,6 +121,7 @@ Apporter des soins plus efficaces aux \glspl{joueur}.
     \item[Post Condition :] L'équipement (et donc les statistiques) des \glspl{joueur} seront modifiées.
     \item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas de suffisamment d'argent pour l'effectuer.
 \end{description}
+
 \paragraph{Améliorer le sponsoring}
 \begin{description}
 \item[Cas général :] L'\gls{utilisateur} doit pouvoir améliorer son sponsoring et les détails relatifs pour sa rentrée d'argent.
@@ -119,6 +129,7 @@ Apporter des soins plus efficaces aux \glspl{joueur}.
 \item[Post Condition :] Le sponsoring, et donc une source de rentrée d'argent sera modifiée.
 \item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas de suffisamment d'argent pour l'effectuer.
 \end{description}
+
 \paragraph{Acheter des \glspl{joueur}}
 \begin{description}
     \item[Cas général :] L'\gls{utilisateur} doit pouvoir acheter des \glspl{joueur}.
@@ -126,6 +137,7 @@ Apporter des soins plus efficaces aux \glspl{joueur}.
     \item[Post Condition :] L'\gls{equipe} de l'\gls{utilisateur} sera modifiée.
     \item[Cas Exceptionnel :] Une dépense n'est pas acceptée si le \gls{club} de l'\gls{utilisateur} ne dispose pas de suffisamment d'argent pour l'effectuer.
 \end{description}
+
 \paragraph{Vendre des \glspl{joueur}}
 \begin{description}
     \item[Cas général :] L'\gls{utilisateur} doit pouvoir vendre l'un (ou plusieurs) de ses \glspl{joueur}.
@@ -134,9 +146,9 @@ Apporter des soins plus efficaces aux \glspl{joueur}.
 \end{description}
 
 \subsubsection{Jouer en tournoi}
-\begin{figure}[h]
-   \caption{\label{1} Tournois}
+\begin{figure}[H]
    \begin{center}
+   \caption{\label{diag-use-championship} Diagramme d'utilisation : gestion des tournois}
    \includegraphics[height=250pt]{uml/usrTournoi.png}
    \end{center}
 \end{figure}

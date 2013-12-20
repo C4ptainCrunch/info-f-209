@@ -1,22 +1,22 @@
-#ifndef FoodShop_h
-#define FoodShop_h
+#ifndef FOODSHOP_H
+#define FOODSHOP_H
 
 #include "Shop.h"
 
 
 class FoodShop : public Shop{
 
-	public:
-		FoodShop();
-		~FoodShop();
-		FoodShop operator=();
-		void improve();
-		int getLevel();
-		int getIncome();
-		void setIncome();
+    public:
+        FoodShop();
+        ~FoodShop();
+        FoodShop operator=();
+        void improve();
+        int getLevel();
+        int getIncome();
+        void setIncome();
 
-	private:
-		int income;
+    private:
+        int income;
 };
 
-#endif // FoodShop_h
+#endif // FOODSHOP_H

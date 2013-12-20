@@ -127,7 +127,7 @@ Apporter des soins plus efficaces aux \glspl{joueur}.
 \paragraph{S'inscrire en tournoi}
 \begin{description}
 \item[Cas général :] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
-Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les autres participants inscrits à ce tournoi.
+Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les autres \glspl{participant} inscrits à ce tournoi.
 \item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
 \item[Post Condition :] L'\gls{utilisateur} sera inscrit pour le tournoi.
 \item[Cas Exceptionnel :] Un \gls{utilisateur} ne peut pas se réinscrire dans un tournoi auquel il est déjà inscrit.
@@ -135,16 +135,16 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 
 \paragraph{Participer à un match du tournoi}
 \begin{description}
-\item[Cas général :] L'\gls{utilisateur} doit pouvoir participer à un match en ligne du tournoi où il affrontera le participant adverse.
-\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté et sélectionné comme étant l'un des deux participant du match.
-\item[Post Condition :] L'\gls{utilisateur} sera en match contre le participant adverse.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir participer à un match en ligne du tournoi où il affrontera le \gls{participant} adverse.
+\item[Pré Condition  :] L'\gls{utilisateur} doit être connecté et sélectionné comme étant l'un des deux \gls{participant} du match.
+\item[Post Condition :] L'\gls{utilisateur} sera en match contre le \gls{participant} adverse.
 \item[Cas Exceptionnel :] L'\gls{utilisateur} sera considéré comme perdant automatiquement s'il a déclaré forfait.
 \end{description}
 
 \subsubsection{Voir les informations relatives à un tournoi}
-\paragraph{Voir la liste des participants d'un tournoi}
+\paragraph{Voir la liste des \glspl{participant} d'un tournoi}
 \begin{description}
-\item[Cas général :] L'\gls{utilisateur} doit pouvoir voir la liste des participants d'un tournoi lancé ou terminé.
+\item[Cas général :] L'\gls{utilisateur} doit pouvoir voir la liste des \glspl{participant} d'un tournoi lancé ou terminé.
 \item[Pré Condition  :] L'\gls{utilisateur} doit être connecté.
 \item[Post Condition :] Néant.
 \end{description}
@@ -249,11 +249,11 @@ Ce qui lui permettra d'être sélectionné pour des matches et d'y affronter les
 Durant sa création, il fixera une date limite pour les inscriptions.
 \end{description}
 
-\paragraph{Modifier la liste des participants}
+\paragraph{Modifier la liste des \glspl{participant}}
 \begin{description}
-\item[Cas général :] Le système doit gérer une liste des participants, indiquant quel \gls{utilisateur} participe ainsi que son état (éliminé, en course). Le système doit être capable de le modifier la liste durant les inscriptions et après que le tournoi soit lancé.
+\item[Cas général :] Le système doit gérer une liste des \glspl{participant}, indiquant quel \gls{utilisateur} participe ainsi que son état (éliminé, en course). Le système doit être capable de le modifier la liste durant les inscriptions et après que le tournoi soit lancé.
 \item[Pré Condition  :] Un tournoi en attente ou lancé.
-\item[Post Condition :] La liste des participants d'un tournoi sera modifiée.
+\item[Post Condition :] La liste des \glspl{participant} d'un tournoi sera modifiée.
 \end{description}
 
 \paragraph{Lancer le tournoi}
@@ -272,8 +272,8 @@ Durant sa création, il fixera une date limite pour les inscriptions.
 
 \paragraph{Mettre à jour un tournoi}
 \begin{description}
-\item[Cas général :] Le système doit mettre à jour l'arbre du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'à ce qu'il ne reste qu'un seul participant qui sera élu grand vainqueur.
-\item[Pré Condition  :] Une fin de match entre deux participants.
+\item[Cas général :] Le système doit mettre à jour l'arbre du tournoi après chaque match en y indiquant les vainqueurs et les éliminés. Les vainqueurs pourront s'affronter aux matches suivants et les perdants seront éliminés, jusqu'à ce qu'il ne reste qu'un seul \gls{participant} qui sera élu grand vainqueur.
+\item[Pré Condition  :] Une fin de match entre deux \glspl{participant}.
 \item[Post Condition :] L'arbre de tournoi sera mis à jour.
 \end{description}
 

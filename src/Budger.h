@@ -11,8 +11,6 @@ class Budger : protected Ball{
 		~Budger();
 		Budger operator=(const Ball &ball);
 	    void move();
-		int getSpeed();
-		void setSpeed();
 		void hitPlayer();
 };
 

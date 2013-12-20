@@ -9,8 +9,6 @@ class Quaffle: protected Ball{
 		~Quaffle();
 		Quaffle operator=();
 		void move();
-		int getSpeed();
-		void setSpeed();
 
 };
 

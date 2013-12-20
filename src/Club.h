@@ -7,6 +7,11 @@
 #include "Team.h"
 #include "NonFieldPlayer.h"
 
+class Installation;
+class Manager;
+class Team;
+class NonFieldPlayer;
+
 class Club {
 
 	public:

@@ -1,5 +1,5 @@
-#ifndef Match_h
-#define Match_h
+#ifndef MATCH_H
+#define MATCH_H
 
 #include "Team.h"
 #include "Field.h"
@@ -15,21 +15,21 @@ class Budger;
 
 class Match{
 
-	public:
-		Match();
-		~Match();
-		Match operator=();
-		int getScore();
-		void setScore();
+    public:
+        Match();
+        ~Match();
+        Match operator=();
+        int getScore();
+        void setScore();
 
-	private:
-		int teamOneScore;
-		int teamTwoScore;
-		Team *myTeam[2];
-		Field *myField;
-		GoldenSnitch *myGoldenSnitch;
-		Quaffle *myQuaffle;
-		Budger *myBudger[2];
+    private:
+        int teamOneScore;
+        int teamTwoScore;
+        Team *myTeam[2];
+        Field *myField;
+        GoldenSnitch *myGoldenSnitch;
+        Quaffle *myQuaffle;
+        Budger *myBudger[2];
 };
 
-#endif // Match_h
+#endif // MATCH_H

@@ -1,17 +1,17 @@
-#ifndef Ball_h
-#define Ball_h
+#ifndef BALL_H
+#define BALL_H
 
 class Ball {
 
-	public:
-		virtual Ball();
-		virtual ~Ball();
-		virtual Ball operator=();
-		virtual void move();
-		virtual int getSpeed();
-		virtual void setSpeed();
+    public:
+        virtual Ball();
+        virtual ~Ball();
+        virtual Ball operator=();
+        virtual void move();
+        virtual int getSpeed();
+        virtual void setSpeed();
 
-	protected:
-		int speed;
+    protected:
+        int speed;
 };
-#endif // Ball_h
+#endif // BALL_H

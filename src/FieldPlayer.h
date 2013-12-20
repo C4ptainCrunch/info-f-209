@@ -1,22 +1,22 @@
-#ifndef FieldPlayer_h
-#define FieldPlayer_h
+#ifndef FIELDPLAYER_H
+#define FIELDPLAYER_H
 
 #include "Player.h"
 
 class FieldPlayer : public Player{
 
-	public:
-		super();
-		FieldPlayer();
-		~FieldPlayer();
-		FieldPlayer operator=();
-		void move();
-		void hitBludger();
-		void catchSnitch();
-		void throwQuaffle();
-		void catchQuaffle();
-		void testMove();
+    public:
+        super();
+        FieldPlayer();
+        ~FieldPlayer();
+        FieldPlayer operator=();
+        void move();
+        void hitBludger();
+        void catchSnitch();
+        void throwQuaffle();
+        void catchQuaffle();
+        void testMove();
 
 };
 
-#endif // FieldPlayer_h
+#endif // FIELDPLAYER_H

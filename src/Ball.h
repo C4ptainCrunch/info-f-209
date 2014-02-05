@@ -4,8 +4,8 @@
 class Ball {
 
     public:
-        virtual Ball();
-        virtual ~Ball();
+        Ball();
+        ~Ball();
         virtual void move();
         virtual int getSpeed();
         virtual void setSpeed();

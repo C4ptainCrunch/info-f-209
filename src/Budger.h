@@ -8,7 +8,6 @@ class Budger : public Ball{
     public:
         Budger();
         ~Budger();
-        Budger operator=();
         void move();
         void hitPlayer();
 };

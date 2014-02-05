@@ -1,12 +1,12 @@
-#ifndef Player_h
-#define Player_h
+#ifndef PLAYER_H
+#define PLAYER_H
 
 
 class Player{
 
     public:
-        virtual Player();
-        virtual ~Player();
+        Player();
+        ~Player();
         virtual Player operator=();
         virtual int getSpeed();
         virtual int getForce();
@@ -22,7 +22,6 @@ class Player{
         virtual void setPassPrecision();
         virtual void setWoundState();
         virtual void setInventory();
-        
 
     protected:
         int speed;
@@ -34,4 +33,4 @@ class Player{
         int inventory[];
 };
 
-#endif // Player_h
+#endif // PLAYER_H

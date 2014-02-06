@@ -17,11 +17,14 @@ class Club {
         int addMoney(const int deltaMoney);
         int getLevel();//calcule le level
         Team& getTeam();
-        std::vector< Installation > getInstallations();
-        std::vector< NonFieldPlayer > getNonFieldPlayers();
-        void setTeam();
-        void setInstallations();
-        void addNonFieldPlayers();
+        std::vector<Installation> getInstallations();
+        std::vector<NonFieldPlayer> getNonFieldPlayers();
+        void addInstallation(Installation& installation);
+        std::vector<Installation> getInstallations();
+        void delInstallation(int pos);
+        void addNonFieldPlayer(Player player);
+        Player & player removeNonFieldPlayer(int pos);
+
 
     private:
         int money;

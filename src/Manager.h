@@ -5,14 +5,19 @@
 class Manager{
 
     public:
-        Manager();
+        Manager(String name, String userName, String password, Club club = Club());
         ~Manager();
-        Manager operator=();
-        int getExperience();
-        void setExperience();
+        bool checkPassword(const String password);
+        void changePassword(const String password);
+        Club & getClub();
+        String getUserName();
+        String getName();
 
     private:
-        int experience;
+        String name;
+        String userName;
+        String hash;
+        Club club;
 
 };
 

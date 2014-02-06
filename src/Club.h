@@ -11,29 +11,23 @@ class Club {
 
     public:
         Club();
+        Club(int money, vector<Installation> installations, Team& team, vector<NonFieldPlayer> players)
         ~Club();
-        Club operator=();
         int getMoney();
-        void addMoney();
-        void lowerMoney();
-        int getLevel();
-        void levelUp();
-        Manager& getManager();
+        int addMoney(const int deltaMoney);
+        int getLevel();//calcule le level
         Team& getTeam();
-        std::vector< Installation* > getInstallations();
-        std::vector< NonFieldPlayer* > getNonFieldPlayers();
-        void setManager();
+        std::vector< Installation > getInstallations();
+        std::vector< NonFieldPlayer > getNonFieldPlayers();
         void setTeam();
         void setInstallations();
-        void setNonFieldPlayers();
+        void addNonFieldPlayers();
 
     private:
         int money;
-        int level;
-        std::vector< Installation* > myInstallation;
-        Manager *myManager;
-        Team *myTeam;
-        std::vector< NonFieldPlayer* > myNonFieldPlayer;
+        std::vector< Installation > installations;
+        Team *team;
+        std::vector< NonFieldPlayer > players;
 };
 
 #endif // CLUB_H

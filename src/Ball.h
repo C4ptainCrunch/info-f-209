@@ -8,6 +8,6 @@ class Ball {
         ~Ball();
 
     protected:
-        int speed;
+        int speed_;
 };
 #endif // BALL_H

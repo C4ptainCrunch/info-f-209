@@ -5,7 +5,7 @@ class Ball {
 
     public:
         Ball(int speed);
-        ~Ball();
+        virtual ~Ball();
 
     protected:
         int speed_;

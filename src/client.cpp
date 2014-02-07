@@ -23,12 +23,11 @@ void Client::connectToName(string name){
     }
     else
     {
-        if ((he=gethostbyname(name.c_str()) == NULL))
+        if ((he=gethostbyname(name.c_str())) == NULL)
         {
             perror("Client: gethostbyname ");
             exit(EXIT_FAILURE);
         }
-
 
         theirAddr.sin_family = AF_INET;
         theirAddr.sin_port = htons(PORT);
@@ -40,7 +39,6 @@ void Client::connectToName(string name){
             perror("Client: connect ");
             exit(EXIT_FAILURE);
         }
-
         connected = true;
         printf("Connecté au serveur.");
     }
@@ -93,6 +91,7 @@ int Client::defaultSend()
 int main(int argc, char** argv)
 {
     int run = 1;
+    string name;
 
     if (argc != 2)
     {
@@ -100,14 +99,16 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
 
+    name = argv[1];
+
     Client client;
-    client.connectToName(string(argv[2]));
+    client.connectToName(name);
 
     while (run == 1)
     {
         string message;
 
-        cout<<"\n>>> "<<endl;
+        cout<<"\n>>> ";
         cin>>message;
 
         client.stringToBuff(message);

@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-include <vector>
+
+#include <vector>
 
 class Player{
 
@@ -26,13 +27,13 @@ class Player{
         virtual void addToInventory(Item newItem);
 
     protected:
-        int speed;
-        int force;
-        int agility;
-        int reflexes;
-        int passPrecision;
-        bool wounded;
-        vector<Item> inventory;
+        int speed_;
+        int force_;
+        int agility_;
+        int reflexes_;
+        int passPrecision_;
+        bool wounded_;
+        vector<Item> inventory_;
 };
 
 #endif // PLAYER_H

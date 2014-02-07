@@ -2,11 +2,13 @@
 #define PLAYER_H
 
 #include <vector>
+#include <string>
+#include "Item.h"
 
 class Player{
 
     public:
-        Player(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, vector<Item> inventory);
+        Player(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory);
         Player();
         virtual ~Player();
         virtual int getSpeed();
@@ -15,15 +17,15 @@ class Player{
         virtual int getReflexes();
         virtual int getPassPrecision();
         virtual bool isWounded();
-        virtual vector<Item> getInventory();
+        virtual std::vector<Item> getInventory();
         virtual void setSpeed(int speed);
         virtual void setForce(int force);
         virtual void setAgility(int agility);
         virtual void setReflexes(int reflexes);
         virtual void setPassPrecision(int passPrecision);
         virtual void setWoundState(bool woundState);
-        Item removeItem(string itemType);
-        Item removeItem(int position);
+        Item removeItem(std::string itemType);
+        Item removeItem(unsigned int position);
         virtual void addToInventory(Item newItem);
 
     protected:
@@ -33,7 +35,7 @@ class Player{
         int reflexes_;
         int passPrecision_;
         bool wounded_;
-        vector<Item> inventory_;
+        std::vector<Item> inventory_;
 };
 
 #endif // PLAYER_H

@@ -1,7 +1,7 @@
 #include "Manager.h"
 using namespace std;
 
-Manager::Manager(string name, string userName, string password, Club club = Club()): name_(name), userName_(userName), club_(club){
+Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club){
 	//TODO : Hash du password
 }
 

@@ -2,15 +2,15 @@
 #define INFIRMARY_H
 
 #include "Installation.h"
+#include "Player.h"
 
 
 class Infirmary : public Installation{
 
     public:
-        Infirmary();
+        Infirmary(int level);
         ~Infirmary();
-        Infirmary operator=();
-        void heal();
+        void heal(Player& player);
 };
 
 #endif // INFIRMARY_H

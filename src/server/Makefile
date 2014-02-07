@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-std=c++11
-SOURCES=main.cpp
-OBJECTS=main.cpp helpers.cpp bind.cpp main.cpp
+SOURCES=server.cpp
+OBJECTS=server.cpp helpers.cpp bind.cpp
 EXECUTABLE=server
 PORT=5001
 

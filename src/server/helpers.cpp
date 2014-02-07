@@ -1,4 +1,4 @@
-#define RCV_SIZE 16
+#define RCV_SIZE 2
 
 char *get_ip_str(const struct sockaddr *sa, char *s, size_t maxlen=128)
 {
@@ -35,10 +35,10 @@ void *get_in_addr(const sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-void sendTo(const int sock, const char * msg) {
-    int len;
+void sendTo(const int sock, std::string message) {
+    const char * msg = message.c_str();
+    int len = strlen(msg);
     int bytes_sent = 0;
-    len = strlen(msg);
     while(len > 0){
         bytes_sent = send(sock, msg, len, 0);
         len -= bytes_sent;
@@ -47,20 +47,17 @@ void sendTo(const int sock, const char * msg) {
 }
 
 std::string recieveFrom(const int sock){
-    std::string ret;
-    std::string stringBuf;
+    std::string message;
     char buf[RCV_SIZE];
     int len = RCV_SIZE;
 
     while(len >= RCV_SIZE || len == 0){
-        len = recv(sock,buf, RCV_SIZE, 0);
-        if(len == 0){
+        if((len = recv(sock,buf, RCV_SIZE, 0)) == 0)
             printf("Listen failed : %s\n", strerror(errno));
-        }
-        else{
-            stringBuf = buf;
-            ret += stringBuf;
+        else {
+            buf[len] = '\0';
+            message += buf;
         }
     }
-    return ret;
+    return message;
 }

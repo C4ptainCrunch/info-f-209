@@ -1,26 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <sys/wait.h>
-#include <signal.h>
-
-#include <arpa/inet.h>
-#include <unistd.h>
-
-#include <thread>
-#include <vector>
-
-#include "helpers.cpp"
-#include "thread.cpp"
-#include "bind.cpp"
-
+#include "server.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,7 +12,7 @@ int main(int argc, char *argv[])
     }
 
     int new_fd;
-    sockaddr_storage their_addr; // connector's address information
+    sockaddr_storage their_addr;
     socklen_t sin_size;
     char s[INET6_ADDRSTRLEN];
 

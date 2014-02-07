@@ -13,6 +13,8 @@ Client::Client(){
 
     socklen_t addrSize = sizeof(struct sockaddr);
 
+    connected = false;
+
     cout<<"Client Initialised"<<endl;
 }
 
@@ -60,32 +62,44 @@ void Client::stringToBuff(string message){
 
 int Client::defaultRecv()
 {
-    int numbytes;
-
-    if ((numbytes = recv(sockFd, buffer, BUFFERSIZE, 0)) == -1)
+    if (connected)
     {
-        char errorText[50];
-        sprintf(errorText, "Client : recv ");
-        perror(errorText);
-        exit(EXIT_FAILURE);
+        int numbytes;
+
+        if ((numbytes = recv(sockFd, buffer, BUFFERSIZE, 0)) == -1)
+        {
+            char errorText[50];
+            sprintf(errorText, "Client : recv ");
+            perror(errorText);
+            exit(EXIT_FAILURE);
+        }
+
+        return numbytes;
     }
 
-    return numbytes;
+    else
+        cout<<"Recv : No connection"<<endl; //Rework
 }
 
 int Client::defaultSend()
 {
-    int res;
-
-    if ((res = send(sockFd, buffer, BUFFERSIZE, 0)) == -1)
+    if (connected)
     {
-        char errorText[50];
-        sprintf(errorText, "Client : send ");
-        perror(errorText);
-        exit(EXIT_FAILURE);
+        int res;
+
+        if ((res = send(sockFd, buffer, BUFFERSIZE, 0)) == -1)
+        {
+            char errorText[50];
+            sprintf(errorText, "Client : send ");
+            perror(errorText);
+            exit(EXIT_FAILURE);
+        }
+
+        return res;
     }
 
-    return res;
+    else
+        cout<<"Send : No connection"<<endl; //Rework
 }
 
 int main(int argc, char** argv)

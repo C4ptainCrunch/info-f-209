@@ -60,7 +60,6 @@ int main(int argc, char** argv)
 
     while (run == 1)
     {
-        int boolSend = 1; /*Ce "bool" représente "faut-il envoyer un message au serveur"*/
 
         printf("\n>>> ");
         fgets(buffer, BUFFERSIZE, stdin);
@@ -69,7 +68,7 @@ int main(int argc, char** argv)
         {
             printf("Fin de la connection.\n");
             run = 0;
-            mySend(sockFd, buffer);
+            defaultSend(sockFd, buffer);
         }
     }
 
@@ -81,7 +80,7 @@ int defaultRecv(int sockFd, void *buf)
 {
     int numbytes;
 
-    if ((numbytes = recv(sockFd, buf, len, flags)) == -1)
+    if ((numbytes = recv(sockFd, buf, BUFFERSIZE, 0)) == -1)
     {
         char errorText[50];
         sprintf(errorText, "Client : recv ");
@@ -96,7 +95,7 @@ int defaultSend(int sockFd, void *buf)
 {
     int res;
 
-    if ((res = send(sockFd, buf, len, flags)) == -1)
+    if ((res = send(sockFd, buf, BUFFERSIZE, 0)) == -1)
     {
         char errorText[50];
         sprintf(errorText, "Client : send ");

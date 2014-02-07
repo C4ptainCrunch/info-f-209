@@ -1,5 +1,5 @@
-#ifndef Installation_h
-#define Installation_h
+#ifndef INSTALLATION_h
+#define INSTALLATION_h
 
 class Installation{
 
@@ -10,7 +10,7 @@ class Installation{
     virtual int getLevel();
 
  protected:
-    int level;
+    int level_;
 };
 
-#endif // Installation_h
+#endif // INSTALLATION_h

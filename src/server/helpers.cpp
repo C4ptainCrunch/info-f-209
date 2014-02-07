@@ -36,6 +36,7 @@ void *get_in_addr(const sockaddr *sa)
 }
 
 void sendTo(const int sock, std::string message) {
+    message += "\n\n";
     const char * msg = message.c_str();
     int len = strlen(msg);
     int bytes_sent = 0;
@@ -46,17 +47,29 @@ void sendTo(const int sock, std::string message) {
     }
 }
 
-std::string recieveFrom(const int sock){
+std::string recieveFrom(const int sock, char * buffer){
     std::string message;
-    char buf[RCV_SIZE];
     int len = RCV_SIZE;
+    char lr = 0; // line returns
 
-    while(len >= RCV_SIZE || len == 0){
-        if((len = recv(sock,buf, RCV_SIZE, 0)) == 0)
+    while(len != 0 && lr < 2){
+        if((len = recv(sock, buffer, RCV_SIZE, 0)) == 0)
             printf("Listen failed : %s\n", strerror(errno));
         else {
-            buf[len] = '\0';
-            message += buf;
+            buffer[len] = '\0';
+            char * i = buffer;
+            for(char c = i[0]; i != '\0'; i++) {
+                if(c == '\n' && lr < 2)
+                    lr++;
+                else if(c == '\n'){
+                    buffer = i + 1;
+                    i--;
+                    i[0] = '\0';
+                }
+                else
+                    lr = 0;
+            }
+            message += buffer;
         }
     }
     return message;

@@ -1,8 +1,13 @@
-void connection(const int fd){
-    sendTo(fd, "Hello, bite!\n");
-    std::string ping = recieveFrom(fd);
-    sendTo(fd, ping);
-    sendTo(fd, "Bye\n");
-    close(fd);
+#define RCV_SIZE 2
+
+void connection(const int socket){
+    std::string response = "";
+    char buffer[RCV_SIZE];
+
+    sendTo(socket, "Hello, bite!");
+    response = recieveFrom(socket, buffer);
+    sendTo(socket, response);
+    sendTo(socket, "Bye");
+    close(socket);
 
 }

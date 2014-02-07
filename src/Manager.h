@@ -7,7 +7,7 @@
 class Manager{
 
     public:
-        Manager(std::string name, std::string userName, std::string password, Club club);
+        Manager(std::string name, std::string userName, std::string password, Club club = Club());
         ~Manager();
         bool checkPassword(const std::string password);
         void changePassword(const std::string password);

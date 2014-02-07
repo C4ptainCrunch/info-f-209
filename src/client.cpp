@@ -1,86 +1,70 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <netdb.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
+#include <iostream>
 
-#define PORT 8000
-#define BUFFERSIZE 200
+#include "client.h"
 
-/*defaultRecv et defaultSend sont des raccourcis pour ne pas préciser les para csts.*/
-int defaultRecv(int sockFd, void *buf);
-int defaultSend(int sockFd, void *buf);
+using namespace std;
 
-
-int main(int argc, char** argv)
-{
-    int sockFd, run = 1, loggedIn = 0;
-    char buffer[BUFFERSIZE];
-    struct sockaddr_in theirAddr;
-    struct hostent *he;
-    socklen_t addrSize = sizeof(struct sockaddr);
-
-
-    if (argc != 2)
-    {
-        fprintf(stderr, "Donnez le nom de la machine distante en argument.\n");
-        return EXIT_FAILURE;
-    }
-
-    if ((he=gethostbyname(argv[1])) == NULL)
-    {
-        perror("Client: gethostbyname ");
-        return EXIT_FAILURE;
-    }
-
+Client::Client(){
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1)
     {
         perror("Client: socket ");
-        return EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
-    theirAddr.sin_family = AF_INET;
-    theirAddr.sin_port = htons(PORT);
-    theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
-    memset(&(theirAddr.sin_zero), '\0', 8);
+    socklen_t addrSize = sizeof(struct sockaddr);
 
-    if (connect(sockFd, (struct sockaddr *)&theirAddr, addrSize) == -1)
-    {
-        perror("Client: connect ");
-        return EXIT_FAILURE;
-    }
-
-    printf("Connecté au serveur.");
-
-    while (run == 1)
-    {
-
-        printf("\n>>> ");
-        fgets(buffer, BUFFERSIZE, stdin);
-
-        if ((strncmp("Q", buffer, 1) == 0) || (strncmp("q", buffer, 1) == 0))
-        {
-            printf("Fin de la connection.\n");
-            run = 0;
-            defaultSend(sockFd, buffer);
-        }
-    }
-
-    close(sockFd);
-    return EXIT_SUCCESS;
+    cout<<"Client Initialised"<<endl;
 }
 
-int defaultRecv(int sockFd, void *buf)
+void Client::connectToName(string name){
+    if (connected)
+    {
+        cout<<"Already connected."<<endl; //Rework
+    }
+    else
+    {
+        if ((he=gethostbyname(name.c_str()) == NULL))
+        {
+            perror("Client: gethostbyname ");
+            exit(EXIT_FAILURE);
+        }
+
+
+        theirAddr.sin_family = AF_INET;
+        theirAddr.sin_port = htons(PORT);
+        theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
+        memset(&(theirAddr.sin_zero), '\0', 8);
+
+        if (connect(sockFd, (struct sockaddr *)&theirAddr, addrSize) == -1)
+        {
+            perror("Client: connect ");
+            exit(EXIT_FAILURE);
+        }
+
+        connected = true;
+        printf("Connecté au serveur.");
+    }
+}
+
+void Client::disconnect(){
+    if (connected)
+    {
+        connected = false;
+        close(sockFd);
+    }
+    else
+        cout<<"Disconnection : No connection"<<endl; //Rework
+}
+
+void Client::stringToBuff(string message){
+    strncpy(buffer, message.c_str(), BUFFERSIZE);
+}
+
+int Client::defaultRecv()
 {
     int numbytes;
 
-    if ((numbytes = recv(sockFd, buf, BUFFERSIZE, 0)) == -1)
+    if ((numbytes = recv(sockFd, buffer, BUFFERSIZE, 0)) == -1)
     {
         char errorText[50];
         sprintf(errorText, "Client : recv ");
@@ -91,11 +75,11 @@ int defaultRecv(int sockFd, void *buf)
     return numbytes;
 }
 
-int defaultSend(int sockFd, void *buf)
+int Client::defaultSend()
 {
     int res;
 
-    if ((res = send(sockFd, buf, BUFFERSIZE, 0)) == -1)
+    if ((res = send(sockFd, buffer, BUFFERSIZE, 0)) == -1)
     {
         char errorText[50];
         sprintf(errorText, "Client : send ");
@@ -104,4 +88,38 @@ int defaultSend(int sockFd, void *buf)
     }
 
     return res;
+}
+
+int main(int argc, char** argv)
+{
+    int run = 1;
+
+    if (argc != 2)
+    {
+        fprintf(stderr, "Donnez le nom de la machine distante en argument.\n");
+        return EXIT_FAILURE;
+    }
+
+    Client client;
+    client.connectToName(string(argv[2]));
+
+    while (run == 1)
+    {
+        string message;
+
+        cout<<"\n>>> "<<endl;
+        cin>>message;
+
+        client.stringToBuff(message);
+        client.defaultSend();
+
+        if (message == "q" or message == "Q")
+        {
+            printf("Fin de la connection.\n");
+            run = 0;
+        }
+    }
+
+    client.disconnect();
+    return EXIT_SUCCESS;
 }

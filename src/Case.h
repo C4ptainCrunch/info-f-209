@@ -1,6 +1,9 @@
 #ifndef CASE_H
 #define CASE_H
 
+#include "FieldPlayer.h"
+#include "Ball.h"
+
 enum { VOID, USABLE, GOAL };
 
 struct Case{

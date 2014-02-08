@@ -6,9 +6,9 @@
 class NonFieldPlayer : public Player{
 
     public:
-        NonFieldPlayer(int vocation, int level = 1, int experience = 0);
+        NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level = 1, int experience = 0);
         ~NonFieldPlayer();
-        NonFieldPlayer & operator=(const Player & player);
+        //NonFieldPlayer & operator=(const Player & player);
         int getLevel();
         void changeExperience(int deltaExperience);
         void levelUp();

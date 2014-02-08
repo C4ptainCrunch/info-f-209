@@ -1,6 +1,8 @@
 #include "NonFieldPlayer.h"
 
-NonFieldPlayer::NonFieldPlayer(int vocation, int level, int experience) : level_(level), experience_(experience), vocation_(vocation) {}
+NonFieldPlayer::NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level, int experience) : level_(level), experience_(experience), vocation_(vocation) {
+	Player(speed, force, agility, reflexes, passPrecision, wounded, inventory);
+}
 
 NonFieldPlayer::~NonFieldPlayer(){}
 

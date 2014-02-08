@@ -27,7 +27,7 @@ class Player{
         virtual void setWoundState(bool woundState);
         Item removeItem(std::string itemType);
         Item removeItem(unsigned int position);
-        virtual void addToInventory(Item newItem);
+        virtual void addToInventory(Item newItem, int pos);
 
     protected:
         int speed_;

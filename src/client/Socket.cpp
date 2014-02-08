@@ -44,27 +44,54 @@ int Socket::write(const string & message){
 }
 
 int Socket::read(string & message){
-    string package, res;
+    //Note : version crade, doit passer plusieurs bout de code en fonction et néttoyer.
+    static string rest; //buffer, sert à sauvegarder des morceaux de texte entre deux read.
+    string fullMessage; //message qui sera copié dans 'message'
     bool hasToRead = true;
+
+    //Gestion du reste du message précédent.
+    if (rest.empty() == false) //S'il reste du reste.
+    {
+        size_t nextStop = rest.find(MESSAGEEND);
+        if (nextStop == string::npos) //Si le reste ne contient pas de message d'arrêt (il est donc un morceau d'un autre message)
+        {
+            fullMessage = rest;
+            rest = "";
+        }
+        else //Si le reste contient au moins un message entier.
+        {
+            fullMessage = rest.substr(0, nextStop);
+            rest.erase(0, nextStop+sizeof(MESSAGEEND)); //On néttoie pour la lecture du reste du reste.
+            hasToRead = false; //On n'itère alors pas dans la boucle qui suit.
+        }
+    }
+    //
+
     while (hasToRead)
     {
+        string package;
         if (recv(fd, buffer, BUFF_SIZE, 0) == -1) //s'attend à des package de bytes défini dans le header.
         {
             cout<<"Error : Socket, read."<<endl;
             return 1;
         }
 
-        package = buffer; //le buffer est passé dans un string
-        if (package != MESSAGEEND) //si différent de sentinelle de fin, le package est alors rajouté au message résultant
+        package.assign(buffer, BUFF_SIZE); //le buffer est passé dans un string
+
+        size_t stop = package.find(MESSAGEEND);
+        if (stop == string::npos)
         {
-            res += package;
+            fullMessage += package;
         }
-        else //si le package est la sentinelle de fin, indique à la boucle de s'arrêter
+        else
         {
-            hasToRead = false;
+            fullMessage += package.substr(0, stop);
+            package.erase(0, stop+sizeof(MESSAGEEND));
+            rest = package; //On place tout ce qui suit le message d'erreur dans le buffer rest.
         }
+
     }
-    message = res; //message est copié dans le string passé en paramètre
+    message = fullMessage; //message est copié dans le string passé en paramètre
     return 0;
 }
 

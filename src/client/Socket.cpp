@@ -65,3 +65,8 @@ int Socket::read(string & message){
     message = res; //message est copié dans le string passé en paramètre
     return 0;
 }
+
+int Socket::getFd()
+{
+    return fd;
+}

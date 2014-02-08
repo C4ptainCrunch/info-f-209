@@ -6,13 +6,14 @@ bool logIn(char * message, Thread * thread)  //  l'ensemble des log et password 
 	bool logged=false;
 	char * reponseMessage;
 	JsonObject json(message);     // classe JsonObject à définir dans le module
-	char * userName=json.get("userName");
-	if(usersInfo.getPassword(userName)!="~")  // ~ étant une valeur sentinelle renvoyée quand l'élément cherché n'est pas dans le json, et utilisée ici pour vérifier si le userName est correct
+	char * userName=json.get("username");
+	if(thread.isknownUser(userName))
 	{
-	    if(thread.getPassword(userName)==json.get(password))   // vérifie le password
+	    if(thread.getPassword(userName)==json.get("password"))   // vérifie le password
 	    {
 			logged=true;
 			reponseMessage="blablabla";  //à définir plus tard
+			thread.setConnected(userName);
 		}
 		else
 		{
@@ -34,12 +35,13 @@ bool signUp(char* message, Thread * thread)
 	char * reponseMessage;
 	JsonObject json(message);     // classe JsonObject à définir dans le module
 	char * userName=json.get("userName");
-	if(thread.getPassword(userName)!="~")  // ~ étant une valeur sentinelle renvoyée quand l'élément cherché n'est pas dans le json, et utilisée ici pour vérifier si le userName est correct
+	if(! thread.isKnownUser(userName))
 	{
-	    if(thread.getPassword(userName)==json.get(password))
+	    if(thread.getPassword(userName)==json.get("password"))
 	    {
 			signedUp=true;
-			thread.addUserDatas(log,password);  // rajoute le nouveau compte
+			thread.addUserDatas(userName, json.get("password"));  // rajoute le nouveau compte
+			thread.setConnected(userName);
 			reponseMessage="blablabla";  //à définir plus tard
 		}
 		else

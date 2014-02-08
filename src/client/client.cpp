@@ -4,6 +4,44 @@
 
 using namespace std;
 
+
+int main(int argc, char** argv)
+{
+    int run = 1;
+    string name;
+
+    if (argc != 2)
+    {
+        fprintf(stderr, "Donnez le nom de la machine distante en argument.\n");
+        return EXIT_FAILURE;
+    }
+
+    name = argv[1];
+
+    Client client;
+    client.connectToName(name);
+
+    while (run == 1)
+    {
+        string message;
+
+        cout<<"\n>>> ";
+        cin>>message;
+
+        client.stringToBuff(message);
+        client.defaultSend();
+
+        if (message == "q" or message == "Q")
+        {
+            printf("Fin de la connection.\n");
+            run = 0;
+        }
+    }
+
+    client.disconnect();
+    return EXIT_SUCCESS;
+}
+
 Client::Client(){
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1)
     {
@@ -11,20 +49,25 @@ Client::Client(){
         exit(EXIT_FAILURE);
     }
 
-    socklen_t addrSize = sizeof(struct sockaddr);
-
     connected = false;
 
     cout<<"Client Initialised"<<endl;
 }
 
 void Client::connectToName(string name){
+
+    struct sockaddr_in theirAddr;
+    struct hostent *he;
+    socklen_t addrSize;
+
     if (connected)
     {
         cout<<"Already connected."<<endl; //Rework
     }
     else
     {
+        socklen_t addrSize = sizeof(struct sockaddr);
+
         if ((he=gethostbyname(name.c_str())) == NULL)
         {
             perror("Client: gethostbyname ");
@@ -100,41 +143,4 @@ int Client::defaultSend()
 
     else
         cout<<"Send : No connection"<<endl; //Rework
-}
-
-int main(int argc, char** argv)
-{
-    int run = 1;
-    string name;
-
-    if (argc != 2)
-    {
-        fprintf(stderr, "Donnez le nom de la machine distante en argument.\n");
-        return EXIT_FAILURE;
-    }
-
-    name = argv[1];
-
-    Client client;
-    client.connectToName(name);
-
-    while (run == 1)
-    {
-        string message;
-
-        cout<<"\n>>> ";
-        cin>>message;
-
-        client.stringToBuff(message);
-        client.defaultSend();
-
-        if (message == "q" or message == "Q")
-        {
-            printf("Fin de la connection.\n");
-            run = 0;
-        }
-    }
-
-    client.disconnect();
-    return EXIT_SUCCESS;
 }

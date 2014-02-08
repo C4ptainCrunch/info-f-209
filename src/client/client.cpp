@@ -8,6 +8,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
     Client client;
+    string message;
 
     if (argc != 2)
     {
@@ -17,6 +18,15 @@ int main(int argc, char** argv)
     string name = argv[1];
 
     client.connectToName(name);
+
+    while (message != "q" and message != "Q")
+    {
+        cout<<">>> ";
+        cin>>message;
+        client.send(message);
+    }
+
+    client.disconnect();
 
     return EXIT_SUCCESS;
 }
@@ -78,4 +88,14 @@ void Client::disconnect(){
     }
     else
         cout<<"Disconnection : No connection"<<endl; //Rework
+}
+
+int Client::send(const string & message)
+{
+    return socket_.write(message);
+}
+
+int Client::recv(string & message)
+{
+    return socket_.read(message);
 }

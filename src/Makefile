@@ -1,5 +1,5 @@
-#COMPILATOR=clang++
-COMPILATOR=g++
+COMPILATOR=clang++
+#COMPILATOR=g++
 ifeq ($(COMPILATOR), clang++)
 	CFLAGS=-std=c++11 -Wpedantic -Wall -Wextra -Winit-self -Winline -Wconversion -Weffc++ -Wctor-dtor-privacy -Woverloaded-virtual -Wconversion -Wsign-promo -g
 else

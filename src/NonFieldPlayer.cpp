@@ -6,8 +6,13 @@ NonFieldPlayer::~NonFieldPlayer(){}
 
 NonFieldPlayer & NonFieldPlayer::operator=(const Player & player){
 	if (this != &player){
-
-		//TODO
+        speed_ = player.getSpeed();
+        force_ = player.getForce();
+        agility_ = player.getAgility();
+        reflexes_ = player.getReflexes();
+        passPrecision_ = player.getPassPrecision();
+        wounded_ = player.isWounded();
+        inventory_ = player.getInventory();
 	}
 }
 

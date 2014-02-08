@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "Installation.h"
-#include "Manager.h"
 #include "Team.h"
 #include "NonFieldPlayer.h"
 

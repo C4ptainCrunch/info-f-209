@@ -6,7 +6,18 @@ Match::Match(Club& host, Club& guest){
 
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();
-    budgers_[2] = {Budger(),Budger()} ;
+    budgers_[0] = Budger();
+    budgers_[1] = Budger();
+
+    for (int i = 0; i< WIDTH; ++i){
+    	for (int j = 0; j < LENGHT; ++j){
+    		struct Case caseUnit;
+    		caseUnit.type = 1;
+    		caseUnit.player = NULL;
+    		caseUnit.ball = NULL;
+    		grid_[i][j] = caseUnit;
+    	}
+    }
 }
 
 Match::~Match(){}

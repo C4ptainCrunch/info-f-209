@@ -4,10 +4,10 @@
 #include "FieldPlayer.h"
 #include "Ball.h"
 
-enum { VOID, USABLE, GOAL };
+enum { VOID = 0, USABLE = 1, GOAL = 2 };
 
 struct Case{
-    char type;
+    int type;
     FieldPlayer* player;
     Ball* ball;
 };

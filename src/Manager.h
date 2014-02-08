@@ -11,7 +11,7 @@ class Manager{
         ~Manager();
         bool checkPassword(const std::string password);
         void changePassword(const std::string password);
-        Club& getClub();
+        Club* getClub();
         std::string getUserName();
         std::string getName();
 

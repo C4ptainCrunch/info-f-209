@@ -1,23 +1,28 @@
-#include <Json.h>
+#include <json.h>
 
-bool logIn(char* userName, char * password, const int fd)
+bool logIn(char* json, const int fd)
 {
 	std::string log = recieveFrom(fd);
 	std::string password = recieveFrom(fd);
 	bool logged=false;
-	if(userName==log and password)
+	Json::Value usersInfos;
+	Json::Reader infosReader;
+	if(parsingSuccess)
 	{
-	    if(usersInfos[log]==password)
-		{
-			logged=true;
-			std::string message="Authentification réussie, bienvenue "+log;
-			sendTo(fd, message);
+	    if("NULL"!=usersInfos.get(log, "NULL"))   // vérifie si le compte existe
+	    {
+			if(usersInfos[log]==password)
+			{
+		        logged=true;
+			    std::string message="Authentification réussie, bienvenue "+log;
+			    sendTo(fd, message);
+			}
 		}
 	}
 	return logged;
 }
 
-bool signUp(char* json, const int fd)
+bool signUp(char* json, const int fd)  // reçoit un json avec l'ensemble des infos des users
 {
 	bool signedUp=false;
 	std::string log = recieveFrom(fd);
@@ -30,7 +35,7 @@ bool signUp(char* json, const int fd)
 	    if("NULL"==usersInfos.get(log, "NULL"))
 	    {
 		    signedUp=true;
-		    usersInfos[log]=password;
+		    usersInfos[log]=password;                                    //enregistre le nouveau compte
 		    std::string message="Inscription réussie, bienvenue "+log;
 		    sendTo(fd, message);
 		}

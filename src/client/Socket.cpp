@@ -15,9 +15,11 @@
 
 using namespace std;
 
-Socket::Socket(int fd_)
+Socket::Socket() {}
+
+Socket::Socket(int fd)
 {
-    fd = fd_;
+    setFd(fd);
 }
 
 int Socket::write(const string & message){
@@ -69,4 +71,9 @@ int Socket::read(string & message){
 int Socket::getFd()
 {
     return fd;
+}
+
+void Socket::setFd(int fd_)
+{
+    fd = fd_;
 }

@@ -10,12 +10,12 @@ class Team{
         Team(NonFieldPlayer *players[7]);
         ~Team();
         NonFieldPlayer* getPlayers();
-        void addPlayer(NonFieldPlayer player);
+        void addPlayer(NonFieldPlayer& player);
         NonFieldPlayer & removePlayer(int pos);
-        void swapPlayers(int pos1, int pos2)
+        void swapPlayers(int pos1, int pos2);
 
     private:
-        NonFieldPlayer *players[7];
+        NonFieldPlayer *players_[7];
 };
 
 #endif // TEAM_H

@@ -2,9 +2,9 @@
 
 Infirmary::Infirmary(int level): Installation(level) { }
 
-Infirmary::~Infirmary() { }
+Infirmary::~Infirmary() {}
 
 void Infirmary::heal(Player& player)
 {
-    //TODO
+    player.setWoundedState(false);
 }

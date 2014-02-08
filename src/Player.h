@@ -17,6 +17,7 @@ class Player{
         virtual int getReflexes();
         virtual int getPassPrecision();
         virtual bool isWounded();
+        virtual void setWoundedState(bool wound);
         virtual std::vector<Item> getInventory();
         virtual void setSpeed(int speed);
         virtual void setForce(int force);

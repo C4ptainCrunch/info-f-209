@@ -8,7 +8,7 @@
 class Infirmary : public Installation{
 
     public:
-        Infirmary(int level);
+        Infirmary(int level = 1);
         ~Infirmary();
         void heal(Player& player);
 };

@@ -4,5 +4,4 @@ void connection(const int fd){
     sendTo(fd, ping);
     sendTo(fd, "Bye\n");
     close(fd);
-
 }

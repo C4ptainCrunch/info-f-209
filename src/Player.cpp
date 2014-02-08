@@ -10,27 +10,27 @@ Player::Player(): speed_(1), force_(1), agility_(1), reflexes_(1), passPrecision
 
 Player::~Player(){ }
 
-int Player::getSpeed(){
+int Player::getSpeed() const{
 	return speed_;
 }
 
-int Player::getForce(){
+int Player::getForce() const{
 	return force_;
 }
 
-int Player::getAgility(){
+int Player::getAgility() const{
 	return agility_;
 }
 
-int Player::getReflexes(){
+int Player::getReflexes() const{
 	return reflexes_;
 }
 
-int Player::getPassPrecision(){
+int Player::getPassPrecision() const{
 	return speed_;
 }
 
-bool Player::isWounded(){
+bool Player::isWounded() const{
 	return wounded_;
 }
 
@@ -38,7 +38,7 @@ void Player::setWoundedState(bool wound){
 	wounded_ = wound;
 }
 
-vector<Item> Player::getInventory(){
+vector<Item> Player::getInventory() const{
 	return inventory_;
 }
 

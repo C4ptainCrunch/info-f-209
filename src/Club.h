@@ -10,7 +10,7 @@ class Club {
 
     public:
         Club();
-        Club(int money, std::vector<Installation> installations, Team& team, std::vector<NonFieldPlayer> players);
+        Club(int money, Installation* installations, Team& team, std::vector<NonFieldPlayer> players);
         ~Club();
 
         int addMoney(const int deltaMoney);
@@ -24,14 +24,14 @@ class Club {
         void addNonFieldPlayer(NonFieldPlayer player);
         NonFieldPlayer& removeNonFieldPlayer(unsigned int pos);
 
-        void addInstallation(Installation& installation);
-        std::vector<Installation> getInstallations();
+        void addInstallation(Installation& installation, int pos);
+        Installation* getInstallations();
         Installation& delInstallation(unsigned int pos);
 
 
     private:
         int money_;
-        std::vector<Installation> installations_;
+        Installation installations_[5];
         Team *team_;
         std::vector<NonFieldPlayer> players_;
 };

@@ -7,47 +7,29 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    int run = 1;
-    string name;
+    Client client;
 
     if (argc != 2)
     {
-        fprintf(stderr, "Donnez le nom de la machine distante en argument.\n");
-        return EXIT_FAILURE;
+        cout<<"Error : Enter argument"<<endl;
+        return(EXIT_FAILURE); //rework here;
     }
+    string name = argv[1];
 
-    name = argv[1];
-
-    Client client;
     client.connectToName(name);
 
-    while (run == 1)
-    {
-        string message;
-
-        cout<<"\n>>> ";
-        cin>>message;
-
-        client.stringToBuff(message);
-        client.defaultSend();
-
-        if (message == "q" or message == "Q")
-        {
-            printf("Fin de la connection.\n");
-            run = 0;
-        }
-    }
-
-    client.disconnect();
     return EXIT_SUCCESS;
 }
 
 Client::Client(){
+    int sockFd;
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1)
     {
         perror("Client: socket ");
         exit(EXIT_FAILURE);
     }
+
+    socket_.setFd(sockFd);
 
     connected = false;
 
@@ -57,8 +39,7 @@ Client::Client(){
 void Client::connectToName(string name){
 
     struct sockaddr_in theirAddr;
-    struct hostent *he;
-    socklen_t addrSize;
+    struct hostent *he;;
 
     if (connected)
     {
@@ -79,7 +60,7 @@ void Client::connectToName(string name){
         theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
         memset(&(theirAddr.sin_zero), '\0', 8);
 
-        if (connect(sockFd, (struct sockaddr *)&theirAddr, addrSize) == -1)
+        if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1)
         {
             perror("Client: connect ");
             exit(EXIT_FAILURE);
@@ -93,54 +74,8 @@ void Client::disconnect(){
     if (connected)
     {
         connected = false;
-        close(sockFd);
+        close(socket_.getFd());
     }
     else
         cout<<"Disconnection : No connection"<<endl; //Rework
-}
-
-void Client::stringToBuff(string message){
-    strncpy(buffer, message.c_str(), BUFFERSIZE);
-}
-
-int Client::defaultRecv()
-{
-    if (connected)
-    {
-        int numbytes;
-
-        if ((numbytes = recv(sockFd, buffer, BUFFERSIZE, 0)) == -1)
-        {
-            char errorText[50];
-            sprintf(errorText, "Client : recv ");
-            perror(errorText);
-            exit(EXIT_FAILURE);
-        }
-
-        return numbytes;
-    }
-
-    else
-        cout<<"Recv : No connection"<<endl; //Rework
-}
-
-int Client::defaultSend()
-{
-    if (connected)
-    {
-        int res;
-
-        if ((res = send(sockFd, buffer, BUFFERSIZE, 0)) == -1)
-        {
-            char errorText[50];
-            sprintf(errorText, "Client : send ");
-            perror(errorText);
-            exit(EXIT_FAILURE);
-        }
-
-        return res;
-    }
-
-    else
-        cout<<"Send : No connection"<<endl; //Rework
 }

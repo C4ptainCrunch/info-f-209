@@ -16,8 +16,8 @@ void Manager::changePassword(const string password){
 	//TODO
 }
 
-Club& Manager::getClub(){
-	return *(club_);
+Club* Manager::getClub(){
+	return &club_;
 }
 
 string Manager::getUserName(){

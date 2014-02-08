@@ -8,6 +8,8 @@ Player::Player(): speed_(1), force_(1), agility_(1), reflexes_(1), passPrecision
 	inventory_ = std::vector<Item>();
 }
 
+Player::~Player(){ }
+
 int Player::getSpeed(){
 	return speed_;
 }

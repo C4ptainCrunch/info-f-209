@@ -66,7 +66,7 @@ void Player::setWoundState(bool woundState){
 	wounded_ = woundState;
 }
 
-Item removeItem(string itemType){
+Item Player::removeItem(string itemType){
 	//TODO convert string to position
 	return Item();
 }
@@ -77,6 +77,6 @@ Item Player::removeItem(unsigned int position){
 	return *tempItem;
 }
 
-void addToInventory(Item newItem){
+void Player::addToInventory(Item newItem){
 	//TODO
 }

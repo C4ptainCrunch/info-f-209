@@ -4,7 +4,7 @@
 class Installation{
 
  public:
-    Installation(int level);
+    Installation(int level = 1);
     ~Installation();
     virtual void improve();
     virtual int getLevel();

@@ -1,6 +1,6 @@
 #include "Installation.h"
 
-Installation::Installation(int level = 1) : level_(level){}
+Installation::Installation(int level) : level_(level){}
 
 Installation::~Installation(){}
 

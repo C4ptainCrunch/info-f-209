@@ -77,6 +77,6 @@ Item Player::removeItem(unsigned int position){
 	return *tempItem;
 }
 
-void Player::addToInventory(Item newItem){
+void Player::addToInventory(Item newItem, int pos){
 	//TODO
 }

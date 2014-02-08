@@ -16,6 +16,7 @@ NonFieldPlayer & NonFieldPlayer::operator=(const Player & player){
         wounded_ = player.isWounded();
         inventory_ = player.getInventory();
 	}
+    return *this;
 }
 
 int NonFieldPlayer::getLevel(){

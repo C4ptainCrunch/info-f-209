@@ -69,7 +69,7 @@ Installation* Club::getInstallations()
 Installation& Club::delInstallation(unsigned int pos)
 {
     Installation tmpInstallation(installations_[pos]);
-    installations_[pos] = NULL;
+    installations_[pos] = 0;
     return tmpInstallation;
 }
 

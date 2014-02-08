@@ -14,12 +14,10 @@ NonFieldPlayer* Team::getPlayers(){
 	return *players_;
 }
 
-void Team::addPlayer(NonFieldPlayer& player){
-	if (players_[player.getVocation()] == 0)
-		players_[player.getVocation()] = &player;
-	else
-		std::cout<<"Pas bon";
-		//TODO
+NonFieldPlayer* Team::changePlayer(int pos, NonFieldPlayer& player){
+    NonFieldPlayer *tmpPlayer = players_[pos];
+    players_[pos] = &player;
+    return tmpPlayer;
 }
 
 NonFieldPlayer& Team::removePlayer(int pos){

@@ -32,6 +32,10 @@ bool Player::isWounded(){
 	return wounded_;
 }
 
+void Player::setWoundedState(bool wound){
+	wounded_ = wound;
+}
+
 vector<Item> Player::getInventory(){
 	return inventory_;
 }

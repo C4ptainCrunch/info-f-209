@@ -32,9 +32,6 @@ private:
     int sockFd;
     bool connected;
     char buffer[BUFFERSIZE];
-    struct sockaddr_in theirAddr;
-    struct hostent *he;
-    socklen_t addrSize;
 };
 
 #endif //CLIENT_H

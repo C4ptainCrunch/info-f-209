@@ -4,7 +4,7 @@
 #include <string>
 
 #define BUFF_SIZE 32
-#define MESSAGEEND "\n\n\0"
+#define MESSAGE_END "\n\n\0"
 
 class Socket {
     public:
@@ -16,7 +16,7 @@ class Socket {
         void setFd(int fd);
     private:
         char buffer[BUFF_SIZE];
-        int fd;
+        int fd_;
 };
 
 #endif //SOCKET_H

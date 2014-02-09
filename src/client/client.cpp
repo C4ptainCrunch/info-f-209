@@ -10,8 +10,7 @@ int main(int argc, char** argv)
     Client client;
     string message;
 
-    if (argc != 2)
-    {
+    if (argc != 2) {  //temporaire, le temps de standardiser les connections et l'interface.
         cout<<"Error : Enter argument"<<endl;
         return(EXIT_FAILURE); //rework here;
     }
@@ -19,8 +18,7 @@ int main(int argc, char** argv)
 
     client.connectToName(name);
 
-    while (message != "q" and message != "Q")
-    {
+    while (message != "q" and message != "Q") {
         cout<<">>> ";
         cin>>message;
         client.send(message);
@@ -33,15 +31,14 @@ int main(int argc, char** argv)
 
 Client::Client(){
     int sockFd;
-    if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1)
-    {
+    if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("Client: socket ");
         exit(EXIT_FAILURE);
     }
 
     socket_.setFd(sockFd);
 
-    connected = false;
+    connected_ = false;
 
     cout<<"Client Initialised"<<endl;
 }
@@ -51,16 +48,13 @@ void Client::connectToName(string name){
     struct sockaddr_in theirAddr;
     struct hostent *he;;
 
-    if (connected)
-    {
+    if (connected_)
         cout<<"Already connected."<<endl; //Rework
-    }
-    else
-    {
+
+    else {
         socklen_t addrSize = sizeof(struct sockaddr);
 
-        if ((he=gethostbyname(name.c_str())) == NULL)
-        {
+        if ((he=gethostbyname(name.c_str())) == NULL) {
             perror("Client: gethostbyname ");
             exit(EXIT_FAILURE);
         }
@@ -70,20 +64,18 @@ void Client::connectToName(string name){
         theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
         memset(&(theirAddr.sin_zero), '\0', 8);
 
-        if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1)
-        {
+        if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
             perror("Client: connect ");
             exit(EXIT_FAILURE);
         }
-        connected = true;
+        connected_ = true;
         printf("Connecté au serveur.");
     }
 }
 
 void Client::disconnect(){
-    if (connected)
-    {
-        connected = false;
+    if (connected_) {
+        connected_ = false;
         close(socket_.getFd());
     }
     else

@@ -17,7 +17,7 @@ using namespace std;
 
 Socket::Socket() {}
 
-Socket::Socket(int fd)
+Socket::Socket(const int fd)
 {
     setFd(fd);
 }
@@ -87,12 +87,12 @@ int Socket::read(string & message)
     return 0;
 }
 
-int Socket::getFd()
+int Socket::getFd() const
 {
     return fd_;
 }
 
-void Socket::setFd(int fd)
+void Socket::setFd(const int fd)
 {
     fd_ = fd;
 }

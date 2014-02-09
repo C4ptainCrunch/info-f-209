@@ -9,11 +9,11 @@
 class Socket {
     public:
         Socket(); //ne fait rien.
-        Socket(int fd); //appele setFd
-        int write(const std::string & message); //Renvoie 0 si succès, 1 si erreur.
-        int read(std::string & message); //idem. Modifie param message en lui donnant la valeur du message lu.
-        int getFd();
-        void setFd(int fd);
+        Socket(const int fd); //appele setFd
+        virtual int write(const std::string & message); //Renvoie 0 si succès, 1 si erreur.
+        virtual int read(std::string & message); //idem. Modifie param message en lui donnant la valeur du message lu.
+        virtual int getFd() const;
+        virtual void setFd(const int fd);
     private:
         char buffer[BUFF_SIZE];
         int fd_;

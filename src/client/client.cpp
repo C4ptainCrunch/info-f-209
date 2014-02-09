@@ -8,28 +8,34 @@ using namespace std;
 int main(int argc, char** argv)
 {
     Client client;
-    string message;
 
     if (argc != 2) {  //temporaire, le temps de standardiser les connections et l'interface.
-        cout<<"Error : Enter argument"<<endl;
+        cout<<"Error : Enter remove machine argument."<<endl;
         return(EXIT_FAILURE); //rework here;
     }
     string name = argv[1];
 
-    client.connectToName(name);
-
-    while (message != "q" and message != "Q") {
-        cout<<">>> ";
-        cin>>message;
-        client.send(message);
-    }
-
-    client.disconnect();
+    client.run(name);
 
     return EXIT_SUCCESS;
 }
 
-Client::Client(){
+void Client::run(const std::string name)
+{
+    currentStateID_ = STATE_INTRO;
+    currentState_ = new IntroState(this);
+
+    while(currentStateID_ != STATE_EXIT){
+        currentState_->handleEvents();
+        currentState_->logic();
+        currentState_->display();
+
+        changeState();
+    }
+}
+
+Client::Client()
+{
     int sockFd;
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("Client: socket ");
@@ -38,18 +44,17 @@ Client::Client(){
 
     socket_.setFd(sockFd);
 
+    nextStateID_ = STATE_NULL;
+
     connected_ = false;
 
     cout<<"Client Initialised"<<endl;
 }
 
-Client::~Client()
+Client::~Client() {}
+
+void Client::connectToName(const string name)
 {
-    cout<<"Client destroyed"<<endl; //Rework
-}
-
-void Client::connectToName(const string name){
-
     struct sockaddr_in theirAddr;
     struct hostent *he;;
 
@@ -78,7 +83,8 @@ void Client::connectToName(const string name){
     }
 }
 
-void Client::disconnect(){
+void Client::disconnect()
+{
     if (connected_) {
         connected_ = false;
         close(socket_.getFd());
@@ -99,38 +105,38 @@ int Client::recv(string & message)
 
 void Client::setNextState(const int newStateID)
 {
-    if (nextStateID != STATE_EXIT)
-        nextStateID = newStateID;
+    if (nextStateID_ != STATE_EXIT)
+        nextStateID_ = newStateID;
 }
 
 void Client::changeState()
 {
-    if (nextStateID != STATE_NULL){
-        if (nextStateID != STATE_EXIT)
-            delete currentState;
+    if (nextStateID_ != STATE_NULL){
+        if (nextStateID_ != STATE_EXIT)
+            delete currentState_;
 
-        switch(nextStateID){
+        switch(nextStateID_){
             case STATE_MENU:
-                currentState = new MenuState();
+                currentState_ = new MenuState(this);
                 break;
             case STATE_UNLOGGED:
-                currentState = new UnloggedState();
+                currentState_ = new UnloggedState(this);
                 break;
             case STATE_MANAGE_PLAYERS:
-                currentState = new ManagePlayerState();
+                currentState_ = new ManagePlayerState(this);
                 break;
             case STATE_MANAGE_INFRASTRUCTURES:
-                currentState = new ManageInfrastructureState();
+                currentState_ = new ManageInfrastructureState(this);
                 break;
             case STATE_AUCTION_HOUSE:
-                currentState = new AuctionHouseState();
+                currentState_ = new AuctionHouseState(this);
                 break;
             case STATE_INGAME:
-                currentState = new InGameState();
+                currentState_ = new InGameState(this);
                 break;
         }
 
-        currentStateID = nextStateID;
-        nextStateID = STATE_NULL;
+        currentStateID_ = nextStateID_;
+        nextStateID_ = STATE_NULL;
     }
 }

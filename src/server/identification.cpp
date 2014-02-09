@@ -1,9 +1,8 @@
 //#include "json.h"  module json à coder
 //#include "Thread.h"  module de l'objet appartenant au thread
 
-bool logIn(char * message, Thread * thread)  //  l'ensemble des log et password connus est dans l'objet thread
+void logIn(char * message, Thread * thread)  //  l'ensemble des log et password connus est dans l'objet thread
 {
-	bool logged=false;
 	char * reponseMessage;
 	JsonObject json(message);     // classe JsonObject à définir dans le module
 	char * userName=json.get("username");
@@ -11,9 +10,8 @@ bool logIn(char * message, Thread * thread)  //  l'ensemble des log et password 
 	{
 	    if(thread.getPassword(userName)==json.get("password"))   // vérifie le password
 	    {
-			logged=true;
 			reponseMessage="blablabla";  //à définir plus tard
-			thread.setConnected(userName);
+			thread.setConnected(userName); // si connected change => authentification réussie, échec sinon (connected reste à "NULL" par exemple)
 		}
 		else
 		{
@@ -24,14 +22,12 @@ bool logIn(char * message, Thread * thread)  //  l'ensemble des log et password 
 	{
 		reponseMessage="blablabla3";  //à définir plus tard
 	}
-	JsonObject reponse;
-	thread.send_message("user.login", reponseMessage);
-	return logged;
+	JsonObject reponse(reponseMessage);
+	thread.send_message("user.login", reponse);
 }
 
-bool signUp(char* message, Thread * thread)
+void signUp(char* message, Thread * thread)
 {
-	bool signedUp=false;
 	char * reponseMessage;
 	JsonObject json(message);     // classe JsonObject à définir dans le module
 	char * userName=json.get("userName");
@@ -39,7 +35,6 @@ bool signUp(char* message, Thread * thread)
 	{
 	    if(thread.getPassword(userName)==json.get("password"))
 	    {
-			signedUp=true;
 			thread.addUserDatas(userName, json.get("password"));  // rajoute le nouveau compte
 			thread.setConnected(userName);
 			reponseMessage="blablabla";  //à définir plus tard
@@ -55,5 +50,4 @@ bool signUp(char* message, Thread * thread)
 	}
 	JsonObject reponse(reponseMessage);
 	thread.send_message("user.login", reponse);
-	return signedUp;
 }

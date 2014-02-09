@@ -43,6 +43,11 @@ Client::Client(){
     cout<<"Client Initialised"<<endl;
 }
 
+Client::~Client()
+{
+    cout<<"Client destroyed"<<endl; //Rework
+}
+
 void Client::connectToName(const string name){
 
     struct sockaddr_in theirAddr;
@@ -90,4 +95,42 @@ int Client::send(const string & message)
 int Client::recv(string & message)
 {
     return socket_.read(message);
+}
+
+void Client::setNextState(const int newStateID)
+{
+    if (nextStateID != STATE_EXIT)
+        nextStateID = newStateID;
+}
+
+void Client::changeState()
+{
+    if (nextStateID != STATE_NULL){
+        if (nextStateID != STATE_EXIT)
+            delete currentState;
+
+        switch(nextStateID){
+            case STATE_MENU:
+                currentState = new MenuState();
+                break;
+            case STATE_UNLOGGED:
+                currentState = new UnloggedState();
+                break;
+            case STATE_MANAGE_PLAYERS:
+                currentState = new ManagePlayerState();
+                break;
+            case STATE_MANAGE_INFRASTRUCTURES:
+                currentState = new ManageInfrastructureState();
+                break;
+            case STATE_AUCTION_HOUSE:
+                currentState = new AuctionHouseState();
+                break;
+            case STATE_INGAME:
+                currentState = new InGameState();
+                break;
+        }
+
+        currentStateID = nextStateID;
+        nextStateID = STATE_NULL;
+    }
 }

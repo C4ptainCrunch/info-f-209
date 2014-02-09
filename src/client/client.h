@@ -28,7 +28,7 @@ public:
     int recv(std::string & message); //idem. Modifie param message en lui donnant la valeur du message lu.
 private:
     Socket socket_;
-    bool connected;
+    bool connected_;
 };
 
 #endif //CLIENT_H

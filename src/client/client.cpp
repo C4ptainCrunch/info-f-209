@@ -43,7 +43,7 @@ Client::Client(){
     cout<<"Client Initialised"<<endl;
 }
 
-void Client::connectToName(string name){
+void Client::connectToName(const string name){
 
     struct sockaddr_in theirAddr;
     struct hostent *he;;

@@ -13,9 +13,12 @@ public:
     virtual void handleEvents() = 0;
     virtual void logic() = 0;
     virtual void display() = 0;
+
+    virtual void setNextState(int state);
 protected:
-    Client * client_;
     int status;
+private:
+    Client * client_;
 };
 
 class IntroState : public GameState
@@ -37,7 +40,6 @@ public:
 private:
     std::string nameEntry;
     std::string passEntry;
-    int connectionStatus;
 };
 
 class MenuState : public GameState
@@ -72,6 +74,15 @@ class AuctionHouseState : public GameState
 {
 public:
     AuctionHouseState(Client * client);
+    virtual void handleEvents();
+    virtual void logic();
+    virtual void display();
+};
+
+class FriendListState : public GameState
+{
+public:
+    FriendListState(Client * client);
     virtual void handleEvents();
     virtual void logic();
     virtual void display();

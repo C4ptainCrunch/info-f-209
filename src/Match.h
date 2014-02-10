@@ -17,7 +17,8 @@ class Match{
         ~Match();
         int* getScore();
         int addPoint(bool guestTeam ,int delta = 1);
-
+        void moveBalls();
+        bool checkEndOfMatch();
     private:
         int score_[2];
         Club *clubs_[2];

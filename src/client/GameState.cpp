@@ -13,6 +13,7 @@ using namespace std;
 GameState::GameState(Client * client)
 {
     client_ = client;
+    status = DEFAULT;
 }
 
 GameState::~GameState() {}
@@ -30,7 +31,6 @@ void IntroState::display() {}
 
 UnloggedState::UnloggedState(Client * client) : GameState(client)
 {
-    connectionStatus = 0;
     cout<<"Entrez l'option souhaité avec les paramètres requis délimités par un espace."<<endl;
     cout<<"Par éxemple : '2 C4 gronoub'"<<endl<<endl;
     display();
@@ -43,13 +43,13 @@ void UnloggedState::handleEvents()
 }
 void UnloggedState::logic()
 {
-    connectionStatus = CONNECTED;
-    if (connectionStatus == CONNECTED)
+    status = CONNECTED;
+    if (status == CONNECTED)
         client_->setNextState(STATE_MENU);
 }
 void UnloggedState::display()
 {
-    if (connectionStatus == CONNECTED)
+    if (status == CONNECTED)
         cout<<"Connecté."<<endl;
     else
     {

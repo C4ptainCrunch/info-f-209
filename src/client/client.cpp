@@ -5,22 +5,16 @@
 using namespace std;
 
 
-int main(int argc, char** argv)
+int main()
 {
     Client client;
 
-    if (argc != 2) {  //temporaire, le temps de standardiser les connections et l'interface.
-        cout<<"Error : Enter remove machine argument."<<endl;
-        return(EXIT_FAILURE); //rework here;
-    }
-    string name = argv[1];
-
-    client.run(name);
+    client.run();
 
     return EXIT_SUCCESS;
 }
 
-void Client::run(const std::string name)
+void Client::run()
 {
     currentStateID_ = STATE_INTRO;
     currentState_ = new IntroState(this);
@@ -59,7 +53,7 @@ void Client::connectToName(const string name)
     struct hostent *he;;
 
     if (connected_)
-        cout<<"Already connected."<<endl; //Rework
+        cout<<"Déjà connecté."<<endl; //Rework
 
     else {
         socklen_t addrSize = sizeof(struct sockaddr);
@@ -90,7 +84,7 @@ void Client::disconnect()
         close(socket_.getFd());
     }
     else
-        cout<<"Disconnection : No connection"<<endl; //Rework
+        cout<<"Disconnect : No connection"<<endl; //Rework
 }
 
 int Client::send(const string & message)

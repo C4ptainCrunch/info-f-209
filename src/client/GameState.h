@@ -15,6 +15,7 @@ public:
     virtual void display() = 0;
 protected:
     Client * client_;
+    int status;
 };
 
 class IntroState : public GameState

@@ -38,7 +38,7 @@ class Client{
 public:
     Client();
     ~Client();
-    virtual void run(const std::string name);
+    virtual void run();
     virtual void setNextState(const int newState);
 
 private:

@@ -1,20 +1,7 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
-//Game States
-enum GameStates
-{
-    STATE_NULL,
-    STATE_EXIT,
-    STATE_INTRO,
-
-    STATE_UNLOGGED,
-    STATE_MENU,
-    STATE_MANAGE_PLAYERS,
-    STATE_MANAGE_INFRASTRUCTURES,
-    STATE_AUCTION_HOUSE,
-    STATE_INGAME,
-};
+#include <string>
 
 class Client;
 
@@ -46,6 +33,10 @@ public:
     virtual void handleEvents();
     virtual void logic();
     virtual void display();
+private:
+    std::string nameEntry;
+    std::string passEntry;
+    int connectionStatus;
 };
 
 class MenuState : public GameState

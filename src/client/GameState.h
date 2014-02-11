@@ -2,6 +2,7 @@
 #define GAME_STATE_H
 
 #include <string>
+#include <vector>
 
 class Client;
 
@@ -37,6 +38,7 @@ public:
     virtual void handleEvents();
     virtual void logic();
     virtual void display();
+    virtual void parse(std::vector<std::string> & inputVec);
 private:
     std::string nameEntry;
     std::string passEntry;
@@ -49,6 +51,7 @@ public:
     virtual void handleEvents();
     virtual void logic();
     virtual void display();
+    virtual void parse(std::vector<std::string> & inputVec);
 };
 
 
@@ -59,6 +62,7 @@ public:
     virtual void handleEvents();
     virtual void logic();
     virtual void display();
+    virtual void parse(std::vector<std::string> & inputVec);
 };
 
 class ManageInfrastructureState : public GameState
@@ -68,6 +72,7 @@ public:
     virtual void handleEvents();
     virtual void logic();
     virtual void display();
+    virtual void parse(std::vector<std::string> & inputVec);
 };
 
 class AuctionHouseState : public GameState
@@ -77,6 +82,7 @@ public:
     virtual void handleEvents();
     virtual void logic();
     virtual void display();
+    virtual void parse(std::vector<std::string> & inputVec);
 };
 
 class FriendListState : public GameState
@@ -86,6 +92,7 @@ public:
     virtual void handleEvents();
     virtual void logic();
     virtual void display();
+    virtual void parse(std::vector<std::string> & inputVec);
 };
 
 class InGameState : public GameState
@@ -96,5 +103,8 @@ public:
     virtual void logic();
     virtual void display();
 };
+
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
+std::vector<std::string> split(const std::string &s, char delim);
 
 #endif //GAME_STATE_H

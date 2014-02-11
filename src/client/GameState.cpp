@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 
+//bug urgent à fix : seg fault dans menu et unlogged si aucun user input.
 
 #include "Socket.h"
 #include "client.h"
@@ -42,10 +43,12 @@ void GameState::setNextState(int state)
 IntroState::IntroState(Client * client) : GameState(client)
 {
     cout<<"BienvenuS dans le systme !"<<endl;
-    setNextState(STATE_UNLOGGED);
 }
 void IntroState::handleEvents() {}
-void IntroState::logic() {}
+void IntroState::logic()
+{
+    setNextState(STATE_UNLOGGED);
+}
 void IntroState::display() {}
 
 //Unlogged-------------------------------------------------------------------------
@@ -67,7 +70,6 @@ void UnloggedState::handleEvents()
 
 void UnloggedState::logic()
 {
-    //send message to server here
     switch (status) {
     case UNLOGGED_CONNECT :
         //envoyer et traiter les données du serveur.
@@ -154,7 +156,6 @@ void MenuState::handleEvents()
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
     //parse entry here
-    status = MENU_MANAGEPLAYERS;
 }
 void MenuState::logic()
 {
@@ -170,8 +171,12 @@ void MenuState::logic()
         break;
     case MENU_FRIENDLIST :
         setNextState(STATE_FRIENDLIST);
+        break;
     case STATUS_DISCONNECT : //!! effectuer tout ce qui est nécéssaire pour la déconnection ici
-        setNextState(STATE_UNLOGGED);
+        setNextState(STATE_INTRO);
+        break;
+    case STATUS_QUIT :
+        setNextState(STATE_EXIT);
         break;
     }
 }
@@ -196,6 +201,37 @@ void MenuState::display()
 
 void MenuState::parse(vector<string> & inputVec)
 {
+
+    string option = inputVec[0];
+    if (option.size() != 1 or inputVec.size() != 1)
+        status = STATUS_BAD_ENTRY;
+    else
+    {
+        switch (option.c_str()[0]) {
+        case '1' :
+            status = MENU_MANAGEPLAYERS;
+            break;
+        case '2' :
+            status = MENU_MANAGEINFRASTRUCTURES;
+            break;
+        case '3' :
+            status = MENU_AUCTIONHOUSE;
+            break;
+        case '4' :
+            status = MENU_FRIENDLIST;
+            break;
+        case '5' :
+            status = STATUS_DISCONNECT;
+            break;
+        case 'q' :
+        case 'Q' :
+            status = STATUS_QUIT;
+            break;
+        default :
+            status = STATUS_BAD_ENTRY;
+            break;
+        }
+    }
 }
 
 
@@ -226,7 +262,7 @@ void ManagePlayerState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
-        cout<<"Revenir au menu : 1"<<endl;
+        cout<<"Manage Players"<<endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
@@ -316,7 +352,7 @@ void AuctionHouseState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
-        cout<<"Revenir au menu : 1"<<endl;
+        cout<<"Auction House"<<endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
@@ -343,6 +379,7 @@ void FriendListState::handleEvents()
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
+    status = STATUS_RETURNMENU;
 }
 void FriendListState::logic()
 {
@@ -356,7 +393,7 @@ void FriendListState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
-        cout<<"Revenir au menu : 1"<<endl;
+        cout<<"Friend List"<<endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :

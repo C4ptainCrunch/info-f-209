@@ -26,6 +26,7 @@ void Client::run()
 
         changeState();
     }
+    cout<<"after loop"<<endl;
 }
 
 Client::Client()
@@ -110,6 +111,9 @@ void Client::changeState()
             delete currentState_;
 
         switch(nextStateID_){
+            case STATE_INTRO:
+                currentState_ = new IntroState(this);
+                break;
             case STATE_MENU:
                 currentState_ = new MenuState(this);
                 break;
@@ -125,11 +129,13 @@ void Client::changeState()
             case STATE_AUCTION_HOUSE:
                 currentState_ = new AuctionHouseState(this);
                 break;
+            case STATE_FRIENDLIST:
+                currentState_ = new FriendListState(this);
+                break;
             case STATE_INGAME:
                 currentState_ = new InGameState(this);
                 break;
         }
-
         currentStateID_ = nextStateID_;
         nextStateID_ = STATE_NULL;
     }

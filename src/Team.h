@@ -7,17 +7,15 @@
 class Team{
 
     public:
-        Team();
+        Team(NonFieldPlayer *players[7]);
         ~Team();
-        Team operator=();
-        Player& getPlayers();
-        NonFieldPlayer& getNonFieldPlayers();
-        void setPlayers();
-        void setNonFieldPlayers();
+        NonFieldPlayer* getPlayers();
+        NonFieldPlayer* changePlayer(int pos, NonFieldPlayer& player);
+        NonFieldPlayer & removePlayer(int pos);
+        void swapPlayers(int pos1, int pos2);
 
     private:
-        Player *myPlayer[ 7];
-        NonFieldPlayer *myNonFieldPlayer[ 7];
+        NonFieldPlayer *players_[7];
 };
 
 #endif // TEAM_H

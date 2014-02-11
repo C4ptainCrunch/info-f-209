@@ -1,18 +1,25 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
+#include "Club.h"
+#include <string>
 
 class Manager{
 
     public:
-        Manager();
+        Manager(std::string name, std::string userName, std::string password, Club club = Club());
         ~Manager();
-        Manager operator=();
-        int getExperience();
-        void setExperience();
+        bool checkPassword(const std::string password);
+        void changePassword(const std::string password);
+        Club* getClub();
+        std::string getUserName();
+        std::string getName();
 
     private:
-        int experience;
+        std::string name_;
+        std::string userName_;
+        std::string hash_;
+        Club club_;
 
 };
 

@@ -1,13 +1,10 @@
 #include "Quaffle.h"
 
-Quaffle::Quaffle(){
-}
+Quaffle::Quaffle(): Ball(0) { }
 
-Quaffle::~Quaffle(){
-}
+Quaffle::~Quaffle() { }
 
-Quaffle Quaffle::operator=(){
-}
-
-void Quaffle::move(){
+Position Quaffle::thrown(const Position pos, const char direction, const int power)
+{
+    //TODO
 }

@@ -1,28 +1,30 @@
 #include "FieldPlayer.h"
 
-FieldPlayer::FieldPlayer(){
-}
+FieldPlayer::FieldPlayer(){}
 
-FieldPlayer::~FieldPlayer(){
-}
+FieldPlayer::~FieldPlayer(){}
 
-FieldPlayer FieldPlayer::operator=(){
+FieldPlayer& FieldPlayer::operator=(Player& player)
+{
+	if (this != &player){
+        speed_ = player.getSpeed();
+        force_ = player.getForce();
+        agility_ = player.getAgility();
+        reflexes_ = player.getReflexes();
+        passPrecision_ = player.getPassPrecision();
+        wounded_ = player.isWounded();
+        inventory_ = player.getInventory();
+    }
+    return *this;
 }
+void FieldPlayer::move(){}
 
-void FieldPlayer::move(){
-}
+void FieldPlayer::hitBudger(){}
 
-void FieldPlayer::hitBludger(){
-}
+void FieldPlayer::catchGoldenSnitch(){}
 
-void FieldPlayer::catchSnitch(){
-}
+void FieldPlayer::throwQuaffle(){}
 
-void FieldPlayer::throwQuaffle(){
-}
+void FieldPlayer::catchQuaffle(){}
 
-void FieldPlayer::catchQuaffle(){
-}
-
-void FieldPlayer::testMove(){
-}
+void FieldPlayer::testMove(){}

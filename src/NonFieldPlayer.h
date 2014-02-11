@@ -6,18 +6,19 @@
 class NonFieldPlayer : public Player{
 
     public:
-        NonFieldPlayer();
+        NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level = 1, int experience = 0);
         ~NonFieldPlayer();
-        NonFieldPlayer operator=();
+        NonFieldPlayer & operator=(const Player & player);
         int getLevel();
-        void setExp();
+        void changeExperience(int deltaExperience);
         void levelUp();
         int getVocation();
-        void setVocation();
+        void setVocation(int vocation);
 
     private:
-        int level;
-        int vocation;
+        int level_;
+        int experience_;
+        int vocation_;
 };
 
 #endif // NONFIELDPLAYER_H

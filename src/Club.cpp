@@ -1,49 +1,76 @@
 #include "Club.h"
 
-Club::Club(){
+using namespace std;
+
+Club::Club(): money_(0), installations_()
+{
+    // TODO: fill team_ and players_ with players.
 }
 
-Club::~Club(){
+Club::Club(int money, Installation* installations, Team& team, vector<NonFieldPlayer> players): money_(money), players_(players)
+{
+    for (int i = 0; i < 5; ++i){
+        installations_[i] = installations[i];
+    }
+    team_ = &team;
 }
 
-Club Club::operator=(){
+Club::~Club(){ }
+
+int Club::addMoney(const int deltaMoney)
+{
+    return money_+=deltaMoney;
 }
 
-void Club::getMoney(){
+int Club::getMoney()
+{
+    return money_;
 }
 
-void Club::addMoney(){
+int Club::getLevel()
+{
+    // TODO
+    return 0;
 }
 
-void Club::lowerMoney(){
+Team* Club::getTeam()
+{
+    return team_;
 }
 
-int Club::getLevel(){
+std::vector<NonFieldPlayer> Club::getNonFieldPlayers()
+{
+    return players_;
 }
 
-void Club::levelUp(){
+void Club::addNonFieldPlayer(NonFieldPlayer player)
+{
+    players_.push_back(player);
 }
 
-Manager& Club::getManager(){
+NonFieldPlayer& Club::removeNonFieldPlayer(unsigned int pos)
+{
+    NonFieldPlayer tmpPlayer(players_[pos]);
+    players_.erase(players_.begin() + pos);
+    return tmpPlayer;
 }
 
-Team& Club::getTeam(){
+
+void Club::addInstallation(Installation& installation, int pos)
+{
+    installations_[pos] = installation;
 }
 
-std::vector< Installation* > Club::getInstallations(){
+Installation* Club::getInstallations()
+{
+    return installations_;
 }
 
-std::vector< NonFieldPlayer* > Club::getNonFieldPlayers(){
+Installation& Club::delInstallation(unsigned int pos)
+{
+    Installation tmpInstallation(installations_[pos]);
+    installations_[pos] = 0;
+    return tmpInstallation;
 }
 
-void Club::setManager(){
-}
 
-void Club::setTeam(){
-}
-
-void Club::setInstallations(){
-}
-
-void Club::setNonFieldPlayers(){
-}

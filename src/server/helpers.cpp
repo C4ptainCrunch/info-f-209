@@ -35,17 +35,6 @@ void *get_in_addr(const sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-void sendTo(const int sock, std::string message) {
-    message += "\n\n";
-    const char * msg = message.c_str();
-    int len = strlen(msg);
-    int bytes_sent = 0;
-    while(len > 0){
-        bytes_sent = send(sock, msg, len, 0);
-        len -= bytes_sent;
-        msg = msg + bytes_sent;
-    }
-}
 
 std::string recieveFrom(const int sock, char * buffer){
     std::string message;

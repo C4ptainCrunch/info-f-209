@@ -15,10 +15,17 @@
 
 using namespace std;
 
-Socket::Socket() {}
+Socket::Socket() {
+    buffer = new char[BUFF_SIZE];
+}
 
 Socket::Socket(const int fd) {
+    buffer = new char[BUFF_SIZE];
     setFd(fd);
+}
+
+Socket::~Socket() {
+    delete[] buffer;
 }
 
 
@@ -44,7 +51,7 @@ string Socket::popFromBuffer() {
         buffer[0] = '\0';
     }
     else {
-        ptr_buffer = buffer + nextStop + 2;
+        buffer = buffer + nextStop + 2;
         partial = partial.substr(0, nextStop + 2);
     }
     cout << partial << endl;
@@ -69,10 +76,11 @@ int Socket::read(string & message) {
         }
 
         buffer[r] = '\0';
-        message = popFromBuffer();
+        message += popFromBuffer();
         isComplete = (message.find(MESSAGE_END) != string::npos);
     }
 
+    message = message.substr(0, message.length() - 2);
     return 1;
 }
 

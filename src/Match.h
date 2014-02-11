@@ -6,32 +6,25 @@
 #include "GoldenSnitch.h"
 #include "Quaffle.h"
 #include "Budger.h"
+#include "Case.h"
 
+static const width = 1;
+static const length = 1;
 class Match{
 
     public:
-        Match();
+        Match(Club & host, Club & guest);
         ~Match();
-        Match operator=();
-        int getScore();
-        Team& getTeams();
-        GoldenSnitch& getGoldenSnitch();
-        Quaffle& getQuaffle();
-        Budger& getBudgers();
-        void setScore();
-        void setTeams();
-        void setGoldenSnitch();
-		void setQuaffle();
-		void setBudgers();
+        int* getScore();
+        int addPoint(bool guestTeam ,int delta = 1);
 
     private:
-        int teamOneScore;
-        int teamTwoScore;
-        Team *myTeam[2];
-        Field *myField;
-        GoldenSnitch *myGoldenSnitch;
-        Quaffle *myQuaffle;
-        Budger *myBudgers[2];
+        int score[2];
+        Club *club[2];
+        Case grid[width][length];
+        GoldenSnitch goldenSnitch;
+        Quaffle quaffle;
+        Budger budgers[2];
 };
 
 #endif // MATCH_H

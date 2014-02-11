@@ -8,7 +8,7 @@ class NonFieldPlayer : public Player{
     public:
         NonFieldPlayer();
         ~NonFieldPlayer();
-        NonFieldPlayer operator=();
+        NonFieldPlayer & operator=(const Player & player);
         int getLevel();
         void setExp();
         void levelUp();

@@ -6,14 +6,14 @@
 class Shop : public Installation{
 
     public:
-        virtual Shop();
-        virtual ~Shop();
-        virtual Shop operator=();
-        virtual int getIncome();
-        virtual void setIncome();
+        Shop(String name,int income);
+        ~Shop();
+        int getIncome();
+        void setIncome();
 
     protected:
         int income;
+        String name;
 };
 
 #endif // Shop_h

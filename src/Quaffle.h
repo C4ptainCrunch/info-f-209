@@ -8,7 +8,6 @@ class Quaffle : public Ball{
     public:
         Quaffle();
         ~Quaffle();
-        Quaffle operator=();
         void move();
 
 };

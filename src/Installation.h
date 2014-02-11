@@ -4,9 +4,8 @@
 class Installation{
 
  public:
-    virtual Installation();
-    virtual ~Installation();
-    virtual Installation operator=();
+    Installation(int level);
+    ~Installation();
     virtual void improve();
     virtual int getLevel();
 

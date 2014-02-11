@@ -1,28 +1,29 @@
-#ifndef Player_h
-#define Player_h
-
+#ifndef PLAYER_H
+#define PLAYER_H
+include <vector>
 
 class Player{
 
     public:
-        virtual Player();
+        Player(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, vector<Item> inventory);
+        Player();
         virtual ~Player();
-        virtual Player operator=();
         virtual int getSpeed();
         virtual int getForce();
         virtual int getAgility();
         virtual int getReflexes();
         virtual int getPassPrecision();
         virtual bool isWounded();
-        virtual void getInventory();
-        virtual void setSpeed();
-        virtual void setForce();
-        virtual void setAgility();
-        virtual void setReflexes();
-        virtual void setPassPrecision();
-        virtual void setWoundState();
-        virtual void setInventory();
-        
+        virtual vector<Item> getInventory();
+        virtual void setSpeed(int speed);
+        virtual void setForce(int force);
+        virtual void setAgility(int agility);
+        virtual void setReflexes(int reflexes);
+        virtual void setPassPrecision(int passPrecision);
+        virtual void setWoundState(bool woundState);
+        Item removeItem(string itemType);
+        Item removeItem(int position);
+        virtual void addToInventory(Item newItem);
 
     protected:
         int speed;
@@ -30,8 +31,8 @@ class Player{
         int agility;
         int reflexes;
         int passPrecision;
-        bool wounded=False;
-        int inventory[];
+        bool wounded;
+        vector<Item> inventory;
 };
 
-#endif // Player_h
+#endif // PLAYER_H

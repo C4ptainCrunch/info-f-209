@@ -4,20 +4,20 @@
 #include <string>
 
 #define BUFF_SIZE 32
-#define MESSAGE_END "AA"
+#define MESSAGE_END "\n\n"
 
 class Socket {
     public:
-        Socket(); //ne fait rien.
-        Socket(const int fd); //appele setFd
-        virtual int write(std::string message); //Renvoie 0 si succès, 1 si erreur.
-        virtual int read(std::string & message); //idem. Modifie param message en lui donnant la valeur du message lu.
+        Socket();
+        ~Socket();
+        Socket(const int fd);
+        virtual int write(std::string message);
+        virtual int read(std::string & message);
         virtual int getFd() const;
         virtual void setFd(const int fd);
 
     private:
-        char buffer[BUFF_SIZE];
-        char *ptr_buffer;
+        char * buffer;
         int fd_;
         virtual std::string popFromBuffer();
 };

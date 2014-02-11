@@ -40,8 +40,8 @@ public:
     virtual void display();
     virtual void parse(std::vector<std::string> & inputVec);
 private:
-    std::string nameEntry;
-    std::string passEntry;
+    std::string nameInput;
+    std::string passInput;
 };
 
 class MenuState : public GameState

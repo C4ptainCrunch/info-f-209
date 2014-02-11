@@ -10,9 +10,9 @@
 #include <thread>
 #include <vector>
 
-#include "helpers.cpp"
-#include "thread.cpp"
-#include "bind.cpp"
+#include "helpers.h"
+#include "thread.h"
+#include "bind.h"
 
 int main(int argc, char *argv[]);
 

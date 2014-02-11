@@ -1,11 +1,12 @@
-#define RCV_SIZE 2
+#include "thread.h"
 
 void connection(const int socket){
+    Socket s(socket);
     std::string response = "";
     char buffer[RCV_SIZE];
 
     sendTo(socket, "Hello, bite!");
-    response = recieveFrom(socket, buffer);
+    s.read(response);
     sendTo(socket, response);
     sendTo(socket, "Bye");
     close(socket);

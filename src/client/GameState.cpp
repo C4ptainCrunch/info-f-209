@@ -6,16 +6,18 @@
 #include "client.h"
 #include "GameState.h"
 
+//Les définitions ci dessous sont toutes les valeurs que peut avoir l'attribut 'status' de la class de base GameState.
+//Valeurs générales :
 #define STATUS_DEFAULT 0
 #define STATUS_BAD_ENTRY -1
 #define STATUS_DISCONNECT -2
 #define STATUS_RETURNMENU -3
 #define STATUS_QUIT -4
-
-#define CONNECTION_CONNECTED 1
-#define CONNECTION_CONNECT 2
-#define CONNECTION_REGISTER 3
-
+//Valeurs pour unlogged :
+#define UNLOGGED_CONNECTED 1
+#define UNLOGGED_CONNECT 2
+#define UNLOGGED_REGISTER 3
+//Valeurs pour menu :
 #define MENU_MANAGEPLAYERS 1
 #define MENU_MANAGEINFRASTRUCTURES 2
 #define MENU_AUCTIONHOUSE 3
@@ -67,12 +69,12 @@ void UnloggedState::logic()
 {
     //send message to server here
     switch (status) {
-    case CONNECTION_CONNECT :
+    case UNLOGGED_CONNECT :
         //envoyer et traiter les données du serveur.
-        status = CONNECTION_CONNECTED;
+        status = UNLOGGED_CONNECTED;
         setNextState(STATE_MENU);
         break;
-    case CONNECTION_REGISTER :
+    case UNLOGGED_REGISTER :
         //envoyer et traiter les données du serveur.
         break;
     case STATUS_QUIT :
@@ -89,7 +91,7 @@ void UnloggedState::display()
         cout<<"Quitter : Q"<<endl;
         cout<<endl;
         break;
-    case CONNECTION_CONNECTED :
+    case UNLOGGED_CONNECTED :
         cout<<"Connecté."<<endl;
         cout<<endl;
         break;
@@ -113,7 +115,7 @@ void UnloggedState::parse(vector<string> & inputVec)
             if (inputVec.size() == 3) {
                 nameInput = inputVec[1];
                 passInput = inputVec[2];
-                status = CONNECTION_CONNECT;
+                status = UNLOGGED_CONNECT; //demande de connection
             }
             else {
                 status = STATUS_BAD_ENTRY;
@@ -123,7 +125,7 @@ void UnloggedState::parse(vector<string> & inputVec)
             if (inputVec.size() == 3) {
                 nameInput = inputVec[1];
                 passInput = inputVec[2];
-                status = CONNECTION_REGISTER;
+                status = UNLOGGED_REGISTER; //demande d'enregistrement
             }
             else {
                 status = STATUS_BAD_ENTRY;

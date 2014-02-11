@@ -10,8 +10,11 @@
 #define STATUS_BAD_ENTRY -1
 #define STATUS_DISCONNECT -2
 #define STATUS_RETURNMENU -3
+#define STATUS_QUIT -4
 
 #define CONNECTION_CONNECTED 1
+#define CONNECTION_CONNECT 2
+#define CONNECTION_REGISTER 3
 
 #define MENU_MANAGEPLAYERS 1
 #define MENU_MANAGEINFRASTRUCTURES 2
@@ -48,7 +51,7 @@ void IntroState::display() {}
 UnloggedState::UnloggedState(Client * client) : GameState(client)
 {
     cout<<"Entrez l'option souhaité avec les paramètres requis délimités par un espace."<<endl;
-    cout<<"Par éxemple : '2 C4 gronoub'"<<endl;
+    cout<<"Par éxemple : '1 C4 gronoub'"<<endl;
     cout<<endl;
     display();
 }
@@ -58,22 +61,31 @@ void UnloggedState::handleEvents()
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
-    //fill username and password here
 }
 
 void UnloggedState::logic()
 {
     //send message to server here
-    status = CONNECTION_CONNECTED;
-    if (status == CONNECTION_CONNECTED)
+    switch (status) {
+    case CONNECTION_CONNECT :
+        //envoyer et traiter les données du serveur.
+        status = CONNECTION_CONNECTED;
         setNextState(STATE_MENU);
+        break;
+    case CONNECTION_REGISTER :
+        //envoyer et traiter les données du serveur.
+        break;
+    case STATUS_QUIT :
+        setNextState(STATE_EXIT);
+        break;
+    }
 }
 void UnloggedState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
-        cout<<"S'enregistrer : 1 - Nom d'utilisateur - Mot de passe"<<endl;
-        cout<<"Se connecter : 2 - Nom d'utilisateur - Mot de passe"<<endl;
+        cout<<"Se connecter : 1 - Nom d'utilisateur - Mot de passe"<<endl;
+        cout<<"S'enregistrer : 2 - Nom d'utilisateur - Mot de passe"<<endl;
         cout<<"Quitter : Q"<<endl;
         cout<<endl;
         break;
@@ -91,6 +103,41 @@ void UnloggedState::display()
 
 void UnloggedState::parse(vector<string> & inputVec)
 {
+    string option = inputVec[0];
+    if (option.size() != 1)
+        status = STATUS_BAD_ENTRY;
+    else
+    {
+        switch (option.c_str()[0]) {
+        case '1' :
+            if (inputVec.size() == 3) {
+                nameInput = inputVec[1];
+                passInput = inputVec[2];
+                status = CONNECTION_CONNECT;
+            }
+            else {
+                status = STATUS_BAD_ENTRY;
+            }
+            break;
+        case '2' :
+            if (inputVec.size() == 3) {
+                nameInput = inputVec[1];
+                passInput = inputVec[2];
+                status = CONNECTION_REGISTER;
+            }
+            else {
+                status = STATUS_BAD_ENTRY;
+            }
+            break;
+        case 'q' :
+        case 'Q' :
+            status = STATUS_QUIT;
+            break;
+        default :
+            status = STATUS_BAD_ENTRY;
+            break;
+        }
+    }
 }
 //Menu-------------------------------------------------------------------------
 

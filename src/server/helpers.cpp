@@ -1,4 +1,4 @@
-#define RCV_SIZE 2
+#include "helpers.h"
 
 char *get_ip_str(const struct sockaddr *sa, char *s, size_t maxlen=128)
 {

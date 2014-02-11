@@ -1,21 +1,17 @@
 CC=g++
-CFLAGS=-std=c++11
-SOURCES=server.cpp
-OBJECTS=server.cpp helpers.cpp bind.cpp
+CFLAGS=-std=c++11 -c
 EXECUTABLE=server
-PORT=5001
+SOURCES=Socket.cpp bind.cpp   helpers.cpp  server.cpp thread.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
 
-all: clean $(EXECUTABLE)
-
+all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(CFLAGS) $(SOURCES) -o $@
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm $(EXECUTABLE) > /dev/null 2>&1 || true
-
-test: $(EXECUTABLE)
-	./server $(PORT) & telnet localhost $(PORT)
-
-run: $(EXECUTABLE)
-	./server $(PORT)
+	rm *.o
+	rm server

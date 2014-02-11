@@ -5,52 +5,61 @@
 using namespace std;
 
 
-int main(int argc, char** argv)
+int main()
 {
     Client client;
 
-    if (argc != 2)
-    {
-        cout<<"Error : Enter argument"<<endl;
-        return(EXIT_FAILURE); //rework here;
-    }
-    string name = argv[1];
-
-    client.connectToName(name);
+    client.run();
 
     return EXIT_SUCCESS;
 }
 
-Client::Client(){
+void Client::run()
+{
+    currentStateID_ = STATE_INTRO;
+    currentState_ = new IntroState(this);
+
+    while(currentStateID_ != STATE_EXIT){
+        currentState_->handleEvents();
+        currentState_->logic();
+        currentState_->display();
+
+        changeState();
+    }
+    cout<<"after loop"<<endl;
+}
+
+Client::Client()
+{
     int sockFd;
-    if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1)
-    {
+    if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("Client: socket ");
         exit(EXIT_FAILURE);
     }
 
     socket_.setFd(sockFd);
 
-    connected = false;
+    nextStateID_ = STATE_NULL;
+
+    connected_ = false;
 
     cout<<"Client Initialised"<<endl;
 }
 
-void Client::connectToName(string name){
+Client::~Client() {}
 
+void Client::connectToName(const string name)
+{
     struct sockaddr_in theirAddr;
     struct hostent *he;;
 
-    if (connected)
-    {
-        cout<<"Already connected."<<endl; //Rework
-    }
-    else
-    {
+    if (connected_)
+        cout<<"Déjà connecté."<<endl; //Rework
+
+    else {
         socklen_t addrSize = sizeof(struct sockaddr);
 
-        if ((he=gethostbyname(name.c_str())) == NULL)
-        {
+        if ((he=gethostbyname(name.c_str())) == NULL) {
             perror("Client: gethostbyname ");
             exit(EXIT_FAILURE);
         }
@@ -60,22 +69,74 @@ void Client::connectToName(string name){
         theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
         memset(&(theirAddr.sin_zero), '\0', 8);
 
-        if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1)
-        {
+        if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
             perror("Client: connect ");
             exit(EXIT_FAILURE);
         }
-        connected = true;
+        connected_ = true;
         printf("Connecté au serveur.");
     }
 }
 
-void Client::disconnect(){
-    if (connected)
-    {
-        connected = false;
+void Client::disconnect()
+{
+    if (connected_) {
+        connected_ = false;
         close(socket_.getFd());
     }
     else
-        cout<<"Disconnection : No connection"<<endl; //Rework
+        cout<<"Disconnect : No connection"<<endl; //Rework
+}
+
+int Client::send(const string & message)
+{
+    return socket_.write(message);
+}
+
+int Client::recv(string & message)
+{
+    return socket_.read(message);
+}
+
+void Client::setNextState(const int newStateID)
+{
+    if (nextStateID_ != STATE_EXIT)
+        nextStateID_ = newStateID;
+}
+
+void Client::changeState()
+{
+    if (nextStateID_ != STATE_NULL){
+        if (nextStateID_ != STATE_EXIT)
+            delete currentState_;
+
+        switch(nextStateID_){
+            case STATE_INTRO:
+                currentState_ = new IntroState(this);
+                break;
+            case STATE_MENU:
+                currentState_ = new MenuState(this);
+                break;
+            case STATE_UNLOGGED:
+                currentState_ = new UnloggedState(this);
+                break;
+            case STATE_MANAGE_PLAYERS:
+                currentState_ = new ManagePlayerState(this);
+                break;
+            case STATE_MANAGE_INFRASTRUCTURES:
+                currentState_ = new ManageInfrastructureState(this);
+                break;
+            case STATE_AUCTION_HOUSE:
+                currentState_ = new AuctionHouseState(this);
+                break;
+            case STATE_FRIENDLIST:
+                currentState_ = new FriendListState(this);
+                break;
+            case STATE_INGAME:
+                currentState_ = new InGameState(this);
+                break;
+        }
+        currentStateID_ = nextStateID_;
+        nextStateID_ = STATE_NULL;
+    }
 }

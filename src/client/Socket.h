@@ -4,7 +4,7 @@
 #include <string>
 
 #define BUFF_SIZE 32
-#define MESSAGE_END "\r\n\r\n"
+#define MESSAGE_END "AA"
 
 class Socket {
     public:
@@ -17,6 +17,7 @@ class Socket {
 
     private:
         char buffer[BUFF_SIZE];
+        char *ptr_buffer;
         int fd_;
         virtual std::string popFromBuffer();
 };

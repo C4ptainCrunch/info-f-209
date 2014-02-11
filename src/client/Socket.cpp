@@ -17,14 +17,12 @@ using namespace std;
 
 Socket::Socket() {}
 
-Socket::Socket(const int fd)
-{
+Socket::Socket(const int fd) {
     setFd(fd);
 }
 
 
-int Socket::write(string message)
-{
+int Socket::write(string message) {
     message += "\n\n";
     const char * msg = message.c_str();
     int len = strlen(msg);
@@ -38,7 +36,7 @@ int Socket::write(string message)
     return 0;
 }
 
-string Socket::popFromBuffer(){
+string Socket::popFromBuffer() {
 
     string partial = buffer;
     size_t nextStop = partial.find(MESSAGE_END);
@@ -46,29 +44,36 @@ string Socket::popFromBuffer(){
         buffer[0] = '\0';
     }
     else {
-        char *ptr_buffer = buffer + nextStop + 2;
-        partial = partial.substr(nextStop + 2);
+        ptr_buffer = buffer + nextStop + 2;
+        partial = partial.substr(0, nextStop + 2);
     }
-    cout << "PLOP" << endl;
+    cout << partial << endl;
 
 
     return partial;
 }
 
-int Socket::read(string & message)
-{
+int Socket::read(string & message) {
     message = popFromBuffer();
-    size_t isComplete = (message.find(MESSAGE_END) != string::npos);
+    bool isComplete = (message.find(MESSAGE_END) != string::npos);
+    int r;
     while(!isComplete){
-        if (recv(fd_, buffer, BUFF_SIZE, 0) == -1) {
+        r = recv(fd_, buffer, BUFF_SIZE - 1, 0);
+        if (r == -1) {
             cout<<"Error : Socket, read."<<endl;
             return -1;
         }
+        else if(r == 0){
+            cout<<"Conn closed."<<endl;
+            return 0;
+        }
+
+        buffer[r] = '\0';
         message = popFromBuffer();
-        size_t isComplete = (message.find(MESSAGE_END) != string::npos);
+        isComplete = (message.find(MESSAGE_END) != string::npos);
     }
 
-    return 0;
+    return 1;
 }
 
 int Socket::getFd() const {

@@ -5,10 +5,10 @@ void connection(const int socket){
     std::string response = "";
     char buffer[RCV_SIZE];
 
-    sendTo(socket, "Hello, bite!");
+    s.write("Hello, bite!");
     s.read(response);
-    sendTo(socket, response);
-    sendTo(socket, "Bye");
+    s.write(response);
+    s.write("Bye");
     close(socket);
 
 }

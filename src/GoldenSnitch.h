@@ -9,7 +9,6 @@ class GoldenSnitch : public Ball {
     public:
         GoldenSnitch();
         ~GoldenSnitch();
-        GoldenSnitch operator=();
         void move();
 
 };

@@ -1,17 +1,32 @@
 #include "Manager.h"
+using namespace std;
 
-
-Manager::Manager(){
+Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club){
+	//TODO : Hash du password
 }
 
-Manager::~Manager(){
+Manager::~Manager(){}
+
+bool Manager::checkPassword(const string password){
+	//TODO
+	return true;
 }
 
-Manager Manager::operator=(){
+void Manager::changePassword(const string password){
+	//TODO
 }
 
-int Manager::getExperience(){
+Club* Manager::getClub(){
+	return &club_;
 }
 
-void Manager::setExperience(){
+string Manager::getUserName(){
+	return userName_;
 }
+
+string Manager::getName(){
+	return name_;
+}
+
+
+

@@ -1,17 +1,16 @@
-#ifndef Installation_h
-#define Installation_h
+#ifndef INSTALLATION_h
+#define INSTALLATION_h
 
 class Installation{
 
  public:
-    virtual Installation();
-    virtual ~Installation();
-    virtual Installation operator=();
+    Installation(int level = 1);
+    ~Installation();
     virtual void improve();
     virtual int getLevel();
 
  protected:
-    int level;
+    int level_;
 };
 
-#endif // Installation_h
+#endif // INSTALLATION_h

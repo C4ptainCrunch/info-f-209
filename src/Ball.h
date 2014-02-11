@@ -4,14 +4,10 @@
 class Ball {
 
     public:
-        virtual Ball();
+        Ball(int speed);
         virtual ~Ball();
-        virtual Ball operator=();
-        virtual void move();
-        virtual int getSpeed();
-        virtual void setSpeed();
 
     protected:
-        int speed;
+        int speed_;
 };
 #endif // BALL_H

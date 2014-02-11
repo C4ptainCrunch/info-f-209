@@ -1,37 +1,31 @@
 #ifndef MATCH_H
 #define MATCH_H
 
-#include "Team.h"
+#include "Club.h"
 #include "Field.h"
 #include "GoldenSnitch.h"
 #include "Quaffle.h"
 #include "Budger.h"
+#include "Case.h"
+
+enum { WIDTH = 1, LENGHT = 1};
 
 class Match{
 
     public:
-        Match();
+        Match(Club& host, Club& guest);
         ~Match();
-        Match operator=();
-        int getScore();
-        Team& getTeams();
-        GoldenSnitch& getGoldenSnitch();
-        Quaffle& getQuaffle();
-        Budger& getBudgers();
-        void setScore();
-        void setTeams();
-        void setGoldenSnitch();
-		void setQuaffle();
-		void setBudgers();
-
+        int* getScore();
+        int addPoint(bool guestTeam ,int delta = 1);
+        void moveBalls();
+        bool checkEndOfMatch();
     private:
-        int teamOneScore;
-        int teamTwoScore;
-        Team *myTeam[2];
-        Field *myField;
-        GoldenSnitch *myGoldenSnitch;
-        Quaffle *myQuaffle;
-        Budger *myBudgers[2];
+        int score_[2];
+        Club *clubs_[2];
+        Case grid_[WIDTH][LENGHT];
+        GoldenSnitch goldenSnitch_;
+        Quaffle quaffle_;
+        Budger budgers_[2];
 };
 
 #endif // MATCH_H

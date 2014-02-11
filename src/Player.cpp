@@ -1,53 +1,82 @@
 #include "Player.h"
 
+using namespace std;
 
-Player::Player(){
+Player::Player(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, vector<Item> inventory) : speed_(speed), force_(force), agility_(agility), reflexes_(reflexes), passPrecision_(passPrecision), wounded_(wounded), inventory_(inventory){}
+
+Player::Player(): speed_(1), force_(1), agility_(1), reflexes_(1), passPrecision_(1), wounded_(false){
+	inventory_ = std::vector<Item>();
 }
 
-Player::~Player(){
+Player::~Player(){ }
+
+int Player::getSpeed() const{
+	return speed_;
 }
 
-Player Player::operator=(){
+int Player::getForce() const{
+	return force_;
 }
 
-int Player::getSpeed(){
+int Player::getAgility() const{
+	return agility_;
 }
 
-int Player::getForce(){
+int Player::getReflexes() const{
+	return reflexes_;
 }
 
-int Player::getAgility(){
+int Player::getPassPrecision() const{
+	return speed_;
 }
 
-int Player::getReflexes(){
+bool Player::isWounded() const{
+	return wounded_;
 }
 
-int Player::getPassPrecision(){
+void Player::setWoundedState(bool wound){
+	wounded_ = wound;
 }
 
-bool Player::isWounded(){
+vector<Item> Player::getInventory() const{
+	return inventory_;
 }
 
-void Player::getInventory(){
+void Player::setSpeed(int speed){
+	speed_ = speed;
 }
 
-void Player::setSpeed(){
+void Player::setForce(int force){
+	force_ = force;
 }
 
-void Player::setForce(){
+void Player::setAgility(int agility){
+	agility_ = agility;
 }
 
-void Player::setAgility(){
+void Player::setReflexes(int reflexes){
+	reflexes_ = reflexes;
 }
 
-void Player::setReflexes(){
+void Player::setPassPrecision(int passPrecision){
+	passPrecision_ = passPrecision;
 }
 
-void Player::setPassPrecision(){
+void Player::setWoundState(bool woundState){
+	wounded_ = woundState;
 }
 
-void Player::setWoundState(){
+Item Player::removeItem(string itemType){
+	//TODO convert string to position
+	return Item();
 }
 
-void Playe::setInventory(){
+Item Player::removeItem(unsigned int position){
+	Item* tempItem = &(inventory_[position]);
+	inventory_.at(position) = Item();
+	return *tempItem;
+}
+
+void Player::addToInventory(Item newItem, int pos){
+	//TODO
 }

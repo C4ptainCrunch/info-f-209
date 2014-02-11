@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "Installation.h"
-#include "Manager.h"
 #include "Team.h"
 #include "NonFieldPlayer.h"
 
@@ -11,29 +10,30 @@ class Club {
 
     public:
         Club();
+        Club(int money, Installation* installations, Team& team, std::vector<NonFieldPlayer> players);
         ~Club();
-        Club operator=();
+
+        int addMoney(const int deltaMoney);
         int getMoney();
-        void addMoney();
-        void lowerMoney();
-        int getLevel();
-        void levelUp();
-        Manager& getManager();
-        Team& getTeam();
-        std::vector< Installation* > getInstallations();
-        std::vector< NonFieldPlayer* > getNonFieldPlayers();
-        void setManager();
-        void setTeam();
-        void setInstallations();
-        void setNonFieldPlayers();
+
+        int getLevel();//calcule le level
+
+        Team* getTeam();
+
+        std::vector<NonFieldPlayer> getNonFieldPlayers();
+        void addNonFieldPlayer(NonFieldPlayer player);
+        NonFieldPlayer& removeNonFieldPlayer(unsigned int pos);
+
+        void addInstallation(Installation& installation, int pos);
+        Installation* getInstallations();
+        Installation& delInstallation(unsigned int pos);
+
 
     private:
-        int money;
-        int level;
-        std::vector< Installation* > myInstallation;
-        Manager *myManager;
-        Team *myTeam;
-        std::vector< NonFieldPlayer* > myNonFieldPlayer;
+        int money_;
+        Installation installations_[5];
+        Team *team_;
+        std::vector<NonFieldPlayer> players_;
 };
 
 #endif // CLUB_H

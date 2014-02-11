@@ -1,16 +1,19 @@
 #include "Shop.h"
 
-Shop::Shop(){
+using namespace std;
+
+Shop::Shop(string name,unsigned int income): Installation(1), income_(income), name_(name) {}
+
+Shop::~Shop(){}
+
+unsigned int Shop::getIncome(){
+	return income_;
 }
 
-Shop::~Shop(){
+void Shop::setIncome(unsigned int income){
+	income_ = income;
 }
 
-Shop Shop::operator=(){
-}
-
-int Shop::getIncome(){
-}
-
-void Shop::setIncome(){
+string Shop::getName(){
+	return name_;
 }

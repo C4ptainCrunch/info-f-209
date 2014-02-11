@@ -2,6 +2,7 @@
 #define GOLDENSNITCH_H
 
 #include "Ball.h"
+#include "Position.h"
 
 
 class GoldenSnitch : public Ball {
@@ -9,8 +10,7 @@ class GoldenSnitch : public Ball {
     public:
         GoldenSnitch();
         ~GoldenSnitch();
-        GoldenSnitch operator=();
-        void move();
+        Position autoMove(const Position pos);
 
 };
 

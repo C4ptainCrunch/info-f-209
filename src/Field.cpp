@@ -1,10 +1,5 @@
 #include "Field.h"
 
-Field::Field(){
-}
+Field::Field(int level): Installation(level){ }
 
-Field::~Field(){
-}
-
-Field Field::operator=(){
-}
+Field::~Field(){ }

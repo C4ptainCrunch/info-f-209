@@ -1,13 +1,10 @@
 #include "GoldenSnitch.h"
 
-GoldenSnitch::GoldenSnitch(){
-}
+GoldenSnitch::GoldenSnitch():Ball(0) { } //TODO set speed
 
-GoldenSnitch::~GoldenSnitch(){
-}
+GoldenSnitch::~GoldenSnitch(){ }
 
-GoldenSnitch GoldenSnitch::operator=(){
-}
-
-void GoldenSnitch::move(){
+Position GoldenSnitch::autoMove(const Position pos)
+{
+    //TODO
 }

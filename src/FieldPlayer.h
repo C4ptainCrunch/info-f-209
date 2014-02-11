@@ -8,10 +8,10 @@ class FieldPlayer : public Player{
     public:
         FieldPlayer();
         ~FieldPlayer();
-        FieldPlayer operator=();
+        FieldPlayer& operator=(Player& player);
         void move();
-        void hitBludger();
-        void catchSnitch();
+        void hitBudger();
+        void catchGoldenSnitch();
         void throwQuaffle();
         void catchQuaffle();
         void testMove();

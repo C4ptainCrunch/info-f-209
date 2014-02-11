@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+
 
 #include "Socket.h"
 #include "client.h"
@@ -7,6 +9,7 @@
 #define STATUS_DEFAULT 0
 #define STATUS_BAD_ENTRY -1
 #define STATUS_DISCONNECT -2
+#define STATUS_RETURNMENU -3
 
 #define CONNECTION_CONNECTED 1
 
@@ -51,11 +54,13 @@ UnloggedState::UnloggedState(Client * client) : GameState(client)
 }
 void UnloggedState::handleEvents()
 {
-    string entry;
-    cin>>entry;
-    //parse entry here
+    string inputString;
+    getline(cin, inputString);
+    vector<string> inputVec = split(inputString, ' ');
+    parse(inputVec);
     //fill username and password here
 }
+
 void UnloggedState::logic()
 {
     //send message to server here
@@ -69,6 +74,7 @@ void UnloggedState::display()
     case STATUS_DEFAULT :
         cout<<"S'enregistrer : 1 - Nom d'utilisateur - Mot de passe"<<endl;
         cout<<"Se connecter : 2 - Nom d'utilisateur - Mot de passe"<<endl;
+        cout<<"Quitter : Q"<<endl;
         cout<<endl;
         break;
     case CONNECTION_CONNECTED :
@@ -83,6 +89,9 @@ void UnloggedState::display()
 
 }
 
+void UnloggedState::parse(vector<string> & inputVec)
+{
+}
 //Menu-------------------------------------------------------------------------
 
 MenuState::MenuState(Client * client) : GameState(client)
@@ -91,8 +100,10 @@ MenuState::MenuState(Client * client) : GameState(client)
 }
 void MenuState::handleEvents()
 {
-    string entry;
-    cin>>entry;
+    string inputString;
+    getline(cin, inputString);
+    vector<string> inputVec = split(inputString, ' ');
+    parse(inputVec);
     //parse entry here
     status = MENU_MANAGEPLAYERS;
 }
@@ -100,16 +111,18 @@ void MenuState::logic()
 {
     switch (status) {
     case MENU_MANAGEPLAYERS :
-        setNextState(STATE_EXIT);
+        setNextState(STATE_MANAGE_PLAYERS);
         break;
     case MENU_MANAGEINFRASTRUCTURES :
-        setNextState(STATE_EXIT);
+        setNextState(STATE_MANAGE_INFRASTRUCTURES);
         break;
     case MENU_AUCTIONHOUSE :
-        setNextState(STATE_EXIT);
+        setNextState(STATE_AUCTION_HOUSE);
         break;
     case MENU_FRIENDLIST :
-        setNextState(STATE_EXIT);
+        setNextState(STATE_FRIENDLIST);
+    case STATUS_DISCONNECT : //!! effectuer tout ce qui est nécéssaire pour la déconnection ici
+        setNextState(STATE_UNLOGGED);
         break;
     }
 }
@@ -122,6 +135,7 @@ void MenuState::display()
         cout<<"Accéder à l'hotel de vente : 3"<<endl;
         cout<<"Voir la liste d'amis : 4"<<endl;
         cout<<"Se déconnecter : 5"<<endl;
+        cout<<"Quitter : Q"<<endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
@@ -131,37 +145,181 @@ void MenuState::display()
     }
 }
 
+void MenuState::parse(vector<string> & inputVec)
+{
+}
+
 
 //ManagePlayer-------------------------------------------------------------------------
 
-ManagePlayerState::ManagePlayerState(Client * client) : GameState(client) {}
-void ManagePlayerState::handleEvents() {}
-void ManagePlayerState::logic() {}
-void ManagePlayerState::display() {}
+ManagePlayerState::ManagePlayerState(Client * client) : GameState(client)
+{
+    display();
+}
+void ManagePlayerState::handleEvents()
+{
+    string inputString;
+    getline(cin, inputString);
+    vector<string> inputVec = split(inputString, ' ');
+    parse(inputVec);
+    //parse entry here
+    status = STATUS_RETURNMENU;
+}
+void ManagePlayerState::logic()
+{
+    switch (status) {
+    case STATUS_RETURNMENU :
+        setNextState(STATE_MENU);
+        break;
+    }
+}
+void ManagePlayerState::display()
+{
+    switch (status) {
+    case STATUS_DEFAULT :
+        cout<<"Revenir au menu : 1"<<endl;
+        cout<<endl;
+        break;
+    case STATUS_BAD_ENTRY :
+        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout<<endl;
+        break;
+    }
+}
+
+void ManagePlayerState::parse(vector<string> & inputVec)
+{
+}
 
 
 //ManageInfrastructure-------------------------------------------------------------------------
 
-ManageInfrastructureState::ManageInfrastructureState(Client * client) : GameState(client) {}
-void ManageInfrastructureState::handleEvents() {}
-void ManageInfrastructureState::logic() {}
-void ManageInfrastructureState::display() {}
+ManageInfrastructureState::ManageInfrastructureState(Client * client) : GameState(client)
+{
+    display();
+}
+void ManageInfrastructureState::handleEvents()
+{
+    string inputString;
+    getline(cin, inputString);
+    vector<string> inputVec = split(inputString, ' ');
+    parse(inputVec);
+    //parse entry here
+    status = STATUS_RETURNMENU;
+}
+
+void ManageInfrastructureState::logic()
+{
+    switch (status) {
+    case STATUS_RETURNMENU :
+        setNextState(STATE_MENU);
+        break;
+    }
+}
+
+void ManageInfrastructureState::display()
+{
+    switch (status) {
+    case STATUS_DEFAULT :
+        cout<<"Créer une infirmerie. : 1"<<endl; //pour plus tard, spécialiser les messages (créer -> améliorer)
+        cout<<"Créer un shop : 2"<<endl;
+        cout<<"Revenir au menu : 3"<<endl;
+        cout<<endl;
+        break;
+    case STATUS_BAD_ENTRY :
+        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout<<endl;
+        break;
+    }
+}
+
+void ManageInfrastructureState::parse(vector<string> & inputVec)
+{
+}
 
 
 //AuctionHouse-------------------------------------------------------------------------
 
-AuctionHouseState::AuctionHouseState(Client * client) : GameState(client) {}
-void AuctionHouseState::handleEvents() {}
-void AuctionHouseState::logic() {}
-void AuctionHouseState::display() {}
+AuctionHouseState::AuctionHouseState(Client * client) : GameState(client)
+{
+    display();
+}
+void AuctionHouseState::handleEvents()
+{
+    string inputString;
+    getline(cin, inputString);
+    vector<string> inputVec = split(inputString, ' ');
+    parse(inputVec);
+    //parse entry here
+    status = STATUS_RETURNMENU;
+}
+
+void AuctionHouseState::logic()
+{
+    switch (status) {
+    case STATUS_RETURNMENU :
+        setNextState(STATE_MENU);
+        break;
+    }
+}
+
+void AuctionHouseState::display()
+{
+    switch (status) {
+    case STATUS_DEFAULT :
+        cout<<"Revenir au menu : 1"<<endl;
+        cout<<endl;
+        break;
+    case STATUS_BAD_ENTRY :
+        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout<<endl;
+        break;
+    }
+}
+
+void AuctionHouseState::parse(vector<string> & inputVec)
+{
+}
 
 
 //FriendList--------------------------------------------------------------------------
 
-FriendListState::FriendListState(Client * client) : GameState(client) {}
-void FriendListState::handleEvents() {}
-void FriendListState::logic() {}
-void FriendListState::display() {}
+FriendListState::FriendListState(Client * client) : GameState(client)
+{
+    display();
+}
+void FriendListState::handleEvents()
+{
+    string inputString;
+    getline(cin, inputString);
+    vector<string> inputVec = split(inputString, ' ');
+    parse(inputVec);
+}
+void FriendListState::logic()
+{
+    switch (status) {
+    case STATUS_RETURNMENU :
+        setNextState(STATE_MENU);
+        break;
+    }
+}
+void FriendListState::display()
+{
+    switch (status) {
+    case STATUS_DEFAULT :
+        cout<<"Revenir au menu : 1"<<endl;
+        cout<<endl;
+        break;
+    case STATUS_BAD_ENTRY :
+        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout<<endl;
+        break;
+    }
+}
+
+void FriendListState::parse(vector<string> & inputVec)
+{
+}
 
 
 //InGame-------------------------------------------------------------------------
@@ -170,3 +328,21 @@ InGameState::InGameState(Client * client) : GameState(client) {}
 void InGameState::handleEvents() {}
 void InGameState::logic() {}
 void InGameState::display() {}
+
+
+vector<string> &split(const string &s, char delim, vector<string> &elems)
+{
+    stringstream ss(s);
+    string item;
+    while (getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
+vector<string> split(const string &s, char delim)
+{
+    vector<string> elems;
+    split(s, delim, elems);
+    return elems;
+}

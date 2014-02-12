@@ -6,6 +6,8 @@ using namespace std;
 
 
 #include "UserHandler.h"
+#include "views.h"
+#include "helpers.h"
 
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list) {
@@ -45,13 +47,20 @@ int UserHandler::writeToClient(string message){
     return s_->write(message);
 }
 
-void UserHandler::loop() {
-    std::string response = "";
+void UserHandler::disconnect(){
+    dead = true;
+    s_->write("diconnect:true");
+}
 
-    s_->write("Hello, ULB!");
-    s_->read(response);
-    s_->write(response);
-    s_->read(response);
-    s_->write(response);
-    s_->write("Bye :)");
+int UserHandler::loop() {
+    string message;
+    string key;
+    while(1){
+        if((s_->read(message) <= 0) || (message == "quit")){
+            disconnect();
+            return 0;
+        }
+        message = split_message(&key, message);
+        plop(key, this);
+    }
 }

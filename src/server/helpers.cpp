@@ -63,3 +63,9 @@ std::string recieveFrom(const int sock, char * buffer){
     }
     return message;
 }
+
+std::string split_message(std::string * key, std::string message){
+    std::size_t found = message.find(':');
+    *key = message.substr(0, found);
+    return message.substr(found + 1, message.length());
+}

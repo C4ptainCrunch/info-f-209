@@ -11,6 +11,7 @@ void thread_loop(UserHandler * handler){
 
     handler->loop();
     delete handler;
+    cout << "Client disconnected." << endl;
 }
 
 int main(int argc, char *argv[])

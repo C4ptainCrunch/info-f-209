@@ -19,4 +19,6 @@ void *get_in_addr(const sockaddr *sa);
 
 std::string recieveFrom(const int sock, char * buffer);
 
+std::string split_message(std::string * key, std::string message);
+
 #endif // HELPERS_H

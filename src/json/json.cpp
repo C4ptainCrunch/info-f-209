@@ -31,15 +31,15 @@ JsonString JsonString::operator=(const JsonString &str){
     return *this;
 }
 
-JsonValue createList(string message, int &i){
-    return JsonValue();
+JsonValue * createList(string message, int &i){
+    return new JsonValue();
 }
 
-JsonValue createNumber(string message, int &i){
-    return JsonValue();
+JsonValue * createNumber(string message, int &i){
+    return new JsonValue();
 }
 
-JsonValue createValue(string message, int &i){
+JsonValue * createValue(string message, int &i){
     i = 0;
     while(i < message.length()){
         switch(message[i]){
@@ -75,12 +75,12 @@ JsonValue createValue(string message, int &i){
     throw 1;
 }
 
-JsonDict createDict(string message, int &i){
-    JsonDict r;
+JsonDict * createDict(string message, int &i){
+    JsonDict * r = new JsonDict();
     i = 0;
     while(1){
-        JsonString key;
-        JsonValue value;
+        JsonString * key;
+        JsonValue * value;
         bool colon = false;
         bool coma = false;
         bool gotkey = false;
@@ -120,7 +120,7 @@ JsonDict createDict(string message, int &i){
             i++;
         }
         value = createValue(message.substr(i, message.length()), i);
-        r.add(key, value);
+        r->add(*key, *value);
         while(i < message.length() && !coma){
                 switch(message[i]){
                 case ',':
@@ -137,7 +137,7 @@ JsonDict createDict(string message, int &i){
     }
 }
 
-JsonString createString(string message, int &i){
+JsonString * createString(string message, int &i){
     while(i < message.length()){
         switch(message[i]){
         case '\\':
@@ -145,7 +145,7 @@ JsonString createString(string message, int &i){
             break;
         case '"':
             i++;
-            return JsonString(message.substr(0, i - 1));
+            return new JsonString(message.substr(0, i - 1));
             break;
         }
     i++;
@@ -155,9 +155,8 @@ JsonString createString(string message, int &i){
 
 int main(){
     int i = 0;
-    JsonValue val = createValue("{}", i);
-    JsonDict dict = reinterpret_cast<JsonDict&>(val);
-    // l = &k;
-    // l->dict;
+    JsonValue * val = createValue("\"Coucou, tu veux voir ma bite ?\"", i);
+    JsonString* strptr = dynamic_cast<JsonString*>(val);
+    cout << strptr->value << endl;
     return 0;
 }

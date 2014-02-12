@@ -6,7 +6,7 @@ FieldPlayer::~FieldPlayer(){}
 
 FieldPlayer& FieldPlayer::operator=(Player& player)
 {
-	if (this != &player){
+    if (this != &player){
         speed_ = player.getSpeed();
         force_ = player.getForce();
         agility_ = player.getAgility();

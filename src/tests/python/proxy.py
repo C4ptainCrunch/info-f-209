@@ -86,7 +86,7 @@ class Proxy:
         del self.channel[self.s]
 
     def on_recv(self):
-        data = self.data
+        data = self.data.replace('\r\n', '\n')
         if self.s.getpeername() == self.forward:
             sign, color = '↓', '\x1b[31;1m'
         else:

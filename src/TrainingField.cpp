@@ -7,5 +7,5 @@ TrainingField::~TrainingField(){}
 //TrainingField TrainingField::operator=(TrainingField& trainingField){}
 
 void TrainingField::training(NonFieldPlayer& player){
-	player.changeExperience(level_*100);
+    player.changeExperience(level_*100);
 }

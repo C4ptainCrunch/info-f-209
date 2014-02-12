@@ -5,7 +5,7 @@
 #include "NonFieldPlayer.h"
 
 class TrainingField : public Installation{
-    
+
     public:
         TrainingField();
         ~TrainingField();

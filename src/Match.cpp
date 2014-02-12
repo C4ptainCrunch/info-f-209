@@ -33,9 +33,12 @@ int Match::addPoint(bool guestTeam ,int delta){
 }
 
 void Match::moveBalls(){
-    goldenSnitch_.automove();
+    Position pos;
+    pos.x = 0;
+    pos.y = 0;
+    goldenSnitch_.autoMove(pos);
     for (int i = 0; i<2;++i){
-        budgers_[i].automove();
+        budgers_[i].autoMove(pos);
     }
 
 }
@@ -44,7 +47,7 @@ bool Match::checkEndOfMatch(){
     bool goldenSnitchCaught = false;
     for (int i = 0; i< WIDTH; ++i){
         for (int j = 0; j < LENGHT; ++j){
-            if (grid_[i][j].ball == goldenSnitch_){
+            if (grid_[i][j].ball == &goldenSnitch_){
                 //IF player = Attrapeur;
                 goldenSnitchCaught = true;
             }

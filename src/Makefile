@@ -10,7 +10,7 @@ LDFLAGS= -g
 SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 HEADER=$(wildcard *.hpp)
-EXECUTABLE=InterfacePlayers
+EXECUTABLE=InterfaceInstallations
 
 all : $(SOURCES) $(EXECUTABLE)
 

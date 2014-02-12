@@ -1,19 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <netdb.h>
-#include <sys/types.h>
-#include <netinet/in.h>
 #include <sys/socket.h>
 #include <iostream>
+#include <string>
+
+using namespace std;
+
+#define BUFF_SIZE 32
+#define MESSAGE_END "\n\n"
 
 #include "Socket.h"
 
-using namespace std;
 
 Socket::Socket() {
     buffer = new char[BUFF_SIZE];
@@ -30,12 +25,18 @@ Socket::~Socket() {
 
 
 int Socket::write(string message) {
+    const char * msg;
+    int len, bytes_sent;
+
     message += "\n\n";
-    const char * msg = message.c_str();
-    int len = strlen(msg);
-    int bytes_sent = 0;
+    msg = message.c_str();
+    len = strlen(msg);
+    bytes_sent = 0;
+
     while(len > 0){
         bytes_sent = send(fd_, msg, len, 0);
+        if(bytes_sent == -1)
+            return -1; // socket error, could not write
         len -= bytes_sent;
         msg = msg + bytes_sent;
     }
@@ -44,9 +45,11 @@ int Socket::write(string message) {
 }
 
 string Socket::popFromBuffer() {
+    string partial;
+    size_t nextStop;
 
-    string partial = buffer;
-    size_t nextStop = partial.find(MESSAGE_END);
+    partial = buffer;
+    nextStop = partial.find(MESSAGE_END);
     if (nextStop == string::npos) {
         buffer[0] = '\0';
     }
@@ -54,33 +57,30 @@ string Socket::popFromBuffer() {
         buffer = buffer + nextStop + 2;
         partial = partial.substr(0, nextStop + 2);
     }
-    cout << partial << endl;
-
 
     return partial;
 }
 
 int Socket::read(string & message) {
-    message = popFromBuffer();
-    bool isComplete = (message.find(MESSAGE_END) != string::npos);
-    int r;
-    while(!isComplete){
-        r = recv(fd_, buffer, BUFF_SIZE - 1, 0);
-        if (r == -1) {
-            cout<<"Error : Socket, read."<<endl;
-            return -1;
-        }
-        else if(r == 0){
-            cout<<"Conn closed."<<endl;
-            return 0;
-        }
+    bool isComplete;
+    int len;
 
-        buffer[r] = '\0';
+    message = popFromBuffer();
+    isComplete = (message.find(MESSAGE_END) != string::npos);
+
+    while(!isComplete){
+        len = recv(fd_, buffer, BUFF_SIZE - 1, 0);
+        if (len == -1)
+            return -1; // socket error, could not read
+        else if(len == 0)
+            return 0; // connection closed from other side
+
+        buffer[len] = '\0'; // prevent buffer overflow
         message += popFromBuffer();
         isComplete = (message.find(MESSAGE_END) != string::npos);
     }
 
-    message = message.substr(0, message.length() - 2);
+    message = message.substr(0, message.length() - 2); // remove MESSAGE_END
     return 1;
 }
 

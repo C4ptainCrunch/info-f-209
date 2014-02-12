@@ -2,8 +2,10 @@
 #define MATCH_H
 
 #include <cmath>
+#include <string>
 
 #include "Club.h"
+#include "FieldPlayer.h"
 #include "Field.h"
 #include "GoldenSnitch.h"
 #include "Quaffle.h"
@@ -11,7 +13,9 @@
 #include "Case.h"
 #include "Position.h"
 
-enum { WIDTH = 1, LENGHT = 1};
+enum { WIDTH = 30, LENGHT = 64};
+
+enum { KEEPER = 0, CHASER = 1, BEATER = 2, SEEKER = 3};
 
 class Match{
 
@@ -22,8 +26,10 @@ class Match{
         int addPoint(bool guestTeam ,int delta = 1);
         void moveBalls();
         bool checkEndOfMatch();
+        int* isInTheWay(int fromX,int fromY,int toX, int toY);
+        std::string print();//FOR TESTS
+        void generateGrid();//TO SET PRIVATE AFTER TESTS
     private:
-        void generateGrid();
         int score_[2];
         Club *clubs_[2];
         Case grid_[WIDTH][LENGHT];

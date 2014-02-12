@@ -1,4 +1,9 @@
+#include <iostream>
+
 #include "Match.h"
+
+using namespace std;
+
 
 
 Match::Match(Club& host, Club& guest){
@@ -17,7 +22,7 @@ Match::Match(Club& host, Club& guest){
 Match::~Match(){}
 
 void Match::generateGrid(){
-    float diameterFactor = 46.0/100.0;// Normalement c'est la moitié de la longueur/largeur 
+    double diameterFactor = 46.0/100.0;// Normalement c'est la moitié de la longueur/largeur 
     int delta = 1/2; //Delta qui permet d'éviter les bugs lors de l'affichage de la matrice
 
     for (int i = 0; i<WIDTH;++i){
@@ -25,7 +30,7 @@ void Match::generateGrid(){
             grid_[i][j].type = USABLE;
             // equation d'une ellipse non centrée : (x-h)²/a² + (x-k)²/b²
             //avec x = i, h et k sont les coord du centre, a et b les demi longueurs de l'ellipse
-            float result = pow(i-WIDTH/2.0, 2)/pow(diameterFactor*WIDTH, 2);
+            double result = pow(i-WIDTH/2.0, 2)/pow(diameterFactor*WIDTH, 2);
             result+= pow(j-LENGHT/2.0, 2)/pow(diameterFactor*LENGHT, 2);
             if (i%2 !=0){
                 result -= delta;
@@ -38,14 +43,87 @@ void Match::generateGrid(){
                 if (j == LENGHT/15 + LENGHT/20 or j == LENGHT*14/15 - LENGHT/20){
                     grid_[i][j].type = GOAL;//goal central
                 }
+                else if(j == 2*LENGHT/15 or j == 13 * LENGHT/15){
+                    FieldPlayer tempPlayer = FieldPlayer(KEEPER);
+                    grid_[i][j].player = &tempPlayer;
+                }
+                else if(j == 7*LENGHT/30 or j == 23*LENGHT/30){
+                    FieldPlayer tempPlayer = FieldPlayer(SEEKER);
+                    grid_[i][j].player = &tempPlayer;
+                }
+                else if(j == 5*LENGHT/30 or j == 25*LENGHT/30){
+                    FieldPlayer tempPlayer = FieldPlayer(CHASER);
+                    grid_[i][j].player = &tempPlayer;
+                }
             }
-            if (i == WIDTH/2 - WIDTH/15 or i== WIDTH/2 + WIDTH/15){
+            else if (i == WIDTH/2 - WIDTH/15 or i== WIDTH/2 + WIDTH/15){
                 if(j == 2 * LENGHT/15 or j == 13 * LENGHT/15){
                     grid_[i][j].type = GOAL;//goals latéraux
                 }
+                else if (j == 5*LENGHT/30 or j == 25*LENGHT/30){
+                    FieldPlayer tempPlayer = FieldPlayer(CHASER);
+                    grid_[i][j].player = &tempPlayer;
+                }
             }
+            else if (i == WIDTH/2 - WIDTH/30 or i == WIDTH/2 + WIDTH/30){
+                if(j == 6*LENGHT/30 or j == 24*LENGHT/30){
+                    FieldPlayer tempPlayer = FieldPlayer(BEATER);
+                    grid_[i][j].player = &tempPlayer;
+                }
+            }
+    //--------------------------PLAYERS----------------------------------
+            
+
+
         }
     }
+}
+int* Match::isInTheWay(int fromX,int fromY,int toX, int toY){
+    int blockingPosition[2];
+    return blockingPosition;
+}
+
+string Match::print(){ //FOR TEST PURPOSES
+    string c;
+    for (int i = 0; i<WIDTH;++i){
+        if (i%2 != 0){ 
+            c+=" ";
+        }
+        for (int j=0; j<LENGHT;++j){
+            if (grid_[i][j].type == USABLE){
+                
+                if (grid_[i][j].player != 0){
+                /*
+                    if (grid_[i][j].player->getRole() == KEEPER){
+                        c+= "K ";
+                    }
+                    else if(grid_[i][j].player->getRole() == CHASER){
+                        c+= "C ";
+                    }
+                    else if(grid_[i][j].player->getRole() == SEEKER){
+                        c+= "S ";
+                    }
+                    else if(grid_[i][j].player->getRole() == BEATER){*/
+                    c+= "B ";
+                    //}
+                }
+                else{
+                    c += "\u2B21 ";
+                }
+                
+            }
+            else if (grid_[i][j].type == GOAL){
+                c += "오";
+            }
+            else{
+                c += "\u2B22 ";
+            }
+            
+            //cout<< matrix[i][j]<<" ";
+        }
+        c+="\n";
+    }
+    return c;
 }
 
 int* Match::getScore(){

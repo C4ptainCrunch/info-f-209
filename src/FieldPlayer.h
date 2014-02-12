@@ -3,10 +3,11 @@
 
 #include "Player.h"
 
+
 class FieldPlayer : public Player{
 
     public:
-        FieldPlayer();
+        FieldPlayer(int role);
         ~FieldPlayer();
         FieldPlayer& operator=(Player& player);
         void move();
@@ -15,6 +16,9 @@ class FieldPlayer : public Player{
         void throwQuaffle();
         void catchQuaffle();
         void testMove();
+        int getRole();
+    private:
+        int role_;
 
 };
 

@@ -1,6 +1,6 @@
 #include "FieldPlayer.h"
 
-FieldPlayer::FieldPlayer(){}
+FieldPlayer::FieldPlayer(int role): role_(role){}
 
 FieldPlayer::~FieldPlayer(){}
 
@@ -28,3 +28,7 @@ void FieldPlayer::throwQuaffle(){}
 void FieldPlayer::catchQuaffle(){}
 
 void FieldPlayer::testMove(){}
+
+int FieldPlayer::getRole(){
+    return role_;
+}

@@ -4,189 +4,151 @@
 #include <vector>
 #include <iostream>
 #include <typeinfo>
+#include <exception>
+
+#include "json.h"
 
 using namespace std;
 
-class JsonNode {};
+JsonDict::JsonDict(){}
 
-class JsonList : public JsonNode {
-    public:
-        vector<JsonNode> children;
-};
+void JsonDict::add(JsonString key, JsonValue value){
+    dict[(string) key] = value;
+}
 
-class JsonNumber : public JsonNode {
-    public:
-        string value;
-};
+JsonString::JsonString(){}
 
-//JsonNode object(char * str);
-JsonNode list(char * str);
-//JsonNode string_f(char * str);
-JsonNode number(char * str);
-JsonNode root(char * str);
+JsonString::JsonString(string val){
+    value = val;
+}
 
-// JsonNode object(char * str){
-//     JsonObject ret;
-//     ret.content = str;
-//     return ret;
-// }
+JsonString::operator std::string() const{
+    return value;
+}
 
-JsonNode list(char * str){
-    JsonNode ret;
-    JsonNode (*next_state)(char *);
+JsonString JsonString::operator=(const JsonString &str){
+    value = str.value;
+    return *this;
+}
 
-    while(str[0] == ' ' || str[0] == '\n'){
-        str++;
+JsonValue createList(string message, int &i){
+    return JsonValue();
+}
+
+JsonValue createNumber(string message, int &i){
+    return JsonValue();
+}
+
+JsonValue createValue(string message, int &i){
+    i = 0;
+    while(i < message.length()){
+        switch(message[i]){
+            case '{':
+                return createDict(message.substr(i + 1, message.length()), i);
+                break;
+            case '[':
+                return createList(message.substr(i + 1, message.length()), i);
+                break;
+            case '"':
+                return createString(message.substr(i + 1, message.length()), i);
+                break;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                return createNumber(message.substr(i, message.length()), i);
+                break;
+            case '\n':
+            case ' ':
+                i++;
+                break;
+            default:
+                throw 1;
+        }
     }
-    switch (str[0]){
-        // case '{':
-        //     next_state = &object;
-        //     break;
-        case '[':
-            next_state = &list;
-            break;
-        // case '"':
-        //     next_state = &string_f;
-        //     break;
-        default:
-            next_state = &number;
-            break;
+    throw 1;
+}
+
+JsonDict createDict(string message, int &i){
+    JsonDict r;
+    i = 0;
+    while(1){
+        JsonString key;
+        JsonValue value;
+        bool colon = false;
+        bool coma = false;
+        bool gotkey = false;
+
+        while(i < message.length()){
+            switch(message[i]){
+                case '"':
+                    key = createString(message.substr(i + 1, message.length()), i);
+                    gotkey = true;
+                    break;
+                case '\n':
+                case ' ':
+                    break;
+                case '}':
+                    i++;
+                    return r;
+                    break;
+                default:
+                    throw 1;
+            }
+            if(gotkey){
+                break;
+            }
+            i++;
+        }
+        while(i < message.length() && !colon){
+                switch(message[i]){
+                case ':':
+                    colon = true;
+                    break;
+                case '\n':
+                case ' ':
+                    break;
+                default:
+                    throw 1;
+            }
+            i++;
+        }
+        value = createValue(message.substr(i, message.length()), i);
+        r.add(key, value);
+        while(i < message.length() && !coma){
+                switch(message[i]){
+                case ',':
+                    coma = true;
+                    break;
+                case '\n':
+                case ' ':
+                    break;
+                default:
+                    throw 1;
+            }
+            i++;
+        }
     }
-    str++;
-    return next_state(str);
 }
 
-// JsonNode string_f(char * str){
-//     JsonNode ret;
-//     ret.type = "string";
-//     ret.content = str;
-//     return ret;
-// }
-
-JsonNode number(char * str){
-    JsonNumber ret;
-    ret = JsonNumber();
-    ret.value = str[0];
-    return ret;
-}
-
-JsonNode root(char * str){
-    JsonNode (*next_state)(char *);
-    while(str[0] == ' ' || str[0] == '\n'){
-        str++;
-    }
-    switch (str[0]){
-        // case '{':
-        //     next_state = &object;
-        //     break;
-        case '[':
-            next_state = &list;
-            break;
-        // case '"':
-        //     next_state = &string_f;
-        //     break;
-        default:
-            next_state = &number;
-            break;
-    }
-    str++;
-    return next_state(str);
-}
-
-
-int main(int argc, char *argv[]){
-    char * str = "[8, 2]";
-    cout << "OUTPUT" << "\n" << "==========" << "\n";
-    JsonList b;
-    JsonNode * a = &b;
-    a = root(str);
-    //cout << b << "\n";
-    return 0;
-}
-
-
-char * findEnd(char type, char * str){
-    return "";
-}
-
-class JsonToken {
-    public:
-        JsonToken(char * str);
-        ~JsonToken();
-        char type;
-        std::vector<JsonToken*> children;
-};
-
-JsonToken::JsonToken(char * str) {
-    for(char * i = str; i[0] != '\0'; i++) {
-        switch (i[0]){
-        case '{':
-            type = '{';
-            break;
-        case '[':
-            type = '[';
+JsonString createString(string message, int &i){
+    while(i < message.length()){
+        switch(message[i]){
+        case '\\':
+            i++;
             break;
         case '"':
-            type = '"';
-            break;
-        default:
-            cout << "fail: " << i[0] << "\n";
+            i++;
+            return JsonString(message.substr(0, i - 1));
             break;
         }
-        children.push_back(new JsonToken(findEnd(type, i)));
+    i++;
     }
+    throw 1;
 }
-
-JsonToken::~JsonToken() {
-    for(int i = 0; i < children.size(); i++){
-        delete children.at(i);
-    }
-}
-
-
-/*
-TOKENS
-
-/^,$/, 'comma'
-/^:$/, 'end-label'
-/^\{$/, 'begin-object'
-/^\}$/, 'end-object'
-/^\[$/, 'begin-array'
-/^\]$/, 'end-array'
-/^"(\\["\\/bfnrtu"]|[^"\\"])*"$/, 'string'
-/^"([^"]|\\")*$/, 'maybe-string'
-/^null$/, 'null'
-/^(true|false)$/, 'boolean'
-/^-?\d+(\.\d+)?([eE]-?\d+)?$/, 'number'
-/^-?\d+\.$/, 'maybe-decimal-number'
-/^-$/, 'maybe-negative-number'
-/^\w+$/, 'symbol'
-
-TESTS :
-
-{
-    "name": "Juventus Milan",
-    "money": 10000,
-    "players": [
-        {
-            "name": "ballotelli",
-            "inventory":[
-                {
-                    "type": "balais",
-                    "speed": 1000
-                }
-            ],
-        },
-                {
-            "name": "chabal",
-            "inventory":[
-                {
-                    "type": "potion",
-                    "puissance": 10
-                }
-            ],
-        }
-    ]
-}
-
-*/

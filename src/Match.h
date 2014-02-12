@@ -1,6 +1,8 @@
 #ifndef MATCH_H
 #define MATCH_H
 
+#include <cmath>
+
 #include "Club.h"
 #include "Field.h"
 #include "GoldenSnitch.h"
@@ -21,6 +23,7 @@ class Match{
         void moveBalls();
         bool checkEndOfMatch();
     private:
+        void generateGrid();
         int score_[2];
         Club *clubs_[2];
         Case grid_[WIDTH][LENGHT];

@@ -1,4 +1,10 @@
 #include <sys/socket.h>
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+
 #include <iostream>
 #include <string>
 
@@ -20,6 +26,7 @@ Socket::Socket(const int fd) {
 }
 
 Socket::~Socket() {
+    close(fd_);
     delete[] buffer;
 }
 

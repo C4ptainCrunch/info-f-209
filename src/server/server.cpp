@@ -1,4 +1,17 @@
+#include <iostream>
+
 #include "server.h"
+using namespace std;
+
+
+void thread_loop(UserHandler * handler){
+    while(!handler->isReady()){
+        usleep(10000);
+    }
+
+    handler->loop();
+    delete handler;
+}
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +29,7 @@ int main(int argc, char *argv[])
     sockaddr_storage remote_addr;
     socklen_t address_len;
     char s[INET6_ADDRSTRLEN];
-    std::vector<std::thread> pool;
+    std::vector<UserHandler *> * handlers_list = new std::vector<UserHandler *>();
 
     sockfd = bindTo(argv[1]);
 
@@ -32,8 +45,14 @@ int main(int argc, char *argv[])
 
         inet_ntop(remote_addr.ss_family, get_in_addr((struct sockaddr *)&remote_addr), s, sizeof s);
         printf("Got connection from %s\n", s);
-        pool.push_back(std::thread(connection, new_fd));
+
+        UserHandler * current_handler = new UserHandler(handlers_list);
+        std::thread * current_thread = new std::thread(thread_loop, current_handler);
+        // TODO should delete current_thread sometimes
+        current_handler->start(new_fd, current_thread);
+        handlers_list->push_back(current_handler);
     }
+    delete handlers_list;
 
     return 0;
 }

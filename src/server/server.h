@@ -13,7 +13,10 @@
 #include "helpers.h"
 #include "thread.h"
 #include "bind.h"
+#include "UserHandler.h"
 
 int main(int argc, char *argv[]);
+
+void thread_loop(UserHandler * handler);
 
 #endif // SERVER_H

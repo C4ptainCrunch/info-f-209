@@ -7,6 +7,7 @@
 #include "Quaffle.h"
 #include "Budger.h"
 #include "Case.h"
+#include "Position.h"
 
 enum { WIDTH = 1, LENGHT = 1};
 

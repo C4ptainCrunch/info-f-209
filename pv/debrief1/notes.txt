@@ -1,0 +1,80 @@
+Document très limite : on s'attend à plus. Prendre les remarques en compte.
+La note sera donnée à la fin.
+
+Plein de fautes
+Glossaire pas complet
+Pas bonne séparation
+Organiser en chapties, c'est pas un article, c'est un document
+
+Argent récolé -> pas assez complet
+
+Introduction : na pas tout expliquer
+Vision globale. Ne doit pas être technique.
+
+Historique:
+Il manque plein d'informations. Qui a fait la crétaion du document ?
+Avoir 1 page d'historique pour le projet
+
+
+1er Use case :
+pas bon. regarder la diniftion. utilisateur et serveur sur le même.
+1 use pour le client 1 pour le servuer.
+incusion mauvaise (connexion auth.)
+
+2.2.(3-4) Copier coller (cas exceptionnels)
+
+2ème : regarder les TP d'AMI
+on a fait un truc fortement non recommandé
+
+3.1.1.1 Enregister une inscr :
+post-cond : on enregistre quoi sur le serveur ?
+    on doit enregistrer le mdp
+
+Figure 4 :
+Use case barré :
+on s'attend à gestion d-connexion passage e de message
+On veut des trucs les plus faciles. Les fonctions de base (on veut pas 16 usecase)
+Usecase = que ce qu'on peut faire ? 1) se connecter 2) jouer 3) messages
+On détaille tout et on se retrouver dans le brouillard. Ne penser qu'aux cas marquants. Pas les détails.
+16 usecase mal foutus. Pas inutiles.
+
+Serveur : on s'attend au lien client serveur.
+Ca doit pas sépcialement être plus technique
+
+Avoir les grandes lignes pour les use case
+
+# Diag classes
+Diagramme de classe illisible.
+
+Le document doit être en .fr diagrammes aussi. Noms de classe .en, reste en .fr
+Extern et include : bien penser à ça
+respecter les cardinalités
+bien penser aux associations
+visibilités
+ne pas mettre les setter/getter
+assoctiation use (mettre le nom des assoc. ou alors ne rien mettre)
+
+diagramme général : vision globale
+faire des zomms par après sur certaines parties
+mettre client et serveur aussi
+diag classe explique les interations statiques
+
+séquence explique le dynamisme
+
+mettre les composants en plus. (diag en +)
+
+tables des mat à mettre au début (après la table des matières)
+
+pas assez dans l'index.
+
+
+combien de usecase ?
+
+
+
+
+
+
+Pas assez gros
+Pas structuré
+

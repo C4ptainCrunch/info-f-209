@@ -28,6 +28,8 @@ class UserHandler {
         Manager * manager_;
         thread * handling_thread_;
         std::vector<UserHandler *> * handlers_list_;
+
+        void handleMessage(std::string message);
 };
 
 //HANDLE_H

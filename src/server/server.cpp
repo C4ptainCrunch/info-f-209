@@ -10,35 +10,29 @@ int main(int argc, char *argv[])
         printf("Invalid port\n");
         exit(0);
     }
-    
-    // chargement du fichiers avec les infos des users
-    // des infos dans un json, pointé par une variable (const JsonObject * usersInfos)
 
-    int new_fd;
-    sockaddr_storage their_addr;
-    socklen_t sin_size;
+    int sockfd; // socket to bind to
+    int new_fd; // "accepted" socket
+    sockaddr_storage remote_addr;
+    socklen_t address_len;
     char s[INET6_ADDRSTRLEN];
-
-    int sockfd = bindTo(argv[1]);
     std::vector<std::thread> pool;
+
+    sockfd = bindTo(argv[1]);
 
     printf("Waiting for connections...\n");
 
-    while(1) {  // main accept() loop
-        sin_size = sizeof their_addr;
-        new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
+    while(1) {
+        address_len = sizeof remote_addr;
+        new_fd = accept(sockfd, (struct sockaddr *)&remote_addr, &address_len);
         if (new_fd == -1) {
             perror("accept");
             continue;
         }
 
-        inet_ntop(their_addr.ss_family,
-            get_in_addr((struct sockaddr *)&their_addr),
-            s, sizeof s);
+        inet_ntop(remote_addr.ss_family, get_in_addr((struct sockaddr *)&remote_addr), s, sizeof s);
         printf("Got connection from %s\n", s);
-        pool.push_back(std::thread(connection, new_fd));  //à remplacer par la ligne en dessous (après test premiers tests client-server)
-        //pool.push_back(std::thread(connection, new_fd, usersInfos))
-        // should join somewhere
+        pool.push_back(std::thread(connection, new_fd));
     }
 
     return 0;

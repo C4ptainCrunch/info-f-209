@@ -2,10 +2,11 @@
 #define HANDLE_H
 
 #include "Socket.h"
+#include <vector>
+#include <thread>
 
 class Manager {};
 
-using namespace std;
 
 class UserHandler {
     public:
@@ -13,14 +14,16 @@ class UserHandler {
         ~UserHandler();
         void start(const int fd, thread * handling_thread);
         bool isReady();
-        void loop();
+        int loop();
 
         std::vector<UserHandler *> * getHandlers_listPtr();
         Manager * getManager();
         void setManager(Manager * manager);
         int writeToClient(string message);
+        void disconnect();
 
     private:
+        bool dead;
         Socket * s_;
         Manager * manager_;
         thread * handling_thread_;

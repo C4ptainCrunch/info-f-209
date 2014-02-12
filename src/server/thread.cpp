@@ -8,12 +8,12 @@ void connection(const int socket){
     std::string response = "";
     char buffer[RCV_SIZE];
 
-    s.write("Hello, bite!");
+    s.write("Hello, ULB!");
     s.read(response);
     s.write(response);
     s.read(response);
     s.write(response);
-    s.write("Bye");
+    s.write("Bye :)");
     close(socket);
 
 }

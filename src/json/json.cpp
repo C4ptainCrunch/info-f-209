@@ -152,3 +152,12 @@ JsonString createString(string message, int &i){
     }
     throw 1;
 }
+
+int main(){
+    int i = 0;
+    JsonValue val = createValue("{}", i);
+    JsonDict dict = reinterpret_cast<JsonDict&>(val);
+    // l = &k;
+    // l->dict;
+    return 0;
+}

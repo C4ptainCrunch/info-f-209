@@ -20,10 +20,29 @@ void UserHandler::start(const int fd, thread * handling_thread){
 
 UserHandler::~UserHandler() {
     delete s_;
+    if(manager_ != NULL)
+        delete manager_;
 }
 
 bool UserHandler::isReady(){
     return s_ != NULL;
+}
+
+std::vector<UserHandler *> * UserHandler::getHandlers_listPtr(){
+    return handlers_list_;
+}
+
+Manager * UserHandler::getManager(){
+    return manager_;
+}
+
+void UserHandler::setManager(Manager * manager){
+    if(manager_ == NULL)
+        manager_ = manager;
+}
+
+int UserHandler::writeToClient(string message){
+    return s_->write(message);
 }
 
 void UserHandler::loop() {

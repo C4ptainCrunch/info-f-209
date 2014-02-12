@@ -3,11 +3,7 @@
 
 #include "Socket.h"
 
-class Manager {
-    public:
-        Manager();
-        ~Manager();
-};
+class Manager {};
 
 using namespace std;
 
@@ -18,6 +14,11 @@ class UserHandler {
         void start(const int fd, thread * handling_thread);
         bool isReady();
         void loop();
+
+        std::vector<UserHandler *> * getHandlers_listPtr();
+        Manager * getManager();
+        void setManager(Manager * manager);
+        int writeToClient(string message);
 
     private:
         Socket * s_;

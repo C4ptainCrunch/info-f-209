@@ -103,3 +103,90 @@ int main(int argc, char *argv[]){
     //cout << b << "\n";
     return 0;
 }
+
+
+char * findEnd(char type, char * str){
+    return "";
+}
+
+class JsonToken {
+    public:
+        JsonToken(char * str);
+        ~JsonToken();
+        char type;
+        std::vector<JsonToken*> children;
+};
+
+JsonToken::JsonToken(char * str) {
+    for(char * i = str; i[0] != '\0'; i++) {
+        switch (i[0]){
+        case '{':
+            type = '{';
+            break;
+        case '[':
+            type = '[';
+            break;
+        case '"':
+            type = '"';
+            break;
+        default:
+            cout << "fail: " << i[0] << "\n";
+            break;
+        }
+        children.push_back(new JsonToken(findEnd(type, i)));
+    }
+}
+
+JsonToken::~JsonToken() {
+    for(int i = 0; i < children.size(); i++){
+        delete children.at(i);
+    }
+}
+
+
+/*
+TOKENS
+
+/^,$/, 'comma'
+/^:$/, 'end-label'
+/^\{$/, 'begin-object'
+/^\}$/, 'end-object'
+/^\[$/, 'begin-array'
+/^\]$/, 'end-array'
+/^"(\\["\\/bfnrtu"]|[^"\\"])*"$/, 'string'
+/^"([^"]|\\")*$/, 'maybe-string'
+/^null$/, 'null'
+/^(true|false)$/, 'boolean'
+/^-?\d+(\.\d+)?([eE]-?\d+)?$/, 'number'
+/^-?\d+\.$/, 'maybe-decimal-number'
+/^-$/, 'maybe-negative-number'
+/^\w+$/, 'symbol'
+
+TESTS :
+
+{
+    "name": "Juventus Milan",
+    "money": 10000,
+    "players": [
+        {
+            "name": "ballotelli",
+            "inventory":[
+                {
+                    "type": "balais",
+                    "speed": 1000
+                }
+            ],
+        },
+                {
+            "name": "chabal",
+            "inventory":[
+                {
+                    "type": "potion",
+                    "puissance": 10
+                }
+            ],
+        }
+    ]
+}
+
+*/

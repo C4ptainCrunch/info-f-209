@@ -54,13 +54,18 @@ void UserHandler::disconnect(){
 
 int UserHandler::loop() {
     string message;
-    string key;
     while(1){
         if((s_->read(message) <= 0) || (message == "quit")){
             disconnect();
             return 0;
         }
-        message = split_message(&key, message);
-        plop(key, this);
+        handleMessage(message);
     }
+}
+
+void UserHandler::handleMessage(string message){
+    string key;
+
+    message = split_message(&key, message);
+    plop(message, this);
 }

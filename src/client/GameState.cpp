@@ -1,8 +1,6 @@
 #include <iostream>
 #include <sstream>
 
-//bug urgent à fix : seg fault dans menu et unlogged si aucun user input.
-
 #include "Socket.h"
 #include "client.h"
 #include "GameState.h"
@@ -204,35 +202,38 @@ void MenuState::display()
 
 void MenuState::parse(vector<string> & inputVec)
 {
-
-    string option = inputVec[0];
-    if (option.size() != 1 or inputVec.size() != 1)
+    if (inputVec.empty() == true)
         status = STATUS_BAD_ENTRY;
-    else
-    {
-        switch (option.c_str()[0]) {
-        case '1' :
-            status = MENU_MANAGEPLAYERS;
-            break;
-        case '2' :
-            status = MENU_MANAGEINFRASTRUCTURES;
-            break;
-        case '3' :
-            status = MENU_AUCTIONHOUSE;
-            break;
-        case '4' :
-            status = MENU_FRIENDLIST;
-            break;
-        case '5' :
-            status = STATUS_DISCONNECT;
-            break;
-        case 'q' :
-        case 'Q' :
-            status = STATUS_QUIT;
-            break;
-        default :
+    else {
+        string option = inputVec[0];
+        if (option.size() != 1 or inputVec.size() != 1)
             status = STATUS_BAD_ENTRY;
-            break;
+        else
+        {
+            switch (option.c_str()[0]) {
+            case '1' :
+                status = MENU_MANAGEPLAYERS;
+                break;
+            case '2' :
+                status = MENU_MANAGEINFRASTRUCTURES;
+                break;
+            case '3' :
+                status = MENU_AUCTIONHOUSE;
+                break;
+            case '4' :
+                status = MENU_FRIENDLIST;
+                break;
+            case '5' :
+                status = STATUS_DISCONNECT;
+                break;
+            case 'q' :
+            case 'Q' :
+                status = STATUS_QUIT;
+                break;
+            default :
+                status = STATUS_BAD_ENTRY;
+                break;
+            }
         }
     }
 }
@@ -277,6 +278,10 @@ void ManagePlayerState::display()
 
 void ManagePlayerState::parse(vector<string> & inputVec)
 {
+    if (inputVec.empty() == true)
+        status = STATUS_BAD_ENTRY;
+    else {
+    }
 }
 
 
@@ -323,6 +328,10 @@ void ManageInfrastructureState::display()
 
 void ManageInfrastructureState::parse(vector<string> & inputVec)
 {
+    if (inputVec.empty() == true)
+        status = STATUS_BAD_ENTRY;
+    else {
+    }
 }
 
 
@@ -367,6 +376,10 @@ void AuctionHouseState::display()
 
 void AuctionHouseState::parse(vector<string> & inputVec)
 {
+    if (inputVec.empty() == true)
+        status = STATUS_BAD_ENTRY;
+    else {
+    }
 }
 
 
@@ -408,6 +421,10 @@ void FriendListState::display()
 
 void FriendListState::parse(vector<string> & inputVec)
 {
+    if (inputVec.empty() == true)
+        status = STATUS_BAD_ENTRY;
+    else {
+    }
 }
 
 

@@ -20,7 +20,7 @@
 #define MENU_MANAGEPLAYERS 1
 #define MENU_MANAGEINFRASTRUCTURES 2
 #define MENU_AUCTIONHOUSE 3
-#define MENU_FRIENDLIST 4
+#define MENU_CONNECTEDLIST 4
 
 using namespace std;
 
@@ -156,7 +156,6 @@ void MenuState::handleEvents()
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
-    //parse entry here
 }
 void MenuState::logic()
 {
@@ -170,8 +169,8 @@ void MenuState::logic()
     case MENU_AUCTIONHOUSE :
         setNextState(STATE_AUCTION_HOUSE);
         break;
-    case MENU_FRIENDLIST :
-        setNextState(STATE_FRIENDLIST);
+    case MENU_CONNECTEDLIST :
+        setNextState(STATE_CONNECTEDLIST);
         break;
     case STATUS_DISCONNECT : //!! effectuer tout ce qui est nécéssaire pour la déconnection ici
         setNextState(STATE_INTRO);
@@ -188,7 +187,7 @@ void MenuState::display()
         cout<<"Gérer votre équipe : 1"<<endl;
         cout<<"Gérer vos infrastructures : 2"<<endl;
         cout<<"Accéder à l'hotel de vente : 3"<<endl;
-        cout<<"Voir la liste d'amis : 4"<<endl;
+        cout<<"Voir la liste de connectés. : 4"<<endl;
         cout<<"Se déconnecter : 5"<<endl;
         cout<<"Quitter : Q"<<endl;
         cout<<endl;
@@ -221,7 +220,7 @@ void MenuState::parse(vector<string> & inputVec)
                 status = MENU_AUCTIONHOUSE;
                 break;
             case '4' :
-                status = MENU_FRIENDLIST;
+                status = MENU_CONNECTEDLIST;
                 break;
             case '5' :
                 status = STATUS_DISCONNECT;
@@ -251,8 +250,6 @@ void ManagePlayerState::handleEvents()
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
-    //parse entry here
-    status = STATUS_RETURNMENU;
 }
 void ManagePlayerState::logic()
 {
@@ -266,7 +263,7 @@ void ManagePlayerState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
-        cout<<"Manage Players"<<endl;
+        cout<<"Retourner au menu : 1"<<endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
@@ -281,6 +278,19 @@ void ManagePlayerState::parse(vector<string> & inputVec)
     if (inputVec.empty() == true)
         status = STATUS_BAD_ENTRY;
     else {
+        string option = inputVec[0];
+        if (option.size() != 1 or inputVec.size() != 1)
+            status = STATUS_BAD_ENTRY;
+        else {
+            switch (option.c_str()[0]) {
+            case '1' :
+                status = STATUS_RETURNMENU;
+                break;
+            default :
+                status = STATUS_BAD_ENTRY;
+                break;
+            }
+        }
     }
 }
 
@@ -297,8 +307,6 @@ void ManageInfrastructureState::handleEvents()
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
-    //parse entry here
-    status = STATUS_RETURNMENU;
 }
 
 void ManageInfrastructureState::logic()
@@ -314,6 +322,7 @@ void ManageInfrastructureState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
+        cout<<"Infrastructures : "<<endl;
         cout<<"Créer une infirmerie. : 1"<<endl; //pour plus tard, spécialiser les messages (créer -> améliorer)
         cout<<"Créer un shop : 2"<<endl;
         cout<<"Revenir au menu : 3"<<endl;
@@ -331,6 +340,19 @@ void ManageInfrastructureState::parse(vector<string> & inputVec)
     if (inputVec.empty() == true)
         status = STATUS_BAD_ENTRY;
     else {
+        string option = inputVec[0];
+        if (option.size() != 1 or inputVec.size() != 1)
+            status = STATUS_BAD_ENTRY;
+        else {
+            switch (option.c_str()[0]) {
+            case '3' :
+                status = STATUS_RETURNMENU;
+                break;
+            default :
+                status = STATUS_BAD_ENTRY;
+                break;
+            }
+        }
     }
 }
 
@@ -347,8 +369,6 @@ void AuctionHouseState::handleEvents()
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
-    //parse entry here
-    status = STATUS_RETURNMENU;
 }
 
 void AuctionHouseState::logic()
@@ -364,7 +384,8 @@ void AuctionHouseState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
-        cout<<"Auction House"<<endl;
+        cout<<"Hotel des ventes : "<<endl;
+        cout<<"Revenir au menu : 1"<<endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
@@ -379,25 +400,37 @@ void AuctionHouseState::parse(vector<string> & inputVec)
     if (inputVec.empty() == true)
         status = STATUS_BAD_ENTRY;
     else {
+        string option = inputVec[0];
+        if (option.size() != 1 or inputVec.size() != 1)
+            status = STATUS_BAD_ENTRY;
+        else {
+            switch (option.c_str()[0]) {
+            case '1' :
+                status = STATUS_RETURNMENU;
+                break;
+            default :
+                status = STATUS_BAD_ENTRY;
+                break;
+            }
+        }
     }
 }
 
 
-//FriendList--------------------------------------------------------------------------
+//ConnectedList--------------------------------------------------------------------------
 
-FriendListState::FriendListState(Client * client) : GameState(client)
+ConnectedListState::ConnectedListState(Client * client) : GameState(client)
 {
     display();
 }
-void FriendListState::handleEvents()
+void ConnectedListState::handleEvents()
 {
     string inputString;
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
     parse(inputVec);
-    status = STATUS_RETURNMENU;
 }
-void FriendListState::logic()
+void ConnectedListState::logic()
 {
     switch (status) {
     case STATUS_RETURNMENU :
@@ -405,11 +438,12 @@ void FriendListState::logic()
         break;
     }
 }
-void FriendListState::display()
+void ConnectedListState::display()
 {
     switch (status) {
     case STATUS_DEFAULT :
-        cout<<"Friend List"<<endl;
+        cout<<"Joueurs connectés : "<<endl;
+        cout<<"Revenir au menu : 1"<<endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
@@ -419,11 +453,24 @@ void FriendListState::display()
     }
 }
 
-void FriendListState::parse(vector<string> & inputVec)
+void ConnectedListState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
         status = STATUS_BAD_ENTRY;
     else {
+        string option = inputVec[0];
+        if (option.size() != 1 or inputVec.size() != 1)
+            status = STATUS_BAD_ENTRY;
+        else {
+            switch (option.c_str()[0]) {
+            case '1' :
+                status = STATUS_RETURNMENU;
+                break;
+            default :
+                status = STATUS_BAD_ENTRY;
+                break;
+            }
+        }
     }
 }
 

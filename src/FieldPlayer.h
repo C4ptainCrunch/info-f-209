@@ -17,6 +17,7 @@ class FieldPlayer : public Player{
         void catchQuaffle();
         void testMove();
         int getRole();
+        void setRole(int role)
     private:
         int role_;
 

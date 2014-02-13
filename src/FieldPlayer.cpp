@@ -1,5 +1,6 @@
 #include "FieldPlayer.h"
 
+
 FieldPlayer::FieldPlayer(int role): role_(role){}
 
 FieldPlayer::~FieldPlayer(){}

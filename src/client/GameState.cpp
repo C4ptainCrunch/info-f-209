@@ -107,39 +107,42 @@ void UnloggedState::display()
 
 void UnloggedState::parse(vector<string> & inputVec)
 {
-    string option = inputVec[0];
-    if (option.size() != 1)
+    if (inputVec.empty() == true)
         status = STATUS_BAD_ENTRY;
-    else
-    {
-        switch (option.c_str()[0]) {
-        case '1' :
-            if (inputVec.size() == 3) {
-                nameInput = inputVec[1];
-                passInput = inputVec[2];
-                status = UNLOGGED_CONNECT; //demande de connection
-            }
-            else {
-                status = STATUS_BAD_ENTRY;
-            }
-            break;
-        case '2' :
-            if (inputVec.size() == 3) {
-                nameInput = inputVec[1];
-                passInput = inputVec[2];
-                status = UNLOGGED_REGISTER; //demande d'enregistrement
-            }
-            else {
-                status = STATUS_BAD_ENTRY;
-            }
-            break;
-        case 'q' :
-        case 'Q' :
-            status = STATUS_QUIT;
-            break;
-        default :
+    else {
+        string option = inputVec[0];
+        if (option.size() != 1)
             status = STATUS_BAD_ENTRY;
-            break;
+        else {
+            switch (option.c_str()[0]) {
+            case '1' :
+                if (inputVec.size() == 3) {
+                    nameInput = inputVec[1];
+                    passInput = inputVec[2];
+                    status = UNLOGGED_CONNECT; //demande de connection
+                }
+                else {
+                    status = STATUS_BAD_ENTRY;
+                }
+                break;
+            case '2' :
+                if (inputVec.size() == 3) {
+                    nameInput = inputVec[1];
+                    passInput = inputVec[2];
+                    status = UNLOGGED_REGISTER; //demande d'enregistrement
+                }
+                else {
+                    status = STATUS_BAD_ENTRY;
+                }
+                break;
+            case 'q' :
+            case 'Q' :
+                status = STATUS_QUIT;
+                break;
+            default :
+                status = STATUS_BAD_ENTRY;
+                break;
+            }
         }
     }
 }

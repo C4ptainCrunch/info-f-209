@@ -12,7 +12,7 @@ using namespace std;
 
 JsonDict::JsonDict(){}
 
-void JsonDict::add(JsonString key, JsonValue value){
+void JsonDict::add(JsonString key, JsonValue * value){
     dict[(string) key] = value;
 }
 
@@ -122,7 +122,7 @@ JsonDict * createDict(string message, int &i){
         int bak = i;
         value = createValue(message.substr(i, message.length()), i);
         i += bak + 1;
-        r->add(*key, *value);
+        r->add(*key, value);
         while(i < message.length() && !coma){
                 switch(message[i]){
                 case ',':
@@ -164,8 +164,11 @@ JsonString * createString(string message, int &i){
 
 int main(){
     int i = 0;
-    JsonValue * val = createValue("{\"Coucou\":\"char\",\"Cocco\":\"chir ?\",\"sqdfqs\":\"qsdf ?\",\"qsd\":\"qdfqsf ?\"}", i);
+    JsonValue * val = createValue("{\"Coucou\":\"char hgkgjh\",\"Cocco\":\"chir ?\",\"sqdfqs\":\"qsdf ?\",\"qsd\":\"qdfqsf ?\"}", i);
     JsonDict* strptr = dynamic_cast<JsonDict*>(val);
     cout << strptr->dict.size() << endl;
+    JsonValue * c = strptr->dict["Coucou"];
+    JsonString * cstr = dynamic_cast<JsonString*>(c);
+    cout << cstr->value << endl;
     return 0;
 }

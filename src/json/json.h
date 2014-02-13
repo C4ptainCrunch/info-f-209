@@ -19,8 +19,8 @@ class JsonString : public JsonValue {
 class JsonDict : public JsonValue {
     public:
         JsonDict();
-        void add(JsonString key, JsonValue value);
-        std::map<std::string, JsonValue> dict;
+        void add(JsonString key, JsonValue * value);
+        std::map<std::string, JsonValue *> dict;
         void plop(){}
 };
 

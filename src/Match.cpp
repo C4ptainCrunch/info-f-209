@@ -44,16 +44,19 @@ void Match::generateGrid(){
                     grid_[i][j].type = GOAL;//goal central
                 }
                 else if(j == 2*LENGHT/15 or j == 13 * LENGHT/15){
-                    FieldPlayer tempPlayer = FieldPlayer(KEEPER);
-                    grid_[i][j].player = &tempPlayer;
+                    FieldPlayer *tempPlayer = new FieldPlayer(KEEPER);
+                    grid_[i][j].player = tempPlayer;
+                    //cout<<endl<<"Le role des batteurs est : "<<grid_[i][j].player->getRole()<<endl;
                 }
                 else if(j == 7*LENGHT/30 or j == 23*LENGHT/30){
-                    FieldPlayer tempPlayer = FieldPlayer(SEEKER);
-                    grid_[i][j].player = &tempPlayer;
+                    FieldPlayer *tempPlayer = new FieldPlayer(SEEKER);
+                    grid_[i][j].player = tempPlayer;
+                    //cout<<endl<<"Le role des attrapeurs est : "<<grid_[i][j].player->getRole()<<endl;
                 }
                 else if(j == 5*LENGHT/30 or j == 25*LENGHT/30){
-                    FieldPlayer tempPlayer = FieldPlayer(CHASER);
-                    grid_[i][j].player = &tempPlayer;
+                    FieldPlayer *tempPlayer = new FieldPlayer(CHASER);
+                    grid_[i][j].player = tempPlayer;
+                    //cout<<endl<<"Le role des poursuiveurs est : "<<grid_[i][j].player->getRole()<<endl;
                 }
             }
             else if (i == WIDTH/2 - WIDTH/15 or i== WIDTH/2 + WIDTH/15){
@@ -61,14 +64,15 @@ void Match::generateGrid(){
                     grid_[i][j].type = GOAL;//goals latéraux
                 }
                 else if (j == 5*LENGHT/30 or j == 25*LENGHT/30){
-                    FieldPlayer tempPlayer = FieldPlayer(CHASER);
-                    grid_[i][j].player = &tempPlayer;
+                    FieldPlayer *tempPlayer = new FieldPlayer(CHASER);
+                    grid_[i][j].player = tempPlayer;
+                    //cout<<endl<<"Le role des poursuiveurs est : "<<grid_[i][j].player->getRole()<<endl;
                 }
             }
             else if (i == WIDTH/2 - WIDTH/30 or i == WIDTH/2 + WIDTH/30){
                 if(j == 6*LENGHT/30 or j == 24*LENGHT/30){
-                    FieldPlayer tempPlayer = FieldPlayer(BEATER);
-                    grid_[i][j].player = &tempPlayer;
+                    FieldPlayer *tempPlayer = new FieldPlayer(BEATER);
+                    grid_[i][j].player = tempPlayer;
                 }
             }
     //--------------------------PLAYERS----------------------------------
@@ -93,7 +97,7 @@ string Match::print(){ //FOR TEST PURPOSES
             if (grid_[i][j].type == USABLE){
                 
                 if (grid_[i][j].player != 0){
-                /*
+                
                     if (grid_[i][j].player->getRole() == KEEPER){
                         c+= "K ";
                     }
@@ -103,9 +107,10 @@ string Match::print(){ //FOR TEST PURPOSES
                     else if(grid_[i][j].player->getRole() == SEEKER){
                         c+= "S ";
                     }
-                    else if(grid_[i][j].player->getRole() == BEATER){*/
-                    c+= "B ";
-                    //}
+                    else if(grid_[i][j].player->getRole() == BEATER){
+                        c+= "B ";
+                    }
+                    delete grid_[i][j].player;
                 }
                 else{
                     c += "\u2B21 ";

@@ -84,7 +84,6 @@ JsonDict * createDict(string message, int &i){
         bool colon = false;
         bool coma = false;
         bool gotkey = false;
-
         while(i < message.length()){
             switch(message[i]){
                 case '"':
@@ -106,6 +105,7 @@ JsonDict * createDict(string message, int &i){
             }
             i++;
         }
+        i++;
         while(i < message.length() && !colon){
                 switch(message[i]){
                 case ':':
@@ -119,25 +119,33 @@ JsonDict * createDict(string message, int &i){
             }
             i++;
         }
+        int bak = i;
         value = createValue(message.substr(i, message.length()), i);
+        i += bak + 1;
         r->add(*key, *value);
         while(i < message.length() && !coma){
                 switch(message[i]){
                 case ',':
                     coma = true;
+                    i++;
                     break;
                 case '\n':
                 case ' ':
+                    break;
+                case '}':
                     break;
                 default:
                     throw 1;
             }
             i++;
         }
+        i--;
     }
 }
 
 JsonString * createString(string message, int &i){
+    int j = i;
+    i = 0;
     while(i < message.length()){
         switch(message[i]){
         case '\\':
@@ -145,6 +153,7 @@ JsonString * createString(string message, int &i){
             break;
         case '"':
             i++;
+            i += j;
             return new JsonString(message.substr(0, i - 1));
             break;
         }
@@ -155,8 +164,8 @@ JsonString * createString(string message, int &i){
 
 int main(){
     int i = 0;
-    JsonValue * val = createValue("\"Coucou, tu veux voir ma bite ?\"", i);
-    JsonString* strptr = dynamic_cast<JsonString*>(val);
-    cout << strptr->value << endl;
+    JsonValue * val = createValue("{\"Coucou\":\"char\",\"Cocco\":\"chir ?\",\"sqdfqs\":\"qsdf ?\",\"qsd\":\"qdfqsf ?\"}", i);
+    JsonDict* strptr = dynamic_cast<JsonDict*>(val);
+    cout << strptr->dict.size() << endl;
     return 0;
 }

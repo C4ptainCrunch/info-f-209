@@ -39,18 +39,42 @@ JsonValue * createNumber(string message, int &i){
     return new JsonValue();
 }
 
-JsonValue * createValue(string message, int &i){
-    i = 0;
+int skip_whitespace(string message){
+    int i = 0;
     while(i < message.length()){
         switch(message[i]){
+            case '\n':
+            case ' ':
+                break;
+            default:
+                return i;
+        }
+        i++;
+    }
+    throw "a";
+}
+
+JsonValue * createValue(string message, int &i){
+    int bak = i;
+    i = 0;
+    string s;
+    while(i < message.length()){
+        i += skip_whitespace(message.substr(i, message.length()));
+        switch(message[i]){
             case '{':
-                return createDict(message.substr(i + 1, message.length()), i);
+                s = message.substr(i + 1, message.length());
+                i = bak;
+                return createDict(s, i);
                 break;
             case '[':
-                return createList(message.substr(i + 1, message.length()), i);
+                s = message.substr(i + 1, message.length());
+                i = bak;
+                return createList(s, i);
                 break;
             case '"':
-                return createString(message.substr(i + 1, message.length()), i);
+                s = message.substr(i + 1, message.length());
+                i = bak;
+                return createString(s, i);
                 break;
             case '0':
             case '1':
@@ -63,10 +87,6 @@ JsonValue * createValue(string message, int &i){
             case '8':
             case '9':
                 return createNumber(message.substr(i, message.length()), i);
-                break;
-            case '\n':
-            case ' ':
-                i++;
                 break;
             default:
                 throw 1;
@@ -85,13 +105,11 @@ JsonDict * createDict(string message, int &i){
         bool coma = false;
         bool gotkey = false;
         while(i < message.length()){
+            i += skip_whitespace(message.substr(i, message.length()));
             switch(message[i]){
                 case '"':
                     key = createString(message.substr(i + 1, message.length()), i);
                     gotkey = true;
-                    break;
-                case '\n':
-                case ' ':
                     break;
                 case '}':
                     i++;
@@ -107,30 +125,27 @@ JsonDict * createDict(string message, int &i){
         }
         i++;
         while(i < message.length() && !colon){
-                switch(message[i]){
+            i += skip_whitespace(message.substr(i, message.length()));
+            switch(message[i]){
                 case ':':
                     colon = true;
-                    break;
-                case '\n':
-                case ' ':
                     break;
                 default:
                     throw 1;
             }
             i++;
         }
-        int bak = i;
+
+        i += skip_whitespace(message.substr(i, message.length()));
 
         value = createValue(message.substr(i, message.length()), i);
-        i += bak + 1;
+        i++;
         r->add(*key, value);
         while(i < message.length() && !coma){
-                switch(message[i]){
+            i += skip_whitespace(message.substr(i, message.length()));
+            switch(message[i]){
                 case ',':
                     coma = true;
-                    break;
-                case '\n':
-                case ' ':
                     break;
                 case '}':
                     i++;
@@ -144,8 +159,9 @@ JsonDict * createDict(string message, int &i){
     }
 }
 
+
 JsonString * createString(string message, int &i){
-    int j = i;
+    int bak = i;
     i = 0;
     while(i < message.length()){
         switch(message[i]){
@@ -155,7 +171,7 @@ JsonString * createString(string message, int &i){
         case '"':
             i++;
             string s = message.substr(0, i - 1);
-            i += j;
+            i += bak;
             return new JsonString(s);
             break;
         }
@@ -166,7 +182,7 @@ JsonString * createString(string message, int &i){
 
 int main(){
     int i = 0;
-    JsonValue * val = createValue("{\"cle1\":\"val1\",\"cle2\":\"val2\",\"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
+    JsonValue * val = createValue("{\"cle1\" :   \"val1\" , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
     JsonDict* strptr = dynamic_cast<JsonDict*>(val);
     cout << "Len=" << strptr->dict.size() << endl;
     JsonValue * c = strptr->dict["cle3"];

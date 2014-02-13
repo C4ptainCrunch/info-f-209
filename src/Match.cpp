@@ -14,12 +14,34 @@ Match::Match(Club& host, Club& guest){
     quaffle_ = Quaffle();
     budgers_[0] = Budger();
     budgers_[1] = Budger();
+    generateFieldPlayers(); 
     generateGrid();
 
 }
 
 
 Match::~Match(){}
+
+void Match::generateFieldPlayers(){
+    for (int i = 0; i< 2 ;++i){
+        for (int j = 0; j < 7; ++j){
+                teams_[i][j] = clubs_[i]->getTeam()->getPlayers()[j];
+            if (j ==0){
+                teams_[i][j].setRole(KEEPER);
+            }
+            else if (j>0 and j<=3){
+                teams_[i][j].setRole(CHASER);
+            }
+            else if (j>3 and j<=5){
+                teams_[i][j].setRole(BEATER);
+            }
+            else{
+                teams_[i][j].setRole(SEEKER);
+            }
+        }
+
+    }
+}
 
 void Match::generateGrid(){
     double diameterFactor = 46.0/100.0;// Normalement c'est la moitié de la longueur/largeur 

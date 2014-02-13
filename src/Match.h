@@ -15,7 +15,8 @@
 
 enum { WIDTH = 30, LENGHT = 64};
 
-enum { KEEPER = 0, CHASER = 1, BEATER = 2, SEEKER = 3};
+enum { KEEPER = 0, CHASER = 1, BEATER = 2, SEEKER = 3};// 1 KEEPER, 3 CHASERS, 2 BEATERS, 1 SEEKER
+
 
 class Match{
 
@@ -27,9 +28,11 @@ class Match{
         void moveBalls();
         bool checkEndOfMatch();
         int* isInTheWay(int fromX,int fromY,int toX, int toY);
+        void generateFieldPlayers();
         std::string print();//FOR TESTS
         void generateGrid();//TO SET PRIVATE AFTER TESTS
     private:
+        FieldPlayer teams_[2][7];
         int score_[2];
         Club *clubs_[2];
         Case grid_[WIDTH][LENGHT];

@@ -19,14 +19,14 @@ void connection(const int socket){
 
 }
 
-/*void connection(const int fd, const JsonObject * usersInfos){
+/*void connection(const int fd, const JsonNode * usersInfos){
     sendTo(fd, "Hello, bite!\n");
     bool quit=false
     while(! quit)
     {
         std::string ping = recieveFrom(fd);
         sendTo(fd, ping);
-        JsonObject json(ping);
+        JsonNode json(ping);
         Thread thread=Thread(fd, usersInfos);
         if (json.getKey()=="user.login")
         {

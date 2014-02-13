@@ -12,7 +12,7 @@ void logIn(std::String message, UserHandler * thread)  // message = "user:passwo
     std::String content;
     if (1){ // test TO DO : delete la ligne
     //if(readFile(filename, &content) == 0){
-        //JsonObject json(content);
+        //JsonNode json(content);
         //TO DO : récupérer info de json
         Club * machin = new Club();
         Manager * user = new Manager("Kong", userName, "Banane", machin);
@@ -40,7 +40,7 @@ void signUp(char* message, Thread * thread)
     std::String content;
     if (1){ // test TO DO : delete la ligne
     //if(readFile(filename, &content) == -1 and errno=EIO){
-        //JsonObject json(content);
+        //JsonNode json(content);
         //TO DO : récupérer info de json
         Club * club = new Club();
         Manager * user = new Manager("Kong", userName, "Banane", club);

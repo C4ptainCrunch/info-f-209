@@ -1,73 +1,49 @@
-// ici, reponseMessage est utilisé pour la communication entre thread (pour les erreurs)
+// TO DO : mettre communication entre thread (pour les erreurs)
 
-void inviteToMatch(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message);
+void inviteToMatch(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void reponseToMatchInvitation(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message); 
+void reponseToMatchInvitation(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void viewUserList(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message);     
+void viewUserList(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void goToManagement(char * message, Thread * thread) //amène à l'écran de gestion du club
-{
-    char * reponseMessage;
-    JsonObject json(message); 
+void goToManagement(JsonObject * json, UserHandler * thread){
+    char * reponse;
+} //amène à l'écran de gestion du club
+
+void buildNewInstallation(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void buildNewInstallation(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message); 
+void manageInstallation(JsonObject * json, UserHandler * thread){
+    char * reponse;
+} //amène à la gestion de l'installation
+
+void manageTeam(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void manageInstallation(char * message, Thread * thread) //amène à la gestion de l'installation
-{
-    char * reponseMessage;
-    JsonObject json(message); 
+void goToAuctionRoom(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void manageTeam()
-{
-    char * reponseMessage;
-    JsonObject json(message); 
+void viewAuctions(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void goToAuctionRoom(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message); 
+void bidToAuction(JsonObject * json, UserHandler * thread){
+    char * reponse;
+} // nécessite un id par enchère. l'id de l'enchère doit etre mentionné dans le message
+
+void viewUserBids(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }
 
-void viewAuctions(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message); 
-}
-
-void bidToAuction(char * message, Thread * thread) // nécessite un id par enchère. l'id de l'enchère doit etre mentionné dans le message
-{
-    char * reponseMessage;
-    JsonObject json(message); 
-}
-
-void viewUserBids(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message); 
-}
-
-void makeAuction(char * message, Thread * thread)
-{
-    char * reponseMessage;
-    JsonObject json(message);     
+void makeAuction(JsonObject * json, UserHandler * thread){
+    char * reponse;
 }

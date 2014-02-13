@@ -10,6 +10,26 @@
 
 using namespace std;
 
+int skip_whitespace(string message, int start){
+    int ret = 0;
+    while(start + ret  < message.length()){
+        switch(message[start + ret]){
+            case '\n':
+            case ' ':
+                break;
+            default:
+                return ret;
+        }
+        ret++;
+    }
+    throw "a";
+}
+
+string cut_from(string message, int from){
+    return message.substr(from, message.length());
+}
+
+
 JsonDict::JsonDict(){}
 
 void JsonDict::add(JsonString key, JsonValue * value){
@@ -39,40 +59,25 @@ JsonValue * createNumber(string message, int &i){
     return new JsonValue();
 }
 
-int skip_whitespace(string message){
-    int i = 0;
-    while(i < message.length()){
-        switch(message[i]){
-            case '\n':
-            case ' ':
-                break;
-            default:
-                return i;
-        }
-        i++;
-    }
-    throw "a";
-}
-
 JsonValue * createValue(string message, int &i){
     int bak = i;
     i = 0;
     string s;
     while(i < message.length()){
-        i += skip_whitespace(message.substr(i, message.length()));
+        i += skip_whitespace(message, i);
         switch(message[i]){
             case '{':
-                s = message.substr(i + 1, message.length());
+                s = cut_from(message, i + 1 );
                 i = bak;
                 return createDict(s, i);
                 break;
             case '[':
-                s = message.substr(i + 1, message.length());
+                s = cut_from(message, i + 1 );
                 i = bak;
                 return createList(s, i);
                 break;
             case '"':
-                s = message.substr(i + 1, message.length());
+                s = cut_from(message, i + 1 );
                 i = bak;
                 return createString(s, i);
                 break;
@@ -86,7 +91,7 @@ JsonValue * createValue(string message, int &i){
             case '7':
             case '8':
             case '9':
-                return createNumber(message.substr(i, message.length()), i);
+                return createNumber(cut_from(message, i), i);
                 break;
             default:
                 throw 1;
@@ -105,10 +110,10 @@ JsonDict * createDict(string message, int &i){
         bool coma = false;
         bool gotkey = false;
         while(i < message.length()){
-            i += skip_whitespace(message.substr(i, message.length()));
+            i += skip_whitespace(message, i);
             switch(message[i]){
                 case '"':
-                    key = createString(message.substr(i + 1, message.length()), i);
+                    key = createString(cut_from(message, i + 1 ), i);
                     gotkey = true;
                     break;
                 case '}':
@@ -125,7 +130,7 @@ JsonDict * createDict(string message, int &i){
         }
         i++;
         while(i < message.length() && !colon){
-            i += skip_whitespace(message.substr(i, message.length()));
+            i += skip_whitespace(message, i);
             switch(message[i]){
                 case ':':
                     colon = true;
@@ -136,13 +141,13 @@ JsonDict * createDict(string message, int &i){
             i++;
         }
 
-        i += skip_whitespace(message.substr(i, message.length()));
+        i += skip_whitespace(message, i);
 
-        value = createValue(message.substr(i, message.length()), i);
+        value = createValue(cut_from(message, i), i);
         i++;
         r->add(*key, value);
         while(i < message.length() && !coma){
-            i += skip_whitespace(message.substr(i, message.length()));
+            i += skip_whitespace(message, i);
             switch(message[i]){
                 case ',':
                     coma = true;

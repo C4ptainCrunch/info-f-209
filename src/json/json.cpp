@@ -120,6 +120,7 @@ JsonDict * createDict(string message, int &i){
             i++;
         }
         int bak = i;
+
         value = createValue(message.substr(i, message.length()), i);
         i += bak + 1;
         r->add(*key, value);
@@ -153,8 +154,9 @@ JsonString * createString(string message, int &i){
             break;
         case '"':
             i++;
+            string s = message.substr(0, i - 1);
             i += j;
-            return new JsonString(message.substr(0, i - 1));
+            return new JsonString(s);
             break;
         }
     i++;
@@ -164,10 +166,10 @@ JsonString * createString(string message, int &i){
 
 int main(){
     int i = 0;
-    JsonValue * val = createValue("{\"Coucou\":\"char hgkgjh\",\"Cocco\":\"chir ?\",\"sqdfqs\":\"qsdf ?\",\"qsd\":\"qdfqsf ?\"}", i);
+    JsonValue * val = createValue("{\"cle1\":\"val1\",\"cle2\":\"val2\",\"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
     JsonDict* strptr = dynamic_cast<JsonDict*>(val);
-    cout << strptr->dict.size() << endl;
-    JsonValue * c = strptr->dict["Coucou"];
+    cout << "Len=" << strptr->dict.size() << endl;
+    JsonValue * c = strptr->dict["cle3"];
     JsonString * cstr = dynamic_cast<JsonString*>(c);
     cout << cstr->value << endl;
     return 0;

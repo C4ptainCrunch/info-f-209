@@ -127,19 +127,19 @@ JsonDict * createDict(string message, int &i){
                 switch(message[i]){
                 case ',':
                     coma = true;
-                    i++;
                     break;
                 case '\n':
                 case ' ':
                     break;
                 case '}':
+                    i++;
+                    return r;
                     break;
                 default:
                     throw 1;
             }
             i++;
         }
-        i--;
     }
 }
 

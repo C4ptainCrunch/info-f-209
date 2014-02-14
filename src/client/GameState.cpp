@@ -15,14 +15,14 @@ enum STATUS
     STATUS_RETURNMENU = -3,
     STATUS_QUIT = -4
 };
-//Valeurs pour unlogged :
+
 enum UNLOGGED
 {
     UNLOGGED_CONNECTED = 1,
     UNLOGGED_CONNECT = 2,
     UNLOGGED_REGISTER = 3
 };
-//Valeurs pour menu :
+
 enum MENU
 {
     MENU_MANAGEPLAYERS = 1,
@@ -49,7 +49,7 @@ void GameState::setNextState(int state)
 
 IntroState::IntroState(Client * client) : GameState(client)
 {
-    cout<<"BienvenuS dans le systme !"<<endl;
+    cout<<"BienvenuS dans le systme !"<<endl; //Rework
 }
 void IntroState::handleEvents() {}
 void IntroState::logic()
@@ -491,20 +491,16 @@ void InGameState::handleEvents() {}
 void InGameState::logic() {}
 void InGameState::display() {}
 
-
-vector<string> &split(const string &s, char delim, vector<string> &elems)
+//Utilitaire--------------------------------------------------------------------------
+vector<string> split(const string &text, char delim)
 {
-    stringstream ss(s);
+    stringstream ss(text);
     string item;
+    vector<string> elems;
+
     while (getline(ss, item, delim)) {
         elems.push_back(item);
     }
-    return elems;
-}
 
-vector<string> split(const string &s, char delim)
-{
-    vector<string> elems;
-    split(s, delim, elems);
     return elems;
 }

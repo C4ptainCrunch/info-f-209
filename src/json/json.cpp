@@ -58,7 +58,28 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
 
 // String
 
+string replaces(string str, string find, string replace){
+    if (str.length() < find.length())
+        return str;
+    size_t pos = str.find(find);
+    if(pos == string::npos)
+        return str;
+    return str.replace(pos,find.length(),replace);
+}
+
+string replaces(string str, string find, char replace){
+    return replaces(str, find, string(1, replace));
+}
+
 JsonString::JsonString(string val){
+    val = replaces(val, "\\\\", '\\');
+    val = replaces(val, "\\\"", '"');
+    val = replaces(val, "\\t", '\t');
+    val = replaces(val, "\\n", '\n');
+    val = replaces(val, "\\r", '\r');
+    val = replaces(val, "\\b", '\b');
+    val = replaces(val, "\\f", '\f');
+    // TODO : replace \u four-hex-digits
     value = val;
 }
 

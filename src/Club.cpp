@@ -1,4 +1,5 @@
 #include "Club.h"
+#include <iostream>
 
 using namespace std;
 
@@ -6,11 +7,11 @@ Club::Club(): money_(0), installations_()
 {
 
     for (int i = 0; i<7; ++i){
+        players_.push_back(NonFieldPlayer());
 
-        players_[i] = NonFieldPlayer();
-        team_->changePlayer(i, players_[i]);
+        team_->setPlayer(players_.at((unsigned int)i), i);
+
     }
-    // TODO: fill team_ and players_ with players.
 }
 
 Club::Club(int money, Installation* installations, Team& team, vector<NonFieldPlayer> players): money_(money), players_(players)
@@ -35,8 +36,11 @@ int Club::getMoney()
 
 int Club::getLevel()
 {
-    // TODO
-    return 0;
+    int level = 0;
+    for (int i = 0; i<5; ++i){
+        level += installations_[i].getLevel();
+    }
+    return level;
 }
 
 Team* Club::getTeam()

@@ -102,8 +102,4 @@ public:
     virtual void display();
 };
 
-//Utilitaire :
-
-std::vector<std::string> split(const std::string &text, char delim);
-
 #endif //GAME_STATE_H

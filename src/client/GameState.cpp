@@ -1,9 +1,9 @@
 #include <iostream>
-#include <sstream>
 
 #include "Socket.h"
 #include "client.h"
 #include "GameState.h"
+#include "utilitary.h"
 
 //Les définitions ci dessous sont toutes les valeurs que peut avoir l'attribut 'status' de la class de base GameState.
 //Valeurs générales :
@@ -480,17 +480,3 @@ InGameState::InGameState(Client * client) : GameState(client) {}
 void InGameState::handleEvents() {}
 void InGameState::logic() {}
 void InGameState::display() {}
-
-//Utilitaire--------------------------------------------------------------------------
-vector<string> split(const string &text, char delim)
-{
-    stringstream ss(text);
-    string item;
-    vector<string> elems;
-
-    while (getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-
-    return elems;
-}

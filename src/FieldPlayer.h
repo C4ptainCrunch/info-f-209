@@ -2,13 +2,16 @@
 #define FIELDPLAYER_H
 
 #include "Player.h"
+#include "NonFieldPlayer.h"
 
 
 class FieldPlayer : public Player{
 
     public:
         FieldPlayer(int role);
+        FieldPlayer();
         ~FieldPlayer();
+        FieldPlayer(NonFieldPlayer& nonFieldPlayer, int role);
         FieldPlayer& operator=(Player& player);
         void move();
         void hitBudger();

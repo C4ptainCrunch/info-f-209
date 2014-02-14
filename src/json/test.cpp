@@ -24,7 +24,7 @@ int listmain(){
 // -----------
 int dictmain(){
     int i = 0;
-    string message = "{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}";
+    string message = "{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val\\\\3bis\"}";
 
     JsonDict* dict_p = JDICT(JsonValue::fromString(message, i));
     cout << "Len=" << dict_p->size() << endl;

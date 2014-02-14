@@ -8,41 +8,14 @@
 
 using namespace std;
 
+// Value
 
-JsonDict::JsonDict(){}
-
-void JsonDict::add(JsonString key, JsonValue * value){
-    dict[(string) key] = value;
+JsonValue * JsonValue::fromString(std::string message){
+    int i = 0;
+    return JsonValue::fromString(message, i);
 }
 
-
-JsonList::JsonList(){}
-
-void JsonList::add(JsonValue * value){
-    content.push_back(value);
-}
-
-JsonString::JsonString(){}
-
-JsonString::JsonString(string val){
-    value = val;
-}
-
-JsonString::operator std::string() const{
-    return value;
-}
-
-JsonString JsonString::operator=(const JsonString &str){
-    value = str.value;
-    return *this;
-}
-
-
-JsonValue * createNumber(string message, int &i){
-    return new JsonValue();
-}
-
-JsonValue * createValue(string message, int &i){
+JsonValue * JsonValue::fromString(std::string message, int &i){
     int bak = i;
     i = 0;
     string s;
@@ -52,17 +25,17 @@ JsonValue * createValue(string message, int &i){
             case '{':
                 s = cut_from(message, i + 1 );
                 i = bak;
-                return createDict(s, i);
+                return JsonDict::fromString(s, i);
                 break;
             case '[':
                 s = cut_from(message, i + 1 );
                 i = bak;
-                return createList(s, i);
+                return JsonList::fromString(s, i);
                 break;
             case '"':
                 s = cut_from(message, i + 1 );
                 i = bak;
-                return createString(s, i);
+                return JsonString::fromString(s, i);
                 break;
             case '0':
             case '1':
@@ -83,61 +56,27 @@ JsonValue * createValue(string message, int &i){
     throw 1;
 }
 
-JsonDict * createDict(string message, int &i){
-    JsonString * key;
-    JsonValue * value;
-    bool colon = false;
-    bool coma = false;
+// String
 
-    JsonDict * r = new JsonDict();
-    i = skip_whitespace(message, 0);
-
-
-    while(1){
-        if(message[i] == '}'){
-            i++;
-            return r;
-        }
-        i += skip_whitespace(message, i);
-        key = createString(cut_from(message, i + 1 ), i);
-        i++;
-        i += skip_colon(message, i);
-        value = createValue(cut_from(message, i), i);
-        i++;
-        r->add(*key, value);
-        i += skip_whitespace(message, i);
-        if(message[i] == ','){
-            i++;
-        }
-    }
+JsonString::JsonString(string val){
+    value = val;
 }
 
-JsonList * createList(string message, int &i){
-    JsonList * r = new JsonList();
-    i = 0;
-    while(1){
-        JsonValue * value;
-        i += skip_whitespace(message, i);
-        value = createValue(cut_from(message, i), i);
-        i++;
-        r->add(value);
-        i += skip_whitespace(message, i);
-        switch(message[i]){
-            case ',':
-                i++;
-                break;
-            case ']':
-                i++;
-                return r;
-                break;
-            default:
-                throw 1;
-        }
-    }
+JsonString::operator std::string() const{
+    return value;
 }
 
+JsonString JsonString::operator=(const JsonString &str){
+    value = str.value;
+    return *this;
+}
 
-JsonString * createString(string message, int &i){
+JsonString * JsonString::fromString(std::string message){
+    int i = 0;
+    return JsonString::fromString(message, i);
+}
+
+JsonString * JsonString::fromString(std::string message, int &i){
     int bak = i;
     i = 0;
     while(i < message.length()){
@@ -155,4 +94,105 @@ JsonString * createString(string message, int &i){
     i++;
     }
     throw 1;
+
+}
+
+// Dict
+
+JsonDict * JsonDict::fromString(std::string message){
+    int i = 0;
+    return JsonDict::fromString(message, i);
+}
+
+JsonDict * JsonDict::fromString(std::string message, int &i){
+    JsonString * key;
+    JsonValue * value;
+    bool colon = false;
+    bool coma = false;
+
+    JsonDict * r = new JsonDict();
+    i = skip_whitespace(message, 0);
+
+
+    while(1){
+        if(message[i] == '}'){
+            i++;
+            return r;
+        }
+        i += skip_whitespace(message, i);
+        key = JsonString::fromString(cut_from(message, i + 1 ), i);
+        i++;
+        i += skip_colon(message, i);
+        value = JsonValue::fromString(cut_from(message, i), i);
+        i++;
+        r->add(*key, value);
+        i += skip_whitespace(message, i);
+        if(message[i] == ','){
+            i++;
+        }
+    }
+}
+
+void JsonDict::add(JsonString key, JsonValue * value){
+    dict[(string) key] = value;
+}
+
+size_t JsonDict::size(){
+    return dict.size();
+}
+
+JsonValue * JsonDict::operator[](const std::string &str){
+    return this->dict[str];
+}
+
+
+
+// List
+
+JsonList * JsonList::fromString(std::string message){
+    int i = 0;
+    return JsonList::fromString(message, i);
+}
+
+JsonList * JsonList::fromString(std::string message, int &i){
+    JsonList * r = new JsonList();
+    i = 0;
+    while(1){
+        JsonValue * value;
+        i += skip_whitespace(message, i);
+        value = JsonValue::fromString(cut_from(message, i), i);
+        i++;
+        r->add(value);
+        i += skip_whitespace(message, i);
+        switch(message[i]){
+            case ',':
+                i++;
+                break;
+            case ']':
+                i++;
+                return r;
+                break;
+            default:
+                throw 1;
+        }
+    }
+}
+
+void JsonList::add(JsonValue * value){
+    content.push_back(value);
+}
+
+size_t JsonList::size(){
+    return content.size();
+}
+
+JsonValue * JsonList::operator[](const int &i){
+    return this->content.at(i);
+}
+
+
+// Functions
+
+JsonValue * createNumber(string message, int &i){
+    return new JsonValue();
 }

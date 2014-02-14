@@ -9,16 +9,14 @@ using namespace std;
 Match::Match(Club& host, Club& guest){
     clubs_[0] = &host;
     clubs_[1] = &guest;
-
-    cout<<"AVANT"<<endl;
+    
     for (int i = 0; i< 2 ;++i){
         cout<<"i : "<<i<<endl;
         for (int j = 0; j < 7; ++j){
             cout<<"j : "<<j;
-            teams_[i][j] = FieldPlayer(clubs_[i]->getTeam()->getPlayers()[j],0);
+            //teams_[i][j] = FieldPlayer(clubs_[i]->getTeam()->getPlayers()[j],0); TO IMPROVE
         }
     }
-    cout<<"APRES"<<endl;
 
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();

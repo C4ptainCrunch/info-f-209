@@ -33,15 +33,9 @@ enum MENU
 
 using namespace std;
 
-GameState::GameState(Client * client)
-{
-    client_ = client;
-    status = STATUS_DEFAULT;
-}
+GameState::GameState(Client * client) : client_(client), status_(STATUS_DEFAULT) {}
 
 GameState::~GameState() {}
-
-//shamir.partou.se
 
 IntroState::IntroState(Client * client) : GameState(client)
 {
@@ -73,10 +67,10 @@ void UnloggedState::handleEvents()
 
 void UnloggedState::logic()
 {
-    switch (status) {
+    switch (status_) {
     case UNLOGGED_CONNECT :
         //envoyer et traiter les données du serveur.
-        status = UNLOGGED_CONNECTED;
+        status_ = UNLOGGED_CONNECTED;
         client_->setNextState(STATE_MENU);
         break;
     case UNLOGGED_REGISTER :
@@ -89,7 +83,7 @@ void UnloggedState::logic()
 }
 void UnloggedState::display()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_DEFAULT :
         cout<<"Se connecter : 1 - Nom d'utilisateur - Mot de passe"<<endl;
         cout<<"S'enregistrer : 2 - Nom d'utilisateur - Mot de passe"<<endl;
@@ -111,39 +105,39 @@ void UnloggedState::display()
 void UnloggedState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
-        status = STATUS_BAD_ENTRY;
+        status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
         if (option.size() != 1)
-            status = STATUS_BAD_ENTRY;
+            status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
             case '1' :
                 if (inputVec.size() == 3) {
                     nameInput = inputVec[1];
                     passInput = inputVec[2];
-                    status = UNLOGGED_CONNECT; //demande de connection
+                    status_ = UNLOGGED_CONNECT; //demande de connection
                 }
                 else {
-                    status = STATUS_BAD_ENTRY;
+                    status_ = STATUS_BAD_ENTRY;
                 }
                 break;
             case '2' :
                 if (inputVec.size() == 3) {
                     nameInput = inputVec[1];
                     passInput = inputVec[2];
-                    status = UNLOGGED_REGISTER; //demande d'enregistrement
+                    status_ = UNLOGGED_REGISTER; //demande d'enregistrement
                 }
                 else {
-                    status = STATUS_BAD_ENTRY;
+                    status_ = STATUS_BAD_ENTRY;
                 }
                 break;
             case 'q' :
             case 'Q' :
-                status = STATUS_QUIT;
+                status_ = STATUS_QUIT;
                 break;
             default :
-                status = STATUS_BAD_ENTRY;
+                status_ = STATUS_BAD_ENTRY;
                 break;
             }
         }
@@ -164,7 +158,7 @@ void MenuState::handleEvents()
 }
 void MenuState::logic()
 {
-    switch (status) {
+    switch (status_) {
     case MENU_MANAGEPLAYERS :
         client_->setNextState(STATE_MANAGE_PLAYERS);
         break;
@@ -187,7 +181,7 @@ void MenuState::logic()
 }
 void MenuState::display()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_DEFAULT :
         cout<<"Gérer votre équipe : 1"<<endl;
         cout<<"Gérer vos infrastructures : 2"<<endl;
@@ -207,35 +201,35 @@ void MenuState::display()
 void MenuState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
-        status = STATUS_BAD_ENTRY;
+        status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
         if (option.size() != 1 or inputVec.size() != 1)
-            status = STATUS_BAD_ENTRY;
+            status_ = STATUS_BAD_ENTRY;
         else
         {
             switch (option.c_str()[0]) {
             case '1' :
-                status = MENU_MANAGEPLAYERS;
+                status_ = MENU_MANAGEPLAYERS;
                 break;
             case '2' :
-                status = MENU_MANAGEINFRASTRUCTURES;
+                status_ = MENU_MANAGEINFRASTRUCTURES;
                 break;
             case '3' :
-                status = MENU_AUCTIONHOUSE;
+                status_ = MENU_AUCTIONHOUSE;
                 break;
             case '4' :
-                status = MENU_CONNECTEDLIST;
+                status_ = MENU_CONNECTEDLIST;
                 break;
             case '5' :
-                status = STATUS_DISCONNECT;
+                status_ = STATUS_DISCONNECT;
                 break;
             case 'q' :
             case 'Q' :
-                status = STATUS_QUIT;
+                status_ = STATUS_QUIT;
                 break;
             default :
-                status = STATUS_BAD_ENTRY;
+                status_ = STATUS_BAD_ENTRY;
                 break;
             }
         }
@@ -258,7 +252,7 @@ void ManagePlayerState::handleEvents()
 }
 void ManagePlayerState::logic()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_RETURNMENU :
         client_->setNextState(STATE_MENU);
         break;
@@ -266,7 +260,7 @@ void ManagePlayerState::logic()
 }
 void ManagePlayerState::display()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_DEFAULT :
         cout<<"Retourner au menu : 1"<<endl;
         cout<<endl;
@@ -281,18 +275,18 @@ void ManagePlayerState::display()
 void ManagePlayerState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
-        status = STATUS_BAD_ENTRY;
+        status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
         if (option.size() != 1 or inputVec.size() != 1)
-            status = STATUS_BAD_ENTRY;
+            status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
             case '1' :
-                status = STATUS_RETURNMENU;
+                status_ = STATUS_RETURNMENU;
                 break;
             default :
-                status = STATUS_BAD_ENTRY;
+                status_ = STATUS_BAD_ENTRY;
                 break;
             }
         }
@@ -316,7 +310,7 @@ void ManageInfrastructureState::handleEvents()
 
 void ManageInfrastructureState::logic()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_RETURNMENU :
         client_->setNextState(STATE_MENU);
         break;
@@ -325,7 +319,7 @@ void ManageInfrastructureState::logic()
 
 void ManageInfrastructureState::display()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_DEFAULT :
         cout<<"Infrastructures : "<<endl;
         cout<<"Créer une infirmerie. : 1"<<endl; //pour plus tard, spécialiser les messages (créer -> améliorer)
@@ -343,18 +337,18 @@ void ManageInfrastructureState::display()
 void ManageInfrastructureState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
-        status = STATUS_BAD_ENTRY;
+        status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
         if (option.size() != 1 or inputVec.size() != 1)
-            status = STATUS_BAD_ENTRY;
+            status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
             case '3' :
-                status = STATUS_RETURNMENU;
+                status_ = STATUS_RETURNMENU;
                 break;
             default :
-                status = STATUS_BAD_ENTRY;
+                status_ = STATUS_BAD_ENTRY;
                 break;
             }
         }
@@ -378,7 +372,7 @@ void AuctionHouseState::handleEvents()
 
 void AuctionHouseState::logic()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_RETURNMENU :
         client_->setNextState(STATE_MENU);
         break;
@@ -387,7 +381,7 @@ void AuctionHouseState::logic()
 
 void AuctionHouseState::display()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_DEFAULT :
         cout<<"Hotel des ventes : "<<endl;
         cout<<"Revenir au menu : 1"<<endl;
@@ -403,18 +397,18 @@ void AuctionHouseState::display()
 void AuctionHouseState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
-        status = STATUS_BAD_ENTRY;
+        status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
         if (option.size() != 1 or inputVec.size() != 1)
-            status = STATUS_BAD_ENTRY;
+            status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
             case '1' :
-                status = STATUS_RETURNMENU;
+                status_ = STATUS_RETURNMENU;
                 break;
             default :
-                status = STATUS_BAD_ENTRY;
+                status_ = STATUS_BAD_ENTRY;
                 break;
             }
         }
@@ -437,7 +431,7 @@ void ConnectedListState::handleEvents()
 }
 void ConnectedListState::logic()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_RETURNMENU :
         client_->setNextState(STATE_MENU);
         break;
@@ -445,7 +439,7 @@ void ConnectedListState::logic()
 }
 void ConnectedListState::display()
 {
-    switch (status) {
+    switch (status_) {
     case STATUS_DEFAULT :
         cout<<"Joueurs connectés : "<<endl;
         cout<<"Revenir au menu : 1"<<endl;
@@ -461,18 +455,18 @@ void ConnectedListState::display()
 void ConnectedListState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
-        status = STATUS_BAD_ENTRY;
+        status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
         if (option.size() != 1 or inputVec.size() != 1)
-            status = STATUS_BAD_ENTRY;
+            status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
             case '1' :
-                status = STATUS_RETURNMENU;
+                status_ = STATUS_RETURNMENU;
                 break;
             default :
-                status = STATUS_BAD_ENTRY;
+                status_ = STATUS_BAD_ENTRY;
                 break;
             }
         }

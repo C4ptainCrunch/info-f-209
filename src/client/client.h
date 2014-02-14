@@ -40,13 +40,14 @@ public:
     Client();
     ~Client();
     virtual void run();
-    virtual void setNextState(const int newState);
 
-private:
+    virtual void setNextState(const int newState);
     virtual void connectToName(const std::string name);
     virtual void disconnect();
     virtual int send(const std::string & message); //Renvoie 0 si succès, 1 si erreur.
     virtual int recv(std::string & message); //idem. Modifie param message en lui donnant la valeur du message lu.
+
+private:
 
     virtual void changeState();
 

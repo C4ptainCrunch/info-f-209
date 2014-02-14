@@ -15,10 +15,8 @@ public:
     virtual void logic() = 0;
     virtual void display() = 0;
 
-    virtual void setNextState(int state);
 protected:
     int status;
-private:
     Client * client_;
 };
 

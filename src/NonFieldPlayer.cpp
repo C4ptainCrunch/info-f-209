@@ -1,7 +1,14 @@
 #include "NonFieldPlayer.h"
+#include <iostream>
+
+using namespace std;
 
 NonFieldPlayer::NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level, int experience) : level_(level), experience_(experience), vocation_(vocation) {
     Player(speed, force, agility, reflexes, passPrecision, wounded, inventory);
+}
+
+NonFieldPlayer::NonFieldPlayer(): level_(1), experience_(0), vocation_(0) {
+    Player();
 }
 
 NonFieldPlayer::~NonFieldPlayer(){}

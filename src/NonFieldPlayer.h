@@ -7,6 +7,7 @@ class NonFieldPlayer : public Player{
 
     public:
         NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level = 1, int experience = 0);
+        NonFieldPlayer();
         ~NonFieldPlayer();
         NonFieldPlayer & operator=(const Player & player);
         int getLevel();

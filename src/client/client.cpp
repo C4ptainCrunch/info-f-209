@@ -26,7 +26,6 @@ void Client::run()
 
         changeState();
     }
-    cout<<"after loop"<<endl;
 }
 
 Client::Client()

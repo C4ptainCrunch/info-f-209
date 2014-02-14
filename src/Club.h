@@ -6,7 +6,7 @@
 #include "Team.h"
 #include "NonFieldPlayer.h"
 
-enum {INFIRMARY = 1, CANDYSHOP = 2, FANSHOP = 3, FIELD = 4, TRAININGFIELD = 5}
+enum {INFIRMARY = 1, CANDYSHOP = 2, FANSHOP = 3, FIELD = 4, TRAININGFIELD = 5};
 
 
 class Club {

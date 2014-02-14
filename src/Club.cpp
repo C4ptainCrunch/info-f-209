@@ -4,6 +4,12 @@ using namespace std;
 
 Club::Club(): money_(0), installations_()
 {
+
+    for (int i = 0; i<7; ++i){
+
+        players_[i] = NonFieldPlayer();
+        team_->changePlayer(i, players_[i]);
+    }
     // TODO: fill team_ and players_ with players.
 }
 
@@ -64,7 +70,7 @@ void Club::addInstallation(Installation& installation, int pos)
 Installation* Club::getInstallations()
 {
     return installations_;
-}
+}   
 
 Installation& Club::delInstallation(unsigned int pos)
 {

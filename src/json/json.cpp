@@ -15,6 +15,8 @@ int skip_whitespace(string message, int start){
     while(start + ret  < message.length()){
         switch(message[start + ret]){
             case '\n':
+            case '\t':
+            case '\r':
             case ' ':
                 break;
             default:
@@ -187,7 +189,7 @@ JsonString * createString(string message, int &i){
 
 int main(){
     int i = 0;
-    JsonValue * val = createValue("{\"cle1\" :   \"val1\" , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
+    JsonValue * val = createValue("{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
     JsonDict* strptr = dynamic_cast<JsonDict*>(val);
     cout << "Len=" << strptr->dict.size() << endl;
     JsonValue * c = strptr->dict["cle3"];

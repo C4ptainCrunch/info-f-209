@@ -1,6 +1,13 @@
 #include "Team.h"
 
 #include <iostream>
+using namespace std;
+
+Team::Team(){
+    for(int i = 0; i < 7; ++ i){
+        players_[i] = 0;
+    }
+}
 
 Team::Team(NonFieldPlayer *players[7]){
     for(int i = 0; i < 7; ++ i){
@@ -10,8 +17,18 @@ Team::Team(NonFieldPlayer *players[7]){
 
 Team::~Team(){}
 
+void Team::setPlayers(NonFieldPlayer players[7]){
+    for (int i = 0; i<7; ++i){
+        players_[i] = &players[i];
+    }
+}
+
+void Team::setPlayer(NonFieldPlayer& player,int pos){
+    players_[pos] = &player;
+}
+
 NonFieldPlayer* Team::getPlayers(){
-    return *players_;
+    return *    players_;
 }
 
 NonFieldPlayer* Team::changePlayer(int pos, NonFieldPlayer& player){

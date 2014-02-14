@@ -128,8 +128,8 @@ void Client::changeState()
             case STATE_AUCTION_HOUSE:
                 currentState_ = new AuctionHouseState(this);
                 break;
-            case STATE_FRIENDLIST:
-                currentState_ = new FriendListState(this);
+            case STATE_CONNECTEDLIST:
+                currentState_ = new ConnectedListState(this);
                 break;
             case STATE_INGAME:
                 currentState_ = new InGameState(this);

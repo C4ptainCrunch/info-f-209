@@ -41,8 +41,6 @@ Client::Client()
     nextStateID_ = STATE_NULL;
 
     connected_ = false;
-
-    cout<<"Client Initialised"<<endl;
 }
 
 Client::~Client() {}

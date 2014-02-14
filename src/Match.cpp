@@ -10,11 +10,15 @@ Match::Match(Club& host, Club& guest){
     clubs_[0] = &host;
     clubs_[1] = &guest;
 
+    cout<<"AVANT"<<endl;
     for (int i = 0; i< 2 ;++i){
+        cout<<"i : "<<i<<endl;
         for (int j = 0; j < 7; ++j){
-                teams_[i][j] = clubs_[i]->getTeam()->getPlayers()[j];
+            cout<<"j : "<<j;
+            teams_[i][j] = FieldPlayer(clubs_[i]->getTeam()->getPlayers()[j],0);
         }
     }
+    cout<<"APRES"<<endl;
 
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();
@@ -102,7 +106,7 @@ void Match::generateGrid(){
                     grid_[i][j].player = tempPlayer;
                 }
             }
-    //--------------------------PLAYERS----------------------------------
+    //--------------------------BALLS----------------------------------
             
 
 
@@ -135,7 +139,7 @@ string Match::print(){ //FOR TEST PURPOSES
                         c+= "S ";
                     }
                     else if(grid_[i][j].player->getRole() == BEATER){
-                        c+= "B ";
+                        c+= "\033[1;31 B ";
                     }
                     delete grid_[i][j].player;
                 }

@@ -10,6 +10,12 @@ Match::Match(Club& host, Club& guest){
     clubs_[0] = &host;
     clubs_[1] = &guest;
 
+    for (int i = 0; i< 2 ;++i){
+        for (int j = 0; j < 7; ++j){
+                teams_[i][j] = clubs_[i]->getTeam()->getPlayers()[j];
+        }
+    }
+
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();
     budgers_[0] = Budger();
@@ -25,7 +31,6 @@ Match::~Match(){}
 void Match::generateFieldPlayers(){
     for (int i = 0; i< 2 ;++i){
         for (int j = 0; j < 7; ++j){
-                teams_[i][j] = clubs_[i]->getTeam()->getPlayers()[j];
             if (j ==0){
                 teams_[i][j].setRole(KEEPER);
             }

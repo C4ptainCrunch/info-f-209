@@ -41,11 +41,7 @@ GameState::GameState(Client * client)
 
 GameState::~GameState() {}
 
-void GameState::setNextState(int state)
-{
-    client_->setNextState(state);
-}
-
+//shamir.partou.se
 
 IntroState::IntroState(Client * client) : GameState(client)
 {
@@ -54,7 +50,7 @@ IntroState::IntroState(Client * client) : GameState(client)
 void IntroState::handleEvents() {}
 void IntroState::logic()
 {
-    setNextState(STATE_UNLOGGED);
+    client_->setNextState(STATE_UNLOGGED);
 }
 void IntroState::display() {}
 
@@ -81,13 +77,13 @@ void UnloggedState::logic()
     case UNLOGGED_CONNECT :
         //envoyer et traiter les données du serveur.
         status = UNLOGGED_CONNECTED;
-        setNextState(STATE_MENU);
+        client_->setNextState(STATE_MENU);
         break;
     case UNLOGGED_REGISTER :
         //envoyer et traiter les données du serveur.
         break;
     case STATUS_QUIT :
-        setNextState(STATE_EXIT);
+        client_->setNextState(STATE_EXIT);
         break;
     }
 }
@@ -170,22 +166,22 @@ void MenuState::logic()
 {
     switch (status) {
     case MENU_MANAGEPLAYERS :
-        setNextState(STATE_MANAGE_PLAYERS);
+        client_->setNextState(STATE_MANAGE_PLAYERS);
         break;
     case MENU_MANAGEINFRASTRUCTURES :
-        setNextState(STATE_MANAGE_INFRASTRUCTURES);
+        client_->setNextState(STATE_MANAGE_INFRASTRUCTURES);
         break;
     case MENU_AUCTIONHOUSE :
-        setNextState(STATE_AUCTION_HOUSE);
+        client_->setNextState(STATE_AUCTION_HOUSE);
         break;
     case MENU_CONNECTEDLIST :
-        setNextState(STATE_CONNECTEDLIST);
+        client_->setNextState(STATE_CONNECTEDLIST);
         break;
     case STATUS_DISCONNECT : //!! effectuer tout ce qui est nécéssaire pour la déconnection ici
-        setNextState(STATE_INTRO);
+        client_->setNextState(STATE_INTRO);
         break;
     case STATUS_QUIT :
-        setNextState(STATE_EXIT);
+        client_->setNextState(STATE_EXIT);
         break;
     }
 }
@@ -264,7 +260,7 @@ void ManagePlayerState::logic()
 {
     switch (status) {
     case STATUS_RETURNMENU :
-        setNextState(STATE_MENU);
+        client_->setNextState(STATE_MENU);
         break;
     }
 }
@@ -322,7 +318,7 @@ void ManageInfrastructureState::logic()
 {
     switch (status) {
     case STATUS_RETURNMENU :
-        setNextState(STATE_MENU);
+        client_->setNextState(STATE_MENU);
         break;
     }
 }
@@ -384,7 +380,7 @@ void AuctionHouseState::logic()
 {
     switch (status) {
     case STATUS_RETURNMENU :
-        setNextState(STATE_MENU);
+        client_->setNextState(STATE_MENU);
         break;
     }
 }
@@ -443,7 +439,7 @@ void ConnectedListState::logic()
 {
     switch (status) {
     case STATUS_RETURNMENU :
-        setNextState(STATE_MENU);
+        client_->setNextState(STATE_MENU);
         break;
     }
 }

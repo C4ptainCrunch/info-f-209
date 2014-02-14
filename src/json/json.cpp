@@ -1,54 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <string>
 #include <vector>
 #include <iostream>
 #include <typeinfo>
-#include <exception>
 
 #include "json.h"
+#include "utils.h"
 
 using namespace std;
-
-int skip_whitespace(string message, int start){
-    int ret = 0;
-    while(start + ret < message.length()){
-        switch(message[start + ret]){
-            case '\n':
-            case '\t':
-            case '\r':
-            case ' ':
-                break;
-            default:
-                return ret;
-        }
-        ret++;
-    }
-    throw "a";
-}
-
-int skip_colon(string message, int start){
-    int ret;
-    bool colon = false;
-
-    ret = skip_whitespace(message, start);
-    while(start + ret < message.length() && !colon){
-        switch(message[start + ret]){
-            case ':':
-                colon = true;
-                break;
-            default:
-                throw 1;
-        }
-        ret++;
-    }
-    ret += skip_whitespace(message, start + ret);
-    return ret;
-}
-
-string cut_from(string message, int from){
-    return message.substr(from, message.length());
-}
 
 
 JsonDict::JsonDict(){}
@@ -197,36 +155,4 @@ JsonString * createString(string message, int &i){
     i++;
     }
     throw 1;
-}
-
-
-// List
-// -----------
-int listmain(){
-    int i = 0;
-    JsonValue * val = createValue("[\"elem 1 \"    ,\n \"elem2\"]", i);
-    JsonList* listptr = dynamic_cast<JsonList*>(val);
-    JsonValue * one = listptr->content.at(1);
-    JsonString * strptr = dynamic_cast<JsonString*>(one);
-    cout << strptr->value << endl;
-    return 0;
-}
-
-// Dict
-// -----------
-int dictmain(){
-    int i = 0;
-    JsonValue * val = createValue("{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
-    JsonDict* strptr = dynamic_cast<JsonDict*>(val);
-    cout << "Len=" << strptr->dict.size() << endl;
-    JsonValue * c = strptr->dict["cle3"];
-    JsonString * cstr = dynamic_cast<JsonString*>(c);
-    cout << cstr->value << endl;
-    return 0;
-}
-
-int main(){
-    listmain();
-    cout << "------------" << endl;
-    return dictmain();
 }

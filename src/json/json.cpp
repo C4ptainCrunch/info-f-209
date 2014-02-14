@@ -38,6 +38,13 @@ void JsonDict::add(JsonString key, JsonValue * value){
     dict[(string) key] = value;
 }
 
+
+JsonList::JsonList(){}
+
+void JsonList::add(JsonValue * value){
+    content.push_back(value);
+}
+
 JsonString::JsonString(){}
 
 JsonString::JsonString(string val){
@@ -53,9 +60,6 @@ JsonString JsonString::operator=(const JsonString &str){
     return *this;
 }
 
-JsonValue * createList(string message, int &i){
-    return new JsonValue();
-}
 
 JsonValue * createNumber(string message, int &i){
     return new JsonValue();
@@ -166,6 +170,30 @@ JsonDict * createDict(string message, int &i){
     }
 }
 
+JsonList * createList(string message, int &i){
+    JsonList * r = new JsonList();
+    i = 0;
+    while(1){
+        JsonValue * value;
+        i += skip_whitespace(message, i);
+        value = createValue(cut_from(message, i), i);
+        i++;
+        r->add(value);
+        i += skip_whitespace(message, i);
+        switch(message[i]){
+            case ',':
+                i++;
+                break;
+            case ']':
+                i++;
+                return r;
+                break;
+            default:
+                throw 1;
+        }
+    }
+}
+
 
 JsonString * createString(string message, int &i){
     int bak = i;
@@ -189,11 +217,23 @@ JsonString * createString(string message, int &i){
 
 int main(){
     int i = 0;
-    JsonValue * val = createValue("{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
-    JsonDict* strptr = dynamic_cast<JsonDict*>(val);
-    cout << "Len=" << strptr->dict.size() << endl;
-    JsonValue * c = strptr->dict["cle3"];
-    JsonString * cstr = dynamic_cast<JsonString*>(c);
-    cout << cstr->value << endl;
+    JsonValue * val = createValue("[\"elem 1 \"    ,\n \"elem2\"]", i);
+    JsonList* listptr = dynamic_cast<JsonList*>(val);
+    JsonValue * one = listptr->content.at(1);
+    JsonString * strptr = dynamic_cast<JsonString*>(one);
+    cout << strptr->value << endl;
     return 0;
 }
+
+// Dict
+// -----------
+// int main(){
+//     int i = 0;
+//     JsonValue * val = createValue("{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
+//     JsonDict* strptr = dynamic_cast<JsonDict*>(val);
+//     cout << "Len=" << strptr->dict.size() << endl;
+//     JsonValue * c = strptr->dict["cle3"];
+//     JsonString * cstr = dynamic_cast<JsonString*>(c);
+//     cout << cstr->value << endl;
+//     return 0;
+// }

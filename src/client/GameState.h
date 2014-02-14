@@ -85,10 +85,10 @@ public:
     virtual void parse(std::vector<std::string> & inputVec);
 };
 
-class FriendListState : public GameState
+class ConnectedListState : public GameState
 {
 public:
-    FriendListState(Client * client);
+    ConnectedListState(Client * client);
     virtual void handleEvents();
     virtual void logic();
     virtual void display();

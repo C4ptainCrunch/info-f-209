@@ -19,7 +19,7 @@
 
 #define PORT 8000
 
-//Game States
+//Game States, le client est une machine à état dont les états possibles sont listés ci dessous.
 enum GameStates
 {
     STATE_NULL,
@@ -39,9 +39,9 @@ class Client{
 public:
     Client();
     ~Client();
-    virtual void run();
+    virtual void run(); //Effectue la boucle principale du jeu.
 
-    virtual void setNextState(const int newState);
+    virtual void setNextState(const int newState); //Demande de changement d'état
     virtual void connectToName(const std::string name);
     virtual void disconnect();
     virtual int send(const std::string & message); //Renvoie 0 si succès, 1 si erreur.
@@ -49,7 +49,7 @@ public:
 
 private:
 
-    virtual void changeState();
+    virtual void changeState(); //Effectue le changement d'état.
 
     Socket socket_;
     bool connected_;

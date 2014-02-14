@@ -37,19 +37,19 @@ GameState::GameState(Client * client) : client_(client), status_(STATUS_DEFAULT)
 
 GameState::~GameState() {}
 
-IntroState::IntroState(Client * client) : GameState(client)
-{
-    cout<<"BienvenuS dans le systme !"<<endl; //Rework
-}
+//Intro-------------------------------------------------------------------------------
+IntroState::IntroState(Client * client) : GameState(client) {}
 void IntroState::handleEvents() {}
 void IntroState::logic()
 {
     client_->setNextState(STATE_UNLOGGED);
 }
-void IntroState::display() {}
+void IntroState::display()
+{
+    cout<<"BienvenuS dans le systme !"<<endl; //Rework
+}
 
 //Unlogged-------------------------------------------------------------------------
-
 UnloggedState::UnloggedState(Client * client) : GameState(client)
 {
     cout<<"Entrez l'option souhaité avec les paramètres requis délimités par un espace."<<endl;
@@ -62,12 +62,12 @@ void UnloggedState::handleEvents()
     string inputString;
     getline(cin, inputString);
     vector<string> inputVec = split(inputString, ' ');
-    parse(inputVec);
+    parse(inputVec); //Status est modifié dans parse.
 }
 
 void UnloggedState::logic()
 {
-    switch (status_) {
+    switch (status_) { //status_ est modifié dans handleEvent
     case UNLOGGED_CONNECT :
         //envoyer et traiter les données du serveur.
         status_ = UNLOGGED_CONNECTED;
@@ -104,39 +104,39 @@ void UnloggedState::display()
 
 void UnloggedState::parse(vector<string> & inputVec)
 {
-    if (inputVec.empty() == true)
+    if (inputVec.empty() == true) //S'il n'y a pas d'entrée utilisateur
         status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
-        if (option.size() != 1)
+        if (option.size() != 1) //Si le premier token est plus long qu'un caractèred
             status_ = STATUS_BAD_ENTRY;
         else {
-            switch (option.c_str()[0]) {
-            case '1' :
+            switch (option.c_str()[0]) { //On switch sur le premier caractère
+            case '1' : //Demande de connection
                 if (inputVec.size() == 3) {
                     nameInput = inputVec[1];
                     passInput = inputVec[2];
-                    status_ = UNLOGGED_CONNECT; //demande de connection
+                    status_ = UNLOGGED_CONNECT;
                 }
                 else {
                     status_ = STATUS_BAD_ENTRY;
                 }
                 break;
-            case '2' :
+            case '2' : //Demande d'enregistrement
                 if (inputVec.size() == 3) {
                     nameInput = inputVec[1];
                     passInput = inputVec[2];
-                    status_ = UNLOGGED_REGISTER; //demande d'enregistrement
+                    status_ = UNLOGGED_REGISTER;
                 }
                 else {
                     status_ = STATUS_BAD_ENTRY;
                 }
                 break;
-            case 'q' :
+            case 'q' : //Demande de quit
             case 'Q' :
                 status_ = STATUS_QUIT;
                 break;
-            default :
+            default : //Si n'importe quoi d'autre est entré
                 status_ = STATUS_BAD_ENTRY;
                 break;
             }
@@ -209,23 +209,23 @@ void MenuState::parse(vector<string> & inputVec)
         else
         {
             switch (option.c_str()[0]) {
-            case '1' :
+            case '1' : //Gestion d'équipe
                 status_ = MENU_MANAGEPLAYERS;
                 break;
-            case '2' :
+            case '2' : //Gestion des infrastructures
                 status_ = MENU_MANAGEINFRASTRUCTURES;
                 break;
-            case '3' :
+            case '3' : //Hotel des ventes
                 status_ = MENU_AUCTIONHOUSE;
                 break;
-            case '4' :
+            case '4' : //Liste de connectés
                 status_ = MENU_CONNECTEDLIST;
                 break;
-            case '5' :
+            case '5' : //Demande de déconnection
                 status_ = STATUS_DISCONNECT;
                 break;
             case 'q' :
-            case 'Q' :
+            case 'Q' : //Demande de quit
                 status_ = STATUS_QUIT;
                 break;
             default :
@@ -282,7 +282,7 @@ void ManagePlayerState::parse(vector<string> & inputVec)
             status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
-            case '1' :
+            case '1' : //Retour au menu
                 status_ = STATUS_RETURNMENU;
                 break;
             default :
@@ -344,7 +344,7 @@ void ManageInfrastructureState::parse(vector<string> & inputVec)
             status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
-            case '3' :
+            case '3' : //Retour au menu
                 status_ = STATUS_RETURNMENU;
                 break;
             default :
@@ -404,7 +404,7 @@ void AuctionHouseState::parse(vector<string> & inputVec)
             status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
-            case '1' :
+            case '1' : //Retour au menu
                 status_ = STATUS_RETURNMENU;
                 break;
             default :
@@ -462,7 +462,7 @@ void ConnectedListState::parse(vector<string> & inputVec)
             status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
-            case '1' :
+            case '1' : //Retour au menu
                 status_ = STATUS_RETURNMENU;
                 break;
             default :

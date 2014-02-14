@@ -5,22 +5,22 @@
 #include <vector>
 
 class Client;
-
+//Classe de base d'un état.
 class GameState
 {
 public:
-    GameState(Client * client);
+    GameState(Client * client); //Contient toujours un pointeur vers le client du jeu.
     virtual ~GameState();
-    virtual void handleEvents() = 0;
-    virtual void logic() = 0;
-    virtual void display() = 0;
+    virtual void handleEvents() = 0; //Gère les entrées de l'utilisateurs.
+    virtual void logic() = 0; //Effectue les actions nécéssaire et demande un changement d'état en fonction de status.
+    virtual void display() = 0; //Effectue tout les affichages de l'état.
 
 protected:
     Client * client_;
-    int status_;
+    int status_; //Beaucoup des états dépendent de leur status pour leur affichage ou logique.
 };
 
-class IntroState : public GameState
+class IntroState : public GameState //Premier état : affichage de l'intro.
 {
 public:
     IntroState(Client * client);
@@ -29,7 +29,7 @@ public:
     virtual void display();
 };
 
-class UnloggedState : public GameState
+class UnloggedState : public GameState //Permet de s'enregistrer ou s'authentifier
 {
 public:
     UnloggedState(Client * client);
@@ -42,7 +42,7 @@ private:
     std::string passInput;
 };
 
-class MenuState : public GameState
+class MenuState : public GameState //Affiche le menu principal et redirige vers le menu souhaité.
 {
 public:
     MenuState(Client * client);
@@ -53,7 +53,7 @@ public:
 };
 
 
-class ManagePlayerState : public GameState
+class ManagePlayerState : public GameState //Gestion des joueurs
 {
 public:
     ManagePlayerState(Client * client);
@@ -63,7 +63,7 @@ public:
     virtual void parse(std::vector<std::string> & inputVec);
 };
 
-class ManageInfrastructureState : public GameState
+class ManageInfrastructureState : public GameState //Gestion des infrastructures
 {
 public:
     ManageInfrastructureState(Client * client);
@@ -73,7 +73,7 @@ public:
     virtual void parse(std::vector<std::string> & inputVec);
 };
 
-class AuctionHouseState : public GameState
+class AuctionHouseState : public GameState //Hotel des ventes
 {
 public:
     AuctionHouseState(Client * client);
@@ -83,7 +83,7 @@ public:
     virtual void parse(std::vector<std::string> & inputVec);
 };
 
-class ConnectedListState : public GameState
+class ConnectedListState : public GameState //Liste de joueurs connectés, permet de les défier aussi.
 {
 public:
     ConnectedListState(Client * client);
@@ -93,7 +93,7 @@ public:
     virtual void parse(std::vector<std::string> & inputVec);
 };
 
-class InGameState : public GameState
+class InGameState : public GameState //État en jeu.
 {
 public:
     InGameState(Client * client);

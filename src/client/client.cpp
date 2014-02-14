@@ -51,7 +51,7 @@ void Client::connectToName(const string name)
     struct hostent *he;;
 
     if (connected_)
-        cout<<"Déjà connecté."<<endl; //Rework
+        cout<<"Erreur : Déjà connecté."<<endl; //Rework. Throw exception?
 
     else {
         socklen_t addrSize = sizeof(struct sockaddr);
@@ -71,7 +71,7 @@ void Client::connectToName(const string name)
             exit(EXIT_FAILURE);
         }
         connected_ = true;
-        printf("Connecté au serveur.");
+        printf("Connecté au serveur."); //Rework. Server should mssg?
     }
 }
 
@@ -82,7 +82,7 @@ void Client::disconnect()
         close(socket_.getFd());
     }
     else
-        cout<<"Disconnect : No connection"<<endl; //Rework
+        cout<<"Erreur : Non connecté lors d'une demande de déconnection."<<endl; //Rework. throw?
 }
 
 int Client::send(const string & message)

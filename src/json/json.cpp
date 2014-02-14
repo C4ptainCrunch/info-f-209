@@ -12,7 +12,7 @@ using namespace std;
 
 int skip_whitespace(string message, int start){
     int ret = 0;
-    while(start + ret  < message.length()){
+    while(start + ret < message.length()){
         switch(message[start + ret]){
             case '\n':
             case '\t':
@@ -25,6 +25,25 @@ int skip_whitespace(string message, int start){
         ret++;
     }
     throw "a";
+}
+
+int skip_colon(string message, int start){
+    int ret;
+    bool colon = false;
+
+    ret = skip_whitespace(message, start);
+    while(start + ret < message.length() && !colon){
+        switch(message[start + ret]){
+            case ':':
+                colon = true;
+                break;
+            default:
+                throw 1;
+        }
+        ret++;
+    }
+    ret += skip_whitespace(message, start + ret);
+    return ret;
 }
 
 string cut_from(string message, int from){
@@ -107,64 +126,29 @@ JsonValue * createValue(string message, int &i){
 }
 
 JsonDict * createDict(string message, int &i){
+    JsonString * key;
+    JsonValue * value;
+    bool colon = false;
+    bool coma = false;
+
     JsonDict * r = new JsonDict();
-    i = 0;
+    i = skip_whitespace(message, 0);
+
+
     while(1){
-        JsonString * key;
-        JsonValue * value;
-        bool colon = false;
-        bool coma = false;
-        bool gotkey = false;
-        while(i < message.length()){
-            i += skip_whitespace(message, i);
-            switch(message[i]){
-                case '"':
-                    key = createString(cut_from(message, i + 1 ), i);
-                    gotkey = true;
-                    break;
-                case '}':
-                    i++;
-                    return r;
-                    break;
-                default:
-                    throw 1;
-            }
-            if(gotkey){
-                break;
-            }
+        if(message[i] == '}'){
             i++;
+            return r;
         }
-        i++;
-        while(i < message.length() && !colon){
-            i += skip_whitespace(message, i);
-            switch(message[i]){
-                case ':':
-                    colon = true;
-                    break;
-                default:
-                    throw 1;
-            }
-            i++;
-        }
-
         i += skip_whitespace(message, i);
-
+        key = createString(cut_from(message, i + 1 ), i);
+        i++;
+        i += skip_colon(message, i);
         value = createValue(cut_from(message, i), i);
         i++;
         r->add(*key, value);
-        while(i < message.length() && !coma){
-            i += skip_whitespace(message, i);
-            switch(message[i]){
-                case ',':
-                    coma = true;
-                    break;
-                case '}':
-                    i++;
-                    return r;
-                    break;
-                default:
-                    throw 1;
-            }
+        i += skip_whitespace(message, i);
+        if(message[i] == ','){
             i++;
         }
     }
@@ -215,7 +199,10 @@ JsonString * createString(string message, int &i){
     throw 1;
 }
 
-int main(){
+
+// List
+// -----------
+int listmain(){
     int i = 0;
     JsonValue * val = createValue("[\"elem 1 \"    ,\n \"elem2\"]", i);
     JsonList* listptr = dynamic_cast<JsonList*>(val);
@@ -227,13 +214,19 @@ int main(){
 
 // Dict
 // -----------
-// int main(){
-//     int i = 0;
-//     JsonValue * val = createValue("{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
-//     JsonDict* strptr = dynamic_cast<JsonDict*>(val);
-//     cout << "Len=" << strptr->dict.size() << endl;
-//     JsonValue * c = strptr->dict["cle3"];
-//     JsonString * cstr = dynamic_cast<JsonString*>(c);
-//     cout << cstr->value << endl;
-//     return 0;
-// }
+int dictmain(){
+    int i = 0;
+    JsonValue * val = createValue("{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val3bis\"}", i);
+    JsonDict* strptr = dynamic_cast<JsonDict*>(val);
+    cout << "Len=" << strptr->dict.size() << endl;
+    JsonValue * c = strptr->dict["cle3"];
+    JsonString * cstr = dynamic_cast<JsonString*>(c);
+    cout << cstr->value << endl;
+    return 0;
+}
+
+int main(){
+    listmain();
+    cout << "------------" << endl;
+    return dictmain();
+}

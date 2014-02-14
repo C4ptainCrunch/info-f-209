@@ -35,7 +35,7 @@ class Club {
     private:
         int money_;
         Installation installations_[5];
-        Team *team_;
+        Team *team_ = new Team();
         std::vector<NonFieldPlayer> players_;
 };
 

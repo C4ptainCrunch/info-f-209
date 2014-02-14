@@ -7,20 +7,29 @@
 
 //Les définitions ci dessous sont toutes les valeurs que peut avoir l'attribut 'status' de la class de base GameState.
 //Valeurs générales :
-#define STATUS_DEFAULT 0
-#define STATUS_BAD_ENTRY -1
-#define STATUS_DISCONNECT -2
-#define STATUS_RETURNMENU -3
-#define STATUS_QUIT -4
+enum STATUS
+{
+    STATUS_DEFAULT = 0,
+    STATUS_BAD_ENTRY = -1,
+    STATUS_DISCONNECT = -2,
+    STATUS_RETURNMENU = -3,
+    STATUS_QUIT = -4
+};
 //Valeurs pour unlogged :
-#define UNLOGGED_CONNECTED 1
-#define UNLOGGED_CONNECT 2
-#define UNLOGGED_REGISTER 3
+enum UNLOGGED
+{
+    UNLOGGED_CONNECTED = 1,
+    UNLOGGED_CONNECT = 2,
+    UNLOGGED_REGISTER = 3
+};
 //Valeurs pour menu :
-#define MENU_MANAGEPLAYERS 1
-#define MENU_MANAGEINFRASTRUCTURES 2
-#define MENU_AUCTIONHOUSE 3
-#define MENU_CONNECTEDLIST 4
+enum MENU
+{
+    MENU_MANAGEPLAYERS = 1,
+    MENU_MANAGEINFRASTRUCTURES = 2,
+    MENU_AUCTIONHOUSE = 3,
+    MENU_CONNECTEDLIST = 4
+};
 
 using namespace std;
 
@@ -54,7 +63,7 @@ void IntroState::display() {}
 UnloggedState::UnloggedState(Client * client) : GameState(client)
 {
     cout<<"Entrez l'option souhaité avec les paramètres requis délimités par un espace."<<endl;
-    cout<<"Par éxemple : '1 C4 gronoub'"<<endl;
+    cout<<"Exemple : '1 Usr mdp'"<<endl;
     cout<<endl;
     display();
 }

@@ -28,6 +28,7 @@ class Match{
         int addPoint(bool guestTeam ,int delta = 1);
         void moveBalls();
         bool checkEndOfMatch();
+        bool isPlayerInGuestTeam(FieldPlayer& fieldPlayer);
         int* isInTheWay(int fromX,int fromY,int toX, int toY);
         void generateFieldPlayers();
         std::string print();//FOR TESTS

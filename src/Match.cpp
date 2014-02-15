@@ -121,6 +121,16 @@ int* Match::isInTheWay(int fromX,int fromY,int toX, int toY){
     return blockingPosition;
 }
 
+bool Match::isPlayerInGuestTeam(FieldPlayer& fieldPlayer){
+    bool playerInGuestTeam = false;
+    for (int i = 0; i<7; ++i){
+        if (teams_[1][i] == fieldPlayer){
+            playerInGuestTeam = false;
+        }
+    }
+    return playerInGuestTeam;
+}
+
 string Match::print(){ //FOR TEST PURPOSES
     string c;
     for (int i = 0; i<WIDTH;++i){
@@ -142,7 +152,13 @@ string Match::print(){ //FOR TEST PURPOSES
                         c+= "S ";
                     }
                     else if(grid_[i][j].player->getRole() == BEATER){
-                        c+= "\e[0;34m B";
+                        if (isPlayerInGuestTeam(*grid_[i][j].player)){
+                            c+= "\e[0;34m B \e[0m";
+                        }
+                        else{
+                            c+= "\e[0;31m B \e[0m";
+
+                        }
                     }
                     delete grid_[i][j].player;
                 }

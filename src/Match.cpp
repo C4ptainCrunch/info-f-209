@@ -124,7 +124,7 @@ int* Match::isInTheWay(int fromX,int fromY,int toX, int toY){
 bool Match::isPlayerInGuestTeam(FieldPlayer& fieldPlayer){
     bool playerInGuestTeam = false;
     for (int i = 0; i<7; ++i){
-        if (teams_[1][i] == fieldPlayer){
+        if (teams_[1][i].getId() == fieldPlayer.getId()){
             playerInGuestTeam = false;
         }
     }

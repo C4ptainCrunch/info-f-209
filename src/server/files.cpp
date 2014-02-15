@@ -31,45 +31,25 @@ int readFile(char * fileName, std::string & content){
 int writeFile(char * fileName, std::string & content){
     int write_len = 0;
     int index=0;
+    int delta;
     int fd = open(fileName, O_WRONLY, O_CREAT, O_APPEND);
-    std::cout<<"write 1"<<std::endl;
     if (fd){
-        std::cout<<"write 2"<<std::endl;
         do {
-            const char *buffer = content.substr(index, BUFF_SIZE).c_str();
-            std::cout<<"write 3"<<std::endl;
-            write_len = write(fd, buffer, BUFF_SIZE);
+            delta = content.size()-index;
+            if (delta > BUFF_SIZE){
+                delta=BUFF_SIZE;
+            }
+            const char *buffer = content.substr(index, delta).c_str();
+            write_len = write(fd, buffer, content.size());
             if(write_len == -1){
                 close(fd);
+                perror("Echec écriture : ");
                 return -1;
             }
             if(write_len>0){
                 index += write_len;
-                std::cout<<"write 4"<<std::endl;
             }
-        } while(write_len>0);
+        } while(delta >= BUFF_SIZE);
     }
     return 0;
-}
-
-int main(int argc, char * argv[]){
-    if(argc <= 1){
-        std::cout<<"Invalid parameters"<<std::endl;
-        exit(0);
-    }
-    std::string lol;
-    char * file = argv[1];
-    int state = readFile(file, lol);
-    if (state == -1){
-        std::cout<<"Erreur en lecture "<<std::endl;
-        exit(1);
-    }
-    std::cout<<lol<<std::endl;
-    state = writeFile("lol.txt", lol);
-    if (state == -1){
-        std::cout<<"Erreur en écriture "<<std::endl;
-        exit(1);
-    }
-    std::cout<<"Success"<<std::endl;
-    return 0;    // TO DO : vérifier si EXIT_SUCCESS à return
 }

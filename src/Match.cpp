@@ -9,7 +9,7 @@ using namespace std;
 Match::Match(Club& host, Club& guest){
     clubs_[0] = &host;
     clubs_[1] = &guest;
-    
+
     for (int i = 0; i< 2 ;++i){
         cout<<"i : "<<i<<endl;
         for (int j = 0; j < 7; ++j){
@@ -111,6 +111,11 @@ void Match::generateGrid(){
         }
     }
 }
+
+void Match::movePlayer(int fromX, int fromY,int toX, int toY){
+
+}
+
 int* Match::isInTheWay(int fromX,int fromY,int toX, int toY){
     int blockingPosition[2];
     return blockingPosition;
@@ -137,7 +142,7 @@ string Match::print(){ //FOR TEST PURPOSES
                         c+= "S ";
                     }
                     else if(grid_[i][j].player->getRole() == BEATER){
-                        c+= "\033[1;31 B ";
+                        c+= "\e[0;34m B";
                     }
                     delete grid_[i][j].player;
                 }

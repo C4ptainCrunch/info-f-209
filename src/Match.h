@@ -23,6 +23,7 @@ class Match{
     public:
         Match(Club& host, Club& guest);
         ~Match();
+        void movePlayer(int fromX, int fromY,int toX, int toY);
         int* getScore();
         int addPoint(bool guestTeam ,int delta = 1);
         void moveBalls();

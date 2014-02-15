@@ -19,10 +19,14 @@ class FieldPlayer : public Player{
         void throwQuaffle();
         void catchQuaffle();
         void testMove();
+        void initializeId();
+        int getId();
         int getRole();
         void setRole(int role);
     private:
+        static int nextID_;
         int role_;
+        int id_;
 
 };
 

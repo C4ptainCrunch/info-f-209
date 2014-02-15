@@ -1,6 +1,9 @@
 //#include "json.h"  module json à coder
 #include "thread.h"
 #include "Manager.h"
+#include <cstlib>
+#include "json.h"
+#include "utils.h"
 
 void logIn(std::String message, UserHandler * thread)  // message = "user:password", TO DO : message en json
 {
@@ -10,12 +13,10 @@ void logIn(std::String message, UserHandler * thread)  // message = "user:passwo
     std::String password = message.substr(index, message.lenght());
     char * filename = "data/users/"+userName+".json";
     std::String content;
-    if (1){ // test TO DO : delete la ligne
-    //if(readFile(filename, &content) == 0){
-        //JsonNode json(content);
-        //TO DO : récupérer info de json
-        Club * machin = new Club();
-        Manager * user = new Manager("Kong", userName, "Banane", machin);
+    if(readFile(filename, &content) == 0){
+        JsonDict * userInfos =  dynamic_cast<JsonDict*> JsonValue::toString(content);
+        // TO DO : changer la ligne en dessous en qqch de propre
+        Manager * user = new Manager(userInfos["name_"], userName, userInfos["hash_"], new Club(userInfos["club_"][money_], userInfos["club_"][team_]));
         if(user->checkPassword(password)){
             thread.writeToClient("user.login : {signal = \"loginSuccess\"}");
             thread.setUser(user);
@@ -30,7 +31,7 @@ void logIn(std::String message, UserHandler * thread)  // message = "user:passwo
     }
 }
 
-void signUp(char* message, Thread * thread)
+void signUp(char * message, Thread * thread)
 {
     std::String reponse;
     int index = message.find(":");
@@ -38,9 +39,8 @@ void signUp(char* message, Thread * thread)
     std::String password = message.substr(index, message.lenght());
     char * filename = "data/users/"+userName+".json";
     std::String content;
-    if (1){ // test TO DO : delete la ligne
-    //if(readFile(filename, &content) == -1 and errno=EIO){
-        //JsonNode json(content);
+    if(readFile(filename, &content) == -1 and errno=EIO){
+        //JsonValue json(content);
         //TO DO : récupérer info de json
         Club * club = new Club();
         Manager * user = new Manager("Kong", userName, "Banane", club);
@@ -52,4 +52,26 @@ void signUp(char* message, Thread * thread)
     else{
         thread.writeToClient("user.signup : {signal = \"accountAlreadyExist\"}");
     }
+}
+
+int main(int argc, char * argv[]){
+    if(argc <= 1){
+        std::cout<<"Invalid parameters"<<std::endl;
+        exit(0);
+    }
+    std::string lol;
+    char * file = argv[1];
+    int state = readFile(file, lol);
+    if (state == -1){
+        std::cout<<"Erreur en lecture "<<std::endl;
+        exit(1);
+    }
+    std::cout<<lol<<std::endl;
+    state = writeFile("lol.txt", lol);
+    if (state == -1){
+        std::cout<<"Erreur en écriture "<<std::endl;
+        exit(1);
+    }
+    std::cout<<"Success"<<std::endl;
+    return EXIT_SUCCESS;    // TO DO : vérifier si EXIT_SUCCESS à return
 }

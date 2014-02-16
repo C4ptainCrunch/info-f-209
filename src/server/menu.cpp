@@ -1,49 +1,49 @@
 // TO DO : mettre communication entre thread (pour les erreurs)
 
-void inviteToMatch(JsonNode * json, UserHandler * thread){
+void inviteToMatch(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void reponseToMatchInvitation(JsonNode * json, UserHandler * thread){
+void reponseToMatchInvitation(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void viewUserList(JsonNode * json, UserHandler * thread){
+void viewUserList(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void goToManagement(JsonNode * json, UserHandler * thread){
+void goToManagement(JsonDict * json, UserHandler * thread){
     char * reponse;
 } //amène à l'écran de gestion du club
 
-void buildNewInstallation(JsonNode * json, UserHandler * thread){
+void buildNewInstallation(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void manageInstallation(JsonNode * json, UserHandler * thread){
+void manageInstallation(JsonDict * json, UserHandler * thread){
     char * reponse;
 } //amène à la gestion de l'installation
 
-void manageTeam(JsonNode * json, UserHandler * thread){
+void manageTeam(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void goToAuctionRoom(JsonNode * json, UserHandler * thread){
+void goToAuctionRoom(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void viewAuctions(JsonNode * json, UserHandler * thread){
+void viewAuctions(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void bidToAuction(JsonNode * json, UserHandler * thread){
+void bidToAuction(JsonDict * json, UserHandler * thread){
     char * reponse;
 } // nécessite un id par enchère. l'id de l'enchère doit etre mentionné dans le message
 
-void viewUserBids(JsonNode * json, UserHandler * thread){
+void viewUserBids(JsonDict * json, UserHandler * thread){
     char * reponse;
 }
 
-void makeAuction(JsonNode * json, UserHandler * thread){
+void makeAuction(JsonDict * json, UserHandler * thread){
     char * reponse;
 }

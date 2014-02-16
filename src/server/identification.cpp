@@ -2,51 +2,46 @@
 #include "thread.h"
 #include "Manager.h"
 #include <cstlib>
+#include <vecteur>
 #include "json.h"
 #include "utils.h"
 
-void logIn(std::String message, UserHandler * thread)  // message = "user:password", TO DO : message en json
+void logIn(JsonDict * message, UserHandler * thread)  // message = "user:password", TO DO : message en json
 {
-    std::String reponse;
-    int index = message.find(":");
-    std::String userName = message.substr(0, index+1);
-    std::String password = message.substr(index, message.lenght());
+    std::String userName = message["username"];
+    std::String password = message["password"];
     char * filename = "data/users/"+userName+".json";
     std::String content;
     if(readFile(filename, &content) == 0){
-        JsonDict * userInfos =  dynamic_cast<JsonDict*> JsonValue::toString(content);
-        // TO DO : changer la ligne en dessous en qqch de propre
-        Manager * user = new Manager(userInfos["name_"], userName, userInfos["hash_"], new Club(userInfos["club_"][money_], userInfos["club_"][team_]));
-        if(user->checkPassword(password)){
-            thread.writeToClient("user.login : {signal = \"loginSuccess\"}");
-            thread.setUser(user);
+        JsonDict * userInfos =  dynamic_cast<JsonDict*> JsonValue::fromString(content);
+        if(userInfos["hash"] == password){
+            thread.writeToClient("user.login : {signal : \"loginSuccess\"}");
+            thread.setUser(new Manager(userInfos));
         }
         else{
-            thread.writeToClient("user.login : {signal = \"wrongPassword\"}");
-            delete(user);
+            thread.writeToClient("user.login : {signal : \"wrongPassword\"}");
         }
+        delete(userInfos);
     }
     else{
-        thread.writeToClient("user.login : {signal = \"accountNotFound\"}");
+        thread.writeToClient("user.login : {signal : \"accountNotFound\"}");
     }
 }
 
-void signUp(char * message, Thread * thread)
+void signUp(JsonDict * message, UserHandler * thread)
 {
-    std::String reponse;
-    int index = message.find(":");
-    std::String userName = message.substr(0, index+1);
-    std::String password = message.substr(index, message.lenght());
+    std::string userName = message["username"]
     char * filename = "data/users/"+userName+".json";
     std::String content;
     if(readFile(filename, &content) == -1 and errno=EIO){
-        //JsonValue json(content);
-        //TO DO : récupérer info de json
-        Club * club = new Club();
-        Manager * user = new Manager("Kong", userName, "Banane", club);
-        thread.writeToClient("user.signup : {signal = \"signupSuccess\"}");
+        Manager * user = new Manager(message["name"], userName, message["password"], new Club());
         thread.setUser(user);
-        thread.addUserDatas(userName, json.get("password"));  // rajoute le nouveau compte
+        std::string infos = convertInfos(user);
+        if (writeFile(fileName, infos) == 0){
+            thread.writeToClient("user.signup : {signal = \"signupSuccess\"}");
+        }
+        else{
+            thread.writeToClient("user.signup : {signal = \"failToSave\"}");
         }
     }
     else{
@@ -54,8 +49,30 @@ void signUp(char * message, Thread * thread)
     }
 }
 
+/*std::string convertInfos(Manager * user){
+    std::string infos = "{name : " + user->getName() + ", username : ";
+    infos =+ user->getUserName() "}";
+    int index = 0;
+    while (index > user->get){
+        JsonDict * player = infos["club_"]["players_"][index]; //TO DO : Optimiser la taille des lignes
+        players.push_back(new NonFieldPlayer(player["vocation"], player["speed"], player["force"], player["agility"], player["reflexes"], player["passPrecision"], player["wounded"], /*TO dO : inventaire*/NULL, player["level"], player["experience"])); //TO DO : object ou pointeur NoNFieldPlayer
+/*        index++;
+    }
+    for (int i = 0 ; i < (int) infos["club_"]["team"].size() ; i++){
+        JsonDict * player = infos["club_"]["team"][i];
+        team[i]= new NonFieldPlayer(player["vocation"], player["speed"], player["force"], player["agility"], player["reflexes"], player["passPrecision"], player["wounded"], /*TO dO : inventaire*/NULL, player["level"], player["experience"])));
+/*    }
+    for (int j = 0 ; j < (int) infos["club_"]["installations"].size() ; j++){
+        installations[i] = new Installation(infos["club_"]["installations"][j]["level"]);
+    }
+    Manager * user = new Manager(infos["name"], infos["username"], infos["hash_"], new Club(infos["club_"]["money_"], new Team(team), players);
+    return (std::string) infos;
+}*/
+
+
+
 int main(int argc, char * argv[]){
-    if(argc <= 1){
+    /*if(argc <= 1){
         std::cout<<"Invalid parameters"<<std::endl;
         exit(0);
     }
@@ -72,6 +89,6 @@ int main(int argc, char * argv[]){
         std::cout<<"Erreur en écriture "<<std::endl;
         exit(1);
     }
-    std::cout<<"Success"<<std::endl;
+    std::cout<<"Success"<<std::endl;*/
     return EXIT_SUCCESS;    // TO DO : vérifier si EXIT_SUCCESS à return
 }

@@ -6,16 +6,16 @@ using namespace std;
 
 
 
-Match::Match(Club& host, Club& guest){
-    clubs_[0] = &host;
-    clubs_[1] = &guest;
+Match::Match(Club& hostClub, Club& guestClub){
+    clubs_[host] = &hostClub;
+    clubs_[guest] = &guestClub;
 
     for (int i = 0; i< 2 ;++i){
         cout<<"i : "<<i<<endl;
         for (int j = 0; j < 7; ++j){
             cout<<"j : "<<j;
             NonFieldPlayer player = clubs_[i]->getTeam()->getPlayers()[j];
-            teams_[i][j] = FieldPlayer(player ,0); //TO IMPROVE
+            teams_[i][j] = FieldPlayer(player ,0, i); //TO IMPROVE
         }
     }
 
@@ -73,18 +73,20 @@ void Match::generateGrid(){
                 if (j == LENGHT/15 + LENGHT/20 or j == LENGHT*14/15 - LENGHT/20){
                     grid_[i][j].type = GOAL;//goal central
                 }
-                else if(j == 2*LENGHT/15 or j == 13 * LENGHT/15){
-                    FieldPlayer *tempPlayer = new FieldPlayer(KEEPER);
-                    grid_[i][j].player = tempPlayer;
-                    //cout<<endl<<"Le role des batteurs est : "<<grid_[i][j].player->getRole()<<endl;
+                else if(j == 2*LENGHT/15){
+                    grid_[i][j].player = &teams_[0][KEEPER];//ICI ROMAIN
+                }
+                else if (j == 13 * LENGHT/15){
+                    grid_[i][j].player = &teams_[1][KEEPER];
+                    //cout<<endl<<"Le role des gardiens est : "<<grid_[i][j].player->getRole()<<endl;
                 }
                 else if(j == 7*LENGHT/30 or j == 23*LENGHT/30){
-                    FieldPlayer *tempPlayer = new FieldPlayer(SEEKER);
+                    FieldPlayer *tempPlayer = new FieldPlayer(SEEKER,0);
                     grid_[i][j].player = tempPlayer;
                     //cout<<endl<<"Le role des attrapeurs est : "<<grid_[i][j].player->getRole()<<endl;
                 }
                 else if(j == 5*LENGHT/30 or j == 25*LENGHT/30){
-                    FieldPlayer *tempPlayer = new FieldPlayer(CHASER);
+                    FieldPlayer *tempPlayer = new FieldPlayer(CHASER,0);
                     grid_[i][j].player = tempPlayer;
                     //cout<<endl<<"Le role des poursuiveurs est : "<<grid_[i][j].player->getRole()<<endl;
                 }
@@ -94,14 +96,14 @@ void Match::generateGrid(){
                     grid_[i][j].type = GOAL;//goals latéraux
                 }
                 else if (j == 5*LENGHT/30 or j == 25*LENGHT/30){
-                    FieldPlayer *tempPlayer = new FieldPlayer(CHASER);
+                    FieldPlayer *tempPlayer = new FieldPlayer(CHASER,0);
                     grid_[i][j].player = tempPlayer;
                     //cout<<endl<<"Le role des poursuiveurs est : "<<grid_[i][j].player->getRole()<<endl;
                 }
             }
             else if (i == WIDTH/2 - WIDTH/30 or i == WIDTH/2 + WIDTH/30){
                 if(j == 6*LENGHT/30 or j == 24*LENGHT/30){
-                    FieldPlayer *tempPlayer = new FieldPlayer(BEATER);
+                    FieldPlayer *tempPlayer = new FieldPlayer(BEATER,0);
                     grid_[i][j].player = tempPlayer;
                 }
             }
@@ -122,15 +124,7 @@ int* Match::isInTheWay(int fromX,int fromY,int toX, int toY){
     return blockingPosition;
 }
 
-bool Match::isPlayerInGuestTeam(FieldPlayer& fieldPlayer){
-    bool playerInGuestTeam = false;
-    for (int i = 0; i<7; ++i){
-        if (teams_[1][i].getId() == fieldPlayer.getId()){
-            playerInGuestTeam = false;
-        }
-    }
-    return playerInGuestTeam;
-}
+
 
 string Match::print(){ //FOR TEST PURPOSES
     string c;
@@ -142,7 +136,12 @@ string Match::print(){ //FOR TEST PURPOSES
             if (grid_[i][j].type == USABLE){
                 
                 if (grid_[i][j].player != 0){
-                
+                    if (! grid_[i][j].player->isInGuestTeam()){
+                        c+="\e[0;34m";
+                    }
+                    else{
+                        c+="\e[0;31m";
+                    }
                     if (grid_[i][j].player->getRole() == KEEPER){
                         c+= "K ";
                     }
@@ -153,14 +152,9 @@ string Match::print(){ //FOR TEST PURPOSES
                         c+= "S ";
                     }
                     else if(grid_[i][j].player->getRole() == BEATER){
-                        if (isPlayerInGuestTeam(*grid_[i][j].player)){
-                            c+= "\e[0;34m B \e[0m";
-                        }
-                        else{
-                            c+= "\e[0;31m B \e[0m";
-
-                        }
+                        c+= "B ";
                     }
+                    c+= "\e[0m";
                     delete grid_[i][j].player;
                 }
                 else{

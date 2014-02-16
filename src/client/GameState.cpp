@@ -11,9 +11,8 @@ enum STATUS
 {
     STATUS_DEFAULT = 0,
     STATUS_BAD_ENTRY = -1,
-    STATUS_DISCONNECT = -2,
-    STATUS_RETURNMENU = -3,
-    STATUS_QUIT = -4
+    STATUS_RETURNMENU = -2,
+    STATUS_QUIT = -3
 };
 
 enum UNLOGGED
@@ -171,9 +170,6 @@ void MenuState::logic()
     case MENU_CONNECTEDLIST :
         client_->setNextState(STATE_CONNECTEDLIST);
         break;
-    case STATUS_DISCONNECT : //!! effectuer tout ce qui est nécéssaire pour la déconnection ici
-        client_->setNextState(STATE_INTRO);
-        break;
     case STATUS_QUIT :
         client_->setNextState(STATE_EXIT);
         break;
@@ -187,7 +183,6 @@ void MenuState::display()
         cout<<"Gérer vos infrastructures : 2"<<endl;
         cout<<"Accéder à l'hotel de vente : 3"<<endl;
         cout<<"Voir la liste de connectés. : 4"<<endl;
-        cout<<"Se déconnecter : 5"<<endl;
         cout<<"Quitter : Q"<<endl;
         cout<<endl;
         break;
@@ -220,9 +215,6 @@ void MenuState::parse(vector<string> & inputVec)
                 break;
             case '4' : //Liste de connectés
                 status_ = MENU_CONNECTEDLIST;
-                break;
-            case '5' : //Demande de déconnection
-                status_ = STATUS_DISCONNECT;
                 break;
             case 'q' :
             case 'Q' : //Demande de quit

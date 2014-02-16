@@ -32,7 +32,7 @@ int writeFile(char * fileName, std::string & content){
     int write_len = 0;
     int index=0;
     int delta;
-    int fd = open(fileName, O_WRONLY, O_CREAT, O_APPEND);
+    int fd = open(fileName, O_WRONLY, O_CREAT);
     if (fd){
         do {
             delta = content.size()-index;

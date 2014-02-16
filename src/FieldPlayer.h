@@ -8,10 +8,10 @@
 class FieldPlayer : public Player{
 
     public:
-        FieldPlayer(int role);
+        FieldPlayer(int role, bool guest);
         FieldPlayer();
         ~FieldPlayer();
-        FieldPlayer(NonFieldPlayer& nonFieldPlayer, int role);
+        FieldPlayer(NonFieldPlayer& nonFieldPlayer, int role, bool guest);
         FieldPlayer& operator=(Player& player);
         void move();
         void hitBudger();
@@ -19,14 +19,12 @@ class FieldPlayer : public Player{
         void throwQuaffle();
         void catchQuaffle();
         void testMove();
-        void initializeId();
-        int getId();
+        bool isInGuestTeam();
         int getRole();
         void setRole(int role);
     private:
-        static int nextID_;
+        bool guest_;
         int role_;
-        int id_;
 
 };
 

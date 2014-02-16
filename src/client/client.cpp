@@ -23,7 +23,7 @@ void Client::run()
         currentState_->handleEvents();
         currentState_->logic();
         currentState_->display();
-
+        //currentState... handle challenge
         changeState();
     }
 }

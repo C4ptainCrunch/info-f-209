@@ -14,6 +14,10 @@ public:
     virtual void handleEvents() = 0; //Gère les entrées de l'utilisateurs.
     virtual void logic() = 0; //Effectue les actions nécéssaire et demande un changement d'état en fonction de status.
     virtual void display() = 0; //Effectue tout les affichages de l'état.
+    //virtual bool checkChallenge(); //Vérifie si le joueur est défié
+    //virtual string getChallengerName(); redéfinir les 4 fonctions en les mettant vide dans intro, unlogged et ingame.
+    //virtual int getChallengerLevel();
+    //virtual void answerToChallenge(bool accept);
 
 protected:
     Client * client_;

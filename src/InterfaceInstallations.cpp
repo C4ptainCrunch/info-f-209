@@ -13,7 +13,7 @@
 using namespace std;
 
 //Ordre des installations : Infirmerie, Shop
-
+/*
 int main()
 {
     char quit = 'a';
@@ -47,3 +47,4 @@ int main()
 
     return 0;
 }
+*/

@@ -26,7 +26,7 @@ void Match::generateFieldPlayers(){
     for (int i = 0; i< 2 ;++i){
         for (int j = 0; j < 7; ++j){
             NonFieldPlayer player = clubs_[i]->getTeam()->getPlayers()[j];
-            teams_[i][j] = FieldPlayer(player ,0, i); //TO IMPROVE
+            teams_[i][j] = FieldPlayer(player ,0, i); 
             if (j ==0){
                 teams_[i][j].setRole(KEEPER);
             }
@@ -39,7 +39,6 @@ void Match::generateFieldPlayers(){
             else{
                 teams_[i][j].setRole(SEEKER);
             }
-            cout<<"ROLE : "<<teams_[i][j].getRole()<<endl;
         }
 
     }
@@ -70,48 +69,66 @@ void Match::generateGrid(){
                     grid_[i][j].type = GOAL;//goal central
                 }
                 else if(j == 2*LENGHT/15){
-                    grid_[i][j].player = &teams_[0][KEEPER];
+                    grid_[i][j].player = &teams_[0][0];
                 }
                 else if (j == 13 * LENGHT/15){
-                    grid_[i][j].player = &teams_[1][KEEPER];
-                    cout<<endl<<"Le role des gardiens est : "<<grid_[i][j].player->getRole()<<endl;
+                    grid_[i][j].player = &teams_[1][0];
                 }
                 else if(j == 7*LENGHT/30){
-                    grid_[i][j].player = &teams_[0][SEEKER];
+                    grid_[i][j].player = &teams_[0][6];
                 }
                 else if(j == 23*LENGHT/30){
-                    grid_[i][j].player = &teams_[1][SEEKER];
-                    cout<<endl<<"Le role des attrapeurs est : "<<grid_[i][j].player->getRole()<<endl;
+                    grid_[i][j].player = &teams_[1][6];
                 }
                 else if(j == 5*LENGHT/30){
-                    grid_[i][j].player = &teams_[0][CHASER];
+                    grid_[i][j].player = &teams_[0][1];
 
                 }
                 else if(j == 25*LENGHT/30){
-                    grid_[i][j].player = &teams_[1][CHASER];
-                    cout<<endl<<"Le role des poursuiveurs est : "<<grid_[i][j].player->getRole()<<endl;
+                    grid_[i][j].player = &teams_[1][1];
                 }
             }
-            else if (i == WIDTH/2 - WIDTH/15 or i== WIDTH/2 + WIDTH/15){
+            else if (i == WIDTH/2 - WIDTH/15){
                 if(j == 2 * LENGHT/15 or j == 13 * LENGHT/15){
                     grid_[i][j].type = GOAL;//goals latéraux
                 }
                 else if (j == 5*LENGHT/30){
-                    grid_[i][j].player = &teams_[0][CHASER];
+                    grid_[i][j].player = &teams_[0][2];
 
                 }
                 else if(j == 25*LENGHT/30){
-                    grid_[i][j].player = &teams_[1][CHASER];
-                    cout<<endl<<"Le role des poursuiveurs est : "<<grid_[i][j].player->getRole()<<endl;
+                    grid_[i][j].player = &teams_[1][2];
                 }
             }
-            else if (i == WIDTH/2 - WIDTH/30 or i == WIDTH/2 + WIDTH/30){
+            else if (i== WIDTH/2 + WIDTH/15){
+                if(j == 2 * LENGHT/15 or j == 13 * LENGHT/15){
+                    grid_[i][j].type = GOAL;//goals latéraux
+                }
+                else if (j == 5*LENGHT/30){
+                    grid_[i][j].player = &teams_[0][3];
+
+                }
+                else if(j == 25*LENGHT/30){
+                    grid_[i][j].player = &teams_[1][3];
+                }
+            }
+            else if (i == WIDTH/2 - WIDTH/30){
                 if(j == 6*LENGHT/30){
-                    grid_[i][j].player = &teams_[0][BEATER];
+                    grid_[i][j].player = &teams_[0][4];
 
                 }
                 else if(j == 24*LENGHT/30){
-                    grid_[i][j].player = &teams_[1][BEATER];
+                    grid_[i][j].player = &teams_[1][4];
+                }
+
+            }
+            else if (i == WIDTH/2 + WIDTH/30){
+                if(j == 6*LENGHT/30){
+                    grid_[i][j].player = &teams_[0][5];
+
+                }
+                else if(j == 24*LENGHT/30){
+                    grid_[i][j].player = &teams_[1][5];
                 }
             }
     //--------------------------BALLS----------------------------------
@@ -144,10 +161,10 @@ string Match::print(){ //FOR TEST PURPOSES
             if (grid_[i][j].type == USABLE){
                 if (grid_[i][j].player != 0){
                     if (! grid_[i][j].player->isInGuestTeam()){
-                        c+="\e[0;34m";
+                        c+="\033[1;94m";
                     }
                     else{
-                        c+="\e[0;31m";
+                        c+="\033[1;91m";
                     }
                     if (grid_[i][j].player->getRole() == KEEPER){
                         c+= "G ";
@@ -161,7 +178,7 @@ string Match::print(){ //FOR TEST PURPOSES
                     else if(grid_[i][j].player->getRole() == BEATER){
                         c+= "B ";
                     }
-                    c+= "\e[0m";
+                    c+= "\033[0m";
                     //delete grid_[i][j].player;
                 }
                 else{
@@ -170,7 +187,7 @@ string Match::print(){ //FOR TEST PURPOSES
                 
             }
             else if (grid_[i][j].type == GOAL){
-                c += "오";
+                c += "\033[1;32m오\033[0m";
             }
             else{
                 c += "\u2B22 ";

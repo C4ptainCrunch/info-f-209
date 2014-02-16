@@ -26,13 +26,10 @@ int main(int argc, char const *argv[])
 
     // Team teamOne(playersT1);
     // Team teamTwo(playersT2);
-    cout<<"1"<<endl;
     Club host = Club();
     Club guest = Club();
     
-    cout<<"2"<<endl;
     Match match = Match(host,guest);
-    cout<<"3"<<endl;
     string x = match.print();
     cout<<x<<endl;
     bool ended = false;

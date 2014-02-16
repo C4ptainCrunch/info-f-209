@@ -20,7 +20,7 @@ FieldPlayer::FieldPlayer(NonFieldPlayer& nonFieldPlayer, int role, bool guest){
         wounded_ = nonFieldPlayer.isWounded();
         inventory_ = nonFieldPlayer.getInventory();
         role_ = role;
-        guest_ = false;
+        guest_ = guest;
 
 }
 

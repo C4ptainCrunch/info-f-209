@@ -17,18 +17,19 @@ enum { WIDTH = 30, LENGHT = 64};
 
 enum { KEEPER = 0, CHASER = 1, BEATER = 2, SEEKER = 3};// 1 KEEPER, 3 CHASERS, 2 BEATERS, 1 SEEKER
 
+enum { host = 0, guest = 1};
+
 
 class Match{
 
     public:
-        Match(Club& host, Club& guest);
+        Match(Club& hostClub, Club& guestClub);
         ~Match();
         void movePlayer(int fromX, int fromY,int toX, int toY);
         int* getScore();
         int addPoint(bool guestTeam ,int delta = 1);
         void moveBalls();
         bool checkEndOfMatch();
-        bool isPlayerInGuestTeam(FieldPlayer& fieldPlayer);
         int* isInTheWay(int fromX,int fromY,int toX, int toY);
         void generateFieldPlayers();
         std::string print();//FOR TESTS

@@ -1,21 +1,17 @@
 #include "FieldPlayer.h"
 
-int FieldPlayer::nextID_ = 1;
+FieldPlayer::FieldPlayer(int role, bool guest): role_(role), guest_(guest){
 
-FieldPlayer::FieldPlayer(int role): role_(role){
-    id_ = nextID_;
-    nextID_ += 1;
 }
 
 FieldPlayer::FieldPlayer(): role_(0){
-    id_ = nextID_;
-    nextID_ += 1;
+    guest_ = false;
 
 }
 
 FieldPlayer::~FieldPlayer(){}
 
-FieldPlayer::FieldPlayer(NonFieldPlayer& nonFieldPlayer, int role){
+FieldPlayer::FieldPlayer(NonFieldPlayer& nonFieldPlayer, int role, bool guest){
         speed_ = nonFieldPlayer.getSpeed();
         force_ = nonFieldPlayer.getForce();
         agility_ = nonFieldPlayer.getAgility();
@@ -24,8 +20,7 @@ FieldPlayer::FieldPlayer(NonFieldPlayer& nonFieldPlayer, int role){
         wounded_ = nonFieldPlayer.isWounded();
         inventory_ = nonFieldPlayer.getInventory();
         role_ = role;
-        id_ = nextID_;
-        nextID_ += 1;
+        guest_ = false;
 
 }
 
@@ -39,13 +34,11 @@ FieldPlayer& FieldPlayer::operator=(Player& player)
         passPrecision_ = player.getPassPrecision();
         wounded_ = player.isWounded();
         inventory_ = player.getInventory();
-        id_ = nextID_;
-        nextID_ += 1;
     }
     return *this;
 }
-void initializeId(){
-    static int nextID_ = 1;
+bool FieldPlayer::isInGuestTeam(){
+    return guest_;
 }
 
 void FieldPlayer::move(){}
@@ -60,9 +53,6 @@ void FieldPlayer::catchQuaffle(){}
 
 void FieldPlayer::testMove(){}
 
-int FieldPlayer::getId(){
-    return id_;
-}
 
 void FieldPlayer::setRole(int role){
     role_ = role;

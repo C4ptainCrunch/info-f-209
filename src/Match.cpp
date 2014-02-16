@@ -14,7 +14,8 @@ Match::Match(Club& host, Club& guest){
         cout<<"i : "<<i<<endl;
         for (int j = 0; j < 7; ++j){
             cout<<"j : "<<j;
-            //teams_[i][j] = FieldPlayer(clubs_[i]->getTeam()->getPlayers()[j],0); TO IMPROVE
+            NonFieldPlayer player = clubs_[i]->getTeam()->getPlayers()[j];
+            teams_[i][j] = FieldPlayer(player ,0); //TO IMPROVE
         }
     }
 

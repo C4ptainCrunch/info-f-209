@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-std=c++11 -c
-EXECUTABLE=a.out
+EXECUTABLE=json
 SOURCES=test.cpp json.cpp utils.cpp
 H=test.h json.h utils.h
 OBJECTS=$(SOURCES:.cpp=.o)

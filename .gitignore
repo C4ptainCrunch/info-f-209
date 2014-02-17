@@ -1,7 +1,7 @@
 # Ne pas versionner le rendu pdf
 srd/srd.pdf
 pv/pv*/*.pdf
-
+/src/server/server
 ##########################
 ignores génériques
 ##########################

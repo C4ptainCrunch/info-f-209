@@ -6,9 +6,6 @@ Ball::Ball(){
 Ball::~Ball(){
 }
 
-Ball Ball::operator=(){
-}
-
 void Ball::move(){
 }
 

@@ -8,9 +8,9 @@ class Budger : public Ball{
     public:
         Budger();
         ~Budger();
-        Budger operator=();
-        void move();
-        void hitPlayer();
+        Position autoMove(const Position pos);
+        Position isHit(const Position pos, const char direction, const int power);
+        void hitPlayer(Player& player, int power);
 };
 
 #endif // BUDGER_H

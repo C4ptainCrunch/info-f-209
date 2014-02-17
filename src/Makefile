@@ -13,7 +13,7 @@ $(BUILD_DIR):
 
 tests: test
 
-test: all
+test: clean all
 	@printf "\n\e[93m Building status :\e[0m\n"
 	@printf "\e[93m===================\e[0m\n"
 	@for dir in $(SUB_PROJETS);\

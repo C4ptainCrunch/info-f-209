@@ -1,23 +1,50 @@
 #include "Team.h"
 
+#include <iostream>
+using namespace std;
 
 Team::Team(){
+    for(int i = 0; i < 7; ++ i){
+        players_[i] = 0;
+    }
 }
 
-Team::~Team(){
+Team::Team(NonFieldPlayer *players[7]){
+    for(int i = 0; i < 7; ++ i){
+        players_[i] = players[i];
+    }
 }
 
-Team Team::operator=(){
+Team::~Team(){}
+
+void Team::setPlayers(NonFieldPlayer players[7]){
+    for (int i = 0; i<7; ++i){
+        players_[i] = &players[i];
+    }
 }
 
-Player& Team::getPlayers(){
+void Team::setPlayer(NonFieldPlayer& player,int pos){
+    players_[pos] = &player;
 }
 
-NonFieldPlayer& Team::getNonFieldPlayers(){
+NonFieldPlayer* Team::getPlayers(){
+    return *    players_;
 }
 
-void Team::setPlayers(){
+NonFieldPlayer* Team::changePlayer(int pos, NonFieldPlayer& player){
+    NonFieldPlayer *tmpPlayer = players_[pos];
+    players_[pos] = &player;
+    return tmpPlayer;
 }
 
-void Team::setNonFieldPlayers(){
+NonFieldPlayer& Team::removePlayer(int pos){
+    NonFieldPlayer* tempPlayer = (players_[pos]);
+    players_[pos] = NULL;
+    return *tempPlayer;
+}
+
+void Team::swapPlayers(int pos1, int pos2){
+    NonFieldPlayer* tempPlayer = (players_[pos1]);
+    players_[pos1] = players_[pos2];
+    players_[pos2] = tempPlayer;
 }

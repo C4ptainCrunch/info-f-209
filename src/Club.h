@@ -3,34 +3,40 @@
 
 #include <vector>
 #include "Installation.h"
-#include "Manager.h"
 #include "Team.h"
 #include "NonFieldPlayer.h"
+
+enum {INFIRMARY = 1, CANDYSHOP = 2, FANSHOP = 3, FIELD = 4, TRAININGFIELD = 5};
+
 
 class Club {
 
     public:
         Club();
-        Club(int money, vector<Installation> installations, Team& team, vector<NonFieldPlayer> players)
+        Club(int money, Installation* installations, Team& team, std::vector<NonFieldPlayer> players);
         ~Club();
-        int getMoney();
+
         int addMoney(const int deltaMoney);
+        int getMoney();
+
         int getLevel();//calcule le level
-        Team& getTeam();
-        std::vector<Installation> getInstallations();
+
+        Team* getTeam();
+
         std::vector<NonFieldPlayer> getNonFieldPlayers();
-        void addInstallation(Installation& installation);
-        std::vector<Installation> getInstallations();
-        void delInstallation(int pos);
-        void addNonFieldPlayer(Player player);
-        Player & player removeNonFieldPlayer(int pos);
+        void addNonFieldPlayer(NonFieldPlayer player);
+        NonFieldPlayer& removeNonFieldPlayer(unsigned int pos);
+
+        void addInstallation(Installation& installation, int pos);
+        Installation* getInstallations();
+        Installation& delInstallation(unsigned int pos);
 
 
     private:
-        int money;
-        std::vector< Installation > installations;
-        Team *team;
-        std::vector< NonFieldPlayer > players;
+        int money_;
+        Installation installations_[5];
+        Team *team_ = new Team();
+        std::vector<NonFieldPlayer> players_;
 };
 
 #endif // CLUB_H

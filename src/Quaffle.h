@@ -2,13 +2,14 @@
 #define QUAFFLE_H
 
 #include "Ball.h"
+#include "Position.h"
 
 class Quaffle : public Ball{
 
     public:
         Quaffle();
         ~Quaffle();
-        void move();
+        Position thrown(const Position pos, const char direction, const int power);
 
 };
 

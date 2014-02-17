@@ -6,9 +6,8 @@
 class Field : public Installation{
 
     public:
-        Field();
+        Field(int level);
         ~Field();
-        Field operator=();
 };
 
 #endif // FIELD_H

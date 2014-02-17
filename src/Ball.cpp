@@ -1,16 +1,7 @@
 #include "Ball.h"
 
-Ball::Ball(){
-}
+Ball::Ball(int speed):speed_(speed){ }
 
 Ball::~Ball(){
-}
 
-void Ball::move(){
-}
-
-int Ball::getSpeed(){
-}
-
-void Ball::setSpeed(){
 }

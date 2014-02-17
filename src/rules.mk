@@ -1,7 +1,7 @@
 all : $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(COMPILATOR) $(LDFLAGS) $^ -o $@
+	$(COMPILATOR) $(LDFLAGS) $^ -o $(BUILD_DIR)/$@
 
 $(EXECUTABLE).o: $(HEADERS)
 
@@ -11,5 +11,6 @@ $(EXECUTABLE).o: $(HEADERS)
 .PHONY: clean
 
 clean:
-	rm *.o
-	rm $(EXECUTABLE)
+	@rm -f *.o
+	@rm -f $(EXECUTABLE)
+	@echo "Cleaning..."

@@ -29,3 +29,7 @@ ifdef DEBUG
 	LDFLAGS+= -g
 	CFLAGS+= -g
 endif
+
+ifndef BUILD_DIR
+	BUILD_DIR=.
+endif

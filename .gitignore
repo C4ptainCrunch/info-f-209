@@ -1,7 +1,7 @@
 ###################
 # Ignore binaries #
 ###################
-
+/src/build/*
 /src/server/server
 /src/client/client
 /src/lib/json/json

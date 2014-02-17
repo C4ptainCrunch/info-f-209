@@ -4,8 +4,8 @@
 
 /src/server/server
 /src/client/client
-/src/json/json
-/src/MatchInstance
+/src/lib/json/json
+/src/models/MatchInstance
 
 ####################
 # Ignore pdf files #

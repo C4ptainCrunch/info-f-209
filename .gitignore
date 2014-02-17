@@ -5,7 +5,7 @@
 /src/server/server
 /src/client/client
 /src/json/json
-
+/src/MatchInstance
 
 ####################
 # Ignore pdf files #

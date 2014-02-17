@@ -2,13 +2,16 @@ include options.mk
 
 SUB_PROJETS=client server lib/json lib/socket lib/file views models
 EXECUTABLE=client server
+BUILD_DIR=$(shell pwd)/build
 
-all:
+all: $(BUILD_DIR)
 	@echo "Building all..."
-	@for dir in $(SUB_PROJETS); do echo "Build $$dir\n============" && $(MAKE) -C $$dir BUILD_DIR=$(shell pwd)/build; done
+	@for dir in $(SUB_PROJETS); do echo "Build $$dir\n============" && $(MAKE) -C $$dir BUILD_DIR=$(BUILD_DIR); done
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
+
+tests: test
 
 test: all
 	@echo "\n Building status :"

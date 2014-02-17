@@ -1,13 +1,11 @@
 #include "TrainingField.h"
 
-TrainingField::TrainingField(){
-}
+TrainingField::TrainingField() : Installation(1){}
 
-TrainingField::~TrainingField(){
-}
+TrainingField::~TrainingField(){}
 
-TrainingField TrainingField::operator=(){
-}
+//TrainingField TrainingField::operator=(TrainingField& trainingField){}
 
-void TrainingField::training(){
+void TrainingField::training(NonFieldPlayer& player){
+    player.changeExperience(level_*100);
 }

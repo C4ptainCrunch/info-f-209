@@ -1,13 +1,10 @@
 #include "Infirmary.h"
 
-Infirmary::Infirmary(){
-}
+Infirmary::Infirmary(int level): Installation(level) { }
 
-Infirmary::~Infirmary(){
-}
+Infirmary::~Infirmary() {}
 
-Infirmary Infirmary::operator=(){
-}
-
-void Infirmary::heal(){
+void Infirmary::heal(Player& player)
+{
+    player.setWoundedState(false);
 }

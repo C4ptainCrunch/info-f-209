@@ -3,6 +3,9 @@
 
 #include "Ball.h"
 
+#include "Position.h"
+#include "Player.h"
+
 class Budger : public Ball{
 
     public:

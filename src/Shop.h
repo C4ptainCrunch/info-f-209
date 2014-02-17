@@ -2,18 +2,20 @@
 #define Shop_h
 
 #include "Installation.h"
+#include <string>
 
 class Shop : public Installation{
 
     public:
-        Shop(String name,int income);
+        Shop(std::string name, unsigned int income);
         ~Shop();
-        int getIncome();
-        void setIncome();
+        unsigned int getIncome();
+        void setIncome(unsigned int income);
+        std::string getName();
 
     protected:
-        int income;
-        String name;
+        unsigned int income_;
+        std::string name_;
 };
 
 #endif // Shop_h

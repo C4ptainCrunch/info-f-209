@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-std=c++11 -c
 EXECUTABLE=server
-SOURCES=Socket.cpp bind.cpp  helpers.cpp  server.cpp thread.cpp UserHandler.cpp ../views/views.cpp
+SOURCES=bind.cpp  helpers.cpp  server.cpp thread.cpp UserHandler.cpp ../views/views.cpp ../lib/socket/Socket.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 
 all: $(SOURCES) $(EXECUTABLE)

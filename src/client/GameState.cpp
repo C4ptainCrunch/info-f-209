@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Socket.h"
+#include "../lib/socket/Socket.h"
 #include "client.h"
 #include "GameState.h"
 #include "utilitary.h"

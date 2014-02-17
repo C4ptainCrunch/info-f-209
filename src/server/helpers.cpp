@@ -47,7 +47,7 @@ std::string recieveFrom(const int sock, char * buffer){
         else {
             buffer[len] = '\0';
             char * i = buffer;
-            for(char c = i[0]; i != '\0'; i++) {
+            for(char c = i[0]; c != '\0'; i++) {
                 if(c == '\n' && lr < 2)
                     lr++;
                 else if(c == '\n'){

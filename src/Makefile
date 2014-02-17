@@ -1,10 +1,21 @@
-COMPILATOR=clang++
-#COMPILATOR=g++
+ifdef C
+    COMPILATOR=$(C)
+else
+    COMPILATOR=clang++
+endif
+
+ifdef N
+
 ifeq ($(COMPILATOR), clang++)
 	CFLAGS=-std=c++11 -Wpedantic -Wall -Wextra -Winit-self -Winline -Wconversion -Weffc++ -Wctor-dtor-privacy -Woverloaded-virtual -Wconversion -Wsign-promo -g
 else
 	CFLAGS=-std=c++11 -Wpedantic -Wall -Wextra -Winit-self -Winline -Wconversion -Weffc++ -Wstrict-null-sentinel -Wnoexcept -Wctor-dtor-privacy -Woverloaded-virtual -Wconversion -Wsign-promo -Wzero-as-null-pointer-constant
 endif
+
+else
+	CFLAGS=-std=c++11
+endif
+
 LDFLAGS= -g
 
 SOURCES=$(wildcard *.cpp)

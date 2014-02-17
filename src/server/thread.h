@@ -6,7 +6,7 @@
 #include "helpers.h"
 
 #define RCV_SIZE 2
-#include "Socket.h"
+#include "../lib/socket/Socket.h"
 
 void connection(const int socket);
 

@@ -14,7 +14,7 @@
 #include <sys/socket.h>
 
 #include <string>
-#include "Socket.h"
+#include "../lib/socket/Socket.h"
 #include "GameState.h"
 
 #define PORT 8000

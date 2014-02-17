@@ -1,8 +1,7 @@
-include ../options.mk
+include ../../options.mk
 
 SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-HEADER=$(wildcard *.hpp)
-EXECUTABLE=MatchInstance
+HEADERS=$(wildcard *.h)
 
 include ../rules.mk

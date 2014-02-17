@@ -5,13 +5,25 @@ EXECUTABLE=client server
 
 all:
 	@echo "Building all..."
-	@for dir in $(SUB_PROJETS); do make -C $$dir BUILD_DIR=$(shell pwd)/build; done
-	@echo "=============="
-	@echo "Done building."
+	@for dir in $(SUB_PROJETS); do echo "Build $$dir\n============" && $(MAKE) -C $$dir BUILD_DIR=$(shell pwd)/build; done
+
+$(BUILD_DIR):
+	mkdir $(BUILD_DIR)
+
+test: all
+	@echo "\n Building status :"
+	@echo "==================="
+	@for dir in $(SUB_PROJETS);\
+	do\
+		tests/buildok.sh $$dir;\
+	done
+
 
 clean:
-	@for dir in $(SUB_PROJETS); do make -C $$dir clean > /dev/null; done
+	@for dir in $(SUB_PROJETS); do $(MAKE) -C $$dir clean > /dev/null; done
 	@rm -f build/*
 	@echo "Cleaning..."
+
+
 
 .PHONY: clean

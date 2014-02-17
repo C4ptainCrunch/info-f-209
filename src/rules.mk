@@ -1,4 +1,5 @@
 all : $(SOURCES) $(EXECUTABLE)
+	@touch build.ok
 
 $(EXECUTABLE): $(OBJECTS)
 	$(COMPILATOR) $(LDFLAGS) $^ -o $(BUILD_DIR)/$@
@@ -11,6 +12,6 @@ $(EXECUTABLE).o: $(HEADERS)
 .PHONY: clean
 
 clean:
-	@rm -f *.o
+	@rm -f *.o build.ok
 	@rm -f $(EXECUTABLE)
 	@echo "Cleaning..."

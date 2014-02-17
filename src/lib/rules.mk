@@ -1,4 +1,5 @@
 all : $(OBJECTS)
+	@touch build.ok
 
 %.o:%.cpp $(HEADERS)
 	$(COMPILATOR) $(CFLAGS) -c $< -o $@
@@ -6,5 +7,5 @@ all : $(OBJECTS)
 .PHONY: clean
 
 clean::
-	@rm -f *.o
+	@rm -f *.o build.ok
 	@echo "Cleaning..."

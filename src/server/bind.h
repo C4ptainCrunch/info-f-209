@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <netdb.h>
+#include <cstring>
 
 #include <string>
 

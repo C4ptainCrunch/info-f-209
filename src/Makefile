@@ -4,7 +4,7 @@ SUB_PROJETS=client server lib/json lib/socket lib/file views models
 EXECUTABLE=client server
 BUILD_DIR=$(shell pwd)/build
 
-all:
+all: $(BUILD_DIR)
 	@printf "\e[93mBuilding all...\e[0m\n"
 	@for dir in $(SUB_PROJETS); do printf "\n\e[93mBuild $$dir\n============\e[0m\n" && $(MAKE) -C $$dir BUILD_DIR=$(BUILD_DIR); done
 

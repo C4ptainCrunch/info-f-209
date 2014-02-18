@@ -115,7 +115,11 @@ JsonString * JsonString::fromString(std::string message, int &i){
     i++;
     }
     throw 1;
+}
 
+std::string JsonString::toString(JsonString * json){
+    std::string infos = "\"" + (std::string) *json + "\"";
+    return infos;
 }
 
 // Dict
@@ -152,6 +156,20 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
             i++;
         }
     }
+}
+
+std::string JsonDict::toString(JsonList * json){
+    std::string infos = "[";
+    int index=0;
+    while (index < json.size()){
+        infos += JsonValue::toString(json[index]);
+        index++;
+        if (index+1 != json.size()){
+            infos+=", ";
+        }
+    }
+    infos+="]";
+    return infos;
 }
 
 void JsonDict::add(JsonString key, JsonValue * value){

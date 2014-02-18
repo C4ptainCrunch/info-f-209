@@ -1,3 +1,6 @@
+#ifdef LIBTEST_H
+#define LIBTEST_H
+
 #include <vector>
 #include <iostream>
 #include <exception>
@@ -48,3 +51,4 @@ void assertEqual(T value1, U value2, std::string message=""){
     }
 }
 
+#endif // LIBTEST_H

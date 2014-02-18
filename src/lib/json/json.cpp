@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <typeinfo>
+#include <map>
 
 #include "json.h"
 #include "utils.h"

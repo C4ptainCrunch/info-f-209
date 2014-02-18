@@ -34,6 +34,8 @@ class JsonDict : public JsonValue {
         static JsonDict * fromString(std::string message, int &i);
         static JsonDict * fromString(std::string message);
 
+        std::string toString(JsonDict * json);
+
         JsonValue * operator[](const std::string &str);
 
         void add(JsonString key, JsonValue * value);

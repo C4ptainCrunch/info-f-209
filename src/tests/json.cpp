@@ -4,7 +4,18 @@ using namespace std;
 //#include "../lib/json/json.h"
 
 void test_empty_dict(){
-    assert(false);
+    assert(true);
+
+    assertFalse(false);
+
+    int *top = NULL;
+    assertNull(top);
+
+    double a = 5;
+    double *val = &a;
+    assertNotNull(val);
+
+    assertEqual(8, 8.0);
     // string message = "{}";
     // int i = 0;
 

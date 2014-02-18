@@ -4,7 +4,7 @@ using namespace std;
 //#include "../lib/json/json.h"
 
 void test_empty_dict(){
-    cout << "plip" << endl;
+    assert(false);
     // string message = "{}";
     // int i = 0;
 

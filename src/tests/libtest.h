@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <exception>
 
 #define TEST() int main(){ std::vector<func_struct> test_vector = TESTVEC; return test(test_vector); }
 
@@ -13,3 +14,14 @@ struct func_struct {
 };
 
 int test(std::vector<func_struct> testvec);
+
+void assert(bool value, std::string message="Assert failed");
+
+class AssertFail: public std::exception {
+    public:
+        AssertFail(std::string message);
+        std::string what();
+
+    private:
+        std::string message;
+};

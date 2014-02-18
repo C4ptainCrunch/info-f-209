@@ -19,6 +19,8 @@ class JsonString : public JsonValue {
         static JsonString * fromString(std::string message, int &i);
         static JsonString * fromString(std::string message);
 
+        std::string toString(JsonString * json);
+
         JsonString operator=(const JsonString &str);
         operator std::string() const;
 
@@ -46,6 +48,8 @@ class JsonList : public JsonValue {
     public:
         static JsonList * fromString(std::string message, int &i);
         static JsonList * fromString(std::string message);
+
+        std::string toString(JsonList * json);
 
         JsonValue * operator[](const int &i);
 

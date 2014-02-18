@@ -6,6 +6,7 @@
 /src/client/client
 /src/lib/json/json
 /src/models/MatchInstance
+/src/tests/json
 build.ok
 
 ####################

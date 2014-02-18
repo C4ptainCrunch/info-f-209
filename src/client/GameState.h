@@ -23,7 +23,8 @@ public:
 
     //FONCTIONS D'APPELS SERVEURS :
 
-    virtual bool checkChallenge(); //Vérifie si le joueur est défié
+    virtual bool notifyServQuit(); //Notifie le serveur de l'arrêt du user.
+    virtual bool checkChallenge(); //Vérifie si le joueur est défié.
     virtual std::string getChallengerName();
     virtual int getChallengerLevel();
     virtual int answerToChallenge(bool accept);

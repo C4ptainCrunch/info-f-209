@@ -158,17 +158,16 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
     }
 }
 
-std::string JsonDict::toString(JsonList * json){
-    std::string infos = "[";
-    int index=0;
-    while (index < json.size()){
-        infos += JsonValue::toString(json[index]);
-        index++;
+std::string JsonDict::toString(JsonDict * json){
+    std::string infos = "{";
+    for (std::map<std::string, JsonValue *>::iterator index json->dict.begin() ; index != json->dict.end() ; index++ ){
+        infos += toString(json[index->first]) + " : ";
+        infos += toString(json[index->second]);
         if (index+1 != json.size()){
             infos+=", ";
         }
     }
-    infos+="]";
+    infos+="}";
     return infos;
 }
 

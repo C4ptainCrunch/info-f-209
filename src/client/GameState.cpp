@@ -19,7 +19,10 @@ enum UNLOGGED
 {
     UNLOGGED_CONNECTED = 1,
     UNLOGGED_CONNECT = 2,
-    UNLOGGED_REGISTER = 3
+    UNLOGGED_REGISTER = 3,
+    UNLOGGED_WRONG_LOG = 4,
+    UNLOGGED_ALREADY_USED = 5,
+    UNLOGGED_REGISTERED = 6
 };
 
 enum MENU
@@ -30,6 +33,13 @@ enum MENU
     MENU_CONNECTEDLIST = 4
 };
 
+enum CODES
+{
+    CODE_SUCCESS,
+    CODE_FAIL_ATTEMPT,
+    CODE_UNEXPECTED_FAILURE
+};
+
 using namespace std;
 
 GameState::GameState(Client * client) : client_(client), status_(STATUS_DEFAULT) {}
@@ -38,14 +48,19 @@ GameState::~GameState() {}
 
 //FONCTIONS D'APPELS SERVEURS :
 
-bool GameState::checkChallenge() {} //Vérifie si le joueur est défié
+bool GameState::notifyServQuit() {}
+
+bool GameState::checkChallenge() {}
 string GameState::getChallengerName() {}
 int GameState::getChallengerLevel() {}
 int GameState::answerToChallenge(bool accept) {}
 
 //log in
 
-int GameState::log(string username, string password) {}
+int GameState::log(string username, string password)
+{
+    return CODE_SUCCESS;
+}
 int GameState::sign(string username, string password) {}
 
 //general
@@ -56,27 +71,27 @@ int GameState::getLevel() {}
 
 //team management
 
-vector<struct objectDataPair> GameState::getInTeamPlayerList() {} //liste des joueurs de la team
-vector<struct objectDataPair> GameState::getOutOfTeamPlayerList() {} //liste des autres joueurs du club
+vector<struct objectDataPair> GameState::getInTeamPlayerList() {}
+vector<struct objectDataPair> GameState::getOutOfTeamPlayerList() {}
 
-Player GameState::getDataOnPlayer(string name) {} //infos détaillées sur un joueur
+Player GameState::getDataOnPlayer(string name) {}
 bool GameState::healPlayer(string name) {}
-int GameState::swapPlayer(string name, string name2) {} //swap un joueur de la team avec un joueur du club en dehors de la team
+int GameState::swapPlayer(string name, string name2) {}
 
 //infrastructures management
 vector<struct objectDataPair> GameState::getInfrastructureList() {}
 bool GameState::UpdateInfrastructure(int ID) {}
 
 //auction house
-vector<struct objectDataPair> GameState::getSellingPlayer() {}  //liste des joueurs vendu à l'hotel des ventes
-int GameState::sell(string name, int prix) {} //place un joueur à l'hdv
-int GameState::bid(string name) {} //enchéri dans un tour sur un joueur
-int GameState::getRoundOnBid(string name) {} //obtient le nbre de tours déjà passé sur une enchère
-int GameState::getRemainingTimeOnRound(string name) {} //le temps restant jusqu'a la fin de l'enchère
-int GameState::getCurrentBid(string name) {} //enchère courrante (prix)
-int GameState::getBidderCount(string name) {} //nombre d'enchérisseurs de ce tour ci
-bool GameState::checkEndOfBid(string name) {} //vérifie si l'enchère est terminé
-int GameState::endBid(string name) {} //résout la fin de l'enchère
+vector<struct objectDataPair> GameState::getSellingPlayer() {}
+int GameState::sell(string name, int prix) {}
+int GameState::bid(string name) {}
+int GameState::getRoundOnBid(string name) {}
+int GameState::getRemainingTimeOnRound(string name) {}
+int GameState::getCurrentBid(string name) {}
+int GameState::getBidderCount(string name) {}
+bool GameState::checkEndOfBid(string name) {}
+int GameState::endBid(string name) {}
 
 //user list
 vector<struct objectDataPair> GameState::getConnectedList() {}
@@ -114,14 +129,28 @@ void UnloggedState::logic()
 {
     switch (status_) { //status_ est modifié dans handleEvent
     case UNLOGGED_CONNECT :
-        //envoyer et traiter les données du serveur.
-        status_ = UNLOGGED_CONNECTED;
-        client_->setNextState(STATE_MENU);
+        int res = log(nameInput, passInput); //appel serveur ici
+
+        if (res == CODE_SUCCSS) {
+            status_ = UNLOGGED_CONNECTED;
+            client_->setNextState(STATE_MENU);
+        } else
+        if (res == CODE_FAIL_ATTEMPT)
+            status_ = UNLOGGED_WRONG_LOGS;
         break;
+
     case UNLOGGED_REGISTER :
-        //envoyer et traiter les données du serveur.
+        int res = sign(nameInput, passInput);
+
+        if (res == CODE_SUCCSS)
+            status_ = UNLOGGED_REGISTERED;
+        else
+        if (res == CODE_FAIL_ATTEMPT)
+            status_ = UNLOGGED_ALREADY_USED;
         break;
+
     case STATUS_QUIT :
+        notifyServQuit();
         client_->setNextState(STATE_EXIT);
         break;
     }
@@ -139,6 +168,18 @@ void UnloggedState::display()
         cout<<"Connecté."<<endl;
         cout<<endl;
         break;
+    case UNLOGGED_WRONG_LOGS :
+        cout<<"Nom de compte ou mot de passe incorrecte."<<endl;
+        cout<<endl;
+        break
+    case UNLOGGED_REGISTERED :
+        cout<<"Enregistrement terminé"<<endl;
+        cout<<endl;
+        break
+    case UNLOGGED_ALREADY_USED :
+        cout<<"Nom de compte déjà utilisé."<<endl;
+        cout<<endl;
+        break
     case STATUS_BAD_ENTRY :
         cout<<"Erreur : votre entrée est incorrecte."<<endl;
         cout<<endl;

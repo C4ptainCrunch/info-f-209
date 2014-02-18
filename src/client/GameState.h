@@ -104,6 +104,9 @@ public:
     virtual void logic();
     virtual void display();
     virtual void parse(std::vector<std::string> & inputVec);
+private:
+    string name;
+    int level;
 };
 
 

@@ -20,7 +20,7 @@ enum UNLOGGED
     UNLOGGED_CONNECTED = 1,
     UNLOGGED_CONNECT = 2,
     UNLOGGED_REGISTER = 3,
-    UNLOGGED_WRONG_LOG = 4,
+    UNLOGGED_WRONG_LOGS = 4,
     UNLOGGED_ALREADY_USED = 5,
     UNLOGGED_REGISTERED = 6
 };
@@ -61,13 +61,25 @@ int GameState::log(string username, string password)
 {
     return CODE_SUCCESS;
 }
-int GameState::sign(string username, string password) {}
+int GameState::sign(string username, string password)
+{
+    return CODE_SUCCESS;
+}
 
 //general
 
-string GameState::getName() {}
-int GameState::getMoney() {}
-int GameState::getLevel() {}
+string GameState::getName()
+{
+    return "Unknown";
+}
+int GameState::getMoney()
+{
+    return 69;
+}
+int GameState::getLevel()
+{
+    return 42;
+}
 
 //team management
 
@@ -127,11 +139,12 @@ void UnloggedState::handleEvents()
 
 void UnloggedState::logic()
 {
+    int res; //réponse du serveur
     switch (status_) { //status_ est modifié dans handleEvent
     case UNLOGGED_CONNECT :
-        int res = log(nameInput, passInput); //appel serveur ici
+        res = log(nameInput, passInput); //appel serveur ici
 
-        if (res == CODE_SUCCSS) {
+        if (res == CODE_SUCCESS) {
             status_ = UNLOGGED_CONNECTED;
             client_->setNextState(STATE_MENU);
         } else
@@ -140,9 +153,9 @@ void UnloggedState::logic()
         break;
 
     case UNLOGGED_REGISTER :
-        int res = sign(nameInput, passInput);
+        res = sign(nameInput, passInput);
 
-        if (res == CODE_SUCCSS)
+        if (res == CODE_SUCCESS)
             status_ = UNLOGGED_REGISTERED;
         else
         if (res == CODE_FAIL_ATTEMPT)
@@ -171,15 +184,15 @@ void UnloggedState::display()
     case UNLOGGED_WRONG_LOGS :
         cout<<"Nom de compte ou mot de passe incorrecte."<<endl;
         cout<<endl;
-        break
+        break;
     case UNLOGGED_REGISTERED :
         cout<<"Enregistrement terminé"<<endl;
         cout<<endl;
-        break
+        break;
     case UNLOGGED_ALREADY_USED :
         cout<<"Nom de compte déjà utilisé."<<endl;
         cout<<endl;
-        break
+        break;
     case STATUS_BAD_ENTRY :
         cout<<"Erreur : votre entrée est incorrecte."<<endl;
         cout<<endl;
@@ -233,6 +246,7 @@ void UnloggedState::parse(vector<string> & inputVec)
 
 MenuState::MenuState(Client * client) : GameState(client)
 {
+    name = getName();
     display();
 }
 void MenuState::handleEvents()
@@ -258,14 +272,18 @@ void MenuState::logic()
         client_->setNextState(STATE_CONNECTEDLIST);
         break;
     case STATUS_QUIT :
+        notifyServQuit();
         client_->setNextState(STATE_EXIT);
         break;
     }
 }
 void MenuState::display()
 {
+    level = getLevel(); //mettre à jour le niveau.
+
     switch (status_) {
     case STATUS_DEFAULT :
+        cout<<name<<". Niveau "<<level<<endl<<endl;
         cout<<"Gérer votre équipe : 1"<<endl;
         cout<<"Gérer vos infrastructures : 2"<<endl;
         cout<<"Accéder à l'hotel de vente : 3"<<endl;

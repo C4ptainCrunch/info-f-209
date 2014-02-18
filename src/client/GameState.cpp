@@ -36,6 +36,52 @@ GameState::GameState(Client * client) : client_(client), status_(STATUS_DEFAULT)
 
 GameState::~GameState() {}
 
+//FONCTIONS D'APPELS SERVEURS :
+
+bool GameState::checkChallenge() {} //Vérifie si le joueur est défié
+string GameState::getChallengerName() {}
+int GameState::getChallengerLevel() {}
+int GameState::answerToChallenge(bool accept) {}
+
+//log in
+
+int GameState::log(string username, string password) {}
+int GameState::sign(string username, string password) {}
+
+//general
+
+string GameState::getName() {}
+int GameState::getMoney() {}
+int GameState::getLevel() {}
+
+//team management
+
+vector<struct objectDataPair> GameState::getInTeamPlayerList() {} //liste des joueurs de la team
+vector<struct objectDataPair> GameState::getOutOfTeamPlayerList() {} //liste des autres joueurs du club
+
+Player GameState::getDataOnPlayer(string name) {} //infos détaillées sur un joueur
+bool GameState::healPlayer(string name) {}
+int GameState::swapPlayer(string name, string name2) {} //swap un joueur de la team avec un joueur du club en dehors de la team
+
+//infrastructures management
+vector<struct objectDataPair> GameState::getInfrastructureList() {}
+bool GameState::UpdateInfrastructure(int ID) {}
+
+//auction house
+vector<struct objectDataPair> GameState::getSellingPlayer() {}  //liste des joueurs vendu à l'hotel des ventes
+int GameState::sell(string name, int prix) {} //place un joueur à l'hdv
+int GameState::bid(string name) {} //enchéri dans un tour sur un joueur
+int GameState::getRoundOnBid(string name) {} //obtient le nbre de tours déjà passé sur une enchère
+int GameState::getRemainingTimeOnRound(string name) {} //le temps restant jusqu'a la fin de l'enchère
+int GameState::getCurrentBid(string name) {} //enchère courrante (prix)
+int GameState::getBidderCount(string name) {} //nombre d'enchérisseurs de ce tour ci
+bool GameState::checkEndOfBid(string name) {} //vérifie si l'enchère est terminé
+int GameState::endBid(string name) {} //résout la fin de l'enchère
+
+//user list
+vector<struct objectDataPair> GameState::getConnectedList() {}
+int GameState::challenge(string name) {}
+
 //Intro-------------------------------------------------------------------------------
 IntroState::IntroState(Client * client) : GameState(client) {}
 void IntroState::handleEvents() {}

@@ -3,6 +3,12 @@
 
 #include <string>
 #include <vector>
+#include "../models/Player.h"
+
+struct objectDataPair {
+    string name;
+    int level;
+};
 
 class Client;
 //Classe de base d'un état.
@@ -14,10 +20,53 @@ public:
     virtual void handleEvents() = 0; //Gère les entrées de l'utilisateurs.
     virtual void logic() = 0; //Effectue les actions nécéssaire et demande un changement d'état en fonction de status.
     virtual void display() = 0; //Effectue tout les affichages de l'état.
-    //virtual bool checkChallenge(); //Vérifie si le joueur est défié
-    //virtual string getChallengerName(); redéfinir les 4 fonctions en les mettant vide dans intro, unlogged et ingame.
-    //virtual int getChallengerLevel();
-    //virtual void answerToChallenge(bool accept);
+
+    //FONCTIONS D'APPELS SERVEURS :
+
+    virtual bool checkChallenge(); //Vérifie si le joueur est défié
+    virtual std::string getChallengerName();
+    virtual int getChallengerLevel();
+    virtual int answerToChallenge(bool accept);
+
+    //log in
+
+    virtual int log(std::string username, std::string password);
+    virtual int sign(std::string username, std::string password);
+
+    //general
+
+    virtual std::string getName();
+    virtual int getMoney();
+    virtual int getLevel();
+
+    //team management
+
+    virtual std::vector<struct objectDataPair> getInTeamPlayerList(); //liste des joueurs de la team
+    virtual std::vector<struct objectDataPair> getOutOfTeamPlayerList(); //liste des autres joueurs du club
+
+    virtual Player getDataOnPlayer(std::string name); //infos détaillées sur un joueur
+    virtual bool healPlayer(std::string name);
+    virtual int swapPlayer(std::string name, std::string name2); //swap un joueur de la team avec un joueur du club en dehors de la team
+
+    //infrastructures management
+    virtual std::vector<struct objectDataPair> getInfrastructureList();
+    virtual bool UpdateInfrastructure(int ID);
+
+    //auction house
+    virtual std::vector<struct objectDataPair> getSellingPlayer();  //liste des joueurs vendu à l'hotel des ventes
+    virtual int sell(std::string name, int prix); //place un joueur à l'hdv
+    virtual int bid(std::string name); //enchéri dans un tour sur un joueur
+    virtual int getRoundOnBid(std::string name); //obtient le nbre de tours déjà passé sur une enchère
+    virtual int getRemainingTimeOnRound(std::string name); //le temps restant jusqu'a la fin de l'enchère
+    virtual int getCurrentBid(std::string name); //enchère courrante (prix)
+    virtual int getBidderCount(std::string name); //nombre d'enchérisseurs de ce tour ci
+    virtual bool checkEndOfBid(std::string name); //vérifie si l'enchère est terminé
+    virtual int endBid(std::string name); //résout la fin de l'enchère
+
+    //user list
+    virtual std::vector<struct objectDataPair> getConnectedList();
+    virtual int challenge(std::string name);
+
 
 protected:
     Client * client_;

@@ -36,7 +36,7 @@ void signUp(JsonDict * message, UserHandler * thread)
     if(readFile(filename, &content) == -1 and errno=EIO){
         Manager * user = new Manager(message["name"], userName, message["password"], new Club());
         thread.setUser(user);
-        std::string infos = convertInfos(user);
+        std::string infos = toString(user->toJson());
         if (writeFile(fileName, infos) == 0){
             thread.writeToClient("user.signup : {signal = \"signupSuccess\"}");
         }

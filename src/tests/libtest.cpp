@@ -46,26 +46,6 @@ void assertFalse(bool value, string message){
     }
 }
 
-template<typename T>
-void assertNull(T value, string message){
-    if(value != 0){
-        throw AssertFail(message);
-    }
-}
-
-template<typename T>
-void assertNotNull(T value, string message){
-    if(value == 0){
-        throw AssertFail(message);
-    }
-}
-template<typename T, typename U>
-void assertEqual(T value1, U value2, string message){
-    if(value1 != value2){
-        throw AssertFail(message);
-    }
-}
-
 AssertFail::AssertFail(std::string message) : message(message) {}
 std::string AssertFail::what() {
     return message;

@@ -1,4 +1,4 @@
-#ifdef LIBTEST_H
+#ifndef LIBTEST_H
 #define LIBTEST_H
 
 #include <vector>

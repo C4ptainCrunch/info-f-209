@@ -8,6 +8,9 @@ EXECUTABLE=json
 
 all : $(SOURCES) $(EXECUTABLE)
 
+test: all
+	@for exec in $(EXECUTABLE); do ./$$exec ; done
+
 $(EXECUTABLE): $(OBJECTS)
 	$(COMPILATOR) $(LDFLAGS) $^ -o $@
 

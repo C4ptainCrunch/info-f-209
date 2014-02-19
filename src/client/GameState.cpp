@@ -13,7 +13,9 @@ enum STATUS
     STATUS_BAD_ENTRY = -1,
     STATUS_RETURNMENU = -2,
     STATUS_QUIT = -3,
-    STATUS_SUCCESS = -4
+    STATUS_SUCCESS = -4,
+    STATUS_FAILURE = -5,
+    STATUS_NO_FUNDS = -6
 };
 
 enum UNLOGGED
@@ -39,7 +41,8 @@ enum MANAGE_PLAYERS
     MANAGE_PLAYERS_HEAL = 1,
     MANAGE_PLAYERS_DISPLAY = 2,
     MANAGE_PLAYERS_SWAP = 3,
-    MANAGE_PLAYERS_INVALID_NAME = 4
+    MANAGE_PLAYERS_INVALID_NAME = 4,
+    MANAGE_PLAYERS_HEALING_UNWOUND = 5
 };
 
 enum CODES
@@ -93,12 +96,42 @@ int GameState::getMoney()
 
 //team management
 
-vector<struct objectDataPair> GameState::getInTeamPlayerList() {}
-vector<struct objectDataPair> GameState::getOutOfTeamPlayerList() {}
+vector<struct objectDataPair> GameState::getInTeamPlayerList()
+{
+    struct objectDataPair k;
+    struct objectDataPair z;
+    k.level = 1;
+    k.name = "k";
+    z.level = 2;
+    z.name = "z";
+    vector<struct objectDataPair> f;
+    f.push_back(k);
+    f.push_back(z);
+    return f;
+}
+vector<struct objectDataPair> GameState::getOutOfTeamPlayerList()
+{
+    struct objectDataPair i;
+    i.level = 1;
+    i.name = "i";
+    vector<struct objectDataPair> f;
+    f.push_back(i);
+    return f;
+}
 
-NonFieldPlayer GameState::getDataOnPlayer(string name) {}
-bool GameState::healPlayer(string name) {}
-int GameState::swapPlayer(string name, string name2) {}
+NonFieldPlayer GameState::getDataOnPlayer(string name)
+{
+    NonFieldPlayer nfp;
+    return nfp;
+}
+bool GameState::healPlayer(string name)
+{
+    return true;
+}
+bool GameState::swapPlayer(string name, string name2)
+{
+    return true;
+}
 
 //infrastructures management
 vector<struct objectDataPair> GameState::getInfrastructureList() {}
@@ -364,25 +397,35 @@ void ManagePlayerState::logic()
 {
     switch (status_) {
     case MANAGE_PLAYERS_DISPLAY :
-        if (isPlayerValid(playerBuff1_)) {
-//            displayPlayer(getDataOnPlayer(playerBuff1_));
-            status_ = STATUS_DEFAULT;
-        }
+        if (isPlayerValid(playerBuff1_))
+            displayPlayer(getDataOnPlayer(playerBuff1_));
         else
             status_ = MANAGE_PLAYERS_INVALID_NAME;
         break;
     case MANAGE_PLAYERS_HEAL :
         if (isPlayerValid(playerBuff1_)) {
-            healPlayer(playerBuff1_);
-            status_ = STATUS_SUCCESS;
+            if (getDataOnPlayer(playerBuff1_).isWounded() == true) {
+                if (getMoney() >= HEAL_PRICE) {
+                    if (healPlayer(playerBuff1_))
+                        status_ = STATUS_SUCCESS;
+                    else
+                        status_ = STATUS_FAILURE;
+                }
+                else
+                    status_ = STATUS_NO_FUNDS;
+            }
+            else
+                status_ = MANAGE_PLAYERS_HEALING_UNWOUND;
         }
         else
             status_ = MANAGE_PLAYERS_INVALID_NAME;
         break;
     case MANAGE_PLAYERS_SWAP :
         if (isPlayerValid(playerBuff1_) and isPlayerValid(playerBuff2_)) {
-            swapPlayer(playerBuff1_, playerBuff2_);
-            status_ = STATUS_SUCCESS;
+            if (swapPlayer(playerBuff1_, playerBuff2_))
+                status_ = STATUS_SUCCESS;
+            else
+                status_ = STATUS_FAILURE;
         }
         else
             status_ = MANAGE_PLAYERS_INVALID_NAME;
@@ -395,10 +438,18 @@ void ManagePlayerState::logic()
 void ManagePlayerState::display()
 {
     int money = getMoney(); //mettre à jour le niveau.
+    vector<struct objectDataPair> inTeamPlayerList = getInTeamPlayerList();
+    vector<struct objectDataPair> outOfTeamPlayerList = getOutOfTeamPlayerList();
 
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<"LISTE DES JOUEURS ICI"<<endl;
+        cout<<"Liste des joueurs :"<<endl;
+        cout<<"Dans l'équipe : "<<endl;
+        displayTeam(1, inTeamPlayerList);
+        cout<<"En dehors de l'équipe : "<<endl;
+        displayTeam(inTeamPlayerList.size()+1, outOfTeamPlayerList);
+        cout<<"-------------------------"<<endl;
+        cout<<endl;
         cout<<"Argent : "<<money<<" crédits."<<endl<<endl;
         cout<<"Voir les informations sur un joueur : 1 - nom du joueur"<<endl;
         cout<<"Soigner un joueur blessé (prix : "<<HEAL_PRICE<<") : 2 - nom du joueur"<<endl;
@@ -406,11 +457,24 @@ void ManagePlayerState::display()
         cout<<"Retourner au menu : 4"<<endl;
         cout<<endl;
         break;
+    case MANAGE_PLAYERS_HEALING_UNWOUND :
+        cout<<"Erreur : le joueur selectionné n'est pas blessé."<<endl;
+        cout<<endl;
+        break;
+    case STATUS_NO_FUNDS :
+        cout<<"Vous ne disposez pas assez d'argent."<<endl;
+        cout<<endl;
     case STATUS_SUCCESS :
         cout<<"Operation terminée."<<endl;
+        cout<<endl;
+        break;
+    case STATUS_FAILURE :
+        cout<<"Echec de l'opération."<<endl;
+        cout<<endl;
         break;
     case MANAGE_PLAYERS_INVALID_NAME :
         cout<<"Erreur : nom du joueur selectionné incorrect."<<endl;
+        cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
         cout<<"Erreur : votre entrée est incorrecte."<<endl;
@@ -421,7 +485,24 @@ void ManagePlayerState::display()
 
 void ManagePlayerState::displayPlayer(NonFieldPlayer player)
 {
-    cout<<"cc, bite"<<endl;
+    bool wounded = player.isWounded();
+    if (wounded)
+        cout<<"État : blessé"<<endl;
+    else
+        cout<<"État : en forme"<<endl;
+    cout<<"Niveau : "<<player.getLevel()<<endl;
+    cout<<"Vitesse : "<<player.getSpeed()<<endl;
+    cout<<"Force : "<<player.getForce()<<endl;
+    cout<<"Agilité : "<<player.getAgility()<<endl;
+    cout<<"Réflèxes : "<<player.getReflexes()<<endl;
+    cout<<"Précision de passe : "<<player.getPassPrecision()<<endl;
+    cout<<endl;
+}
+
+void ManagePlayerState::displayTeam(int startID, vector<struct objectDataPair> vec)
+{
+    for (int i = 0; i < vec.size(); ++i)
+        cout<<i+startID<<endl;
 }
 
 bool ManagePlayerState::isPlayerValid(string name)

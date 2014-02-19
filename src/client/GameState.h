@@ -25,8 +25,7 @@ public:
 
     virtual bool notifyServQuit(); //Notifie le serveur de l'arrêt du user.
     virtual bool checkChallenge(); //Vérifie si le joueur est défié.
-    virtual std::string getChallengerName();
-    virtual int getChallengerLevel();
+    virtual struct objectDataPair getChallengerInfo();
     virtual int answerToChallenge(bool accept);
 
     //log in
@@ -36,9 +35,8 @@ public:
 
     //general
 
-    virtual std::string getName();
+    virtual struct objectDataPair getUserInfo();
     virtual int getMoney();
-    virtual int getLevel();
 
     //team management
 

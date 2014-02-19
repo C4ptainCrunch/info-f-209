@@ -12,7 +12,8 @@ enum STATUS
     STATUS_DEFAULT = 0,
     STATUS_BAD_ENTRY = -1,
     STATUS_RETURNMENU = -2,
-    STATUS_QUIT = -3
+    STATUS_QUIT = -3,
+    STATUS_SUCCESS = -4
 };
 
 enum UNLOGGED
@@ -33,12 +34,22 @@ enum MENU
     MENU_CONNECTEDLIST = 4
 };
 
+enum MANAGE_PLAYERS
+{
+    MANAGE_PLAYERS_HEAL = 1,
+    MANAGE_PLAYERS_DISPLAY = 2,
+    MANAGE_PLAYERS_SWAP = 3,
+    MANAGE_PLAYERS_INVALID_NAME = 4
+};
+
 enum CODES
 {
     CODE_SUCCESS,
     CODE_FAIL_ATTEMPT,
     CODE_UNEXPECTED_FAILURE
 };
+
+#define HEAL_PRICE 500
 
 using namespace std;
 
@@ -85,7 +96,7 @@ int GameState::getMoney()
 vector<struct objectDataPair> GameState::getInTeamPlayerList() {}
 vector<struct objectDataPair> GameState::getOutOfTeamPlayerList() {}
 
-Player GameState::getDataOnPlayer(string name) {}
+NonFieldPlayer GameState::getDataOnPlayer(string name) {}
 bool GameState::healPlayer(string name) {}
 int GameState::swapPlayer(string name, string name2) {}
 
@@ -117,7 +128,7 @@ void IntroState::logic()
 }
 void IntroState::display()
 {
-    cout<<"BienvenuS dans le systme !"<<endl; //Rework
+    cout<<"Bienvenue à Quidditch Manager 2014!"<<endl; //Rework
 }
 
 //Unlogged-------------------------------------------------------------------------
@@ -141,7 +152,7 @@ void UnloggedState::logic()
     int res; //réponse du serveur
     switch (status_) { //status_ est modifié dans handleEvent
     case UNLOGGED_CONNECT :
-        res = log(nameInput, passInput); //appel serveur ici
+        res = log(nameInput_, passInput_); //appel serveur ici
 
         if (res == CODE_SUCCESS) {
             status_ = UNLOGGED_CONNECTED;
@@ -152,7 +163,7 @@ void UnloggedState::logic()
         break;
 
     case UNLOGGED_REGISTER :
-        res = sign(nameInput, passInput);
+        res = sign(nameInput_, passInput_);
 
         if (res == CODE_SUCCESS)
             status_ = UNLOGGED_REGISTERED;
@@ -212,8 +223,8 @@ void UnloggedState::parse(vector<string> & inputVec)
             switch (option.c_str()[0]) { //On switch sur le premier caractère
             case '1' : //Demande de connection
                 if (inputVec.size() == 3) {
-                    nameInput = inputVec[1];
-                    passInput = inputVec[2];
+                    nameInput_ = inputVec[1];
+                    passInput_ = inputVec[2];
                     status_ = UNLOGGED_CONNECT;
                 }
                 else {
@@ -222,8 +233,8 @@ void UnloggedState::parse(vector<string> & inputVec)
                 break;
             case '2' : //Demande d'enregistrement
                 if (inputVec.size() == 3) {
-                    nameInput = inputVec[1];
-                    passInput = inputVec[2];
+                    nameInput_ = inputVec[1];
+                    passInput_ = inputVec[2];
                     status_ = UNLOGGED_REGISTER;
                 }
                 else {
@@ -247,8 +258,8 @@ MenuState::MenuState(Client * client) : GameState(client)
 {
     struct objectDataPair usr;
     usr = getUserInfo();
-    name = usr.name;
-    level = usr.level;
+    name_ = usr.name;
+    level_ = usr.level;
     display();
 }
 void MenuState::handleEvents()
@@ -285,11 +296,11 @@ void MenuState::display()
 
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<name<<". Niveau "<<level<<". Argent : "<<money<<endl<<endl;
+        cout<<name_<<". Niveau "<<level_<<". Argent : "<<money<<" crédits."<<endl<<endl;
         cout<<"Gérer votre équipe : 1"<<endl;
         cout<<"Gérer vos infrastructures : 2"<<endl;
         cout<<"Accéder à l'hotel de vente : 3"<<endl;
-        cout<<"Voir la liste de connectés. : 4"<<endl;
+        cout<<"Voir la liste des managers connectés : 4"<<endl;
         cout<<"Quitter : Q"<<endl;
         cout<<endl;
         break;
@@ -352,6 +363,30 @@ void ManagePlayerState::handleEvents()
 void ManagePlayerState::logic()
 {
     switch (status_) {
+    case MANAGE_PLAYERS_DISPLAY :
+        if (isPlayerValid(playerBuff1_)) {
+//            displayPlayer(getDataOnPlayer(playerBuff1_));
+            status_ = STATUS_DEFAULT;
+        }
+        else
+            status_ = MANAGE_PLAYERS_INVALID_NAME;
+        break;
+    case MANAGE_PLAYERS_HEAL :
+        if (isPlayerValid(playerBuff1_)) {
+            healPlayer(playerBuff1_);
+            status_ = STATUS_SUCCESS;
+        }
+        else
+            status_ = MANAGE_PLAYERS_INVALID_NAME;
+        break;
+    case MANAGE_PLAYERS_SWAP :
+        if (isPlayerValid(playerBuff1_) and isPlayerValid(playerBuff2_)) {
+            swapPlayer(playerBuff1_, playerBuff2_);
+            status_ = STATUS_SUCCESS;
+        }
+        else
+            status_ = MANAGE_PLAYERS_INVALID_NAME;
+        break;
     case STATUS_RETURNMENU :
         client_->setNextState(STATE_MENU);
         break;
@@ -359,10 +394,23 @@ void ManagePlayerState::logic()
 }
 void ManagePlayerState::display()
 {
+    int money = getMoney(); //mettre à jour le niveau.
+
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<"Retourner au menu : 1"<<endl;
+        cout<<"LISTE DES JOUEURS ICI"<<endl;
+        cout<<"Argent : "<<money<<" crédits."<<endl<<endl;
+        cout<<"Voir les informations sur un joueur : 1 - nom du joueur"<<endl;
+        cout<<"Soigner un joueur blessé (prix : "<<HEAL_PRICE<<") : 2 - nom du joueur"<<endl;
+        cout<<"Déplacer des joueurs : 3 - nom du joueur 1 - nom du joueur 2"<<endl;
+        cout<<"Retourner au menu : 4"<<endl;
         cout<<endl;
+        break;
+    case STATUS_SUCCESS :
+        cout<<"Operation terminée."<<endl;
+        break;
+    case MANAGE_PLAYERS_INVALID_NAME :
+        cout<<"Erreur : nom du joueur selectionné incorrect."<<endl;
         break;
     case STATUS_BAD_ENTRY :
         cout<<"Erreur : votre entrée est incorrecte."<<endl;
@@ -371,18 +419,57 @@ void ManagePlayerState::display()
     }
 }
 
+void ManagePlayerState::displayPlayer(NonFieldPlayer player)
+{
+    cout<<"cc, bite"<<endl;
+}
+
+bool ManagePlayerState::isPlayerValid(string name)
+{
+    return true;
+}
+
 void ManagePlayerState::parse(vector<string> & inputVec)
 {
     if (inputVec.empty() == true)
         status_ = STATUS_BAD_ENTRY;
     else {
         string option = inputVec[0];
-        if (option.size() != 1 or inputVec.size() != 1)
+        if (option.size() != 1)
             status_ = STATUS_BAD_ENTRY;
         else {
             switch (option.c_str()[0]) {
-            case '1' : //Retour au menu
-                status_ = STATUS_RETURNMENU;
+            case '1' : //Infos détaillés
+                if (inputVec.size() == 2) {
+                    status_ = MANAGE_PLAYERS_DISPLAY;
+                    playerBuff1_ = inputVec[1]; //on place l'entry du joueur dans le buffer de la classe pour qu'il soit analysé à logic
+                }
+                else
+                    status_ = STATUS_BAD_ENTRY;
+                break;
+            case '2' : //Soigner un joueur
+                if (inputVec.size() == 2) {
+                    status_ = MANAGE_PLAYERS_HEAL;
+                    playerBuff1_ = inputVec[1];
+                }
+                else
+                    status_ = STATUS_BAD_ENTRY;
+                break;
+            case '3' : //Swap des joueurs
+                if (inputVec.size() == 3) {
+                    status_ = MANAGE_PLAYERS_SWAP;
+                    playerBuff1_ = inputVec[1];
+                    playerBuff2_ = inputVec[2];
+                }
+                else
+                    status_ = STATUS_BAD_ENTRY;
+                break;
+            case '4' : //Retour au menu
+                if (inputVec.size() == 1) {
+                    status_ = STATUS_RETURNMENU;
+                }
+                else
+                    status_ = STATUS_BAD_ENTRY;
                 break;
             default :
                 status_ = STATUS_BAD_ENTRY;

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "../models/Player.h"
+#include "../models/NonFieldPlayer.h"
 
 struct objectDataPair {
     string name;
@@ -43,7 +43,7 @@ public:
     virtual std::vector<struct objectDataPair> getInTeamPlayerList(); //liste des joueurs de la team
     virtual std::vector<struct objectDataPair> getOutOfTeamPlayerList(); //liste des autres joueurs du club
 
-    virtual Player getDataOnPlayer(std::string name); //infos détaillées sur un joueur
+    virtual NonFieldPlayer getDataOnPlayer(std::string name); //infos détaillées sur un joueur
     virtual bool healPlayer(std::string name);
     virtual int swapPlayer(std::string name, std::string name2); //swap un joueur de la team avec un joueur du club en dehors de la team
 
@@ -90,8 +90,8 @@ public:
     virtual void display();
     virtual void parse(std::vector<std::string> & inputVec);
 private:
-    std::string nameInput;
-    std::string passInput;
+    std::string nameInput_;
+    std::string passInput_;
 };
 
 class MenuState : public GameState //Affiche le menu principal et redirige vers le menu souhaité.
@@ -103,8 +103,8 @@ public:
     virtual void display();
     virtual void parse(std::vector<std::string> & inputVec);
 private:
-    string name;
-    int level;
+    string name_;
+    int level_;
 };
 
 
@@ -116,6 +116,11 @@ public:
     virtual void logic();
     virtual void display();
     virtual void parse(std::vector<std::string> & inputVec);
+    virtual void displayPlayer(NonFieldPlayer player);
+    virtual bool isPlayerValid(std::string name);
+private:
+    string playerBuff1_;
+    string playerBuff2_;
 };
 
 class ManageInfrastructureState : public GameState //Gestion des infrastructures

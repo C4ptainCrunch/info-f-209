@@ -249,5 +249,5 @@ JsonValue * JsonList::operator[](const int &i){
 // Functions
 
 JsonValue * createNumber(string message, int &i){
-    return new JsonValue();
+    return new JsonString("TEST");
 }

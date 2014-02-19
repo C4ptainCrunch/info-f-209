@@ -57,6 +57,10 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
     throw 1;
 }
 
+/*std::string JsonValue::toString(JsonValue * json){
+    return json->toString();
+}*/
+
 // String
 
 string replaces(string str, string find, string replace){
@@ -118,8 +122,8 @@ JsonString * JsonString::fromString(std::string message, int &i){
     throw 1;
 }
 
-std::string JsonString::toString(JsonString * json){
-    std::string infos = "\"" + (std::string) *json + "\"";
+std::string JsonString::toString(){
+    std::string infos = "\"" + this->value + "\"";
     return infos;
 }
 
@@ -159,16 +163,14 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
     }
 }
 
-std::string JsonDict::toString(JsonDict * json){
+std::string JsonDict::toString(){
     std::string infos = "{";
-    for (std::map<std::string, JsonValue *>::iterator index json->dict.begin() ; index != json->dict.end() ; index++ ){
-        infos += toString(json[index->first]) + " : ";
-        infos += toString(json[index->second]);
-        if (index+1 != json.size()){
-            infos+=", ";
-        }
+    for (std::map<std::string, JsonValue *>::iterator index = this->dict.begin() ; index != this->dict.end() ; index++ ){
+        infos += ((std::string) index->first) + " : ";
+        infos += index->second->toString();
+        infos += ", ";
     }
-    infos+="}";
+    infos = infos.substr(0, infos.size()-2) + "}";
     return infos;
 }
 
@@ -215,6 +217,20 @@ JsonList * JsonList::fromString(std::string message, int &i){
                 throw 1;
         }
     }
+}
+
+std::string JsonList::toString(){
+    std::string infos = "[";
+    int index=0;
+    while (index < this->content.size()){
+        infos += this->content[index]->toString();
+        index++;
+        if (index+1 != this->content.size()){
+            infos+=", ";
+        }
+    }
+    infos+="]";
+    return infos;
 }
 
 void JsonList::add(JsonValue * value){

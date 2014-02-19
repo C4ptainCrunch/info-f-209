@@ -7,6 +7,8 @@ class JsonValue {
         static JsonValue * fromString(std::string message, int &i);
         static JsonValue * fromString(std::string message);
 
+        virtual std::string toString() = 0;
+
     private:
         virtual void plop(){}
 };
@@ -19,7 +21,7 @@ class JsonString : public JsonValue {
         static JsonString * fromString(std::string message, int &i);
         static JsonString * fromString(std::string message);
 
-        std::string toString(JsonString * json);
+        std::string toString();
 
         JsonString operator=(const JsonString &str);
         operator std::string() const;
@@ -34,7 +36,7 @@ class JsonDict : public JsonValue {
         static JsonDict * fromString(std::string message, int &i);
         static JsonDict * fromString(std::string message);
 
-        std::string toString(JsonDict * json);
+        std::string toString();
 
         JsonValue * operator[](const std::string &str);
 
@@ -51,7 +53,7 @@ class JsonList : public JsonValue {
         static JsonList * fromString(std::string message, int &i);
         static JsonList * fromString(std::string message);
 
-        std::string toString(JsonList * json);
+        std::string toString();
 
         JsonValue * operator[](const int &i);
 
@@ -60,7 +62,7 @@ class JsonList : public JsonValue {
 
     private:
         virtual void plop(){}
-        std::vector<JsonValue *>content;
+        std::vector<JsonValue *> content;
 };
 
 JsonValue * createNumber(std::string message, int &i);

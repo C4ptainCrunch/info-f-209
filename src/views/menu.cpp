@@ -23,11 +23,18 @@ void answerToChallenge(JsonValue * json, UserHandler * thread){
 //*********************
 
 void getInfo(JsonValue * json, UserHandler * thread){
-    char * reponse;
+    std::string values = "{";
+    Manager * user = thread->getManager();
+    values += "name : " + (std::string) user->getUserName() + ", ";
+    values += "level : " + (std::string) user->getClub()->getLevel();
+    values += "}";
+    writeToClient(values);
 } //string name int level
 
 void getMoney(JsonValue * json, UserHandler * thread){
-    char * reponse;
+    std::string value = "{money : ";
+    value += thread->getManager()->getClub()->getMoney();
+    writeToClient(value);
 } //int
 
 //*********************

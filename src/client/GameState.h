@@ -45,7 +45,7 @@ public:
 
     virtual NonFieldPlayer getDataOnPlayer(std::string name); //infos détaillées sur un joueur
     virtual bool healPlayer(std::string name);
-    virtual int swapPlayer(std::string name, std::string name2); //swap un joueur de la team avec un joueur du club en dehors de la team
+    virtual bool swapPlayer(std::string name, std::string name2); //swap un joueur de la team avec un joueur du club en dehors de la team
 
     //infrastructures management
     virtual std::vector<struct objectDataPair> getInfrastructureList();
@@ -118,6 +118,7 @@ public:
     virtual void parse(std::vector<std::string> & inputVec);
     virtual void displayPlayer(NonFieldPlayer player);
     virtual bool isPlayerValid(std::string name);
+    virtual void displayTeam(int startID, std::vector<struct objectDataPair> vec);
 private:
     string playerBuff1_;
     string playerBuff2_;

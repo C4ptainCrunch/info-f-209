@@ -1,49 +1,119 @@
-// TO DO : mettre communication entre thread (pour les erreurs)
+//*********************
+// Divers
+//*********************
 
-void inviteToMatch(JsonDict * json, UserHandler * thread){
+void notifyServQuit(JsonValue * json, UserHandler * thread){
     char * reponse;
 }
 
-void reponseToMatchInvitation(JsonDict * json, UserHandler * thread){
+void checkChallenge(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} //bool
+
+void getChallengerInfo(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} //string name
+
+void answerToChallenge(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} //code
+
+//*********************
+// Menu
+//*********************
+
+void getInfo(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} //string name int level
+
+void getMoney(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} //int
+
+//*********************
+// ManagerPlayers
+//*********************
+
+void getInTeamPlayerList(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} // struct
+
+void getOutOfTeamPlayerList(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} // struct
+
+void getDataOnPlayer(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} // player
+
+void healPlayer(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} // bool
+
+void swapPlayer(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} // code
+
+//*********************
+// ManageInfrastructure
+//*********************
+
+void getInfrastructureList(JsonValue * json, UserHandler * thread){
     char * reponse;
 }
 
-void viewUserList(JsonDict * json, UserHandler * thread){
+void updateInfrastructure(JsonValue * json, UserHandler * thread){
+    char * reponse;
+} //bool
+
+//*********************
+// AuctionHouse
+//*********************
+
+void getSellingPlayers()(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// struct
+
+void sell(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// code
+
+void bid(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// code
+
+void getRoundOnBid(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// int
+
+void getRemainingTimeOnRound(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// int
+
+void getCurrentBid(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// int
+
+void getBidderCount(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// int
+
+void checkEndOfBid(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// bool
+
+void endBid(JsonValue * json, UserHandler * thread){
+    char * reponse;
+}// code
+
+//*********************
+// ConnectedList
+//*********************
+
+void getConnectedList(JsonValue * json, UserHandler * thread){
     char * reponse;
 }
 
-void goToManagement(JsonDict * json, UserHandler * thread){
+void challenge(JsonValue * json, UserHandler * thread){
     char * reponse;
-} //amène à l'écran de gestion du club
-
-void buildNewInstallation(JsonDict * json, UserHandler * thread){
-    char * reponse;
-}
-
-void manageInstallation(JsonDict * json, UserHandler * thread){
-    char * reponse;
-} //amène à la gestion de l'installation
-
-void manageTeam(JsonDict * json, UserHandler * thread){
-    char * reponse;
-}
-
-void goToAuctionRoom(JsonDict * json, UserHandler * thread){
-    char * reponse;
-}
-
-void viewAuctions(JsonDict * json, UserHandler * thread){
-    char * reponse;
-}
-
-void bidToAuction(JsonDict * json, UserHandler * thread){
-    char * reponse;
-} // nécessite un id par enchère. l'id de l'enchère doit etre mentionné dans le message
-
-void viewUserBids(JsonDict * json, UserHandler * thread){
-    char * reponse;
-}
-
-void makeAuction(JsonDict * json, UserHandler * thread){
-    char * reponse;
-}
+} // code

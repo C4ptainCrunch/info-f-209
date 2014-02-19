@@ -18,7 +18,7 @@ void Client::run()
 {
     currentStateID_ = STATE_INTRO;
     currentState_ = new IntroState(this);
-
+    //connect ici
     while(currentStateID_ != STATE_EXIT){
         currentState_->handleEvents();
         currentState_->logic();
@@ -51,7 +51,7 @@ void Client::connectToName(const string name)
     struct hostent *he;;
 
     if (connected_)
-        cout<<"Erreur : Déjà connecté."<<endl; //Rework. Throw exception?
+        cout<<"Erreur : Déjà connecté."<<endl;
 
     else {
         socklen_t addrSize = sizeof(struct sockaddr);
@@ -82,7 +82,7 @@ void Client::disconnect()
         close(socket_.getFd());
     }
     else
-        cout<<"Erreur : Non connecté lors d'une demande de déconnection."<<endl; //Rework. throw?
+        cout<<"Erreur : Non connecté lors d'une demande de déconnection."<<endl;
 }
 
 int Client::send(const string & message)

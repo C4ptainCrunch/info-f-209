@@ -29,13 +29,14 @@ void getInfo(JsonValue * json, UserHandler * thread){
     values += "level : " + (std::string) user->getClub()->getLevel();
     values += "}";
     writeToClient(values);
-} //string name int level
+}
 
 void getMoney(JsonValue * json, UserHandler * thread){
     std::string value = "{money : ";
-    value += thread->getManager()->getClub()->getMoney();
+    value += (std::string) thread->getManager()->getClub()->getMoney();
+    value += "}";
     writeToClient(value);
-} //int
+}
 
 //*********************
 // ManagerPlayers
@@ -55,7 +56,7 @@ void getDataOnPlayer(JsonValue * json, UserHandler * thread){
 
 void healPlayer(JsonValue * json, UserHandler * thread){
     char * reponse;
-} // bool
+} // bool -> code
 
 void swapPlayer(JsonValue * json, UserHandler * thread){
     char * reponse;

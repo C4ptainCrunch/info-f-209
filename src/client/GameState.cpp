@@ -51,8 +51,7 @@ GameState::~GameState() {}
 bool GameState::notifyServQuit() {}
 
 bool GameState::checkChallenge() {}
-string GameState::getChallengerName() {}
-int GameState::getChallengerLevel() {}
+struct objectDataPair GameState::getChallengerInfo() {}
 int GameState::answerToChallenge(bool accept) {}
 
 //log in
@@ -68,17 +67,17 @@ int GameState::sign(string username, string password)
 
 //general
 
-string GameState::getName()
+struct objectDataPair GameState::getUserInfo()
 {
-    return "Unknown";
+    struct objectDataPair user;
+    user.name = "uglyfakka";
+    user.level = 12;
+    return user;
 }
+
 int GameState::getMoney()
 {
     return 69;
-}
-int GameState::getLevel()
-{
-    return 42;
 }
 
 //team management
@@ -246,7 +245,10 @@ void UnloggedState::parse(vector<string> & inputVec)
 
 MenuState::MenuState(Client * client) : GameState(client)
 {
-    name = getName();
+    struct objectDataPair usr;
+    usr = getUserInfo();
+    name = usr.name;
+    level = usr.level;
     display();
 }
 void MenuState::handleEvents()
@@ -279,11 +281,11 @@ void MenuState::logic()
 }
 void MenuState::display()
 {
-    level = getLevel(); //mettre à jour le niveau.
+    int money = getMoney(); //mettre à jour le niveau.
 
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<name<<". Niveau "<<level<<endl<<endl;
+        cout<<name<<". Niveau "<<level<<". Argent : "<<money<<endl<<endl;
         cout<<"Gérer votre équipe : 1"<<endl;
         cout<<"Gérer vos infrastructures : 2"<<endl;
         cout<<"Accéder à l'hotel de vente : 3"<<endl;

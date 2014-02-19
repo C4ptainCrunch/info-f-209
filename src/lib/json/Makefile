@@ -1,19 +1,16 @@
-CC=g++
-CFLAGS=-std=c++11 -c
-EXECUTABLE=json
-SOURCES=test.cpp json.cpp utils.cpp
-H=test.h json.h utils.h
+include ../../options.mk
+
+SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
+HEADERS=$(wildcard *.h)
 
-all: $(SOURCES) $(EXECUTABLE)
+include ../rules.mk
 
+
+EXECUTABLE=json
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	$(COMPILATOR) $(LDFLAGS) $(OBJECTS) -o $@
 
-.cpp.o:  $(H)
-	$(CC) $(CFLAGS) $< -o $@
-
-clean:
-	rm *.o
-	rm $(EXECUTABLE)
+clean::
+	@rm -f $(EXECUTABLE)

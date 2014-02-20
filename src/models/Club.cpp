@@ -48,9 +48,9 @@ Club::Club(JsonValue * json) {
     if(player_list == NULL)
         throw 1;
 
-    vector<NonFieldPlayer> players;
+    vector<NonFieldPlayer*> players;
     for(int i = 0; i < player_list->size(); i++){
-        players.push_back(NonFieldPlayer((*player_list)[i]));
+        players.push_back(new NonFieldPlayer((*player_list)[i]));
     }
     Club(money, installations, team, players);
 

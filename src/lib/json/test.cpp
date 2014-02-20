@@ -65,7 +65,7 @@ int dictmain(){
     return 0;
 }
 
-int main(){
+int inmain(){
     listmain();
     cout << "------------" << endl;
     intmain();
@@ -76,4 +76,30 @@ int main(){
     cout << "------------" << endl;
     dictmain();
     return 0;
+}
+
+
+int outmain(){
+    JsonDict * r = new JsonDict();
+    r->add("coucou", new JsonBool(true));
+    r->add("caca", new JsonInt(1));
+    cout << r->toString() << endl;
+
+    JsonList * l = new JsonList();
+    l->add(new JsonString("coucou"));
+    l->add(new JsonInt(10));
+    cout << l->toString() << endl;
+
+    cout << JsonBool(true).toString() << endl;
+
+    cout << JsonNull().toString() << endl;
+
+    cout << JsonInt(10).toString() << endl;
+
+    cout << JsonString("coucou").toString() << endl;
+    return 0;
+}
+
+int main(){
+    return outmain();
 }

@@ -1,3 +1,6 @@
+#ifndef JSON_H
+#define JSON_H
+
 #include <map>
 #include <string>
 #include <vector>
@@ -118,3 +121,5 @@ class JsonBool : public JsonValue {
         virtual void plop(){}
         bool value;
 };
+
+#endif

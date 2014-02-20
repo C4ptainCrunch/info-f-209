@@ -14,6 +14,48 @@ Club::Club(): money_(0), installations_()
     }
 }
 
+Club::Club(JsonValue * json) {
+    JsonDict * club = JDICT(json);
+    JsonDict * ins;
+
+    if(club == NULL)
+        throw 1;
+
+    JsonInt * money_int = JINT((*club)["money"]);
+    if(money_int == NULL)
+        throw 1;
+
+    int money = * money_int;
+    Installation installations[5];
+
+    JsonList * installations_list = JLIST((*club)["installations"]);
+    if(installations_list == NULL)
+        throw 1;
+    if(installations_list->size() != 5)
+        throw 1;
+
+
+    for(int i = 0; i < 5; i++){
+        ins = JDICT((*installations_list)[i]);
+        if(ins == NULL)
+            throw 1;
+
+        installations[i] = Installation(ins);
+    }
+
+    Team team((*club)["team"]);
+    JsonList * player_list = JLIST((*club)["players"]);
+    if(player_list == NULL)
+        throw 1;
+
+    vector<NonFieldPlayer> players;
+    for(int i = 0; i < player_list->size(); i++){
+        players.push_back(NonFieldPlayer((*player_list)[i]));
+    }
+    Club(money, installations, team, players);
+
+}
+
 Club::Club(int money, Installation* installations, Team& team, vector<NonFieldPlayer> players): money_(money), players_(players)
 {
     for (int i = 0; i < 5; ++i){
@@ -74,7 +116,7 @@ void Club::addInstallation(Installation& installation, int pos)
 Installation* Club::getInstallations()
 {
     return installations_;
-}   
+}
 
 Installation& Club::delInstallation(unsigned int pos)
 {

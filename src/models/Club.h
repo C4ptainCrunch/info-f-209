@@ -6,6 +6,8 @@
 #include "Team.h"
 #include "NonFieldPlayer.h"
 
+#include "../lib/json/json.h"
+
 enum {INFIRMARY = 1, CANDYSHOP = 2, FANSHOP = 3, FIELD = 4, TRAININGFIELD = 5};
 
 
@@ -13,6 +15,7 @@ class Club {
 
     public:
         Club();
+        Club(JsonValue * json);
         Club(int money, Installation* installations, Team& team, std::vector<NonFieldPlayer> players);
         ~Club();
 

@@ -3,12 +3,14 @@
 
 #include "Player.h"
 #include "NonFieldPlayer.h"
+#include "../lib/json/json.h"
 
 class Team{
 
     public:
         Team(NonFieldPlayer *players[7]);
         Team();
+        Team(JsonValue * json);
         ~Team();
         void setPlayers(NonFieldPlayer players[7]);
         void setPlayer(NonFieldPlayer& player, int pos);

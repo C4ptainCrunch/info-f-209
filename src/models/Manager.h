@@ -2,12 +2,14 @@
 #define MANAGER_H
 
 #include "Club.h"
+#include "../lib/json/json.h"
 #include <string>
 
 class Manager{
 
     public:
         Manager(std::string name, std::string userName, std::string password, Club club = Club());
+        Manager(JsonValue * json);
         ~Manager();
         bool checkPassword(const std::string password);
         void changePassword(const std::string password);

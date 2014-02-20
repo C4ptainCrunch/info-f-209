@@ -5,14 +5,36 @@
 using namespace std;
 
 
-int main()
+int main(int argc, char *argv[])
 {
-    Client client;
+    if(argc <= 2){
+        printf("Invalid parameters\nUsage : %s host port\n", argv[0]);
+        exit(0);
+    }
+    int port = atoi(argv[2]);
+    if(port <= 0 || port > 65535){
+        printf("Invalid port\n");
+        exit(0);
+    }
+
+    Client client(argv[1], port);
 
     client.run();
 
     return EXIT_SUCCESS;
 }
+
+
+Client::Client(char * host, int port)
+{
+    connectToServer(host, port);
+
+    nextStateID_ = STATE_NULL;
+
+    connected_ = false;
+}
+
+Client::~Client() {}
 
 void Client::run()
 {
@@ -28,9 +50,10 @@ void Client::run()
     }
 }
 
-Client::Client()
+void Client::connectToServer(char * host, const int port)
 {
     int sockFd;
+
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("Client: socket ");
         exit(EXIT_FAILURE);
@@ -38,41 +61,26 @@ Client::Client()
 
     socket_.setFd(sockFd);
 
-    nextStateID_ = STATE_NULL;
-
-    connected_ = false;
-}
-
-Client::~Client() {}
-
-void Client::connectToName(const string name)
-{
     struct sockaddr_in theirAddr;
-    struct hostent *he;;
+    struct hostent *he;
 
-    if (connected_)
-        cout<<"Erreur : Déjà connecté."<<endl;
+    socklen_t addrSize = sizeof(struct sockaddr);
 
-    else {
-        socklen_t addrSize = sizeof(struct sockaddr);
-
-        if ((he=gethostbyname(name.c_str())) == NULL) {
-            perror("Client: gethostbyname ");
-            exit(EXIT_FAILURE);
-        }
-
-        theirAddr.sin_family = AF_INET;
-        theirAddr.sin_port = htons(PORT);
-        theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
-        memset(&(theirAddr.sin_zero), '\0', 8);
-
-        if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
-            perror("Client: connect ");
-            exit(EXIT_FAILURE);
-        }
-        connected_ = true;
-        printf("Connecté au serveur."); //Rework. Server should mssg?
+    if ((he=gethostbyname(host)) == NULL) {
+        cout << "Could not resolve hostname" << endl;
+        exit(EXIT_FAILURE);
     }
+
+    theirAddr.sin_family = AF_INET;
+    theirAddr.sin_port = htons(port);
+    theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
+    memset(&(theirAddr.sin_zero), '\0', 8);
+
+    if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
+        perror("Connect");
+        exit(EXIT_FAILURE);
+    }
+    connected_ = true;
 }
 
 void Client::disconnect()
@@ -81,8 +89,6 @@ void Client::disconnect()
         connected_ = false;
         close(socket_.getFd());
     }
-    else
-        cout<<"Erreur : Non connecté lors d'une demande de déconnection."<<endl;
 }
 
 int Client::send(const string & message)

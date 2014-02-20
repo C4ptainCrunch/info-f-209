@@ -8,9 +8,15 @@
 /src/models/MatchInstance
 build.ok
 
+#####################
+# Ignore temp files #
+#####################
+*~
+
+
 ####################
 # Ignore pdf files #
-###################
+####################
 
 srd/srd.pdf
 pv/pv*/*.pdf
@@ -111,3 +117,4 @@ pv/pv*/*.pdf
 
 # xindy
 *.xdy
+

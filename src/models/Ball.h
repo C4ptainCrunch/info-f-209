@@ -9,6 +9,7 @@ class Ball {
         Ball(int speed);
         virtual ~Ball();
         Position getPosition();
+        void setPosition(int x, int y);
         void setPosition(Position position);
 
     protected:

@@ -8,22 +8,24 @@
 
 void logIn(JsonValue * message, UserHandler * thread)  // message = "user:password", TO DO : message en json
 {
-    JsonDict * dict = JDICT(message);
-    if (dict != NULL){
-        std::string userName = (*dict)["username"]->toString();
-        std::string password = (*dict)["password"]->toString();
+    JsonDict * dictMessage = JDICT(message);
+    if (dictMessage != NULL){
+        std::string userName = (*dictMessage)["username"]->toString();
+        std::string password = (*dictMessage)["password"]->toString();
         std::string rawFileName = "data/users/"+userName+".json";
         std::string content;
         const char * fileName = rawFileName.c_str();
         if (readFile(fileName, content) == 0){
             JsonDict * userInfos = JDICT(JsonValue::fromString(content));
             if (userInfos != NULL){
-                if ((*userInfos)["hash"]->toString() == password){
+                Manager * user = new Manager(userInfos);
+                if ((*userInfos)["password"]->toString() == password){
+                    thread->setManager(user);
                     thread->writeToClient("user.login : {signal : \"loginSuccess\"}");
-                    thread->setManager(new Manager(userInfos));
                 }
                 else {
                     thread->writeToClient("user.login : {signal : \"wrongPassword\"}");
+                    delete user;
                 }
                 delete userInfos;
             }
@@ -38,19 +40,19 @@ void logIn(JsonValue * message, UserHandler * thread)  // message = "user:passwo
     else{
         thread->writeToClient("user.login : {signal : \"wrongMessageFormat\"}");
     }
-    delete dict;
+    delete dictMessage;
 }
 
 void signUp(JsonValue * message, UserHandler * thread)
 {
-    JsonDict * dict = JDICT(message);
-    if (dict != NULL){
-        std::string userName = (*dict)["username"]->toString();
+    JsonDict * dictMessage = JDICT(message);
+    if (dictMessage != NULL){
+        std::string userName = (*dictMessage)["username"]->toString();
         std::string rawFileName = "data/users/"+userName+".json";
         std::string content;
         const char * fileName = rawFileName.c_str();
         if(readFile(fileName, content) == -1 and errno == EIO){
-            Manager * user = new Manager((*dict)["name"]->toString(), userName, (*dict)["password"]->toString());
+            Manager * user = new Manager((*dictMessage)["username"]->toString(), userName, (*dictMessage)["password"]->toString());
             thread->setManager(user);
             JsonDict * userInfos = user->toJson();
             std::string infos = userInfos->toString();
@@ -68,7 +70,7 @@ void signUp(JsonValue * message, UserHandler * thread)
     else{
         thread->writeToClient("user.login : {signal : \"wrongMessageFormat\"}");
     }
-    delete dict;
+    delete dictMessage;
 }
 
 int main(int argc, char * argv[]){

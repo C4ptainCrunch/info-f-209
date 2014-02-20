@@ -40,16 +40,15 @@ public:
 
     //team management
 
-    virtual std::vector<struct objectDataPair> getInTeamPlayerList(); //liste des joueurs de la team
-    virtual std::vector<struct objectDataPair> getOutOfTeamPlayerList(); //liste des autres joueurs du club
+    virtual std::vector<int> getPlayerList(); //liste des joueurs de la team
 
-    virtual NonFieldPlayer getDataOnPlayer(std::string name); //infos détaillées sur un joueur
-    virtual bool healPlayer(std::string name);
-    virtual bool swapPlayer(std::string name, std::string name2); //swap un joueur de la team avec un joueur du club en dehors de la team
+    virtual NonFieldPlayer getDataOnPlayer(int pos); //infos détaillées sur un joueur
+    virtual bool healPlayer(int pos);
+    virtual bool swapPlayer(int pos1, int pos2); //swap un joueur de la team avec un joueur du club en dehors de la team
 
     //infrastructures management
-    virtual std::vector<struct objectDataPair> getInfrastructureList();
-    virtual bool UpdateInfrastructure(int ID);
+    virtual std::vector<int> getInfrastructureList();
+    virtual bool UpdateInfrastructure(int pos);
 
     //auction house
     virtual std::vector<struct objectDataPair> getSellingPlayer();  //liste des joueurs vendu à l'hotel des ventes
@@ -117,11 +116,11 @@ public:
     virtual void display();
     virtual void parse(std::vector<std::string> & inputVec);
     virtual void displayPlayer(NonFieldPlayer player);
-    virtual bool isPlayerValid(std::string name);
-    virtual void displayTeam(int startID, std::vector<struct objectDataPair> vec);
+    virtual void displayPlayerList(std::vector<int> vec);
+    virtual bool isPlayerValid(int pos);
 private:
-    string playerBuff1_;
-    string playerBuff2_;
+    int playerBuff1_;
+    int playerBuff2_;
 };
 
 class ManageInfrastructureState : public GameState //Gestion des infrastructures

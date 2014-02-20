@@ -96,45 +96,28 @@ int GameState::getMoney()
 
 //team management
 
-vector<struct objectDataPair> GameState::getInTeamPlayerList()
+vector<int> GameState::getPlayerList()
 {
-    struct objectDataPair k;
-    struct objectDataPair z;
-    k.level = 1;
-    k.name = "k";
-    z.level = 2;
-    z.name = "z";
-    vector<struct objectDataPair> f;
-    f.push_back(k);
-    f.push_back(z);
-    return f;
-}
-vector<struct objectDataPair> GameState::getOutOfTeamPlayerList()
-{
-    struct objectDataPair i;
-    i.level = 1;
-    i.name = "i";
-    vector<struct objectDataPair> f;
-    f.push_back(i);
-    return f;
+    vector<int> vec;
+    return vec;
 }
 
-NonFieldPlayer GameState::getDataOnPlayer(string name)
+NonFieldPlayer GameState::getDataOnPlayer(int pos)
 {
     NonFieldPlayer nfp;
     return nfp;
 }
-bool GameState::healPlayer(string name)
+bool GameState::healPlayer(int pos)
 {
     return true;
 }
-bool GameState::swapPlayer(string name, string name2)
+bool GameState::swapPlayer(int pos1, int pos2)
 {
     return true;
 }
 
 //infrastructures management
-vector<struct objectDataPair> GameState::getInfrastructureList() {}
+vector<int> GameState::getInfrastructureList() {}
 bool GameState::UpdateInfrastructure(int ID) {}
 
 //auction house
@@ -438,22 +421,17 @@ void ManagePlayerState::logic()
 void ManagePlayerState::display()
 {
     int money = getMoney(); //mettre à jour le niveau.
-    vector<struct objectDataPair> inTeamPlayerList = getInTeamPlayerList();
-    vector<struct objectDataPair> outOfTeamPlayerList = getOutOfTeamPlayerList();
+    vector<int> vec;
 
     switch (status_) {
     case STATUS_DEFAULT :
         cout<<"Liste des joueurs :"<<endl;
-        cout<<"Dans l'équipe : "<<endl;
-        displayTeam(1, inTeamPlayerList);
-        cout<<"En dehors de l'équipe : "<<endl;
-        displayTeam(inTeamPlayerList.size()+1, outOfTeamPlayerList);
-        cout<<"-------------------------"<<endl;
+        displayPlayerList(vec);
         cout<<endl;
         cout<<"Argent : "<<money<<" crédits."<<endl<<endl;
-        cout<<"Voir les informations sur un joueur : 1 - nom du joueur"<<endl;
-        cout<<"Soigner un joueur blessé (prix : "<<HEAL_PRICE<<") : 2 - nom du joueur"<<endl;
-        cout<<"Déplacer des joueurs : 3 - nom du joueur 1 - nom du joueur 2"<<endl;
+        cout<<"Voir les informations sur un joueur : 1 - numero du joueur"<<endl;
+        cout<<"Soigner un joueur blessé (prix : "<<HEAL_PRICE<<") : 2 - numero du joueur"<<endl;
+        cout<<"Déplacer des joueurs : 3 - numero du joueur 1 - numero du joueur 2"<<endl;
         cout<<"Retourner au menu : 4"<<endl;
         cout<<endl;
         break;
@@ -499,15 +477,19 @@ void ManagePlayerState::displayPlayer(NonFieldPlayer player)
     cout<<endl;
 }
 
-void ManagePlayerState::displayTeam(int startID, vector<struct objectDataPair> vec)
-{
-    for (int i = 0; i < vec.size(); ++i)
-        cout<<i+startID<<endl;
-}
-
-bool ManagePlayerState::isPlayerValid(string name)
+bool ManagePlayerState::isPlayerValid(int pos)
 {
     return true;
+}
+
+void ManagePlayerState::displayPlayerList(vector<int> vec)
+{
+    for (int i = 0; i < vec.size(); ++i)
+    {
+        cout<<i<<" : Niveau "<<vec[i]<<endl;
+        if (i == 6)
+            cout<<"-----------------------"<<endl;
+    }
 }
 
 void ManagePlayerState::parse(vector<string> & inputVec)
@@ -521,26 +503,26 @@ void ManagePlayerState::parse(vector<string> & inputVec)
         else {
             switch (option.c_str()[0]) {
             case '1' : //Infos détaillés
-                if (inputVec.size() == 2) {
+                if (inputVec.size() == 2 and isNumber(inputVec[1])) {
                     status_ = MANAGE_PLAYERS_DISPLAY;
-                    playerBuff1_ = inputVec[1]; //on place l'entry du joueur dans le buffer de la classe pour qu'il soit analysé à logic
+                    playerBuff1_ = stringToInt(inputVec[1]); //on place l'entry du joueur dans le buffer de la classe pour qu'il soit analysé à logic
                 }
                 else
                     status_ = STATUS_BAD_ENTRY;
                 break;
             case '2' : //Soigner un joueur
-                if (inputVec.size() == 2) {
+                if (inputVec.size() == 2  and isNumber(inputVec[1])) {
                     status_ = MANAGE_PLAYERS_HEAL;
-                    playerBuff1_ = inputVec[1];
+                    playerBuff1_ = stringToInt(inputVec[1]);
                 }
                 else
                     status_ = STATUS_BAD_ENTRY;
                 break;
             case '3' : //Swap des joueurs
-                if (inputVec.size() == 3) {
+                if (inputVec.size() == 3  and (isNumber(inputVec[1]) and isNumber(inputVec[2]))) {
                     status_ = MANAGE_PLAYERS_SWAP;
-                    playerBuff1_ = inputVec[1];
-                    playerBuff2_ = inputVec[2];
+                    playerBuff1_ = stringToInt(inputVec[1]);
+                    playerBuff2_ = stringToInt(inputVec[2]);
                 }
                 else
                     status_ = STATUS_BAD_ENTRY;

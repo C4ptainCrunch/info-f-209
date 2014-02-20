@@ -8,7 +8,6 @@ using namespace std;
 // List
 // -----------
 int listmain(){
-    int i = 0;
     JsonList* list_p = JLIST(JsonValue::fromString("[ 1    ,\n \"elem2\"]"));
     JsonString * str_p = JSTRING((*list_p)[1]);
 
@@ -20,7 +19,6 @@ int listmain(){
 // Null
 // -----------
 int nullmain(){
-    int i = 0;
     JsonList* list_p = JLIST(JsonValue::fromString("[ null    ,\n \"elem2\"]"));
     JsonNull * null_p = JNULL((*list_p)[0]);
     if(*null_p == NULL){
@@ -32,7 +30,6 @@ int nullmain(){
 
 // INT
 int intmain(){
-    int i = 0;
     JsonList* list_p = JLIST(JsonValue::fromString("[ 1 , 200000000 , 3 , \"elem2\"]"));
     JsonInt * int_p = JINT((*list_p)[1]);
 
@@ -40,14 +37,28 @@ int intmain(){
     return 0;
 }
 
+// Bool
+int boolmain(){
+    JsonList* list_p = JLIST(JsonValue::fromString("[ true , false , 3 , \"elem2\"]"));
+    JsonBool* bool_p = JBOOL((*list_p)[0]);
+    JsonBool* bool_p1 = JBOOL((*list_p)[1]);
+
+    if(*bool_p == true){
+        cout << "T" << endl;
+    }
+    if(*bool_p1 == false){
+        cout << "F" << endl;
+    }
+    return 0;
+}
+
 
 // Dict
 // -----------
 int dictmain(){
-    int i = 0;
     string message = "{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val\\\\3bis\"}";
 
-    JsonDict* dict_p = JDICT(JsonValue::fromString(message, i));
+    JsonDict* dict_p = JDICT(JsonValue::fromString(message));
     cout << "Len=" << dict_p->size() << endl;
     JsonString * str_p = JSTRING((*dict_p)["cle3"]);
     cout << (string) *str_p << endl;
@@ -59,7 +70,10 @@ int main(){
     cout << "------------" << endl;
     intmain();
     cout << "------------" << endl;
+    boolmain();
+    cout << "------------" << endl;
     nullmain();
     cout << "------------" << endl;
-    return dictmain();
+    dictmain();
+    return 0;
 }

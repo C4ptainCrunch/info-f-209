@@ -38,11 +38,11 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
                 i = bak;
                 return JsonString::fromString(s, i);
                 break;
-            // case 'b':
-            // case 'f':
-            //     s = cut_from(message, i);
-            //     i = bak;
-            //     return JsonBool::fromString(s, i);
+            case 't':
+            case 'f':
+                s = cut_from(message, i);
+                i = bak;
+                return JsonBool::fromString(s, i);
             case 'n':
                 s = cut_from(message, i);
                 i = bak;
@@ -339,4 +339,52 @@ JsonNull * JsonNull::fromString(std::string message, int &i){
 
 bool JsonNull::operator ==(const int * i){
     return i == 0;
+}
+
+// Bool
+
+JsonBool::JsonBool(bool val){
+    value = val;
+}
+
+JsonBool * JsonBool::fromString(std::string message){
+    int i = 0;
+    return JsonBool::fromString(message, i);
+}
+
+JsonBool * JsonBool::fromString(std::string message, int &i){
+    JsonBool * r;
+    if(message[0] == 't'){
+        if(message.substr(0,4) != "true"){
+            throw 1;
+        }
+        r = new JsonBool(true);
+        i += 4;
+    }
+    else {
+        if(message.substr(0,5) != "false"){
+            throw 1;
+        }
+        r = new JsonBool(false);
+        i += 5;
+    }
+
+    return r;
+}
+
+string JsonBool::toString(){
+    if(value){
+        return "true";
+    }
+    else {
+        return "false";
+    }
+}
+
+bool JsonBool::operator ==(const bool i){
+    return value == i;
+}
+
+JsonBool::operator bool() const{
+    return value;
 }

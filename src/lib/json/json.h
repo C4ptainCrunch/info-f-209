@@ -7,6 +7,7 @@
 #define JSTRING dynamic_cast<JsonString*>
 #define JINT dynamic_cast<JsonInt*>
 #define JNULL dynamic_cast<JsonNull*>
+#define JBOOL dynamic_cast<JsonBool*>
 
 class JsonValue {
     public:
@@ -100,4 +101,18 @@ class JsonNull : public JsonValue {
 
     private:
         virtual void plop(){}
+};
+
+class JsonBool : public JsonValue {
+    public:
+        JsonBool(bool val);
+        static JsonBool * fromString(std::string message, int &i);
+        static JsonBool * fromString(std::string message);
+
+        std::string toString();
+        bool operator ==(const bool i);
+        operator bool() const;
+    private:
+        virtual void plop(){}
+        bool value;
 };

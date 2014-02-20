@@ -6,8 +6,7 @@
 #include "../lib/json/json.h"
 #include "../server/UserHandler.h"
 
-void logIn(JsonValue * message, UserHandler * thread)  // message = "user:password", TO DO : message en json
-{
+void logIn(JsonValue * message, UserHandler * thread){
     JsonDict * dictMessage = JDICT(message);
     if (dictMessage != NULL){
         std::string userName = (*dictMessage)["username"]->toString();
@@ -43,8 +42,7 @@ void logIn(JsonValue * message, UserHandler * thread)  // message = "user:passwo
     delete dictMessage;
 }
 
-void signUp(JsonValue * message, UserHandler * thread)
-{
+void signUp(JsonValue * message, UserHandler * thread){
     JsonDict * dictMessage = JDICT(message);
     if (dictMessage != NULL){
         std::string userName = (*dictMessage)["username"]->toString();

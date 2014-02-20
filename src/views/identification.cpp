@@ -9,6 +9,7 @@
 
 void logIn(JsonValue * message, UserHandler * thread){
     JsonDict * dictMessage = JDICT(message);
+    JsonInt * code = new JsonInt();
     if (dictMessage != NULL){
         std::string userName = (*dictMessage)[USERNAME]->toString();
         std::string password = (*dictMessage)[PASSWORD]->toString();
@@ -20,31 +21,37 @@ void logIn(JsonValue * message, UserHandler * thread){
             if (userInfos != NULL){
                 Manager * user = new Manager(userInfos);
                 if ((*userInfos)[PASSWORD]->toString() == password){
+                    code->setValue(CODE_SUCCESS);
+                    thread->writeToClient(code->toString());
                     thread->setManager(user);
-                    thread->writeToClient((JsonInt(CODE_SUCCESS)).toString());
                 }
                 else {
-                    thread->writeToClient((JsonInt(CODE_BAD_PASSWORD)).toString());
+                    code->setValue(CODE_BAD_PASSWORD);
+                    thread->writeToClient(code->toString());
                     delete user;
                 }
                 delete userInfos;
             }
             else{
-                thread->writeToClient((JsonInt(CODE_BAD_PASSWORD_FORMAT)).toString());
+                code->setValue(CODE_BAD_PASSWORD_FORMAT);
+                thread->writeToClient(code->toString());
             }
         }
         else {
-            thread->writeToClient((JsonInt(CODE_ACCOUNT_NOT_FOUND)).toString());
+            code->setValue(CODE_ACCOUNT_NOT_FOUND);
+            thread->writeToClient(code->toString());
         }
     }
     else{
-        thread->writeToClient((JsonInt(CODE_WRONG_MESSAGE_FORMAT)).toString());
+        code->setValue(CODE_WRONG_MESSAGE_FORMAT);
+        thread->writeToClient(code->toString());
     }
-    delete dictMessage;
+    delete code;
 }
 
 void signUp(JsonValue * message, UserHandler * thread){
     JsonDict * dictMessage = JDICT(message);
+    JsonInt * code = new JsonInt();
     if (dictMessage != NULL){
         std::string userName = (*dictMessage)[USERNAME]->toString();
         std::string rawFileName = "data/users/"+userName+".json";
@@ -56,20 +63,24 @@ void signUp(JsonValue * message, UserHandler * thread){
             JsonDict * userInfos = user->toJson();
             std::string infos = userInfos->toString();
             if (writeFile(fileName, infos) == 0){
-                thread->writeToClient((JsonInt(CODE_SUCCESS)).toString());
+                code->setValue(CODE_SUCCESS);
+                thread->writeToClient(code->toString());
             }
             else{
-                thread->writeToClient((JsonInt(CODE_FAIL_TO_SAVE)).toString());
+                code->setValue(CODE_FAIL_TO_SAVE);
+                thread->writeToClient(code->toString());
             }
         }
         else{
-            thread->writeToClient((JsonInt(CODE_ACCOUNT_ALREADY_EXIST)).toString());
+            code->setValue(CODE_ACCOUNT_ALREADY_EXIST);
+            thread->writeToClient(code->toString());
         }
     }
     else{
-        thread->writeToClient((JsonInt(CODE_WRONG_MESSAGE_FORMAT)).toString());
+        code->setValue(CODE_WRONG_MESSAGE_FORMAT);
+        thread->writeToClient(code->toString());
     }
-    delete dictMessage;
+    delete code;
 }
 
 int main(int argc, char * argv[]){

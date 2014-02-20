@@ -18,6 +18,7 @@ void getConnectedList(JsonValue * json, UserHandler * thread){
 
 void challenge(JsonValue * json, UserHandler * thread){
     JsonDict * challengerInfos = new JsonDict();
+    JsonInt * code = new JsonInt();
     Manager * challenger = thread->getManager();
     std::vector<UserHandler*> * users = thread->getHandlers_listPtr();
     bool find = false;
@@ -35,16 +36,20 @@ void challenge(JsonValue * json, UserHandler * thread){
             challengerInfos->add(JsonString(LEVEL), (std::string) challenger->getClub()->getLevel());
             JsonString reponse = JsonString("answerToChallenge : " + challengerInfos->toString())
             user->writeToClient(reponse.toString());
-            thread->writeToClient((JsonInt(CODE_SUCCESS)).toString());
+            code->setValue(CODE_SUCCESS);
+            thread->writeToClient(code->toString());
         }
         else{
-            thread->writeToClient("UserOccuped");
+            code->setValue(CODE_OCCUPED_USER);
+            thread->writeToClient(code->toString());
         }
     }
     else{
-        thread->writeToClient("UserNotFound");
+        code->setValue(CODE_ACCOUNT_NOT_FOUND);
+        thread->writeToClient(code->toString());
     }
-    delete reponse;
+    delete challengerInfos;
+    delete code;
 } // code
 
 void answerToChallenge(JsonValue * json, UserHandler * thread){

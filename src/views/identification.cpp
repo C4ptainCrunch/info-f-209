@@ -21,24 +21,24 @@ void logIn(JsonValue * message, UserHandler * thread){
                 Manager * user = new Manager(userInfos);
                 if ((*userInfos)[PASSWORD]->toString() == password){
                     thread->setManager(user);
-                    thread->writeToClient("user.login : {signal : \"loginSuccess\"}");
+                    thread->writeToClient((JsonInt(CODE_SUCCESS)).toString());
                 }
                 else {
-                    thread->writeToClient("user.login : {signal : \"wrongPassword\"}");
+                    thread->writeToClient((JsonInt(CODE_BAD_PASSWORD)).toString());
                     delete user;
                 }
                 delete userInfos;
             }
             else{
-                thread->writeToClient("user.login : {signal : \"wrongPasswordFormat\"}");
+                thread->writeToClient((JsonInt(CODE_BAD_PASSWORD_FORMAT)).toString());
             }
         }
         else {
-            thread->writeToClient("user.login : {signal : \"accountNotFound\"}");
+            thread->writeToClient((JsonInt(CODE_ACCOUNT_NOT_FOUND)).toString());
         }
     }
     else{
-        thread->writeToClient("user.login : {signal : \"wrongMessageFormat\"}");
+        thread->writeToClient((JsonInt(CODE_WRONG_MESSAGE_FORMAT)).toString());
     }
     delete dictMessage;
 }
@@ -56,18 +56,18 @@ void signUp(JsonValue * message, UserHandler * thread){
             JsonDict * userInfos = user->toJson();
             std::string infos = userInfos->toString();
             if (writeFile(fileName, infos) == 0){
-                thread->writeToClient("user.signup : {signal = \"signupSuccess\"}");
+                thread->writeToClient((JsonInt(CODE_SUCCESS)).toString());
             }
             else{
-                thread->writeToClient("user.signup : {signal = \"failToSave\"}");
+                thread->writeToClient((JsonInt(CODE_FAIL_TO_SAVE)).toString());
             }
         }
         else{
-            thread->writeToClient("user.signup : {signal = \"accountAlreadyExist\"}");
+            thread->writeToClient((JsonInt(CODE_ACCOUNT_ALREADY_EXIST)).toString());
         }
     }
     else{
-        thread->writeToClient("user.login : {signal : \"wrongMessageFormat\"}");
+        thread->writeToClient((JsonInt(CODE_WRONG_MESSAGE_FORMAT)).toString());
     }
     delete dictMessage;
 }

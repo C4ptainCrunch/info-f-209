@@ -177,7 +177,7 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
 std::string JsonDict::toString(){
     std::string infos = "{";
     for (std::map<std::string, JsonValue *>::iterator index = this->dict.begin() ; index != this->dict.end() ; index++ ){
-        infos += ((std::string) index->first) + " : ";
+        infos += "\"" + ((std::string) index->first) + "\"" + " : ";
         infos += index->second->toString();
         infos += ", ";
     }
@@ -185,8 +185,8 @@ std::string JsonDict::toString(){
     return infos;
 }
 
-void JsonDict::add(JsonString key, JsonValue * value){
-    dict[(string) key] = value;
+void JsonDict::add(string key, JsonValue * value){
+    dict[key] = value;
 }
 
 size_t JsonDict::size(){
@@ -236,11 +236,10 @@ std::string JsonList::toString(){
     while (index < this->content.size()){
         infos += this->content[index]->toString();
         index++;
-        if (index+1 != this->content.size()){
-            infos+=", ";
-        }
+        infos+=", ";
     }
-    infos+="]";
+
+    infos = infos.substr(0, infos.size()-2) + "]";
     return infos;
 }
 
@@ -258,6 +257,10 @@ JsonValue * JsonList::operator[](const int &i){
 
 
 // Int
+
+JsonInt::JsonInt(int val){
+    value = val;
+}
 
 JsonInt * JsonInt::fromString(std::string message){
     int i = 0;

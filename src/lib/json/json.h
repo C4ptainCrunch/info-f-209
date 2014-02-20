@@ -47,7 +47,7 @@ class JsonDict : public JsonValue {
 
         JsonValue * operator[](const std::string &str);
 
-        void add(JsonString key, JsonValue * value);
+        void add(std::string key, JsonValue * value);
         size_t size();
 
     private:
@@ -74,6 +74,8 @@ class JsonList : public JsonValue {
 
 class JsonInt : public JsonValue {
     public:
+        JsonInt(int val=0);
+
         static JsonInt * fromString(std::string message, int &i);
         static JsonInt * fromString(std::string message);
 

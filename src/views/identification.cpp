@@ -23,7 +23,6 @@ void logIn(JsonValue * message, UserHandler * thread){
                 Manager * user = new Manager(userInfos);
                 if ((*userInfos)[PASSWORD]->toString() == password){
                     code->setValue(SUCCESS);
-                    thread->writeToClient(code->toString());
                     thread->setManager(user);
                 }
                 else {

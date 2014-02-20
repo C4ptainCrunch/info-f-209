@@ -9,12 +9,23 @@ using namespace std;
 // -----------
 int listmain(){
     int i = 0;
-    JsonList* list_p = JLIST(JsonValue::fromString("[ 2    , \"elem2\"]"));
-    JsonInt * int_p = JINT((*list_p)[0]);
+    JsonList* list_p = JLIST(JsonValue::fromString("[ 1    ,\n \"elem2\"]"));
+    JsonString * str_p = JSTRING((*list_p)[1]);
+
+    cout << (string) *str_p << endl;
+    return 0;
+}
+
+// INT
+int intmain(){
+    int i = 0;
+    JsonList* list_p = JLIST(JsonValue::fromString("[ 1 , 200000000 , 3 , \"elem2\"]"));
+    JsonInt * int_p = JINT((*list_p)[1]);
 
     cout << (int) *int_p << endl;
     return 0;
 }
+
 
 // Dict
 // -----------
@@ -31,6 +42,8 @@ int dictmain(){
 
 int main(){
     listmain();
-    cout << "------------" << endl << endl;
+    cout << "------------" << endl;
+    intmain();
+    cout << "------------" << endl;
     return dictmain();
 }

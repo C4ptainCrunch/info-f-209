@@ -48,7 +48,9 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
             case '7':
             case '8':
             case '9':
-                return JsonInt::fromString(cut_from(message, i), i);
+                s = cut_from(message, i);
+                i = bak;
+                return JsonInt::fromString(s, i);
                 break;
             default:
                 throw 1;
@@ -254,6 +256,7 @@ JsonInt * JsonInt::fromString(std::string message){
 }
 
 JsonInt * JsonInt::fromString(std::string message, int &i){
+    int bak = i;
     JsonInt * r = new JsonInt();
     bool end;
     i = 0;
@@ -277,7 +280,7 @@ JsonInt * JsonInt::fromString(std::string message, int &i){
         }
     }
     r->setValue(message.substr(0, i));
-    i += skip_whitespace(message, 0);
+    i += bak - 1;
     return r;
 }
 

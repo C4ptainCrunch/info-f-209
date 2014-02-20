@@ -60,7 +60,6 @@ void Client::connectToServer(char * host, const int port)
 
     tv.tv_sec = 2; //secondes de timeout
     tv.tv_usec = 0;
-
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("Client: socket ");
         exit(EXIT_FAILURE);

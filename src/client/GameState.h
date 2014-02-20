@@ -21,6 +21,7 @@ public:
     virtual void logic() = 0; //Effectue les actions nécéssaire et demande un changement d'état en fonction de status.
     virtual void display() = 0; //Effectue tout les affichages de l'état.
 
+
     //FONCTIONS D'APPELS SERVEURS
 
     //log in

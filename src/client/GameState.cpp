@@ -57,38 +57,41 @@ GameState::~GameState() {}
 
 //FONCTIONS D'APPELS SERVEURS :
 
+
 //log in
 
 int GameState::log(string username, string password)
 {
     string message = "logIn : ";
     int res;
+    JsonInt JSres;
     JsonString JSusername(username);
     JsonString JSpass(password);
-    JsonInt JSres;
     JsonDict dict;
     dict.add("username", &JSusername);
     dict.add("password", &JSpass);
     message += dict.toString();
     client_->send(message);
-    client_->read(message);
-    res.fromString(message);
+    client_->recv(message);
+    JSres.fromString(message);
+    res = JSres.getValue();
     return res;
 }
 int GameState::sign(string username, string password)
 {
     string message = "signUp : ";
     int res;
+    JsonInt JSres;
     JsonString JSusername(username);
     JsonString JSpass(password);
-    JsonInt JSres;
     JsonDict dict;
     dict.add("username", &JSusername);
     dict.add("password", &JSpass);
     message += dict.toString();
     client_->send(message);
-    client_->read(message);
-    res.fromString(message);
+    client_->recv(message);
+    JSres.fromString(message);
+    res = JSres.getValue();
     return res;
 }
 

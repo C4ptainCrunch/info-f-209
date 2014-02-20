@@ -18,6 +18,6 @@ Position Ball::getPosition(){
 	return position_;
 }
 
-Ball::setPosition(Position position){
+void Ball::setPosition(Position position){
 	position_ = position;
 }

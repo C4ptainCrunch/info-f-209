@@ -1,3 +1,5 @@
+#include "Case.h"
+
 Position nextCase(Position position, int direction){
     Position nextPosition;
     nextPosition.x = position.x;
@@ -25,7 +27,7 @@ Position nextCase(Position position, int direction){
             nextPosition.y--;
             break;
         case UP_LEFT:
-            nextPosition--;
+            nextPosition.x--;
             if(position.x % 2 != 2)
                 nextPosition.y--;
             break;

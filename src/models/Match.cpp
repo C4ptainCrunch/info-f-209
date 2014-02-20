@@ -183,7 +183,7 @@ void Match::newTurn(Way playerWays[14]){
         //BUDGERS
         Position nextBallPos;
         for (int i = 0; i<2; ++i){
-            nextBallPos = budgers_[i].autoMove(grid_));
+            nextBallPos = budgers_[i].autoMove(grid_);
             grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
             grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
         }
@@ -286,15 +286,4 @@ int* Match::getScore(){
 int Match::addPoint(bool guestTeam ,int delta){
     score_[guestTeam] += delta;
     return score_[guestTeam];
-}
-
-void Match::moveBalls(){
-    Position pos;
-    pos.x = 0;
-    pos.y = 0;
-    goldenSnitch_.autoMove(pos);
-    for (int i = 0; i<2;++i){
-        budgers_[i].autoMove(pos);
-    }
-
 }

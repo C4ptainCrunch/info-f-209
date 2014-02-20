@@ -6,21 +6,21 @@ GoldenSnitch::GoldenSnitch():Ball(0) {
 
 GoldenSnitch::~GoldenSnitch(){ }
 
-Position GoldenSnitch::autoMove(const Case& grid[WIDTH][LENGTH])
+Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGHT])
 {
     Position nextPosition;
-    next = rand() % 6;
+    int next = rand() % 6;
     nextPosition = nextCase(position_, next);
-    if(grid[nextPosition][nextPosition].type == USABLE){
-        if(grid[nextPosition][nextPosition].ball == 0){
+    if(grid[nextPosition.x][nextPosition.y].type == USABLE){
+        if(grid[nextPosition.x][nextPosition.y].ball == 0){
             return nextPosition;
         }
     }
     for(int i=0; i<5; i++){
-        next = (next + 1)%6
+        next = (next + 1)%6;
         nextPosition = nextCase(position_, next);
-        if(grid[nextPosition][nextPosition].type == USABLE){
-            if(grid[nextPosition][nextPosition].ball == 0){
+        if(grid[nextPosition.x][nextPosition.y].type == USABLE){
+            if(grid[nextPosition.x][nextPosition.y].ball == 0){
                 return nextPosition;
             }
         }

@@ -1,8 +1,8 @@
 include ../options.mk
 
-SOURCES=$(wildcard *.cpp) ../views/views.cpp ../lib/socket/Socket.cpp
+SOURCES=$(wildcard *.cpp) ../lib/socket/Socket.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 HEADERS=$(wildcard *.h)
-EXECUTABLE=server
+EXECUTABLE=client
 
 include ../rules.mk

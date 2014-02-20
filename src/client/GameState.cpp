@@ -62,18 +62,34 @@ GameState::~GameState() {}
 int GameState::log(string username, string password)
 {
     string message = "logIn : ";
-    JsonString user(username);
-    JsonString pass(password);
+    int res;
+    JsonString JSusername(username);
+    JsonString JSpass(password);
+    JsonInt JSres;
     JsonDict dict;
-    dict.add("username", &user);
-    dict.add("password", &pass);
+    dict.add("username", &JSusername);
+    dict.add("password", &JSpass);
     message += dict.toString();
     client_->send(message);
-    return CODE_SUCCESS;
+    client_->read(message);
+    res.fromString(message);
+    return res;
 }
 int GameState::sign(string username, string password)
 {
-    return CODE_SUCCESS;
+    string message = "signUp : ";
+    int res;
+    JsonString JSusername(username);
+    JsonString JSpass(password);
+    JsonInt JSres;
+    JsonDict dict;
+    dict.add("username", &JSusername);
+    dict.add("password", &JSpass);
+    message += dict.toString();
+    client_->send(message);
+    client_->read(message);
+    res.fromString(message);
+    return res;
 }
 
 //general
@@ -167,21 +183,21 @@ void UnloggedState::logic()
     case UNLOGGED_CONNECT :
         res = log(nameInput_, passInput_); //appel serveur ici
 
-        if (res == CODE_SUCCESS) {
+        if (res == SUCCESS) {
             status_ = UNLOGGED_CONNECTED;
             client_->setNextState(STATE_MENU);
         } else
-        if (res == CODE_FAIL_ATTEMPT)
+        if (res == FAIL)
             status_ = UNLOGGED_WRONG_LOGS;
         break;
 
     case UNLOGGED_REGISTER :
         res = sign(nameInput_, passInput_);
 
-        if (res == CODE_SUCCESS)
+        if (res == SUCCESS)
             status_ = UNLOGGED_REGISTERED;
         else
-        if (res == CODE_FAIL_ATTEMPT)
+        if (res == FAIL)
             status_ = UNLOGGED_ALREADY_USED;
         break;
 

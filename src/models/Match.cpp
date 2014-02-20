@@ -132,7 +132,24 @@ void Match::generateGrid(){
                 }
             }
     //--------------------------BALLS----------------------------------
-            
+            if (j==LENGHT/2){
+                if(i == WIDTH/5){
+                    grid_[i][j].ball = &budgers_[0];
+                    budgers_[0].setPosition(i,j);
+                }
+                else if(i == 2*WIDTH/5){
+                    grid_[i][j].ball = &goldenSnitch_;
+                    goldenSnitch_.setPosition(i,j);
+                }
+                else if (i == 3*WIDTH/(5)){
+                    grid_[i][j].ball = &quaffle_;
+                    quaffle_.setPosition(i,j);
+                }
+                else if (i == 4*WIDTH/5){
+                    grid_[i][j].ball = &budgers_[1];
+                    budgers_[1].setPosition(i,j);
+                }
+            }
 
 
         }
@@ -145,7 +162,7 @@ void Match::movePlayer(Position fromPos, Position toPos){
     grid_[fromPos.x][fromPos.y].player = 0;
 }
 
-Case* Match::newTurn(Way playerWays[14]){
+void Match::newTurn(Way playerWays[14]){
     bool moved = true;
     int turnNumber = 0;
     while (moved && !endGame_){
@@ -154,7 +171,7 @@ Case* Match::newTurn(Way playerWays[14]){
         for (int i = 0; i<14; ++i){
             if (playerWays[i].size() >1){
                 if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0){
-                    nextPosition.[i] = playerWays[i][turnNumber + 1];
+                    nextPosition[i] = playerWays[i][turnNumber + 1];
                     movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
                 }
                 else{
@@ -163,32 +180,46 @@ Case* Match::newTurn(Way playerWays[14]){
                 moved = true;
             }
         }
+        //BUDGERS
+        Position nextBallPos;
+        for (int i = 0; i<2; ++i){
+            nextBallPos = budgers_[i].autoMove(grid_));
+            grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
+            grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
+        }
+        //GOLDENSNITCH
+        nextBallPos = goldenSnitch_.autoMove(grid_);
+        grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
+        grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
+
+        //QUAFFLE
+
         ++turnNumber;
     }
 }
 void Match::resolveConflict(Position nextPosition[14], Way playerWays[14], int indexOne, int turnNumber){
-    FieldPlayer playerOne = grid_[ways[indexOne][turnNumber + 1].x][ways[indexOne][turnNumber + 1].y].player;//joueur sur la case causant la merde
-    FieldPlayer playerTwo = grid_[ways[indexOne][turnNumber].x][ways[indexOne][turnNumber].y].player;//joueur qui vient foutre la merde
-    if (playerOne.getForce() >= playerTwo.getForce()){
-        playerWays[indexOne].insert(turnNumber + 1, ways[indexOne][turnNumber])//le joueur le plus faible perd un déplacement(le dernier)
-        nextPosition[turnNumber] = ways[indexOne][turnNumber];
+    FieldPlayer* playerOne = grid_[playerWays[indexOne][turnNumber + 1].x][playerWays[indexOne][turnNumber + 1].y].player;//joueur sur la case causant la merde
+    FieldPlayer* playerTwo = grid_[playerWays[indexOne][turnNumber].x][playerWays[indexOne][turnNumber].y].player;//joueur qui vient foutre la merde
+    if (playerOne->getForce() >= playerTwo->getForce()){
+        playerWays[indexOne].insert(playerWays[indexOne].begin()+turnNumber + 1, playerWays[indexOne][turnNumber]);//le joueur le plus faible perd un déplacement(le dernier)
+        nextPosition[turnNumber] = playerWays[indexOne][turnNumber];
     }
-    else  if (playerOne.getForce() < playerTwo.getForce()){
-        int indexTwo = findIndex(nextPosition, ways[indexOne][turnNumber + 1]);
+    else  if (playerOne->getForce() < playerTwo->getForce()){
+        int indexTwo = findIndex(nextPosition, playerWays[indexOne][turnNumber + 1]);
         // Faire reculer le joueur qui etait avancé et qui doit retourner à la position précédente
-        nextPosition[indexTwo] = ways[indexTwo][turnNumber];
+        nextPosition[indexTwo] = playerWays[indexTwo][turnNumber];
         movePlayer(playerWays[indexTwo][turnNumber + 1], playerWays[indexTwo][turnNumber]);
-        playerWays[indexTwo].insert(turnNumber + 1, ways[indexTwo][turnNumber])//le joueur le plus faible perd un déplacement(le dernier)
+        playerWays[indexTwo].insert(playerWays[indexTwo].begin()+turnNumber + 1, playerWays[indexTwo][turnNumber]);//le joueur le plus faible perd un déplacement(le dernier)
 
         // Faire avancer le joueur qui a gagné
-        nextPosition[indexOne] = ways[indexOne][turnNumber + 1];
+        nextPosition[indexOne] = playerWays[indexOne][turnNumber + 1];
         movePlayer(playerWays[indexOne][turnNumber], playerWays[indexOne][turnNumber + 1]);
     }
 }
 
 int Match::findIndex(Position nextPosition[14], Position position){
     for (int i = 0; i<14; ++i){
-        if (nextPosition[i] = position){
+        if (nextPosition[i] == position){
             return i;
         }
     }
@@ -226,7 +257,6 @@ string Match::print(){ //FOR TEST PURPOSES
                         c+= "B ";
                     }
                     c+= "\033[0m";
-                    //delete grid_[i][j].player;
                 }
                 else{
                     c += "\u2B21 ";
@@ -236,11 +266,13 @@ string Match::print(){ //FOR TEST PURPOSES
             else if (grid_[i][j].type == GOAL){
                 c += "\033[1;32m오\033[0m";
             }
+            else if (grid_[i][j].ball != 0){
+                cout<< "TYPE" << typeid(grid_[i][j]).name()<<" "   ;
+            }
             else{
                 c += "\u2B22 ";
             }
             
-            //cout<< matrix[i][j]<<" ";
         }
         c+="\n";
     }
@@ -266,18 +298,3 @@ void Match::moveBalls(){
     }
 
 }
-
-bool Match::checkEndOfMatch(){
-    bool goldenSnitchCaught = false;
-    for (int i = 0; i< WIDTH; ++i){
-        for (int j = 0; j < LENGHT; ++j){
-            if (grid_[i][j].ball == &goldenSnitch_){
-                //IF player = Attrapeur;
-                goldenSnitchCaught = true;
-            }
-        }
-    }
-    return goldenSnitchCaught;
-
-}
-

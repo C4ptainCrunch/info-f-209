@@ -38,14 +38,17 @@ Client::~Client() {}
 
 void Client::run()
 {
+    string buffer;
     currentStateID_ = STATE_INTRO;
     currentState_ = new IntroState(this);
-    //connect ici
+    socket_.recv(buffer);
+    if (buffer == "1")
+        cout<<"Challenged !"<<endl;
     while(currentStateID_ != STATE_EXIT){
         currentState_->handleEvents();
         currentState_->logic();
         currentState_->display();
-        //currentState... handle challenge
+
         changeState();
     }
 }
@@ -53,11 +56,17 @@ void Client::run()
 void Client::connectToServer(char * host, const int port)
 {
     int sockFd;
+    struct timeval tv;
+
+    tv.tv_sec = 2; //secondes de timeout
+    tv.tv_usec = 0;
 
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         perror("Client: socket ");
         exit(EXIT_FAILURE);
     }
+
+    setsockopt(sockFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
 
     socket_.setFd(sockFd);
 
@@ -89,6 +98,11 @@ void Client::disconnect()
         connected_ = false;
         close(socket_.getFd());
     }
+}
+
+int answerToChallenge(bool accept)
+{
+    return true;
 }
 
 int Client::send(const string & message)

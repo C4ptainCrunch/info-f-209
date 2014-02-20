@@ -4,6 +4,7 @@
 #include "client.h"
 #include "GameState.h"
 #include "utilitary.h"
+#include "../lib/json/json.h"
 
 //Les définitions ci dessous sont toutes les valeurs que peut avoir l'attribut 'status' de la class de base GameState.
 //Valeurs générales :
@@ -61,12 +62,6 @@ GameState::GameState(Client * client) : client_(client), status_(STATUS_DEFAULT)
 GameState::~GameState() {}
 
 //FONCTIONS D'APPELS SERVEURS :
-
-bool GameState::notifyServQuit() {}
-
-bool GameState::checkChallenge() {}
-struct objectDataPair GameState::getChallengerInfo() {}
-int GameState::answerToChallenge(bool accept) {}
 
 //log in
 

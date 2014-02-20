@@ -44,6 +44,7 @@ public:
     virtual void disconnect();
     virtual int send(const std::string & message); //Renvoie 0 si succès, 1 si erreur.
     virtual int recv(std::string & message); //idem. Modifie param message en lui donnant la valeur du message lu.
+    virtual int answerToChallenge(bool accept);
 
 private:
 

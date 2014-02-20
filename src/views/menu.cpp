@@ -1,22 +1,27 @@
-#include "constants.h"
+//#include "menu.h"
 
 //*********************
 // Divers
 //*********************
 
-void getConnectedList(JsonValue * json, UserHandler * thread){
+/*void getConnectedList(JsonValue * json, UserHandler * thread){
     JsonList * reponse = new JsonList();
     std::vector<UserHandler*> * users = thread->getHandlers_listPtr();
     for (int i = 0 ; i < users->size() ; i++){
-        reponse->add(new JsonDict());
-        reponse[i]->add(JsonString(USERNAME), users[i]->getManager()->getUserName());
-        reponse[i]->add(JsonString(LEVEL), (std::string) users[i]->getManager()->getClub()->getLevel())
+        JsonDict * tempDict = new JsonDict();
+        JsonString * userName = new JsonString((*users)[i]->getManager()->getUserName());
+        JsonInt * level = new JsonInt();
+        level->setValue((*users)[i]->getManager()->getClub()->getLevel());
+        tempDict->add((std::string) USERNAME, userName);
+        tempDict->add((std::string) LEVEL, level);
+        reponse->add(tempDict);
     }
     thread->writeToClient(reponse->toString());
     delete reponse;
-}
+}*/
 
-void challenge(JsonValue * json, UserHandler * thread){
+/*void challenge(JsonValue * json, UserHandler * thread){
+    JsonDict * dictMessage = JDICT(json);
     JsonDict * challengerInfos = new JsonDict();
     JsonInt * code = new JsonInt();
     code->setValue(FAIL);
@@ -26,16 +31,16 @@ void challenge(JsonValue * json, UserHandler * thread){
     int index = 0;
     Manager * user;
     while (index < users->size() and (not find)){
-        user = users[index]->getManager();
-        find = (user->getUserName() == json[USERNAME]);
+        user = (*users)[index]->getManager();
+        find = (user->getUserName() == (*dictMessage)[(std::string) USERNAME]);
         index++;
     }
     if (find){
-        if (user->isFree()){
-            thread->setFreeState(false);
+        if (user->isReady()){
+            user->setReadyState(false);
             challengerInfos->add(JsonString(USERNAME), challenger->getUserName());
             challengerInfos->add(JsonString(LEVEL), (std::string) challenger->getClub()->getLevel());
-            JsonString reponse = JsonString("answerToChallenge : " + challengerInfos->toString())
+            JsonString reponse = JsonString("answerToChallenge : " + challengerInfos->toString());
             user->writeToClient(reponse.toString());
             code->setValue(CODE_SUCCESS);
         }
@@ -44,9 +49,9 @@ void challenge(JsonValue * json, UserHandler * thread){
     thread->writeToClient(code->toString());
     delete challengerInfos;
     delete code;
-} // code
+} // code*/
 
-void answerToChallenge(JsonValue * json, UserHandler * thread){
+/*void answerToChallenge(JsonValue * json, UserHandler * thread){
     char * reponse;
 } //code
 
@@ -54,7 +59,7 @@ void answerToChallenge(JsonValue * json, UserHandler * thread){
 // Menu
 //*********************
 
-void getInfo(JsonValue * json, UserHandler * thread){
+/*void getInfo(JsonValue * json, UserHandler * thread){
     JsonDict * reponse = new JsonDict();
     Manager * user = thread->getManager();
     reponse->add(JsonString(USERNAME), user->getUserName());
@@ -69,13 +74,13 @@ void getMoney(JsonValue * json, UserHandler * thread){
     reponse->setValue(user->getClub()->getMoney());
     writeToClient(reponse->toString());
     delete reponse;
-}
+}*/
 
 //*********************
 // ManagerPlayers
 //*********************
 
-void getInTeamPlayerList(JsonValue * json, UserHandler * thread){
+/*void getInTeamPlayerList(JsonValue * json, UserHandler * thread){
     char * reponse;
 } // struct
 
@@ -88,11 +93,10 @@ void getDataOnPlayer(JsonValue * json, UserHandler * thread){
 } // player
 
 void healPlayer(JsonValue * json, UserHandler * thread){
-    JsonDict * reponse = new JsonDict();
+    /*JsonDict * reponse = new JsonDict();
     JsonInt * code = new JsonInt();
     code->setValue(FAIL);
     Manager * user = thread->getManager();
-    reponse->add(JsonString(MONEY), (std::string) user->getClub()->getMoney());
     writeToClient(reponse->toString());
     delete reponse;
 } //code
@@ -117,7 +121,7 @@ void updateInfrastructure(JsonValue * json, UserHandler * thread){
 // AuctionHouse
 //*********************
 
-void getSellingPlayers()(JsonValue * json, UserHandler * thread){
+void getSellingPlayers(JsonValue * json, UserHandler * thread){
     char * reponse;
 }// struct
 
@@ -153,3 +157,4 @@ void checkEndOfBid(JsonValue * json, UserHandler * thread){
 void endBid(JsonValue * json, UserHandler * thread){
     char * reponse;
 }// code
+*/

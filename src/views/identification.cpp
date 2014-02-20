@@ -1,11 +1,4 @@
-#include "../models/Manager.h"
-#include "../lib/json/utils.h"
-#include <cstdlib>
-#include <vector>
-#include "../lib/file/files.cpp"
-#include "../lib/json/json.h"
-#include "../server/UserHandler.h"
-#include "constants.h"
+#include "identification.h"
 
 void logIn(JsonValue * message, UserHandler * thread){
     JsonDict * dictMessage = JDICT(message);
@@ -48,7 +41,7 @@ void signUp(JsonValue * message, UserHandler * thread){
         if(readFile(fileName, content) == -1 and errno == EIO){
             Manager * user = new Manager((*dictMessage)[NAME]->toString(), userName, (*dictMessage)[PASSWORD]->toString());
             thread->setManager(user);
-            JsonDict * userInfos = user->toJson();
+            JsonDict * userInfos = JsonDict::fromString("{\"essai\" : \"lol\"}");//user->toJson();
             std::string infos = userInfos->toString();
             if (writeFile(fileName, infos) == 0){
                 code->setValue(SUCCESS);
@@ -59,6 +52,6 @@ void signUp(JsonValue * message, UserHandler * thread){
     delete code;
 }
 
-int main(int argc, char * argv[]){
-    return EXIT_SUCCESS;    // TO DO : vérifier si EXIT_SUCCESS à return
+int main(){
+    return 0;
 }

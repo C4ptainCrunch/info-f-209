@@ -46,13 +46,6 @@ enum MANAGE_PLAYERS
     MANAGE_PLAYERS_HEALING_UNWOUND = 5
 };
 
-enum CODES
-{
-    CODE_SUCCESS,
-    CODE_FAIL_ATTEMPT,
-    CODE_UNEXPECTED_FAILURE
-};
-
 #define HEAL_PRICE 500
 
 using namespace std;
@@ -67,6 +60,13 @@ GameState::~GameState() {}
 
 int GameState::log(string username, string password)
 {
+    string message = "logIn : ";
+    JsonDict * dict = new JsonDict();
+    dict->add("username", username);
+    dict->add("password", password);
+    message += dict->toString();
+    client_.send(message);
+    delete dict;
     return CODE_SUCCESS;
 }
 int GameState::sign(string username, string password)
@@ -184,7 +184,6 @@ void UnloggedState::logic()
         break;
 
     case STATUS_QUIT :
-        notifyServQuit();
         client_->setNextState(STATE_EXIT);
         break;
     }
@@ -296,7 +295,6 @@ void MenuState::logic()
         client_->setNextState(STATE_CONNECTEDLIST);
         break;
     case STATUS_QUIT :
-        notifyServQuit();
         client_->setNextState(STATE_EXIT);
         break;
     }

@@ -41,7 +41,7 @@ void Client::run()
     string buffer;
     currentStateID_ = STATE_INTRO;
     currentState_ = new IntroState(this);
-    socket_.recv(buffer);
+    recv(buffer);
     if (buffer == "1")
         cout<<"Challenged !"<<endl;
     while(currentStateID_ != STATE_EXIT){
@@ -100,7 +100,7 @@ void Client::disconnect()
     }
 }
 
-int answerToChallenge(bool accept)
+int Client::answerToChallenge(bool accept)
 {
     return true;
 }

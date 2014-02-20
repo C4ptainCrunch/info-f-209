@@ -9,6 +9,30 @@ Team::Team(){
     }
 }
 
+Team::Team(JsonValue * json){
+    JsonDict * team = JDICT(json);
+    JsonDict * player_dict;
+    NonFieldPlayer *players[7];
+
+    if(team == NULL)
+        throw 1;
+    JsonList * players_list = JLIST((*team)["players"]);
+    if(players_list == NULL)
+        throw 1;
+    if(players_list->size() != 7)
+        throw 1;
+
+    for(int i = 0; i < 7; i++){
+        player_dict = JDICT((*players_list)[i]);
+        if(player_dict == NULL)
+            players[i] = NULL;
+        else{
+            players[i] = new NonFieldPlayer(player_dict);
+        }
+    }
+
+}
+
 Team::Team(NonFieldPlayer *players[7]){
     for(int i = 0; i < 7; ++ i){
         players_[i] = players[i];

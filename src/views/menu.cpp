@@ -1,3 +1,5 @@
+#include "constants.h"
+
 //*********************
 // Divers
 //*********************
@@ -7,8 +9,8 @@ void getConnectedList(JsonValue * json, UserHandler * thread){
     std::vector<UserHandler*> * users = thread->getHandlers_listPtr();
     for (int i = 0 ; i < users->size() ; i++){
         reponse->add(new JsonDict());
-        reponse[i]->add(JsonString("name"), users[i]->getManager()->getUserName());
-        reponse[i]->add(JsonString("level"), (std::string) users[i]->getManager()->getClub()->getLevel())
+        reponse[i]->add(JsonString(USERNAME), users[i]->getManager()->getUserName());
+        reponse[i]->add(JsonString(LEVEL), (std::string) users[i]->getManager()->getClub()->getLevel())
     }
     thread->writeToClient(reponse->toString());
     delete reponse;
@@ -23,17 +25,17 @@ void challenge(JsonValue * json, UserHandler * thread){
     Manager * user;
     while (index < users->size() and (not find)){
         user = users[index]->getManager();
-        find = (user->getUserName() == json["name"]);
+        find = (user->getUserName() == json[USERNAME]);
         index++;
     }
     if (find){
         if (user->isFree()){
             thread->setFreeState(false);
-            challengerInfos->add(JsonString("name"), challenger->getUserName());
-            challengerInfos->add(JsonString("level"), (std::string) challenger->getClub()->getLevel());
+            challengerInfos->add(JsonString(USERNAME), challenger->getUserName());
+            challengerInfos->add(JsonString(LEVEL), (std::string) challenger->getClub()->getLevel());
             JsonString reponse = JsonString("answerToChallenge : " + challengerInfos->toString())
             user->writeToClient(reponse.toString());
-            thread->writeToClient("ChallengeSuccess");
+            thread->writeToClient((JsonInt(CODE_SUCCESS)).toString());
         }
         else{
             thread->writeToClient("UserOccuped");
@@ -56,8 +58,8 @@ void answerToChallenge(JsonValue * json, UserHandler * thread){
 void getInfo(JsonValue * json, UserHandler * thread){
     JsonDict * reponse = new JsonDict();
     Manager * user = thread->getManager();
-    reponse->add(JsonString("name"), user->getUserName());
-    reponse->add(JsonString("level"), (std::string) user->getClub()->getLevel());
+    reponse->add(JsonString(USERNAME), user->getUserName());
+    reponse->add(JsonString(LEVEL), (std::string) user->getClub()->getLevel());
     writeToClient(reponse->toString());
     delete reponse;
 }
@@ -65,7 +67,7 @@ void getInfo(JsonValue * json, UserHandler * thread){
 void getMoney(JsonValue * json, UserHandler * thread){
     JsonDict * reponse = new JsonDict();
     Manager * user = thread->getManager();
-    reponse->add(JsonString("money"), (std::string) user->getClub()->getMoney());
+    reponse->add(JsonString(MONEY), (std::string) user->getClub()->getMoney());
     writeToClient(reponse->toString());
     delete reponse;
 }

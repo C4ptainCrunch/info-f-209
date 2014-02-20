@@ -140,14 +140,61 @@ void Match::generateGrid(){
 
 }
 
-void Match::movePlayer(int fromX, int fromY,int toX, int toY){
-
+void Match::movePlayer(Position fromPos, Position toPos){
+    grid_[toPos.x][toPos.y].player = grid_[fromPos.x][toPos.y].player;
+    grid_[fromPos.x][fromPos.y].player = 0;
 }
 
-int* Match::isInTheWay(int fromX,int fromY,int toX, int toY){
-    int blockingPosition[2];
-    return blockingPosition;
+Case* Match::newTurn(Way playerWays[14]){
+    bool moved = true;
+    int turnNumber = 0;
+    while (moved && !endGame_){
+        moved = false;
+        Position nextPosition[14];
+        for (int i = 0; i<14; ++i){
+            if (playerWays[i].size() >1){
+                if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0){
+                    nextPosition.[i] = playerWays[i][turnNumber + 1];
+                    movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
+                }
+                else{
+                    resolveConflict(nextPosition, playerWays, i, turnNumber);
+                }
+                moved = true;
+            }
+        }
+        ++turnNumber;
+    }
 }
+void Match::resolveConflict(Position nextPosition[14], Way playerWays[14], int indexOne, int turnNumber){
+    FieldPlayer playerOne = grid_[ways[indexOne][turnNumber + 1].x][ways[indexOne][turnNumber + 1].y].player;//joueur sur la case causant la merde
+    FieldPlayer playerTwo = grid_[ways[indexOne][turnNumber].x][ways[indexOne][turnNumber].y].player;//joueur qui vient foutre la merde
+    if (playerOne.getForce() >= playerTwo.getForce()){
+        playerWays[indexOne].insert(turnNumber + 1, ways[indexOne][turnNumber])//le joueur le plus faible perd un déplacement(le dernier)
+        nextPosition[turnNumber] = ways[indexOne][turnNumber];
+    }
+    else  if (playerOne.getForce() < playerTwo.getForce()){
+        int indexTwo = findIndex(nextPosition, ways[indexOne][turnNumber + 1]);
+        // Faire reculer le joueur qui etait avancé et qui doit retourner à la position précédente
+        nextPosition[indexTwo] = ways[indexTwo][turnNumber];
+        movePlayer(playerWays[indexTwo][turnNumber + 1], playerWays[indexTwo][turnNumber]);
+        playerWays[indexTwo].insert(turnNumber + 1, ways[indexTwo][turnNumber])//le joueur le plus faible perd un déplacement(le dernier)
+
+        // Faire avancer le joueur qui a gagné
+        nextPosition[indexOne] = ways[indexOne][turnNumber + 1];
+        movePlayer(playerWays[indexOne][turnNumber], playerWays[indexOne][turnNumber + 1]);
+    }
+}
+
+int Match::findIndex(Position nextPosition[14], Position position){
+    for (int i = 0; i<14; ++i){
+        if (nextPosition[i] = position){
+            return i;
+        }
+    }
+    return -1;
+}
+
 
 
 

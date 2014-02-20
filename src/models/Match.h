@@ -35,6 +35,7 @@ class Match{
         std::string print();//FOR TESTS
         void generateGrid();//TO SET PRIVATE AFTER TESTS
     private:
+        bool endGame_ = false;
         FieldPlayer teams_[2][7];
         int score_[2];
         Club *clubs_[2];

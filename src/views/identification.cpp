@@ -10,6 +10,7 @@
 void logIn(JsonValue * message, UserHandler * thread){
     JsonDict * dictMessage = JDICT(message);
     JsonInt * code = new JsonInt();
+    code->setValue(FAIL);
     if (dictMessage != NULL){
         std::string userName = (*dictMessage)[USERNAME]->toString();
         std::string password = (*dictMessage)[PASSWORD]->toString();
@@ -21,37 +22,25 @@ void logIn(JsonValue * message, UserHandler * thread){
             if (userInfos != NULL){
                 Manager * user = new Manager(userInfos);
                 if ((*userInfos)[PASSWORD]->toString() == password){
-                    code->setValue(CODE_SUCCESS);
+                    code->setValue(SUCCESS);
                     thread->writeToClient(code->toString());
                     thread->setManager(user);
                 }
                 else {
-                    code->setValue(CODE_BAD_PASSWORD);
-                    thread->writeToClient(code->toString());
                     delete user;
                 }
                 delete userInfos;
             }
-            else{
-                code->setValue(CODE_BAD_PASSWORD_FORMAT);
-                thread->writeToClient(code->toString());
-            }
-        }
-        else {
-            code->setValue(CODE_ACCOUNT_NOT_FOUND);
-            thread->writeToClient(code->toString());
         }
     }
-    else{
-        code->setValue(CODE_WRONG_MESSAGE_FORMAT);
-        thread->writeToClient(code->toString());
-    }
+    thread->writeToClient(code->toString());
     delete code;
 }
 
 void signUp(JsonValue * message, UserHandler * thread){
     JsonDict * dictMessage = JDICT(message);
     JsonInt * code = new JsonInt();
+    code->setValue(FAIL);
     if (dictMessage != NULL){
         std::string userName = (*dictMessage)[USERNAME]->toString();
         std::string rawFileName = "data/users/"+userName+".json";
@@ -63,23 +52,11 @@ void signUp(JsonValue * message, UserHandler * thread){
             JsonDict * userInfos = user->toJson();
             std::string infos = userInfos->toString();
             if (writeFile(fileName, infos) == 0){
-                code->setValue(CODE_SUCCESS);
-                thread->writeToClient(code->toString());
-            }
-            else{
-                code->setValue(CODE_FAIL_TO_SAVE);
-                thread->writeToClient(code->toString());
+                code->setValue(SUCCESS);
             }
         }
-        else{
-            code->setValue(CODE_ACCOUNT_ALREADY_EXIST);
-            thread->writeToClient(code->toString());
-        }
     }
-    else{
-        code->setValue(CODE_WRONG_MESSAGE_FORMAT);
-        thread->writeToClient(code->toString());
-    }
+    thread->writeToClient(code->toString());
     delete code;
 }
 

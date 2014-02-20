@@ -19,6 +19,7 @@ void getConnectedList(JsonValue * json, UserHandler * thread){
 void challenge(JsonValue * json, UserHandler * thread){
     JsonDict * challengerInfos = new JsonDict();
     JsonInt * code = new JsonInt();
+    code->setValue(FAIL);
     Manager * challenger = thread->getManager();
     std::vector<UserHandler*> * users = thread->getHandlers_listPtr();
     bool find = false;
@@ -37,17 +38,10 @@ void challenge(JsonValue * json, UserHandler * thread){
             JsonString reponse = JsonString("answerToChallenge : " + challengerInfos->toString())
             user->writeToClient(reponse.toString());
             code->setValue(CODE_SUCCESS);
-            thread->writeToClient(code->toString());
         }
-        else{
-            code->setValue(CODE_OCCUPED_USER);
-            thread->writeToClient(code->toString());
-        }
+        
     }
-    else{
-        code->setValue(CODE_ACCOUNT_NOT_FOUND);
-        thread->writeToClient(code->toString());
-    }
+    thread->writeToClient(code->toString());
     delete challengerInfos;
     delete code;
 } // code
@@ -94,11 +88,11 @@ void getDataOnPlayer(JsonValue * json, UserHandler * thread){
 } // player
 
 void healPlayer(JsonValue * json, UserHandler * thread){
-    /*JsonDict * reponse = new JsonDict();
+    JsonDict * reponse = new JsonDict();
     Manager * user = thread->getManager();
-    reponse->add(JsonString("money"), (std::string) user->getClub()->getMoney());
+    reponse->add(JsonString(MONEY), (std::string) user->getClub()->getMoney());
     writeToClient(reponse->toString());
-    delete reponse;*/
+    delete reponse;
 } // bool -> code
 
 void swapPlayer(JsonValue * json, UserHandler * thread){

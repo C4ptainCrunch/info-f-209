@@ -24,6 +24,7 @@ class UserHandler {
 
     private:
         bool dead;
+        bool free;
         Socket * s_;
         Manager * manager_;
         thread * handling_thread_;

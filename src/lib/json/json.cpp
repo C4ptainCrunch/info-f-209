@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <typeinfo>
+#include <map>
 
 #include "json.h"
 #include "utils.h"
@@ -37,6 +38,15 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
                 i = bak;
                 return JsonString::fromString(s, i);
                 break;
+            case 't':
+            case 'f':
+                s = cut_from(message, i);
+                i = bak;
+                return JsonBool::fromString(s, i);
+            case 'n':
+                s = cut_from(message, i);
+                i = bak;
+                return JsonNull::fromString(s, i);
             case '0':
             case '1':
             case '2':
@@ -47,7 +57,9 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
             case '7':
             case '8':
             case '9':
-                return createNumber(cut_from(message, i), i);
+                s = cut_from(message, i);
+                i = bak;
+                return JsonInt::fromString(s, i);
                 break;
             default:
                 throw 1;
@@ -55,6 +67,10 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
     }
     throw 1;
 }
+
+/*std::string JsonValue::toString(JsonValue * json){
+    return json->toString();
+}*/
 
 // String
 
@@ -115,7 +131,11 @@ JsonString * JsonString::fromString(std::string message, int &i){
     i++;
     }
     throw 1;
+}
 
+std::string JsonString::toString(){
+    std::string infos = "\"" + this->value + "\"";
+    return infos;
 }
 
 // Dict
@@ -152,6 +172,17 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
             i++;
         }
     }
+}
+
+std::string JsonDict::toString(){
+    std::string infos = "{";
+    for (std::map<std::string, JsonValue *>::iterator index = this->dict.begin() ; index != this->dict.end() ; index++ ){
+        infos += ((std::string) index->first) + " : ";
+        infos += index->second->toString();
+        infos += ", ";
+    }
+    infos = infos.substr(0, infos.size()-2) + "}";
+    return infos;
 }
 
 void JsonDict::add(JsonString key, JsonValue * value){
@@ -199,6 +230,20 @@ JsonList * JsonList::fromString(std::string message, int &i){
     }
 }
 
+std::string JsonList::toString(){
+    std::string infos = "[";
+    int index=0;
+    while (index < this->content.size()){
+        infos += this->content[index]->toString();
+        index++;
+        if (index+1 != this->content.size()){
+            infos+=", ";
+        }
+    }
+    infos+="]";
+    return infos;
+}
+
 void JsonList::add(JsonValue * value){
     content.push_back(value);
 }
@@ -212,8 +257,134 @@ JsonValue * JsonList::operator[](const int &i){
 }
 
 
-// Functions
+// Int
 
-JsonValue * createNumber(string message, int &i){
-    return new JsonValue();
+JsonInt * JsonInt::fromString(std::string message){
+    int i = 0;
+    return JsonInt::fromString(message, i);
+}
+
+JsonInt * JsonInt::fromString(std::string message, int &i){
+    int bak = i;
+    JsonInt * r = new JsonInt();
+    bool end;
+    i = 0;
+    while(!end){
+        switch(message[i]){
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                i++;
+                break;
+            default:
+                end = true;
+                break;
+        }
+    }
+    r->setValue(message.substr(0, i));
+    i += bak - 1;
+    return r;
+}
+
+string JsonInt::toString(){
+    return (string) *this;
+}
+
+
+int JsonInt::getValue(){
+    return value;
+}
+
+void JsonInt::setValue(int val){
+    value = val;
+}
+
+void JsonInt::setValue(string val){
+    value = stoi(val);
+}
+
+JsonInt::operator std::string() const{
+    return std::to_string(value);
+}
+
+JsonInt::operator int() const{
+    return value;
+}
+
+// Null
+
+JsonNull * JsonNull::fromString(std::string message){
+    int i = 0;
+    return JsonNull::fromString(message, i);
+}
+
+string JsonNull::toString(){
+    return "null";
+}
+
+JsonNull * JsonNull::fromString(std::string message, int &i){
+    i += 4;
+    if(message.substr(0,4) != "null"){
+        throw 1;
+    }
+    return new JsonNull;
+}
+
+bool JsonNull::operator ==(const int * i){
+    return i == 0;
+}
+
+// Bool
+
+JsonBool::JsonBool(bool val){
+    value = val;
+}
+
+JsonBool * JsonBool::fromString(std::string message){
+    int i = 0;
+    return JsonBool::fromString(message, i);
+}
+
+JsonBool * JsonBool::fromString(std::string message, int &i){
+    JsonBool * r;
+    if(message[0] == 't'){
+        if(message.substr(0,4) != "true"){
+            throw 1;
+        }
+        r = new JsonBool(true);
+        i += 4;
+    }
+    else {
+        if(message.substr(0,5) != "false"){
+            throw 1;
+        }
+        r = new JsonBool(false);
+        i += 5;
+    }
+
+    return r;
+}
+
+string JsonBool::toString(){
+    if(value){
+        return "true";
+    }
+    else {
+        return "false";
+    }
+}
+
+bool JsonBool::operator ==(const bool i){
+    return value == i;
+}
+
+JsonBool::operator bool() const{
+    return value;
 }

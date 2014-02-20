@@ -18,6 +18,7 @@ void getConnectedList(JsonValue * json, UserHandler * thread){
     delete reponse;
 }
 
+
 void challenge(JsonValue * json, UserHandler * thread){
     JsonDict * challenger = new JsonDict();
     Manager * user = thread->getManager();
@@ -143,6 +144,7 @@ void getBidderCount(JsonValue * json, UserHandler * thread){
 void checkEndOfBid(JsonValue * json, UserHandler * thread){
     char * reponse;
 }// bool
+
 
 void endBid(JsonValue * json, UserHandler * thread){
     char * reponse;

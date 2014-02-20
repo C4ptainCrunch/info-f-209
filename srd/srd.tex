@@ -55,6 +55,7 @@ Cet argent sera récolté lors des matchs et grâce aux revenus générés par l
 En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibilité de recruter de nouveaux \glspl{joueur} de Quidditch pour renforcer son \gls{equipe} via un système d'\glspl{enchere}, il pourra aussi développer différentes infrastructures et services comme son stade, son infirmerie, son terrain d'entraînement, son fanshop etc.
 
 % glossaire
+
 \printglossary[numberedsection]
 \subsection{Historique}
 \begin{description}
@@ -68,6 +69,7 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \item[1.0] (20/12/13) : Délivrable pour la phase 1 - Equipe
 \item[1.1] (16/02/13) : Correction de fautes d'orthographes et remplissage de l'historique - Bruno
 \end{description}
+
 
 \section{Besoins d'utilisation}
 \subsection{Exigences fonctionnelles}
@@ -376,6 +378,34 @@ Durant sa création, il fixera une date limite pour les inscriptions.
   }
    \caption{\label{3} Diagramme de classe représentant les structures de données intervenant pour la partie client}
 \end{figure}
+
+\section{Justification de la bibliothèque graphique}
+\subsection{Qt}
+\paragraph{Avantages}
+\begin{itemize}
+\item Qt est une librairie complête et possède une documentation énorme. De ce fait, il sera facile de trouver réponse à nos questions.
+\item Qt est une librairie utilisée depuis 1995 et le projet est toujours actif et maintenu par une grande société (Nokia), on peut donc la considérer comme stable.
+\item Qt est écrit en C++ et donc nativement adapté pour ce langage.
+\item Qt est OpenSource (sous license GNU LGPL)
+\item Qt permet d'utiliser le framework QgraphicsView, facile d'utilisation et complet, permettant de dessiner aisément ce que l'on veut.
+\item On peut utiliser Qt Creator pour cette librairie graphique, IDE fournissant une autocomplétion pour tous les modules de Qt et possédant une aide disponible intrinsèque.
+\end{itemize}
+\paragraph{Inconvénients}
+\begin{itemize}
+\item Lourd
+\item Possède des packages qui ne nous serviront pas, étant donné que nous ne n'utiliserons que la partie graphique de Qt
+\end{itemize}
+\subsection{GTK+}
+\paragraph{Avantages}
+\begin{itemize}
+\item Plus léger
+\end{itemize}
+\paragraph{Inconvénients}
+\begin{itemize}
+\item Documentation non complête
+\item Pas d'IDE fournie par l'équipe en charge du projet GTK+
+\end{itemize}
+
 
 \printindex
 \listoffigures

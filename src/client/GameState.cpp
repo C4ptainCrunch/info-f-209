@@ -5,6 +5,7 @@
 #include "GameState.h"
 #include "utilitary.h"
 #include "../lib/json/json.h"
+#include "../views/constants.h"
 
 //Les définitions ci dessous sont toutes les valeurs que peut avoir l'attribut 'status' de la class de base GameState.
 //Valeurs générales :
@@ -61,12 +62,13 @@ GameState::~GameState() {}
 int GameState::log(string username, string password)
 {
     string message = "logIn : ";
-    JsonDict * dict = new JsonDict();
-    dict->add("username", username);
-    dict->add("password", password);
-    message += dict->toString();
-    client_.send(message);
-    delete dict;
+    JsonString user(username);
+    JsonString pass(password);
+    JsonDict dict;
+    dict.add("username", &user);
+    dict.add("password", &pass);
+    message += dict.toString();
+    client_->send(message);
     return CODE_SUCCESS;
 }
 int GameState::sign(string username, string password)

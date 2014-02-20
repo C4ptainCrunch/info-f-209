@@ -38,6 +38,15 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
                 i = bak;
                 return JsonString::fromString(s, i);
                 break;
+            // case 'b':
+            // case 'f':
+            //     s = cut_from(message, i);
+            //     i = bak;
+            //     return JsonBool::fromString(s, i);
+            case 'n':
+                s = cut_from(message, i);
+                i = bak;
+                return JsonNull::fromString(s, i);
             case '0':
             case '1':
             case '2':
@@ -307,4 +316,27 @@ JsonInt::operator std::string() const{
 
 JsonInt::operator int() const{
     return value;
+}
+
+// Null
+
+JsonNull * JsonNull::fromString(std::string message){
+    int i = 0;
+    return JsonNull::fromString(message, i);
+}
+
+string JsonNull::toString(){
+    return "null";
+}
+
+JsonNull * JsonNull::fromString(std::string message, int &i){
+    i += 4;
+    if(message.substr(0,4) != "null"){
+        throw 1;
+    }
+    return new JsonNull;
+}
+
+bool JsonNull::operator ==(const int * i){
+    return i == 0;
 }

@@ -16,6 +16,20 @@ int listmain(){
     return 0;
 }
 
+
+// Null
+// -----------
+int nullmain(){
+    int i = 0;
+    JsonList* list_p = JLIST(JsonValue::fromString("[ null    ,\n \"elem2\"]"));
+    JsonNull * null_p = JNULL((*list_p)[0]);
+    if(*null_p == NULL){
+        cout << "N" << endl;
+    }
+    //cout << (string) *str_p << endl;
+    return 0;
+}
+
 // INT
 int intmain(){
     int i = 0;
@@ -44,6 +58,8 @@ int main(){
     listmain();
     cout << "------------" << endl;
     intmain();
+    cout << "------------" << endl;
+    nullmain();
     cout << "------------" << endl;
     return dictmain();
 }

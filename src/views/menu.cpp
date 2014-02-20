@@ -87,7 +87,11 @@ void getDataOnPlayer(JsonValue * json, UserHandler * thread){
 } // player
 
 void healPlayer(JsonValue * json, UserHandler * thread){
-    char * reponse;
+    /*JsonDict * reponse = new JsonDict();
+    Manager * user = thread->getManager();
+    reponse->add(JsonString("money"), (std::string) user->getClub()->getMoney());
+    writeToClient(reponse->toString());
+    delete reponse;*/
 } // bool -> code
 
 void swapPlayer(JsonValue * json, UserHandler * thread){

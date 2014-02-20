@@ -13,7 +13,6 @@ using namespace std;
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list) {
     handlers_list_ = handlers_list;
     s_ = NULL;
-    free = true;
 }
 
 void UserHandler::start(const int fd, thread * handling_thread){

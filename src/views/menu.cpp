@@ -2,10 +2,6 @@
 // Divers
 //*********************
 
-/*void notifyServQuit(JsonValue * json, UserHandler * thread){
-    char * reponse;
-}*/
-
 void getConnectedList(JsonValue * json, UserHandler * thread){
     JsonList * reponse = new JsonList();
     std::vector<UserHandler*> * users = thread->getHandlers_listPtr();
@@ -18,35 +14,36 @@ void getConnectedList(JsonValue * json, UserHandler * thread){
     delete reponse;
 }
 
-
 void challenge(JsonValue * json, UserHandler * thread){
-    JsonDict * challenger = new JsonDict();
-    Manager * user = thread->getManager();
+    JsonDict * challengerInfos = new JsonDict();
+    Manager * challenger = thread->getManager();
     std::vector<UserHandler*> * users = thread->getHandlers_listPtr();
     bool find = false;
     int index = 0;
     Manager * user;
     while (index < users->size() and (not find)){
-        user = users[index];
-        find = (user->getManager()->getUserName() == json["name"]);
+        user = users[index]->getManager();
+        find = (user->getUserName() == json["name"]);
         index++;
     }
     if (find){
-        challenger->add(JsonString("name"), user->getUserName());
-        challenger->add(JsonString("level"), (std::string) user->getClub()->getLevel());
-        JsonString reponse = JsonString("answerToChallenge : " + challenger->toString())
-        user->writeToClient(reponse.toString());
-    } // bloque jusqu'à réponse?
+        if (user->isFree()){
+            thread->setFreeState(false);
+            challengerInfos->add(JsonString("name"), challenger->getUserName());
+            challengerInfos->add(JsonString("level"), (std::string) challenger->getClub()->getLevel());
+            JsonString reponse = JsonString("answerToChallenge : " + challengerInfos->toString())
+            user->writeToClient(reponse.toString());
+            thread->writeToClient("ChallengeSuccess");
+        }
+        else{
+            thread->writeToClient("UserOccuped");
+        }
+    }
+    else{
+        thread->writeToClient("UserNotFound");
+    }
     delete reponse;
 } // code
-
-/*void checkChallenge(JsonValue * json, UserHandler * thread){
-    char * reponse;
-} //bool*/
-
-void getChallengerInfo(JsonValue * json, UserHandler * thread){
-    char * reponse;
-} //string name
 
 void answerToChallenge(JsonValue * json, UserHandler * thread){
     char * reponse;

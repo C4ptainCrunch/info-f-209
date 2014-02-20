@@ -4,9 +4,7 @@
 #include "../lib/socket/Socket.h"
 #include <vector>
 #include <thread>
-
-class Manager {};
-
+#include "../models/Manager.h"
 
 class UserHandler {
     public:

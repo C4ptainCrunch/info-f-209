@@ -2,6 +2,11 @@
 #include <string>
 #include <vector>
 
+#define JDICT dynamic_cast<JsonDict*>
+#define JLIST dynamic_cast<JsonList*>
+#define JSTRING dynamic_cast<JsonString*>
+#define JINT dynamic_cast<JsonInt*>
+
 class JsonValue {
     public:
         static JsonValue * fromString(std::string message, int &i);
@@ -65,4 +70,21 @@ class JsonList : public JsonValue {
         std::vector<JsonValue *> content;
 };
 
-JsonValue * createNumber(std::string message, int &i);
+class JsonInt : public JsonValue {
+    public:
+        static JsonInt * fromString(std::string message, int &i);
+        static JsonInt * fromString(std::string message);
+
+        std::string toString();
+
+        int getValue();
+        void setValue(int val);
+        void setValue(std::string val);
+
+        operator std::string() const;
+        operator int() const;
+
+    private:
+        virtual void plop(){}
+        int value;
+};

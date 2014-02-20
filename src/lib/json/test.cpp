@@ -3,20 +3,16 @@
 
 #include "json.h"
 
-#define JDICT dynamic_cast<JsonDict*>
-#define JLIST dynamic_cast<JsonList*>
-#define JSTRING dynamic_cast<JsonString*>
-
 using namespace std;
 
 // List
 // -----------
 int listmain(){
     int i = 0;
-    JsonList* list_p = JLIST(JsonValue::fromString("[\"elem 1 \"    ,\n \"elem2\"]"));
-    JsonString * str_p = JSTRING((*list_p)[1]);
+    JsonList* list_p = JLIST(JsonValue::fromString("[ 2    , \"elem2\"]"));
+    JsonInt * int_p = JINT((*list_p)[0]);
 
-    cout << (string) *str_p << endl;
+    cout << (int) *int_p << endl;
     return 0;
 }
 
@@ -35,6 +31,6 @@ int dictmain(){
 
 int main(){
     listmain();
-    cout << "------------" << endl;
+    cout << "------------" << endl << endl;
     return dictmain();
 }

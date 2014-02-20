@@ -48,7 +48,7 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
             case '7':
             case '8':
             case '9':
-                return createNumber(cut_from(message, i), i);
+                return JsonInt::fromString(cut_from(message, i), i);
                 break;
             default:
                 throw 1;
@@ -246,8 +246,62 @@ JsonValue * JsonList::operator[](const int &i){
 }
 
 
-// Functions
+// Int
 
-JsonValue * createNumber(string message, int &i){
-    return new JsonString("TEST");
+JsonInt * JsonInt::fromString(std::string message){
+    int i = 0;
+    return JsonInt::fromString(message, i);
+}
+
+JsonInt * JsonInt::fromString(std::string message, int &i){
+    JsonInt * r = new JsonInt();
+    bool end;
+    i = 0;
+    while(!end){
+        switch(message[i]){
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                i++;
+                break;
+            default:
+                end = true;
+                break;
+        }
+    }
+    r->setValue(message.substr(0, i));
+    i += skip_whitespace(message, 0);
+    return r;
+}
+
+string JsonInt::toString(){
+    return (string) *this;
+}
+
+
+int JsonInt::getValue(){
+    return value;
+}
+
+void JsonInt::setValue(int val){
+    value = val;
+}
+
+void JsonInt::setValue(string val){
+    value = stoi(val);
+}
+
+JsonInt::operator std::string() const{
+    return std::to_string(value);
+}
+
+JsonInt::operator int() const{
+    return value;
 }

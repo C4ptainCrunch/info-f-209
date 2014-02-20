@@ -144,14 +144,14 @@ void IntroState::logic()
 }
 void IntroState::display()
 {
-    cout<<"Bienvenue à Quidditch Manager 2014!"<<endl; //Rework
+    cout << "Bienvenue à Quidditch Manager 2014!" << endl; //Rework
 }
 
 //Unlogged-------------------------------------------------------------------------
 UnloggedState::UnloggedState(Client * client) : GameState(client)
 {
-    cout<<"Entrez l'option souhaité avec les paramètres requis délimités par un espace."<<endl;
-    cout<<"Exemple : '1 Usr mdp'"<<endl;
+    cout << "Entrez l'option souhaité avec les paramètres requis délimités par un espace." << endl;
+    cout << "Exemple : '1 Usr mdp'" << endl;
     cout<<endl;
     display();
 }
@@ -198,29 +198,29 @@ void UnloggedState::display()
 {
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<"Se connecter : 1 - Nom d'utilisateur - Mot de passe"<<endl;
-        cout<<"S'enregistrer : 2 - Nom d'utilisateur - Mot de passe"<<endl;
-        cout<<"Quitter : Q"<<endl;
+        cout << "Se connecter : 1 - Nom d'utilisateur - Mot de passe" << endl;
+        cout << "S'enregistrer : 2 - Nom d'utilisateur - Mot de passe" << endl;
+        cout << "Quitter : Q" << endl;
         cout<<endl;
         break;
     case UNLOGGED_CONNECTED :
-        cout<<"Connecté."<<endl;
+        cout << "Connecté." << endl;
         cout<<endl;
         break;
     case UNLOGGED_WRONG_LOGS :
-        cout<<"Nom de compte ou mot de passe incorrecte."<<endl;
+        cout << "Nom de compte ou mot de passe incorrecte." << endl;
         cout<<endl;
         break;
     case UNLOGGED_REGISTERED :
-        cout<<"Enregistrement terminé"<<endl;
+        cout << "Enregistrement terminé" << endl;
         cout<<endl;
         break;
     case UNLOGGED_ALREADY_USED :
-        cout<<"Nom de compte déjà utilisé."<<endl;
+        cout << "Nom de compte déjà utilisé." << endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
-        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout << "Erreur : votre entrée est incorrecte." << endl;
         cout<<endl;
         break;
     }
@@ -312,16 +312,16 @@ void MenuState::display()
 
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<name_<<". Niveau "<<level_<<". Argent : "<<money<<" crédits."<<endl<<endl;
-        cout<<"Gérer votre équipe : 1"<<endl;
-        cout<<"Gérer vos infrastructures : 2"<<endl;
-        cout<<"Accéder à l'hotel de vente : 3"<<endl;
-        cout<<"Voir la liste des managers connectés : 4"<<endl;
-        cout<<"Quitter : Q"<<endl;
+        cout<<name_<<". Niveau "<<level_<<". Argent : "<<money<<" crédits." << endl<<endl;
+        cout << "Gérer votre équipe : 1" << endl;
+        cout << "Gérer vos infrastructures : 2" << endl;
+        cout << "Accéder à l'hotel de vente : 3" << endl;
+        cout << "Voir la liste des managers connectés : 4" << endl;
+        cout << "Quitter : Q" << endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
-        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout << "Erreur : votre entrée est incorrecte." << endl;
         cout<<endl;
         break;
     }
@@ -425,37 +425,37 @@ void ManagePlayerState::display()
 
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<"Liste des joueurs :"<<endl;
+        cout << "Liste des joueurs :" << endl;
         displayPlayerList(vec);
         cout<<endl;
-        cout<<"Argent : "<<money<<" crédits."<<endl<<endl;
-        cout<<"Voir les informations sur un joueur : 1 - numero du joueur"<<endl;
-        cout<<"Soigner un joueur blessé (prix : "<<HEAL_PRICE<<") : 2 - numero du joueur"<<endl;
-        cout<<"Déplacer des joueurs : 3 - numero du joueur 1 - numero du joueur 2"<<endl;
-        cout<<"Retourner au menu : 4"<<endl;
+        cout << "Argent : "<<money<<" crédits." << endl<<endl;
+        cout << "Voir les informations sur un joueur : 1 - numero du joueur" << endl;
+        cout << "Soigner un joueur blessé (prix : "<<HEAL_PRICE<<") : 2 - numero du joueur" << endl;
+        cout << "Déplacer des joueurs : 3 - numero du joueur 1 - numero du joueur 2" << endl;
+        cout << "Retourner au menu : 4" << endl;
         cout<<endl;
         break;
     case MANAGE_PLAYERS_HEALING_UNWOUND :
-        cout<<"Erreur : le joueur selectionné n'est pas blessé."<<endl;
+        cout << "Erreur : le joueur selectionné n'est pas blessé." << endl;
         cout<<endl;
         break;
     case STATUS_NO_FUNDS :
-        cout<<"Vous ne disposez pas assez d'argent."<<endl;
+        cout << "Vous ne disposez pas assez d'argent." << endl;
         cout<<endl;
     case STATUS_SUCCESS :
-        cout<<"Operation terminée."<<endl;
+        cout << "Operation terminée." << endl;
         cout<<endl;
         break;
     case STATUS_FAILURE :
-        cout<<"Echec de l'opération."<<endl;
+        cout << "Echec de l'opération." << endl;
         cout<<endl;
         break;
     case MANAGE_PLAYERS_INVALID_NAME :
-        cout<<"Erreur : nom du joueur selectionné incorrect."<<endl;
+        cout << "Erreur : nom du joueur selectionné incorrect." << endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
-        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout << "Erreur : votre entrée est incorrecte." << endl;
         cout<<endl;
         break;
     }
@@ -465,15 +465,15 @@ void ManagePlayerState::displayPlayer(NonFieldPlayer player)
 {
     bool wounded = player.isWounded();
     if (wounded)
-        cout<<"État : blessé"<<endl;
+        cout << "État : blessé" << endl;
     else
-        cout<<"État : en forme"<<endl;
-    cout<<"Niveau : "<<player.getLevel()<<endl;
-    cout<<"Vitesse : "<<player.getSpeed()<<endl;
-    cout<<"Force : "<<player.getForce()<<endl;
-    cout<<"Agilité : "<<player.getAgility()<<endl;
-    cout<<"Réflèxes : "<<player.getReflexes()<<endl;
-    cout<<"Précision de passe : "<<player.getPassPrecision()<<endl;
+        cout << "État : en forme" << endl;
+    cout << "Niveau : "<<player.getLevel()<<endl;
+    cout << "Vitesse : "<<player.getSpeed()<<endl;
+    cout << "Force : "<<player.getForce()<<endl;
+    cout << "Agilité : "<<player.getAgility()<<endl;
+    cout << "Réflèxes : "<<player.getReflexes()<<endl;
+    cout << "Précision de passe : "<<player.getPassPrecision()<<endl;
     cout<<endl;
 }
 
@@ -488,7 +488,7 @@ void ManagePlayerState::displayPlayerList(vector<int> vec)
     {
         cout<<i<<" : Niveau "<<vec[i]<<endl;
         if (i == 6)
-            cout<<"-----------------------"<<endl;
+            cout << "-----------------------" << endl;
     }
 }
 
@@ -570,14 +570,14 @@ void ManageInfrastructureState::display()
 {
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<"Infrastructures : "<<endl;
-        cout<<"Créer une infirmerie. : 1"<<endl; //pour plus tard, spécialiser les messages (créer -> améliorer)
-        cout<<"Créer un shop : 2"<<endl;
-        cout<<"Revenir au menu : 3"<<endl;
+        cout << "Infrastructures : " << endl;
+        cout << "Créer une infirmerie. : 1" << endl; //pour plus tard, spécialiser les messages (créer -> améliorer)
+        cout << "Créer un shop : 2" << endl;
+        cout << "Revenir au menu : 3" << endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
-        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout << "Erreur : votre entrée est incorrecte." << endl;
         cout<<endl;
         break;
     }
@@ -632,12 +632,12 @@ void AuctionHouseState::display()
 {
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<"Hotel des ventes : "<<endl;
-        cout<<"Revenir au menu : 1"<<endl;
+        cout << "Hotel des ventes : " << endl;
+        cout << "Revenir au menu : 1" << endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
-        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout << "Erreur : votre entrée est incorrecte." << endl;
         cout<<endl;
         break;
     }
@@ -690,12 +690,12 @@ void ConnectedListState::display()
 {
     switch (status_) {
     case STATUS_DEFAULT :
-        cout<<"Joueurs connectés : "<<endl;
-        cout<<"Revenir au menu : 1"<<endl;
+        cout << "Joueurs connectés : " << endl;
+        cout << "Revenir au menu : 1" << endl;
         cout<<endl;
         break;
     case STATUS_BAD_ENTRY :
-        cout<<"Erreur : votre entrée est incorrecte."<<endl;
+        cout << "Erreur : votre entrée est incorrecte." << endl;
         cout<<endl;
         break;
     }

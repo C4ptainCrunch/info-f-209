@@ -6,6 +6,10 @@
 
 enum { VOID = 0, USABLE = 1, GOAL = 2 };
 
+enum { WIDTH = 30, LENGHT = 64};
+
+Position nextCase(Position position, int direction);
+
 struct Case{
     int type;
     FieldPlayer* player = 0;

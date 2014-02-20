@@ -4,6 +4,11 @@
 #include "Ball.h"
 #include "Position.h"
 
+#include "Case.h"
+#include "Match.h"
+#include <stdlib.h>
+#include <time.h>
+
 
 class GoldenSnitch : public Ball {
 

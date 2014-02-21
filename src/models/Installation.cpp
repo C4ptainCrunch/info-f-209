@@ -24,3 +24,11 @@ void Installation::improve(){
 int Installation::getLevel(){
     return level_;
 }
+
+Installation::operator JsonValue() const{
+    JsonDict r;
+
+    r.add("level", new JsonInt(level_));
+
+    return r;
+}

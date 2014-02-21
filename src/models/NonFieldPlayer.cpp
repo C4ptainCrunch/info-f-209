@@ -108,3 +108,25 @@ int NonFieldPlayer::getVocation(){
 void NonFieldPlayer::setVocation(int vocation){
     vocation_ = vocation;
 }
+
+NonFieldPlayer::operator JsonValue() const{
+    JsonDict r;
+    r.add("vocation", new JsonInt(vocation_));
+    r.add("speed", new JsonInt(speed_));
+    r.add("force", new JsonInt(force_));
+    r.add("agility", new JsonInt(agility_));
+    r.add("reflexes", new JsonInt(reflexes_));
+    r.add("passPrecision", new JsonInt(passPrecision_));
+    r.add("wounded", new JsonBool(wounded_));
+    r.add("level", new JsonBool(level_));
+    r.add("experience", new JsonBool(experience_));
+
+    JsonList * inventory = new JsonList();
+    for(int i = 0; i < inventory_.size(); i++){
+        JsonValue * item = new JsonValue(inventory_[i]);
+        inventory->add(item);
+    }
+    r.add("inventory", inventory);
+
+    return r;
+}

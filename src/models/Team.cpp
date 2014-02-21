@@ -72,3 +72,20 @@ void Team::swapPlayers(int pos1, int pos2){
     players_[pos1] = players_[pos2];
     players_[pos2] = tempPlayer;
 }
+
+Team::operator JsonValue() const{
+    JsonDict r;
+    JsonList * players = new JsonList();
+    for(int i = 0; i < 7; i++){
+        if(players_[i] != NULL){
+            JsonValue * item = new JsonValue(*(players_[i]));
+            players->add(item);
+        }
+        else {
+            players->add(new JsonNull());
+        }
+    }
+    r.add("players", players);
+
+    return r;
+}

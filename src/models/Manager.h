@@ -18,6 +18,9 @@ class Manager{
         std::string getName();
         bool isReady();
         void setReadyState(bool state);
+        operator JsonValue() const;
+        bool isFree();
+        void setFreeState(bool state);
 
     private:
         std::string name_;

@@ -11,6 +11,7 @@ class Installation{
         ~Installation();
         virtual void improve();
         virtual int getLevel();
+        operator JsonValue() const;
 
     protected:
         int level_;

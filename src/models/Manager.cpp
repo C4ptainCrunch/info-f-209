@@ -63,3 +63,14 @@ void Manager::setReadyState(bool state){
     ready = state;
 }
 
+Manager::operator JsonValue() const{
+    JsonDict r;
+
+    r.add("name", new JsonString(name_));
+    r.add("username", new JsonString(userName_));
+    r.add("hash", new JsonString(hash_));
+    JsonValue * club = new JsonValue(club_);
+    r.add("club", club);
+
+    return r;
+}

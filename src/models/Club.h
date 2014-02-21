@@ -26,6 +26,8 @@ class Club {
 
         Team* getTeam();
 
+        operator JsonValue() const;
+
         std::vector<NonFieldPlayer*> getNonFieldPlayers();
         void addNonFieldPlayer(NonFieldPlayer* player);
         NonFieldPlayer* removeNonFieldPlayer(unsigned int pos);

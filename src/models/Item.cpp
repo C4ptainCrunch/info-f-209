@@ -9,3 +9,8 @@ Item::Item(JsonValue * json){
 }
 
 Item::~Item(){}
+
+Item::operator JsonValue() const{
+    JsonDict r;
+    return r;
+}

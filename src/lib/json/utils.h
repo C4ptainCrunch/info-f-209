@@ -1,3 +1,4 @@
+#include "ParseError.h"
 #include <vector>
 
 int skip_whitespace(std::string message, int start);

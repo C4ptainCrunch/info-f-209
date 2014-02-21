@@ -1,11 +1,4 @@
-#include <string>
-#include <vector>
-#include <iostream>
-#include <typeinfo>
-#include <map>
-
 #include "json.h"
-#include "utils.h"
 
 using namespace std;
 
@@ -62,10 +55,10 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
                 return JsonInt::fromString(s, i);
                 break;
             default:
-                throw 1;
+                throw ParseError();
         }
     }
-    throw 1;
+    throw ParseError();
 }
 
 /*std::string JsonValue::toString(JsonValue * json){
@@ -126,7 +119,7 @@ JsonString * JsonString::fromString(std::string message, int &i){
         }
     i++;
     }
-    throw 1;
+    throw ParseError();
 }
 
 std::string JsonString::toString(){
@@ -226,7 +219,7 @@ JsonList * JsonList::fromString(std::string message, int &i){
                 return r;
                 break;
             default:
-                throw 1;
+                throw ParseError();
         }
     }
 }
@@ -336,7 +329,7 @@ string JsonNull::toString(){
 JsonNull * JsonNull::fromString(std::string message, int &i){
     i += 4;
     if(message.substr(0,4) != "null"){
-        throw 1;
+        throw ParseError();
     }
     return new JsonNull();
 }
@@ -360,14 +353,14 @@ JsonBool * JsonBool::fromString(std::string message, int &i){
     JsonBool * r = NULL;
     if(message[0] == 't'){
         if(message.substr(0,4) != "true"){
-            throw 1;
+            throw ParseError();
         }
         r = new JsonBool(true);
         i += 4;
     }
     else {
         if(message.substr(0,5) != "false"){
-            throw 1;
+            throw ParseError();
         }
         r = new JsonBool(false);
         i += 5;

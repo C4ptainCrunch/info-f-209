@@ -5,6 +5,15 @@
 #include <string>
 #include <vector>
 
+#include "utils.h"
+#include "ParseError.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+#include <typeinfo>
+#include <map>
+
 #define JDICT dynamic_cast<JsonDict*>
 #define JLIST dynamic_cast<JsonList*>
 #define JSTRING dynamic_cast<JsonString*>

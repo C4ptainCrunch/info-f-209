@@ -10,7 +10,7 @@ Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGHT])
 {
     Position nextPosition;
     int next = rand() % 6;
-    nextPosition = nextCase(position_, next);
+    nextPosition = nextCase(position_, next, grid);
     if(grid[nextPosition.x][nextPosition.y].type == USABLE){
         if(grid[nextPosition.x][nextPosition.y].ball == 0){
             return nextPosition;
@@ -18,7 +18,7 @@ Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGHT])
     }
     for(int i=0; i<5; i++){
         next = (next + 1)%6;
-        nextPosition = nextCase(position_, next);
+        nextPosition = nextCase(position_, next, grid);
         if(grid[nextPosition.x][nextPosition.y].type == USABLE){
             if(grid[nextPosition.x][nextPosition.y].ball == 0){
                 return nextPosition;

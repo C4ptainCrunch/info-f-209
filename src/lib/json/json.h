@@ -33,7 +33,6 @@ class JsonString : public JsonValue {
 
         std::string toString();
 
-        JsonString operator=(const JsonString &str);
         operator std::string() const;
 
     private:

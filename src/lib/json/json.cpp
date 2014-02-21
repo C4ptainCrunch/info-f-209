@@ -103,10 +103,6 @@ JsonString::operator std::string() const{
     return value;
 }
 
-JsonString JsonString::operator=(const JsonString &str){
-    value = str.value;
-    return *this;
-}
 
 JsonString * JsonString::fromString(std::string message){
     int i = 0;
@@ -146,8 +142,8 @@ JsonDict * JsonDict::fromString(std::string message){
 }
 
 JsonDict * JsonDict::fromString(std::string message, int &i){
-    JsonString * key;
-    JsonValue * value;
+    JsonString * key = NULL;
+    JsonValue * value = NULL;
     bool colon = false;
     bool coma = false;
 
@@ -167,6 +163,9 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
         value = JsonValue::fromString(cut_from(message, i), i);
         i++;
         r->add(*key, value);
+        value = NULL;
+        delete key;
+        key = NULL;
         i += skip_whitespace(message, i);
         if(message[i] == ','){
             i++;
@@ -194,6 +193,7 @@ size_t JsonDict::size(){
 }
 
 JsonValue * JsonDict::operator[](const std::string &str){
+    // TODO : Should make a copy ?
     return this->dict[str];
 }
 
@@ -210,11 +210,12 @@ JsonList * JsonList::fromString(std::string message, int &i){
     JsonList * r = new JsonList();
     i = 0;
     while(1){
-        JsonValue * value;
+        JsonValue * value = NULL;
         i += skip_whitespace(message, i);
         value = JsonValue::fromString(cut_from(message, i), i);
         i++;
         r->add(value);
+        value = NULL;
         i += skip_whitespace(message, i);
         switch(message[i]){
             case ',':
@@ -232,14 +233,14 @@ JsonList * JsonList::fromString(std::string message, int &i){
 
 std::string JsonList::toString(){
     std::string infos = "[";
-    int index=0;
+    int index = 0;
     while (index < this->content.size()){
         infos += this->content[index]->toString();
         index++;
         infos+=", ";
     }
 
-    infos = infos.substr(0, infos.size()-2) + "]";
+    infos = infos.substr(0, infos.size() - 2) + "]";
     return infos;
 }
 
@@ -252,7 +253,7 @@ size_t JsonList::size(){
 }
 
 JsonValue * JsonList::operator[](const int &i){
-    return this->content.at(i);
+    return content.at(i);
 }
 
 
@@ -270,7 +271,7 @@ JsonInt * JsonInt::fromString(std::string message){
 JsonInt * JsonInt::fromString(std::string message, int &i){
     int bak = i;
     JsonInt * r = new JsonInt();
-    bool end;
+    bool end = false;
     i = 0;
     while(!end){
         switch(message[i]){
@@ -337,7 +338,7 @@ JsonNull * JsonNull::fromString(std::string message, int &i){
     if(message.substr(0,4) != "null"){
         throw 1;
     }
-    return new JsonNull;
+    return new JsonNull();
 }
 
 bool JsonNull::operator ==(const int * i){
@@ -356,7 +357,7 @@ JsonBool * JsonBool::fromString(std::string message){
 }
 
 JsonBool * JsonBool::fromString(std::string message, int &i){
-    JsonBool * r;
+    JsonBool * r = NULL;
     if(message[0] == 't'){
         if(message.substr(0,4) != "true"){
             throw 1;

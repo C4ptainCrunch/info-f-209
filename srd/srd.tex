@@ -62,15 +62,19 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[0.1] (05/12/13) : Création du document - Equipe
     \item[0.2] (10/12/13) : Premier jet de chaque partie - Equipe
     \item[0.3] (11/12/13) : Création des diagrammes UML - Bruno, Tsotne
-    \item[0.4] (11/12/13) : Amélioration des differents requirements - Nikita
+    \item[0.4] (11/12/13) : Amélioration des différents requirements - Nikita
     \item[0.5] (12/12/13) : Ajout du glossaire - Romain
     \item[0.6] (14/12/13) : Ajout du use case d'authentification et ajout des descriptions des use case - Tsotne
-    \item[0.7] (19/12/13) : Corrections et ajout des diagrammes au document - Bruno, Tsotne
+    \item[0.7] (15/12/13) : Finalisation des use case - Tsotne
+    \item[0.8] (15/12/13) : Ajout de l'index et de la table des figures - Nikita
+    \item[0.9] (19/12/13) : Corrections et ajout des diagrammes au document - Bruno, Tsotne
     \item[1.0] (20/12/13) : Délivrable pour la phase 1 - Equipe
     \item[1.1] (16/02/13) : Correction de fautes d'orthographes et remplissage de l'historique - Bruno
     \item[1.2] (18/02/13) : Ajout et correction de diagrammes de classe - Bruno
     \item[1.3] (20/02/13) : Modification du type de document et ajout des chapitres - Romain
-    \item[1.4] (21/02/13) : Ajout des diagrammes d'activité - Bruno
+    \item[1.4] (20/02/13) : Ajout du justificatif de choix de librairie graphique - Bruno
+    \item[1.5] (21/02/13) : Ajout des diagrammes d'activité - Bruno
+    \item[1.6] (21/02/13) : Finalisation de la justification de choix de librairie graphique - Bruno
 \end{description}
 
 
@@ -421,14 +425,14 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item Qt est une librairie complête et possède une documentation énorme. De ce fait, il sera facile de trouver réponse à nos questions.
     \item Qt est une librairie utilisée depuis 1995 et le projet est toujours actif et maintenu par une grande société (Nokia), on peut donc la considérer comme stable.
     \item Qt est écrit en C++ et donc nativement adapté pour ce langage.
-    \item Qt est OpenSource (sous license GNU LGPL)
+    \item Qt est OpenSource (sous license GNU LGPL).
     \item Qt permet d'utiliser le framework QgraphicsView, facile d'utilisation et complet, permettant de dessiner aisément ce que l'on veut.
     \item On peut utiliser Qt Creator pour cette librairie graphique, IDE fournissant une autocomplétion pour tous les modules de Qt et possédant une aide disponible intrinsèque.
 \end{itemize}
 \subsection{Inconvénients}
 \begin{itemize}
     \item Lourd
-    \item Possède des packages qui ne nous serviront pas, étant donné que nous ne n'utiliserons que la partie graphique de Qt.
+    \item Possède des packages qui ne nous serviront pas, étant donné que nous ne n'utiliserons que la partie graphique de Qt
 \end{itemize}
 \section{GTK+}
 \subsection{Avantages}
@@ -440,6 +444,8 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item Documentation non complête
     \item Pas d'IDE fournie par l'équipe en charge du projet GTK+
 \end{itemize}
+\section{Conclusion}
+Nous utiliserons donc Qt, de par la présence et la simplicité d'utilisation de son IDE \textit{Qt Creator} et par la richesse de la documentation qui l'accompagne. La stabilité de cette API fut également un élément influencant notre choix.
 
 
 \printindex

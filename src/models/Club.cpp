@@ -7,14 +7,14 @@ Club::Club(): money_(0), installations_()
 {
 
     for (int i = 0; i<7; ++i){
-        players_.push_back(NonFieldPlayer());
+        players_.push_back(new NonFieldPlayer());
 
-        team_->setPlayer(players_.at((unsigned int)i), i);
+        team_->setPlayer(*players_.at((unsigned int)i), i);
 
     }
 }
 
-Club::Club(int money, Installation* installations, Team& team, vector<NonFieldPlayer> players): money_(money), players_(players)
+Club::Club(int money, Installation* installations, Team& team, vector<NonFieldPlayer*> players): money_(money), players_(players)
 {
     for (int i = 0; i < 5; ++i){
         installations_[i] = installations[i];
@@ -48,19 +48,19 @@ Team* Club::getTeam()
     return team_;
 }
 
-std::vector<NonFieldPlayer> Club::getNonFieldPlayers()
+std::vector<NonFieldPlayer*> Club::getNonFieldPlayers()
 {
     return players_;
 }
 
-void Club::addNonFieldPlayer(NonFieldPlayer player)
+void Club::addNonFieldPlayer(NonFieldPlayer* player)
 {
     players_.push_back(player);
 }
 
-NonFieldPlayer& Club::removeNonFieldPlayer(unsigned int pos)
+NonFieldPlayer* Club::removeNonFieldPlayer(unsigned int pos)
 {
-    NonFieldPlayer tmpPlayer(players_[pos]);
+    NonFieldPlayer* tmpPlayer = players_[pos];
     players_.erase(players_.begin() + pos);
     return tmpPlayer;
 }
@@ -75,12 +75,5 @@ Installation* Club::getInstallations()
 {
     return installations_;
 }   
-
-Installation& Club::delInstallation(unsigned int pos)
-{
-    Installation tmpInstallation(installations_[pos]);
-    installations_[pos] = 0;
-    return tmpInstallation;
-}
 
 

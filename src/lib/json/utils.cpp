@@ -16,7 +16,7 @@ int skip_whitespace(string message, int start){
         }
         ret++;
     }
-    throw "a";
+    throw 1;
 }
 
 int skip_colon(string message, int start){

@@ -10,8 +10,12 @@ Manager::Manager(JsonValue * json){
     if(manager == NULL){
         throw 1;
     }
-
-    Club club = Club((*manager)["club"]);
+    Club club;
+    JsonDict * club_json = JDICT((*manager)["club"]);
+    if(club_json == NULL)
+        club = Club();
+    else
+        club = Club(club_json);
 
     JsonString * name_string = JSTRING((*manager)["name"]);
     if(name_string == NULL)

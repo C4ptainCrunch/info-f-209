@@ -9,9 +9,9 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <iostream>
 
 #include "helpers.h"
-#include "thread.h"
 #include "bind.h"
 #include "UserHandler.h"
 

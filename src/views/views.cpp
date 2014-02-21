@@ -1,6 +1,5 @@
 #include "views.h"
 
-
-void plop(std::string message, UserHandler * handler){
-    handler->writeToClient(message);
+void plop(JsonValue * message, UserHandler * handler){
+    handler->writeToClient("pong", message);
 }

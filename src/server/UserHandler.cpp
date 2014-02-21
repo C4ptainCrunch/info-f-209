@@ -1,15 +1,11 @@
 #include "UserHandler.h"
-#include "../views/views.h"
-#include "helpers.h"
 
 using namespace std;
 
-typedef void (*view_ptr)(JsonValue *, UserHandler * );
-
-map<string,view_ptr> viewmap {
+const map<string,view_ptr> UserHandler::viewmap = {
     {"plop", plop},
+    {"login", logIn}
 };
-
 
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list) {
@@ -70,5 +66,5 @@ void UserHandler::handleMessage(string message){
     string key;
 
     message = split_message(&key, message);
-    viewmap[key](JsonValue::fromString(message), this);
+    UserHandler::viewmap.at(key)(JsonValue::fromString(message), this);
 }

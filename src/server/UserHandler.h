@@ -9,6 +9,13 @@
 
 #include "../lib/socket/Socket.h"
 #include "../models/Manager.h"
+#include "helpers.h"
+#include "../views/views.h"
+
+class UserHandler;
+
+typedef void (*view_ptr)(JsonValue *, UserHandler * );
+
 
 class UserHandler {
     public:
@@ -32,7 +39,8 @@ class UserHandler {
         std::vector<UserHandler *> * handlers_list_;
 
         void handleMessage(std::string message);
-};
 
+        static const map<string,view_ptr> viewmap;
+};
 //HANDLE_H
 #endif

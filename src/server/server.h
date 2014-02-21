@@ -9,6 +9,7 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <iostream>
 
 #include "helpers.h"
 #include "bind.h"

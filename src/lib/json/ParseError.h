@@ -6,8 +6,9 @@
 #include <exception>
 
 class ParseError : public std::exception {
-    ParseError();
-    const char * what() const throw();
-}
+    public:
+        ParseError();
+        const char * what() const throw();
+};
 
 #endif

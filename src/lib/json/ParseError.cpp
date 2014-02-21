@@ -2,8 +2,8 @@
 
 using namespace std;
 
-ParseError(){ }
+ParseError::ParseError(){ }
 
-const char * what() const throw(){
-    return "Json parse error."
+const char * ParseError::what() const throw(){
+    return "Json parse error.";
 }

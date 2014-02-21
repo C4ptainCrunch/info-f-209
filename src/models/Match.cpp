@@ -228,7 +228,7 @@ int Match::findIndex(Position nextPosition[14], Position position){
 
 
 string Match::print(){ //FOR TEST PURPOSES
-    string c;
+    string c="\033[0m";
     for (int i = 0; i<WIDTH;++i){
         if (i%2 != 0){
             c+=" ";
@@ -256,6 +256,10 @@ string Match::print(){ //FOR TEST PURPOSES
                     }
                     c+= "\033[0m";
                 }
+                else if (grid_[i][j].ball != 0){
+                    c += "\033[1;93mB \033[0m";
+                    //<< typeid(grid_[i][j].ball).name();
+                }
                 else{
                     c += "\u2B21 ";
                 }
@@ -263,9 +267,6 @@ string Match::print(){ //FOR TEST PURPOSES
             }
             else if (grid_[i][j].type == GOAL){
                 c += "\033[1;32m오\033[0m";
-            }
-            else if (grid_[i][j].ball != 0){
-                cout<< "TYPE" << typeid(grid_[i][j]).name()<<" "   ;
             }
             else{
                 c += "\u2B22 ";

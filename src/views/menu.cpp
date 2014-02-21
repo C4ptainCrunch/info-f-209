@@ -64,9 +64,9 @@ void getInfo(JsonValue * json, UserHandler * thread){
 }
 
 void getMoney(JsonValue * json, UserHandler * thread){
-    JsonDict * reponse = new JsonDict();
+    JsonInt * reponse = new JsonInt();
     Manager * user = thread->getManager();
-    reponse->add(JsonString(MONEY), (std::string) user->getClub()->getMoney());
+    reponse->setValue(user->getClub()->getMoney());
     writeToClient(reponse->toString());
     delete reponse;
 }
@@ -89,11 +89,13 @@ void getDataOnPlayer(JsonValue * json, UserHandler * thread){
 
 void healPlayer(JsonValue * json, UserHandler * thread){
     JsonDict * reponse = new JsonDict();
+    JsonInt * code = new JsonInt();
+    code->setValue(FAIL);
     Manager * user = thread->getManager();
     reponse->add(JsonString(MONEY), (std::string) user->getClub()->getMoney());
     writeToClient(reponse->toString());
     delete reponse;
-} // bool -> code
+} //code
 
 void swapPlayer(JsonValue * json, UserHandler * thread){
     char * reponse;

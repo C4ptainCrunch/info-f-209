@@ -8,7 +8,7 @@
 /src/models/MatchInstance
 /src/tests/json
 build.ok
-
+/src/server/data
 #####################
 # Ignore temp files #
 #####################

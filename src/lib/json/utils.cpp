@@ -16,21 +16,19 @@ int skip_whitespace(string message, int start){
         }
         ret++;
     }
-    throw ParseError();
+    throw ParseError("while skipping whitespace", __LINE__, start + ret);
 }
 
 int skip_colon(string message, int start){
-    int ret;
+    int ret = skip_whitespace(message, 0);
     bool colon = false;
-
-    ret = skip_whitespace(message, start);
     while(start + ret < message.length() && !colon){
         switch(message[start + ret]){
             case ':':
                 colon = true;
                 break;
             default:
-                throw ParseError();
+                throw ParseError("while skipping colons found " + string(1, message[start + ret]), __LINE__, start + ret);
         }
         ret++;
     }

@@ -18,6 +18,7 @@ using namespace std;
 
 
 Socket::Socket() {
+    fd_ = 0;
     buffer = new char[BUFF_SIZE];
 }
 
@@ -27,8 +28,8 @@ Socket::Socket(const int fd) {
 }
 
 Socket::~Socket() {
-    close(fd_);
-    delete[] buffer;
+    if(fd_ != 0)
+        close(fd_);
 }
 
 

@@ -59,7 +59,7 @@ int dictmain(){
     string message = "{\"cle1\" :   \"val1\"   , \"cle2\" : \"val2\" ,  \"cle3\":\"val3\",\"cle3\":\"val\\\\3bis\"}";
 
     // TODO this v fails
-    string message = "{\"a\":1,\"dfsdfqsd\": false}";
+    //string message = "{\"a\":1,\"dfsdfqsd\": false}";
 
     JsonDict* dict_p = JDICT(JsonValue::fromString(message));
     cout << "Len=" << dict_p->size() << endl;

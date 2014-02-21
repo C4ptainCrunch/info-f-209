@@ -5,7 +5,7 @@ Item::Item(){}
 Item::Item(JsonValue * json){
     JsonDict * item_dict = JDICT(json);
     if(item_dict == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
 }
 
 Item::~Item(){}

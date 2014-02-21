@@ -7,7 +7,7 @@
 
 #include "utils.h"
 #include "ParseError.h"
-#include "ModelUnserialzationError.h"
+#include "ModelUnserializationError.h"
 
 #include <string>
 #include <vector>

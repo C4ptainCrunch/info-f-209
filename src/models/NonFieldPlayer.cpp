@@ -15,56 +15,56 @@ NonFieldPlayer::NonFieldPlayer(JsonValue * json){
     JsonDict * player_dict = JDICT(json);
 
     if(player_dict == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
 
     JsonInt * vocation_int = JINT((*player_dict)["vocation"]);
     if(vocation_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int vocation = * vocation_int;
 
     JsonInt * speed_int = JINT((*player_dict)["speed"]);
     if(speed_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int speed = * speed_int;
 
     JsonInt * force_int = JINT((*player_dict)["force"]);
     if(force_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int force = * force_int;
 
     JsonInt * agility_int = JINT((*player_dict)["agility"]);
     if(agility_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int agility = * agility_int;
 
     JsonInt * reflexes_int = JINT((*player_dict)["reflexes"]);
     if(reflexes_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int reflexes = * reflexes_int;
 
     JsonInt * passPrecision_int = JINT((*player_dict)["passPrecision"]);
     if(passPrecision_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int passPrecision = * passPrecision_int;
 
     JsonInt * level_int = JINT((*player_dict)["level"]);
     if(level_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int level = * level_int;
 
     JsonInt * experience_int = JINT((*player_dict)["experience"]);
     if(experience_int == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     int experience = * experience_int;
 
     JsonBool * wounded_bool = JBOOL((*player_dict)["wounded"]);
     if(wounded_bool == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
     bool wounded = * wounded_bool;
 
     JsonList * item_list = JLIST((*player_dict)["inventory"]);
     if(item_list == NULL)
-        throw ModelUnserialzationError();
+        throw ModelUnserializationError();
 
     std::vector<Item> inventory;
     for(int i = 0; i < item_list->size(); i++){

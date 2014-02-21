@@ -3,13 +3,14 @@
 
 #include "Ball.h"
 #include "Position.h"
+#include "Case.h"
 
 class Quaffle : public Ball{
 
     public:
         Quaffle();
         ~Quaffle();
-        Position thrown(const Position pos, const char direction, const int power);
+        Way thrown(const char direction, const int power, const Case grid[WIDTH][LENGHT]);
 
 };
 

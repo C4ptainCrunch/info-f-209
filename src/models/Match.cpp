@@ -15,7 +15,7 @@ Match::Match(Club& hostClub, Club& guestClub){
     quaffle_ = Quaffle();
     budgers_[0] = Budger();
     budgers_[1] = Budger();
-    generateGrid(); 
+    generateGrid();
 
 }
 
@@ -26,7 +26,7 @@ void Match::generateFieldPlayers(){
     for (int i = 0; i< 2 ;++i){
         for (int j = 0; j < 7; ++j){
             NonFieldPlayer player = clubs_[i]->getTeam()->getPlayers()[j];
-            teams_[i][j] = FieldPlayer(player ,0, i); 
+            teams_[i][j] = FieldPlayer(player ,0, i);
             if (j ==0){
                 teams_[i][j].setRole(KEEPER);
             }
@@ -45,7 +45,7 @@ void Match::generateFieldPlayers(){
 }
 
 void Match::generateGrid(){
-    double diameterFactor = 46.0/100.0;// Normalement c'est la moitié de la longueur/largeur 
+    double diameterFactor = 46.0/100.0;// Normalement c'est la moitié de la longueur/largeur
     int delta = 1/2; //Delta qui permet d'éviter les bugs lors de l'affichage de la matrice
 
     generateFieldPlayers();
@@ -132,7 +132,7 @@ void Match::generateGrid(){
                 }
             }
     //--------------------------BALLS----------------------------------
-            
+
 
 
         }
@@ -154,7 +154,7 @@ int* Match::isInTheWay(int fromX,int fromY,int toX, int toY){
 string Match::print(){ //FOR TEST PURPOSES
     string c;
     for (int i = 0; i<WIDTH;++i){
-        if (i%2 != 0){ 
+        if (i%2 != 0){
             c+=" ";
         }
         for (int j=0; j<LENGHT;++j){
@@ -184,7 +184,7 @@ string Match::print(){ //FOR TEST PURPOSES
                 else{
                     c += "\u2B21 ";
                 }
-                
+
             }
             else if (grid_[i][j].type == GOAL){
                 c += "\033[1;32m오\033[0m";
@@ -192,7 +192,7 @@ string Match::print(){ //FOR TEST PURPOSES
             else{
                 c += "\u2B22 ";
             }
-            
+
             //cout<< matrix[i][j]<<" ";
         }
         c+="\n";

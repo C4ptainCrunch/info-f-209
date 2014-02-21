@@ -11,6 +11,69 @@ NonFieldPlayer::NonFieldPlayer(): level_(1), experience_(0), vocation_(0) {
     Player();
 }
 
+NonFieldPlayer::NonFieldPlayer(JsonValue * json){
+    JsonDict * player_dict = JDICT(json);
+
+    if(player_dict == NULL)
+        throw 1;
+
+    JsonInt * vocation_int = JINT((*player_dict)["vocation"]);
+    if(vocation_int == NULL)
+        throw 1;
+    int vocation = * vocation_int;
+
+    JsonInt * speed_int = JINT((*player_dict)["speed"]);
+    if(speed_int == NULL)
+        throw 1;
+    int speed = * speed_int;
+
+    JsonInt * force_int = JINT((*player_dict)["force"]);
+    if(force_int == NULL)
+        throw 1;
+    int force = * force_int;
+
+    JsonInt * agility_int = JINT((*player_dict)["agility"]);
+    if(agility_int == NULL)
+        throw 1;
+    int agility = * agility_int;
+
+    JsonInt * reflexes_int = JINT((*player_dict)["reflexes"]);
+    if(reflexes_int == NULL)
+        throw 1;
+    int reflexes = * reflexes_int;
+
+    JsonInt * passPrecision_int = JINT((*player_dict)["passPrecision"]);
+    if(passPrecision_int == NULL)
+        throw 1;
+    int passPrecision = * passPrecision_int;
+
+    JsonInt * level_int = JINT((*player_dict)["level"]);
+    if(level_int == NULL)
+        throw 1;
+    int level = * level_int;
+
+    JsonInt * experience_int = JINT((*player_dict)["experience"]);
+    if(experience_int == NULL)
+        throw 1;
+    int experience = * experience_int;
+
+    JsonBool * wounded_bool = JBOOL((*player_dict)["wounded"]);
+    if(wounded_bool == NULL)
+        throw 1;
+    bool wounded = * wounded_bool;
+
+    JsonList * item_list = JLIST((*player_dict)["inventory"]);
+    if(item_list == NULL)
+        throw 1;
+
+    std::vector<Item> inventory;
+    for(int i = 0; i < item_list->size(); i++){
+        inventory.push_back(Item((*item_list)[i]));
+    }
+
+    NonFieldPlayer(vocation, speed, force, agility, reflexes, passPrecision,  wounded, inventory, level, experience);
+}
+
 NonFieldPlayer::~NonFieldPlayer(){}
 
 NonFieldPlayer & NonFieldPlayer::operator=(const Player & player){
@@ -44,4 +107,26 @@ int NonFieldPlayer::getVocation(){
 
 void NonFieldPlayer::setVocation(int vocation){
     vocation_ = vocation;
+}
+
+NonFieldPlayer::operator JsonValue() const{
+    JsonDict r;
+    r.add("vocation", new JsonInt(vocation_));
+    r.add("speed", new JsonInt(speed_));
+    r.add("force", new JsonInt(force_));
+    r.add("agility", new JsonInt(agility_));
+    r.add("reflexes", new JsonInt(reflexes_));
+    r.add("passPrecision", new JsonInt(passPrecision_));
+    r.add("wounded", new JsonBool(wounded_));
+    r.add("level", new JsonBool(level_));
+    r.add("experience", new JsonBool(experience_));
+
+    JsonList * inventory = new JsonList();
+    for(int i = 0; i < inventory_.size(); i++){
+        JsonValue * item = new JsonValue(inventory_[i]);
+        inventory->add(item);
+    }
+    r.add("inventory", inventory);
+
+    return r;
 }

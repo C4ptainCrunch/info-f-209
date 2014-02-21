@@ -2,15 +2,18 @@
 #define INSTALLATION_h
 
 #include <math.h>
+#include "../lib/json/json.h"
 
 class Installation{
 
     public:
+        Installation(JsonValue * json);
         Installation(int level = 1);
         ~Installation();
         virtual void improve();
         virtual int improvePrice();
         virtual int getLevel();
+        operator JsonValue() const;
 
     protected:
         int level_;

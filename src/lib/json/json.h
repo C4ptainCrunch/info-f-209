@@ -17,7 +17,7 @@ class JsonValue {
         static JsonValue * fromString(std::string message, int &i);
         static JsonValue * fromString(std::string message);
 
-        virtual std::string toString() = 0;
+        virtual std::string toString(){ return "";};
 
     private:
         virtual void plop(){}

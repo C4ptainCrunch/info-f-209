@@ -18,6 +18,7 @@ class Team{
         NonFieldPlayer* changePlayer(int pos, NonFieldPlayer& player);
         NonFieldPlayer & removePlayer(int pos);
         void swapPlayers(int pos1, int pos2);
+        operator JsonValue() const;
 
     private:
         NonFieldPlayer *players_[7];

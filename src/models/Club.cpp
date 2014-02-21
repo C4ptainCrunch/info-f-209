@@ -119,3 +119,27 @@ Installation* Club::getInstallations()
 }
 
 
+Club::operator JsonValue() const{
+    JsonDict r;
+
+    r.add("money", new JsonInt(money_));
+
+    JsonValue * team = new JsonValue(*team_);
+    r.add("team", team);
+
+    JsonList * installations = new JsonList();
+    for(int i = 0; i < 5; i++){
+        JsonValue * install = new JsonValue(installations_[i]);
+        installations->add(install);
+    }
+    r.add("installations", installations);
+
+    JsonList * players = new JsonList();
+    for(int i = 0; i < players_.size(); i++){
+        JsonValue * player = new JsonValue(*(players_[i]));
+        players->add(player);
+    }
+    r.add("players", players);
+
+    return r;
+}

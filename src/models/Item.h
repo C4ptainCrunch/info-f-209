@@ -9,6 +9,7 @@ class Item{
         Item();
         Item(JsonValue * json);
         ~Item();
+        operator JsonValue() const;
 };
 
 #endif // ITEM_H

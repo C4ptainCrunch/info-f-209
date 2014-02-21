@@ -16,6 +16,7 @@ class Manager{
         Club* getClub();
         std::string getUserName();
         std::string getName();
+        operator JsonValue() const;
 
     private:
         std::string name_;

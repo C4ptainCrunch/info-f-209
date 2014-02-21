@@ -9,11 +9,11 @@ else
 endif
 
 ifndef CFLAGS
-	CFLAGS=
+	CFLAGS=-ggdb
 endif
 
 ifndef LDFLAGS
-	LDFLAGS=
+	LDFLAGS=-ggdb
 endif
 
 CFLAGS+=-std=c++11

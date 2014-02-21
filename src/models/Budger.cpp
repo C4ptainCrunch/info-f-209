@@ -1,6 +1,6 @@
 #include "Budger.h"
 
-Budger::Budger():Ball(0) { 
+Budger::Budger():Ball(0) {
     srand (time(NULL));
 } // TODO set speed
 

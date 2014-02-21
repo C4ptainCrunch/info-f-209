@@ -5,38 +5,29 @@
 using namespace std;
 
 
-int main()
+int main(int argc, char *argv[])
 {
-    Client client;
+    if(argc <= 2){
+        printf("Invalid parameters\nUsage : %s host port\n", argv[0]);
+        exit(0);
+    }
+    int port = atoi(argv[2]);
+    if(port <= 0 || port > 65535){
+        printf("Invalid port\n");
+        exit(0);
+    }
+
+    Client client(argv[1], port);
 
     client.run();
 
     return EXIT_SUCCESS;
 }
 
-void Client::run()
+
+Client::Client(char * host, int port)
 {
-    currentStateID_ = STATE_INTRO;
-    currentState_ = new IntroState(this);
-
-    while(currentStateID_ != STATE_EXIT){
-        currentState_->handleEvents();
-        currentState_->logic();
-        currentState_->display();
-        //currentState... handle challenge
-        changeState();
-    }
-}
-
-Client::Client()
-{
-    int sockFd;
-    if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
-        perror("Client: socket ");
-        exit(EXIT_FAILURE);
-    }
-
-    socket_.setFd(sockFd);
+    connectToServer(host, port);
 
     nextStateID_ = STATE_NULL;
 
@@ -45,34 +36,59 @@ Client::Client()
 
 Client::~Client() {}
 
-void Client::connectToName(const string name)
+void Client::run()
 {
-    struct sockaddr_in theirAddr;
-    struct hostent *he;;
+    string buffer;
+    currentStateID_ = STATE_INTRO;
+    currentState_ = new IntroState(this);
+    recv(buffer);
+    if (buffer == "1")
+        cout<<"Challenged !"<<endl;
+    while(currentStateID_ != STATE_EXIT){
+        currentState_->handleEvents();
+        currentState_->logic();
+        currentState_->display();
 
-    if (connected_)
-        cout<<"Erreur : Déjà connecté."<<endl; //Rework. Throw exception?
-
-    else {
-        socklen_t addrSize = sizeof(struct sockaddr);
-
-        if ((he=gethostbyname(name.c_str())) == NULL) {
-            perror("Client: gethostbyname ");
-            exit(EXIT_FAILURE);
-        }
-
-        theirAddr.sin_family = AF_INET;
-        theirAddr.sin_port = htons(PORT);
-        theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
-        memset(&(theirAddr.sin_zero), '\0', 8);
-
-        if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
-            perror("Client: connect ");
-            exit(EXIT_FAILURE);
-        }
-        connected_ = true;
-        printf("Connecté au serveur."); //Rework. Server should mssg?
+        changeState();
     }
+}
+
+void Client::connectToServer(char * host, const int port)
+{
+    int sockFd;
+    struct timeval tv;
+
+    tv.tv_sec = 2; //secondes de timeout
+    tv.tv_usec = 0;
+    if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
+        perror("Client: socket ");
+        exit(EXIT_FAILURE);
+    }
+
+    setsockopt(sockFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+
+    socket_.setFd(sockFd);
+
+    struct sockaddr_in theirAddr;
+    struct hostent *he;
+
+    socklen_t addrSize = sizeof(struct sockaddr);
+
+    if ((he=gethostbyname(host)) == NULL) {
+        cout << "Could not resolve hostname" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    theirAddr.sin_family = AF_INET;
+    theirAddr.sin_port = htons(port);
+    theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
+    memset(&(theirAddr.sin_zero), '\0', 8);
+
+    if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
+        perror("Connect");
+        exit(EXIT_FAILURE);
+    }
+    connected_ = true;
 }
 
 void Client::disconnect()
@@ -81,8 +97,11 @@ void Client::disconnect()
         connected_ = false;
         close(socket_.getFd());
     }
-    else
-        cout<<"Erreur : Non connecté lors d'une demande de déconnection."<<endl; //Rework. throw?
+}
+
+int Client::answerToChallenge(bool accept)
+{
+    return true;
 }
 
 int Client::send(const string & message)

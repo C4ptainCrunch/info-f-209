@@ -17,8 +17,6 @@
 #include "../lib/socket/Socket.h"
 #include "GameState.h"
 
-#define PORT 8000
-
 //Game States, le client est une machine à état dont les états possibles sont listés ci dessous.
 enum GameStates
 {
@@ -37,15 +35,16 @@ enum GameStates
 
 class Client{
 public:
-    Client();
+    Client(char * host, int port);
     ~Client();
     virtual void run(); //Effectue la boucle principale du jeu.
 
     virtual void setNextState(const int newState); //Demande de changement d'état
-    virtual void connectToName(const std::string name);
+    virtual void connectToServer(char * host, const int port);
     virtual void disconnect();
     virtual int send(const std::string & message); //Renvoie 0 si succès, 1 si erreur.
     virtual int recv(std::string & message); //idem. Modifie param message en lui donnant la valeur du message lu.
+    virtual int answerToChallenge(bool accept);
 
 private:
 

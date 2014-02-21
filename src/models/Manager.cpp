@@ -2,6 +2,7 @@
 using namespace std;
 
 Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club){
+    free = true;
     //TODO : Hash du password
 }
 
@@ -52,6 +53,14 @@ string Manager::getUserName(){
 
 string Manager::getName(){
     return name_;
+}
+
+bool Manager::isFree(){
+    return free;
+}
+
+void Manager::setFreeState(bool state){
+    free = state;
 }
 
 Manager::operator JsonValue() const{

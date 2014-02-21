@@ -17,12 +17,15 @@ class Manager{
         std::string getUserName();
         std::string getName();
         operator JsonValue() const;
+        bool isFree();
+        void setFreeState(bool state);
 
     private:
         std::string name_;
         std::string userName_;
         std::string hash_;
         Club club_;
+        bool free;
 
 };
 

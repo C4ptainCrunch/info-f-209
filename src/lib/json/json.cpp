@@ -20,6 +20,8 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
     int bak = i;
     i = 0;
     string s;
+    cout << "VALUE" << endl;
+    cout << message << endl;
     while(i < message.length()){
         i += skip_whitespace(message, i);
         switch(message[i]){
@@ -57,8 +59,12 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
             case '7':
             case '8':
             case '9':
+                cout << "IIIIIIII" << endl;
+                cout << i << endl;
                 s = cut_from(message, i);
+                cout << i << endl;
                 i = bak;
+                cout << i << endl;
                 return JsonInt::fromString(s, i);
                 break;
             default:
@@ -310,6 +316,8 @@ void JsonInt::setValue(int val){
 }
 
 void JsonInt::setValue(string val){
+    cout << "FUCK" << endl;
+    cout << "'" << val <<  "'" << endl;
     value = stoi(val);
 }
 

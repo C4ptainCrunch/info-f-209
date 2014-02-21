@@ -6,7 +6,7 @@
 
 #include "../server/UserHandler.h"
 
-void plop(std::string message, UserHandler * thread);
+void plop(JsonValue * message, UserHandler * handler);
 
 //VIEWS_H
 #endif

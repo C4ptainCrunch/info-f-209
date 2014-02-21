@@ -11,7 +11,6 @@
 #include <vector>
 
 #include "helpers.h"
-#include "thread.h"
 #include "bind.h"
 #include "UserHandler.h"
 

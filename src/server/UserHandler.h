@@ -1,9 +1,13 @@
 #ifndef HANDLE_H
 #define HANDLE_H
 
-#include "../lib/socket/Socket.h"
 #include <vector>
 #include <thread>
+#include <string>
+#include <map>
+#include <iostream>
+
+#include "../lib/socket/Socket.h"
 #include "../models/Manager.h"
 
 class UserHandler {
@@ -17,7 +21,7 @@ class UserHandler {
         std::vector<UserHandler *> * getHandlers_listPtr();
         Manager * getManager();
         void setManager(Manager * manager);
-        int writeToClient(string message);
+        int writeToClient(std::string key, JsonValue * json);
         void disconnect();
 
     private:

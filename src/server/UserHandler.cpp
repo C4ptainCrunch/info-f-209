@@ -1,13 +1,16 @@
-#include <vector>
-#include <thread>
-#include <string>
-
-using namespace std;
-
-
 #include "UserHandler.h"
 #include "../views/views.h"
 #include "helpers.h"
+
+using namespace std;
+
+typedef void (*view_ptr)(JsonValue *, UserHandler * );
+
+map<string,view_ptr> viewmap {
+    {"plop", plop},
+};
+
+
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list) {
     handlers_list_ = handlers_list;
@@ -43,8 +46,8 @@ void UserHandler::setManager(Manager * manager){
         manager_ = manager;
 }
 
-int UserHandler::writeToClient(string message){
-    return s_->write(message);
+int UserHandler::writeToClient(std::string key, JsonValue * json){
+    return s_->write(key + ":" + json->toString());
 }
 
 void UserHandler::disconnect(){
@@ -67,5 +70,6 @@ void UserHandler::handleMessage(string message){
     string key;
 
     message = split_message(&key, message);
-    plop(message, this);
+    cout << "'" << message << "'" << endl;
+    viewmap[key](JsonValue::fromString(message), this);
 }

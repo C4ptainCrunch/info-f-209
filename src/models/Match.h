@@ -18,8 +18,6 @@ enum { KEEPER = 0, CHASER = 1, BEATER = 2, SEEKER = 3};// 1 KEEPER, 3 CHASERS, 2
 
 enum { host = 0, guest = 1};
 
-typedef std::vector<Position> Way;
-
 class Match{
 
     public:

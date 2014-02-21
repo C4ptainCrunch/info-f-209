@@ -4,8 +4,11 @@ Quaffle::Quaffle(): Ball(0) { }
 
 Quaffle::~Quaffle() { }
 
-Position Quaffle::thrown(const Position pos, const char direction, const int power)
+Way Quaffle::thrown(const char direction, const int power, const Case grid[WIDTH][LENGHT])
 {
-    Position p = {1,1};
-    return p;
+    Way way;
+    for(int i =0; i<power; i++){
+        way.push_back(nextCase(position_, direction, grid));
+    }
+    return way;
 }

@@ -1,6 +1,6 @@
 #include "Case.h"
 
-Position nextCase(Position position, int direction){
+Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGHT]){
     Position nextPosition;
     nextPosition.x = position.x;
     nextPosition.y = position.y;
@@ -31,6 +31,10 @@ Position nextCase(Position position, int direction){
             if(position.x % 2 != 2)
                 nextPosition.y--;
             break;
+    }
+    if(grid[nextPosition.x][nextPosition.y].type == VOID){
+        nextPosition.x = position.x;
+        nextPosition.y = position.y;
     }
     return nextPosition;
 }

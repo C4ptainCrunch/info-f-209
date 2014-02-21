@@ -1,4 +1,4 @@
-#include <string>
+#include "utils.h"
 
 using namespace std;
 
@@ -16,7 +16,7 @@ int skip_whitespace(string message, int start){
         }
         ret++;
     }
-    throw 1;
+    throw ParseError();
 }
 
 int skip_colon(string message, int start){
@@ -30,7 +30,7 @@ int skip_colon(string message, int start){
                 colon = true;
                 break;
             default:
-                throw 1;
+                throw ParseError();
         }
         ret++;
     }

@@ -1,10 +1,21 @@
 #ifndef HANDLE_H
 #define HANDLE_H
 
-#include "../lib/socket/Socket.h"
 #include <vector>
 #include <thread>
+#include <string>
+#include <map>
+#include <iostream>
+
+#include "../lib/socket/Socket.h"
 #include "../models/Manager.h"
+#include "helpers.h"
+#include "../views/views.h"
+
+class UserHandler;
+
+typedef void (*view_ptr)(JsonValue *, UserHandler * );
+
 
 class UserHandler {
     public:
@@ -17,7 +28,7 @@ class UserHandler {
         std::vector<UserHandler *> * getHandlers_listPtr();
         Manager * getManager();
         void setManager(Manager * manager);
-        int writeToClient(string message);
+        int writeToClient(std::string key, JsonValue * json);
         void disconnect();
 
     private:
@@ -28,7 +39,8 @@ class UserHandler {
         std::vector<UserHandler *> * handlers_list_;
 
         void handleMessage(std::string message);
-};
 
+        static const map<string,view_ptr> viewmap;
+};
 //HANDLE_H
 #endif

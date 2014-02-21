@@ -5,6 +5,16 @@
 #include <string>
 #include <vector>
 
+#include "utils.h"
+#include "ParseError.h"
+#include "ModelUnserializationError.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+#include <typeinfo>
+#include <map>
+
 #define JDICT dynamic_cast<JsonDict*>
 #define JLIST dynamic_cast<JsonList*>
 #define JSTRING dynamic_cast<JsonString*>
@@ -33,7 +43,6 @@ class JsonString : public JsonValue {
 
         std::string toString();
 
-        JsonString operator=(const JsonString &str);
         operator std::string() const;
 
     private:

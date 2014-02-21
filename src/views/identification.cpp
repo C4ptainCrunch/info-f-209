@@ -1,57 +1,66 @@
 #include "identification.h"
 
-void logIn(JsonValue * message, UserHandler * thread){
+using namespace std;
+
+void logIn(JsonValue * message, UserHandler * handler){
     JsonDict * dictMessage = JDICT(message);
-    JsonInt * code = new JsonInt();
-    code->setValue(FAIL);
+    JsonDict answer;
+
     if (dictMessage != NULL){
-        std::string userName = (*dictMessage)[USERNAME]->toString();
-        std::string password = (*dictMessage)[PASSWORD]->toString();
-        std::string rawFileName = "data/users/"+userName+".json";
-        std::string content;
+        // TODO : Check if cast is not null
+        string userName = *JSTRING((*dictMessage)["username"]);
+        string password = *JSTRING((*dictMessage)["password"]);
+
+        string rawFileName = "data/users/"+userName+".json";
+        string content;
+
         const char * fileName = rawFileName.c_str();
         if (readFile(fileName, content) == 0){
-            JsonDict * userInfos = JDICT(JsonValue::fromString(content));
-            if (userInfos != NULL){
-                Manager * user = new Manager(userInfos);
-                if ((*userInfos)[PASSWORD]->toString() == password){
-                    code->setValue(SUCCESS);
-                    thread->setManager(user);
-                }
-                else {
-                    delete user;
-                }
-                delete userInfos;
+            Manager * user = new Manager(JsonValue::fromString(content));
+            if (user->checkPassword(password)){
+                JsonBool b = JsonBool(true);
+                answer.add("success", &b);
+                handler->writeToClient("login", &answer);
+                handler->setManager(user);
             }
+            else {
+                delete user;
+                user = NULL;
+            }
+            delete user;
+        }
+        else {
+            JsonBool b = JsonBool(false);
+            answer.add("success", &b);
+            handler->writeToClient("login", &answer);
         }
     }
-    thread->writeToClient(code->toString());
-    delete code;
-}
-
-void signUp(JsonValue * message, UserHandler * thread){
-    JsonDict * dictMessage = JDICT(message);
-    JsonInt * code = new JsonInt();
-    code->setValue(FAIL);
-    if (dictMessage != NULL){
-        std::string userName = (*dictMessage)[USERNAME]->toString();
-        std::string rawFileName = "data/users/"+userName+".json";
-        std::string content;
-        const char * fileName = rawFileName.c_str();
-        if(readFile(fileName, content) == -1 and errno == EIO){
-            Manager * user = new Manager((*dictMessage)[NAME]->toString(), userName, (*dictMessage)[PASSWORD]->toString());
-            thread->setManager(user);
-            JsonDict * userInfos = JsonDict::fromString("{\"essai\" : \"lol\"}");//user->toJson();
-            std::string infos = userInfos->toString();
-            if (writeFile(fileName, infos) == 0){
-                code->setValue(SUCCESS);
-            }
-        }
+    else {
+        JsonBool b = JsonBool(false);
+        answer.add("success", &b);
+        handler->writeToClient("login", &answer);
     }
-    thread->writeToClient(code->toString());
-    delete code;
 }
 
-int main(){
-    return 0;
-}
+// void signUp(JsonValue * message, UserHandler * handler){
+//     JsonDict * dictMessage = JDICT(message);
+//     JsonInt * code = new JsonInt();
+//     code->setValue(FAIL);
+//     if (dictMessage != NULL){
+//         string userName = (*dictMessage)[USERNAME]->toString();
+//         string rawFileName = "data/users/"+userName+".json";
+//         string content;
+//         const char * fileName = rawFileName.c_str();
+//         if(readFile(fileName, content) == -1 and errno == EIO){
+//             Manager * user = new Manager((*dictMessage)[NAME]->toString(), userName, (*dictMessage)[PASSWORD]->toString());
+//             handler->setManager(user);
+//             JsonDict * userInfos = JsonDict::fromString("{\"essai\" : \"lol\"}");//user->toJson();
+//             string infos = userInfos->toString();
+//             if (writeFile(fileName, infos) == 0){
+//                 code->setValue(SUCCESS);
+//             }
+//         }
+//     }
+//     handler->writeToClient(code->toString());
+//     delete code;
+// }

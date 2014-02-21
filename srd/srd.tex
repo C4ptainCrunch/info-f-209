@@ -68,6 +68,9 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[0.7] (19/12/13) : Corrections et ajout des diagrammes au document - Bruno, Tsotne
     \item[1.0] (20/12/13) : Délivrable pour la phase 1 - Equipe
     \item[1.1] (16/02/13) : Correction de fautes d'orthographes et remplissage de l'historique - Bruno
+    \item[1.2] (18/02/13) : Ajout et correction de diagrammes de classe - Bruno
+    \item[1.3] (20/02/13) : Modification du type de document et ajout des chapitres - Romain
+    \item[1.4] (21/02/13) : Ajout des diagrammes d'activité - Bruno
 \end{description}
 
 
@@ -345,6 +348,8 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 
 \section{Design et fonctionnement}
+\subsection{Diagrammes de classe}
+
 \newpage
 \begin{figure}[H]
     \vspace*{-3cm}
@@ -354,6 +359,7 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \caption{\label{3} Diagramme de classe représentant toutes les structures de données}
 \end{figure}
 \newpage
+
 \begin{figure}[H]
     \vspace*{-3cm}
     \makebox[\linewidth]{
@@ -361,8 +367,8 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     }
     \caption{\label{3} Diagramme de classe représentant les structures de données intervenant pour un match}
 \end{figure}
-\newpage
 
+\newpage
 \begin{figure}[H]
     \vspace*{-3cm}
     \makebox[\linewidth]{
@@ -379,6 +385,35 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \caption{\label{3} Diagramme de classe représentant les structures de données intervenant pour la partie client}
 \end{figure}
 
+%\newpage
+\section{Diagrammes d'activité}
+\subsection{Diagrammes d'activité}
+
+\begin{figure}[h]
+    %\vspace*{-3cm}
+    \makebox[\linewidth]{
+        \includegraphics[scale = 0.77]{uml/auctionHouseActivityDiagram.png}
+    }
+    \caption{\label{3} Diagramme d'activité représentant le déroulement d'une enchère}
+\end{figure}
+
+\begin{figure}[h]
+    %\vspace*{-3cm}
+    \makebox[\linewidth]{
+        \includegraphics[scale = 0.3]{uml/matchActivityDiagram.png}
+    }
+    \caption{\label{3} Diagramme d'activité représentant le déroulement d'un match}
+\end{figure}
+
+\begin{figure}[h]
+    %\vspace*{-3cm}
+    \makebox[\linewidth]{
+        \includegraphics[scale = 0.24]{uml/globalActivityDiagram.png}
+    }
+    \caption{\label{3} Diagramme d'activité représentant la procédure normale d'une partie de jeu}
+\end{figure}
+
+
 \chapter{Justification de la bibliothèque graphique}
 \section{Qt}
 \subsection{Avantages}
@@ -393,7 +428,7 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \subsection{Inconvénients}
 \begin{itemize}
     \item Lourd
-    \item Possède des packages qui ne nous serviront pas, étant donné que nous ne n'utiliserons que la partie graphique de Qt
+    \item Possède des packages qui ne nous serviront pas, étant donné que nous ne n'utiliserons que la partie graphique de Qt.
 \end{itemize}
 \section{GTK+}
 \subsection{Avantages}

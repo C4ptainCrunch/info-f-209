@@ -55,10 +55,10 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
                 return JsonInt::fromString(s, i);
                 break;
             default:
-                throw ParseError();
+                throw ParseError("unknwown value", __LINE__, i);
         }
     }
-    throw ParseError();
+    throw ParseError("no value found", __LINE__, i);
 }
 
 /*std::string JsonValue::toString(JsonValue * json){
@@ -119,7 +119,7 @@ JsonString * JsonString::fromString(std::string message, int &i){
         }
     i++;
     }
-    throw ParseError();
+    throw ParseError("No \" ending string", __LINE__, i);
 }
 
 std::string JsonString::toString(){
@@ -205,7 +205,9 @@ JsonList * JsonList::fromString(std::string message, int &i){
     while(1){
         JsonValue * value = NULL;
         i += skip_whitespace(message, i);
+        int bak = i;
         value = JsonValue::fromString(cut_from(message, i), i);
+        i += bak;
         i++;
         r->add(value);
         value = NULL;
@@ -219,7 +221,7 @@ JsonList * JsonList::fromString(std::string message, int &i){
                 return r;
                 break;
             default:
-                throw ParseError();
+                throw ParseError("expected ] or , found " + string(1, message[i]), __LINE__, i);
         }
     }
 }
@@ -327,10 +329,10 @@ string JsonNull::toString(){
 }
 
 JsonNull * JsonNull::fromString(std::string message, int &i){
-    i += 4;
     if(message.substr(0,4) != "null"){
-        throw ParseError();
+        throw ParseError("expected null", __LINE__, i);
     }
+    i += 4;
     return new JsonNull();
 }
 
@@ -353,14 +355,14 @@ JsonBool * JsonBool::fromString(std::string message, int &i){
     JsonBool * r = NULL;
     if(message[0] == 't'){
         if(message.substr(0,4) != "true"){
-            throw ParseError();
+            throw ParseError("expected true", __LINE__, i);
         }
         r = new JsonBool(true);
         i += 4;
     }
     else {
         if(message.substr(0,5) != "false"){
-            throw ParseError();
+            throw ParseError("expected false", __LINE__, i);
         }
         r = new JsonBool(false);
         i += 5;

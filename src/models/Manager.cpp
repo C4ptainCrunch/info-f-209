@@ -1,9 +1,8 @@
 #include "Manager.h"
 using namespace std;
 
-Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club){
+Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club), hash_(password){
     ready = true;
-    //TODO : Hash du password
 }
 
 Manager::Manager(JsonValue * json){
@@ -35,12 +34,11 @@ Manager::Manager(JsonValue * json){
 Manager::~Manager(){}
 
 bool Manager::checkPassword(const string password){
-    //TODO
-    return true;
+    return password == hash_;
 }
 
 void Manager::changePassword(const string password){
-    //TODO
+    hash_ = password;
 }
 
 Club* Manager::getClub(){

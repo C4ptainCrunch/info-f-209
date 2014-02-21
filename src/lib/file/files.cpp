@@ -1,12 +1,6 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <string>
-#include <unistd.h>
-#include <iostream>
+#include "files.h"
 
-#define BUFF_SIZE 1024
+using namespace std;
 
 int readFile(const char * fileName, std::string & content){
     char buffer[BUFF_SIZE];

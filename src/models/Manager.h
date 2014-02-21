@@ -16,6 +16,8 @@ class Manager{
         Club* getClub();
         std::string getUserName();
         std::string getName();
+        bool isReady();
+        void setReadyState(bool state);
         operator JsonValue() const;
         bool isFree();
         void setFreeState(bool state);
@@ -25,7 +27,7 @@ class Manager{
         std::string userName_;
         std::string hash_;
         Club club_;
-        bool free;
+        bool ready;
 
 };
 

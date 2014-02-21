@@ -2,7 +2,7 @@
 using namespace std;
 
 Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club){
-    free = true;
+    ready = true;
     //TODO : Hash du password
 }
 
@@ -55,12 +55,12 @@ string Manager::getName(){
     return name_;
 }
 
-bool Manager::isFree(){
-    return free;
+bool Manager::isReady(){
+    return ready;
 }
 
-void Manager::setFreeState(bool state){
-    free = state;
+void Manager::setReadyState(bool state){
+    ready = state;
 }
 
 Manager::operator JsonValue() const{

@@ -70,6 +70,5 @@ void UserHandler::handleMessage(string message){
     string key;
 
     message = split_message(&key, message);
-    cout << "'" << message << "'" << endl;
     viewmap[key](JsonValue::fromString(message), this);
 }

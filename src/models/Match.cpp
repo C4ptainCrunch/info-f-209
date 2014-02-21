@@ -25,7 +25,7 @@ Match::~Match(){}
 void Match::generateFieldPlayers(){
     for (int i = 0; i< 2 ;++i){
         for (int j = 0; j < 7; ++j){
-            NonFieldPlayer player = clubs_[i]->getTeam()->getPlayers()[j];
+            NonFieldPlayer player = *(clubs_[i]->getTeam()->getPlayer(j));
             teams_[i][j] = FieldPlayer(player ,0, i); 
             if (j ==0){
                 teams_[i][j].setRole(KEEPER);

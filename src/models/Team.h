@@ -12,7 +12,7 @@ class Team{
         ~Team();
         void setPlayers(NonFieldPlayer players[7]);
         void setPlayer(NonFieldPlayer& player, int pos);
-        NonFieldPlayer* getPlayers();
+        NonFieldPlayer* getPlayer(int pos);
         NonFieldPlayer* changePlayer(int pos, NonFieldPlayer& player);
         NonFieldPlayer & removePlayer(int pos);
         void swapPlayers(int pos1, int pos2);

@@ -8,7 +8,7 @@ Manager::Manager(string name, string userName, string password, Club club): name
 Manager::Manager(JsonValue * json){
     JsonDict * manager = JDICT(json);
     if(manager == NULL){
-        throw 1;
+        throw ModelUnserialzationError();
     }
     Club club;
     JsonDict * club_json = JDICT((*manager)["club"]);
@@ -19,17 +19,17 @@ Manager::Manager(JsonValue * json){
 
     JsonString * name_string = JSTRING((*manager)["name"]);
     if(name_string == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
     string name = * name_string;
 
     JsonString * username_string = JSTRING((*manager)["username"]);
     if(username_string == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
     string username = * username_string;
 
     JsonString * password_string = JSTRING((*manager)["password"]);
     if(password_string == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
     string password = * password_string;
 
     Manager(name, username, password, club);

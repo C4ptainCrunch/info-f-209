@@ -19,26 +19,26 @@ Club::Club(JsonValue * json) {
     JsonDict * ins;
 
     if(club == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
 
     JsonInt * money_int = JINT((*club)["money"]);
     if(money_int == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
 
     int money = * money_int;
     Installation installations[5];
 
     JsonList * installations_list = JLIST((*club)["installations"]);
     if(installations_list == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
     if(installations_list->size() != 5)
-        throw 1;
+        throw ModelUnserialzationError();
 
 
     for(int i = 0; i < 5; i++){
         ins = JDICT((*installations_list)[i]);
         if(ins == NULL)
-            throw 1;
+            throw ModelUnserialzationError();
 
         installations[i] = Installation(ins);
     }
@@ -46,7 +46,7 @@ Club::Club(JsonValue * json) {
     Team team((*club)["team"]);
     JsonList * player_list = JLIST((*club)["players"]);
     if(player_list == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
 
     vector<NonFieldPlayer*> players;
     for(int i = 0; i < player_list->size(); i++){

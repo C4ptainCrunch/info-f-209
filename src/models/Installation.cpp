@@ -6,11 +6,11 @@ Installation::Installation(JsonValue * json) {
     JsonDict * installation = JDICT(json);
 
     if(installation == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
 
     JsonInt * level = JINT((*installation)["level"]);
     if(level == NULL)
-        throw 1;
+        throw ModelUnserialzationError();
 
     Installation((int) *level);
 }

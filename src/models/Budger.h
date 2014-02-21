@@ -16,7 +16,7 @@ class Budger : public Ball{
         Budger();
         ~Budger();
         Position autoMove(const Case grid[WIDTH][LENGHT]);
-        Position isHit(const Position pos, const char direction, const int power);
+        Way isHit(const char direction, const int power, const Case grid[WIDTH][LENGHT]);
         void hitPlayer(Player& player, int power);
 };
 

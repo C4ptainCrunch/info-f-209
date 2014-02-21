@@ -15,12 +15,12 @@ Team::Team(JsonValue * json){
     NonFieldPlayer *players[7];
 
     if(team == NULL)
-        throw 1;
+        throw ModelUnserializationError();
     JsonList * players_list = JLIST((*team)["players"]);
     if(players_list == NULL)
-        throw 1;
+        throw ModelUnserializationError();
     if(players_list->size() != 7)
-        throw 1;
+        throw ModelUnserializationError();
 
     for(int i = 0; i < 7; i++){
         player_dict = JDICT((*players_list)[i]);

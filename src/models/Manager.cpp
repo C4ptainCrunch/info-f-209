@@ -1,32 +1,35 @@
 #include "Manager.h"
 using namespace std;
 
-Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club){
+Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club), hash_(password){
     ready = true;
-    //TODO : Hash du password
 }
 
 Manager::Manager(JsonValue * json){
     JsonDict * manager = JDICT(json);
     if(manager == NULL){
-        throw 1;
+        throw ModelUnserializationError();
     }
-
-    Club club = Club((*manager)["club"]);
+    Club club;
+    JsonDict * club_json = JDICT((*manager)["club"]);
+    if(club_json == NULL)
+        club = Club();
+    else
+        club = Club(club_json);
 
     JsonString * name_string = JSTRING((*manager)["name"]);
     if(name_string == NULL)
-        throw 1;
+        throw ModelUnserializationError();
     string name = * name_string;
 
     JsonString * username_string = JSTRING((*manager)["username"]);
     if(username_string == NULL)
-        throw 1;
+        throw ModelUnserializationError();
     string username = * username_string;
 
     JsonString * password_string = JSTRING((*manager)["password"]);
     if(password_string == NULL)
-        throw 1;
+        throw ModelUnserializationError();
     string password = * password_string;
 
     Manager(name, username, password, club);
@@ -35,12 +38,11 @@ Manager::Manager(JsonValue * json){
 Manager::~Manager(){}
 
 bool Manager::checkPassword(const string password){
-    //TODO
-    return true;
+    return password == hash_;
 }
 
 void Manager::changePassword(const string password){
-    //TODO
+    hash_ = password;
 }
 
 Club* Manager::getClub(){

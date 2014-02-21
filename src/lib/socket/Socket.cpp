@@ -56,24 +56,21 @@ int Socket::write(string message) {
 string Socket::popFromBuffer() {
     string partial;
     size_t nextStop;
-
     partial = buffer;
     nextStop = partial.find(MESSAGE_END);
     if (nextStop == string::npos) {
         buffer[0] = '\0';
     }
     else {
-        buffer = buffer + nextStop + 2;
+        strcpy(buffer, buffer + nextStop + 2);
         partial = partial.substr(0, nextStop + 2);
     }
-
     return partial;
 }
 
 int Socket::read(string & message) {
     bool isComplete;
     int len;
-
     message = popFromBuffer();
     isComplete = (message.find(MESSAGE_END) != string::npos);
 

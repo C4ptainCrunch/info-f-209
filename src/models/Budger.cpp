@@ -10,7 +10,7 @@ Position Budger::autoMove(const Case grid[WIDTH][LENGHT])
 {
     Position nextPosition;
     int next = rand() % 6;
-    nextPosition = nextCase(position_, next);
+    nextPosition = nextCase(position_, next, grid);
     if(grid[nextPosition.x][nextPosition.y].type == USABLE){
         if(grid[nextPosition.x][nextPosition.y].ball == 0){
             return nextPosition;
@@ -18,7 +18,7 @@ Position Budger::autoMove(const Case grid[WIDTH][LENGHT])
     }
     for(int i=0; i<5; i++){
         next = (next + 1)%6;
-        nextPosition = nextCase(position_, next);
+        nextPosition = nextCase(position_, next, grid);
         if(grid[nextPosition.x][nextPosition.y].type == USABLE){
             if(grid[nextPosition.x][nextPosition.y].ball == 0){
                 return nextPosition;
@@ -29,10 +29,13 @@ Position Budger::autoMove(const Case grid[WIDTH][LENGHT])
 
 }
 
-Position Budger::isHit(const Position pos, const char direction, const int power)
+Way Budger::isHit(const char direction, const int power, const Case grid[WIDTH][LENGHT])
 {
-    Position p = {1,1};
-    return p;
+    Way way;
+    for(int i =0; i<power; i++){
+        way.push_back(nextCase(position_, direction, grid));
+    }
+    return way;
 }
 
 void Budger::hitPlayer(Player& player, int power)

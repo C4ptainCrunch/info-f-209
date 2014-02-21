@@ -1,6 +1,6 @@
 include ../options.mk
 
-SOURCES=$(wildcard *.cpp) ../views/views.cpp ../lib/socket/Socket.cpp ../lib/json/json.cpp ../lib/json/utils.cpp ../models/Manager.cpp ../models/Club.cpp ../models/Team.cpp ../models/Player.cpp ../models/NonFieldPlayer.cpp ../models/Installation.cpp ../models/Item.cpp
+SOURCES=$(wildcard *.cpp) $(wildcard ../models/*.cpp) $(wildcard ../views/*.cpp) $(wildcard ../lib/socket/*.cpp) ../lib/json/utils.cpp ../lib/json/json.cpp ../lib/json/ParseError.cpp  ../lib/json/ModelUnserializationError.cpp ../lib/file/files.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 HEADERS=$(wildcard *.h)
 EXECUTABLE=server

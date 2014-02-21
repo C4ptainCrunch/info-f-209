@@ -1,54 +1,57 @@
-//#include "json.h"  module json à coder
-#include "thread.h"
-#include "Manager.h"
-#include <cstlib>
-#include <vecteur>
-#include "json.h"
-#include "utils.h"
+#include "identification.h"
 
-void logIn(JsonDict * message, UserHandler * thread)  // message = "user:password", TO DO : message en json
-{
-    std::String userName = message["username"];
-    std::String password = message["password"];
-    char * filename = "data/users/"+userName+".json";
-    std::String content;
-    if(readFile(filename, &content) == 0){
-        JsonDict * userInfos =  dynamic_cast<JsonDict*> JsonValue::fromString(content);
-        if(userInfos["hash"] == password){
-            thread.writeToClient("user.login : {signal : \"loginSuccess\"}");
-            thread.setUser(new Manager(userInfos));
+void logIn(JsonValue * message, UserHandler * thread){
+    JsonDict * dictMessage = JDICT(message);
+    JsonInt * code = new JsonInt();
+    code->setValue(FAIL);
+    if (dictMessage != NULL){
+        std::string userName = (*dictMessage)[USERNAME]->toString();
+        std::string password = (*dictMessage)[PASSWORD]->toString();
+        std::string rawFileName = "data/users/"+userName+".json";
+        std::string content;
+        const char * fileName = rawFileName.c_str();
+        if (readFile(fileName, content) == 0){
+            JsonDict * userInfos = JDICT(JsonValue::fromString(content));
+            if (userInfos != NULL){
+                Manager * user = new Manager(userInfos);
+                if ((*userInfos)[PASSWORD]->toString() == password){
+                    code->setValue(SUCCESS);
+                    thread->setManager(user);
+                }
+                else {
+                    delete user;
+                }
+                delete userInfos;
+            }
         }
-        else{
-            thread.writeToClient("user.login : {signal : \"wrongPassword\"}");
-        }
-        delete(userInfos);
     }
-    else{
-        thread.writeToClient("user.login : {signal : \"accountNotFound\"}");
-    }
+    thread->writeToClient(code->toString());
+    delete code;
 }
 
-void signUp(JsonDict * message, UserHandler * thread)
-{
-    std::string userName = message["username"]
-    char * filename = "data/users/"+userName+".json";
-    std::String content;
-    if(readFile(filename, &content) == -1 and errno=EIO){
-        Manager * user = new Manager(message["name"], userName, message["password"], new Club());
-        thread.setUser(user);
-        std::string infos = (user->toJson())->toString();
-        if (writeFile(fileName, infos) == 0){
-            thread.writeToClient("user.signup : {signal = \"signupSuccess\"}");
-        }
-        else{
-            thread.writeToClient("user.signup : {signal = \"failToSave\"}");
+void signUp(JsonValue * message, UserHandler * thread){
+    JsonDict * dictMessage = JDICT(message);
+    JsonInt * code = new JsonInt();
+    code->setValue(FAIL);
+    if (dictMessage != NULL){
+        std::string userName = (*dictMessage)[USERNAME]->toString();
+        std::string rawFileName = "data/users/"+userName+".json";
+        std::string content;
+        const char * fileName = rawFileName.c_str();
+        if(readFile(fileName, content) == -1 and errno == EIO){
+            Manager * user = new Manager((*dictMessage)[NAME]->toString(), userName, (*dictMessage)[PASSWORD]->toString());
+            thread->setManager(user);
+            JsonDict * userInfos = JsonDict::fromString("{\"essai\" : \"lol\"}");//user->toJson();
+            std::string infos = userInfos->toString();
+            if (writeFile(fileName, infos) == 0){
+                code->setValue(SUCCESS);
+            }
         }
     }
-    else{
-        thread.writeToClient("user.signup : {signal = \"accountAlreadyExist\"}");
-    }
+    thread->writeToClient(code->toString());
+    delete code;
 }
 
-int main(int argc, char * argv[]){
-    return EXIT_SUCCESS;    // TO DO : vérifier si EXIT_SUCCESS à return
+int main(){
+    return 0;
 }

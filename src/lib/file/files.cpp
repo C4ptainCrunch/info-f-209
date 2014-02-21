@@ -1,14 +1,8 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <string>
-#include <unistd.h>
-#include <iostream>
+#include "files.h"
 
-#define BUFF_SIZE 1024
+using namespace std;
 
-int readFile(char * fileName, std::string & content){
+int readFile(const char * fileName, std::string & content){
     char buffer[BUFF_SIZE];
     int read_len = 0;
     int fd = open(fileName, O_RDONLY);
@@ -28,7 +22,7 @@ int readFile(char * fileName, std::string & content){
     return 0;
 }
 
-int writeFile(char * fileName, std::string & content){
+int writeFile(const char * fileName, std::string & content){
     int write_len = 0;
     int index=0;
     int delta;

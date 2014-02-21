@@ -9,7 +9,6 @@ using namespace std;
 #include "../views/views.h"
 #include "helpers.h"
 
-
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list) {
     handlers_list_ = handlers_list;
     s_ = NULL;

@@ -1,4 +1,6 @@
-void playerSelection(JsonValue * json, UserHandler * thread){
+//#include "matchViews.h"
+
+/*void playerSelection(JsonValue * json, UserHandler * thread){
     char * reponse;
 }
 
@@ -28,4 +30,4 @@ void doPass(JsonValue * json, UserHandler * thread){ //reçoit l'action de tenta
 
 void doInterception(JsonValue * json, UserHandler * thread){
     char * reponse;
-}
+}*/

@@ -15,7 +15,7 @@ Match::Match(Club& hostClub, Club& guestClub){
     quaffle_ = Quaffle();
     budgers_[0] = Budger();
     budgers_[1] = Budger();
-    generateGrid(); 
+    generateGrid();
 
 }
 
@@ -45,7 +45,7 @@ void Match::generateFieldPlayers(){
 }
 
 void Match::generateGrid(){
-    double diameterFactor = 46.0/100.0;// Normalement c'est la moitié de la longueur/largeur 
+    double diameterFactor = 46.0/100.0;// Normalement c'est la moitié de la longueur/largeur
     int delta = 1/2; //Delta qui permet d'éviter les bugs lors de l'affichage de la matrice
 
     generateFieldPlayers();
@@ -150,8 +150,6 @@ void Match::generateGrid(){
                     budgers_[1].setPosition(i,j);
                 }
             }
-
-
         }
     }
 
@@ -232,7 +230,7 @@ int Match::findIndex(Position nextPosition[14], Position position){
 string Match::print(){ //FOR TEST PURPOSES
     string c;
     for (int i = 0; i<WIDTH;++i){
-        if (i%2 != 0){ 
+        if (i%2 != 0){
             c+=" ";
         }
         for (int j=0; j<LENGHT;++j){
@@ -261,7 +259,7 @@ string Match::print(){ //FOR TEST PURPOSES
                 else{
                     c += "\u2B21 ";
                 }
-                
+
             }
             else if (grid_[i][j].type == GOAL){
                 c += "\033[1;32m오\033[0m";
@@ -272,7 +270,7 @@ string Match::print(){ //FOR TEST PURPOSES
             else{
                 c += "\u2B22 ";
             }
-            
+            //cout<< matrix[i][j]<<" ";
         }
         c+="\n";
     }

@@ -1,3 +1,6 @@
+#ifndef JSON_H
+#define JSON_H
+
 #include <map>
 #include <string>
 #include <vector>
@@ -14,7 +17,7 @@ class JsonValue {
         static JsonValue * fromString(std::string message, int &i);
         static JsonValue * fromString(std::string message);
 
-        virtual std::string toString() = 0;
+        virtual std::string toString(){ return "";};
 
     private:
         virtual void plop(){}
@@ -118,3 +121,5 @@ class JsonBool : public JsonValue {
         virtual void plop(){}
         bool value;
 };
+
+#endif

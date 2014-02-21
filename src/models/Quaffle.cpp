@@ -6,5 +6,6 @@ Quaffle::~Quaffle() { }
 
 Position Quaffle::thrown(const Position pos, const char direction, const int power)
 {
-    //TODO
+    Position p = {1,1};
+    return p;
 }

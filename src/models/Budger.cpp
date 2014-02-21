@@ -1,6 +1,6 @@
 #include "Budger.h"
 
-Budger::Budger():Ball(0) { 
+Budger::Budger():Ball(0) {
     srand (time(NULL));
 } // TODO set speed
 
@@ -31,7 +31,8 @@ Position Budger::autoMove(const Case grid[WIDTH][LENGHT])
 
 Position Budger::isHit(const Position pos, const char direction, const int power)
 {
-// TODO
+    Position p = {1,1};
+    return p;
 }
 
 void Budger::hitPlayer(Player& player, int power)

@@ -51,8 +51,8 @@ void Team::setPlayer(NonFieldPlayer& player,int pos){
     players_[pos] = &player;
 }
 
-NonFieldPlayer* Team::getPlayers(){
-    return *    players_;
+NonFieldPlayer* Team::getPlayer(int pos){
+    return players_[pos];
 }
 
 NonFieldPlayer* Team::changePlayer(int pos, NonFieldPlayer& player){

@@ -3,8 +3,15 @@
 
 #include "FieldPlayer.h"
 #include "Ball.h"
+#include "Position.h"
 
 enum { VOID = 0, USABLE = 1, GOAL = 2 };
+
+enum { UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN_LEFT, LEFT, UP_LEFT};
+
+enum { WIDTH = 30, LENGHT = 64};
+
+Position nextCase(Position position, int direction);
 
 struct Case{
     int type;

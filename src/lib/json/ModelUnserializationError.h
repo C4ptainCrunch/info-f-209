@@ -4,11 +4,11 @@
 #include <iostream>
 #include <sstream>
 #include <exception>
+#include <stdexcept>
 
-class ModelUnserializationError : public std::exception {
+class ModelUnserializationError : public std::runtime_error {
     public:
-        ModelUnserializationError();
-        const char * what() const throw();
+        ModelUnserializationError(std::string message="Json serialization error.");
 };
 
 #endif

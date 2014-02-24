@@ -16,7 +16,7 @@ int skip_whitespace(string message, int start){
         }
         ret++;
     }
-    throw ParseError("while skipping whitespace", __LINE__, start + ret);
+    throw PARSE_ERROR("while skipping whitespace", start + ret);
 }
 
 int skip_colon(string message, int start){
@@ -28,7 +28,7 @@ int skip_colon(string message, int start){
                 colon = true;
                 break;
             default:
-                throw ParseError("while skipping colons found " + string(1, message[start + ret]), __LINE__, start + ret);
+                throw PARSE_ERROR("while skipping colons found " + string(1, message[start + ret]), start + ret);
         }
         ret++;
     }

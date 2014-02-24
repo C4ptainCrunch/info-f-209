@@ -4,16 +4,13 @@
 #include <iostream>
 #include <sstream>
 #include <exception>
+#include <stdexcept>
 
-class ParseError : public std::exception {
+#define PARSE_ERROR(message, position) ParseError(std::string(message) + " in " + std::string(__FILE__) + ":" + std::to_string(__LINE__) + " at position " + std::to_string(position))
+
+class ParseError : public std::runtime_error {
     public:
-        ParseError(std::string message="Unknown error", int line=-1, int position=-1);
-        const char * what() const throw();
-
-    private:
-        std::string message;
-        int line;
-        int position;
+        ParseError(std::string message="Json parse error.");
 };
 
 #endif

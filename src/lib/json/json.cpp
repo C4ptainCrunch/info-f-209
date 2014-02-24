@@ -55,10 +55,10 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
                 return JsonInt::fromString(s, i);
                 break;
             default:
-                throw ParseError("unknwown value", __LINE__, i);
+                throw PARSE_ERROR("unknwown value", i);
         }
     }
-    throw ParseError("no value found", __LINE__, i);
+    throw PARSE_ERROR("no value found", i);
 }
 
 /*std::string JsonValue::toString(JsonValue * json){
@@ -119,7 +119,7 @@ JsonString * JsonString::fromString(std::string message, int &i){
         }
     i++;
     }
-    throw ParseError("No \" ending string", __LINE__, i);
+    throw PARSE_ERROR("No \" ending string", i);
 }
 
 std::string JsonString::toString(){
@@ -221,7 +221,7 @@ JsonList * JsonList::fromString(std::string message, int &i){
                 return r;
                 break;
             default:
-                throw ParseError("expected ] or , found " + string(1, message[i]), __LINE__, i);
+                throw PARSE_ERROR("expected ] or , found " + string(1, message[i]), i);
         }
     }
 }
@@ -330,7 +330,7 @@ string JsonNull::toString(){
 
 JsonNull * JsonNull::fromString(std::string message, int &i){
     if(message.substr(0,4) != "null"){
-        throw ParseError("expected null", __LINE__, i);
+        throw PARSE_ERROR("expected null", i);
     }
     i += 4;
     return new JsonNull();
@@ -355,14 +355,14 @@ JsonBool * JsonBool::fromString(std::string message, int &i){
     JsonBool * r = NULL;
     if(message[0] == 't'){
         if(message.substr(0,4) != "true"){
-            throw ParseError("expected true", __LINE__, i);
+            throw PARSE_ERROR("expected true", i);
         }
         r = new JsonBool(true);
         i += 4;
     }
     else {
         if(message.substr(0,5) != "false"){
-            throw ParseError("expected false", __LINE__, i);
+            throw PARSE_ERROR("expected false", i);
         }
         r = new JsonBool(false);
         i += 5;

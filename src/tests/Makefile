@@ -24,4 +24,8 @@ $(EXECUTABLE).o: $(HEADERS)
 clean:
 	@rm -f *.o
 	@rm -f $(EXECUTABLE)
+	@cd ../lib/json/ && make clean > /dev/null && cd - > /dev/null
 	@echo "Cleaning..."
+
+t: all
+	./json

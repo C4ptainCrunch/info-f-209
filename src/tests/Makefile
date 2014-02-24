@@ -1,6 +1,6 @@
 include ../options.mk
 
-SOURCES=$(wildcard *.cpp)
+SOURCES=$(wildcard *.cpp) ../lib/json/json.cpp ../lib/json/utils.cpp ../lib/json/ModelUnserializationError.cpp ../lib/json/ParseError.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 HEADERS=$(wildcard *.h)
 

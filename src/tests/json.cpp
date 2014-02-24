@@ -1,44 +1,31 @@
 #include "libtest.h"
 
 using namespace std;
-//#include "../lib/json/json.h"
+#include "../lib/json/json.h"
 
 void test_empty_dict(){
-    ASSERT(false, "plop");
 
-    assertFalse(false);
+    string message = "{}";
 
-    int *top = NULL;
-    assertNull(top);
+    JsonValue * value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
 
-    double a = 5;
-    double *val = &a;
-    assertNotNull(val);
+    JsonDict* dict_p = JDICT(value);
+    ASSERT_NOT_NULL(dict_p, "Dict not null");
 
-    assertEqual(8, 8.0);
-    // string message = "{}";
-    // int i = 0;
-
-    // JsonValue * value = JsonValue::fromString(message, i)
-    // ASSERT_NOT_NULL(value);
-
-    // JsonDict* dict_p = JDICT(value);
-    // ASSERT_NOT_NULL(dict_p);
-
-    // ASSERT_EQUAL(dict_p->size(), 0);
+    ASSERT(dict_p->size() == 0, "Empty dict");
 }
 
 void test_empty_list(){
-    // string message = "{}";
-    // int i = 0;
+    string message = "[]";
 
-    // JsonValue * value = JsonValue::fromString(message, i)
-    // ASSERT_NOT_NULL(value);
+    JsonValue * value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
 
-    // JsonDict* dict_p = JDICT(value);
-    // ASSERT_NOT_NULL(dict_p);
+    JsonDict* dict_p = JDICT(value);
+    ASSERT_NOT_NULL(dict_p, "List not null");
 
-    // ASSERT_EQUAL(dict_p->size(), 0);
+    ASSERT(dict_p->size() == 0, "Empty list");
 }
 
 #define TESTVEC {T(test_empty_dict), T(test_empty_list)}

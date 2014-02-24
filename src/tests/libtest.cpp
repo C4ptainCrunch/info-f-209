@@ -19,7 +19,7 @@ int test(vector<func_struct> testvec){
         }
         catch (exception e){
             fail++;
-            cout << "\b\b\b\e[1;31mwhat" << "\e[0m" << endl;
+            cout << "\b\b\b[\e[1;34mTHRO\e[0m] " << e.what() << "\e[0m" << endl;
         }
     }
     cout << endl;

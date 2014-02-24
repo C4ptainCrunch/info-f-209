@@ -34,19 +34,27 @@ int test(vector<func_struct> testvec){
 
 }
 
-void assert(bool value, string message){
+void assert(bool value, string message, int line, string file, string func){
     if(!value){
-        throw AssertFail(message);
+        throw AssertFail(message, line, file, func);
     }
 }
 
-void assertFalse(bool value, string message){
-    if(value){
-        throw AssertFail(message);
-    }
+void assertFalse(bool value, string message, int line, string file, string func){
+    assert(!value, message, line, file, func);
 }
 
-AssertFail::AssertFail(std::string message) : message(message) {}
-std::string AssertFail::what() {
-    return message;
+AssertFail::AssertFail(string message, int line, string file, string func) : message(message), line(line), file(file), func(func) {}
+
+string AssertFail::what() {
+    string errorMessage;
+    if(func!="")
+        errorMessage+="In function: " + func + " ";
+    if(file!="")
+        errorMessage+="In file: " + file + " ";
+    if(line>0)
+        errorMessage+="At line " + to_string(line) + " ";
+    if(message!="")
+        errorMessage+=": " + message;
+    return errorMessage;
 }

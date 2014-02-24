@@ -4,7 +4,7 @@ using namespace std;
 //#include "../lib/json/json.h"
 
 void test_empty_dict(){
-    assert(true);
+    ASSERT(false, "plop");
 
     assertFalse(false);
 

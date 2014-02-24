@@ -8,6 +8,7 @@ void test_empty_dict(){
     string message = "{}";
 
     JsonValue * value = JsonValue::fromString(message);
+
     ASSERT_NOT_NULL(value, "Parsing not null");
 
     JsonDict* dict_p = JDICT(value);

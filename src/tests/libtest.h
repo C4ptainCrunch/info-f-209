@@ -51,12 +51,12 @@ void assertFalse(bool value, std::string message="", int line=-1, std::string fi
 
 template<typename T>
 void assertNull(T value, std::string message="", int line=-1, std::string file="", std::string func=""){
-    assert(value != 0, message, line, file, func);
+    assert(value == NULL, message, line, file, func);
 }
 
 template<typename T>
 void assertNotNull(T value, std::string message="", int line=-1, std::string file="", std::string func=""){
-    assert(value == 0, message, line, file, func);
+    assert(value != NULL, message, line, file, func);
 }
 template<typename T, typename U>
 void assertEqual(T value1, U value2, std::string message="", int line=-1, std::string file="", std::string func=""){

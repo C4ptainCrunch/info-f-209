@@ -1,10 +1,10 @@
 ifdef C
-	COMPILATOR=$(C)
+	CXX=$(C)
 else
 	ifeq ($(shell uname),Darwin)
-		COMPILATOR=clang++
+		CXX=clang++
 	else
-		COMPILATOR=g++
+		CXX=g++
 	endif
 endif
 
@@ -20,7 +20,7 @@ CFLAGS+=-std=c++11
 
 ifdef STRICT
 	CFLAGS+=-Wpedantic -Wall -Wextra -Winit-self -Winline -Wconversion -Weffc++ -Wctor-dtor-privacy -Woverloaded-virtual -Wconversion -Wsign-promo
-	ifneq ($(COMPILATOR), clang++)
+	ifneq ($(CXX), clang++)
 		CFLAGS+=-Wstrict-null-sentinel -Wnoexcept -Wzero-as-null-pointer-constant
 	endif
 endif

@@ -22,17 +22,17 @@ $(EXECUTABLES): build/bin/$@
 
 build/bin/$(EXECUTABLES): $(OBJECTS) build/bin
 	@echo "Compiling $@"
-	@$(CXX) -std=c++11 $(LDFLAGS) $(OBJECTS) $(call containing,$@,$(SEXECUTABLES)) -o build/bin/$@
+	@$(CXX) $(CFLAGS) $(LDFLAGS) $(OBJECTS) $(call containing,$@,$(SEXECUTABLES)) -o build/bin/$@
 
 build/objects/%.o: %.cpp $(dir $@) $(HEADERS)
 	@make $(dir $@) > /dev/null
-	$(CXX) -std=c++11 $(CFLAGS) -c $< -o $@
+	$(CXX) $(CFLAGS) -c $< -o $@
 
 build:
 	@mkdir build/
 
 build/bin: build
-	@mkdir build/bin
+	@mkdir build/bin > /dev/null || true
 
 build/objects/%/: build
 	@mkdir -p $@

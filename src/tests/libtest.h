@@ -5,6 +5,14 @@
 #include <iostream>
 #include <exception>
 
+#define GREEN  "\e[1;32m"
+#define RED    "\e[1;31m"
+#define PURPLE "\e[1;34m"
+#define WHITE  "\e[0m"
+#define YELLOW "\e[93m"
+#define DEL    "\b"
+#define BOLD   "\e[1m"
+
 #define TEST() int main(){ std::vector<func_struct> test_vector = TESTVEC; return test(test_vector); }
 
 #define T(func) {#func, func}

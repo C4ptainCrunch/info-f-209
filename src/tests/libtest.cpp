@@ -3,28 +3,55 @@ using namespace std;
 
 int test(vector<func_struct> testvec){
     int fail = 0;
+    bool pass = true;
+    bool except = true;
+    string error = "";
+    string reset = "";
 
-    cout << "\e[93mExecuting " << testvec.size() << " tests: \e[0m" << endl;
+    cout << YELLOW << "Executing " << testvec.size() << " tests:" << WHITE << endl;
 
     for(int i=0; i < testvec.size(); i++){
-        printf("%-25s ...", (testvec[i].name + "():").c_str());
+        pass = false;
+        except = true;
+
+        cout << testvec[i].name + "() ...";
 
         try {
             testvec[i].ptr();
-            cout << "\b\b\b[ \e[1;32mOk\e[0m ]" << endl;
+            pass = true;
         }
         catch (AssertFail e){
             fail++;
-            cout << "\b\b\b[\e[1;31mFAIL\e[0m] " << e.what() << "\e[0m" << endl;
+            except = false;
+            error = e.what();
         }
         catch (runtime_error e){
             fail++;
-            cout << "\b\b\b[\e[1;31mFAIL\e[0m] " << e.what() << "\e[0m" << endl;
+            error = e.what();
         }
         catch (exception e){
             fail++;
-            cout << "\b\b\b[\e[1;34mTHRO\e[0m] " << e.what() << "\e[0m" << endl;
+            error = e.what();
         }
+        reset = "";
+        int max = testvec[i].name.length() + 6;
+        for(int i=0; i < max; i++)
+            reset += DEL;
+        cout << reset << "[";
+        if(pass)
+            cout << GREEN << " Ok ";
+        else {
+            if(except)
+                cout << PURPLE << "THRO";
+            else
+                cout << RED << "FAIL";
+        }
+        cout << WHITE << "] ";
+        if(!pass)
+            cout << error;
+        else
+            cout << testvec[i].name << "()";
+        cout << endl;
     }
     cout << endl;
     if(fail == 0){
@@ -63,6 +90,6 @@ string AssertFail::what() {
             errorMessage+=":" + to_string(line);
     }
     if(message!="")
-        errorMessage+=": " + message;
+        errorMessage+=": " + string(BOLD) + message;
     return errorMessage;
 }

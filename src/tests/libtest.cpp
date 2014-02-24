@@ -4,25 +4,25 @@ using namespace std;
 int test(vector<func_struct> testvec){
     int fail = 0;
 
-    cout << "\e[93mExecuting " << testvec.size() << " tests..." << endl;
-    cout << "=====================\e[0m" << endl;
+    cout << "\e[93mExecuting " << testvec.size() << " tests: \e[0m" << endl;
+
     for(int i=0; i < testvec.size(); i++){
-        cout << endl << "Testing : " << testvec[i].name << "()"<< endl;
-        cout << "--------------------------" << endl;
+        printf("%-25s ...", (testvec[i].name + "():").c_str());
+
         try {
             testvec[i].ptr();
-            cout << "\e[1;32mOk\e[0m" << endl;
+            cout << "\b\b\b[ \e[1;32mOk\e[0m ]" << endl;
         }
         catch (AssertFail e){
             fail++;
-            cout << "\e[1;31mAssert error: " << e.what() << "\e[0m" << endl;
+            cout << "\b\b\b[\e[1;31mFAIL\e[0m] " << e.what() << "\e[0m" << endl;
         }
         catch (exception e){
             fail++;
-            cout << "\e[1;31mwhat" << "\e[0m" << endl;
+            cout << "\b\b\b\e[1;31mwhat" << "\e[0m" << endl;
         }
     }
-    cout << "\e[93m=================\e[0m" << endl;
+    cout << endl;
     if(fail == 0){
         cout << "Executed " << testvec.size() << " tests. \e[1;32mOK.\e[0m" << endl;
         return 0;
@@ -49,11 +49,15 @@ AssertFail::AssertFail(string message, int line, string file, string func) : mes
 string AssertFail::what() {
     string errorMessage;
     if(func!="")
-        errorMessage+="In function: " + func + " ";
+        errorMessage+="in " + func + "() ";
     if(file!="")
-        errorMessage+="In file: " + file + " ";
-    if(line>0)
-        errorMessage+="At line " + to_string(line) + " ";
+        errorMessage+="in " + file;
+    if(line>0){
+        if(file=="")
+            errorMessage+=" At line " + to_string(line);
+        else
+            errorMessage+=":" + to_string(line);
+    }
     if(message!="")
         errorMessage+=": " + message;
     return errorMessage;

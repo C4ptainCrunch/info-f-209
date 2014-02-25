@@ -3,16 +3,13 @@ using namespace std;
 
 int test(vector<func_struct> testvec){
     int fail = 0;
-    bool pass = true;
-    bool except = true;
     string error = "";
     string reset = "";
-
     cout << YELLOW << "Executing " << testvec.size() << " tests:" << WHITE << endl;
 
     for(int i=0; i < testvec.size(); i++){
-        pass = false;
-        except = true;
+        bool pass = false;
+        bool except = true;
 
         cout << testvec[i].name + "() ...";
 
@@ -20,16 +17,16 @@ int test(vector<func_struct> testvec){
             testvec[i].ptr();
             pass = true;
         }
-        catch (AssertFail e){
+        catch (AssertFail &e){
             fail++;
             except = false;
             error = e.what();
         }
-        catch (runtime_error e){
+        catch (runtime_error &e){
             fail++;
             error = e.what();
         }
-        catch (exception e){
+        catch (exception &e){
             fail++;
             error = e.what();
         }
@@ -47,8 +44,11 @@ int test(vector<func_struct> testvec){
                 cout << RED << "FAIL";
         }
         cout << WHITE << "] ";
-        if(!pass)
+        if(!pass){
+            if(except)
+                cout << "in " << testvec[i].name << "() ";
             cout << error;
+        }
         else
             cout << testvec[i].name << "()";
         cout << endl;

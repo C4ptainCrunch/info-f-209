@@ -20,7 +20,7 @@ libs: $(OBJECTS)
 
 $(EXECUTABLES): build/bin/$@
 
-build/bin/$(EXECUTABLES): $(OBJECTS) build/bin
+build/bin/$(EXECUTABLES): $(OBJECTS) $(call containing,$@,$(SEXECUTABLES)) build/bin
 	@echo "Compiling $@"
 	@$(CXX) $(CFLAGS) $(LDFLAGS) $(OBJECTS) $(call containing,$@,$(SEXECUTABLES)) -o build/bin/$@
 

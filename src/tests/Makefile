@@ -12,12 +12,12 @@ test: all
 	@for exec in $(EXECUTABLE); do ./$$exec ; done
 
 $(EXECUTABLE): $(OBJECTS)
-	$(COMPILATOR) $(LDFLAGS) $^ -o $@
+	$(CXX) $(LDFLAGS) $^ -o $@
 
 $(EXECUTABLE).o: $(HEADERS)
 
 %.o:%.cpp $(HEADERS)
-	$(COMPILATOR) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 
@@ -26,6 +26,3 @@ clean:
 	@rm -f $(EXECUTABLE)
 	@cd ../lib/json/ && make clean > /dev/null && cd - > /dev/null
 	@echo "Cleaning..."
-
-t: all
-	./json

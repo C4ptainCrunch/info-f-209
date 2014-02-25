@@ -29,5 +29,9 @@ void test_empty_list(){
     ASSERT(dict_p->size() == 0, "Empty list");
 }
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list)}
+void test_assert_equal(){
+    ASSERT_EQUAL(5.0, 5, "egaux");
+}
+
+#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_assert_equal)}
 TEST();

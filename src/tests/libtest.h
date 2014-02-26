@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <exception>
+#include <stdexcept>
 
 #define GREEN  "\e[1;32m"
 #define RED    "\e[1;31m"
@@ -50,7 +51,7 @@ class AssertFail: public std::exception {
 #define ASSERT_NOT_NULL(value, message) assertNotNull(value, message, __LINE__, __FILE__, __func__)
 //#define ASSERT_NOT_NULL(value) ASSERT_NOT_NULL(value, "")
 
-#define ASSERT_EQUAL(value1, value2, message) assertEqual(value, message, __LINE__, __FILE__, __func__)
+#define ASSERT_EQUAL(value1, value2, message) assertEqual(value1, value2, message, __LINE__, __FILE__, __func__)
 //#define ASSERT_EQUAL(value1, value2) ASSERT_EQUAL(value1, value2, "")
 
 void assert(bool value, std::string message="", int line=-1, std::string file="", std::string func="");
@@ -68,7 +69,7 @@ void assertNotNull(T value, std::string message="", int line=-1, std::string fil
 }
 template<typename T, typename U>
 void assertEqual(T value1, U value2, std::string message="", int line=-1, std::string file="", std::string func=""){
-    assert(value1 != value2, message, line, file, func);
+    assert(value1 == value2, message, line, file, func);
 }
 
 #endif // LIBTEST_H

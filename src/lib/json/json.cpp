@@ -143,18 +143,21 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
     JsonDict * r = new JsonDict();
     i = skip_whitespace(message, 0);
 
+    if(message[i] == '}'){
+        i++;
+        return r;
+    }
 
     while(1){
-        if(message[i] == '}'){
-            i++;
-            return r;
-        }
         i += skip_whitespace(message, i);
         key = JsonString::fromString(cut_from(message, i + 1 ), i);
         i++;
+        i += skip_whitespace(message, i);
         i += skip_colon(message, i);
+        i += skip_whitespace(message, i);
         value = JsonValue::fromString(cut_from(message, i), i);
         i++;
+        i += skip_whitespace(message, i);
         r->add(*key, value);
         value = NULL;
         delete key;
@@ -162,6 +165,13 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
         i += skip_whitespace(message, i);
         if(message[i] == ','){
             i++;
+        }
+        else if(message[i] == '}'){
+            i++;
+            return r;
+        }
+        else{
+            throw PARSE_ERROR("expected } or , found '" + string(1, message[i]) + "'", i);
         }
     }
 }

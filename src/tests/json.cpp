@@ -66,8 +66,17 @@ void test_false_bool(){
 }
 
 void test_null(){
+    string message = "null";
+
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonNull* null_p = JNULL(value);
+    ASSERT_NOT_NULL(null_p, "Cast to null");
+
+    ASSERT_NULL(*null_p, "Is null");
 
 }
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool)}
+#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null)}
 TEST();

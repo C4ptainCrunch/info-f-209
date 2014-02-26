@@ -47,8 +47,11 @@ int test(vector<func_struct> testvec){
                 cout << RED << "FAIL";
         }
         cout << WHITE << "] ";
-        if(!pass)
+        if(!pass){
+            if(except)
+                cout << testvec[i].name << "(): ";
             cout << error;
+        }
         else
             cout << testvec[i].name << "()";
         cout << endl;

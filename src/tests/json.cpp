@@ -39,8 +39,35 @@ void test_empty_string(){
     ASSERT_NOT_NULL(string_p, "String not null");
 
     ASSERT_EQUAL((string) *string_p, "", "Empty string");
+}
+
+void test_true_bool(){
+    string message = "true";
+
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonBool * bool_p = JBOOL(value);
+    ASSERT_NOT_NULL(bool_p, "Cast");
+
+    ASSERT(*bool_p, "Must be true");
+}
+
+void test_false_bool(){
+    string message = "false";
+
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonBool * bool_p = JBOOL(value);
+    ASSERT_NOT_NULL(bool_p, "Cast");
+
+    ASSERT_FALSE(*bool_p, "Must be false");
+}
+
+void test_null(){
 
 }
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string)}
+#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool)}
 TEST();

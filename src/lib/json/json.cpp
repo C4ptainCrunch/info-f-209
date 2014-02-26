@@ -202,6 +202,10 @@ JsonList * JsonList::fromString(std::string message){
 JsonList * JsonList::fromString(std::string message, int &i){
     JsonList * r = new JsonList();
     i = 0;
+    i += skip_whitespace(message, i);
+    int bak = i;
+    if(message[i] == ']')
+        return r;
     while(1){
         JsonValue * value = NULL;
         i += skip_whitespace(message, i);

@@ -18,15 +18,15 @@ void test_empty_dict(){
 }
 
 void test_empty_list(){
-    string message = "[1]";
+    string message = "[]";
 
     JsonValue * value = JsonValue::fromString(message);
     ASSERT_NOT_NULL(value, "Parsing null");
 
-    JsonDict* dict_p = JDICT(value);
-    ASSERT_NOT_NULL(dict_p, "List null");
+    JsonList * list_p = JLIST(value);
+    ASSERT_NOT_NULL(list_p, "List null");
 
-    ASSERT(dict_p->size() == 0, "List not empty");
+    ASSERT(list_p->size() == 0, "List not empty");
 }
 
 void test_empty_string(){

@@ -4,15 +4,15 @@
 #include <cstdlib>
 #include <vector>
 
-#include "../lib/json/json.h"
+#include "../../common/lib/json/json.h"
 
 class UserHandler;
 void logIn(JsonValue * message, UserHandler * handler);
 void logIn(JsonValue * message, UserHandler * handler);
 //void signUp(JsonValue * message, UserHandler * handler);
-#include "../server/UserHandler.h"
-#include "../lib/file/files.h"
+#include "../UserHandler.h"
+#include "../../common/lib/file/files.h"
 #include "constants.h"
-#include "../models/Manager.h"
+#include "../../common/models/Manager.h"
 
 #endif // IDENTIFICATION_H

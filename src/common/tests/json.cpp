@@ -114,6 +114,18 @@ void test_list_of_multiple_elemets(){
     ASSERT_EQUAL(list_p->size(), 7, "List contain 7 elements");
 }
 
+void test_dict_of_multiple_elemets(){
+    string message ="{ \"boolTrue\":true, \"boolFalse\": false, \"null\" :null, \"string\" : \"plop\",\"int\":1}";
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val), T(test_list_of_multiple_elemets)}
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonDict* dict_p = JDICT(value);
+    ASSERT_NOT_NULL(dict_p, "Cast");
+
+    ASSERT_EQUAL(dict_p->size(), 5, "Dict contain 5 elements");
+}
+
+
+#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val), T(test_list_of_multiple_elemets), T(test_dict_of_multiple_elemets)}
 TEST();

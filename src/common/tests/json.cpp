@@ -102,5 +102,18 @@ void test_null(){
 
 }
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val)}
+void test_list_of_multiple_elemets(){
+    string message ="[ true, false, null, \"plop\",1,2 , 3]";
+
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonList* list_p = JLIST(value);
+    ASSERT_NOT_NULL(list_p, "Cast");
+
+    ASSERT_EQUAL(list_p->size(), 7, "List contain 7 elements");
+}
+
+
+#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val), T(test_list_of_multiple_elemets)}
 TEST();

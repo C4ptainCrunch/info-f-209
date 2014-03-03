@@ -31,7 +31,7 @@ build/objects/%.o: %.cpp $(dir $@) $(HEADERS)
 build:
 	@mkdir build/
 
-build/bin: build
+build/bin/: build
 	@mkdir build/bin > /dev/null || true
 
 build/objects/%/: build

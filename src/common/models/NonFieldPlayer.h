@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "../lib/json/json.h"
+#include "ModelUnserializationError.h"
 
 class NonFieldPlayer : public Player{
 

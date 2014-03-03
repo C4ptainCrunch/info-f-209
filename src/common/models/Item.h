@@ -2,6 +2,7 @@
 #define ITEM_H
 
 #include "../lib/json/json.h"
+#include "ModelUnserializationError.h"
 
 class Item{
 

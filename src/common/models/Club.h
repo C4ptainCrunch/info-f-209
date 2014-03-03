@@ -7,6 +7,7 @@
 #include "NonFieldPlayer.h"
 
 #include "../lib/json/json.h"
+#include "ModelUnserializationError.h"
 
 enum {INFIRMARY = 1, CANDYSHOP = 2, FANSHOP = 3, FIELD = 4, TRAININGFIELD = 5};
 

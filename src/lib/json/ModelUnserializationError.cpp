@@ -2,8 +2,5 @@
 
 using namespace std;
 
-ModelUnserializationError::ModelUnserializationError(){ }
 
-const char * ModelUnserializationError::what() const throw(){
-    return "Json serialization error.";
-}
+ModelUnserializationError::ModelUnserializationError(string message): runtime_error::runtime_error(message){}

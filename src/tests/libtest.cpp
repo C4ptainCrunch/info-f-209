@@ -3,26 +3,57 @@ using namespace std;
 
 int test(vector<func_struct> testvec){
     int fail = 0;
+    string error = "";
+    string reset = "";
+    cout << YELLOW << "Executing " << testvec.size() << " tests:" << WHITE << endl;
 
-    cout << "\e[93mExecuting " << testvec.size() << " tests..." << endl;
-    cout << "=====================\e[0m" << endl;
     for(int i=0; i < testvec.size(); i++){
-        cout << endl << "Testing : " << testvec[i].name << "()"<< endl;
-        cout << "--------------------------" << endl;
+        bool pass = false;
+        bool except = true;
+
+        cout << testvec[i].name + "() ...";
+
         try {
             testvec[i].ptr();
-            cout << "\e[1;32mOk\e[0m" << endl;
+            pass = true;
         }
-        catch (AssertFail e){
+        catch (AssertFail &e){
             fail++;
-            cout << "\e[1;31mAssert error: " << e.what() << "\e[0m" << endl;
+            except = false;
+            error = e.what();
         }
-        catch (exception e){
+        catch (runtime_error &e){
             fail++;
-            cout << "\e[1;31mwhat" << "\e[0m" << endl;
+            error = e.what();
         }
+        catch (exception &e){
+            fail++;
+            error = e.what();
+        }
+        reset = "";
+        int max = testvec[i].name.length() + 6;
+        for(int i=0; i < max; i++)
+            reset += DEL;
+        cout << reset << "[";
+        if(pass)
+            cout << GREEN << " Ok ";
+        else {
+            if(except)
+                cout << PURPLE << "THRO";
+            else
+                cout << RED << "FAIL";
+        }
+        cout << WHITE << "] ";
+        if(!pass){
+            if(except)
+                cout << "in " << testvec[i].name << "() ";
+            cout << error;
+        }
+        else
+            cout << testvec[i].name << "()";
+        cout << endl;
     }
-    cout << "\e[93m=================\e[0m" << endl;
+    cout << endl;
     if(fail == 0){
         cout << "Executed " << testvec.size() << " tests. \e[1;32mOK.\e[0m" << endl;
         return 0;
@@ -34,19 +65,31 @@ int test(vector<func_struct> testvec){
 
 }
 
-void assert(bool value, string message){
+void assert(bool value, string message, int line, string file, string func){
     if(!value){
-        throw AssertFail(message);
+        throw AssertFail(message, line, file, func);
     }
 }
 
-void assertFalse(bool value, string message){
-    if(value){
-        throw AssertFail(message);
-    }
+void assertFalse(bool value, string message, int line, string file, string func){
+    assert(!value, message, line, file, func);
 }
 
-AssertFail::AssertFail(std::string message) : message(message) {}
-std::string AssertFail::what() {
-    return message;
+AssertFail::AssertFail(string message, int line, string file, string func) : message(message), line(line), file(file), func(func) {}
+
+string AssertFail::what() {
+    string errorMessage;
+    if(func!="")
+        errorMessage+="in " + func + "() ";
+    if(file!="")
+        errorMessage+="in " + file;
+    if(line>0){
+        if(file=="")
+            errorMessage+=" At line " + to_string(line);
+        else
+            errorMessage+=":" + to_string(line);
+    }
+    if(message!="")
+        errorMessage+=": " + string(BOLD) + message;
+    return errorMessage;
 }

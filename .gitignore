@@ -1,14 +1,6 @@
-###################
-# Ignore binaries #
-###################
-/src/build/*
-/src/server/server
-/src/client/client
-/src/lib/json/json
-/src/models/MatchInstance
-/src/tests/json
-build.ok
-/src/server/data
+build/
+data/
+
 #####################
 # Ignore temp files #
 #####################

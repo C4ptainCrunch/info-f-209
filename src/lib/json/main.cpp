@@ -70,14 +70,14 @@ int dictmain(){
 
 int inmain(){
     listmain();
-    cout << "------------" << endl;
-    intmain();
-    cout << "------------" << endl;
-    boolmain();
-    cout << "------------" << endl;
-    nullmain();
-    cout << "------------" << endl;
-    dictmain();
+    // cout << "------------" << endl;
+    // intmain();
+    // cout << "------------" << endl;
+    // boolmain();
+    // cout << "------------" << endl;
+    // nullmain();
+    // cout << "------------" << endl;
+    // dictmain();
     return 0;
 }
 

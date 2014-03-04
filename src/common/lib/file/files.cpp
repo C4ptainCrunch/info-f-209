@@ -2,48 +2,57 @@
 
 using namespace std;
 
-int readFile(const char * fileName, std::string & content){
-    char buffer[BUFF_SIZE];
-    int read_len = 0;
-    int fd = open(fileName, O_RDONLY);
-    if (fd){
+int readFile(const string & filename, string & content){
+    int fd = open(filename.c_str(), O_RDONLY);
+    if (fd >= 0){
+        char buffer[BUFF_SIZE];
+        size_t read_len = 0;
         do {
-            read_len=read(fd, buffer, BUFF_SIZE);
+            read_len = read(fd, buffer, BUFF_SIZE);
             if(read_len == -1){
                 close(fd);
                 return -1;
             }
-            if(read_len>0){
-                content += buffer;
+            if(read_len > 0){
+                content += string(buffer, read_len);
             }
-        } while(read_len>0);
+        } while(read_len > 0);
+        close(fd);
+        return 0;
     }
-    close(fd);
-    return 0;
+    else {
+        return fd;
+    }
 }
 
-int writeFile(const char * fileName, std::string & content){
-    int write_len = 0;
-    int index=0;
-    int delta;
-    int fd = open(fileName, O_WRONLY, O_CREAT);
-    if (fd){
+int writeFile(const string & filename, string & content){
+    int fd = open(filename.c_str(), O_WRONLY, O_CREAT);
+
+    if (fd >= 0){
+        size_t index = 0;
+        size_t delta;
+
         do {
-            delta = content.size()-index;
-            if (delta > BUFF_SIZE){
-                delta=BUFF_SIZE;
-            }
-            const char *buffer = content.substr(index, delta).c_str();
+            size_t write_len = 0;
+
+            delta = content.size() - index;
+            if (delta > BUFF_SIZE)
+                delta = BUFF_SIZE;
+
+            const char * buffer = content.substr(index, delta).c_str();
             write_len = write(fd, buffer, content.size());
             if(write_len == -1){
                 close(fd);
-                perror("Echec écriture : ");
                 return -1;
             }
-            if(write_len>0){
+            if(write_len > 0){
                 index += write_len;
             }
-        } while(delta >= BUFF_SIZE);
+        } while(delta > 0);
+
+        return 0;
     }
-    return 0;
+    else {
+        return fd;
+    }
 }

@@ -29,7 +29,10 @@ $(BUILD_DIR)/libsocket.a:
 $(BUILD_DIR)/bin/:
 	mkdir -p $@
 
-.PHONY: clean
+doc:
+	make -C doc
+
+.PHONY: clean doc
 
 clean:
 	rm -rf build/

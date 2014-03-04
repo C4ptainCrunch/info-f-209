@@ -1,5 +1,8 @@
 include src/options.mk
 # include src/latex.mk
+rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
+
+CODE=$(call rwildcard, src/, *.cpp *.h)
 
 EXECUTABLES=server
 
@@ -36,3 +39,10 @@ doc:
 
 clean:
 	rm -rf build/
+
+normalize:
+	uncrustify --replace -c src/normalize.cfg $(CODE)
+
+normalize-clean:
+	find . -name "*.unc-backup.md5\~" -exec rm {} \;
+	find . -name "*.unc-backup\~" -exec rm {} \;

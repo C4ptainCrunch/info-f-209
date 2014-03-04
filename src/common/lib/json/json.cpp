@@ -18,17 +18,17 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
         switch(message[i]){
             case '{':
                 s = cut_from(message, i + 1 );
-                i = bak;
+                i = bak + 1;
                 return JsonDict::fromString(s, i);
                 break;
             case '[':
                 s = cut_from(message, i + 1 );
-                i = bak;
+                i = bak + 1;
                 return JsonList::fromString(s, i);
                 break;
             case '"':
                 s = cut_from(message, i + 1 );
-                i = bak;
+                i = bak + 1;
                 return JsonString::fromString(s, i);
                 break;
             case 't':
@@ -156,7 +156,6 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
         i += skip_colon(message, i);
         i += skip_whitespace(message, i);
         value = JsonValue::fromString(cut_from(message, i), i);
-        i++;
         i += skip_whitespace(message, i);
         r->add(*key, value);
         value = NULL;
@@ -221,8 +220,6 @@ JsonList * JsonList::fromString(std::string message, int &i){
         i += skip_whitespace(message, i);
         int bak = i;
         value = JsonValue::fromString(cut_from(message, i), i);
-        i += bak;
-        i++;
         r->add(value);
         value = NULL;
         i += skip_whitespace(message, i);
@@ -302,7 +299,7 @@ JsonInt * JsonInt::fromString(std::string message, int &i){
         }
     }
     r->setValue(message.substr(0, i));
-    i += bak - 1;
+    i += bak ;
     return r;
 }
 

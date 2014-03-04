@@ -3,6 +3,7 @@
 
 #include "Club.h"
 #include "../lib/json/json.h"
+#include "ModelUnserializationError.h"
 #include <string>
 
 class Manager{

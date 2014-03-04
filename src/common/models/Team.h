@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "NonFieldPlayer.h"
 #include "../lib/json/json.h"
+#include "ModelUnserializationError.h"
 
 class Team{
 

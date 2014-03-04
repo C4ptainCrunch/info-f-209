@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include "../lib/json/json.h"
+#include "ModelUnserializationError.h"
 
 class Installation{
 

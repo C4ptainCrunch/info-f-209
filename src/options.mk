@@ -28,3 +28,6 @@ ifeq ($(S), 1)
 		CFLAGS+=-Wstrict-null-sentinel -Wnoexcept -Wzero-as-null-pointer-constant
 	endif
 endif
+
+ROOT=$(shell git rev-parse --show-toplevel)
+BUILD_DIR=$(ROOT)/build

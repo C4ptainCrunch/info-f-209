@@ -7,10 +7,10 @@
 #include <map>
 #include <iostream>
 
-#include "../lib/socket/Socket.h"
-#include "../models/Manager.h"
+#include "../common/lib/socket/Socket.h"
+#include "../common/models/Manager.h"
 #include "helpers.h"
-#include "../views/views.h"
+#include "views/views.h"
 
 class UserHandler;
 

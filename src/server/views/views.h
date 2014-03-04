@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../server/UserHandler.h"
+#include "../UserHandler.h"
 #include "identification.h"
 
 void plop(JsonValue * message, UserHandler * handler);

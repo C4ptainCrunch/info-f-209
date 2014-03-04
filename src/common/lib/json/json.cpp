@@ -4,12 +4,12 @@ using namespace std;
 
 // Value
 
-JsonValue * JsonValue::fromString(std::string message){
+JsonValue * JsonValue::fromString(string message){
     int i = 0;
     return JsonValue::fromString(message, i);
 }
 
-JsonValue * JsonValue::fromString(std::string message, int &i){
+JsonValue * JsonValue::fromString(string message, int &i){
     int bak = i;
     i = 0;
     string s;
@@ -61,48 +61,50 @@ JsonValue * JsonValue::fromString(std::string message, int &i){
     throw PARSE_ERROR("no value found", i);
 }
 
-/*std::string JsonValue::toString(JsonValue * json){
+/*string JsonValue::toString(JsonValue * json){
     return json->toString();
 }*/
 
 // String
 
-string replaces(string str, string find, string replace){
-    if (str.length() < find.length())
-        return str;
-    size_t pos = str.find(find);
-    if(pos == string::npos)
-        return str;
-    return str.replace(pos,find.length(),replace);
+
+void replace_all(string& str, const string& find, const string& replacement) {
+    if(find.empty())
+        return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(find, start_pos)) != std::string::npos) {
+        str.replace(start_pos, find.length(), replacement);
+        start_pos += replacement.length();
+    }
 }
 
-string replaces(string str, string find, char replace){
-    return replaces(str, find, string(1, replace));
+void replace_all(string& str, const string& find, const char& replacement){
+    return replace_all(str, find, string(1, replacement));
 }
 
 JsonString::JsonString(string val){
-    val = replaces(val, "\\\\", '\\');
-    val = replaces(val, "\\\"", '"');
-    val = replaces(val, "\\t", '\t');
-    val = replaces(val, "\\n", '\n');
-    val = replaces(val, "\\r", '\r');
-    val = replaces(val, "\\b", '\b');
-    val = replaces(val, "\\f", '\f');
+    replace_all(val, "\\\\", '\\');
+    replace_all(val, "\\\"", '"');
+    replace_all(val, "\\t", '\t');
+    replace_all(val, "\\n", '\n');
+    replace_all(val, "\\r", '\r');
+    replace_all(val, "\\b", '\b');
+    replace_all(val, "\\f", '\f');
     // TODO : replace \u four-hex-digits
     value = val;
 }
 
-JsonString::operator std::string() const{
+JsonString::operator string() const{
     return value;
 }
 
 
-JsonString * JsonString::fromString(std::string message){
+JsonString * JsonString::fromString(string message){
     int i = 0;
     return JsonString::fromString(message, i);
 }
 
-JsonString * JsonString::fromString(std::string message, int &i){
+JsonString * JsonString::fromString(string message, int &i){
     int bak = i;
     i = 0;
     while(i < message.length()){
@@ -122,19 +124,19 @@ JsonString * JsonString::fromString(std::string message, int &i){
     throw PARSE_ERROR("No \" ending string", i);
 }
 
-std::string JsonString::toString(){
-    std::string infos = "\"" + this->value + "\"";
+string JsonString::toString(){
+    string infos = "\"" + this->value + "\"";
     return infos;
 }
 
 // Dict
 
-JsonDict * JsonDict::fromString(std::string message){
+JsonDict * JsonDict::fromString(string message){
     int i = 0;
     return JsonDict::fromString(message, i);
 }
 
-JsonDict * JsonDict::fromString(std::string message, int &i){
+JsonDict * JsonDict::fromString(string message, int &i){
     JsonString * key = NULL;
     JsonValue * value = NULL;
     bool colon = false;
@@ -175,10 +177,10 @@ JsonDict * JsonDict::fromString(std::string message, int &i){
     }
 }
 
-std::string JsonDict::toString(){
-    std::string infos = "{";
-    for (std::map<std::string, JsonValue *>::iterator index = this->dict.begin() ; index != this->dict.end() ; index++ ){
-        infos += "\"" + ((std::string) index->first) + "\"" + " : ";
+string JsonDict::toString(){
+    string infos = "{";
+    for (map<string, JsonValue *>::iterator index = this->dict.begin() ; index != this->dict.end() ; ++index ){
+        infos += "\"" + ((string) index->first) + "\"" + " : ";
         infos += index->second->toString();
         infos += ", ";
     }
@@ -194,7 +196,7 @@ size_t JsonDict::size(){
     return dict.size();
 }
 
-JsonValue * JsonDict::operator[](const std::string &str){
+JsonValue * JsonDict::operator[](const string &str){
     // TODO : Should make a copy ?
     return this->dict[str];
 }
@@ -203,12 +205,12 @@ JsonValue * JsonDict::operator[](const std::string &str){
 
 // List
 
-JsonList * JsonList::fromString(std::string message){
+JsonList * JsonList::fromString(string message){
     int i = 0;
     return JsonList::fromString(message, i);
 }
 
-JsonList * JsonList::fromString(std::string message, int &i){
+JsonList * JsonList::fromString(string message, int &i){
     JsonList * r = new JsonList();
     i = 0;
     i += skip_whitespace(message, i);
@@ -237,8 +239,8 @@ JsonList * JsonList::fromString(std::string message, int &i){
     }
 }
 
-std::string JsonList::toString(){
-    std::string infos = "[";
+string JsonList::toString(){
+    string infos = "[";
     int index = 0;
     while (index < this->content.size()){
         infos += this->content[index]->toString();
@@ -269,12 +271,12 @@ JsonInt::JsonInt(int val){
     value = val;
 }
 
-JsonInt * JsonInt::fromString(std::string message){
+JsonInt * JsonInt::fromString(string message){
     int i = 0;
     return JsonInt::fromString(message, i);
 }
 
-JsonInt * JsonInt::fromString(std::string message, int &i){
+JsonInt * JsonInt::fromString(string message, int &i){
     int bak = i;
     JsonInt * r = new JsonInt();
     bool end = false;
@@ -320,8 +322,8 @@ void JsonInt::setValue(string val){
     value = stoi(val);
 }
 
-JsonInt::operator std::string() const{
-    return std::to_string(value);
+JsonInt::operator string() const{
+    return to_string(value);
 }
 
 JsonInt::operator int() const{
@@ -330,7 +332,7 @@ JsonInt::operator int() const{
 
 // Null
 
-JsonNull * JsonNull::fromString(std::string message){
+JsonNull * JsonNull::fromString(string message){
     int i = 0;
     return JsonNull::fromString(message, i);
 }
@@ -339,7 +341,7 @@ string JsonNull::toString(){
     return "null";
 }
 
-JsonNull * JsonNull::fromString(std::string message, int &i){
+JsonNull * JsonNull::fromString(string message, int &i){
     if(message.substr(0,4) != "null"){
         throw PARSE_ERROR("expected null", i);
     }
@@ -357,12 +359,12 @@ JsonBool::JsonBool(bool val){
     value = val;
 }
 
-JsonBool * JsonBool::fromString(std::string message){
+JsonBool * JsonBool::fromString(string message){
     int i = 0;
     return JsonBool::fromString(message, i);
 }
 
-JsonBool * JsonBool::fromString(std::string message, int &i){
+JsonBool * JsonBool::fromString(string message, int &i){
     JsonBool * r = NULL;
     if(message[0] == 't'){
         if(message.substr(0,4) != "true"){

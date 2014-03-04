@@ -74,7 +74,7 @@ void test_string(){
     JsonString* string_p = JSTRING(value);
     ASSERT_NOT_NULL(string_p, "String not null");
 
-    ASSERT_EQUAL((string) *string_p, "Hello \"world\" !", "Hello \"world\" !");
+    ASSERT_EQUAL((string) *string_p, "Hello \"world\" !", "Wrong uquoting");
 }
 
 void test_true_bool(){

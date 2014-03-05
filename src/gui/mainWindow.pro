@@ -14,12 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    loginScreenWidget.cpp
+    menuwindow.cpp \
+    loginscreenwidget.cpp
 
 HEADERS  += mainwindow.h \
-    loginScreenWidget.h
+    menuwindow.h \
+    loginscreenwidget.h
 
 FORMS    +=
 
 OTHER_FILES += \
-    stylesheet.qss
+    ../build-mainWindow-Desktop-Release/stylesheets/stylesheet.qss

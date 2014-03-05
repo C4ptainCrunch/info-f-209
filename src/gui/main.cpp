@@ -5,7 +5,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <iostream>
-#include <loginScreenWidget.h>
+#include <menuwindow.h>
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     MainWindow* window = new MainWindow();
+    MenuWindow* menuWindow = new MenuWindow();
+    //menuWindow->show();
 
     window->show();
 

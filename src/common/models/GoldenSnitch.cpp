@@ -1,8 +1,8 @@
 #include "GoldenSnitch.h"
 
-GoldenSnitch::GoldenSnitch():Ball(0) { 
+GoldenSnitch::GoldenSnitch():Ball(42) { 
     srand (time(NULL));
-} //TODO set speed
+}
 
 GoldenSnitch::~GoldenSnitch(){ }
 

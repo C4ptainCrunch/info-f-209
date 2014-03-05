@@ -4,7 +4,7 @@ Quaffle::Quaffle(): Ball(0) { }
 
 Quaffle::~Quaffle() { }
 
-Way Quaffle::thrown(const char direction, const int power, const Case grid[WIDTH][LENGHT])
+Way Quaffle::thrown(const char direction, const int power, const Case grid[WIDTH][LENGTH])
 {
     Way way;
     for(int i =0; i<power; i++){

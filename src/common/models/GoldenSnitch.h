@@ -14,7 +14,7 @@ class GoldenSnitch : public Ball {
     public:
         GoldenSnitch();
         ~GoldenSnitch();
-        Position autoMove(const Case grid[WIDTH][LENGHT]);
+        Position autoMove(const Case grid[WIDTH][LENGTH]);
 
 };
 

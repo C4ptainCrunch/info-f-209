@@ -10,7 +10,7 @@ class Quaffle : public Ball{
     public:
         Quaffle();
         ~Quaffle();
-        Way thrown(const char direction, const int power, const Case grid[WIDTH][LENGHT]);
+        Way thrown(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
 
 };
 

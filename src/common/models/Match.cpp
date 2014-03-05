@@ -51,12 +51,12 @@ void Match::generateGrid(){
     generateFieldPlayers();
 
     for (int i = 0; i<WIDTH;++i){
-        for (int j=0; j<LENGHT;++j){
+        for (int j=0; j<LENGTH;++j){
             grid_[i][j].type = USABLE;
             // equation d'une ellipse non centrée : (x-h)²/a² + (x-k)²/b²
             //avec x = i, h et k sont les coord du centre, a et b les demi longueurs de l'ellipse
             double result = pow(i-WIDTH/2.0, 2)/pow(diameterFactor*WIDTH, 2);
-            result+= pow(j-LENGHT/2.0, 2)/pow(diameterFactor*LENGHT, 2);
+            result+= pow(j-LENGTH/2.0, 2)/pow(diameterFactor*LENGTH, 2);
             if (i%2 !=0){
                 result -= delta;
             }
@@ -65,74 +65,74 @@ void Match::generateGrid(){
             }
     //----------------------------GOALS---------------------------------
             if( i == WIDTH/2){
-                if (j == LENGHT/15 + LENGHT/20 or j == LENGHT*14/15 - LENGHT/20){
+                if (j == LENGTH/15 + LENGTH/20 or j == LENGTH*14/15 - LENGTH/20){
                     grid_[i][j].type = GOAL;//goal central
                 }
-                else if(j == 2*LENGHT/15){
+                else if(j == 2*LENGTH/15){
                     grid_[i][j].player = &teams_[0][0];
                 }
-                else if (j == 13 * LENGHT/15){
+                else if (j == 13 * LENGTH/15){
                     grid_[i][j].player = &teams_[1][0];
                 }
-                else if(j == 7*LENGHT/30){
+                else if(j == 7*LENGTH/30){
                     grid_[i][j].player = &teams_[0][6];
                 }
-                else if(j == 23*LENGHT/30){
+                else if(j == 23*LENGTH/30){
                     grid_[i][j].player = &teams_[1][6];
                 }
-                else if(j == 5*LENGHT/30){
+                else if(j == 5*LENGTH/30){
                     grid_[i][j].player = &teams_[0][1];
 
                 }
-                else if(j == 25*LENGHT/30){
+                else if(j == 25*LENGTH/30){
                     grid_[i][j].player = &teams_[1][1];
                 }
             }
             else if (i == WIDTH/2 - WIDTH/15){
-                if(j == 2 * LENGHT/15 or j == 13 * LENGHT/15){
+                if(j == 2 * LENGTH/15 or j == 13 * LENGTH/15){
                     grid_[i][j].type = GOAL;//goals latéraux
                 }
-                else if (j == 5*LENGHT/30){
+                else if (j == 5*LENGTH/30){
                     grid_[i][j].player = &teams_[0][2];
 
                 }
-                else if(j == 25*LENGHT/30){
+                else if(j == 25*LENGTH/30){
                     grid_[i][j].player = &teams_[1][2];
                 }
             }
             else if (i== WIDTH/2 + WIDTH/15){
-                if(j == 2 * LENGHT/15 or j == 13 * LENGHT/15){
+                if(j == 2 * LENGTH/15 or j == 13 * LENGTH/15){
                     grid_[i][j].type = GOAL;//goals latéraux
                 }
-                else if (j == 5*LENGHT/30){
+                else if (j == 5*LENGTH/30){
                     grid_[i][j].player = &teams_[0][3];
 
                 }
-                else if(j == 25*LENGHT/30){
+                else if(j == 25*LENGTH/30){
                     grid_[i][j].player = &teams_[1][3];
                 }
             }
             else if (i == WIDTH/2 - WIDTH/30){
-                if(j == 6*LENGHT/30){
+                if(j == 6*LENGTH/30){
                     grid_[i][j].player = &teams_[0][4];
 
                 }
-                else if(j == 24*LENGHT/30){
+                else if(j == 24*LENGTH/30){
                     grid_[i][j].player = &teams_[1][4];
                 }
 
             }
             else if (i == WIDTH/2 + WIDTH/30){
-                if(j == 6*LENGHT/30){
+                if(j == 6*LENGTH/30){
                     grid_[i][j].player = &teams_[0][5];
 
                 }
-                else if(j == 24*LENGHT/30){
+                else if(j == 24*LENGTH/30){
                     grid_[i][j].player = &teams_[1][5];
                 }
             }
     //--------------------------BALLS----------------------------------
-            if (j==LENGHT/2){
+            if (j==LENGTH/2){
                 if(i == WIDTH/5){
                     grid_[i][j].ball = &budgers_[0];
                     budgers_[0].setPosition(i,j);
@@ -233,7 +233,7 @@ string Match::print(){ //FOR TEST PURPOSES
         if (i%2 != 0){
             c+=" ";
         }
-        for (int j=0; j<LENGHT;++j){
+        for (int j=0; j<LENGTH;++j){
             if (grid_[i][j].type == USABLE){
                 if (grid_[i][j].player != 0){
                     if (! grid_[i][j].player->isInGuestTeam()){

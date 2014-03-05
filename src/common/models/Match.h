@@ -40,7 +40,7 @@ class Match{
         FieldPlayer teams_[2][7];
         int score_[2];
         Club *clubs_[2];
-        Case grid_[WIDTH][LENGHT];
+        Case grid_[WIDTH][LENGTH];
         GoldenSnitch goldenSnitch_;
         Quaffle quaffle_;
         Budger budgers_[2];

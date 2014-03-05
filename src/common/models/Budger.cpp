@@ -6,7 +6,7 @@ Budger::Budger():Ball(0) {
 
 Budger::~Budger(){ }
 
-Position Budger::autoMove(const Case grid[WIDTH][LENGHT])
+Position Budger::autoMove(const Case grid[WIDTH][LENGTH])
 {
     Position nextPosition;
     int next = rand() % 6;
@@ -29,7 +29,7 @@ Position Budger::autoMove(const Case grid[WIDTH][LENGHT])
 
 }
 
-Way Budger::isHit(const char direction, const int power, const Case grid[WIDTH][LENGHT])
+Way Budger::isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH])
 {
     Way way;
     for(int i =0; i<power; i++){

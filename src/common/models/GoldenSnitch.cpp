@@ -6,7 +6,7 @@ GoldenSnitch::GoldenSnitch():Ball(0) {
 
 GoldenSnitch::~GoldenSnitch(){ }
 
-Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGHT])
+Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGTH])
 {
     Position nextPosition;
     int next = rand() % 6;

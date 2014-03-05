@@ -11,7 +11,7 @@ enum { UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN_LEFT, LEFT, UP_LEFT};
 
 typedef std::vector<Position> Way;
 
-enum { WIDTH = 30, LENGHT = 64};
+enum { WIDTH = 30, LENGTH = 64};
 
 struct Case{
     int type;
@@ -19,6 +19,6 @@ struct Case{
     Ball* ball = 0;
 };
 
-Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGHT]);
+Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]);
 
 #endif // CASE_H

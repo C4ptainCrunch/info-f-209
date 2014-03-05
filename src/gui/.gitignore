@@ -26,3 +26,4 @@ Makefile*
 *.autosave
 
 *.app
+mainWindow

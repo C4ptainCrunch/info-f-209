@@ -142,7 +142,7 @@ void test_list_of_multiple_elemets(){
     JsonList* list_p = JLIST(value);
     ASSERT_NOT_NULL(list_p, "Cast");
 
-    ASSERT_EQUAL(list_p->size(), 7, "List contain 7 elements");
+    ASSERT_EQUAL(list_p->size(), 7, "List should contain 7 elements, got : " + to_string(list_p->size()));
 }
 
 void test_dict_of_multiple_elemets(){

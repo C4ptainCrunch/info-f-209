@@ -7,7 +7,7 @@ CODE=$(call rwildcard, src/, *.cpp *.h)
 EXECUTABLES=server
 
 SERVER_DEPS=$(BUILD_DIR)/server.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/models.a $(BUILD_DIR)/libexception.a
-RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a
+RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libtest.a
 
 all: $(addprefix $(BUILD_DIR)/bin/,$(EXECUTABLES))
 
@@ -37,6 +37,9 @@ $(BUILD_DIR)/libsocket.a:
 
 $(BUILD_DIR)/libexception.a:
 	make -C src/common/lib/exception
+
+$(BUILD_DIR)/libtest.a:
+	make -C src/common/lib/test
 
 $(BUILD_DIR)/bin/:
 	mkdir -p $@

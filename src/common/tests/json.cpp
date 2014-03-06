@@ -65,6 +65,18 @@ void test_empty_string(){
     ASSERT_EQUAL((string) *string_p, "", "Empty string");
 }
 
+void test_string(){
+    string message ="\"Hello \\\"world\\\" !\"";
+
+    JsonValue * value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonString* string_p = JSTRING(value);
+    ASSERT_NOT_NULL(string_p, "String not null");
+
+    ASSERT_EQUAL((string) *string_p, "Hello \"world\" !", "Wrong uquoting");
+}
+
 void test_true_bool(){
     string message = "true";
 
@@ -108,5 +120,42 @@ void test_functionnal_user(){
     ASSERT_NOT_NULL(value, "Parsing not null");
 }
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val), T(test_functionnal_user)}
+void test_int(){
+    string message = "42";
+
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonInt* int_p = JINT(value);
+    ASSERT_NOT_NULL(int_p, "Cast not null");
+
+    ASSERT_EQUAL((int)*int_p, 42, "Value is 42");
+}
+
+void test_list_of_multiple_elemets(){
+    string message ="[ true, false, null, \"plop\",1,2 , 3]";
+
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonList* list_p = JLIST(value);
+    ASSERT_NOT_NULL(list_p, "Cast");
+
+    ASSERT_EQUAL(list_p->size(), 7, "List contain 7 elements");
+}
+
+void test_dict_of_multiple_elemets(){
+    string message ="{ \"boolTrue\":true, \"boolFalse\": false, \"null\" :null, \"string\" : \"plop\",\"int\":1}";
+
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+
+    JsonDict* dict_p = JDICT(value);
+    ASSERT_NOT_NULL(dict_p, "Cast");
+
+    ASSERT_EQUAL(dict_p->size(), 5, "Dict contain 5 elements");
+}
+
+#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val), T(test_string), T(test_int), T(test_list_of_multiple_elemets), T(test_dict_of_multiple_elemets), T(test_functionnal_user)}
+
 TEST();

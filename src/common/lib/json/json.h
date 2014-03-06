@@ -1,11 +1,12 @@
 #ifndef JSON_H
 #define JSON_H
 
-#include <string>
 #include <vector>
 #include <iostream>
 #include <typeinfo>
 #include <map>
+#include <algorithm>
+#include <string>
 
 #include "utils.h"
 #include "ParseError.h"

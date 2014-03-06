@@ -67,3 +67,16 @@ void signup(JsonValue * message, UserHandler * handler){
     answer.add("success", &b);
     handler->writeToClient("login", &answer);
 }
+
+
+void userlist(JsonValue * message, UserHandler * handler){
+    JsonList answer;
+    std::vector<UserHandler *> handlers_vector = *(handler->getHandlers_listPtr());
+
+    for(int i = 0; i < handlers_vector.size(); i++){
+        Manager * manager = handlers_vector[i]->getManager();
+        if(manager != NULL)
+            answer.add(new JsonString(manager->getName()));
+    }
+    handler->writeToClient("userlist", &answer);
+}

@@ -3,7 +3,9 @@
 using namespace std;
 
 const map<string,view_ptr> UserHandler::viewmap = {
-    {"login", login}
+    {"login", login},
+    {"register", signup},
+    {"userlist", userlist}
 };
 
 

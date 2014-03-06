@@ -20,10 +20,10 @@ void test_empty_dict(){
 void test_dict_one_val(){
     string fix[] = {
         "{\"a\":\"b\"}",
-        "{\"a\" :\"b\"}",
-        "{\"a\": \"b\"}",
-        "{\"a\" : \"b\"}",
-        "{  \"a\"  :  \"b\"  }"
+        "{\"c\" :\"d\"}",
+        "{\"e\": \"f\"}",
+        "{\"g\" : \"h\"}",
+        "{  \"i\"  :  \"j\"  }"
     };
 
     for(int i=0; i < 5; i++){
@@ -62,7 +62,7 @@ void test_empty_string(){
     JsonString* string_p = JSTRING(value);
     ASSERT_NOT_NULL(string_p, "String not null");
 
-    ASSERT_EQUAL((string) *string_p, "", "Empty string");
+    ASSERT_EQUAL((string) *string_p, "", "String should be empty, got : '" + (string) *string_p + "'");
 }
 
 void test_string(){

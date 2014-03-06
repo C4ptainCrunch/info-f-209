@@ -9,37 +9,25 @@ JsonValue * JsonValue::fromString(string message){
     return JsonValue::fromString(message, i);
 }
 
+
 JsonValue * JsonValue::fromString(string message, int &i){
-    int bak = i;
-    i = 0;
-    string s;
     while(i < message.length()){
         i += skip_whitespace(message, i);
         switch(message[i]){
             case '{':
-                s = cut_from(message, i + 1 );
-                i = bak + 1;
-                return JsonDict::fromString(s, i);
+                return JsonDict::fromString(message, i);
                 break;
             case '[':
-                s = cut_from(message, i + 1 );
-                i = bak + 1;
-                return JsonList::fromString(s, i);
+                return JsonList::fromString(message, i);
                 break;
             case '"':
-                s = cut_from(message, i + 1 );
-                i = bak + 1;
-                return JsonString::fromString(s, i);
+                return JsonString::fromString(message, i);
                 break;
             case 't':
             case 'f':
-                s = cut_from(message, i);
-                i = bak;
-                return JsonBool::fromString(s, i);
+                return JsonBool::fromString(message, i);
             case 'n':
-                s = cut_from(message, i);
-                i = bak;
-                return JsonNull::fromString(s, i);
+                return JsonNull::fromString(message, i);
             case '0':
             case '1':
             case '2':
@@ -50,9 +38,7 @@ JsonValue * JsonValue::fromString(string message, int &i){
             case '7':
             case '8':
             case '9':
-                s = cut_from(message, i);
-                i = bak;
-                return JsonInt::fromString(s, i);
+                return JsonInt::fromString(message, i);
                 break;
             default:
                 throw PARSE_ERROR("unknwown value", i);
@@ -61,26 +47,8 @@ JsonValue * JsonValue::fromString(string message, int &i){
     throw PARSE_ERROR("no value found", i);
 }
 
-/*string JsonValue::toString(JsonValue * json){
-    return json->toString();
-}*/
 
 // String
-
-
-void replace_all(string& str, const string& find, const string& replacement) {
-    if(find.empty())
-        return;
-    size_t start_pos = 0;
-    while((start_pos = str.find(find, start_pos)) != std::string::npos) {
-        str.replace(start_pos, find.length(), replacement);
-        start_pos += replacement.length();
-    }
-}
-
-void replace_all(string& str, const string& find, const char& replacement){
-    return replace_all(str, find, string(1, replacement));
-}
 
 JsonString::JsonString(string val){
     replace_all(val, "\\\\", '\\');
@@ -99,25 +67,18 @@ JsonString::operator string() const{
 }
 
 
-JsonString * JsonString::fromString(string message){
-    int i = 0;
-    return JsonString::fromString(message, i);
-}
-
 JsonString * JsonString::fromString(string message, int &i){
-    int bak = i;
-    i = 0;
+    i++;
+    int start = i;
     while(i < message.length()){
         switch(message[i]){
         case '\\':
             i++;
             break;
         case '"':
+            string s = message.substr(start, i - 1);
             i++;
-            string s = message.substr(0, i - 1);
-            i += bak;
             return new JsonString(s);
-            break;
         }
     i++;
     }
@@ -131,19 +92,10 @@ string JsonString::toString(){
 
 // Dict
 
-JsonDict * JsonDict::fromString(string message){
-    int i = 0;
-    return JsonDict::fromString(message, i);
-}
-
 JsonDict * JsonDict::fromString(string message, int &i){
-    JsonString * key = NULL;
-    JsonValue * value = NULL;
-    bool colon = false;
-    bool coma = false;
-
+    i++;
     JsonDict * r = new JsonDict();
-    i = skip_whitespace(message, 0);
+    i += skip_whitespace(message, i);
 
     if(message[i] == '}'){
         i++;
@@ -151,18 +103,19 @@ JsonDict * JsonDict::fromString(string message, int &i){
     }
 
     while(1){
+        JsonString * key = NULL;
+        JsonValue * value = NULL;
+
         i += skip_whitespace(message, i);
-        key = JsonString::fromString(cut_from(message, i + 1 ), i);
-        i++;
+        key = JsonString::fromString(message, i);
+        string key_str = *key;
+        delete key;
         i += skip_whitespace(message, i);
         i += skip_colon(message, i);
         i += skip_whitespace(message, i);
-        value = JsonValue::fromString(cut_from(message, i), i);
-        i += skip_whitespace(message, i);
-        r->add(*key, value);
-        value = NULL;
-        delete key;
-        key = NULL;
+        value = JsonValue::fromString(message, i);
+        r->add(key_str, value);
+
         i += skip_whitespace(message, i);
         if(message[i] == ','){
             i++;
@@ -205,26 +158,24 @@ JsonValue * JsonDict::operator[](const string &str){
 
 // List
 
-JsonList * JsonList::fromString(string message){
-    int i = 0;
-    return JsonList::fromString(message, i);
-}
-
 JsonList * JsonList::fromString(string message, int &i){
+    i++;
     JsonList * r = new JsonList();
-    i = 0;
     i += skip_whitespace(message, i);
-    int bak = i;
+
     if(message[i] == ']')
+        i++;
         return r;
+
     while(1){
         JsonValue * value = NULL;
+
         i += skip_whitespace(message, i);
-        int bak = i;
-        value = JsonValue::fromString(cut_from(message, i), i);
+        value = JsonValue::fromString(message, i);
         r->add(value);
-        value = NULL;
+
         i += skip_whitespace(message, i);
+
         switch(message[i]){
             case ',':
                 i++;
@@ -271,16 +222,10 @@ JsonInt::JsonInt(int val){
     value = val;
 }
 
-JsonInt * JsonInt::fromString(string message){
-    int i = 0;
-    return JsonInt::fromString(message, i);
-}
-
 JsonInt * JsonInt::fromString(string message, int &i){
-    int bak = i;
     JsonInt * r = new JsonInt();
     bool end = false;
-    i = 0;
+    int start = i;
     while(!end){
         switch(message[i]){
             case '0':
@@ -300,8 +245,7 @@ JsonInt * JsonInt::fromString(string message, int &i){
                 break;
         }
     }
-    r->setValue(message.substr(0, i));
-    i += bak ;
+    r->setValue(message.substr(start, i));
     return r;
 }
 
@@ -332,11 +276,6 @@ JsonInt::operator int() const{
 
 // Null
 
-JsonNull * JsonNull::fromString(string message){
-    int i = 0;
-    return JsonNull::fromString(message, i);
-}
-
 string JsonNull::toString(){
     return "null";
 }
@@ -357,11 +296,6 @@ bool JsonNull::operator ==(const int * i){
 
 JsonBool::JsonBool(bool val){
     value = val;
-}
-
-JsonBool * JsonBool::fromString(string message){
-    int i = 0;
-    return JsonBool::fromString(message, i);
 }
 
 JsonBool * JsonBool::fromString(string message, int &i){

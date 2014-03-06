@@ -1,5 +1,8 @@
 include src/options.mk
 # include src/latex.mk
+rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
+
+CODE=$(call rwildcard, src/, *.cpp *.h)
 
 EXECUTABLES=server
 
@@ -38,10 +41,20 @@ $(BUILD_DIR)/libexception.a:
 $(BUILD_DIR)/bin/:
 	mkdir -p $@
 
-doc:
+doc: $(BUILD_DIR)/doc
 	make -C doc
 
 .PHONY: clean doc $(RMAKES)
 
+$(BUILD_DIR)/doc:
+	mkdir -p $@
+
 clean:
 	rm -rf build/
+
+normalize:
+	uncrustify --replace -c src/normalize.cfg $(CODE)
+
+normalize-clean:
+	find . -name "*.unc-backup.md5\~" -exec rm {} \;
+	find . -name "*.unc-backup\~" -exec rm {} \;

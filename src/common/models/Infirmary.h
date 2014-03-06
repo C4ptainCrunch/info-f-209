@@ -5,12 +5,12 @@
 #include "Player.h"
 
 
-class Infirmary : public Installation{
+class Infirmary: public Installation {
 
-    public:
-        Infirmary(int level = 1);
-        ~Infirmary();
-        void heal(Player& player);
+public:
+    Infirmary(int level=1);
+    ~Infirmary();
+    void heal(Player & player);
 };
 
 #endif // INFIRMARY_H

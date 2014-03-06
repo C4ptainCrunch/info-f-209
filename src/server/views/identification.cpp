@@ -2,10 +2,10 @@
 
 using namespace std;
 
-void login(JsonValue * message, UserHandler * handler){
+void login(JsonValue * message, UserHandler * handler) {
     JsonDict * dictMessage = JDICT(message);
 
-    if (dictMessage == NULL){
+    if (dictMessage == NULL) {
         throw BadRequest("Malformatted request. Need a JSON dict");
     }
 
@@ -16,18 +16,18 @@ void login(JsonValue * message, UserHandler * handler){
     cout << filename << endl;
     string content;
 
-    if (readFile(filename, content) != 0){
-       return sendFail(handler, 301, "login", "User does not exist");
+    if (readFile(filename, content) != 0) {
+        return sendFail(handler, 301, "login", "User does not exist");
     }
 
     Manager * manager = NULL;
     try {
         manager = new Manager(JsonValue::fromString(content));
     }
-    catch (const ParseError & pe){
+    catch (const ParseError & pe) {
         return sendFail(handler, 501, "login", "Error while retrieving user");
     }
-    if (manager->checkPassword(password)){
+    if (manager->checkPassword(password)) {
         JsonDict answer;
 
         JsonBool b = JsonBool(true);
@@ -42,10 +42,10 @@ void login(JsonValue * message, UserHandler * handler){
     }
 }
 
-void signup(JsonValue * message, UserHandler * handler){
+void signup(JsonValue * message, UserHandler * handler) {
     JsonDict * dictMessage = JDICT(message);
 
-    if (dictMessage == NULL){
+    if (dictMessage == NULL) {
         throw BadRequest("Malformatted request. Need a JSON dict");
     }
 
@@ -55,8 +55,9 @@ void signup(JsonValue * message, UserHandler * handler){
 
     string filename = handler->path("users", username);
 
-    if(fileExists(filename))
+    if (fileExists(filename)) {
         return sendFail(handler, 402, "login", "User already exists");
+    }
 
     Manager * manager = new Manager(name, username, password);
     handler->setManager(manager);
@@ -69,14 +70,15 @@ void signup(JsonValue * message, UserHandler * handler){
 }
 
 
-void userlist(JsonValue * message, UserHandler * handler){
+void userlist(JsonValue * message, UserHandler * handler) {
     JsonList answer;
     std::vector<UserHandler *> handlers_vector = *(handler->getHandlers_listPtr());
 
-    for(int i = 0; i < handlers_vector.size(); i++){
+    for (int i = 0; i < handlers_vector.size(); i++) {
         Manager * manager = handlers_vector[i]->getManager();
-        if(manager != NULL)
+        if (manager != NULL) {
             answer.add(new JsonString(manager->getName()));
+        }
     }
     handler->writeToClient("userlist", &answer);
 }

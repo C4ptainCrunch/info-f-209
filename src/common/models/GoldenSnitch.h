@@ -10,13 +10,13 @@
 
 #include "Ball.h"
 
-class GoldenSnitch : public Ball {
+class GoldenSnitch: public Ball {
 
-    public:
-        GoldenSnitch();
-        ~GoldenSnitch();
-        Position autoMove(const Case grid[WIDTH][LENGTH]);
-        std::string getName();
+public:
+    GoldenSnitch();
+    ~GoldenSnitch();
+    Position autoMove(const Case grid[WIDTH][LENGTH]);
+    std::string getName();
 };
 
 #endif // GOLDENSNITCH_H

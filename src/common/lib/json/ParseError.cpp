@@ -2,4 +2,4 @@
 
 using namespace std;
 
-ParseError::ParseError(string message): runtime_error::runtime_error(message){}
+ParseError::ParseError(string message): runtime_error::runtime_error(message) {}

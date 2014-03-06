@@ -5,8 +5,7 @@
 using namespace std;
 
 
-Client::Client(char * host, int port)
-{
+Client::Client(char * host, int port) {
     connectToServer(host, port);
 
     nextStateID_ = STATE_NULL;
@@ -16,15 +15,15 @@ Client::Client(char * host, int port)
 
 Client::~Client() {}
 
-void Client::run()
-{
+void Client::run() {
     string buffer;
     currentStateID_ = STATE_INTRO;
     currentState_ = new IntroState(this);
     recv(buffer);
-    if (buffer == "1")
-        cout<<"Challenged !"<<endl;
-    while(currentStateID_ != STATE_EXIT){
+    if (buffer == "1") {
+        cout << "Challenged !" << endl;
+    }
+    while (currentStateID_ != STATE_EXIT) {
         currentState_->handleEvents();
         currentState_->logic();
         currentState_->display();
@@ -33,8 +32,7 @@ void Client::run()
     }
 }
 
-void Client::connectToServer(char * host, const int port)
-{
+void Client::connectToServer(char * host, const int port) {
     int sockFd;
     struct timeval tv;
 
@@ -45,23 +43,23 @@ void Client::connectToServer(char * host, const int port)
         exit(EXIT_FAILURE);
     }
 
-    setsockopt(sockFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+    setsockopt(sockFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(struct timeval));
 
     socket_.setFd(sockFd);
 
     struct sockaddr_in theirAddr;
-    struct hostent *he;
+    struct hostent * he;
 
     socklen_t addrSize = sizeof(struct sockaddr);
 
-    if ((he=gethostbyname(host)) == NULL) {
+    if ((he = gethostbyname(host)) == NULL) {
         cout << "Could not resolve hostname" << endl;
         exit(EXIT_FAILURE);
     }
 
     theirAddr.sin_family = AF_INET;
     theirAddr.sin_port = htons(port);
-    theirAddr.sin_addr = *((struct in_addr*)he->h_addr);
+    theirAddr.sin_addr = *((struct in_addr *)he->h_addr);
     memset(&(theirAddr.sin_zero), '\0', 8);
 
     if (connect(socket_.getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
@@ -71,42 +69,38 @@ void Client::connectToServer(char * host, const int port)
     connected_ = true;
 }
 
-void Client::disconnect()
-{
+void Client::disconnect() {
     if (connected_) {
         connected_ = false;
         close(socket_.getFd());
     }
 }
 
-int Client::answerToChallenge(bool accept)
-{
+int Client::answerToChallenge(bool accept) {
     return true;
 }
 
-int Client::send(const string & message)
-{
+int Client::send(const string & message) {
     return socket_.write(message);
 }
 
-int Client::recv(string & message)
-{
+int Client::recv(string & message) {
     return socket_.read(message);
 }
 
-void Client::setNextState(const int newStateID)
-{
-    if (nextStateID_ != STATE_EXIT)
+void Client::setNextState(const int newStateID) {
+    if (nextStateID_ != STATE_EXIT) {
         nextStateID_ = newStateID;
+    }
 }
 
-void Client::changeState()
-{
-    if (nextStateID_ != STATE_NULL){
-        if (nextStateID_ != STATE_EXIT)
+void Client::changeState() {
+    if (nextStateID_ != STATE_NULL) {
+        if (nextStateID_ != STATE_EXIT) {
             delete currentState_;
+        }
 
-        switch(nextStateID_){
+        switch (nextStateID_) {
             case STATE_INTRO:
                 currentState_ = new IntroState(this);
                 break;

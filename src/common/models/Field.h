@@ -3,11 +3,11 @@
 
 #include "Installation.h"
 
-class Field : public Installation{
+class Field: public Installation {
 
-    public:
-        Field(int level);
-        ~Field();
+public:
+    Field(int level);
+    ~Field();
 };
 
 #endif // FIELD_H

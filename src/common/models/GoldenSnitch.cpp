@@ -2,27 +2,26 @@
 
 using namespace std;
 
-GoldenSnitch::GoldenSnitch():Ball(42) { 
-    srand (time(NULL));
+GoldenSnitch::GoldenSnitch(): Ball(42) {
+    srand(time(NULL));
 }
 
-GoldenSnitch::~GoldenSnitch(){ }
+GoldenSnitch::~GoldenSnitch() {}
 
-Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGTH])
-{
+Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGTH]) {
     Position nextPosition;
     int next = rand() % 6;
     nextPosition = nextCase(position_, next, grid);
-    if(grid[nextPosition.x][nextPosition.y].type == USABLE){
-        if(grid[nextPosition.x][nextPosition.y].ball == 0){
+    if (grid[nextPosition.x][nextPosition.y].type == USABLE) {
+        if (grid[nextPosition.x][nextPosition.y].ball == 0) {
             return nextPosition;
         }
     }
-    for(int i=0; i<5; i++){
-        next = (next + 1)%6;
+    for (int i = 0; i < 5; i++) {
+        next = (next + 1) % 6;
         nextPosition = nextCase(position_, next, grid);
-        if(grid[nextPosition.x][nextPosition.y].type == USABLE){
-            if(grid[nextPosition.x][nextPosition.y].ball == 0){
+        if (grid[nextPosition.x][nextPosition.y].type == USABLE) {
+            if (grid[nextPosition.x][nextPosition.y].ball == 0) {
                 return nextPosition;
             }
         }
@@ -30,6 +29,6 @@ Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGTH])
     return position_;
 }
 
-string GoldenSnitch::getName(){
+string GoldenSnitch::getName() {
     return "G";
 }

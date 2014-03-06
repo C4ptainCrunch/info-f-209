@@ -14,8 +14,8 @@ using namespace std;
 
 //Ordre des installations : Infirmerie, Shop
 /*
-int main()
-{
+   int main()
+   {
     char quit = 'a';
     while (quit != 'q'){
         cout<< "Bienvenue "<<endl;
@@ -46,5 +46,5 @@ int main()
 
 
     return 0;
-}
-*/
+   }
+ */

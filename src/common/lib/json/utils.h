@@ -10,7 +10,7 @@ int skip_colon(std::string message, int start);
 std::string cut_from(std::string message, int from);
 
 
-void replace_all(std::string& str, const std::string& find, const std::string& replacement);
-void replace_all(std::string& str, const std::string& find, const char& replacement);
+void replace_all(std::string & str, const std::string & find, const std::string & replacement);
+void replace_all(std::string & str, const std::string & find, const char & replacement);
 
 #endif

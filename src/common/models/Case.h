@@ -13,10 +13,10 @@ typedef std::vector<Position> Way;
 
 enum { WIDTH = 30, LENGTH = 64};
 
-struct Case{
+struct Case {
     int type;
-    FieldPlayer* player = 0;
-    Ball* ball = 0;
+    FieldPlayer * player = 0;
+    Ball * ball = 0;
 };
 
 Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]);

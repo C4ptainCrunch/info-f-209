@@ -2,65 +2,62 @@
 
 using namespace std;
 
-void logIn(JsonValue * message, UserHandler * handler){
+void login(JsonValue * message, UserHandler * handler){
     JsonDict * dictMessage = JDICT(message);
-    JsonDict answer;
 
-    if (dictMessage != NULL){
-        // TODO : Check if cast is not null
-        string userName = *JSTRING((*dictMessage)["username"]);
-        string password = *JSTRING((*dictMessage)["password"]);
-
-        string rawFileName = "data/users/"+userName+".json";
-        string content;
-
-        const char * fileName = rawFileName.c_str();
-        if (readFile(fileName, content) == 0){
-            Manager * user = new Manager(JsonValue::fromString(content));
-            if (user->checkPassword(password)){
-                JsonBool b = JsonBool(true);
-                answer.add("success", &b);
-                handler->writeToClient("login", &answer);
-                handler->setManager(user);
-            }
-            else {
-                delete user;
-                user = NULL;
-            }
-            delete user;
-        }
-        else {
-            JsonBool b = JsonBool(false);
-            answer.add("success", &b);
-            handler->writeToClient("login", &answer);
-        }
+    if (dictMessage == NULL){
+        throw BadRequest("Malformatted request. Need a JSON dict");
     }
-    else {
-        JsonBool b = JsonBool(false);
+
+    string username = getString(dictMessage, "username");
+    string password = getString(dictMessage, "password");
+
+    string filename = "data/users/"+username+".json";
+    string content;
+
+    if (readFile(filename, content) != 0){
+       return sendFail(handler, 301, "login", "User does not exist");
+    }
+
+    Manager * manager = new Manager(JsonValue::fromString(content));
+    if (manager->checkPassword(password)){
+        JsonDict answer;
+
+        JsonBool b = JsonBool(true);
         answer.add("success", &b);
         handler->writeToClient("login", &answer);
+        handler->setManager(manager);
+    }
+    else {
+        delete manager;
+        manager = NULL;
+        return sendFail(handler, 401, "login", "Wrong password");
     }
 }
 
-// void signUp(JsonValue * message, UserHandler * handler){
-//     JsonDict * dictMessage = JDICT(message);
-//     JsonInt * code = new JsonInt();
-//     code->setValue(FAIL);
-//     if (dictMessage != NULL){
-//         string userName = (*dictMessage)[USERNAME]->toString();
-//         string rawFileName = "data/users/"+userName+".json";
-//         string content;
-//         const char * fileName = rawFileName.c_str();
-//         if(readFile(fileName, content) == -1 and errno == EIO){
-//             Manager * user = new Manager((*dictMessage)[NAME]->toString(), userName, (*dictMessage)[PASSWORD]->toString());
-//             handler->setManager(user);
-//             JsonDict * userInfos = JsonDict::fromString("{\"essai\" : \"lol\"}");//user->toJson();
-//             string infos = userInfos->toString();
-//             if (writeFile(fileName, infos) == 0){
-//                 code->setValue(SUCCESS);
-//             }
-//         }
-//     }
-//     handler->writeToClient(code->toString());
-//     delete code;
-// }
+void signup(JsonValue * message, UserHandler * handler){
+    JsonDict * dictMessage = JDICT(message);
+
+    if (dictMessage == NULL){
+        throw BadRequest("Malformatted request. Need a JSON dict");
+    }
+
+    string username = getString(dictMessage, "username");
+    string password = getString(dictMessage, "password");
+    string name = getString(dictMessage, "name");
+
+
+    // // TODO : add defence against path injection
+    // string filename = "data/users/"+username+".json";
+    // // TODO : check if user arleady exists
+    // string content;
+
+    Manager * manager = new Manager(name, username, password);
+    handler->setManager(manager);
+
+    JsonDict answer;
+
+    JsonBool b = JsonBool(true);
+    answer.add("success", &b);
+    handler->writeToClient("login", &answer);
+}

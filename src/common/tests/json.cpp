@@ -102,5 +102,11 @@ void test_null(){
 
 }
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val)}
+void test_functionnal_user(){
+    string message = "{\n    \"username\": \"nikita\",\n    \"name\": \"Nikita Marchant\",\n    \"hash\": \"plop\",\n    \"club\": {\n        \"money\": 10,\n        \"installations\" : [\n            {\"level\": 1},\n            {\"mevel\": 2},\n            {\"wevel\": 3},\n            {\"xevel\": 4},\n            {\"cevel\": 5}\n        ],\n        \"team\": {\n            \"players\" : [null, null, null, null, null, null, null]\n        },\n        \"players\": []\n    }\n}\n\n";
+    JsonValue* value = JsonValue::fromString(message);
+    ASSERT_NOT_NULL(value, "Parsing not null");
+}
+
+#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val), T(test_functionnal_user)}
 TEST();

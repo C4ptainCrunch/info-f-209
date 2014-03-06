@@ -58,5 +58,6 @@ int writeFile(const string & filename, string & content){
 }
 
 bool fileExists(const std::string & filename){
-    return access( filename.c_str(), F_OK ) != -1;
+    access( filename.c_str(), F_OK );
+    return errno != ENOENT;
 }

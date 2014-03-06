@@ -55,7 +55,7 @@ void signup(JsonValue * message, UserHandler * handler){
 
     string filename = handler->path("users", username);
 
-    if(!fileExists(filename))
+    if(fileExists(filename))
         return sendFail(handler, 402, "login", "User already exists");
 
     Manager * manager = new Manager(name, username, password);

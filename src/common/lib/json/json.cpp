@@ -264,6 +264,7 @@ void JsonInt::setValue(int val){
 }
 
 void JsonInt::setValue(string val){
+    // TODO : catch exception
     value = stoi(val);
 }
 

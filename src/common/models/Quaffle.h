@@ -1,9 +1,12 @@
 #ifndef QUAFFLE_H
 #define QUAFFLE_H
 
-#include "Ball.h"
+#include <string>
+
 #include "Position.h"
 #include "Case.h"
+
+#include "Ball.h"
 
 class Quaffle : public Ball{
 
@@ -11,7 +14,7 @@ class Quaffle : public Ball{
         Quaffle();
         ~Quaffle();
         Way thrown(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
-
+        std::string getName();
 };
 
 #endif // QUAFFLE_H

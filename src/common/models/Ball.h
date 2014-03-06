@@ -1,6 +1,8 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include <string>
+
 #include "Position.h"
 
 class Ball {
@@ -11,6 +13,7 @@ class Ball {
         Position getPosition();
         void setPosition(int x, int y);
         void setPosition(Position position);
+        std::string virtual getName() = 0;
 
     protected:
         int speed_;

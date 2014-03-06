@@ -1,5 +1,7 @@
 #include "GoldenSnitch.h"
 
+using namespace std;
+
 GoldenSnitch::GoldenSnitch():Ball(42) { 
     srand (time(NULL));
 }
@@ -26,4 +28,8 @@ Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGTH])
         }
     }
     return position_;
+}
+
+string GoldenSnitch::getName(){
+    return "G";
 }

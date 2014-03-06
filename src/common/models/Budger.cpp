@@ -43,3 +43,6 @@ void Budger::hitPlayer(Player& player, int power)
 // TODO
 }
 
+std::string Budger::getName(){
+    return "B";
+}

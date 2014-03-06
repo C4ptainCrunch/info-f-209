@@ -1,5 +1,7 @@
 #include "Quaffle.h"
 
+using namespace std;
+
 Quaffle::Quaffle(): Ball(0) { }
 
 Quaffle::~Quaffle() { }
@@ -11,4 +13,8 @@ Way Quaffle::thrown(const char direction, const int power, const Case grid[WIDTH
         way.push_back(nextCase(position_, direction, grid));
     }
     return way;
+}
+
+string Quaffle::getName(){
+    return "Q";
 }

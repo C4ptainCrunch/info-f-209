@@ -11,7 +11,7 @@
 
 #include "helpers.h"
 
-int bindTo(char* port);
+int bindTo(int port_i);
 
 
 #endif // BIND_H

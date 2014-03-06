@@ -7,8 +7,9 @@ const map<string,view_ptr> UserHandler::viewmap = {
 };
 
 
-UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list) {
+UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
     handlers_list_ = handlers_list;
+    datapath_ = datapath;
     s_ = NULL;
     manager_ = NULL;
 }
@@ -91,4 +92,9 @@ void UserHandler::handleMessage(string message){
         answer.add("code", &i);
         this->writeToClient("error", &answer);
     }
+}
+
+string UserHandler::path(string dir, string var) {
+    // TODO : add defence against path injection
+    return datapath_ + dir + "/" + var + ".json";
 }

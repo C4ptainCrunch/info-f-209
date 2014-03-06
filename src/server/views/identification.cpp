@@ -12,7 +12,8 @@ void login(JsonValue * message, UserHandler * handler){
     string username = getString(dictMessage, "username");
     string password = getString(dictMessage, "password");
 
-    string filename = "data/users/"+username+".json";
+    string filename = handler->path("users", username);
+    cout << filename << endl;
     string content;
 
     if (readFile(filename, content) != 0){
@@ -52,9 +53,7 @@ void signup(JsonValue * message, UserHandler * handler){
     string password = getString(dictMessage, "password");
     string name = getString(dictMessage, "name");
 
-
-    // TODO : add defence against path injection
-    string filename = "data/users/"+username+".json";
+    string filename = handler->path("users", username);
 
     if(!fileExists(filename))
         return sendFail(handler, 402, "login", "User already exists");

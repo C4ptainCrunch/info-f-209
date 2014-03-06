@@ -10,4 +10,6 @@
 int readFile(const std::string & filename, std::string & content);
 int writeFile(const std::string & filename, std::string & content);
 
+bool fileExists(const std::string & filename);
+
 #endif // FILES_H

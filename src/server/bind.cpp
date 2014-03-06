@@ -1,6 +1,12 @@
 #include "bind.h"
 
-int bindTo(char* port) {
+int bindTo(int port_i) {
+    if (port_i > 65535 || port_i < 1){
+        printf("Bad port\n");
+        exit(0);
+    }
+    char port[5] = {};
+    sprintf(port, "%d", port_i);
     addrinfo hints;
     addrinfo * servinfo;
     addrinfo * p;

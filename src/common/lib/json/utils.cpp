@@ -39,3 +39,17 @@ int skip_colon(string message, int start){
 string cut_from(string message, int from){
     return message.substr(from, message.length());
 }
+
+void replace_all(string& str, const string& find, const string& replacement) {
+    if(find.empty())
+        return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(find, start_pos)) != std::string::npos) {
+        str.replace(start_pos, find.length(), replacement);
+        start_pos += replacement.length();
+    }
+}
+
+void replace_all(string& str, const string& find, const char& replacement){
+    return replace_all(str, find, string(1, replacement));
+}

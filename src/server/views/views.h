@@ -6,7 +6,6 @@
 #include "../UserHandler.h"
 #include "identification.h"
 
-void plop(JsonValue * message, UserHandler * handler);
 
 //VIEWS_H
 #endif

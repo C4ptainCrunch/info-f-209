@@ -3,6 +3,7 @@
 using namespace std;
 
 Match::Match(Club& hostClub, Club& guestClub){
+    srand (time(NULL));
     clubs_[host] = &hostClub;
     clubs_[guest] = &guestClub;
 
@@ -57,7 +58,7 @@ void Match::generateGrid(){
             if (result>1){//Si on est à l'extérieur de l'ellipse
                 grid_[i][j].type = VOID;
             }
-    //----------------------------GOALS---------------------------------
+            //----------------------------GOALS---------------------------------
             if( i == WIDTH/2){
                 if (j == LENGTH/15 + LENGTH/20 or j == LENGTH*14/15 - LENGTH/20){
                     grid_[i][j].type = GOAL;//goal central
@@ -125,7 +126,7 @@ void Match::generateGrid(){
                     grid_[i][j].player = &teams_[1][5];
                 }
             }
-    //--------------------------BALLS----------------------------------
+            //--------------------------BALLS----------------------------------
             if (j==LENGTH/2){
                 if(i == WIDTH/5){
                     grid_[i][j].ball = &budgers_[0];
@@ -172,23 +173,39 @@ void Match::newTurn(Way playerWays[14]){
                 moved = true;
             }
         }
-        //BUDGERS
-        Position nextBallPos;
-        for (int i = 0; i<2; ++i){
-            nextBallPos = budgers_[i].autoMove(grid_);
-            grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
-            grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
-        }
-        //GOLDENSNITCH
-        nextBallPos = goldenSnitch_.autoMove(grid_);
-        grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
-        grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
-
-        //QUAFFLE
-
+        moveBalls();
         ++turnNumber;
     }
 }
+
+void Match::moveBalls(){
+    //BUDGERS
+    Position nextBallPos;
+    for (int i = 0; i<2; ++i){
+        nextBallPos = budgers_[i].autoMove(grid_);
+        grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
+        grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
+        if(grid_[nextBallPos.x][nextBallPos.y].player != 0){
+            // TODO set direction and power for isHit and hitPlayer.
+            if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == BEATER){
+                int direction = rand() % 6;
+                budgers_[i].isHit(direction, grid_[nextBallPos.x][nextBallPos.y].player->getForce(), grid_);
+            }
+            else{
+                budgers_[i].hitPlayer(grid_[nextBallPos.x][nextBallPos.y].player, 0);
+            }
+        }
+    }
+
+    //GOLDENSNITCH
+    nextBallPos = goldenSnitch_.autoMove(grid_);
+    grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
+    grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
+
+    //QUAFFLE
+
+}
+
 void Match::resolveConflict(Position nextPosition[14], Way playerWays[14], int indexOne, int turnNumber){
     FieldPlayer* playerOne = grid_[playerWays[indexOne][turnNumber + 1].x][playerWays[indexOne][turnNumber + 1].y].player;//joueur sur la case causant la merde
     FieldPlayer* playerTwo = grid_[playerWays[indexOne][turnNumber].x][playerWays[indexOne][turnNumber].y].player;//joueur qui vient foutre la merde

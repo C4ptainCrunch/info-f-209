@@ -18,7 +18,7 @@ class Budger : public Ball{
         ~Budger();
         Position autoMove(const Case grid[WIDTH][LENGTH]);
         Way isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
-        void hitPlayer(Player& player, int power);
+        void hitPlayer(Player* player, int power);
         std::string getName();
 };
 

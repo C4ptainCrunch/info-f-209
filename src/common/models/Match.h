@@ -5,6 +5,7 @@
 #include <string>
 #include <typeinfo>
 #include <iostream>
+#include <time.h>
 
 #include "Club.h"
 #include "FieldPlayer.h"

@@ -38,10 +38,10 @@ Way Budger::isHit(const char direction, const int power, const Case grid[WIDTH][
     return way;
 }
 
-void Budger::hitPlayer(Player& player, int power)
+void Budger::hitPlayer(Player* player, int power)
 {
     if (1 == rand() % 20)
-        player.setWoundState(true);
+        player->setWoundState(true);
 }
 
 std::string Budger::getName(){

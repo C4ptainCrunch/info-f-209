@@ -1,15 +1,10 @@
-#include <iostream>
-
 #include "Match.h"
 
 using namespace std;
 
-
-
 Match::Match(Club& hostClub, Club& guestClub){
     clubs_[host] = &hostClub;
     clubs_[guest] = &guestClub;
-
 
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();
@@ -18,7 +13,6 @@ Match::Match(Club& hostClub, Club& guestClub){
     generateGrid();
 
 }
-
 
 Match::~Match(){}
 

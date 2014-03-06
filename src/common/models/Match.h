@@ -4,6 +4,7 @@
 #include <cmath>
 #include <string>
 #include <typeinfo>
+#include <iostream>
 
 #include "Club.h"
 #include "FieldPlayer.h"

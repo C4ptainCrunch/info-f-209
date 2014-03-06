@@ -1,5 +1,4 @@
 #include "NonFieldPlayer.h"
-#include <iostream>
 
 using namespace std;
 

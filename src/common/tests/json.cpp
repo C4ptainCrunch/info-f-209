@@ -157,6 +157,18 @@ void test_dict_of_multiple_elemets(){
     ASSERT_EQUAL(dict_p->size(), 5, "Dict contain 5 elements");
 }
 
-#define TESTVEC {T(test_empty_dict), T(test_empty_list), T(test_empty_string), T(test_true_bool), T(test_false_bool), T(test_null), T(test_dict_one_val), T(test_string), T(test_int), T(test_list_of_multiple_elemets), T(test_dict_of_multiple_elemets), T(test_functionnal_user)}
+#define TESTVEC {T(test_empty_dict),\
+    T(test_empty_list),\
+    T(test_empty_string),\
+    T(test_true_bool),\
+    T(test_false_bool),\
+    T(test_null),\
+    T(test_dict_one_val),\
+    T(test_string),\
+    T(test_int),\
+    T(test_list_of_multiple_elemets),\
+    T(test_dict_of_multiple_elemets),\
+    T(test_functionnal_user)\
+}
 
 TEST();

@@ -163,9 +163,10 @@ JsonList * JsonList::fromString(string message, int &i){
     JsonList * r = new JsonList();
     i += skip_whitespace(message, i);
 
-    if(message[i] == ']')
+    if(message[i] == ']') {
         i++;
         return r;
+    }
 
     while(1){
         JsonValue * value = NULL;

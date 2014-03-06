@@ -28,8 +28,9 @@ Socket::Socket(const int fd) {
 }
 
 Socket::~Socket() {
-    if(fd_ != 0)
+    if (fd_ != 0) {
         close(fd_);
+    }
 }
 
 
@@ -42,10 +43,11 @@ int Socket::write(string message) {
     len = strlen(msg);
     bytes_sent = 0;
 
-    while(len > 0){
+    while (len > 0) {
         bytes_sent = send(fd_, msg, len, 0);
-        if(bytes_sent == -1)
+        if (bytes_sent == -1) {
             return -1; // socket error, could not write
+        }
         len -= bytes_sent;
         msg = msg + bytes_sent;
     }
@@ -74,13 +76,15 @@ int Socket::read(string & message) {
     message = popFromBuffer();
     isComplete = (message.find(MESSAGE_END) != string::npos);
 
-    while(!isComplete){
+    while (!isComplete) {
         len = recv(fd_, buffer, BUFF_SIZE - 1, 0);
-        if (len == -1)
+        if (len == -1) {
             return -1; // socket error, could not read
-        else if(len == 0)
+        }
+        else if (len == 0) {
             return 0; // connection closed from other side
 
+        }
         buffer[len] = '\0'; // prevent buffer overflow
         message += popFromBuffer();
         isComplete = (message.find(MESSAGE_END) != string::npos);

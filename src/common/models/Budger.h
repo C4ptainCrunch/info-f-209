@@ -10,14 +10,14 @@
 #include <stdlib.h>
 #include <time.h>
 
-class Budger : public Ball{
+class Budger: public Ball {
 
-    public:
-        Budger();
-        ~Budger();
-        Position autoMove(const Case grid[WIDTH][LENGHT]);
-        Way isHit(const char direction, const int power, const Case grid[WIDTH][LENGHT]);
-        void hitPlayer(Player& player, int power);
+public:
+    Budger();
+    ~Budger();
+    Position autoMove(const Case grid[WIDTH][LENGHT]);
+    Way isHit(const char direction, const int power, const Case grid[WIDTH][LENGHT]);
+    void hitPlayer(Player & player, int power);
 };
 
 #endif // BUDGER_H

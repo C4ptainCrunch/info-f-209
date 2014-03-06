@@ -8,8 +8,7 @@ using namespace std;
 
 
 //Utilitaire--------------------------------------------------------------------------
-vector<string> split(const string &text, char delim)
-{
+vector<string> split(const string & text, char delim) {
     stringstream ss(text);
     string item;
     vector<string> elems;
@@ -21,12 +20,10 @@ vector<string> split(const string &text, char delim)
     return elems;
 }
 
-int stringToInt(const string &text)
-{
+int stringToInt(const string & text) {
     return atoi(text.c_str());
 }
 
-bool isNumber(const string &text)
-{
-    return !text.empty() && std::find_if(text.begin(), text.end(), [](char c) {return !std::isdigit(c);}) == text.end();
+bool isNumber(const string & text) {
+    return !text.empty() && std::find_if(text.begin(), text.end(), [](char c) {return !std::isdigit(c); }) == text.end();
 }

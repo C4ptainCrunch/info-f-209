@@ -18,8 +18,7 @@
 #include "GameState.h"
 
 //Game States, le client est une machine à état dont les états possibles sont listés ci dessous.
-enum GameStates
-{
+enum GameStates {
     STATE_NULL,
     STATE_EXIT,
     STATE_INTRO,
@@ -33,7 +32,7 @@ enum GameStates
     STATE_INGAME
 };
 
-class Client{
+class Client {
 public:
     Client(char * host, int port);
     ~Client();

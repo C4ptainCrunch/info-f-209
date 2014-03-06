@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void sendFail(UserHandler * handler, int errorcode, string topic, string message){
+void sendFail(UserHandler * handler, int errorcode, string topic, string message) {
     JsonDict answer;
 
     JsonBool b = JsonBool(false);

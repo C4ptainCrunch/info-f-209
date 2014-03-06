@@ -5,12 +5,12 @@
 #include "Position.h"
 #include "Case.h"
 
-class Quaffle : public Ball{
+class Quaffle: public Ball {
 
-    public:
-        Quaffle();
-        ~Quaffle();
-        Way thrown(const char direction, const int power, const Case grid[WIDTH][LENGHT]);
+public:
+    Quaffle();
+    ~Quaffle();
+    Way thrown(const char direction, const int power, const Case grid[WIDTH][LENGHT]);
 
 };
 

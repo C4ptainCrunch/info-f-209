@@ -3,13 +3,15 @@
 using namespace std;
 
 const map<string,view_ptr> UserHandler::viewmap = {
-    {"plop", plop},
-    {"login", logIn}
+    {"login", login},
+    {"register", signup},
+    {"userlist", userlist}
 };
 
 
-UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list) {
+UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
     handlers_list_ = handlers_list;
+    datapath_ = datapath;
     s_ = NULL;
     manager_ = NULL;
 }
@@ -66,5 +68,35 @@ void UserHandler::handleMessage(string message){
     string key;
 
     message = split_message(&key, message);
-    UserHandler::viewmap.at(key)(JsonValue::fromString(message), this);
+    try {
+        try {
+            UserHandler::viewmap.at(key)(JsonValue::fromString(message), this);
+        }
+        catch (const std::out_of_range & oor) {
+            throw BadRequest("Unknown topic : '" + key + "'");
+        }
+    }
+    catch (const BadRequest & br){
+        JsonDict answer;
+
+        JsonString s = JsonString(br.what());
+        JsonInt i = JsonInt(100);
+        answer.add("Bad request", &s);
+        answer.add("code", &i);
+        this->writeToClient("error", &answer);
+    }
+    catch (const ParseError & pe){
+        JsonDict answer;
+
+        JsonString s = JsonString(pe.what());
+        JsonInt i = JsonInt(101);
+        answer.add("Parse error", &s);
+        answer.add("code", &i);
+        this->writeToClient("error", &answer);
+    }
+}
+
+string UserHandler::path(string dir, string var) {
+    // TODO : add defence against path injection
+    return datapath_ + dir + "/" + var + ".json";
 }

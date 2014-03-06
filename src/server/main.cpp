@@ -1,15 +1,42 @@
+#include "../common/lib/json/json.h"
+#include "../common/lib/file/file.h"
 #include "server.h"
 
 int main(int argc, char *argv[])
 {
-    if(argc <= 1){
-        printf("Invalid parameters\nUsage : %s port\n", argv[0]);
+    string configfile;
+    if(argc == 1)
+        configfile = "../../server-config.json";
+    else if (argc == 3)
+        configfile = argv[2];
+    else {
+        printf("Unknown option\n");
         exit(0);
     }
-    if(atoi(argv[1]) <= 0 || atoi(argv[1]) > 65535){
-        printf("Invalid port\n");
+    if(!fileExists(configfile)){
+        printf("Missing configuration file\nSearched at : %s\n", configfile.c_str());
         exit(0);
     }
+
+    string config;
+    if(readFile(configfile, config) != 0){
+        printf("Error while reading configuration file");
+        exit(0);
+    }
+    JsonValue * val = JsonValue::fromString(config);
+    JsonDict * dict = JDICT(val);
+    if(dict == NULL){
+        printf("Error while parsing configuration file");
+        exit(0);
+    }
+    JsonInt * port_p = JINT((*dict)["port"]);
+    JsonString * data_p = JSTRING((*dict)["datapath"]);
+    if(port_p == NULL || data_p == NULL){
+        printf("Error while parsing configuration file");
+        exit(0);
+    }
+    int port = *port_p;
+    string datapath = *data_p;
 
     int sockfd; // socket to bind to
     int new_fd; // "accepted" socket
@@ -18,7 +45,7 @@ int main(int argc, char *argv[])
     char s[INET6_ADDRSTRLEN];
     std::vector<UserHandler *> * handlers_list = new std::vector<UserHandler *>();
 
-    sockfd = bindTo(argv[1]);
+    sockfd = bindTo(port);
 
     printf("Waiting for connections...\n");
 
@@ -33,7 +60,7 @@ int main(int argc, char *argv[])
         inet_ntop(remote_addr.ss_family, get_in_addr((struct sockaddr *)&remote_addr), s, sizeof s);
         printf("Got connection from %s\n", s);
 
-        UserHandler * current_handler = new UserHandler(handlers_list);
+        UserHandler * current_handler = new UserHandler(handlers_list, datapath);
         std::thread * current_thread = new std::thread(thread_loop, current_handler);
         // TODO should delete current_thread sometimes
         current_handler->start(new_fd, current_thread);

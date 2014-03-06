@@ -201,6 +201,13 @@ void Match::moveBalls(){
     nextBallPos = goldenSnitch_.autoMove(grid_);
     grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
     grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
+    if(grid_[nextBallPos.x][nextBallPos.y].player != 0){
+        if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == SEEKER){
+            endGame_ = true;
+            // TODO vérifier pour les 150
+            addPoint(grid_[nextBallPos.x][nextBallPos.y].player->isInGuestTeam(), 150);
+        }
+    }
 
     //QUAFFLE
 

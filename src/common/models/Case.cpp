@@ -1,6 +1,6 @@
 #include "Case.h"
 
-Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]) {
+Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGHT]) {
     Position nextPosition;
     nextPosition.x = position.x;
     nextPosition.y = position.y;

@@ -20,10 +20,10 @@ void test_empty_dict(){
 void test_dict_one_val(){
     string fix[] = {
         "{\"a\":\"b\"}",
-        "{\"c\" :\"d\"}",
-        "{\"e\": \"f\"}",
-        "{\"g\" : \"h\"}",
-        "{  \"i\"  :  \"j\"  }"
+        "{\"a\" :\"b\"}",
+        "{\"a\": \"b\"}",
+        "{\"a\" : \"b\"}",
+        "{  \"a\"  :  \"b\"  }"
     };
 
     for(int i=0; i < 5; i++){
@@ -37,6 +37,7 @@ void test_dict_one_val(){
         ASSERT_NOT_NULL(dict_p, "Dict null");
 
         ASSERT(dict_p->size() == 1, "Dict not null");
+        JsonValue* val = (*dict_p)["a"];
         ASSERT_EQUAL((string) *JSTRING((*dict_p)["a"]), "b", "d[a]!=b");
     }
 }

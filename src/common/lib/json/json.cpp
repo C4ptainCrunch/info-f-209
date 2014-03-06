@@ -76,7 +76,7 @@ JsonString * JsonString::fromString(string message, int &i){
             i++;
             break;
         case '"':
-            string s = message.substr(start, i - 1);
+            string s = message.substr(start, i - start);
             i++;
             return new JsonString(s);
         }

@@ -2,12 +2,11 @@
 
 using namespace std;
 
-const map<string,view_ptr> UserHandler::viewmap = {
+const map<string, view_ptr> UserHandler::viewmap = {
     {"login", login},
     {"register", signup},
     {"userlist", userlist}
 };
-
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
     handlers_list_ = handlers_list;
@@ -16,47 +15,49 @@ UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string data
     manager_ = NULL;
 }
 
-void UserHandler::start(const int fd, thread * handling_thread){
+void UserHandler::start(const int fd, thread * handling_thread) {
     handling_thread_ = handling_thread;
     s_ = new Socket(fd);
 }
 
 UserHandler::~UserHandler() {
     delete s_;
-    if(manager_ != NULL)
+    if (manager_ != NULL) {
         delete manager_;
+    }
 }
 
-bool UserHandler::isReady(){
+bool UserHandler::isReady() {
     return s_ != NULL;
 }
 
-std::vector<UserHandler *> * UserHandler::getHandlers_listPtr(){
+std::vector<UserHandler *> * UserHandler::getHandlers_listPtr() {
     return handlers_list_;
 }
 
-Manager * UserHandler::getManager(){
+Manager * UserHandler::getManager() {
     return manager_;
 }
 
-void UserHandler::setManager(Manager * manager){
-    if(manager_ == NULL)
+void UserHandler::setManager(Manager * manager) {
+    if (manager_ == NULL) {
         manager_ = manager;
+    }
 }
 
-int UserHandler::writeToClient(std::string key, JsonValue * json){
+int UserHandler::writeToClient(std::string key, JsonValue * json) {
     return s_->write(key + ":" + json->toString());
 }
 
-void UserHandler::disconnect(){
+void UserHandler::disconnect() {
     dead = true;
     s_->write("diconnect:true");
 }
 
 int UserHandler::loop() {
     string message;
-    while(1){
-        if((s_->read(message) <= 0) || (message == "quit")){
+    while (1) {
+        if ((s_->read(message) <= 0) || (message == "quit")) {
             disconnect();
             return 0;
         }
@@ -64,19 +65,19 @@ int UserHandler::loop() {
     }
 }
 
-void UserHandler::handleMessage(string message){
+void UserHandler::handleMessage(string message) {
     string key;
 
     message = split_message(&key, message);
     try {
         try {
-            UserHandler::viewmap.at(key)(JsonValue::fromString(message), this);
+            UserHandler::viewmap.at (key)(JsonValue::fromString(message), this);
         }
         catch (const std::out_of_range & oor) {
             throw BadRequest("Unknown topic : '" + key + "'");
         }
     }
-    catch (const BadRequest & br){
+    catch (const BadRequest & br) {
         JsonDict answer;
 
         JsonString s = JsonString(br.what());
@@ -85,7 +86,7 @@ void UserHandler::handleMessage(string message){
         answer.add("code", &i);
         this->writeToClient("error", &answer);
     }
-    catch (const ParseError & pe){
+    catch (const ParseError & pe) {
         JsonDict answer;
 
         JsonString s = JsonString(pe.what());

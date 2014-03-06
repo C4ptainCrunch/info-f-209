@@ -3,7 +3,7 @@
 
 using namespace std;
 
-NonFieldPlayer::NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level, int experience) : level_(level), experience_(experience), vocation_(vocation) {
+NonFieldPlayer::NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level, int experience): level_(level), experience_(experience), vocation_(vocation) {
     Player(speed, force, agility, reflexes, passPrecision, wounded, inventory);
 }
 
@@ -11,73 +11,84 @@ NonFieldPlayer::NonFieldPlayer(): level_(1), experience_(0), vocation_(0) {
     Player();
 }
 
-NonFieldPlayer::NonFieldPlayer(JsonValue * json){
+NonFieldPlayer::NonFieldPlayer(JsonValue * json) {
     JsonDict * player_dict = JDICT(json);
 
-    if(player_dict == NULL)
+    if (player_dict == NULL) {
         throw ModelUnserializationError();
+    }
 
     JsonInt * vocation_int = JINT((*player_dict)["vocation"]);
-    if(vocation_int == NULL)
+    if (vocation_int == NULL) {
         throw ModelUnserializationError();
-    int vocation = * vocation_int;
+    }
+    int vocation = *vocation_int;
 
     JsonInt * speed_int = JINT((*player_dict)["speed"]);
-    if(speed_int == NULL)
+    if (speed_int == NULL) {
         throw ModelUnserializationError();
-    int speed = * speed_int;
+    }
+    int speed = *speed_int;
 
     JsonInt * force_int = JINT((*player_dict)["force"]);
-    if(force_int == NULL)
+    if (force_int == NULL) {
         throw ModelUnserializationError();
-    int force = * force_int;
+    }
+    int force = *force_int;
 
     JsonInt * agility_int = JINT((*player_dict)["agility"]);
-    if(agility_int == NULL)
+    if (agility_int == NULL) {
         throw ModelUnserializationError();
-    int agility = * agility_int;
+    }
+    int agility = *agility_int;
 
     JsonInt * reflexes_int = JINT((*player_dict)["reflexes"]);
-    if(reflexes_int == NULL)
+    if (reflexes_int == NULL) {
         throw ModelUnserializationError();
-    int reflexes = * reflexes_int;
+    }
+    int reflexes = *reflexes_int;
 
     JsonInt * passPrecision_int = JINT((*player_dict)["passPrecision"]);
-    if(passPrecision_int == NULL)
+    if (passPrecision_int == NULL) {
         throw ModelUnserializationError();
-    int passPrecision = * passPrecision_int;
+    }
+    int passPrecision = *passPrecision_int;
 
     JsonInt * level_int = JINT((*player_dict)["level"]);
-    if(level_int == NULL)
+    if (level_int == NULL) {
         throw ModelUnserializationError();
-    int level = * level_int;
+    }
+    int level = *level_int;
 
     JsonInt * experience_int = JINT((*player_dict)["experience"]);
-    if(experience_int == NULL)
+    if (experience_int == NULL) {
         throw ModelUnserializationError();
-    int experience = * experience_int;
+    }
+    int experience = *experience_int;
 
     JsonBool * wounded_bool = JBOOL((*player_dict)["wounded"]);
-    if(wounded_bool == NULL)
+    if (wounded_bool == NULL) {
         throw ModelUnserializationError();
-    bool wounded = * wounded_bool;
+    }
+    bool wounded = *wounded_bool;
 
     JsonList * item_list = JLIST((*player_dict)["inventory"]);
-    if(item_list == NULL)
+    if (item_list == NULL) {
         throw ModelUnserializationError();
+    }
 
     std::vector<Item> inventory;
-    for(int i = 0; i < item_list->size(); i++){
+    for (int i = 0; i < item_list->size(); i++) {
         inventory.push_back(Item((*item_list)[i]));
     }
 
     NonFieldPlayer(vocation, speed, force, agility, reflexes, passPrecision,  wounded, inventory, level, experience);
 }
 
-NonFieldPlayer::~NonFieldPlayer(){}
+NonFieldPlayer::~NonFieldPlayer() {}
 
-NonFieldPlayer & NonFieldPlayer::operator=(const Player & player){
-    if (this != &player){
+NonFieldPlayer & NonFieldPlayer::operator=(const Player & player) {
+    if (this != &player) {
         speed_ = player.getSpeed();
         force_ = player.getForce();
         agility_ = player.getAgility();
@@ -89,27 +100,27 @@ NonFieldPlayer & NonFieldPlayer::operator=(const Player & player){
     return *this;
 }
 
-int NonFieldPlayer::getLevel(){
+int NonFieldPlayer::getLevel() {
     return level_;
 }
 
-void NonFieldPlayer::changeExperience(int deltaExperience){
+void NonFieldPlayer::changeExperience(int deltaExperience) {
     experience_ += deltaExperience;
 }
 
-void NonFieldPlayer::levelUp(){
+void NonFieldPlayer::levelUp() {
     level_ += 1;
 }
 
-int NonFieldPlayer::getVocation(){
+int NonFieldPlayer::getVocation() {
     return vocation_;
 }
 
-void NonFieldPlayer::setVocation(int vocation){
+void NonFieldPlayer::setVocation(int vocation) {
     vocation_ = vocation;
 }
 
-NonFieldPlayer::operator JsonValue() const{
+NonFieldPlayer::operator JsonValue() const {
     JsonDict r;
     r.add("vocation", new JsonInt(vocation_));
     r.add("speed", new JsonInt(speed_));
@@ -122,7 +133,7 @@ NonFieldPlayer::operator JsonValue() const{
     r.add("experience", new JsonBool(experience_));
 
     JsonList * inventory = new JsonList();
-    for(int i = 0; i < inventory_.size(); i++){
+    for (int i = 0; i < inventory_.size(); i++) {
         JsonValue * item = new JsonValue(inventory_[i]);
         inventory->add(item);
     }

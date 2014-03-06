@@ -1,7 +1,7 @@
 #include "bind.h"
 
 int bindTo(int port_i) {
-    if (port_i > 65535 || port_i < 1){
+    if ((port_i > 65535) || (port_i < 1)) {
         printf("Bad port\n");
         exit(0);
     }
@@ -12,7 +12,7 @@ int bindTo(int port_i) {
     addrinfo * p;
     int sockfd;
     int rv;
-    int yes=1;
+    int yes = 1;
 
     memset(&hints, 0, sizeof hints);
     hints.ai_family = AF_UNSPEC;  // use IPv4 or IPv6, whichever
@@ -24,7 +24,7 @@ int bindTo(int port_i) {
         return 1;
     }
 
-    for(p = servinfo; p != NULL; p = p->ai_next) {
+    for (p = servinfo; p != NULL; p = p->ai_next) {
         if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
             perror("server: socket");
             continue;
@@ -45,7 +45,7 @@ int bindTo(int port_i) {
     }
 
 
-    if (p == NULL)  {
+    if (p == NULL) {
         fprintf(stderr, "server: failed to bind\n");
         return 2;
     }

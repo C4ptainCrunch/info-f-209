@@ -2,36 +2,37 @@
 #include "../common/lib/file/file.h"
 #include "server.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char * argv[]) {
     string configfile;
-    if(argc == 1)
+    if (argc == 1) {
         configfile = "../../server-config.json";
-    else if (argc == 3)
+    }
+    else if (argc == 3) {
         configfile = argv[2];
+    }
     else {
         printf("Unknown option\n");
         exit(0);
     }
-    if(!fileExists(configfile)){
+    if (!fileExists(configfile)) {
         printf("Missing configuration file\nSearched at : %s\n", configfile.c_str());
         exit(0);
     }
 
     string config;
-    if(readFile(configfile, config) != 0){
+    if (readFile(configfile, config) != 0) {
         printf("Error while reading configuration file");
         exit(0);
     }
     JsonValue * val = JsonValue::fromString(config);
     JsonDict * dict = JDICT(val);
-    if(dict == NULL){
+    if (dict == NULL) {
         printf("Error while parsing configuration file");
         exit(0);
     }
     JsonInt * port_p = JINT((*dict)["port"]);
     JsonString * data_p = JSTRING((*dict)["datapath"]);
-    if(port_p == NULL || data_p == NULL){
+    if ((port_p == NULL) || (data_p == NULL)) {
         printf("Error while parsing configuration file");
         exit(0);
     }
@@ -49,7 +50,7 @@ int main(int argc, char *argv[])
 
     printf("Waiting for connections...\n");
 
-    while(1) {
+    while (1) {
         address_len = sizeof remote_addr;
         new_fd = accept(sockfd, (struct sockaddr *)&remote_addr, &address_len);
         if (new_fd == -1) {

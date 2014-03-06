@@ -1,5 +1,5 @@
 #include "Field.h"
 
-Field::Field(int level): Installation(level){ }
+Field::Field(int level): Installation(level) {}
 
-Field::~Field(){ }
+Field::~Field() {}

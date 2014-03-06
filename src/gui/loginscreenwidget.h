@@ -13,11 +13,10 @@
 
 class MainWindow;
 
-class loginScreenWidget : public QWidget
-{
+class loginScreenWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit loginScreenWidget(MainWindow *parent = 0);
+    explicit loginScreenWidget(MainWindow * parent=0);
 
 signals:
 
@@ -27,9 +26,9 @@ public slots:
     void exit();
 
 private:
-    QLineEdit* usernameLine;
-    QLineEdit* passLine;
-    MainWindow* parent_;
+    QLineEdit * usernameLine;
+    QLineEdit * passLine;
+    MainWindow * parent_;
 
 };
 #include <mainwindow.h>

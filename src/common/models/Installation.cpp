@@ -1,35 +1,37 @@
 #include "Installation.h"
 
-Installation::Installation(int level) : level_(level){}
+Installation::Installation(int level): level_(level) {}
 
 Installation::Installation(JsonValue * json) {
     JsonDict * installation = JDICT(json);
 
-    if(installation == NULL)
+    if (installation == NULL) {
         throw ModelUnserializationError();
+    }
 
     JsonInt * level = JINT((*installation)["level"]);
-    if(level == NULL)
+    if (level == NULL) {
         throw ModelUnserializationError();
+    }
 
     Installation((int) *level);
 }
 
-Installation::~Installation(){}
+Installation::~Installation() {}
 
-void Installation::improve(){
+void Installation::improve() {
     level_ += 1;
 }
 
-int Installation::improvePrice(){
+int Installation::improvePrice() {
     return baseprice_ + pow(powerprice_, level_);
 }
 
-int Installation::getLevel(){
+int Installation::getLevel() {
     return level_;
 }
 
-Installation::operator JsonValue() const{
+Installation::operator JsonValue() const {
     JsonDict r;
 
     r.add("level", new JsonInt(level_));

@@ -3,8 +3,8 @@
 using namespace std;
 
 
-void thread_loop(UserHandler * handler){
-    while(!handler->isReady()){
+void thread_loop(UserHandler * handler) {
+    while (!handler->isReady()) {
         usleep(10000);
     }
 

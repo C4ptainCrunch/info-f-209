@@ -2,18 +2,18 @@
 
 using namespace std;
 
-Shop::Shop(string name,unsigned int income): Installation(1), income_(income), name_(name) {}
+Shop::Shop(string name, unsigned int income): Installation(1), income_(income), name_(name) {}
 
-Shop::~Shop(){}
+Shop::~Shop() {}
 
-unsigned int Shop::getIncome(){
+unsigned int Shop::getIncome() {
     return income_;
 }
 
-void Shop::setIncome(unsigned int income){
+void Shop::setIncome(unsigned int income) {
     income_ = income;
 }
 
-string Shop::getName(){
+string Shop::getName() {
     return name_;
 }

@@ -4,13 +4,13 @@
 #include "Installation.h"
 #include "NonFieldPlayer.h"
 
-class TrainingField : public Installation{
+class TrainingField: public Installation {
 
-    public:
-        TrainingField();
-        ~TrainingField();
-        TrainingField operator=(TrainingField& trainingField);
-        void training(NonFieldPlayer& player);
+public:
+    TrainingField();
+    ~TrainingField();
+    TrainingField operator=(TrainingField & trainingField);
+    void training(NonFieldPlayer & player);
 
 };
 

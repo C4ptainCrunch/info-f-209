@@ -6,9 +6,9 @@
 #include <exception>
 #include <stdexcept>
 
-class ModelUnserializationError : public std::runtime_error {
-    public:
-        ModelUnserializationError(std::string message="Json serialization error.");
+class ModelUnserializationError: public std::runtime_error {
+public:
+    ModelUnserializationError(std::string message="Json serialization error.");
 };
 
 #endif

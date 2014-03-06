@@ -14,11 +14,11 @@
 #define DEL    "\b"
 #define BOLD   "\e[1m"
 
-#define TEST() int main(){ std::vector<func_struct> test_vector = TESTVEC; return test(test_vector); }
+#define TEST() int main() {std::vector<func_struct> test_vector = TESTVEC; return test(test_vector); }
 
 #define T(func) {#func, func}
 
-typedef void (*test_func) (void);
+typedef void (* test_func) (void);
 
 struct func_struct {
     std::string name;
@@ -28,15 +28,15 @@ struct func_struct {
 int test(std::vector<func_struct> testvec);
 
 class AssertFail: public std::exception {
-    public:
-        AssertFail(std::string message, int line, std::string file, std::string func);
-        std::string what();
+public:
+    AssertFail(std::string message, int line, std::string file, std::string func);
+    std::string what();
 
-    private:
-        std::string message;
-        std::string file;
-        std::string func;
-        int line;
+private:
+    std::string message;
+    std::string file;
+    std::string func;
+    int line;
 };
 
 #define ASSERT(value, message) assert(value, message, __LINE__, __FILE__, __func__)
@@ -59,16 +59,16 @@ void assert(bool value, std::string message="", int line=-1, std::string file=""
 void assertFalse(bool value, std::string message="", int line=-1, std::string file="", std::string func="");
 
 template<typename T>
-void assertNull(T value, std::string message="", int line=-1, std::string file="", std::string func=""){
+void assertNull(T value, std::string message="", int line=-1, std::string file="", std::string func="") {
     assert(value == NULL, message, line, file, func);
 }
 
 template<typename T>
-void assertNotNull(T value, std::string message="", int line=-1, std::string file="", std::string func=""){
+void assertNotNull(T value, std::string message="", int line=-1, std::string file="", std::string func="") {
     assert(value != NULL, message, line, file, func);
 }
 template<typename T, typename U>
-void assertEqual(T value1, U value2, std::string message="", int line=-1, std::string file="", std::string func=""){
+void assertEqual(T value1, U value2, std::string message="", int line=-1, std::string file="", std::string func="") {
     assert(value1 == value2, message, line, file, func);
 }
 

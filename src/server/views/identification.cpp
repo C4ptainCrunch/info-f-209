@@ -19,7 +19,13 @@ void login(JsonValue * message, UserHandler * handler){
        return sendFail(handler, 301, "login", "User does not exist");
     }
 
-    Manager * manager = new Manager(JsonValue::fromString(content));
+    Manager * manager = NULL;
+    try {
+        manager = new Manager(JsonValue::fromString(content));
+    }
+    catch (const ParseError & pe){
+        return sendFail(handler, 501, "login", "Error while retrieving user");
+    }
     if (manager->checkPassword(password)){
         JsonDict answer;
 

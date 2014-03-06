@@ -53,10 +53,11 @@ void signup(JsonValue * message, UserHandler * handler){
     string name = getString(dictMessage, "name");
 
 
-    // // TODO : add defence against path injection
-    // string filename = "data/users/"+username+".json";
-    // // TODO : check if user arleady exists
-    // string content;
+    // TODO : add defence against path injection
+    string filename = "data/users/"+username+".json";
+
+    if(!fileExists(filename))
+        return sendFail(handler, 402, "login", "User already exists");
 
     Manager * manager = new Manager(name, username, password);
     handler->setManager(manager);

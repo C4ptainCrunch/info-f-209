@@ -41,7 +41,7 @@ JsonValue * JsonValue::fromString(string message, int &i){
                 return JsonInt::fromString(message, i);
                 break;
             default:
-                throw PARSE_ERROR("unknwown value", i);
+                throw PARSE_ERROR("unknwown value. Got '" + string(1, message[i]) + "'", i);
         }
     }
     throw PARSE_ERROR("no value found", i);
@@ -283,7 +283,7 @@ string JsonNull::toString(){
 
 JsonNull * JsonNull::fromString(string message, int &i){
     if(message.substr(0,4) != "null"){
-        throw PARSE_ERROR("expected null", i);
+        throw PARSE_ERROR("expected null, got '" + message.substr(0,4) + "'", i);
     }
     i += 4;
     return new JsonNull();
@@ -303,14 +303,14 @@ JsonBool * JsonBool::fromString(string message, int &i){
     JsonBool * r = NULL;
     if(message[0] == 't'){
         if(message.substr(0,4) != "true"){
-            throw PARSE_ERROR("expected true", i);
+            throw PARSE_ERROR("expected true, got '" + message.substr(0,4) + "'", i);
         }
         r = new JsonBool(true);
         i += 4;
     }
     else {
         if(message.substr(0,5) != "false"){
-            throw PARSE_ERROR("expected false", i);
+            throw PARSE_ERROR("expected false, got '" + message.substr(0,5) + "'", i);
         }
         r = new JsonBool(false);
         i += 5;

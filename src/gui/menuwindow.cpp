@@ -39,6 +39,7 @@ MenuWindow::MenuWindow(MainWindow *parent) :
         list->addItem(QString(connectedList[i]));
     }
     QPushButton* startMatchButton = new QPushButton("DEFIER",matchLauncherWidget);
+    QObject::connect(startMatchButton,SIGNAL(clicked()),this,SLOT(startMatch()));
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton* refreshButton = new QPushButton("Rafraichir",matchLauncherWidget);
@@ -89,6 +90,10 @@ MenuWindow::MenuWindow(MainWindow *parent) :
     mainWidget->show();
 
 
+}
+
+void MenuWindow::startMatch(){
+    parent_->setNextScreen(MATCHSTATE);
 }
 
 void MenuWindow::logOut(){

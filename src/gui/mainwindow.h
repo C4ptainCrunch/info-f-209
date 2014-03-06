@@ -12,6 +12,7 @@
 #include <QCoreApplication>
 #include <menuwindow.h>
 #include <loginscreenwidget.h>
+#include <matchwidget.h>
 
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4,MATCHSTATE = 5};
 
@@ -31,7 +32,7 @@ public slots:
 private:
     QLineEdit* usernameLine;
     QLineEdit* passLine;
-    //QVector<QWidget*> currentWidgets;
+    QWidget* currentWidget;
 
 };
 

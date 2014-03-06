@@ -39,6 +39,7 @@ signals:
 public slots:
     void refreshConnectedList();
     void logOut();
+    void startMatch();
 
 private:
     MainWindow* parent_;

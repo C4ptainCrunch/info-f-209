@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QFrame>
 #include <menuwindow.h>
 
 class MainWindow;

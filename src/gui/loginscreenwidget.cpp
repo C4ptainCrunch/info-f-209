@@ -1,6 +1,7 @@
 #include "loginscreenwidget.h"
 #include <iostream>
 #include <QCoreApplication>
+#include <QPalette>
 using namespace std;
 
 loginScreenWidget::loginScreenWidget(MainWindow *parent) :
@@ -19,8 +20,9 @@ loginScreenWidget::loginScreenWidget(MainWindow *parent) :
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
 
-    //----------------------------FIELDS WIDGET---------------------------
-    QWidget* fields = new QWidget(this);
+    //----------------------------LINE/BUTTONS---------------------------
+    QFrame* fields = new QFrame(this);
+
     QVBoxLayout* fieldsLayout = new QVBoxLayout;
     fields->setFixedHeight(250);
     fields->setFixedWidth(150);

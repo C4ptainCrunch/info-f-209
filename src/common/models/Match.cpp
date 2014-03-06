@@ -251,7 +251,9 @@ string Match::print(){ //FOR TEST PURPOSES
                     c+= "\033[0m";
                 }
                 else if (grid_[i][j].ball != 0){
-                    c += "\033[1;93mB \033[0m";
+                    c += "\033[1;93";
+                    c += grid_[i][j].ball->getName();
+                    c += "\033[0m";
                     //<< typeid(grid_[i][j].ball).name();
                 }
                 else{

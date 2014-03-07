@@ -11,10 +11,10 @@
 
 class UserHandler;
 
-namespace views{
-    void login(JsonValue * message, UserHandler * handler);
-    void signup(JsonValue * message, UserHandler * handler);
-    void userlist(JsonValue * message, UserHandler * handler);
+namespace views {
+void login(JsonValue * message, UserHandler * handler);
+void signup(JsonValue * message, UserHandler * handler);
+void userlist(JsonValue * message, UserHandler * handler);
 }
 
 #include "../UserHandler.h"

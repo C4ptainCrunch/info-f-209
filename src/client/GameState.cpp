@@ -60,12 +60,10 @@ int GameState::log(string username, string password) {
     string message = "logIn : ";
     int res;
     JsonInt JSres;
-    JsonString JSusername(username);
-    JsonString JSpass(password);
-    JsonDict dict;
-    dict.add("username", &JSusername);
-    dict.add("password", &JSpass);
-    message += dict.toString();
+    JsonDict * dict = new JsonDict();
+    dict->add("username", new JsonString(username));
+    dict->add("password", new JsonString(password));
+    message += dict->toString();
     client_->send(message);
     client_->recv(message);
     JSres.fromString(message);

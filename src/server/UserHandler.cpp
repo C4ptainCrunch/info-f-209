@@ -80,19 +80,15 @@ void UserHandler::handleMessage(string message) {
     catch (const BadRequest & br) {
         JsonDict answer;
 
-        JsonString s = JsonString(br.what());
-        JsonInt i = JsonInt(100);
-        answer.add("Bad request", &s);
-        answer.add("code", &i);
+        answer.add("Bad request", new JsonString(br.what()));
+        answer.add("code", new JsonInt(100));
         this->writeToClient("error", &answer);
     }
     catch (const ParseError & pe) {
         JsonDict answer;
 
-        JsonString s = JsonString(pe.what());
-        JsonInt i = JsonInt(101);
-        answer.add("Parse error", &s);
-        answer.add("code", &i);
+        answer.add("Parse error", new JsonInt(101));
+        answer.add("code", new JsonString(pe.what()));
         this->writeToClient("error", &answer);
     }
 }

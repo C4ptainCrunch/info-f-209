@@ -30,8 +30,7 @@ void login(JsonValue * message, UserHandler * handler) {
     if (manager->checkPassword(password)) {
         JsonDict answer;
 
-        JsonBool b = JsonBool(true);
-        answer.add("success", &b);
+        answer.add("success", new JsonBool(true));
         handler->writeToClient("login", &answer);
         handler->setManager(manager);
     }
@@ -64,8 +63,7 @@ void signup(JsonValue * message, UserHandler * handler) {
 
     JsonDict answer;
 
-    JsonBool b = JsonBool(true);
-    answer.add("success", &b);
+    answer.add("success", new JsonBool(true));
     handler->writeToClient("login", &answer);
 }
 

@@ -2,6 +2,8 @@
 #include "../common/lib/file/file.h"
 #include "server.h"
 
+using namespace std;
+
 int main(int argc, char * argv[]) {
     string configfile;
     if (argc == 1) {

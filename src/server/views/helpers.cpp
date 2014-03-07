@@ -5,11 +5,8 @@ using namespace std;
 void sendFail(UserHandler * handler, int errorcode, string topic, string message) {
     JsonDict answer;
 
-    JsonBool b = JsonBool(false);
-    JsonString s = JsonString(message);
-    JsonInt i = JsonInt(errorcode);
-    answer.add("success", &b);
-    answer.add("reason", &s);
-    answer.add("code", &i);
+    answer.add("success", new JsonBool(false));
+    answer.add("reason", new JsonString(message));
+    answer.add("code", new JsonInt(errorcode));
     handler->writeToClient(topic, &answer);
 }

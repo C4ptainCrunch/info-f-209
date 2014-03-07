@@ -1,20 +1,6 @@
-#include <sys/socket.h>
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-
-#include <iostream>
-#include <string>
-#include <string.h>
+#include "Socket.h"
 
 using namespace std;
-
-#define BUFF_SIZE 32
-#define MESSAGE_END "\n\n"
-
-#include "Socket.h"
 
 
 Socket::Socket() {
@@ -78,7 +64,7 @@ int Socket::read(string & message) {
 
     while (!isComplete) {
         int len;
-        len = recv(fd_, buffer, BUFF_SIZE - 1, 0);
+        len = recv(fd_, buffer, SBUFF_SIZE - 1, 0);
         if (len == -1) {
             return -1; // socket error, could not read
         }

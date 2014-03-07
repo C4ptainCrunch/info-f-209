@@ -16,23 +16,22 @@
 class MainWindow;
 
 
-class MenuWindow : public QWidget
-{
+class MenuWindow: public QWidget {
     Q_OBJECT
 public:
-    explicit MenuWindow(MainWindow *parent = 0);
+    explicit MenuWindow(MainWindow * parent=0);
 
-    QGridLayout* mainLayout;
-    QGridLayout* matchLauncherLayout;
+    QGridLayout * mainLayout;
+    QGridLayout * matchLauncherLayout;
 
-    QWidget* quitWidget;
-    QWidget* matchLauncherWidget;
+    QWidget * quitWidget;
+    QWidget * matchLauncherWidget;
 
-    QComboBox *list;
+    QComboBox * list;
 
-    QPushButton* disconnectButton;
-    QPushButton* auctionHouseButton;
-    QPushButton* teamHandlingButton;
+    QPushButton * disconnectButton;
+    QPushButton * auctionHouseButton;
+    QPushButton * teamHandlingButton;
 
 signals:
 
@@ -42,7 +41,7 @@ public slots:
     void startMatch();
 
 private:
-    MainWindow* parent_;
+    MainWindow * parent_;
 
 };
 

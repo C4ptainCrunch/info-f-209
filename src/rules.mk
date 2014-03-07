@@ -1,17 +1,24 @@
-all : $(SOURCES) $(EXECUTABLE)
-	@touch build.ok
+SOURCES=$(wildcard *.cpp)
+HEADERS=$(wildcard *.h)
+OBJECTS=$(addprefix $(BUILD_DIR)/$(NAME)/,$(subst .cpp,.o,$(SOURCES)))
+A=$(BUILD_DIR)/$(NAME).a
 
-$(EXECUTABLE): $(OBJECTS)
-	$(COMPILATOR) $(LDFLAGS) $^ -o $(BUILD_DIR)/$@
 
-$(EXECUTABLE).o: $(HEADERS)
+.PHONY: all clean
 
-%.o:%.cpp $(HEADERS)
-	$(COMPILATOR) $(CFLAGS) -c $< -o $@
+all: $(A)
 
-.PHONY: clean
+a:
+	@echo $(OBJECTS)
+
+$(BUILD_DIR)/$(NAME)/%.o: %.cpp $(HEADERS) | $(BUILD_DIR)/$(NAME)/
+	$(CXX) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/$(NAME)/:
+	@mkdir -p $@
+
+$(A): $(OBJECTS)
+	ar -r $@ $(OBJECTS)
 
 clean:
-	@rm -f *.o build.ok
-	@rm -f $(EXECUTABLE)
-	@echo "Cleaning..."
+	rm -rf $(BUILD_DIR)/$(NAME)

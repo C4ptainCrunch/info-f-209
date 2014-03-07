@@ -7,40 +7,42 @@
 #include <map>
 #include <iostream>
 
-#include "../lib/socket/Socket.h"
-#include "../models/Manager.h"
+#include "../common/lib/socket/Socket.h"
+#include "../common/models/Manager.h"
 #include "helpers.h"
-#include "../views/views.h"
+#include "views/views.h"
 
 class UserHandler;
 
-typedef void (*view_ptr)(JsonValue *, UserHandler * );
+typedef void (* view_ptr)(JsonValue *, UserHandler *);
 
 
 class UserHandler {
-    public:
-        UserHandler(std::vector<UserHandler*> * handlers_list);
-        ~UserHandler();
-        void start(const int fd, thread * handling_thread);
-        bool isReady();
-        int loop();
+public:
+    UserHandler(std::vector<UserHandler *> * handlers_list, std::string datapath);
+    ~UserHandler();
+    void start(const int fd, thread * handling_thread);
+    bool isReady();
+    int loop();
 
-        std::vector<UserHandler *> * getHandlers_listPtr();
-        Manager * getManager();
-        void setManager(Manager * manager);
-        int writeToClient(std::string key, JsonValue * json);
-        void disconnect();
+    std::vector<UserHandler *> * getHandlers_listPtr();
+    Manager * getManager();
+    void setManager(Manager * manager);
+    int writeToClient(std::string key, JsonValue * json);
+    void disconnect();
+    std::string path(std::string dir, std::string var);
 
-    private:
-        bool dead;
-        Socket * s_;
-        Manager * manager_;
-        thread * handling_thread_;
-        std::vector<UserHandler *> * handlers_list_;
+private:
+    bool dead;
+    Socket * s_;
+    Manager * manager_;
+    thread * handling_thread_;
+    std::vector<UserHandler *> * handlers_list_;
+    std::string datapath_;
 
-        void handleMessage(std::string message);
+    void handleMessage(std::string message);
 
-        static const map<string,view_ptr> viewmap;
+    static const map<string, view_ptr> viewmap;
 };
 //HANDLE_H
 #endif

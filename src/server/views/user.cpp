@@ -15,7 +15,6 @@ void login(JsonValue * message, UserHandler * handler) {
     string password = getString(dictMessage, "password");
 
     string filename = handler->path("users", username);
-    cout << filename << endl;
     string content;
 
     if (readFile(filename, content) != 0) {

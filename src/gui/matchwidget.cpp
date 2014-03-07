@@ -13,7 +13,8 @@ MatchWidget::MatchWidget(QWidget *parent) :
     QLabel * image = new QLabel(this);
     image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/Quidditch_pitch_hogwarts.jpg"));
     layout->addWidget(image);
-    this->setLayout(layout);
+    //this->setLayout(layout);
+
 
     //---------------------MAIN CONTAINER WIDGET---------------------------
     QWidget* mainWidget = new QWidget(this);
@@ -21,25 +22,53 @@ MatchWidget::MatchWidget(QWidget *parent) :
     mainWidget->setFixedWidth(1280);
     QGridLayout* mainLayout = new QGridLayout(mainWidget);
 
+    //------------------------SCORE SETTINGS--------------------------------
+    QLabel* title = new QLabel("VOUS : 0",mainWidget);
+    title->setFixedSize(200,75);
+    QFont font;
+    font.setPointSize(17);
+    title->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
+    title->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
+    title->setWordWrap(true);
+    title->setFont(font);
+    title->move(100,50);
+    title->show();
+
+    QLabel* title2 = new QLabel("ADVERSAIRE : 0",mainWidget);
+    title2->setFixedSize(200,75);
+    title2->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
+    title2->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
+    title2->setWordWrap(true);
+    title2->setFont(font);
+    title2->move(1000,50);
+    title2->show();
+
+    //---------------------FIELD CONTAINER WIDGET--------------------------
     fieldWidget  = new QFrame(mainWidget);
-    fieldWidget->setFixedSize(QSize(600,400));
-    fieldWidget->setLineWidth(2);
-    fieldWidget->setFrameStyle(QFrame::Box);
-    fieldWidget->move(mainWidget->width()/2-fieldWidget->width()/2,mainWidget->height()/2-fieldWidget->height()/2);
+    //fieldWidget->setLineWidth(2);
+    //fieldWidget->setFrameStyle(QFrame::Box);
+    /*
     QPalette* palette = new QPalette();
-    palette->setColor(QPalette::Foreground,Qt::darkRed);
-    fieldWidget->setStyleSheet("background-image : url(images/grass2.jpg)");
-    //palette->setColor(QPalette::Background,Qt::white);
+    palette->setBrush(QPalette::Foreground,QBrush(QImage("images/wood.jpg")));
+    palette->setColor(QPalette::Background,Qt::white);
     fieldWidget->setPalette(*palette);
     fieldWidget->setAutoFillBackground( true );
-    //QPushButton* test = new QPushButton("Coucou",fieldWidget);
+    */
 
     //---------------------FIELD REPRESENTATION----------------------------
-    QGraphicsScene* scene = new QGraphicsScene(fieldWidget);
 
+    fieldWidget->setFixedSize(QSize(1100,450));
+    fieldWidget->move(mainWidget->width()/2-fieldWidget->width()/2,mainWidget->height()/2-fieldWidget->height()/2);
+    QLabel* label = new QLabel(fieldWidget);
+    QPixmap* pixmap = new QPixmap(1100,450);
+    pixmap->fill(Qt::transparent);
+
+    QPainter painter(pixmap);
+    painter.setBrush(QBrush(Qt::darkGreen));
     Hexagon hexagon[WIDTH][LENGHT];
+    QBrush* grass = new QBrush(QImage("images/grass.jpg"));
 
-    double x = 26;
+    double x = 0;
     double y = 0;
     int delta = 1/2;
     bool pair = true;
@@ -60,10 +89,13 @@ MatchWidget::MatchWidget(QWidget *parent) :
                 result -= delta;
             }
             if (result<1){
-                hexagon[i][j].update();
-                scene->addPolygon(hexagon[i][j].hexagon_);
-                hexagon[i][j].update();
-                scene->update();
+                if(i <= LENGHT/2 and j == LENGHT/2){
+                    painter.setBrush(QBrush(Qt::white));
+                }
+                else{
+                    painter.setBrush(*grass);
+                }
+                painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
         y += 15;
@@ -76,13 +108,12 @@ MatchWidget::MatchWidget(QWidget *parent) :
         pair = !pair;
     }
 
+    label->setPixmap(*pixmap);
 
-    QGraphicsView vue(scene);
-    vue.setFixedSize(1200,1200);
-    //vue.show();
+
     //mainLayout->addWidget(fieldWidget,1,1);
     mainWidget->setLayout(mainLayout);
-    //fieldWidget->move(400,400);
+    //fieldWidget->move(200,200);
     mainWidget->show();
 
 

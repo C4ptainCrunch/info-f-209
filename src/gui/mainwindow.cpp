@@ -63,13 +63,17 @@ void MainWindow::setNextScreen(int nextState){
 }
 
 void QWidget::closeEvent(QCloseEvent * event){
+    event->accept();
+    /*
+     * TODO
+
     if(QMessageBox::question(this,tr("Déconnexion"),tr("Voulez-vous vraiment vous Quitter?"),QMessageBox::Yes |QMessageBox::Cancel,QMessageBox::Yes ) == QMessageBox::Yes){
         event->accept();
     }
     else{
         event->ignore();
     }
-
+    */
 }
 
 

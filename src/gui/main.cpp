@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGridLayout>
 #include <QLabel>
+#include <QPixmap>
 #include <iostream>
 #include <menuwindow.h>
 using namespace std;
@@ -17,6 +18,5 @@ int main(int argc, char *argv[])
     //menuWindow->show();
 
     window->show();
-
     return a.exec();
 }

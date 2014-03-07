@@ -29,5 +29,4 @@ void Hexagon::setCorners(){
     corners.push_back(QPoint(x_,y_-r));
     corners.push_back(QPoint(r*cos(pi/6.0)+x_, y_-r/2.0));
     hexagon_ = QPolygon(corners);
-    this->setStyleSheet("background-image : url(images/grass2.jpg)");
 }

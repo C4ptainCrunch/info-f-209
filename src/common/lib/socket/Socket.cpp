@@ -19,11 +19,11 @@ using namespace std;
 
 Socket::Socket() {
     fd_ = 0;
-    buffer = new char[BUFF_SIZE];
+    buffer[0] = '\0';
 }
 
 Socket::Socket(const int fd) {
-    buffer = new char[BUFF_SIZE];
+    buffer[0] = '\0';
     setFd(fd);
 }
 
@@ -72,11 +72,12 @@ string Socket::popFromBuffer() {
 
 int Socket::read(string & message) {
     bool isComplete;
-    int len;
+
     message = popFromBuffer();
     isComplete = (message.find(MESSAGE_END) != string::npos);
 
     while (!isComplete) {
+        int len;
         len = recv(fd_, buffer, BUFF_SIZE - 1, 0);
         if (len == -1) {
             return -1; // socket error, could not read

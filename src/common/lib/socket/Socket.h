@@ -14,7 +14,7 @@ public:
     virtual void setFd(const int fd);
 
 private:
-    char * buffer;
+    char buffer[BUFF_SIZE];
     int fd_;
     virtual string popFromBuffer();
 };

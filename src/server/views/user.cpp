@@ -1,7 +1,9 @@
 #include "user.h"
 
 using namespace std;
+
 namespace views {
+
     void login(JsonValue * message, UserHandler * handler) {
         JsonDict * dictMessage = JDICT(message);
 

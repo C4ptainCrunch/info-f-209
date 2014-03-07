@@ -1,4 +1,3 @@
-
 #ifndef HEXAGON_H
 #define HEXAGON_H
 
@@ -14,25 +13,24 @@
 
 using namespace std;
 
-class Hexagon : public QWidget
-{
+class Hexagon: public QWidget {
     Q_OBJECT
 public:
-  explicit Hexagon(int x, int y, QWidget *parent = 0);
-  explicit Hexagon(QWidget* parent = 0);
-  ~Hexagon();
-  void setCorners();
-  void setX(int x);
-  void setY(int y);
-  QPolygon hexagon_;
+    explicit Hexagon(int x, int y, QWidget * parent=0);
+    explicit Hexagon(QWidget * parent=0);
+    ~Hexagon();
+    void setCorners();
+    void setX(int x);
+    void setY(int y);
+    QPolygon hexagon_;
 
 protected:
-  void paintEvent(QShowEvent *event);
+    void paintEvent(QShowEvent * event);
 
 private:
-  int x_;
-  int y_;
-  QVector<QPoint> corners;
+    int x_;
+    int y_;
+    QVector<QPoint> corners;
 
 };
 

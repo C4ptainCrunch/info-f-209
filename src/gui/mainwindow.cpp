@@ -3,10 +3,9 @@
 
 using namespace std;
 
-MainWindow::MainWindow(QWidget *parent) :
-    QWidget(parent)
-{
-    cout<<QCoreApplication::applicationDirPath().toStdString()<<endl;
+MainWindow::MainWindow(QWidget * parent):
+    QWidget(parent) {
+    cout << QCoreApplication::applicationDirPath().toStdString() << endl;
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
 
@@ -22,27 +21,26 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setStyleSheet(styleSheet);
 
     //-----------------LOGIN SCREEN-----------------------
-    loginScreenWidget* login = new loginScreenWidget(this);
+    loginScreenWidget * login = new loginScreenWidget(this);
     login->show();
 
 
 }
 
 MainWindow::~MainWindow()
-{
-}
+{}
 
-void MainWindow::setNextScreen(int nextState){
+void MainWindow::setNextScreen(int nextState) {
 
-    switch(nextState) {
-        case LOGINMENUSTATE:{
-            loginScreenWidget* login = new loginScreenWidget(this);
+    switch (nextState) {
+        case LOGINMENUSTATE: {
+            loginScreenWidget * login = new loginScreenWidget(this);
             currentWidget = login;
             login->show();
             break;
         }
-        case MAINMENUSTATE:{
-            MenuWindow* menu = new MenuWindow(this);
+        case MAINMENUSTATE: {
+            MenuWindow * menu = new MenuWindow(this);
             currentWidget = menu;
             menu->show();
             break;
@@ -52,8 +50,8 @@ void MainWindow::setNextScreen(int nextState){
             break;
         case TEAMHANDLINGSTATE:
             break;
-        case MATCHSTATE:{
-            MatchWidget* match = new MatchWidget(this);
+        case MATCHSTATE: {
+            MatchWidget * match = new MatchWidget(this);
             currentWidget = match;
             match->show();
             break;
@@ -62,18 +60,16 @@ void MainWindow::setNextScreen(int nextState){
 
 }
 
-void QWidget::closeEvent(QCloseEvent * event){
+void QWidget::closeEvent(QCloseEvent * event) {
     event->accept();
     /*
      * TODO
 
-    if(QMessageBox::question(this,tr("Déconnexion"),tr("Voulez-vous vraiment vous Quitter?"),QMessageBox::Yes |QMessageBox::Cancel,QMessageBox::Yes ) == QMessageBox::Yes){
+       if(QMessageBox::question(this,tr("Déconnexion"),tr("Voulez-vous vraiment vous Quitter?"),QMessageBox::Yes |QMessageBox::Cancel,QMessageBox::Yes ) == QMessageBox::Yes){
         event->accept();
-    }
-    else{
+       }
+       else{
         event->ignore();
-    }
-    */
+       }
+     */
 }
-
-

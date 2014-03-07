@@ -21,11 +21,10 @@ enum { WIDTH = 30, LENGHT = 60};
 
 class MainWindow;
 
-class MatchWidget : public QWidget
-{
+class MatchWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit MatchWidget(QWidget *parent = 0);
+    explicit MatchWidget(QWidget * parent=0);
     ~MatchWidget();
 
 signals:
@@ -33,8 +32,8 @@ signals:
 public slots:
 
 private:
-    MainWindow* parent_;
-    QFrame* fieldWidget;
+    MainWindow * parent_;
+    QFrame * fieldWidget;
 
 };
 

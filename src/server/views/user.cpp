@@ -1,6 +1,8 @@
-#include "identification.h"
+#include "user.h"
 
 using namespace std;
+
+namespace views {
 
 void login(JsonValue * message, UserHandler * handler) {
     JsonDict * dictMessage = JDICT(message);
@@ -79,4 +81,5 @@ void userlist(JsonValue * message, UserHandler * handler) {
         }
     }
     handler->writeToClient("userlist", &answer);
+}
 }

@@ -2,10 +2,13 @@
 
 using namespace std;
 
+
+#include "views/user.h"
+
 const map<string, view_ptr> UserHandler::viewmap = {
-    {"login", login},
-    {"register", signup},
-    {"userlist", userlist}
+    {"login", views::login},
+    {"register", views::signup},
+    {"userlist", views::userlist}
 };
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {

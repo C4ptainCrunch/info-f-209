@@ -10,7 +10,6 @@
 #include "../common/lib/socket/Socket.h"
 #include "../common/models/Manager.h"
 #include "helpers.h"
-#include "views/views.h"
 
 class UserHandler;
 

@@ -1,7 +1,7 @@
 #include "Socket.h"
 
 using namespace std;
-
+// TODO : LOCK READ AND WRITE !
 
 Socket::Socket() {
     fd_ = 0;

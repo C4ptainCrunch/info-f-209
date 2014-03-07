@@ -31,6 +31,7 @@ UserHandler::~UserHandler() {
 }
 
 bool UserHandler::isReady() {
+    // TODO: use a lock to prevent datarace
     return s_ != NULL;
 }
 

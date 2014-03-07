@@ -42,7 +42,7 @@ int main(int argc, char * argv[]) {
     string datapath = *data_p;
 
     int sockfd; // socket to bind to
-    int new_fd; // "accepted" socket
+
     sockaddr_storage remote_addr;
     socklen_t address_len;
     char s[INET6_ADDRSTRLEN];
@@ -53,6 +53,8 @@ int main(int argc, char * argv[]) {
     printf("Waiting for connections...\n");
 
     while (1) {
+        int new_fd; // "accepted" socket
+
         address_len = sizeof remote_addr;
         new_fd = accept(sockfd, (struct sockaddr *)&remote_addr, &address_len);
         if (new_fd == -1) {
@@ -65,7 +67,7 @@ int main(int argc, char * argv[]) {
 
         UserHandler * current_handler = new UserHandler(handlers_list, datapath);
         std::thread * current_thread = new std::thread(thread_loop, current_handler);
-        // TODO should delete current_thread sometimes
+        // TODO: should delete current_thread sometimes
         current_handler->start(new_fd, current_thread);
         handlers_list->push_back(current_handler);
     }

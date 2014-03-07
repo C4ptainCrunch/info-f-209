@@ -22,25 +22,25 @@ MatchWidget::MatchWidget(QWidget * parent):
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
 
     //------------------------SCORE SETTINGS--------------------------------
-    QLabel * title = new QLabel("VOUS : 0", mainWidget);
-    title->setFixedSize(200, 75);
+    QLabel * ownScore = new QLabel("VOUS : 0", mainWidget);
+    ownScore->setFixedSize(200, 75);
     QFont font;
     font.setPointSize(17);
-    title->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
-    title->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
-    title->setWordWrap(true);
-    title->setFont(font);
-    title->move(100, 50);
-    title->show();
+    ownScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
+    ownScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
+    ownScore->setWordWrap(true);
+    ownScore->setFont(font);
+    ownScore->move(100, 50);
+    ownScore->show();
 
-    QLabel * title2 = new QLabel("ADVERSAIRE : 0", mainWidget);
-    title2->setFixedSize(200, 75);
-    title2->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
-    title2->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
-    title2->setWordWrap(true);
-    title2->setFont(font);
-    title2->move(1000, 50);
-    title2->show();
+    opponentScore = new QLabel("ADVERSAIRE : 0", mainWidget);
+    opponentScore->setFixedSize(200, 75);
+    opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
+    opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
+    opponentScore->setWordWrap(true);
+    opponentScore->setFont(font);
+    opponentScore->move(1000, 50);
+    opponentScore->show();
 
     //---------------------FIELD CONTAINER WIDGET--------------------------
     fieldWidget  = new QFrame(mainWidget);

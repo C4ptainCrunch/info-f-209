@@ -33,6 +33,8 @@ public slots:
 
 private:
     MainWindow * parent_;
+    QLabel * ownScore;
+    QLabel * opponentScore;
     QFrame * fieldWidget;
 
 };

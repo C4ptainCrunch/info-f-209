@@ -1,7 +1,9 @@
 #include "loginscreenwidget.h"
 #include <iostream>
 #include <QCoreApplication>
+#include <QFormLayout>
 #include <QPalette>
+#include <QDialogButtonBox>
 using namespace std;
 
 loginScreenWidget::loginScreenWidget(MainWindow * parent):
@@ -41,6 +43,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(checkIdPresence()));
 
     QPushButton * registerButton = new QPushButton("Register", fields);
+    QObject::connect(registerButton, SIGNAL(clicked()),this, SLOT(registerUser()));
 
     QPushButton * quitButton = new QPushButton("Quit", fields);
     QObject::connect(quitButton, SIGNAL(clicked()), this, SLOT(exit()));
@@ -74,8 +77,45 @@ void loginScreenWidget::checkIdPresence() {
     }
     else {
         //TODO VERIFY ID/PASSWORD
+
         parent_->setNextScreen(MAINMENUSTATE);
+        //else {QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistrer");}
     }
+}
+
+void loginScreenWidget::registerUser(){
+    cout<<"coucou"<<endl;
+    QDialog* dialog = new QDialog(this);
+    dialog->setWindowTitle("Nouveau compte");
+    // Use a layout allowing to have a label next to each field
+    QFormLayout form(dialog);
+
+
+    // Add the lineEdits with their respective labels
+    QLineEdit* newUserName = new QLineEdit(dialog);
+    QString label = QString("Nom de compte : ");
+    form.addRow(label,newUserName);
+    QLineEdit* newPassword = new QLineEdit(dialog);
+    QString label2 = QString("Mot de passe : ");
+    form.addRow(label2,newPassword);
+
+
+    // Add some standard buttons (Cancel/Ok) at the bottom of the dialog
+    QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+                               Qt::Horizontal, dialog);
+    form.addRow(&buttonBox);
+    QObject::connect(&buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
+    QObject::connect(&buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
+
+    // Show the dialog as modal
+    QString newID;
+    QString newPW;
+
+    if (dialog->exec() == QDialog::Accepted) {
+        newID = newUserName->text();
+        newPW = newPassword->text();
+    }
+    cout<<newID.toStdString()<<endl;
 }
 
 void loginScreenWidget::exit() {

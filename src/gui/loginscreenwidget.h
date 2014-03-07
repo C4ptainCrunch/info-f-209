@@ -23,6 +23,7 @@ signals:
 
 public slots:
     void checkIdPresence();
+    void registerUser();
     void showCredits();
     void exit();
 

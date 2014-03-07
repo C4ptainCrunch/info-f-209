@@ -14,10 +14,8 @@ void thread_loop(UserHandler * handler) {
         try {
             JsonDict answer;
 
-            JsonString s = JsonString("Unknown error");
-            JsonInt i = JsonInt(500);
-            answer.add("Error", &s);
-            answer.add("code", &i);
+            answer.add("Error", new JsonString("Unknown error"));
+            answer.add("code", new JsonInt(500));
             handler->writeToClient("error", &answer);
         }
         catch (...) {}

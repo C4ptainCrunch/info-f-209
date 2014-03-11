@@ -173,12 +173,12 @@ void Match::newTurn(Way playerWays[14]) {
                 moved = true;
             }
         }
-        moveBalls();
+        moveBalls(moved, turnNumber);
         ++turnNumber;
     }
 }
 
-void Match::moveBalls() {
+void Match::moveBalls(bool& moved, int turnNumber) {
     //BUDGERS
     Position nextBallPos;
     for (int i = 0; i < 2; ++i) {

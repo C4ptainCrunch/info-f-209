@@ -14,6 +14,7 @@ public:
     void setPosition(int x, int y);
     void setPosition(Position position);
     std::string virtual getName() = 0;
+    int getSpeed() const;
 
 protected:
     int speed_;

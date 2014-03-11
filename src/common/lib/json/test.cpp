@@ -1,7 +1,7 @@
-#include "libtest.h"
+#include "../test/libtest.h"
 
 using namespace std;
-#include "../lib/json/json.h"
+#include "json.h"
 
 void test_empty_dict() {
 

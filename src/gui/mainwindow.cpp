@@ -31,7 +31,7 @@ MainWindow::~MainWindow()
 {}
 
 void MainWindow::setNextScreen(int nextState) {
-
+    cout<<nextState;
     switch (nextState) {
         case LOGINMENUSTATE: {
             loginScreenWidget * login = new loginScreenWidget(this);
@@ -46,10 +46,15 @@ void MainWindow::setNextScreen(int nextState) {
             break;
 
         }
-        case AUCTIONHOUSESTATE:
+        case AUCTIONHOUSESTATE:{
             break;
-        case TEAMHANDLINGSTATE:
+        }
+        case TEAMHANDLINGSTATE:{
+            TeamHandlingMenu * teamHandling = new TeamHandlingMenu(this);
+            currentWidget = teamHandling;
+            teamHandling->show();
             break;
+        }
         case MATCHSTATE: {
             MatchWidget * match = new MatchWidget(this);
             currentWidget = match;

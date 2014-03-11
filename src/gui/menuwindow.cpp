@@ -62,6 +62,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     //-----------------TEAM HANDLING BUTTON--------------------------
     teamHandlingButton = new QPushButton("Gestion de Team");
     teamHandlingButton->setMinimumHeight(60);
+    connect(teamHandlingButton, SIGNAL(clicked()), this, SLOT(handlePlayers()));
 
     //------------------DISCONNECT BUTTON---------------------------
     disconnectButton = new QPushButton("Se deconnecter");
@@ -90,6 +91,12 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
 
 }
+
+void MenuWindow::handlePlayers(){
+    parent_->setNextScreen(TEAMHANDLINGSTATE);
+
+}
+
 
 void MenuWindow::startMatch() {
     parent_->setNextScreen(MATCHSTATE);

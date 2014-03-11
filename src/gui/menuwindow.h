@@ -19,7 +19,7 @@ class MainWindow;
 class MenuWindow: public QWidget {
     Q_OBJECT
 public:
-    explicit MenuWindow(MainWindow * parent=0);
+    explicit MenuWindow(MainWindow *parent=0);
 
     QGridLayout * mainLayout;
     QGridLayout * matchLauncherLayout;
@@ -39,6 +39,7 @@ public slots:
     void refreshConnectedList();
     void logOut();
     void startMatch();
+    void handlePlayers();
 
 private:
     MainWindow * parent_;

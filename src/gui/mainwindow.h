@@ -13,6 +13,7 @@
 #include <menuwindow.h>
 #include <loginscreenwidget.h>
 #include <matchwidget.h>
+#include <teamhandlingmenu.h>
 
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5};
 

@@ -17,9 +17,13 @@ public:
     Budger();
     ~Budger();
     Position autoMove(const Case grid[WIDTH][LENGTH]);
-    Way isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
+    void isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
     void hitPlayer(Player * player, int power);
     std::string getName();
+    Way getHitWay() const;
+
+private:
+    Way hitWay;
 };
 
 #endif // BUDGER_H

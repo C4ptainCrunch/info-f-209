@@ -1,6 +1,6 @@
 #include "Budger.h"
 
-Budger::Budger(): Ball(4) {
+Budger::Budger(): Ball(4), hitWay() {
     srand(time(NULL));
 }
 
@@ -28,12 +28,12 @@ Position Budger::autoMove(const Case grid[WIDTH][LENGTH]) {
 
 }
 
-Way Budger::isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]) {
+void Budger::isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]) {
     Way way;
     for (int i = 0; i < power; i++) {
         way.push_back(nextCase(position_, direction, grid));
     }
-    return way;
+    hitWay = way;
 }
 
 void Budger::hitPlayer(Player * player, int power) {
@@ -44,4 +44,8 @@ void Budger::hitPlayer(Player * player, int power) {
 
 std::string Budger::getName() {
     return "B";
+}
+
+Way Budger::getHitWay() const{
+    return hitWay;
 }

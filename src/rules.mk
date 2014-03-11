@@ -27,7 +27,7 @@ clean:
 
 
 mtest: $(A) $(DEPSA) test.cpp | $(BUILD_DIR)/tests/
-	$(CXX) $(LDFLAGS) $(CFLAGS) $(DEPSA) test.cpp -o $(BUILD_DIR)/tests/$(NAME)
+	$(CXX) $(LDFLAGS) $(CFLAGS) test.cpp -o $(BUILD_DIR)/tests/$(NAME) $(DEPSA)
 
 test: mtest
 	$(BUILD_DIR)/tests/$(NAME)

@@ -1,5 +1,5 @@
-#ifndef TEAMHANDLINGMENU_H
-#define TEAMHANDLINGMENU_H
+#ifndef TEAMHANDLINGWIDGET_H
+#define TEAMHANDLINGWIDGET_H
 
 #include <QMainWindow>
 #include <QLineEdit>
@@ -17,11 +17,11 @@
 class MainWindow;
 
 
-class TeamHandlingMenu : public QWidget
+class TeamHandlingWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TeamHandlingMenu(MainWindow *parent = 0);
+    explicit TeamHandlingWidget(MainWindow *parent = 0);
 
 signals:
 
@@ -34,4 +34,4 @@ private:
 
 #include <mainwindow.h>
 
-#endif // TEAMHANDLINGMENU_H
+#endif // TEAMHANDLINGWIDGET_H

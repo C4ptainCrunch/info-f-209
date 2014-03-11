@@ -153,6 +153,8 @@ MatchWidget::MatchWidget(QWidget * parent):
     //mainWidget->setLayout(mainLayout);
     //cout<<"LA"<<endl;
     //fieldWidget->move(200,200);
+    grid_[13][49] = 7;
+    refreshField();
     mainWidget->show();
 
 
@@ -293,5 +295,76 @@ void MatchWidget::generateGrid() {
     }
 
 }
+
+void MatchWidget::refreshField(){
+
+    QLabel * label = new QLabel(fieldWidget);
+    QPixmap * pixmap = new QPixmap(LENGHT*20, WIDTH*17);
+    pixmap->fill(Qt::transparent);
+
+    QPainter painter(pixmap);
+    painter.setBrush(QBrush(Qt::darkGreen));
+    Hexagon hexagon[WIDTH][LENGHT];
+    QBrush * grass = new QBrush(QImage("images/grass.jpg"));
+
+
+    double x = 0;
+    double y = 0;
+    bool pair = true;
+    for (int i = 0; i < WIDTH; ++i) {
+        //cout<<i<<endl;
+        for (int j = 0; j < LENGHT; ++j) {
+            //cout<<"MAX : "<<WIDTH<<" "<<LENGHT<<" X : "<<i<<" Y : "<<j<<endl;
+            cout<<grid_[i][j]<<" ";
+            hexagon[i][j].setX(x);
+            hexagon[i][j].setY(y);
+            hexagon[i][j].setCorners();
+
+            x += 18;
+            painter.setBrush(*grass);
+            if(grid_[i][j] != 9){
+                switch(grid_[i][j]){
+                    case -1:
+                        painter.setBrush(QBrush(Qt::yellow));
+                        break;
+                    case 1:
+                        painter.setBrush(QBrush(Qt::red));
+                        break;
+                    case 2:
+                        painter.setBrush(QBrush(Qt::blue));
+                        break;
+                    case 3:
+                        painter.setBrush(QBrush(Qt::white));
+                        break;
+                    case 4:
+                        painter.setBrush(QBrush(Qt::black));
+                        break;
+                    case 5:
+                        painter.setBrush(QBrush(QColor("darkGrey")));
+                        break;
+                    case 6:
+                        painter.setBrush(QBrush(QColor("brown")));
+                        break;
+                    case 7:
+                        painter.setBrush(QBrush(QColor("darkRed")));
+                        break;
+                }
+                painter.drawPolygon(hexagon[i][j].hexagon_);
+            }
+        }
+        cout<<endl;
+        y += 15;
+        if (pair) {
+            x = 35;
+        }
+        else {
+            x = 26;
+        }
+        pair = !pair;
+    }
+    label->setPixmap(*pixmap);
+    mainWidget->show();
+}
+
 
 MatchWidget::~MatchWidget() {}

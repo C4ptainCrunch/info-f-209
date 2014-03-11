@@ -47,10 +47,13 @@ void MainWindow::setNextScreen(int nextState) {
 
         }
         case AUCTIONHOUSESTATE:{
+            AuctionHouseWidget * auctionHouse = new AuctionHouseWidget(this);
+            currentWidget = auctionHouse;
+            auctionHouse->show();
             break;
         }
         case TEAMHANDLINGSTATE:{
-            TeamHandlingMenu * teamHandling = new TeamHandlingMenu(this);
+            TeamHandlingWidget * teamHandling = new TeamHandlingWidget(this);
             currentWidget = teamHandling;
             teamHandling->show();
             break;

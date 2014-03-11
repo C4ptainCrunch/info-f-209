@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     loginscreenwidget.cpp \
     matchwidget.cpp \
     hexagon.cpp \
-    teamhandlingmenu.cpp
+    teamhandlingwidget.cpp \
+    auctionhousewidget.cpp
 
 HEADERS  += mainwindow.h \
     menuwindow.h \
     loginscreenwidget.h \
     matchwidget.h \
     hexagon.h \
-    teamhandlingmenu.h
+    teamhandlingwidget.h \
+    auctionhousewidget.h
 
 FORMS    +=
 

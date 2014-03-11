@@ -40,6 +40,7 @@ public slots:
     void logOut();
     void startMatch();
     void handlePlayers();
+    void auctionHouse();
 
 private:
     MainWindow * parent_;

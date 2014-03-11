@@ -58,6 +58,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     //-------------------AUCTIONHOUSE BUTTON-------------------------
     auctionHouseButton = new QPushButton("Encheres");
     auctionHouseButton->setMinimumHeight(60);
+    connect(auctionHouseButton,SIGNAL(clicked()),this,SLOT(auctionHouse()));
 
     //-----------------TEAM HANDLING BUTTON--------------------------
     teamHandlingButton = new QPushButton("Gestion de Team");
@@ -108,6 +109,10 @@ void MenuWindow::logOut() {
         parent_->setNextScreen(LOGINMENUSTATE);
     }
 
+}
+
+void MenuWindow::auctionHouse() {
+    parent_->setNextScreen(AUCTIONHOUSESTATE);
 }
 
 void MenuWindow::refreshConnectedList() {

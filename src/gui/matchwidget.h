@@ -27,6 +27,7 @@ public:
     explicit MatchWidget(QWidget * parent=0);
     void mousePressEvent(QMouseEvent *);
     void generateGrid() ;
+    void refreshField();
     ~MatchWidget();
 
 signals:

@@ -1,8 +1,8 @@
-#include "teamhandlingmenu.h"
+#include "teamhandlingwidget.h"
 #include <QCoreApplication>
 #include <QHeaderView>
 
-TeamHandlingMenu::TeamHandlingMenu(MainWindow *parent) :
+TeamHandlingWidget::TeamHandlingWidget(MainWindow *parent) :
     QWidget(parent), parent_(parent) {
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
@@ -67,6 +67,6 @@ TeamHandlingMenu::TeamHandlingMenu(MainWindow *parent) :
 
 }
 
-void TeamHandlingMenu::backToMenu(){
+void TeamHandlingWidget::backToMenu(){
     parent_->setNextScreen(MAINMENUSTATE);
 }

@@ -75,6 +75,12 @@ void MainWindow::setNextScreen(int nextState) {
 
 }
 
+QWidget* MainWindow::getCurrentWidget(){
+    return currentWidget;
+}
+
+
+
 void QWidget::closeEvent(QCloseEvent * event) {
     event->accept();
     /*
@@ -88,3 +94,5 @@ void QWidget::closeEvent(QCloseEvent * event) {
        }
      */
 }
+
+

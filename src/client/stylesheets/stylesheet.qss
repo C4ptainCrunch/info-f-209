@@ -1,0 +1,64 @@
+QLineEdit {
+                            border: 2px solid darkbrown;
+                            border-radius: 10px;
+                            padding: 0 8px;
+                            selection-background-color: darkgray;
+ }
+
+
+QPushButton {
+                            border: 2px solid darkbrown;
+                            border-radius: 10px;
+                            padding: 0 8px;
+                            background-image : url(images/wood.jpg);
+                            selection-background-color: brown;
+                            background-color: black;
+                            color : white;
+                      }
+
+QPushButton:pressed {
+                            border: 4px solid black;
+                            border-radius: 10px;
+                            padding: 0 8px;
+                            selection-background-color: darkgray;
+                            background-color: black;
+                            color : white;
+                            background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
+ }
+QPushButton::flat{
+                            border: 2px solid gray;
+                            border-radius: 10px;
+                            padding: 0 8px;
+                            selection-background-color: darkgray;
+                            background-color: black;
+                            color : white;
+                            background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
+
+
+}
+QComboBox {
+        border: 2px solid darkbrown;
+        background-image : url(images/wood.jpg);
+        border-radius: 10px;
+        padding: 1px 23px 1px 3px;
+        min-width: 6em;
+        color: #ffffff;
+}
+QComboBox::drop-down {
+        subcontrol-origin: padding;
+        subcontrol-position: top right;
+        width: 20px;
+
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+}
+
+QComboBox QAbstractItemView{
+        background-color: #4f4f4f;
+        color: #999999;
+
+        selection-background-color: #999999;
+        selection-color: #4f4f4f;
+}

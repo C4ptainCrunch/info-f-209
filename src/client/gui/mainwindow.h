@@ -26,7 +26,11 @@ public:
 
     explicit MainWindow(QWidget * parent=0);
     QVBoxLayout * backgroundLayout;
+    QWidget* getCurrentWidget();
     ~MainWindow();
+
+signals:
+    void loginSuccess();
 
 public slots:
     void setNextScreen(int nextState);

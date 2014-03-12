@@ -26,9 +26,13 @@ public slots:
     void registerUser();
     void showCredits();
     void exit();
-
+    void acceptLogin();
 private:
     QLineEdit * usernameLine;
+    QPushButton * connectButton;
+    QPushButton * creditsButton;
+    QPushButton * registerButton;
+    QPushButton * quitButton;
     QLineEdit * passLine;
     MainWindow * parent_;
 

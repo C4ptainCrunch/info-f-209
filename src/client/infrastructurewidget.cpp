@@ -64,7 +64,7 @@ InfrastructureWidget::InfrastructureWidget(MainWindow *parent) :
     currentInfrastructure->setText("Infirmerie");
     currentInfrastructure->setAlignment(Qt::AlignHCenter);
     currentInfrastructure->setAlignment(Qt::AlignVCenter);
-    currentInfrastructure->setStyleSheet("color : white; font-size : 60px;");
+    currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
 
     QHBoxLayout * buttonsLayout = new QHBoxLayout();
 
@@ -94,7 +94,7 @@ void InfrastructureWidget::setTrainingField(){
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Terrain d'entrainement");
     currentInfrastructure->setAlignment(Qt::AlignHCenter);
-    currentInfrastructure->setStyleSheet("color : white; font-size : 60px;");
+    currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
 void InfrastructureWidget::setInfirmary(){
@@ -102,7 +102,7 @@ void InfrastructureWidget::setInfirmary(){
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Infirmerie");
     currentInfrastructure->setAlignment(Qt::AlignHCenter);
-    currentInfrastructure->setStyleSheet("color : white; font-size : 60px;");
+    currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
 void InfrastructureWidget::setField(){
@@ -110,7 +110,7 @@ void InfrastructureWidget::setField(){
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Terrain");
     currentInfrastructure->setAlignment(Qt::AlignHCenter);
-    currentInfrastructure->setStyleSheet("color : white; font-size : 60px;");
+    currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
 void InfrastructureWidget::setFanShop(){
@@ -118,7 +118,7 @@ void InfrastructureWidget::setFanShop(){
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Fanshop");
     currentInfrastructure->setAlignment(Qt::AlignHCenter);
-    currentInfrastructure->setStyleSheet("color : white; font-size : 60px;");
+    currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
 void InfrastructureWidget::setCandyShop(){
@@ -126,7 +126,7 @@ void InfrastructureWidget::setCandyShop(){
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Magasin de bonbons");
     currentInfrastructure->setAlignment(Qt::AlignHCenter);
-    currentInfrastructure->setStyleSheet("color : white; font-size : 60px;");
+    currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
 

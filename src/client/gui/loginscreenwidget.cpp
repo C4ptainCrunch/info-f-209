@@ -40,7 +40,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     QObject::connect(creditsButton, SIGNAL(clicked()), this, SLOT(showCredits()));
 
     connectButton = new QPushButton("Connect", fields);
-    QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(checkIdPresence()));
+    QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(logIn()));
 
     registerButton = new QPushButton("Register", fields);
     QObject::connect(registerButton, SIGNAL(clicked()),this, SLOT(registerUser()));
@@ -73,7 +73,7 @@ void loginScreenWidget::showCredits() {
 }
 
 
-void loginScreenWidget::checkIdPresence() {
+void loginScreenWidget::logIn() {
     QString username = usernameLine->text();
     QString password = passLine->text();
     if ((username.isEmpty() && password.isEmpty())or((username == "username") && (password == "password"))) {

@@ -4,6 +4,8 @@
 #include <cmath>
 #include <string>
 #include <typeinfo>
+#include <iostream>
+#include <time.h>
 
 #include "Club.h"
 #include "FieldPlayer.h"
@@ -26,7 +28,7 @@ public:
     void movePlayer(int fromX, int fromY, int toX, int toY);
     int * getScore();
     int addPoint(bool guestTeam, int delta=1);
-    void moveBalls();
+    void moveBalls(bool& moved, int turnNumber);
     void newTurn(Way playerWays[14]);
     void resolveConflict(Position nextPosition[14], Way playerWays[14], int indexOne, int turnNumber);
     int findIndex(Position nextPosition[14], Position position);
@@ -40,7 +42,7 @@ private:
     FieldPlayer teams_[2][7];
     int score_[2];
     Club * clubs_[2];
-    Case grid_[WIDTH][LENGHT];
+    Case grid_[WIDTH][LENGTH];
     GoldenSnitch goldenSnitch_;
     Quaffle quaffle_;
     Budger budgers_[2];

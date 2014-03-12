@@ -1,12 +1,14 @@
 #include "GoldenSnitch.h"
 
-GoldenSnitch::GoldenSnitch(): Ball(0) {
+using namespace std;
+
+GoldenSnitch::GoldenSnitch(): Ball(42) {
     srand(time(NULL));
-} //TODO set speed
+}
 
 GoldenSnitch::~GoldenSnitch() {}
 
-Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGHT]) {
+Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGTH]) {
     Position nextPosition;
     int next = rand() % 6;
     nextPosition = nextCase(position_, next, grid);
@@ -25,4 +27,8 @@ Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGHT]) {
         }
     }
     return position_;
+}
+
+string GoldenSnitch::getName() {
+    return "G";
 }

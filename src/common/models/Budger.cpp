@@ -1,12 +1,12 @@
 #include "Budger.h"
 
-Budger::Budger(): Ball(0) {
+Budger::Budger(): Ball(4), hitWay() {
     srand(time(NULL));
-} // TODO set speed
+}
 
 Budger::~Budger() {}
 
-Position Budger::autoMove(const Case grid[WIDTH][LENGHT]) {
+Position Budger::autoMove(const Case grid[WIDTH][LENGTH]) {
     Position nextPosition;
     int next = rand() % 6;
     nextPosition = nextCase(position_, next, grid);
@@ -28,14 +28,24 @@ Position Budger::autoMove(const Case grid[WIDTH][LENGHT]) {
 
 }
 
-Way Budger::isHit(const char direction, const int power, const Case grid[WIDTH][LENGHT]) {
+void Budger::isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]) {
     Way way;
     for (int i = 0; i < power; i++) {
         way.push_back(nextCase(position_, direction, grid));
     }
-    return way;
+    hitWay = way;
 }
 
-void Budger::hitPlayer(Player & player, int power) {
-// TODO
+void Budger::hitPlayer(Player * player, int power) {
+    if (1 == rand() % 20) {
+        player->setWoundState(true);
+    }
+}
+
+std::string Budger::getName() {
+    return "B";
+}
+
+Way Budger::getHitWay() const{
+    return hitWay;
 }

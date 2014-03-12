@@ -10,6 +10,7 @@ void * print_message(void*) {
     sleep(1);
     cout << "Threading2" << endl;
     sleep(1);
+    return 0;
 }
 
 void test_thread() {

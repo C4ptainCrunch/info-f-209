@@ -18,6 +18,8 @@ AuctionHouseWidget::AuctionHouseWidget(MainWindow *parent) :
     QWidget * mainWidget = new QWidget(this);
     mainWidget->setFixedHeight(720);
     mainWidget->setFixedWidth(1280);
+
+
     QWidget* message = new QWidget(mainWidget);
     QGridLayout* messageLayout = new QGridLayout(message);
     message-> setFixedSize(600,300);

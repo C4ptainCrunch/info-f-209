@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     matchwidget.cpp \
     hexagon.cpp \
     teamhandlingwidget.cpp \
-    auctionhousewidget.cpp
+    auctionhousewidget.cpp \
+    infrastructurewidget.cpp
 
 HEADERS  += mainwindow.h \
     menuwindow.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     matchwidget.h \
     hexagon.h \
     teamhandlingwidget.h \
-    auctionhousewidget.h
+    auctionhousewidget.h \
+    infrastructurewidget.h
 
 FORMS    +=
 

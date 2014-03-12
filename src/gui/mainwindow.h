@@ -15,8 +15,9 @@
 #include <matchwidget.h>
 #include <teamhandlingwidget.h>
 #include <auctionhousewidget.h>
+#include <infrastructurewidget.h>
 
-enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5};
+enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5, INFRASTRUCTURESTATE = 6};
 
 class MainWindow: public QWidget {
     Q_OBJECT

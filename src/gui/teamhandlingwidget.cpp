@@ -56,15 +56,6 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow *parent) :
     mainWidget->move(parent_->width()/2-tableWidth/2,parent_->height()/2-tableheight/2);
 
 
-
-    /* QTableI
-     * for (int i = 0; i<team.size(); ++i){
-     *
-     * }
-     *
-     *
-     * */
-
 }
 
 void TeamHandlingWidget::backToMenu(){

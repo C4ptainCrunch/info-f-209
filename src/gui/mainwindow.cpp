@@ -64,6 +64,13 @@ void MainWindow::setNextScreen(int nextState) {
             match->show();
             break;
         }
+        case INFRASTRUCTURESTATE:{
+            InfrastructureWidget * infrastructure = new InfrastructureWidget(this);
+            currentWidget = infrastructure;
+            infrastructure->show();
+            break;
+
+        }
     }
 
 }

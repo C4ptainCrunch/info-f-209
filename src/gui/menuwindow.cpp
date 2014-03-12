@@ -65,6 +65,12 @@ MenuWindow::MenuWindow(MainWindow * parent):
     teamHandlingButton->setMinimumHeight(60);
     connect(teamHandlingButton, SIGNAL(clicked()), this, SLOT(handlePlayers()));
 
+    //-----------------INFRASTRUCTURE BUTTON--------------------------
+    infrastructureButton = new QPushButton("Infrastructures");
+    infrastructureButton->setMinimumHeight(60);
+    connect(infrastructureButton, SIGNAL(clicked()), this, SLOT(infrastructures()));
+
+
     //------------------DISCONNECT BUTTON---------------------------
     disconnectButton = new QPushButton("Se deconnecter");
     disconnectButton->setMinimumHeight(60);
@@ -83,6 +89,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     mainLayout->addWidget(auctionHouseButton, 1, 1, 1, 1);
     mainLayout->addWidget(disconnectButton, 4, 2, 1, 1);
     mainLayout->addWidget(teamHandlingButton, 1, 3, 1, 1);
+    mainLayout->addWidget(infrastructureButton, 1, 2, 1, 1);
     //mainLayout->addWidget(quitWidget,4,3,1,1);
     mainLayout->addWidget(matchLauncherWidget, 2, 2, 2, 1);
     mainLayout->addWidget(temp2, 5, 4, 1, 1);
@@ -95,6 +102,12 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
 void MenuWindow::handlePlayers(){
     parent_->setNextScreen(TEAMHANDLINGSTATE);
+
+}
+
+
+void MenuWindow::infrastructures(){
+    parent_->setNextScreen(INFRASTRUCTURESTATE);
 
 }
 

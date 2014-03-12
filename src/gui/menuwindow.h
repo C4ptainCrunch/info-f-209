@@ -30,6 +30,7 @@ public:
     QComboBox * list;
 
     QPushButton * disconnectButton;
+    QPushButton * infrastructureButton;
     QPushButton * auctionHouseButton;
     QPushButton * teamHandlingButton;
 
@@ -41,6 +42,7 @@ public slots:
     void startMatch();
     void handlePlayers();
     void auctionHouse();
+    void infrastructures();
 
 private:
     MainWindow * parent_;

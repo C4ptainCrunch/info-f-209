@@ -6,7 +6,7 @@
 
 #include <unistd.h>
 
-#define SECOND 1000000
+#define SECOND 0999999
 
 class Thread {
 public:

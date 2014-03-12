@@ -18,7 +18,7 @@ InfrastructureWidget::InfrastructureWidget(MainWindow *parent) :
     QLabel * image = new QLabel(this);
     image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/Quidditch_pitch_hogwarts.jpg"));
     layout->addWidget(image);
-    this->setLayout(layout);
+    //this->setLayout(layout);
 
     //---------------------MAIN CONTAINER WIDGET---------------------------
     mainWidget = new QWidget(this);
@@ -81,15 +81,11 @@ InfrastructureWidget::InfrastructureWidget(MainWindow *parent) :
     QWidget * temp2 = new QWidget(mainWidget);
     temp2->setFixedSize(100,100);
 
-    //currentInfrastructureWidget->move(300,150);
-    //currentInfrastructureWidget->show();
-
     mainLayout->addWidget(backButton,0,0);
     mainLayout->addWidget(currentInfrastructureWidget,0,1);
     mainLayout->addWidget(temp2,3,2);
     mainLayout->addLayout(buttonsLayout,1,1);
 
-    mainWidget->setLayout(buttonsLayout);
 
 }
 

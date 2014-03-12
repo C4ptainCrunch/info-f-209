@@ -1,6 +1,8 @@
-#include "identification.h"
+#include "user.h"
 
 using namespace std;
+
+namespace views {
 
 void login(JsonValue * message, UserHandler * handler) {
     JsonDict * dictMessage = JDICT(message);
@@ -13,7 +15,6 @@ void login(JsonValue * message, UserHandler * handler) {
     string password = getString(dictMessage, "password");
 
     string filename = handler->path("users", username);
-    cout << filename << endl;
     string content;
 
     if (readFile(filename, content) != 0) {
@@ -30,8 +31,7 @@ void login(JsonValue * message, UserHandler * handler) {
     if (manager->checkPassword(password)) {
         JsonDict answer;
 
-        JsonBool b = JsonBool(true);
-        answer.add("success", &b);
+        answer.add("success", new JsonBool(true));
         handler->writeToClient("login", &answer);
         handler->setManager(manager);
     }
@@ -64,8 +64,7 @@ void signup(JsonValue * message, UserHandler * handler) {
 
     JsonDict answer;
 
-    JsonBool b = JsonBool(true);
-    answer.add("success", &b);
+    answer.add("success", new JsonBool(true));
     handler->writeToClient("login", &answer);
 }
 
@@ -81,4 +80,5 @@ void userlist(JsonValue * message, UserHandler * handler) {
         }
     }
     handler->writeToClient("userlist", &answer);
+}
 }

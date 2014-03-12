@@ -7,7 +7,7 @@ CODE=$(call rwildcard, src/, *.cpp *.h)
 EXECUTABLES=server
 
 SERVER_DEPS=$(BUILD_DIR)/server.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/models.a $(BUILD_DIR)/libexception.a
-RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a
+RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libtest.a
 
 all: $(addprefix $(BUILD_DIR)/bin/,$(EXECUTABLES))
 
@@ -18,31 +18,34 @@ $(BUILD_DIR)/../server-config.json: | $(BUILD_DIR)/bin/
 	cp src/server/config.json.example $@
 
 $(BUILD_DIR)/server.a:
-	make -C src/server
+	$(MAKE) -C src/server
 
 $(BUILD_DIR)/models.a:
-	make -C src/common/models
+	$(MAKE) -C src/common/models
 
 $(BUILD_DIR)/server-views.a:
-	make -C src/server/views
+	$(MAKE) -C src/server/views
 
 $(BUILD_DIR)/libjson.a:
-	make -C src/common/lib/json
+	$(MAKE) -C src/common/lib/json
 
 $(BUILD_DIR)/libfile.a:
-	make -C src/common/lib/file
+	$(MAKE) -C src/common/lib/file
 
 $(BUILD_DIR)/libsocket.a:
-	make -C src/common/lib/socket
+	$(MAKE) -C src/common/lib/socket
 
 $(BUILD_DIR)/libexception.a:
-	make -C src/common/lib/exception
+	$(MAKE) -C src/common/lib/exception
+
+$(BUILD_DIR)/libtest.a:
+	$(MAKE) -C src/common/lib/test
 
 $(BUILD_DIR)/bin/:
 	mkdir -p $@
 
 doc: $(BUILD_DIR)/doc
-	make -C doc
+	$(MAKE) -C doc
 
 .PHONY: clean doc $(RMAKES)
 

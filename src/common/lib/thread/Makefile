@@ -1,6 +1,5 @@
 include ../../../options.mk
 
-NAME=libjson
-DEPS=
+NAME=libthread
 
 include ../../../rules.mk

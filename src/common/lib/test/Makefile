@@ -1,6 +1,6 @@
 include ../../../options.mk
 
-NAME=libjson
+NAME=libtest
 DEPS=
 
 include ../../../rules.mk

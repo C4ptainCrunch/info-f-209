@@ -92,6 +92,13 @@ string JsonString::toString() {
 
 // Dict
 
+JsonDict::~JsonDict(){
+    for(std::map<std::string, JsonValue *>::iterator iter = dict.begin(); iter != dict.end(); ++iter) {
+        delete iter->second;
+        iter->second = NULL;
+    }
+}
+
 JsonDict * JsonDict::fromString(string message, int & i) {
     i++;
     JsonDict * r = new JsonDict();
@@ -156,6 +163,13 @@ JsonValue * JsonDict::operator[](const string & str) {
 
 
 // List
+
+JsonList::~JsonList(){
+    for(int i = 0; i < content.size(); i++) {
+        delete content[i];
+        content[i] = NULL;
+    }
+}
 
 JsonList * JsonList::fromString(string message, int & i) {
     i++;

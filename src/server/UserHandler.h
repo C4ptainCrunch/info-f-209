@@ -10,7 +10,6 @@
 #include "../common/lib/socket/Socket.h"
 #include "../common/models/Manager.h"
 #include "helpers.h"
-#include "views/views.h"
 
 class UserHandler;
 
@@ -21,7 +20,7 @@ class UserHandler {
 public:
     UserHandler(std::vector<UserHandler *> * handlers_list, std::string datapath);
     ~UserHandler();
-    void start(const int fd, thread * handling_thread);
+    void start(const int fd, std::thread * handling_thread);
     bool isReady();
     int loop();
 
@@ -36,13 +35,13 @@ private:
     bool dead;
     Socket * s_;
     Manager * manager_;
-    thread * handling_thread_;
+    std::thread * handling_thread_;
     std::vector<UserHandler *> * handlers_list_;
     std::string datapath_;
 
     void handleMessage(std::string message);
 
-    static const map<string, view_ptr> viewmap;
+    static const std::map<std::string, view_ptr> viewmap;
 };
 //HANDLE_H
 #endif

@@ -1,14 +1,15 @@
 #include "../test/libtest.h"
+#include "thread.h"
 
 using namespace std;
-#include "thread.h"
+
 
 void * print_message(void*) {
 
     cout << "Threading" << endl;
-    usleep(SECOND);
+    sleep(1);
     cout << "Threading2" << endl;
-    usleep(SECOND);
+    sleep(1);
 }
 
 void test_thread() {

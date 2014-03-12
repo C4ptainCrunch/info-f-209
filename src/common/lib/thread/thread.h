@@ -6,8 +6,6 @@
 
 #include <unistd.h>
 
-#define SECOND 999999
-
 class Thread {
 public:
     Thread(void *(*routine) (void *), void * p = NULL);

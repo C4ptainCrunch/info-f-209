@@ -6,7 +6,7 @@ void writeToServer(Socket s, string topic, string message){
     s.write(topic + ":" + message);
 }
 
-namespace rviews {
+namespace sviews {
 void login(Socket s, string username, string password){
     JsonDict answer;
     answer.add("username", new JsonString(username));

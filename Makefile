@@ -63,7 +63,7 @@ $(BUILD_DIR)/libtest.a:
 
 
 $(BUILD_DIR)/client-send-views.a:
-	$(MAKE) -C src/client/gui
+	$(MAKE) -C src/client/send-views
 
 $(BUILD_DIR)/bin/:
 	mkdir -p $@

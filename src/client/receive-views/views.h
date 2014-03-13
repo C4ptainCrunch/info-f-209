@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "../../common/lib/json/json.h"
+#include "../../common/lib/json/helpers.h"
 
 class ServerHandler;
 

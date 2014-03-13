@@ -19,7 +19,7 @@ void * start_loop(void* arg) {
 }
 
 int main(int argc, char * argv[]) {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
 
     MainWindow * window = new MainWindow();
 
@@ -37,7 +37,7 @@ int main(int argc, char * argv[]) {
 
     window->show();
 
-    Thread a = Thread(start_loop, (void *)&handler);
+    Thread loopThread = Thread(start_loop, (void *)&handler);
 
-    return a.exec();
+    return app.exec();
 }

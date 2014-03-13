@@ -30,6 +30,7 @@ public:
     QWidget* getCurrentWidget();
     ~MainWindow();
     void setSocket(Socket* s);
+    Socket* getSocket();
 
 signals:
     void loginSuccess();

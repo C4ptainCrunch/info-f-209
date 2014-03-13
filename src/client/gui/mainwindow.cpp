@@ -116,3 +116,7 @@ void MainWindow::getDefi(string username){
 void MainWindow::setSocket(Socket* s){
     s_ = s;
 }
+
+Socket* getSocket(){
+    return s_;
+}

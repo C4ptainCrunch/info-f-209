@@ -21,7 +21,7 @@ Socket::~Socket() {
 
 
 int Socket::write(string message) {
-    const char * msg;
+    char * msg;//const?
     int len, bytes_sent;
 
     message += "\n\n";
@@ -64,7 +64,8 @@ int Socket::read(string & message) {
 
     while (!isComplete) {
         int len;
-        len = recv(fd_, buffer, SBUFF_SIZE - 1, 0);
+        len = recv(fd_, buffer, sizeof(buffer) - 1, 0);
+        cout << "BUFFER : " << buffer << endl;
         if (len == -1) {
             return -1; // socket error, could not read
         }

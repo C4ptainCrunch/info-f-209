@@ -18,6 +18,7 @@ int main(int argc, char * argv[]) {
     //menuWindow->show();
 
     window->show();
+    emit window->registerFailure();
     ServerHandler k = ServerHandler("bill.local", 5000, window);
     k.connect_socket();
     k.loop();

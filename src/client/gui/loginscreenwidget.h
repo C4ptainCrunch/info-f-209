@@ -28,6 +28,9 @@ public slots:
     void exit();
     void acceptLogin();
     void refuseLogin();
+    void refuseRegister();
+    void acceptRegister();
+
 private:
     QLineEdit * usernameLine;
     QPushButton * connectButton;

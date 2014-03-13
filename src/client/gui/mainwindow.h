@@ -32,6 +32,8 @@ public:
 signals:
     void loginSuccess();
     void loginFailure();
+    void registerSuccess();
+    void registerFailure();
     void newDefi(std::string username);
 
 public slots:

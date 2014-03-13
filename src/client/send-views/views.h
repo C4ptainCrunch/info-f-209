@@ -8,7 +8,7 @@
 
 namespace sviews {
 void login(Socket s, std::string username, std::string password);
-void signup(Socket s, std::string username, std::string password);
+void signup(Socket s, std::string username, std::string name, std::string password);
 void userlist(Socket s);
 }
 

@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget * parent):
     loginScreenWidget * login = new loginScreenWidget(this);
     login->show();
 
+    //-----------------SIGNAUX----------------------------
+    QObject::connect(this, SIGNAL(newDefi()), this, SLOT(getDefi()));
+
 
 }
 
@@ -93,6 +96,10 @@ void QWidget::closeEvent(QCloseEvent * event) {
         event->ignore();
        }
      */
+}
+
+void MainWindow::getDefi(string username){
+
 }
 
 

@@ -32,9 +32,12 @@ public:
 signals:
     void loginSuccess();
     void loginFailure();
+    void newDefi(std::string username);
 
 public slots:
     void setNextScreen(int nextState);
+    void getDefi(std::string username);
+
 
 private:
     QLineEdit * usernameLine;

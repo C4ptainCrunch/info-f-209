@@ -14,9 +14,10 @@ void login(Socket s, string username, string password){
     writeToServer(s, "login", answer.toString());
 }
 
-void signup(Socket s, string username, string password){
+void signup(Socket s, string username, string name, string password){
     JsonDict answer;
     answer.add("username", new JsonString(username));
+    answer.add("name", new JsonString(name));
     answer.add("password", new JsonString(password));
     writeToServer(s, "register", answer.toString());
 }

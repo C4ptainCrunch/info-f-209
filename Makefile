@@ -16,10 +16,16 @@ all: $(addprefix $(BUILD_DIR)/bin/,$(EXECUTABLES))
 $(BUILD_DIR)/bin/server: $(SERVER_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/../server-config.json
 	$(CXX) $(LDFLAGS) -o $@ $^
 
-$(BUILD_DIR)/bin/client: $(CLIENT_DEPS) | $(BUILD_DIR)/bin/
+$(BUILD_DIR)/bin/client: $(CLIENT_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/bin/images $(BUILD_DIR)/bin/stylesheets
 	rm -f src/client/gui/Makefile
 	cd src/client/gui/; qmake; cd -
 	$(MAKE) -C src/client/gui/
+
+$(BUILD_DIR)/bin/images:
+	cp -r src/client/gui/images $(BUILD_DIR)/bin/
+
+$(BUILD_DIR)/bin/stylesheets:
+	cp -r  src/client/gui/stylesheets $(BUILD_DIR)/bin/
 
 
 $(BUILD_DIR)/../server-config.json: | $(BUILD_DIR)/bin/

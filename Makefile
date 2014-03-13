@@ -21,6 +21,12 @@ $(BUILD_DIR)/bin/client: $(CLIENT_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/bin/ima
 	cd src/client/gui/; qmake; cd -
 	$(MAKE) -C src/client/gui/
 
+client: $(BUILD_DIR)/bin/client
+	./build/bin/client
+
+server: $(BUILD_DIR)/bin/server
+	./build/bin/server -c ./server-config.json
+
 $(BUILD_DIR)/bin/images:
 	cp -r src/client/gui/images $(BUILD_DIR)/bin/
 

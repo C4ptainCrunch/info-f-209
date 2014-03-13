@@ -44,7 +44,7 @@ OTHER_FILES += \
     ../build-mainWindow-Desktop-Release/stylesheets/stylesheet.qss \
     stylesheets/stylesheet.qss
 
-LIBS+= $$DESTDIR/libjson.a $$DESTDIR/libsocket.a $$DESTDIR/libexception.a
+LIBS+= $$DESTDIR/libjson.a $$DESTDIR/libsocket.a $$DESTDIR/libexception.a $$DESTDIR/client-send-views.a
 
 
 OBJECTS_DIR = $$DESTDIR/qclient/

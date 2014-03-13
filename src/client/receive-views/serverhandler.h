@@ -16,6 +16,15 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 
+#include <QApplication>
+#include <QPushButton>
+#include <QGraphicsView>
+#include <QGridLayout>
+#include <QLabel>
+#include <QPixmap>
+#include <iostream>
+#include <menuwindow.h>
+
 #include "../../common/lib/socket/Socket.h"
 #include "../../common/lib/json/json.h"
 #include "../../common/lib/exception/BadRequest.h"
@@ -30,7 +39,7 @@ typedef void (* view_ptr)(JsonValue *, ServerHandler *);
 
 class ServerHandler {
 public:
-    ServerHandler(std::string host, const int port, MainWindow * window);
+    ServerHandler(std::string host, const int port, MainWindow* window);
     ~ServerHandler();
     bool connect_socket(const int timeout = 2);
     void send(std::string message);

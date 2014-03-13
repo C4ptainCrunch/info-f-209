@@ -99,7 +99,7 @@ void ServerHandler::handleMessage(string message) {
 int ServerHandler::loop() {
     string message;
     while (1) {
-        if (s_->read(message)) {
+        if (s_->read(message) != 1) {
             return 0;
         }
         handleMessage(message);

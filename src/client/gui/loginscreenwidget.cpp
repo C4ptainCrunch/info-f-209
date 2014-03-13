@@ -51,9 +51,9 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
     QObject::connect(parent_,SIGNAL(loginSuccess()),this,SLOT(acceptLogin()));
-    QObject::connect(parent_, SIGNAL(loginFailure()),this,SLOT(refuseLogin()));
+    QObject::connect(parent_, SIGNAL(loginFailure(int)),this,SLOT(refuseLogin(int)));
     QObject::connect(parent_, SIGNAL(registerSuccess()),this,SLOT(acceptRegister()));
-    QObject::connect(parent_, SIGNAL(registerFailure()),this,SLOT(refuseRegister()));
+    QObject::connect(parent_, SIGNAL(registerFailure(int)),this,SLOT(refuseRegister(int)));
 
 
     //--------------------------ADDS THE WIGETS---------------------------
@@ -99,7 +99,7 @@ void loginScreenWidget::acceptLogin(){
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
-void loginScreenWidget::refuseLogin(){
+void loginScreenWidget::refuseLogin(int errorCode){
     QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
     connectButton->setStyleSheet("color : white;");
 }
@@ -108,7 +108,7 @@ void loginScreenWidget::acceptRegister(){
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
-void loginScreenWidget::refuseRegister(){
+void loginScreenWidget::refuseRegister(int errorCode){
     QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
     registerButton->setStyleSheet("color : white;");
 }

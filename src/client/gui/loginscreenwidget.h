@@ -27,8 +27,8 @@ public slots:
     void showCredits();
     void exit();
     void acceptLogin();
-    void refuseLogin();
-    void refuseRegister();
+    void refuseLogin(int errorCode);
+    void refuseRegister(int errorCode);
     void acceptRegister();
 
 private:

@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QCloseEvent>
 #include <QCoreApplication>
+#include <vector>
 #include <menuwindow.h>
 #include <loginscreenwidget.h>
 #include <matchwidget.h>
@@ -33,7 +34,7 @@ signals:
     void loginSuccess();
     void loginFailure(int);
     void registerSuccess();
-    void refreshRegisterList();
+    void userList(vector<string>);
     void registerFailure(int);
     void newDefi(std::string username);
 

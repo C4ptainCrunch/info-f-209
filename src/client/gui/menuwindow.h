@@ -10,8 +10,11 @@
 #include <QHBoxLayout>
 #include <QWidget>
 #include <QString>
+#include <string>
+#include <vector>
 #include <QComboBox>
 #include <iostream>
+
 
 class MainWindow;
 
@@ -40,7 +43,7 @@ public:
 signals:
 
 public slots:
-    void refreshConnectedList();
+    void refreshConnectedList(std::vector<std::string> connectedList);
     void logOut();
     void startMatch();
     void handlePlayers();

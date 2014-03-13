@@ -104,7 +104,7 @@ int ServerHandler::loop() {
     }
 }
 
-MainWindow * ServerHandler::getWIndow() {
+MainWindow * ServerHandler::getWindow() {
     return window_;
 }
 

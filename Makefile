@@ -7,7 +7,7 @@ CODE=$(call rwildcard, src/, *.cpp *.h)
 EXECUTABLES=server client
 
 SERVER_DEPS=$(BUILD_DIR)/server.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/models.a $(BUILD_DIR)/libexception.a
-CLIENT_DEPS=$(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/client-send-views.a
+CLIENT_DEPS=$(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/client-send-views.a $(BUILD_DIR)/libthread.a
 
 RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libtest.a
 
@@ -61,6 +61,8 @@ $(BUILD_DIR)/libexception.a:
 $(BUILD_DIR)/libtest.a:
 	$(MAKE) -C src/common/lib/test
 
+$(BUILD_DIR)/libthread.a:
+	$(MAKE) -C src/common/lib/thread/
 
 $(BUILD_DIR)/client-send-views.a:
 	$(MAKE) -C src/client/send-views

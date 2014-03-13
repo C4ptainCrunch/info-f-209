@@ -8,10 +8,18 @@
 #include <iostream>
 #include <menuwindow.h>
 #include "../receive-views/serverhandler.h"
+#include "../../common/lib/thread/thread.h"
+
 using namespace std;
 
+void * start_loop(void* arg) {
+    ServerHandler * handler = (ServerHandler*) arg;
+    handler->loop();
+    return 0;
+}
+
 int main(int argc, char * argv[]) {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
 
     MainWindow * window = new MainWindow();
 
@@ -29,7 +37,7 @@ int main(int argc, char * argv[]) {
 
     window->show();
 
-    handler.loop();
+    Thread loopThread = Thread(start_loop, (void *)&handler);
 
-    return a.exec();
+    return app.exec();
 }

@@ -90,3 +90,34 @@ int Socket::getFd() const {
 void Socket::setFd(const int fd) {
     fd_ = fd;
 }
+
+
+Socket::Socket(string hostname, int port){
+    int sockfd;
+    struct sockaddr_in their_addr;
+    struct hostent *he;
+
+    if ((he=gethostbyname(hostname.c_str())) == NULL) {
+        perror("Client: gethostbyname");
+        throw 1;
+    }
+
+    if ((sockfd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
+        perror("Client: socket");
+        throw 1;
+    }
+
+    their_addr.sin_family = AF_INET;
+    their_addr.sin_port = htons(port);
+    their_addr.sin_addr = *((struct in_addr*)he->h_addr);
+    memset(&(their_addr.sin_zero), '\0', 8);
+
+
+    if (connect(sockfd, (struct sockaddr *)&their_addr, sizeof(struct sockaddr)) == -1) {
+        perror("Client: connect");
+        throw 1;
+    }
+
+    buffer[0] = '\0';
+    fd_ = sockfd;
+}

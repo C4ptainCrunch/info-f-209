@@ -153,7 +153,7 @@ void MenuWindow::refreshConnectedList(vector<string> connectedList) {
 
 
     for (int i = 0; i < connectedList.size(); ++i) {
-        list->addItem(QString(connectedList[i]));
+        list->addItem(QString::fromStdString(connectedList[i]));
     }
 
 

@@ -77,6 +77,10 @@ MenuWindow::MenuWindow(MainWindow * parent):
     disconnectButton->setMinimumHeight(60);
     connect(disconnectButton, SIGNAL(clicked()), this, SLOT(logOut()));
 
+    //-----------------------CUSTOM SIGNALS CONNECTION--------------------
+
+    QObject::connect(parent_,SIGNAL(userList(vector<string>)),this,SLOT(refreshConnectedList(vector<string>)));
+
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
     QWidget * temp = new QWidget;
     temp->setFixedHeight(20);
@@ -142,12 +146,8 @@ void MenuWindow::auctionHouse() {
     parent_->setNextScreen(AUCTIONHOUSESTATE);
 }
 
-void MenuWindow::refreshConnectedList() {
+void MenuWindow::refreshConnectedList(vector<string> connectedList) {
     list->clear();
-    QVector<QString> connectedList;
-    connectedList.push_back("Am");
-    connectedList.push_back("Stram");
-    connectedList.push_back("Gram");
     list->addItem("Choisissez un adversaire");
     list->insertSeparator(1);
 

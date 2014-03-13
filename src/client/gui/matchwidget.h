@@ -16,6 +16,7 @@
 #include <iostream>
 
 #include "hexagon.h"
+#include "../../common/lib/socket/Socket.h"
 
 enum { WIDTH = 30, LENGHT = 64};
 

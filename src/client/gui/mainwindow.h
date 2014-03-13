@@ -29,6 +29,7 @@ public:
     QVBoxLayout * backgroundLayout;
     QWidget* getCurrentWidget();
     ~MainWindow();
+    void setSocket(Socket* s);
 
 signals:
     void loginSuccess();
@@ -47,6 +48,7 @@ private:
     QLineEdit * usernameLine;
     QLineEdit * passLine;
     QWidget * currentWidget;
+    Socket* s_;
 
 };
 

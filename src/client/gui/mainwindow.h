@@ -31,6 +31,7 @@ public:
 
 signals:
     void loginSuccess();
+    void loginFailure();
 
 public slots:
     void setNextScreen(int nextState);

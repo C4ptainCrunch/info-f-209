@@ -27,6 +27,7 @@ public slots:
     void showCredits();
     void exit();
     void acceptLogin();
+    void refuseLogin();
 private:
     QLineEdit * usernameLine;
     QPushButton * connectButton;

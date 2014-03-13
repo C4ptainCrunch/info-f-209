@@ -51,6 +51,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
     QObject::connect(parent_,SIGNAL(loginSuccess()),this,SLOT(acceptLogin()));
+    QObject::connect(parent_, SIGNAL(loginFailure()),this,SLOT(refuseLogin()));
 
     //--------------------------ADDS THE WIGETS---------------------------
     fieldsLayout->addWidget(userLine_);
@@ -92,6 +93,10 @@ void loginScreenWidget::logIn() {
 
 void loginScreenWidget::acceptLogin(){
     parent_->setNextScreen(MAINMENUSTATE);
+}
+
+void loginScreenWidget::refuseLogin(){
+    QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistrer");
 }
 
 void loginScreenWidget::registerUser(){

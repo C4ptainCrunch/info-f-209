@@ -159,6 +159,8 @@ void loginScreenWidget::registerUser(){
     if (dialog->exec() == QDialog::Accepted) {
         newID = newUserName->text();
         newPW = newPassword->text();
+
+        sviews::signup(*parent_->getSocket(), newID.toStdString(), newPW.toStdString());
     }
 }
 

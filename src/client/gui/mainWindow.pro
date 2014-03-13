@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     hexagon.cpp \
     teamhandlingwidget.cpp \
     auctionhousewidget.cpp \
-    infrastructurewidget.cpp
+    infrastructurewidget.cpp\
+    ../receive-views/serverhandler.cpp\
+    ../receive-views/views.cpp
 
 HEADERS  += mainwindow.h \
     menuwindow.h \
@@ -29,10 +31,14 @@ HEADERS  += mainwindow.h \
     hexagon.h \
     teamhandlingwidget.h \
     auctionhousewidget.h \
-    infrastructurewidget.h
+    infrastructurewidget.h\
+    ../receive-views/serverhandler.h\
+    ../receive-views/views.h
 
 FORMS    +=
 
 OTHER_FILES += \
     ../build-mainWindow-Desktop-Release/stylesheets/stylesheet.qss \
     stylesheets/stylesheet.qss
+
+CONFIG += c++11

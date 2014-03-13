@@ -366,5 +366,4 @@ void MatchWidget::refreshField(){
     mainWidget->show();
 }
 
-
 MatchWidget::~MatchWidget() {}

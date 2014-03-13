@@ -5,6 +5,7 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget * parent):
     QWidget(parent) {
+    s_ = 0;
     cout << QCoreApplication::applicationDirPath().toStdString() << endl;
 
     //----------------TITLE SETTINGS-----------------------
@@ -112,4 +113,6 @@ void MainWindow::getDefi(string username){
     }
 }
 
-
+void MainWindow::setSocket(Socket* s){
+    s_ = s;
+}

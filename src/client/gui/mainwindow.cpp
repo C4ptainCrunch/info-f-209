@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget * parent):
     login->show();
 
     //-----------------SIGNAUX----------------------------
-    QObject::connect(this, SIGNAL(newDefi()), this, SLOT(getDefi()));
+    QObject::connect(this, SIGNAL(newDefi(std::string)), this, SLOT(getDefi(std::string)));
 
 
 }
@@ -99,7 +99,7 @@ void QWidget::closeEvent(QCloseEvent * event) {
 }
 
 void MainWindow::getDefi(string username){
-
+    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
 }
 
 

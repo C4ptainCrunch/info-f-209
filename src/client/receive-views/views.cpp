@@ -37,9 +37,9 @@ void signup(JsonValue * message, ServerHandler * handler) {
 }
 
 void userlist(JsonValue * message, ServerHandler * handler) {
-    JsonDict * listMessage = JLIST(message);
+    JsonDict * dictMessage = JDICT(message);
 
-    if (listMessage == NULL) {
+    if (dictMessage == NULL) {
         throw BadRequest("Malformatted request. Need a JSON list");
     }
 
@@ -48,5 +48,6 @@ void userlist(JsonValue * message, ServerHandler * handler) {
     for(int i = 0; i < jlist->size(); i++){
         ulist.push_back(getString(jlist, i));
     }
-    emit handler->getWindow()->refreshRegisterList(ulist);
+    emit handler->getWindow()->userList(ulist);
+}
 }

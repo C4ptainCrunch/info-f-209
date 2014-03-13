@@ -23,37 +23,13 @@ ServerHandler::~ServerHandler() {
 }
 
 bool ServerHandler::connect_socket(){
-    int sockFd;
-
-    if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
-        // perror("Client: socket ");
+    try{
+        s_ = new Socket(host_, port_);
+    }
+    catch(...){
         return false;
     }
-
-    s_ = new Socket(sockFd);
-
-    struct sockaddr_in theirAddr;
-    struct hostent * he;
-
-    socklen_t addrSize = sizeof(struct sockaddr);
-
-    if ((he = gethostbyname(host_.c_str())) == NULL) {
-        // cout << "Could not resolve hostname" << endl;
-        return false;
-    }
-
-    theirAddr.sin_family = AF_INET;
-    theirAddr.sin_port = htons(port_);
-    theirAddr.sin_addr = *((struct in_addr *)he->h_addr);
-    memset(&(theirAddr.sin_zero), '\0', 8);
-
-    if (connect(s_->getFd(), (struct sockaddr *)&theirAddr, addrSize) == -1) {
-        // perror("Connect");
-        return false;
-    }
-
     window_->setSocket(s_);
-
     return true;
 }
 

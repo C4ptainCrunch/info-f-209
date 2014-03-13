@@ -7,7 +7,7 @@
 #include <QPixmap>
 #include <iostream>
 #include <menuwindow.h>
-#include "../recieve-views/serverhandler.h"
+#include "../receive-views/serverhandler.h"
 using namespace std;
 
 int main(int argc, char * argv[]) {

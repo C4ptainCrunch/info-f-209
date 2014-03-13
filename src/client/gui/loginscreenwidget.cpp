@@ -40,7 +40,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     QObject::connect(creditsButton, SIGNAL(clicked()), this, SLOT(showCredits()));
 
     connectButton = new QPushButton("Connect", fields);
-    QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(checkIdPresence()));
+    QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(logIn()));
 
     registerButton = new QPushButton("Register", fields);
     QObject::connect(registerButton, SIGNAL(clicked()),this, SLOT(registerUser()));
@@ -51,6 +51,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
     QObject::connect(parent_,SIGNAL(loginSuccess()),this,SLOT(acceptLogin()));
+    QObject::connect(parent_, SIGNAL(loginFailure()),this,SLOT(refuseLogin()));
 
     //--------------------------ADDS THE WIGETS---------------------------
     fieldsLayout->addWidget(userLine_);
@@ -73,7 +74,7 @@ void loginScreenWidget::showCredits() {
 }
 
 
-void loginScreenWidget::checkIdPresence() {
+void loginScreenWidget::logIn() {
     QString username = usernameLine->text();
     QString password = passLine->text();
     if ((username.isEmpty() && password.isEmpty())or((username == "username") && (password == "password"))) {
@@ -92,6 +93,10 @@ void loginScreenWidget::checkIdPresence() {
 
 void loginScreenWidget::acceptLogin(){
     parent_->setNextScreen(MAINMENUSTATE);
+}
+
+void loginScreenWidget::refuseLogin(){
+    QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistrer");
 }
 
 void loginScreenWidget::registerUser(){

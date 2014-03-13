@@ -57,6 +57,8 @@ bool ServerHandler::connect_socket(const int timeout){
         return false;
     }
 
+    window_.setSocket(s_);
+
     return true;
 }
 

@@ -15,15 +15,22 @@ int main(int argc, char * argv[]) {
 
     MainWindow * window = new MainWindow();
 
-    window->show();
-    emit window->registerSuccess();
-    string hostname = "bill.local";
+    string hostname = "localhost";
+    int port = 500;
     if (argc == 2){
         hostname = argv[1];
     }
-    ServerHandler k = ServerHandler(hostname, 5000, window);
-    k.connect_socket();
-    k.loop();
+    if (argc == 3){
+        port = stoi(argv[2]);
+    }
+
+    ServerHandler handler = ServerHandler(hostname, port, window);
+
+    handler.connect_socket();
+
+    window->show();
+
+    handler.loop();
 
     return a.exec();
 }

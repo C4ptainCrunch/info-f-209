@@ -100,6 +100,14 @@ void QWidget::closeEvent(QCloseEvent * event) {
 
 void MainWindow::getDefi(string username){
     int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
+    if (accept == QMessageBox::Yes)
+    {
+        //TODO lanch match
+    }
+    else if (accept == QMessageBox::No)
+    {
+        //TODO say no to server
+    }
 }
 
 

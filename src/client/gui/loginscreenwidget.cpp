@@ -100,7 +100,16 @@ void loginScreenWidget::acceptLogin(){
 }
 
 void loginScreenWidget::refuseLogin(int errorCode){
-    QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
+    if (errorCode == 300){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
+    }
+    else if (errorCode == 401){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Mauvais mot de passe");
+    }
+    else{
+        QMessageBox::warning(this, "Identifiants Incorrects", "Tu n'as pas des projets à terminer?");
+    }
+
     connectButton->setStyleSheet("color : white;");
 }
 
@@ -109,7 +118,12 @@ void loginScreenWidget::acceptRegister(){
 }
 
 void loginScreenWidget::refuseRegister(int errorCode){
-    QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+    if (errorCode == 402){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+    }
+    else{
+        QMessageBox::warning(this, "Identifiants Incorrects", "Le serveur ne comprend rien");
+    }
     registerButton->setStyleSheet("color : white;");
 }
 

@@ -135,13 +135,19 @@ void loginScreenWidget::registerUser(){
     dialog->setWindowTitle("Nouveau compte");
 
     QFormLayout form(dialog);
+
     QLineEdit* newUserName = new QLineEdit(dialog);
     QString label = QString("Nom de compte : ");
     form.addRow(label,newUserName);
+
     QLineEdit* newPassword = new QLineEdit(dialog);
     newPassword->setEchoMode(QLineEdit::Password);
     QString label2 = QString("Mot de passe : ");
     form.addRow(label2,newPassword);
+
+    QLineEdit* newManagerName = new QLineEdit(dialog);
+    QString label3 = QString("Nom de manager : ");
+    form.addRow(label3,newManagerName);
 
 
     // Add some standard buttons (Cancel/Ok) at the bottom of the dialog
@@ -155,12 +161,14 @@ void loginScreenWidget::registerUser(){
     // Show the dialog as modal
     QString newID;
     QString newPW;
+    QString newName;
 
     if (dialog->exec() == QDialog::Accepted) {
         newID = newUserName->text();
         newPW = newPassword->text();
+        newName = newManagerName->text();
 
-        sviews::signup(*parent_->getSocket(), newID.toStdString(), newPW.toStdString());
+        sviews::signup(*parent_->getSocket(), newID.toStdString(), newName.toStdString(), newPW.toStdString());
     }
 }
 

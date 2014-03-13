@@ -16,14 +16,13 @@ int main(int argc, char * argv[]) {
     MainWindow * window = new MainWindow();
 
     string hostname = "localhost";
-    int port = 500;
+    int port = 5000;
     if (argc == 2){
         hostname = argv[1];
     }
     if (argc == 3){
         port = stoi(argv[2]);
     }
-
     ServerHandler handler = ServerHandler(hostname, port, window);
 
     handler.connect_socket();

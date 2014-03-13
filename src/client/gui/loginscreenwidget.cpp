@@ -83,6 +83,7 @@ void loginScreenWidget::logIn() {
     else {
         //TODO VERIFY ID/PASSWORD
         connectButton->setDisabled(true);
+        connectButton->setStyleSheet("color : black;");
         registerButton->setDisabled(true);
         creditsButton->setDisabled(true);
 
@@ -97,6 +98,7 @@ void loginScreenWidget::acceptLogin(){
 
 void loginScreenWidget::refuseLogin(){
     QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistrer");
+    connectButton->setStyleSheet("color : white;");
 }
 
 void loginScreenWidget::registerUser(){

@@ -25,12 +25,12 @@
 
 class ServerHandler;
 
-typedef void (* view_ptr)(JsonValue *, ServerHandler *, MainWindow * window);
+typedef void (* view_ptr)(JsonValue *, ServerHandler *);
 
 
 class ServerHandler {
 public:
-    ServerHandler(std::string host, const int port);
+    ServerHandler(std::string host, const int port, MainWindow * window);
     ~ServerHandler();
     bool connect_socket(const int timeout = 2);
     void send(std::string message);

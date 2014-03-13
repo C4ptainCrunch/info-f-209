@@ -7,6 +7,7 @@
 #include <QPixmap>
 #include <iostream>
 #include <menuwindow.h>
+#include "../recieve-views/serverhandler.h"
 using namespace std;
 
 int main(int argc, char * argv[]) {
@@ -17,5 +18,8 @@ int main(int argc, char * argv[]) {
     //menuWindow->show();
 
     window->show();
+    ServerHandler k = ServerHandler("bill.local", 5000, window);
+    k.connect_socket();
+    k.loop();
     return a.exec();
 }

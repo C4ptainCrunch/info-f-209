@@ -31,10 +31,10 @@ public:
 
 signals:
     void loginSuccess();
-    void loginFailure();
+    void loginFailure(int);
     void registerSuccess();
-    void registerFailure();
     void refreshRegisterList();
+    void registerFailure(int);
     void newDefi(std::string username);
 
 public slots:

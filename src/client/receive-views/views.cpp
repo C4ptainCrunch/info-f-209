@@ -16,35 +16,47 @@ void login(JsonValue * message, ServerHandler * handler) {
         emit handler->getWindow()->loginSuccess();
     }
     else {
-        emit handler->getWindow()->loginFailure();
+        emit handler->getWindow()->loginFailure(getString(dictMessage, "reason"));
     }
 }
 
-// void signup(JsonValue * message, UserHandler * handler) {
-//     JsonDict * dictMessage = JDICT(message);
+void signup(JsonValue * message, ServerHandler * handler) {
+    JsonDict * dictMessage = JDICT(message);
 
-//     if (dictMessage == NULL) {
-//         throw BadRequest("Malformatted request. Need a JSON dict");
-//     }
+    if (dictMessage == NULL) {
+        throw BadRequest("Malformatted request. Need a JSON dict");
+    }
 
-//     string username = getString(dictMessage, "username");
-//     string password = getString(dictMessage, "password");
-//     string name = getString(dictMessage, "name");
+    bool success = getBool(dictMessage, "success");
+    if(success){
+        emit handler->getWindow()->registerSuccess();
+    }
+    else {
+        emit handler->getWindow()->registerFailure(getInt(dictMessage, "code"));
+    }
+}
 
-//     string filename = handler->path("users", username);
+void userlist(JsonValue * message, ServerHandler * handler) {
+    JsonDict * listMessage = JLIST(message);
 
-//     if (fileExists(filename)) {
-//         return sendFail(handler, 402, "login", "User already exists");
-//     }
+    if (listMessage == NULL) {
+        throw BadRequest("Malformatted request. Need a JSON list");
+    }
 
-//     Manager * manager = new Manager(name, username, password);
-//     handler->setManager(manager);
+    bool success = getBool(dictMessage, "success");
+    if(success){
+        JsonList * jlist = getList(dictMessage, "userlist");
+        vector<string> ulist;
+        for(int i = 0; i < jlist->size(); i++){
+            ulist.push_back(getString(jlist, i));
+        }
+        emit handler->getWindow()->userlist(ulist);
+    }
+    else {
+        emit handler->getWindow()->registerFailure(getInt(dictMessage, "code"));
+    }
+}
 
-//     JsonDict answer;
-
-//     answer.add("success", new JsonBool(true));
-//     handler->writeToClient("login", &answer);
-// }
 
 
 // void userlist(JsonValue * message, UserHandler * handler) {

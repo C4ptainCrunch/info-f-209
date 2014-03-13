@@ -51,9 +51,9 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
     QObject::connect(parent_,SIGNAL(loginSuccess()),this,SLOT(acceptLogin()));
-    QObject::connect(parent_, SIGNAL(loginFailure()),this,SLOT(refuseLogin()));
+    QObject::connect(parent_, SIGNAL(loginFailure(int)),this,SLOT(refuseLogin(int)));
     QObject::connect(parent_, SIGNAL(registerSuccess()),this,SLOT(acceptRegister()));
-    QObject::connect(parent_, SIGNAL(registerFailure()),this,SLOT(refuseRegister()));
+    QObject::connect(parent_, SIGNAL(registerFailure(int)),this,SLOT(refuseRegister(int)));
 
 
     //--------------------------ADDS THE WIGETS---------------------------
@@ -99,8 +99,17 @@ void loginScreenWidget::acceptLogin(){
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
-void loginScreenWidget::refuseLogin(){
-    QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
+void loginScreenWidget::refuseLogin(int errorCode){
+    if (errorCode == 300){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
+    }
+    else if (errorCode == 401){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Mauvais mot de passe");
+    }
+    else{
+        QMessageBox::warning(this, "Identifiants Incorrects", "Tu n'as pas des projets à terminer?");
+    }
+
     connectButton->setStyleSheet("color : white;");
 }
 
@@ -108,8 +117,13 @@ void loginScreenWidget::acceptRegister(){
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
-void loginScreenWidget::refuseRegister(){
-    QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+void loginScreenWidget::refuseRegister(int errorCode){
+    if (errorCode == 402){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+    }
+    else{
+        QMessageBox::warning(this, "Identifiants Incorrects", "Le serveur ne comprend rien");
+    }
     registerButton->setStyleSheet("color : white;");
 }
 

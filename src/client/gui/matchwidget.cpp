@@ -58,14 +58,18 @@ MatchWidget::MatchWidget(QWidget * parent):
        fieldWidget->setAutoFillBackground( true );
      */
 
+    //----------------------CUSTOM SIGNALS CONNECT-------------------------
+
+    QObject::connect(parent_,SIGNAL(refreshField(Case[][])),this,SLOT(refreshField(Case[][])));
+
     //---------------------FIELD REPRESENTATION----------------------------
 
-    fieldWidget->setFixedSize(QSize(LENGHT*20, WIDTH*17));
+    fieldWidget->setFixedSize(QSize(LENGTH*20, WIDTH*17));
     QWidget* temp = new QWidget(fieldWidget);
 
-    temp->setFixedSize((mainWidget->height()-WIDTH*20)/2,(mainWidget->width()-LENGHT*20)/2);
+    temp->setFixedSize((mainWidget->height()-WIDTH*20)/2,(mainWidget->width()-LENGTH*20)/2);
     QLabel * label = new QLabel(fieldWidget);
-    QPixmap * pixmap = new QPixmap(LENGHT*20, WIDTH*17);
+    QPixmap * pixmap = new QPixmap(LENGTH*20, WIDTH*17);
     mainLayout->setRowMinimumHeight(0,100);
     mainLayout->addWidget(temp,0,0);
     mainLayout->addWidget(fieldWidget,1,1);
@@ -82,7 +86,7 @@ MatchWidget::MatchWidget(QWidget * parent):
 
     QPainter painter(pixmap);
     painter.setBrush(QBrush(Qt::darkGreen));
-    Hexagon hexagon[WIDTH][LENGHT];
+    Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
 
     generateGrid();
@@ -94,8 +98,8 @@ MatchWidget::MatchWidget(QWidget * parent):
     bool pair = true;
     for (int i = 0; i < WIDTH; ++i) {
         //<<i<<endl;
-        for (int j = 0; j < LENGHT; ++j) {
-            //cout<<"MAX : "<<WIDTH<<" "<<LENGHT<<" X : "<<i<<" Y : "<<j<<endl;
+        for (int j = 0; j < LENGTH; ++j) {
+            //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
             cout<<grid_[i][j]<<" ";
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
@@ -154,7 +158,7 @@ MatchWidget::MatchWidget(QWidget * parent):
     //cout<<"LA"<<endl;
     //fieldWidget->move(200,200);
     grid_[13][49] = 7;
-    refreshField();
+    //refreshField();
     mainWidget->show();
 
 
@@ -206,12 +210,12 @@ void MatchWidget::generateGrid() {
 
 
     for (int i = 0; i < WIDTH; ++i) {
-        for (int j = 0; j < LENGHT; ++j) {
+        for (int j = 0; j < LENGTH; ++j) {
             grid_[i][j] = 0;
             // equation d'une ellipse non centrée : (x-h)²/a² + (x-k)²/b²
             //avec x = i, h et k sont les coord du centre, a et b les demi longueurs de l'ellipse
             double result = pow(i - WIDTH / 2.0, 2) / pow(diameterFactor * WIDTH, 2);
-            result += pow(j - LENGHT / 2.0, 2) / pow(diameterFactor * LENGHT, 2);
+            result += pow(j - LENGTH / 2.0, 2) / pow(diameterFactor * LENGTH, 2);
             if (i % 2 != 0) {
                 result -= delta;
             }
@@ -222,69 +226,69 @@ void MatchWidget::generateGrid() {
 
             //----------------------------GOALS---------------------------------
             if (i == WIDTH / 2) {
-                if (j == LENGHT / 15 + LENGHT / 20 or j == LENGHT * 14 / 15 - LENGHT / 20) {
+                if (j == LENGTH / 15 + LENGTH / 20 or j == LENGTH * 14 / 15 - LENGTH / 20) {
                     grid_[i][j] = -1; //goal central
                 }
-                else if (j == 2 * LENGHT / 15) {
+                else if (j == 2 * LENGTH / 15) {
                     grid_[i][j] = 1;
                 }
-                else if (j == 13 * LENGHT / 15) {
+                else if (j == 13 * LENGTH / 15) {
                     grid_[i][j] = 1;
                 }
-                else if (j == 7 * LENGHT / 30) {
+                else if (j == 7 * LENGTH / 30) {
                     grid_[i][j] = 2;
                 }
-                else if (j == 23 * LENGHT / 30) {
+                else if (j == 23 * LENGTH / 30) {
                     grid_[i][j] = 2;
                 }
-                else if (j == 5 * LENGHT / 30) {
+                else if (j == 5 * LENGTH / 30) {
                     grid_[i][j] = 3;
 
                 }
-                else if (j == 25 * LENGHT / 30) {
+                else if (j == 25 * LENGTH / 30) {
                     grid_[i][j] = 3;
                 }
             }
             else if (i == WIDTH / 2 - WIDTH / 15) {
-                if (j == 2 * LENGHT / 15 or j == 13 * LENGHT / 15) {
+                if (j == 2 * LENGTH / 15 or j == 13 * LENGTH / 15) {
                     grid_[i][j] = -1; //goals latéraux
                 }
-                else if (j == 5 * LENGHT / 30) {
+                else if (j == 5 * LENGTH / 30) {
                     grid_[i][j] = 4;
 
                 }
-                else if (j == 25 * LENGHT / 30) {
+                else if (j == 25 * LENGTH / 30) {
                     grid_[i][j] = 4;
                 }
             }
             else if (i == WIDTH / 2 + WIDTH / 15) {
-                if (j == 2 * LENGHT / 15 or j == 13 * LENGHT / 15) {
+                if (j == 2 * LENGTH / 15 or j == 13 * LENGTH / 15) {
                     grid_[i][j] = -1; //goals latéraux
                 }
-                else if (j == 5 * LENGHT / 30) {
+                else if (j == 5 * LENGTH / 30) {
                     grid_[i][j] = 5;
 
                 }
-                else if (j == 25 * LENGHT / 30) {
+                else if (j == 25 * LENGTH / 30) {
                     grid_[i][j] = 5;
                 }
             }
             else if (i == WIDTH / 2 - WIDTH / 30) {
-                if (j == 6 * LENGHT / 30) {
+                if (j == 6 * LENGTH / 30) {
                     grid_[i][j] = 6;
 
                 }
-                else if (j == 24 * LENGHT / 30) {
+                else if (j == 24 * LENGTH / 30) {
                     grid_[i][j] = 6;
                 }
 
             }
             else if (i == WIDTH / 2 + WIDTH / 30) {
-                if (j == 6 * LENGHT / 30) {
+                if (j == 6 * LENGTH / 30) {
                     grid_[i][j] = 7;
 
                 }
-                else if (j == 24 * LENGHT / 30) {
+                else if (j == 24 * LENGTH / 30) {
                     grid_[i][j] = 7;
                 }
             }
@@ -296,15 +300,15 @@ void MatchWidget::generateGrid() {
 
 }
 
-void MatchWidget::refreshField(){
+void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]){
 
     QLabel * label = new QLabel(fieldWidget);
-    QPixmap * pixmap = new QPixmap(LENGHT*20, WIDTH*17);
+    QPixmap * pixmap = new QPixmap(LENGTH*20, WIDTH*17);
     pixmap->fill(Qt::transparent);
 
     QPainter painter(pixmap);
     painter.setBrush(QBrush(Qt::darkGreen));
-    Hexagon hexagon[WIDTH][LENGHT];
+    Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
 
 
@@ -313,8 +317,8 @@ void MatchWidget::refreshField(){
     bool pair = true;
     for (int i = 0; i < WIDTH; ++i) {
         //cout<<i<<endl;
-        for (int j = 0; j < LENGHT; ++j) {
-            //cout<<"MAX : "<<WIDTH<<" "<<LENGHT<<" X : "<<i<<" Y : "<<j<<endl;
+        for (int j = 0; j < LENGTH; ++j) {
+            //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
             cout<<grid_[i][j]<<" ";
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);

@@ -17,8 +17,10 @@
 #include <teamhandlingwidget.h>
 #include <auctionhousewidget.h>
 #include <infrastructurewidget.h>
+#include <../../common/models/Case.h>
 
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5, INFRASTRUCTURESTATE = 6};
+
 
 class MainWindow: public QWidget {
     Q_OBJECT
@@ -39,6 +41,7 @@ signals:
     void userList(vector<string>);
     void registerFailure(int);
     void newDefi(std::string username);
+    void refreshField(Case grid_[WIDTH][LENGTH]);
 
 public slots:
     void setNextScreen(int nextState);

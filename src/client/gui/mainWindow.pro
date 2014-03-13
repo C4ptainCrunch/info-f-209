@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = mainWindow
 TEMPLATE = app
+QMAKE_CXX=clang++
 
 
 SOURCES += main.cpp\
@@ -40,5 +41,7 @@ FORMS    +=
 OTHER_FILES += \
     ../build-mainWindow-Desktop-Release/stylesheets/stylesheet.qss \
     stylesheets/stylesheet.qss
+
+LIBS+= ../../../build/libjson.a ../../../build/libsocket.a ../../../build/libexception.a
 
 CONFIG += c++11

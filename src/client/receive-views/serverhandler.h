@@ -34,7 +34,7 @@
 
 class ServerHandler;
 
-typedef void (* view_ptr)(JsonValue *, ServerHandler *, MainWindow * window);
+typedef void (* view_ptr)(JsonValue *, ServerHandler *);
 
 
 class ServerHandler {

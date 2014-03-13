@@ -5,5 +5,6 @@
 #include "../exception/BadRequest.h"
 
 std::string getString(JsonDict * dict, std::string key);
+bool getBool(JsonDict * dict, std::string key);
 
 #endif

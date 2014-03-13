@@ -22,18 +22,13 @@ ServerHandler::~ServerHandler() {
     }
 }
 
-bool ServerHandler::connect_socket(const int timeout){
+bool ServerHandler::connect_socket(){
     int sockFd;
-    struct timeval ctimeout;
 
-    ctimeout.tv_sec = timeout;
-    ctimeout.tv_usec = 0;
     if ((sockFd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
         // perror("Client: socket ");
         return false;
     }
-
-    setsockopt(sockFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&ctimeout, sizeof(struct timeval));
 
     s_ = new Socket(sockFd);
 

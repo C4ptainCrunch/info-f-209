@@ -41,7 +41,7 @@ class ServerHandler {
 public:
     ServerHandler(std::string host, const int port, MainWindow* window);
     ~ServerHandler();
-    bool connect_socket(const int timeout = 2);
+    bool connect_socket();
     void send(std::string message);
     int recieve(std::string & message);
     int loop();

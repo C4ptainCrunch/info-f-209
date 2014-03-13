@@ -5,8 +5,8 @@ using namespace std;
 
 const map<string, view_ptr> ServerHandler::viewmap = {
     {"login", rviews::login},
-    // {"register", rviews::signup},
-    // {"userlist", rviews::userlist}
+    {"register", rviews::signup},
+    {"userlist", rviews::userlist}
 };
 
 ServerHandler::ServerHandler(string host, const int port, MainWindow * window) {

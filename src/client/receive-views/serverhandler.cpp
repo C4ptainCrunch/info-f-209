@@ -104,8 +104,13 @@ int ServerHandler::loop() {
     }
 }
 
+MainWindow * ServerHandler::getWIndow() {
+    return window_;
+}
+
 string split_message(string * key, string message) {
     size_t found = message.find(':');
     *key = message.substr(0, found);
     return message.substr(found + 1, message.length());
 }
+

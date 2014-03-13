@@ -6,6 +6,7 @@ using namespace std;
 MainWindow::MainWindow(QWidget * parent):
     QWidget(parent) {
     cout << QCoreApplication::applicationDirPath().toStdString() << endl;
+
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
 
@@ -46,6 +47,7 @@ void MainWindow::setNextScreen(int nextState) {
             MenuWindow * menu = new MenuWindow(this);
             currentWidget = menu;
             menu->show();
+            menu->enable();
             break;
 
         }

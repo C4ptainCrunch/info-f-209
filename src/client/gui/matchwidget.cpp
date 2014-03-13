@@ -93,7 +93,7 @@ MatchWidget::MatchWidget(QWidget * parent):
     double y = 0;
     bool pair = true;
     for (int i = 0; i < WIDTH; ++i) {
-        //cout<<i<<endl;
+        //<<i<<endl;
         for (int j = 0; j < LENGHT; ++j) {
             //cout<<"MAX : "<<WIDTH<<" "<<LENGHT<<" X : "<<i<<" Y : "<<j<<endl;
             cout<<grid_[i][j]<<" ";

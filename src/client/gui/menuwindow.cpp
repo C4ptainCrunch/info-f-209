@@ -4,6 +4,7 @@ using namespace std;
 
 MenuWindow::MenuWindow(MainWindow * parent):
     QWidget(parent), parent_(parent) {
+    cout<<"FENETRE ACTIVE : "<<this->isActiveWindow()<<endl;
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
@@ -96,6 +97,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     mainWidget->setLayout(mainLayout);
     //--------------------------DISPLAY---------------------------
     mainWidget->show();
+    cout<<"FENETRE ACTIVE FOR REAL : "<<this->isActive()<<endl;
 
 
 }
@@ -103,6 +105,18 @@ MenuWindow::MenuWindow(MainWindow * parent):
 void MenuWindow::handlePlayers(){
     parent_->setNextScreen(TEAMHANDLINGSTATE);
 
+}
+
+bool MenuWindow::isActive(){
+    return active;
+}
+
+void MenuWindow::enable(){
+    cout<<"Menu is activating..."<<endl;
+    active = true;
+}
+void MenuWindow::disable(){
+    active = false;
 }
 
 

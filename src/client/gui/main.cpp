@@ -14,12 +14,14 @@ int main(int argc, char * argv[]) {
     QApplication a(argc, argv);
 
     MainWindow * window = new MainWindow();
-    //MenuWindow * menuWindow = new MenuWindow();
-    //menuWindow->show();
 
     window->show();
-    emit window->registerFailure();
-    ServerHandler k = ServerHandler("bill.local", 5000, window);
+    emit window->registerSuccess();
+    string hostname = "bill.local";
+    if (argc == 2){
+        hostname = argv[1];
+    }
+    ServerHandler k = ServerHandler(hostname, 5000, window);
     k.connect_socket();
     k.loop();
 

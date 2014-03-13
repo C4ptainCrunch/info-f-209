@@ -33,6 +33,9 @@ public:
     QPushButton * infrastructureButton;
     QPushButton * auctionHouseButton;
     QPushButton * teamHandlingButton;
+    bool isActive();
+    void enable();
+    void disable();
 
 signals:
 
@@ -46,6 +49,7 @@ public slots:
 
 private:
     MainWindow * parent_;
+    bool active;
 
 };
 

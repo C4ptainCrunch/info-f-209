@@ -21,7 +21,7 @@ Socket::~Socket() {
 
 
 int Socket::write(string message) {
-    char * msg;//const?
+    const char * msg;//const?
     int len, bytes_sent;
 
     message += "\n\n";
@@ -32,6 +32,7 @@ int Socket::write(string message) {
     while (len > 0) {
         bytes_sent = send(fd_, msg, len, 0);
         if (bytes_sent == -1) {
+            perror("");
             return -1; // socket error, could not write
         }
         len -= bytes_sent;

@@ -4,15 +4,23 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 
 CODE=$(call rwildcard, src/, *.cpp *.h)
 
-EXECUTABLES=server
+EXECUTABLES=server client
 
 SERVER_DEPS=$(BUILD_DIR)/server.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/models.a $(BUILD_DIR)/libexception.a
+CLIENT_DEPS=$(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a
+
 RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libtest.a
 
 all: $(addprefix $(BUILD_DIR)/bin/,$(EXECUTABLES))
 
 $(BUILD_DIR)/bin/server: $(SERVER_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/../server-config.json
 	$(CXX) $(LDFLAGS) -o $@ $^
+
+$(BUILD_DIR)/bin/client: $(CLIENT_DEPS) | $(BUILD_DIR)/bin/
+	rm -f src/client/gui/Makefile
+	cd src/client/gui/; qmake; cd -
+	$(MAKE) -C src/client/gui/
+
 
 $(BUILD_DIR)/../server-config.json: | $(BUILD_DIR)/bin/
 	cp src/server/config.json.example $@

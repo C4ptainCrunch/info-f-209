@@ -5,10 +5,13 @@
 #-------------------------------------------------
 
 QT       += core gui
+CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = mainWindow
+DESTDIR = ../../../build
+
+TARGET = bin/client
 TEMPLATE = app
 
 
@@ -41,6 +44,11 @@ OTHER_FILES += \
     ../build-mainWindow-Desktop-Release/stylesheets/stylesheet.qss \
     stylesheets/stylesheet.qss
 
-LIBS+= ../../../build/libjson.a ../../../build/libsocket.a ../../../build/libexception.a
+LIBS+= $$DESTDIR/libjson.a $$DESTDIR/libsocket.a $$DESTDIR/libexception.a
 
-CONFIG += c++11
+
+OBJECTS_DIR = $$DESTDIR/qclient/
+MOC_DIR = $$DESTDIR/qclient/.moc
+RCC_DIR = $$DESTDIR/qclient/.rcc
+UI_DIR = $$DESTDIR/qclient/.ui
+

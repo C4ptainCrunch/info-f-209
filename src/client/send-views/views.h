@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "../../common/lib/json/json.h"
-#include "../../common/lib/socket/socket.h"
+#include "../../common/lib/socket/Socket.h"
 
 namespace sviews {
 void login(Socket s, std::string username, std::string password);

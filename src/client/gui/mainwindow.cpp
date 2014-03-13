@@ -117,6 +117,6 @@ void MainWindow::setSocket(Socket* s){
     s_ = s;
 }
 
-Socket* getSocket(){
+Socket* MainWindow::getSocket(){
     return s_;
 }

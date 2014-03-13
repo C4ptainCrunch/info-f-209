@@ -86,6 +86,7 @@ void loginScreenWidget::logIn() {
     }
     else {
         //TODO VERIFY ID/PASSWORD
+        sviews::login(*parent_->getSocket(), username.toStdString(), password.toStdString());
         connectButton->setDisabled(true);
         connectButton->setStyleSheet("color : black;");
         registerButton->setDisabled(true);

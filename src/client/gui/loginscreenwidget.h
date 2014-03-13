@@ -12,6 +12,8 @@
 #include <QFrame>
 #include <menuwindow.h>
 
+#include "../send-views/views.h"
+
 class MainWindow;
 
 class loginScreenWidget: public QWidget {

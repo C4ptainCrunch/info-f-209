@@ -78,7 +78,7 @@ doc: $(BUILD_DIR)/doc
 $(BUILD_DIR)/doc:
 	mkdir -p $@
 
-clean:
+clean: srd-clean normalize-clean
 	rm -rf build/
 
 normalize:
@@ -87,3 +87,13 @@ normalize:
 normalize-clean:
 	find . -name "*.unc-backup.md5\~" -exec rm {} \;
 	find . -name "*.unc-backup\~" -exec rm {} \;
+
+srd:
+	$(MAKE) -C srd/
+
+srd-clear:
+	$(MAKE) -C srd/ clean
+
+srd-clean:
+	$(MAKE) -C srd/ clean
+	rm -f srd/srd.pdf

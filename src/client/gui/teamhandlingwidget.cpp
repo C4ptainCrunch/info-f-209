@@ -21,23 +21,28 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
     mainWidget->setFixedWidth(1280);
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
 
-    //-----------------------CUSTOM SIGNALS CONNECTION--------------------
-
-    QObject::connect(parent_, SIGNAL(playerList(std::vector<NonFieldPlayer *>)), this, SLOT(recievePlayers(std::vector<NonFieldPlayer *>)));
 
     //--------------------TEAM DISPLAY-----------------------------
 
-    this->getPlayers();
 
+    vector<NonFieldPlayer *> playerList = parent_->getPlayers();
     int playersNumber = playerList.size();
     QTableWidget * playersDisplayer = new QTableWidget(playersNumber, 6, mainWidget);
     for (int i = 0; i< playersNumber; ++i){
-        playersDisplayer->setItem(i,0,new QTableWidgetItem((QString) playerList[i]->getSpeed()));
-        playersDisplayer->setItem(i,1,new QTableWidgetItem((QString) playerList[i]->getForce()));
-        playersDisplayer->setItem(i,2,new QTableWidgetItem((QString) playerList[i]->getAgility()));
-        playersDisplayer->setItem(i,3,new QTableWidgetItem((QString) playerList[i]->getReflexes()));
-        playersDisplayer->setItem(i,4,new QTableWidgetItem((QString) playerList[i]->getPassPrecision()));
-        playersDisplayer->setVerticalHeaderItem(i, new QTableWidgetItem(QString("Joueur %i").arg(i)));
+        playersDisplayer->setItem(i,0,new QTableWidgetItem(QString::number(playerList[i]->getSpeed())));
+        playersDisplayer->setItem(i,1,new QTableWidgetItem(QString::number(playerList[i]->getForce())));
+        playersDisplayer->setItem(i,2,new QTableWidgetItem(QString::number(playerList[i]->getAgility())));
+        playersDisplayer->setItem(i,3,new QTableWidgetItem(QString::number(playerList[i]->getReflexes())));
+        playersDisplayer->setItem(i,4,new QTableWidgetItem(QString::number(playerList[i]->getPassPrecision())));
+        QString iswounded;
+        if(playerList[i]->isWounded()){
+            iswounded = "Blessé";
+        }
+        else{
+            iswounded = "Non Blessé";
+        }
+            playersDisplayer->setItem(i,5,new QTableWidgetItem(iswounded));
+        playersDisplayer->setVerticalHeaderItem(i, new QTableWidgetItem("Joueur "+QString::number(i+1)));
     }
 
     int tableheight = 300;
@@ -45,9 +50,7 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
 
     playersDisplayer->setSelectionMode(QAbstractItemView::NoSelection);
     playersDisplayer->setEditTriggers(QAbstractItemView::EditTriggers(0));
-    //QString path = QCoreApplication::applicationDirPath() + "/images/wood.jpg";
     playersDisplayer->setStyleSheet("QHeaderView::section { background-color : rgb(139,69,19); color:white;}");
-    playersDisplayer->setVerticalHeaderItem(0, new QTableWidgetItem("Joueur 1"));
     playersDisplayer->setHorizontalHeaderLabels(QString("Vitesse;Force;Agilité;Reflexes;Précision;État").split(";"));
     mainWidget->setFixedSize(tableWidth, tableheight);
 
@@ -68,19 +71,6 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
 
 }
 
-
-
-void TeamHandlingWidget::getPlayers(){
-    sviews::playerlist(parent_->getSocket());
-}
-
-void TeamHandlingWidget::recievePlayers(std::vector<NonFieldPlayer *> players){
-    playerList = players;
-    for (int i = 0; i<players.size();++i){
-        delete players[i];
-    }
-    players.clear();
-}
 
 void TeamHandlingWidget::backToMenu() {
     parent_->setNextScreen(MAINMENUSTATE);

@@ -33,6 +33,8 @@ public:
     ~MainWindow();
     void setSocket(Socket * s);
     Socket * getSocket();
+    void askPlayers();
+    vector<NonFieldPlayer *> getPlayers();
 
 signals:
     void loginSuccess();
@@ -44,11 +46,12 @@ signals:
 
     void refreshField(Case grid_[WIDTH][LENGTH]);
 
-    void playerList(std::vector<NonFieldPlayer *> players);
+    void playerList(std::vector<NonFieldPlayer *> *players);
 
 public slots:
     void setNextScreen(int nextState);
     void getDefi(std::string username);
+    void recievePlayers(std::vector<NonFieldPlayer *> *players);
 
 
 private:
@@ -56,6 +59,7 @@ private:
     QLineEdit * passLine;
     QWidget * currentWidget;
     Socket * s_;
+    std::vector<NonFieldPlayer *> playersList;
 
 };
 

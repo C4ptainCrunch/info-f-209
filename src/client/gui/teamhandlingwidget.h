@@ -24,17 +24,14 @@ class TeamHandlingWidget: public QWidget {
     Q_OBJECT
 public:
     explicit TeamHandlingWidget(MainWindow * parent=0);
-    void getPlayers();
 
 signals:
 
 public slots:
     void backToMenu();
-    void recievePlayers(std::vector<NonFieldPlayer *> players);
 
 private:
     MainWindow * parent_;
-    std::vector<NonFieldPlayer *> playerList;
 };
 
 #include <mainwindow.h>

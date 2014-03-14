@@ -61,7 +61,7 @@ void playerlist(JsonValue * message, ServerHandler * handler) {
     for (int i = 0; i < listMessage->size(); i++) {
         plist->push_back(new NonFieldPlayer((*listMessage)[i]));
     }
-    emit handler->getWindow()->playerList(*plist);
+    emit handler->getWindow()->playerList(plist);
 }
 
 }

@@ -131,8 +131,14 @@ Club::operator JsonDict() const {
 
     JsonList * players = new JsonList();
     for (int i = 0; i < players_.size(); i++) {
-        JsonDict * player = new JsonDict(*(players_[i]));
-        players->add(player);
+        bool present = false;
+        for(int j = 0; (j < 7) && (!present) ; j++){
+            present = players_[i] == team_.getPlayer(j);
+        }
+        if(!present){
+            JsonDict * player = new JsonDict(*(players_[i]));
+            players->add(player);
+        }
     }
     r.add("players", players);
 

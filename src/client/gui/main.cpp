@@ -27,7 +27,6 @@ int main(int argc, char * argv[]) {
     if (slash){
         std::string clientdir(argv[0], slash-argv[0]);
         chdir(clientdir.c_str());
-        has_chdir = true;
     }
 
     QApplication app(argc, argv);

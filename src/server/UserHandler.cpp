@@ -12,6 +12,7 @@ const map<string, view_ptr> UserHandler::viewmap = {
 };
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
+    pthread_mutex_init(&ready_lock, NULL);
     handlers_list_ = handlers_list;
     datapath_ = datapath;
     s_ = NULL;

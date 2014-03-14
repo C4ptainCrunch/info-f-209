@@ -3,11 +3,15 @@
 using namespace std;
 
 Socket::Socket() {
+    pthread_mutex_init(&write_lock, NULL);
+    pthread_mutex_init(&read_lock, NULL);
     fd_ = 0;
     buffer[0] = '\0';
 }
 
 Socket::Socket(const int fd) {
+    pthread_mutex_init(&write_lock, NULL);
+    pthread_mutex_init(&read_lock, NULL);
     buffer[0] = '\0';
     setFd(fd);
 }

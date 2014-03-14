@@ -88,16 +88,12 @@ QWidget * MainWindow::getCurrentWidget() {
 
 void QWidget::closeEvent(QCloseEvent * event) {
     event->accept();
-    /*
-     * TODO
-
-       if(QMessageBox::question(this,tr("Déconnexion"),tr("Voulez-vous vraiment vous Quitter?"),QMessageBox::Yes |QMessageBox::Cancel,QMessageBox::Yes ) == QMessageBox::Yes){
+    if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous Quitter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
         event->accept();
-       }
-       else{
+    }
+    else {
         event->ignore();
-       }
-     */
+    }
 }
 
 void MainWindow::getDefi(string username) {

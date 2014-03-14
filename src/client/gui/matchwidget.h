@@ -27,7 +27,7 @@ class MatchWidget: public QWidget {
 public:
     explicit MatchWidget(QWidget * parent=0);
     void mousePressEvent(QMouseEvent *);
-    void generateGrid() ;
+    void generateGrid();
     ~MatchWidget();
 
 signals:

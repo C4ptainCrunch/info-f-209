@@ -18,31 +18,31 @@ ServerHandler::ServerHandler(string host, const int port, MainWindow * window) {
 
 ServerHandler::~ServerHandler() {
     cout << "BOUM: "  << endl;
-    if(s_ != NULL){
+    if (s_ != NULL) {
         delete s_;
     }
 }
 
-bool ServerHandler::connect_socket(){
-    try{
+bool ServerHandler::connect_socket() {
+    try {
         s_ = new Socket(host_, port_);
     }
-    catch(...){
+    catch (...) {
         return false;
     }
     window_->setSocket(s_);
     return true;
 }
 
-void ServerHandler::send(string message){
-    if(s_ == NULL){
+void ServerHandler::send(string message) {
+    if (s_ == NULL) {
         throw 1;
     }
     s_->write(message);
 }
 
-int ServerHandler::recieve(string & message){
-    if(s_ == NULL){
+int ServerHandler::recieve(string & message) {
+    if (s_ == NULL) {
         throw 1;
     }
     return s_->read(message);
@@ -87,4 +87,3 @@ string split_message(string * key, string message) {
     *key = message.substr(0, found);
     return message.substr(found + 1, message.length());
 }
-

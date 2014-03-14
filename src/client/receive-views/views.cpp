@@ -12,7 +12,7 @@ void login(JsonValue * message, ServerHandler * handler) {
     }
 
     bool success = getBool(dictMessage, "success");
-    if(success){
+    if (success) {
         emit handler->getWindow()->loginSuccess();
     }
     else {
@@ -28,7 +28,7 @@ void signup(JsonValue * message, ServerHandler * handler) {
     }
 
     bool success = getBool(dictMessage, "success");
-    if(success){
+    if (success) {
         emit handler->getWindow()->registerSuccess();
     }
     else {
@@ -43,8 +43,8 @@ void userlist(JsonValue * message, ServerHandler * handler) {
         throw BadRequest("Malformatted request. Need a JSON list");
     }
 
-    vector<string> *ulist = new vector<string>;
-    for(int i = 0; i < listMessage->size(); i++){
+    vector<string> * ulist = new vector<string>;
+    for (int i = 0; i < listMessage->size(); i++) {
         ulist->push_back(getString(listMessage, i));
     }
     emit handler->getWindow()->userList(ulist);

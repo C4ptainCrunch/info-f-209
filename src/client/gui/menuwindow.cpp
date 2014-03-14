@@ -4,7 +4,7 @@ using namespace std;
 
 MenuWindow::MenuWindow(MainWindow * parent):
     QWidget(parent), parent_(parent) {
-    cout<<"FENETRE ACTIVE : "<<this->isActiveWindow()<<endl;
+    cout << "FENETRE ACTIVE : " << this->isActiveWindow() << endl;
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
@@ -51,7 +51,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     //-------------------AUCTIONHOUSE BUTTON-------------------------
     auctionHouseButton = new QPushButton("Encheres");
     auctionHouseButton->setMinimumHeight(60);
-    connect(auctionHouseButton,SIGNAL(clicked()),this,SLOT(auctionHouse()));
+    connect(auctionHouseButton, SIGNAL(clicked()), this, SLOT(auctionHouse()));
 
     //-----------------TEAM HANDLING BUTTON--------------------------
     teamHandlingButton = new QPushButton("Gestion de Team");
@@ -71,7 +71,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_,SIGNAL(userList(std::vector<std::string>*)),this,SLOT(refreshConnectedList(std::vector<std::string>*)));
+    QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
     QWidget * temp = new QWidget;
@@ -93,29 +93,29 @@ MenuWindow::MenuWindow(MainWindow * parent):
     mainWidget->setLayout(mainLayout);
     //--------------------------DISPLAY---------------------------
     mainWidget->show();
-    cout<<"FENETRE ACTIVE FOR REAL : "<<this->isActive()<<endl;
+    cout << "FENETRE ACTIVE FOR REAL : " << this->isActive() << endl;
 
 
 }
 
-void MenuWindow::handlePlayers(){
+void MenuWindow::handlePlayers() {
     parent_->setNextScreen(TEAMHANDLINGSTATE);
 
 }
 
-bool MenuWindow::isActive(){
+bool MenuWindow::isActive() {
     return active;
 }
 
-void MenuWindow::enable(){
+void MenuWindow::enable() {
     active = true;
 }
-void MenuWindow::disable(){
+void MenuWindow::disable() {
     active = false;
 }
 
 
-void MenuWindow::infrastructures(){
+void MenuWindow::infrastructures() {
     parent_->setNextScreen(INFRASTRUCTURESTATE);
 
 }
@@ -137,7 +137,7 @@ void MenuWindow::auctionHouse() {
     parent_->setNextScreen(AUCTIONHOUSESTATE);
 }
 
-void MenuWindow::refreshConnectedList(vector<string>* connectedList) {
+void MenuWindow::refreshConnectedList(vector<string> * connectedList) {
     list->clear();
     list->addItem("Choisissez un adversaire");
     list->insertSeparator(1);
@@ -150,6 +150,6 @@ void MenuWindow::refreshConnectedList(vector<string>* connectedList) {
     delete connectedList;
 }
 
-void MenuWindow::askConnectedListRefresh(){
+void MenuWindow::askConnectedListRefresh() {
     sviews::userlist(parent_->getSocket());
 }

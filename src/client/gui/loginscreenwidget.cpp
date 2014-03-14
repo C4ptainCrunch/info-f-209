@@ -43,17 +43,17 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(logIn()));
 
     registerButton = new QPushButton("Register", fields);
-    QObject::connect(registerButton, SIGNAL(clicked()),this, SLOT(registerUser()));
+    QObject::connect(registerButton, SIGNAL(clicked()), this, SLOT(registerUser()));
 
     quitButton = new QPushButton("Quit", fields);
     QObject::connect(quitButton, SIGNAL(clicked()), this, SLOT(exit()));
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_,SIGNAL(loginSuccess()),this,SLOT(acceptLogin()));
-    QObject::connect(parent_, SIGNAL(loginFailure(int)),this,SLOT(refuseLogin(int)));
-    QObject::connect(parent_, SIGNAL(registerSuccess()),this,SLOT(acceptRegister()));
-    QObject::connect(parent_, SIGNAL(registerFailure(int)),this,SLOT(refuseRegister(int)));
+    QObject::connect(parent_, SIGNAL(loginSuccess()), this, SLOT(acceptLogin()));
+    QObject::connect(parent_, SIGNAL(loginFailure(int)), this, SLOT(refuseLogin(int)));
+    QObject::connect(parent_, SIGNAL(registerSuccess()), this, SLOT(acceptRegister()));
+    QObject::connect(parent_, SIGNAL(registerFailure(int)), this, SLOT(refuseRegister(int)));
 
 
     //--------------------------ADDS THE WIGETS---------------------------
@@ -91,7 +91,7 @@ void loginScreenWidget::logIn() {
     }
 }
 
-void loginScreenWidget::disableButtons(){
+void loginScreenWidget::disableButtons() {
 
     connectButton->setDisabled(true);
     registerButton->setDisabled(true);
@@ -101,7 +101,7 @@ void loginScreenWidget::disableButtons(){
     registerButton->setStyleSheet("color : black;");
     creditsButton->setStyleSheet("color : black;");
 }
-void loginScreenWidget::enableButtons(){
+void loginScreenWidget::enableButtons() {
 
     connectButton->setEnabled(true);
     registerButton->setEnabled(true);
@@ -113,64 +113,64 @@ void loginScreenWidget::enableButtons(){
 }
 
 
-void loginScreenWidget::acceptLogin(){
+void loginScreenWidget::acceptLogin() {
     this->enableButtons();
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
-void loginScreenWidget::refuseLogin(int errorCode){
+void loginScreenWidget::refuseLogin(int errorCode) {
     this->enableButtons();
-    if (errorCode == 301){
+    if (errorCode == 301) {
         QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
     }
-    else if (errorCode == 401){
+    else if (errorCode == 401) {
         QMessageBox::warning(this, "Identifiants Incorrects", "Mauvais mot de passe");
     }
-    else{
+    else {
         QMessageBox::warning(this, "Identifiants Incorrects", "Tu n'as pas des projets à terminer?");
     }
 
     connectButton->setStyleSheet("color : white;");
 }
 
-void loginScreenWidget::acceptRegister(){
+void loginScreenWidget::acceptRegister() {
     this->enableButtons();
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
-void loginScreenWidget::refuseRegister(int errorCode){
+void loginScreenWidget::refuseRegister(int errorCode) {
     this->enableButtons();
-    if (errorCode == 402){
+    if (errorCode == 402) {
         QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
     }
-    else{
+    else {
         QMessageBox::warning(this, "Identifiants Incorrects", "Le serveur ne comprend rien");
     }
     registerButton->setStyleSheet("color : white;");
 }
 
-void loginScreenWidget::registerUser(){
+void loginScreenWidget::registerUser() {
 
     this->disableButtons();
     registerButton->setStyleSheet("color : black;");
 
-    QDialog* dialog = new QDialog(this);
+    QDialog * dialog = new QDialog(this);
     dialog->setWindowTitle("Nouveau compte");
 
     QFormLayout form(dialog);
 
-    QLineEdit* newUserName = new QLineEdit(dialog);
+    QLineEdit * newUserName = new QLineEdit(dialog);
     QString label = QString("Nom de compte : ");
-    form.addRow(label,newUserName);
+    form.addRow(label, newUserName);
 
-    QLineEdit* newPassword = new QLineEdit(dialog);
+    QLineEdit * newPassword = new QLineEdit(dialog);
     newPassword->setEchoMode(QLineEdit::Password);
     QString label2 = QString("Mot de passe : ");
-    form.addRow(label2,newPassword);
+    form.addRow(label2, newPassword);
 
-    QLineEdit* newManagerName = new QLineEdit(dialog);
+    QLineEdit * newManagerName = new QLineEdit(dialog);
     QString label3 = QString("Nom de manager : ");
-    form.addRow(label3,newManagerName);
+    form.addRow(label3, newManagerName);
 
 
     // Add some standard buttons (Cancel/Ok) at the bottom of the dialog

@@ -92,8 +92,8 @@ string JsonString::toString() {
 
 // Dict
 
-JsonDict::~JsonDict(){
-    for(std::map<std::string, JsonValue *>::iterator iter = dict.begin(); iter != dict.end(); ++iter) {
+JsonDict::~JsonDict() {
+    for (std::map<std::string, JsonValue *>::iterator iter = dict.begin(); iter != dict.end(); ++iter) {
         delete iter->second;
         iter->second = NULL;
     }
@@ -164,8 +164,8 @@ JsonValue * JsonDict::operator[](const string & str) {
 
 // List
 
-JsonList::~JsonList(){
-    for(int i = 0; i < content.size(); i++) {
+JsonList::~JsonList() {
+    for (int i = 0; i < content.size(); i++) {
         delete content[i];
         content[i] = NULL;
     }

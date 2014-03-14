@@ -17,11 +17,10 @@
 
 class MainWindow;
 
-class AuctionHouseWidget : public QWidget
-{
+class AuctionHouseWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit AuctionHouseWidget(MainWindow *parent = 0);
+    explicit AuctionHouseWidget(MainWindow * parent=0);
 
 signals:
 

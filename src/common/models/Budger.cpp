@@ -46,6 +46,6 @@ std::string Budger::getName() {
     return "B";
 }
 
-Way Budger::getHitWay() const{
+Way Budger::getHitWay() const {
     return hitWay;
 }

@@ -20,16 +20,16 @@ void send_message() {
     sh.send("plop:");
     string message;
     sh.recieve(message);
-    ASSERT_EQUAL("error:{\"Bad request\" : \"Unknown topic : 'plop'\", \"code\" : 100}",message, "Bad error") ;
+    ASSERT_EQUAL("error:{\"Bad request\" : \"Unknown topic : 'plop'\", \"code\" : 100}", message, "Bad error");
 }
 
 void send_without_connect() {
     bool catched = false;
     ServerHandler sh = ServerHandler("localhost", 5000);
-    try{
+    try {
         sh.send("youhou");
     }
-    catch(...){
+    catch (...) {
         catched = true;
     }
     ASSERT(catched, "Exception not thrown");

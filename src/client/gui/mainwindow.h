@@ -41,7 +41,10 @@ signals:
     void userList(std::vector<std::string> *);
     void registerFailure(int);
     void newDefi(std::string username);
+
     void refreshField(Case grid_[WIDTH][LENGTH]);
+
+    void playerList(std::vector<NonFieldPlayer *> players);
 
 public slots:
     void setNextScreen(int nextState);

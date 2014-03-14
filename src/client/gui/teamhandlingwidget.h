@@ -13,6 +13,9 @@
 #include <QComboBox>
 #include <QTableWidget>
 #include <iostream>
+#include <../../common/models/NonFieldPlayer.h>
+#include <../send-views/views.h>
+
 
 class MainWindow;
 
@@ -21,14 +24,17 @@ class TeamHandlingWidget: public QWidget {
     Q_OBJECT
 public:
     explicit TeamHandlingWidget(MainWindow * parent=0);
+    void getPlayers();
 
 signals:
 
 public slots:
     void backToMenu();
+    void recievePlayers(std::vector<NonFieldPlayer *> players);
 
 private:
     MainWindow * parent_;
+    std::vector<NonFieldPlayer *> playerList;
 };
 
 #include <mainwindow.h>

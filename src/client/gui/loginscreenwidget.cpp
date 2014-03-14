@@ -36,17 +36,25 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     passLine = passLine_;
 
     //-------------------------------BUTTONS---------------------------
-    QPushButton * creditsButton = new QPushButton("Credits", fields);
+    creditsButton = new QPushButton("Credits", fields);
     QObject::connect(creditsButton, SIGNAL(clicked()), this, SLOT(showCredits()));
 
-    QPushButton * connectButton = new QPushButton("Connect", fields);
-    QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(checkIdPresence()));
+    connectButton = new QPushButton("Connect", fields);
+    QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(logIn()));
 
-    QPushButton * registerButton = new QPushButton("Register", fields);
+    registerButton = new QPushButton("Register", fields);
     QObject::connect(registerButton, SIGNAL(clicked()),this, SLOT(registerUser()));
 
-    QPushButton * quitButton = new QPushButton("Quit", fields);
+    quitButton = new QPushButton("Quit", fields);
     QObject::connect(quitButton, SIGNAL(clicked()), this, SLOT(exit()));
+
+    //-----------------------CUSTOM SIGNALS CONNECTION--------------------
+
+    QObject::connect(parent_,SIGNAL(loginSuccess()),this,SLOT(acceptLogin()));
+    QObject::connect(parent_, SIGNAL(loginFailure(int)),this,SLOT(refuseLogin(int)));
+    QObject::connect(parent_, SIGNAL(registerSuccess()),this,SLOT(acceptRegister()));
+    QObject::connect(parent_, SIGNAL(registerFailure(int)),this,SLOT(refuseRegister(int)));
+
 
     //--------------------------ADDS THE WIGETS---------------------------
     fieldsLayout->addWidget(userLine_);
@@ -64,12 +72,13 @@ void loginScreenWidget::showCredits() {
                              "Application créée par Romain, Nikita et Bruno\nAvec la participation de Tsotne et Cédric\n"
                              "Librairie graphique utilisée : Qt 5.2.1\n"
                              "Background : http://fanzone.potterish.com/wp-content/gallery/video-game-hp6-playstation-3/edp_ps3_screencap_02.jpg\n"
-                             "Dans le cadre du cours INFO-F-209");
+                             "Dans le cadre du cours INFO-F-209\n"
+                             "En fait, Quidditch c'est uidditch fait par Qt");
 
 }
 
 
-void loginScreenWidget::checkIdPresence() {
+void loginScreenWidget::logIn() {
     QString username = usernameLine->text();
     QString password = passLine->text();
     if ((username.isEmpty() && password.isEmpty())or((username == "username") && (password == "password"))) {
@@ -77,27 +86,91 @@ void loginScreenWidget::checkIdPresence() {
     }
     else {
         //TODO VERIFY ID/PASSWORD
-
-        parent_->setNextScreen(MAINMENUSTATE);
-        //else {QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistrer");}
+        sviews::login(parent_->getSocket(), username.toStdString(), password.toStdString());
+        this->disableButtons();
     }
 }
 
+void loginScreenWidget::disableButtons(){
+
+    connectButton->setDisabled(true);
+    registerButton->setDisabled(true);
+    creditsButton->setDisabled(true);
+
+    connectButton->setStyleSheet("color : black;");
+    registerButton->setStyleSheet("color : black;");
+    creditsButton->setStyleSheet("color : black;");
+}
+void loginScreenWidget::enableButtons(){
+
+    connectButton->setEnabled(true);
+    registerButton->setEnabled(true);
+    creditsButton->setEnabled(true);
+
+    connectButton->setStyleSheet("color : white;");
+    registerButton->setStyleSheet("color : white;");
+    creditsButton->setStyleSheet("color : white;");
+}
+
+
+void loginScreenWidget::acceptLogin(){
+    this->enableButtons();
+    parent_->setNextScreen(MAINMENUSTATE);
+}
+
+void loginScreenWidget::refuseLogin(int errorCode){
+    this->enableButtons();
+    if (errorCode == 301){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
+    }
+    else if (errorCode == 401){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Mauvais mot de passe");
+    }
+    else{
+        QMessageBox::warning(this, "Identifiants Incorrects", "Tu n'as pas des projets à terminer?");
+    }
+
+    connectButton->setStyleSheet("color : white;");
+}
+
+void loginScreenWidget::acceptRegister(){
+    this->enableButtons();
+    parent_->setNextScreen(MAINMENUSTATE);
+}
+
+void loginScreenWidget::refuseRegister(int errorCode){
+    this->enableButtons();
+    if (errorCode == 402){
+        QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+    }
+    else{
+        QMessageBox::warning(this, "Identifiants Incorrects", "Le serveur ne comprend rien");
+    }
+    registerButton->setStyleSheet("color : white;");
+}
+
 void loginScreenWidget::registerUser(){
-    cout<<"coucou"<<endl;
+
+    this->disableButtons();
+    registerButton->setStyleSheet("color : black;");
+
     QDialog* dialog = new QDialog(this);
     dialog->setWindowTitle("Nouveau compte");
-    // Use a layout allowing to have a label next to each field
+
     QFormLayout form(dialog);
 
-
-    // Add the lineEdits with their respective labels
     QLineEdit* newUserName = new QLineEdit(dialog);
     QString label = QString("Nom de compte : ");
     form.addRow(label,newUserName);
+
     QLineEdit* newPassword = new QLineEdit(dialog);
+    newPassword->setEchoMode(QLineEdit::Password);
     QString label2 = QString("Mot de passe : ");
     form.addRow(label2,newPassword);
+
+    QLineEdit* newManagerName = new QLineEdit(dialog);
+    QString label3 = QString("Nom de manager : ");
+    form.addRow(label3,newManagerName);
 
 
     // Add some standard buttons (Cancel/Ok) at the bottom of the dialog
@@ -106,16 +179,20 @@ void loginScreenWidget::registerUser(){
     form.addRow(&buttonBox);
     QObject::connect(&buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(&buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
+    registerButton->setStyleSheet("color : white;");
 
     // Show the dialog as modal
     QString newID;
     QString newPW;
+    QString newName;
 
     if (dialog->exec() == QDialog::Accepted) {
         newID = newUserName->text();
         newPW = newPassword->text();
+        newName = newManagerName->text();
+
+        sviews::signup(parent_->getSocket(), newID.toStdString(), newName.toStdString(), newPW.toStdString());
     }
-    cout<<newID.toStdString()<<endl;
 }
 
 void loginScreenWidget::exit() {

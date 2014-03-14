@@ -9,6 +9,7 @@
 
 #include "../common/lib/socket/Socket.h"
 #include "../common/models/Manager.h"
+#include "../common/lib/exception/BadRequest.h"
 #include "helpers.h"
 
 class UserHandler;

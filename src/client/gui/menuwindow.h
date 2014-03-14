@@ -10,8 +10,11 @@
 #include <QHBoxLayout>
 #include <QWidget>
 #include <QString>
+#include <string>
+#include <vector>
 #include <QComboBox>
 #include <iostream>
+
 
 class MainWindow;
 
@@ -33,19 +36,24 @@ public:
     QPushButton * infrastructureButton;
     QPushButton * auctionHouseButton;
     QPushButton * teamHandlingButton;
+    bool isActive();
+    void enable();
+    void disable();
 
 signals:
 
 public slots:
-    void refreshConnectedList();
+    void refreshConnectedList(std::vector<std::string> *connectedList);
     void logOut();
     void startMatch();
     void handlePlayers();
     void auctionHouse();
     void infrastructures();
+    void askConnectedListRefresh();
 
 private:
     MainWindow * parent_;
+    bool active;
 
 };
 

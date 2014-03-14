@@ -4,6 +4,7 @@ using namespace std;
 
 MenuWindow::MenuWindow(MainWindow * parent):
     QWidget(parent), parent_(parent) {
+    cout<<"FENETRE ACTIVE : "<<this->isActiveWindow()<<endl;
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
@@ -26,23 +27,15 @@ MenuWindow::MenuWindow(MainWindow * parent):
     matchLauncherLayout = new QGridLayout(matchLauncherWidget);
 
     //---------------------------OPPONENT CHOICE-------------------
-    QVector<QString> connectedList;
-    connectedList.push_back("Romain");
-    connectedList.push_back("Nikita");
-    connectedList.push_back("Bruno");
     list = new QComboBox(matchLauncherWidget);
-    list->addItem("Choisissez un adversaire");
-    list->insertSeparator(1);
+    this->askConnectedListRefresh();
 
-    for (int i = 0; i < connectedList.size(); ++i) {
-        list->addItem(QString(connectedList[i]));
-    }
     QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
     QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(startMatch()));
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
-    QObject::connect(refreshButton, SIGNAL(clicked()), this, SLOT(refreshConnectedList()));
+    QObject::connect(refreshButton, SIGNAL(clicked()), this, SLOT(askConnectedListRefresh()));
 
     matchLauncherLayout->addWidget(list, 0, 0, 1, 3);
     matchLauncherLayout->addWidget(startMatchButton, 1, 0, 1, 4);
@@ -72,9 +65,13 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
 
     //------------------DISCONNECT BUTTON---------------------------
-    disconnectButton = new QPushButton("Se deconnecter");
+    disconnectButton = new QPushButton("Quitter");
     disconnectButton->setMinimumHeight(60);
     connect(disconnectButton, SIGNAL(clicked()), this, SLOT(logOut()));
+
+    //-----------------------CUSTOM SIGNALS CONNECTION--------------------
+
+    QObject::connect(parent_,SIGNAL(userList(std::vector<std::string>*)),this,SLOT(refreshConnectedList(std::vector<std::string>*)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
     QWidget * temp = new QWidget;
@@ -96,6 +93,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     mainWidget->setLayout(mainLayout);
     //--------------------------DISPLAY---------------------------
     mainWidget->show();
+    cout<<"FENETRE ACTIVE FOR REAL : "<<this->isActive()<<endl;
 
 
 }
@@ -103,6 +101,17 @@ MenuWindow::MenuWindow(MainWindow * parent):
 void MenuWindow::handlePlayers(){
     parent_->setNextScreen(TEAMHANDLINGSTATE);
 
+}
+
+bool MenuWindow::isActive(){
+    return active;
+}
+
+void MenuWindow::enable(){
+    active = true;
+}
+void MenuWindow::disable(){
+    active = false;
 }
 
 
@@ -119,7 +128,7 @@ void MenuWindow::startMatch() {
 void MenuWindow::logOut() {
     //TODO : DISCONNECT CLIENT FROM SERVER
     if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous déconnecter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
-        parent_->setNextScreen(LOGINMENUSTATE);
+        parent_->close();
     }
 
 }
@@ -128,19 +137,19 @@ void MenuWindow::auctionHouse() {
     parent_->setNextScreen(AUCTIONHOUSESTATE);
 }
 
-void MenuWindow::refreshConnectedList() {
+void MenuWindow::refreshConnectedList(vector<string>* connectedList) {
     list->clear();
-    QVector<QString> connectedList;
-    connectedList.push_back("Am");
-    connectedList.push_back("Stram");
-    connectedList.push_back("Gram");
     list->addItem("Choisissez un adversaire");
     list->insertSeparator(1);
 
 
-    for (int i = 0; i < connectedList.size(); ++i) {
-        list->addItem(QString(connectedList[i]));
+    for (int i = 0; i < (int)connectedList->size(); ++i) {
+        list->addItem(QString::fromStdString((*connectedList)[i]));
     }
 
+    delete connectedList;
+}
 
+void MenuWindow::askConnectedListRefresh(){
+    sviews::userlist(parent_->getSocket());
 }

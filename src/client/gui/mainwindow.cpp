@@ -5,7 +5,9 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget * parent):
     QWidget(parent) {
+    s_ = 0;
     cout << QCoreApplication::applicationDirPath().toStdString() << endl;
+
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
 
@@ -23,6 +25,9 @@ MainWindow::MainWindow(QWidget * parent):
     //-----------------LOGIN SCREEN-----------------------
     loginScreenWidget * login = new loginScreenWidget(this);
     login->show();
+
+    //-----------------SIGNAUX----------------------------
+    QObject::connect(this, SIGNAL(newDefi(std::string)), this, SLOT(getDefi(std::string)));
 
 
 }
@@ -43,6 +48,7 @@ void MainWindow::setNextScreen(int nextState) {
             MenuWindow * menu = new MenuWindow(this);
             currentWidget = menu;
             menu->show();
+            menu->enable();
             break;
 
         }
@@ -75,6 +81,12 @@ void MainWindow::setNextScreen(int nextState) {
 
 }
 
+QWidget* MainWindow::getCurrentWidget(){
+    return currentWidget;
+}
+
+
+
 void QWidget::closeEvent(QCloseEvent * event) {
     event->accept();
     /*
@@ -87,4 +99,24 @@ void QWidget::closeEvent(QCloseEvent * event) {
         event->ignore();
        }
      */
+}
+
+void MainWindow::getDefi(string username){
+    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
+    if (accept == QMessageBox::Yes)
+    {
+        //TODO lanch match
+    }
+    else if (accept == QMessageBox::No)
+    {
+        //TODO say no to server
+    }
+}
+
+void MainWindow::setSocket(Socket* s){
+    s_ = s;
+}
+
+Socket* MainWindow::getSocket(){
+    return s_;
 }

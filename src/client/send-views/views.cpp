@@ -23,7 +23,7 @@ void signup(Socket * s, string username, string name, string password){
 }
 
 void userlist(Socket * s){
-    writeToServer(s, "userlist", "True");
+    writeToServer(s, "userlist", "true");
 }
 
 }

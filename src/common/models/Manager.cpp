@@ -8,7 +8,7 @@ Manager::Manager(string name, string userName, string password, Club club): name
 Manager::Manager(JsonValue * json) {
     JsonDict * manager = JDICT(json);
     if (manager == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Manager : hasn't got a dict");
     }
     Club club;
     JsonDict * club_json = JDICT((*manager)["club"]);

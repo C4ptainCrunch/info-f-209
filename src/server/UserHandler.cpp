@@ -21,10 +21,10 @@ UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string data
     manager_ = NULL;
 }
 
-void UserHandler::start(const int fd, thread * handling_thread) {
+void UserHandler::start(Socket * fd, thread * handling_thread) {
     pthread_mutex_lock(&ready_lock);
     handling_thread_ = handling_thread;
-    s_ = new Socket(fd);
+    s_ = fd;
     pthread_mutex_unlock(&ready_lock);
 }
 

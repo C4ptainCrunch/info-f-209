@@ -86,7 +86,7 @@ void loginScreenWidget::logIn() {
     }
     else {
         //TODO VERIFY ID/PASSWORD
-        sviews::login(*parent_->getSocket(), username.toStdString(), password.toStdString());
+        sviews::login(parent_->getSocket(), username.toStdString(), password.toStdString());
         connectButton->setDisabled(true);
         connectButton->setStyleSheet("color : black;");
         registerButton->setDisabled(true);
@@ -168,7 +168,7 @@ void loginScreenWidget::registerUser(){
         newPW = newPassword->text();
         newName = newManagerName->text();
 
-        sviews::signup(*parent_->getSocket(), newID.toStdString(), newName.toStdString(), newPW.toStdString());
+        sviews::signup(parent_->getSocket(), newID.toStdString(), newName.toStdString(), newPW.toStdString());
     }
 }
 

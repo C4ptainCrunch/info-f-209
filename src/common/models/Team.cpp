@@ -14,14 +14,14 @@ Team::Team(JsonValue * json) {
     NonFieldPlayer * players[7];
 
     if (team == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__ ));
     }
     JsonList * players_list = JLIST((*team)["players"]);
     if (players_list == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__ ));
     }
     if (players_list->size() != 7) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__ ));
     }
 
     for (int i = 0; i < 7; i++) {

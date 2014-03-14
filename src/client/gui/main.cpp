@@ -17,6 +17,8 @@ void * start_loop(void * arg) {
     handler->loop();
     perror("string vide");
     cout << errno << endl;
+    QMessageBox::critical(handler->getWindow(), "Erreur", "Le serveur s'est déconnecté");
+    exit(1);
     return 0;
 }
 

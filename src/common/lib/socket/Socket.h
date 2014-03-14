@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <pthread.h>
 
 #include <iostream>
 #include <string>
@@ -31,6 +32,9 @@ private:
     char buffer[SBUFF_SIZE];
     int fd_;
     virtual std::string popFromBuffer();
+    pthread_mutex_t read_lock;
+    pthread_mutex_t write_lock;
+
 };
 
 //SOCKET_H

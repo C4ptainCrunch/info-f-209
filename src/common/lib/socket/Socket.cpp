@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 Socket::Socket() {
     fd_ = 0;
     buffer[0] = '\0';
@@ -21,6 +20,7 @@ Socket::~Socket() {
 
 
 int Socket::write(string message) {
+    pthread_mutex_lock(&write_lock);
     const char * msg; //const?
     int len, bytes_sent;
 
@@ -38,7 +38,7 @@ int Socket::write(string message) {
         len -= bytes_sent;
         msg = msg + bytes_sent;
     }
-
+    pthread_mutex_unlock(&write_lock);
     return 0;
 }
 
@@ -58,6 +58,7 @@ string Socket::popFromBuffer() {
 }
 
 int Socket::read(string & message) {
+    pthread_mutex_lock(&read_lock);
     bool isComplete;
 
     message = popFromBuffer();
@@ -79,6 +80,7 @@ int Socket::read(string & message) {
     }
 
     message = message.substr(0, message.length() - 2); // remove MESSAGE_END
+    pthread_mutex_unlock(&read_lock);
     return 1;
 }
 

@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <pthread.h>
 
 #include "../common/lib/socket/Socket.h"
 #include "../common/models/Manager.h"
@@ -39,6 +40,7 @@ private:
     std::thread * handling_thread_;
     std::vector<UserHandler *> * handlers_list_;
     std::string datapath_;
+    pthread_mutex_t ready_lock;
 
     void handleMessage(std::string message);
 

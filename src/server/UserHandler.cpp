@@ -21,8 +21,10 @@ UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string data
 }
 
 void UserHandler::start(const int fd, thread * handling_thread) {
+    pthread_mutex_lock(&ready_lock);
     handling_thread_ = handling_thread;
     s_ = new Socket(fd);
+    pthread_mutex_unlock(&ready_lock);
 }
 
 UserHandler::~UserHandler() {
@@ -39,7 +41,10 @@ UserHandler::~UserHandler() {
 }
 
 bool UserHandler::isReady() {
-    return s_ != NULL;
+    pthread_mutex_lock(&ready_lock);
+    bool ready = s_ != NULL;
+    pthread_mutex_unlock(&ready_lock);
+    return ready;
 }
 
 std::vector<UserHandler *> * UserHandler::getHandlers_listPtr() {

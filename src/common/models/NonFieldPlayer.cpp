@@ -119,7 +119,7 @@ void NonFieldPlayer::setVocation(int vocation) {
     vocation_ = vocation;
 }
 
-NonFieldPlayer::operator JsonValue() const {
+NonFieldPlayer::operator JsonDict() const {
     JsonDict r;
     r.add("vocation", new JsonInt(vocation_));
     r.add("speed", new JsonInt(speed_));

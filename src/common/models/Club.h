@@ -27,7 +27,7 @@ public:
 
     Team * getTeam();
 
-    operator JsonValue() const;
+    operator JsonDict() const;
 
     std::vector<NonFieldPlayer *> getNonFieldPlayers();
     void addNonFieldPlayer(NonFieldPlayer * player);

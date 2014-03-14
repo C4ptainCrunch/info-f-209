@@ -70,7 +70,7 @@ void Manager::setReadyState(bool state) {
     ready = state;
 }
 
-Manager::operator JsonValue() const {
+Manager::operator JsonDict() const {
     JsonDict r;
 
     r.add("name", new JsonString(name_));

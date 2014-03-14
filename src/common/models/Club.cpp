@@ -114,7 +114,7 @@ Installation * Club::getInstallations() {
 }
 
 
-Club::operator JsonValue() const {
+Club::operator JsonDict() const {
     JsonDict r;
 
     r.add("money", new JsonInt(money_));

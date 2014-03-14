@@ -15,6 +15,8 @@ using namespace std;
 void * start_loop(void* arg) {
     ServerHandler * handler = (ServerHandler*) arg;
     handler->loop();
+    perror("string vide");
+    cout << errno << endl;
     return 0;
 }
 

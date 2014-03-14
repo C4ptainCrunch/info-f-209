@@ -14,6 +14,7 @@ Socket::Socket(const int fd) {
 }
 
 Socket::~Socket() {
+    cout << "capout" << endl;
     if (fd_ != 0) {
         close(fd_);
     }

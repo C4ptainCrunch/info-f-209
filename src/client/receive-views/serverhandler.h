@@ -39,7 +39,7 @@ typedef void (* view_ptr)(JsonValue *, ServerHandler *);
 
 class ServerHandler {
 public:
-    ServerHandler(std::string host, const int port, MainWindow* window);
+    ServerHandler(std::string host, const int port, MainWindow * window);
     ~ServerHandler();
     bool connect_socket();
     void send(std::string message);

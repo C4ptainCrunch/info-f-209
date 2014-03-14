@@ -17,11 +17,10 @@
 class MainWindow;
 
 
-class TeamHandlingWidget : public QWidget
-{
+class TeamHandlingWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit TeamHandlingWidget(MainWindow *parent = 0);
+    explicit TeamHandlingWidget(MainWindow * parent=0);
 
 signals:
 

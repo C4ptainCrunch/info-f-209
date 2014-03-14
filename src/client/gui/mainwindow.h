@@ -29,16 +29,16 @@ public:
 
     explicit MainWindow(QWidget * parent=0);
     QVBoxLayout * backgroundLayout;
-    QWidget* getCurrentWidget();
+    QWidget * getCurrentWidget();
     ~MainWindow();
-    void setSocket(Socket* s);
-    Socket* getSocket();
+    void setSocket(Socket * s);
+    Socket * getSocket();
 
 signals:
     void loginSuccess();
     void loginFailure(int);
     void registerSuccess();
-    void userList(std::vector<std::string>*);
+    void userList(std::vector<std::string> *);
     void registerFailure(int);
     void newDefi(std::string username);
     void refreshField(Case grid_[WIDTH][LENGTH]);
@@ -52,7 +52,7 @@ private:
     QLineEdit * usernameLine;
     QLineEdit * passLine;
     QWidget * currentWidget;
-    Socket* s_;
+    Socket * s_;
 
 };
 

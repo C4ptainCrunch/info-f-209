@@ -25,8 +25,8 @@ void UserHandler::start(const int fd, thread * handling_thread) {
 
 UserHandler::~UserHandler() {
     delete s_;
-    for(int i = 0; i < handlers_list_->size(); i++){
-        if (handlers_list_->at(i) == this){
+    for (int i = 0; i < handlers_list_->size(); i++) {
+        if (handlers_list_->at(i) == this) {
             handlers_list_->erase(handlers_list_->begin() + i);
             break;
         }

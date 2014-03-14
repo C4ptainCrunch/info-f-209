@@ -12,8 +12,8 @@
 
 using namespace std;
 
-void * start_loop(void* arg) {
-    ServerHandler * handler = (ServerHandler*) arg;
+void * start_loop(void * arg) {
+    ServerHandler * handler = (ServerHandler *) arg;
     handler->loop();
     perror("string vide");
     cout << errno << endl;
@@ -29,10 +29,10 @@ int main(int argc, char * argv[]) {
 
     string hostname = "localhost";
     int port = 5000;
-    if (argc == 2){
+    if (argc == 2) {
         hostname = argv[1];
     }
-    if (argc == 3){
+    if (argc == 3) {
         port = stoi(argv[2]);
     }
     ServerHandler handler = ServerHandler(hostname, port, window);

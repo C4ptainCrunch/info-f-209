@@ -60,27 +60,27 @@ MatchWidget::MatchWidget(QWidget * parent):
 
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
-    QObject::connect(parent_,SIGNAL(refreshField(Case[][])),this,SLOT(refreshField(Case[][])));
+    QObject::connect(parent_, SIGNAL(refreshField(Case[][])), this, SLOT(refreshField(Case[][])));
 
     //---------------------FIELD REPRESENTATION----------------------------
 
-    fieldWidget->setFixedSize(QSize(LENGTH*20, WIDTH*17));
-    QWidget* temp = new QWidget(fieldWidget);
+    fieldWidget->setFixedSize(QSize(LENGTH * 20, WIDTH * 17));
+    QWidget * temp = new QWidget(fieldWidget);
 
-    temp->setFixedSize((mainWidget->height()-WIDTH*20)/2,(mainWidget->width()-LENGTH*20)/2);
+    temp->setFixedSize((mainWidget->height() - WIDTH * 20) / 2, (mainWidget->width() - LENGTH * 20) / 2);
     QLabel * label = new QLabel(fieldWidget);
-    QPixmap * pixmap = new QPixmap(LENGTH*20, WIDTH*17);
-    mainLayout->setRowMinimumHeight(0,100);
-    mainLayout->addWidget(temp,0,0);
-    mainLayout->addWidget(fieldWidget,1,1);
+    QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
+    mainLayout->setRowMinimumHeight(0, 100);
+    mainLayout->addWidget(temp, 0, 0);
+    mainLayout->addWidget(fieldWidget, 1, 1);
 
-    QPushButton* turnEndButton = new QPushButton("Fin du tour",mainWidget);
+    QPushButton * turnEndButton = new QPushButton("Fin du tour", mainWidget);
     turnEndButton->setMinimumHeight(30);
-    mainLayout->addWidget(turnEndButton, 2,2);
+    mainLayout->addWidget(turnEndButton, 2, 2);
 
-    QPushButton* surrenderButton = new QPushButton("Abandonner",mainWidget);
+    QPushButton * surrenderButton = new QPushButton("Abandonner", mainWidget);
     surrenderButton->setMinimumHeight(30);
-    mainLayout->addWidget(surrenderButton, 2,3);
+    mainLayout->addWidget(surrenderButton, 2, 3);
 
     pixmap->fill(Qt::transparent);
 
@@ -100,15 +100,15 @@ MatchWidget::MatchWidget(QWidget * parent):
         //<<i<<endl;
         for (int j = 0; j < LENGTH; ++j) {
             //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
-            cout<<grid_[i][j]<<" ";
+            cout << grid_[i][j] << " ";
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
             hexagon[i][j].setCorners();
 
             x += 18;
             painter.setBrush(*grass);
-            if(grid_[i][j] != 9){
-                switch(grid_[i][j]){
+            if (grid_[i][j] != 9) {
+                switch (grid_[i][j]) {
                     case -1:
                         painter.setBrush(QBrush(Qt::yellow));
                         break;
@@ -137,7 +137,7 @@ MatchWidget::MatchWidget(QWidget * parent):
                 painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
-        cout<<endl;
+        cout << endl;
         y += 15;
         if (pair) {
             x = 35;
@@ -164,7 +164,7 @@ MatchWidget::MatchWidget(QWidget * parent):
 
 }
 
-void MatchWidget::mousePressEvent ( QMouseEvent * event ){
+void MatchWidget::mousePressEvent(QMouseEvent * event) {
 
 
     double hexagonHeight = 18;
@@ -172,25 +172,27 @@ void MatchWidget::mousePressEvent ( QMouseEvent * event ){
     double halfHeight = hexagonHeight / 2;
     int startHeight = 103;
     int startWidth = 144;
-    cout<<"start : "<<startHeight<<endl;
-    cout<<"ROW : "<<(event->y()-144)/15<<" COL : "<<(event->x()-103)/18<<endl;
+    cout << "start : " << startHeight << endl;
+    cout << "ROW : " << (event->y() - 144) / 15 << " COL : " << (event->x() - 103) / 18 << endl;
 
-    if(event->x()>startHeight && event->x()<1200){
-        if(event->y()>startWidth && event->y()<580){
+    if ((event->x() > startHeight) && (event->x() < 1200)) {
+        if ((event->y() > startWidth) && (event->y() < 580)) {
 
             // These will represent which box the mouse is in, not which hexagon!
-            int row = (event->y()-startWidth) / hexagonWidth;
+            int row = (event->y() - startWidth) / hexagonWidth;
             int column;
 
             bool rowIsOdd = row % 2 == 0;
 
             // Is the row an even number?
-            if (rowIsOdd)
-                column = ((event->x() -startHeight)/ hexagonHeight);
-            else
-                column = ((event->x() -startHeight + halfHeight) / hexagonHeight);
-            cout<<"ROW : "<<row<<" COL : "<<column<<endl;
-            cout<<grid_[row+1][column]<<endl;
+            if (rowIsOdd) {
+                column = ((event->x() - startHeight) / hexagonHeight);
+            }
+            else {
+                column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
+            }
+            cout << "ROW : " << row << " COL : " << column << endl;
+            cout << grid_[row + 1][column] << endl;
 
         }
     }
@@ -200,7 +202,7 @@ void MatchWidget::mousePressEvent ( QMouseEvent * event ){
 
 void MatchWidget::generateGrid() {
     /*
-     *TO REMOVE , HAVE TO USE THE ONE FROM MODELS
+     * TO REMOVE , HAVE TO USE THE ONE FROM MODELS
      *
      */
 
@@ -293,24 +295,23 @@ void MatchWidget::generateGrid() {
                 }
             }
 
-        //cout<<grid_[i][j];
+            //cout<<grid_[i][j];
         }
         //cout<<endl;
     }
 
 }
 
-void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]){
+void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]) {
 
     QLabel * label = new QLabel(fieldWidget);
-    QPixmap * pixmap = new QPixmap(LENGTH*20, WIDTH*17);
+    QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);
 
     QPainter painter(pixmap);
     painter.setBrush(QBrush(Qt::darkGreen));
     Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
-
 
     double x = 0;
     double y = 0;
@@ -319,15 +320,15 @@ void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]){
         //cout<<i<<endl;
         for (int j = 0; j < LENGTH; ++j) {
             //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
-            cout<<grid_[i][j]<<" ";
+            cout << grid_[i][j] << " ";
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
             hexagon[i][j].setCorners();
 
             x += 18;
             painter.setBrush(*grass);
-            if(grid_[i][j] != 9){
-                switch(grid_[i][j]){
+            if (grid_[i][j] != 9) {
+                switch (grid_[i][j]) {
                     case -1:
                         painter.setBrush(QBrush(Qt::yellow));
                         break;
@@ -356,7 +357,7 @@ void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]){
                 painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
-        cout<<endl;
+        cout << endl;
         y += 15;
         if (pair) {
             x = 35;

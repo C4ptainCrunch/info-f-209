@@ -21,7 +21,7 @@ Socket::~Socket() {
 
 
 int Socket::write(string message) {
-    const char * msg;//const?
+    const char * msg; //const?
     int len, bytes_sent;
 
     message += "\n\n";
@@ -91,12 +91,12 @@ void Socket::setFd(const int fd) {
 }
 
 
-Socket::Socket(string hostname, int port){
+Socket::Socket(string hostname, int port) {
     int sockfd;
     struct sockaddr_in their_addr;
-    struct hostent *he;
+    struct hostent * he;
 
-    if ((he=gethostbyname(hostname.c_str())) == NULL) {
+    if ((he = gethostbyname(hostname.c_str())) == NULL) {
         perror("Client: gethostbyname");
         throw 1;
     }
@@ -108,7 +108,7 @@ Socket::Socket(string hostname, int port){
 
     their_addr.sin_family = AF_INET;
     their_addr.sin_port = htons(port);
-    their_addr.sin_addr = *((struct in_addr*)he->h_addr);
+    their_addr.sin_addr = *((struct in_addr *)he->h_addr);
     memset(&(their_addr.sin_zero), '\0', 8);
 
 

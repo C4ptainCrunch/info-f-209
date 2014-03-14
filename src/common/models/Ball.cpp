@@ -19,3 +19,7 @@ Position Ball::getPosition() {
 void Ball::setPosition(Position position) {
     position_ = position;
 }
+
+int Ball::getSpeed() const{
+    return speed_;
+}

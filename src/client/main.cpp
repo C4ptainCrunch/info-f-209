@@ -1,22 +1,21 @@
-#include "client.h"
-
+#include "mainwindow.h"
+#include <QApplication>
+#include <QPushButton>
+#include <QGraphicsView>
+#include <QGridLayout>
+#include <QLabel>
+#include <QPixmap>
+#include <iostream>
+#include <menuwindow.h>
 using namespace std;
 
-
 int main(int argc, char * argv[]) {
-    if (argc <= 2) {
-        printf("Invalid parameters\nUsage : %s host port\n", argv[0]);
-        exit(0);
-    }
-    int port = atoi(argv[2]);
-    if ((port <= 0) || (port > 65535)) {
-        printf("Invalid port\n");
-        exit(0);
-    }
+    QApplication a(argc, argv);
 
-    Client client(argv[1], port);
+    MainWindow * window = new MainWindow();
+    //MenuWindow * menuWindow = new MenuWindow();
+    //menuWindow->show();
 
-    client.run();
-
-    return EXIT_SUCCESS;
+    window->show();
+    return a.exec();
 }

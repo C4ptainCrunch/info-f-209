@@ -116,16 +116,15 @@ string UserHandler::path(string dir, string var) {
 }
 
 
-bool UserHandler::writeToFile(){
+bool UserHandler::writeToFile() {
     string content = ((JsonDict)(*manager_)).toString();
     string fileName = path("users", manager_->getUserName());
 
-    if(writeFile(fileName, content)){
+    if (writeFile(fileName, content)) {
         perror("Save user ");
         return false;
     }
-    else{
+    else {
         return true;
     }
 }
-

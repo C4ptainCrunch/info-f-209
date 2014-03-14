@@ -10,7 +10,7 @@ void thread_loop(UserHandler * handler) {
     try {
         handler->loop();
     }
-    catch (exception& e) {
+    catch (exception & e) {
         try {
             JsonDict answer;
 
@@ -18,7 +18,7 @@ void thread_loop(UserHandler * handler) {
             answer.add("code", new JsonInt(500));
             handler->writeToClient("error", &answer);
         }
-        catch (exception& e) {
+        catch (exception & e) {
             cout << "Uncought exception while handling uncought exception, very BAD !" << endl;
             cout << e.what() << endl;
         }
@@ -28,7 +28,7 @@ void thread_loop(UserHandler * handler) {
         cout << "Uncought exception, this is bad !" << endl;
         cout << e.what() << endl;
     }
-    catch(...){
+    catch (...) {
         cout << "Uncought UNKNOWN exception, very BAD !" << endl;
     }
     delete handler;

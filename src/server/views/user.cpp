@@ -14,6 +14,10 @@ void login(JsonValue * message, UserHandler * handler) {
     string username = getString(dictMessage, "username");
     string password = getString(dictMessage, "password");
 
+    if (isInConnectedList(handler->getHandlers_listPtr(), username)) {
+        return sendFail(handler, 403, "login", "Already logged");
+    }
+
     string filename = handler->path("users", username);
     string content;
 
@@ -53,6 +57,9 @@ void signup(JsonValue * message, UserHandler * handler) {
     string password = getString(dictMessage, "password");
     string name = getString(dictMessage, "name");
 
+    if (isInConnectedList(handler->getHandlers_listPtr(), username)) {
+        return sendFail(handler, 403, "login", "Already logged");
+    }
     string filename = handler->path("users", username);
 
     if (fileExists(filename)) {

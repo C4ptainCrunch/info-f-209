@@ -14,7 +14,7 @@ Installation::Installation(JsonValue * json) {
         throw ModelUnserializationError("Missing int at key 'level' in Installation");
     }
 
-    new (this) Installation((int) *level);
+    new (this)Installation((int) *level);
 }
 
 Installation::~Installation() {}

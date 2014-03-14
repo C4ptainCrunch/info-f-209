@@ -62,8 +62,8 @@ Club::Club(JsonValue * json) {
             players.push_back(team_.getPlayer(i));
         }
     }
-    Club(money, installations, team, players);
 
+    new (this) Club(money, installations, team, players);
 }
 
 Club::Club(int money, Installation * installations, Team & team, vector<NonFieldPlayer *> players): money_(money), players_(players) {

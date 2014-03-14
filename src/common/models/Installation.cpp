@@ -14,7 +14,7 @@ Installation::Installation(JsonValue * json) {
         throw ModelUnserializationError();
     }
 
-    Installation((int) *level);
+    new (this) Installation((int) *level);
 }
 
 Installation::~Installation() {}

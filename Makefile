@@ -22,7 +22,7 @@ $(BUILD_DIR)/bin/client: $(CLIENT_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/bin/ima
 	$(MAKE) -C src/client/gui/
 
 client: $(BUILD_DIR)/bin/client
-	./build/bin/client bill.lan
+	./build/bin/client
 
 server: $(BUILD_DIR)/bin/server
 	./build/bin/server

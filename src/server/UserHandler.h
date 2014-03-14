@@ -22,7 +22,7 @@ class UserHandler {
 public:
     UserHandler(std::vector<UserHandler *> * handlers_list, std::string datapath);
     ~UserHandler();
-    void start(const int fd, std::thread * handling_thread);
+    void start(Socket * fd, std::thread * handling_thread);
     bool isReady();
     int loop();
 

@@ -12,7 +12,6 @@
 #include <iostream>
 
 #include "helpers.h"
-#include "bind.h"
 #include "UserHandler.h"
 
 int main(int argc, char * argv[]);

@@ -75,7 +75,7 @@ void userlist(JsonValue * message, UserHandler * handler) {
 
     for (int i = 0; i < handlers_vector.size(); i++) {
         Manager * manager = handlers_vector[i]->getManager();
-        if (manager != NULL) {
+        if (manager != NULL && manager != handler->getManager()) {
             answer.add(new JsonString(manager->getName()));
         }
     }

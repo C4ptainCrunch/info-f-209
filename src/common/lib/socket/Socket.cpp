@@ -16,7 +16,7 @@ Socket::Socket(const int fd) {
     setFd(fd);
 }
 
-void Socket::mutex_init(){
+void Socket::mutex_init() {
     pthread_mutex_init(&write_lock, NULL);
     pthread_mutex_init(&read_lock, NULL);
 }

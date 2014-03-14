@@ -28,15 +28,15 @@ int readFile(const string & filename, string & content) {
 int writeFile(const string & filename, string & content) {
     int fd = open(filename.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
-    if(fd >= 0){
+    if (fd >= 0) {
         int pos = 0;
 
-        while(pos < content.length()){
-            const char* buffer = content.c_str();
+        while (pos < content.length()) {
+            const char * buffer = content.c_str();
             int len = content.length();
 
             int size =  write(fd, buffer, len);
-            if(size == -1){
+            if (size == -1) {
                 return -1;
             }
             pos += size;

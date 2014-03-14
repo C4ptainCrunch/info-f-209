@@ -57,7 +57,7 @@ void playerlist(JsonValue * message, ServerHandler * handler) {
         throw BadRequest("Malformatted request. Need a JSON list");
     }
 
-    vector<NonFieldPlayer*> * plist = new vector<NonFieldPlayer*>;
+    vector<NonFieldPlayer *> * plist = new vector<NonFieldPlayer *>;
     for (int i = 0; i < listMessage->size(); i++) {
         plist->push_back(new NonFieldPlayer((*listMessage)[i]));
     }

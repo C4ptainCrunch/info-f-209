@@ -9,7 +9,7 @@ void playerlist(JsonValue * message, UserHandler * handler) {
     JsonList * playerslist;
     if ((manager != NULL)) {
         playerslist = new JsonList();
-        vector<NonFieldPlayer*> players = manager->getClub()->getNonFieldPlayers();
+        vector<NonFieldPlayer *> players = manager->getClub()->getNonFieldPlayers();
         for (int i = 0; i < players.size(); i++) {
             JsonDict * player = new JsonDict(*(players[i]));
             playerslist->add(player);

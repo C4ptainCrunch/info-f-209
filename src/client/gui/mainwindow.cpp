@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget * parent):
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
     QObject::connect(this, SIGNAL(newDefi(std::string)), this, SLOT(getDefi(std::string)));
 
-    QObject::connect(this, SIGNAL(playerList(std::vector<NonFieldPlayer *>*)), this, SLOT(recievePlayers(std::vector<NonFieldPlayer *>*)));
+    QObject::connect(this, SIGNAL(playerList(std::vector<NonFieldPlayer *> *)), this, SLOT(recievePlayers(std::vector<NonFieldPlayer *> *)));
 
 
 }
@@ -102,18 +102,18 @@ void QWidget::closeEvent(QCloseEvent * event) {
      */
 }
 
-void MainWindow::askPlayers(){
+void MainWindow::askPlayers() {
     sviews::playerlist(this->getSocket());
 }
 
-void MainWindow::recievePlayers(std::vector<NonFieldPlayer *> *players){
-    cout<< "REAL SIZE : "<<players->size()<<endl;
+void MainWindow::recievePlayers(std::vector<NonFieldPlayer *> * players) {
+    cout << "REAL SIZE : " << players->size() << endl;
     playersList = *players;
-    cout<< "DAMN SIZE : "<<playersList.size()<<endl;
+    cout << "DAMN SIZE : " << playersList.size() << endl;
     this->setNextScreen(TEAMHANDLINGSTATE);
 }
 
-vector<NonFieldPlayer *> MainWindow::getPlayers(){
+vector<NonFieldPlayer *> MainWindow::getPlayers() {
     return playersList;
 
 }

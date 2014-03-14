@@ -28,21 +28,21 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
     vector<NonFieldPlayer *> playerList = parent_->getPlayers();
     int playersNumber = playerList.size();
     QTableWidget * playersDisplayer = new QTableWidget(playersNumber, 6, mainWidget);
-    for (int i = 0; i< playersNumber; ++i){
-        playersDisplayer->setItem(i,0,new QTableWidgetItem(QString::number(playerList[i]->getSpeed())));
-        playersDisplayer->setItem(i,1,new QTableWidgetItem(QString::number(playerList[i]->getForce())));
-        playersDisplayer->setItem(i,2,new QTableWidgetItem(QString::number(playerList[i]->getAgility())));
-        playersDisplayer->setItem(i,3,new QTableWidgetItem(QString::number(playerList[i]->getReflexes())));
-        playersDisplayer->setItem(i,4,new QTableWidgetItem(QString::number(playerList[i]->getPassPrecision())));
+    for (int i = 0; i < playersNumber; ++i) {
+        playersDisplayer->setItem(i, 0, new QTableWidgetItem(QString::number(playerList[i]->getSpeed())));
+        playersDisplayer->setItem(i, 1, new QTableWidgetItem(QString::number(playerList[i]->getForce())));
+        playersDisplayer->setItem(i, 2, new QTableWidgetItem(QString::number(playerList[i]->getAgility())));
+        playersDisplayer->setItem(i, 3, new QTableWidgetItem(QString::number(playerList[i]->getReflexes())));
+        playersDisplayer->setItem(i, 4, new QTableWidgetItem(QString::number(playerList[i]->getPassPrecision())));
         QString iswounded;
-        if(playerList[i]->isWounded()){
+        if (playerList[i]->isWounded()) {
             iswounded = "Blessé";
         }
-        else{
+        else {
             iswounded = "Non Blessé";
         }
-            playersDisplayer->setItem(i,5,new QTableWidgetItem(iswounded));
-        playersDisplayer->setVerticalHeaderItem(i, new QTableWidgetItem("Joueur "+QString::number(i+1)));
+        playersDisplayer->setItem(i, 5, new QTableWidgetItem(iswounded));
+        playersDisplayer->setVerticalHeaderItem(i, new QTableWidgetItem("Joueur " + QString::number(i + 1)));
     }
 
     int tableheight = 300;

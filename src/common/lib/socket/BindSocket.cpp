@@ -3,21 +3,21 @@
 // using namespace std;
 
 
-BindSocket::BindSocket(std::string hostname, int port){
+BindSocket::BindSocket(std::string hostname, int port) {
     mutex_init();
 
     int sockfd;
     struct sockaddr_in my_addr;
     struct sockaddr_in their_addr;
-    int yes=1;
+    int yes = 1;
 
     if ((sockfd = socket(PF_INET,
-                    SOCK_STREAM, 0)) == -1) {
+                         SOCK_STREAM, 0)) == -1) {
         perror("Serveur: socket");
         throw 1;
     }
 
-    if (setsockopt(sockfd,SOL_SOCKET,SO_REUSEADDR, &yes, sizeof(int)) == -1) {
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1) {
         perror("Serveur: setsockopt");
         throw 1;
     }
@@ -40,13 +40,13 @@ BindSocket::BindSocket(std::string hostname, int port){
     fd_ = sockfd;
 }
 
-ClientSocket * BindSocket::accept_client(){
+ClientSocket * BindSocket::accept_client() {
     char new_fd = -2;
     sockaddr_storage remote_addr;
     socklen_t address_len;
 
     address_len = sizeof remote_addr;
-    while(new_fd < 0){
+    while (new_fd < 0) {
         new_fd = accept(fd_, (struct sockaddr *)&remote_addr, &address_len);
         if (new_fd == -1) {
             perror("accept");
@@ -57,11 +57,11 @@ ClientSocket * BindSocket::accept_client(){
 }
 
 
-ClientSocket::ClientSocket(const int fd, sockaddr_storage remote) : Socket(fd){
+ClientSocket::ClientSocket(const int fd, sockaddr_storage remote): Socket(fd) {
     remote_addr_ = remote;
 }
 
-std::string ClientSocket::remote(){
+std::string ClientSocket::remote() {
     char s[INET6_ADDRSTRLEN];
     inet_ntop(remote_addr_.ss_family, get_in_addr((struct sockaddr *)&remote_addr_), s, sizeof s);
     return std::string(s);

@@ -18,13 +18,13 @@
 
 class ClientSocket;
 
-class BindSocket : public Socket {
+class BindSocket: public Socket {
 public:
     BindSocket(std::string hostname, int port);
     virtual ClientSocket * accept_client();
 };
 
-class ClientSocket : public Socket {
+class ClientSocket: public Socket {
 public:
     ClientSocket(const int fd, sockaddr_storage remote);
     std::string remote();

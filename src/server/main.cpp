@@ -6,9 +6,9 @@
 using namespace std;
 
 int main(int argc, char * argv[]) {
-    const char *slash = strrchr(argv[0], '/');
-    if (slash){
-        std::string clientdir(argv[0], slash-argv[0]);
+    const char * slash = strrchr(argv[0], '/');
+    if (slash) {
+        std::string clientdir(argv[0], slash - argv[0]);
         chdir(clientdir.c_str());
     }
 
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
         printf("Error while parsing configuration file");
         exit(0);
     }
-    if (data_p != NULL){
+    if (data_p != NULL) {
         datapath = *data_p;
     }
     else {

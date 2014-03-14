@@ -128,7 +128,7 @@ NonFieldPlayer::operator JsonDict() const {
     r.add("reflexes", new JsonInt(reflexes_));
     r.add("passPrecision", new JsonInt(passPrecision_));
     r.add("wounded", new JsonBool(wounded_));
-    r.add("level", new JsonBool(level_));
+    r.add("level", new JsonInt(level_));
     r.add("experience", new JsonBool(experience_));
 
     JsonList * inventory = new JsonList();

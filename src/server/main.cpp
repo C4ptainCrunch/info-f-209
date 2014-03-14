@@ -1,10 +1,17 @@
 #include "../common/lib/json/json.h"
 #include "../common/lib/file/file.h"
+#include "../common/lib/socket/BindSocket.h"
 #include "server.h"
 
 using namespace std;
 
 int main(int argc, char * argv[]) {
+    const char * slash = strrchr(argv[0], '/');
+    if (slash) {
+        std::string clientdir(argv[0], slash - argv[0]);
+        chdir(clientdir.c_str());
+    }
+
     string configfile;
     if (argc == 1) {
         configfile = "../../server-config.json";
@@ -34,41 +41,33 @@ int main(int argc, char * argv[]) {
     }
     JsonInt * port_p = JINT((*dict)["port"]);
     JsonString * data_p = JSTRING((*dict)["datapath"]);
-    if ((port_p == NULL) || (data_p == NULL)) {
+    string datapath;
+    if (port_p == NULL) {
         printf("Error while parsing configuration file");
         exit(0);
     }
+    if (data_p != NULL) {
+        datapath = *data_p;
+    }
+    else {
+        datapath = "../../data/";
+    }
     int port = *port_p;
-    string datapath = *data_p;
 
-    int sockfd; // socket to bind to
-
-    sockaddr_storage remote_addr;
-    socklen_t address_len;
-    char s[INET6_ADDRSTRLEN];
-    std::vector<UserHandler *> * handlers_list = new std::vector<UserHandler *>();
-
-    sockfd = bindTo(port);
-
+    BindSocket binded = BindSocket("", port);
     printf("Waiting for connections...\n");
 
+    std::vector<UserHandler *> * handlers_list = new std::vector<UserHandler *>();
+
     while (1) {
-        int new_fd; // "accepted" socket
-
-        address_len = sizeof remote_addr;
-        new_fd = accept(sockfd, (struct sockaddr *)&remote_addr, &address_len);
-        if (new_fd == -1) {
-            perror("accept");
-            continue;
-        }
-
-        inet_ntop(remote_addr.ss_family, get_in_addr((struct sockaddr *)&remote_addr), s, sizeof s);
-        printf("Got connection from %s\n", s);
+        ClientSocket * client_socket = binded.accept_client();
+        cout << "Got connection from " << client_socket->remote() << endl;
 
         UserHandler * current_handler = new UserHandler(handlers_list, datapath);
         std::thread * current_thread = new std::thread(thread_loop, current_handler);
+
         // TODO: should delete current_thread sometimes
-        current_handler->start(new_fd, current_thread);
+        current_handler->start(client_socket, current_thread);
         handlers_list->push_back(current_handler);
     }
     delete handlers_list;

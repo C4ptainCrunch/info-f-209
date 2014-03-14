@@ -18,12 +18,12 @@ Club::Club(JsonValue * json) {
     JsonDict * ins;
 
     if (club == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Club initialized from non dict");
     }
 
     JsonInt * money_int = JINT((*club)["money"]);
     if (money_int == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Missing int at key 'money' in Club");
     }
 
     int money = *money_int;
@@ -31,17 +31,17 @@ Club::Club(JsonValue * json) {
 
     JsonList * installations_list = JLIST((*club)["installations"]);
     if (installations_list == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Missing list at key 'installations' in Club");
     }
     if (installations_list->size() != 5) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Bad 'installations' size in Club");
     }
 
 
     for (int i = 0; i < 5; i++) {
         ins = JDICT((*installations_list)[i]);
         if (ins == NULL) {
-            throw ModelUnserializationError();
+            throw ModelUnserializationError("Null installation in Club");
         }
 
         installations[i] = Installation(ins);
@@ -50,7 +50,7 @@ Club::Club(JsonValue * json) {
     Team team((*club)["team"]);
     JsonList * player_list = JLIST((*club)["players"]);
     if (player_list == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Missing list at key 'players' in Club");
     }
 
     vector<NonFieldPlayer *> players;

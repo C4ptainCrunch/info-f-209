@@ -13,6 +13,9 @@
 #include <QComboBox>
 #include <QTableWidget>
 #include <iostream>
+#include <../../common/models/NonFieldPlayer.h>
+#include <../send-views/views.h>
+
 
 class MainWindow;
 

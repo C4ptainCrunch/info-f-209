@@ -6,12 +6,12 @@ Installation::Installation(JsonValue * json) {
     JsonDict * installation = JDICT(json);
 
     if (installation == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Installation initialized from non dict");
     }
 
     JsonInt * level = JINT((*installation)["level"]);
     if (level == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Missing int at key 'level' in Installation");
     }
 
     new (this)Installation((int) *level);

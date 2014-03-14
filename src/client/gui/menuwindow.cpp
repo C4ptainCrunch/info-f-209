@@ -87,19 +87,17 @@ MenuWindow::MenuWindow(MainWindow * parent):
     mainLayout->addWidget(disconnectButton, 4, 2, 1, 1);
     mainLayout->addWidget(teamHandlingButton, 1, 3, 1, 1);
     mainLayout->addWidget(infrastructureButton, 1, 2, 1, 1);
-    //mainLayout->addWidget(quitWidget,4,3,1,1);
     mainLayout->addWidget(matchLauncherWidget, 2, 2, 2, 1);
     mainLayout->addWidget(temp2, 5, 4, 1, 1);
     mainWidget->setLayout(mainLayout);
     //--------------------------DISPLAY---------------------------
     mainWidget->show();
-    cout << "FENETRE ACTIVE FOR REAL : " << this->isActive() << endl;
 
 
 }
 
 void MenuWindow::handlePlayers() {
-    parent_->setNextScreen(TEAMHANDLINGSTATE);
+    parent_->askPlayers();
 
 }
 

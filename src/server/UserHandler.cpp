@@ -4,11 +4,13 @@ using namespace std;
 
 
 #include "views/user.h"
+#include "views/management.h"
 
 const map<string, view_ptr> UserHandler::viewmap = {
     {"login", views::login},
     {"register", views::signup},
-    {"userlist", views::userlist}
+    {"userlist", views::userlist},
+    {"playerlist", views::playerlist}
 };
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
@@ -19,10 +21,10 @@ UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string data
     manager_ = NULL;
 }
 
-void UserHandler::start(const int fd, thread * handling_thread) {
+void UserHandler::start(Socket * fd, thread * handling_thread) {
     pthread_mutex_lock(&ready_lock);
     handling_thread_ = handling_thread;
-    s_ = new Socket(fd);
+    s_ = fd;
     pthread_mutex_unlock(&ready_lock);
 }
 

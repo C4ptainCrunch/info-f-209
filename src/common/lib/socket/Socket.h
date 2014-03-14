@@ -20,15 +20,16 @@
 class Socket {
 public:
     Socket();
-    ~Socket();
     Socket(const int fd);
     Socket(std::string hostname, int port);
+    ~Socket();
+    virtual void mutex_init();
     virtual int write(std::string message);
     virtual int read(std::string & message);
     virtual int getFd() const;
     virtual void setFd(const int fd);
 
-private:
+protected:
     char buffer[SBUFF_SIZE];
     int fd_;
     virtual std::string popFromBuffer();

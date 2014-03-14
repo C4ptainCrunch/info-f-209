@@ -43,9 +43,9 @@ void userlist(JsonValue * message, ServerHandler * handler) {
         throw BadRequest("Malformatted request. Need a JSON list");
     }
 
-    vector<string> ulist;
+    vector<string> *ulist = new vector<string>;
     for(int i = 0; i < listMessage->size(); i++){
-        ulist.push_back(getString(listMessage, i));
+        ulist->push_back(getString(listMessage, i));
     }
     emit handler->getWindow()->userList(ulist);
 }

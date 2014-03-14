@@ -43,12 +43,13 @@ public:
 signals:
 
 public slots:
-    void refreshConnectedList(std::vector<std::string> connectedList);
+    void refreshConnectedList(std::vector<std::string> *connectedList);
     void logOut();
     void startMatch();
     void handlePlayers();
     void auctionHouse();
     void infrastructures();
+    void askConnectedListRefresh();
 
 private:
     MainWindow * parent_;

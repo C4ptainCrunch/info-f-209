@@ -20,6 +20,8 @@ class loginScreenWidget: public QWidget {
     Q_OBJECT
 public:
     explicit loginScreenWidget(MainWindow * parent=0);
+    void enableButtons();
+    void disableButtons();
 
 signals:
 

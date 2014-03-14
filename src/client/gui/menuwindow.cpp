@@ -27,23 +27,15 @@ MenuWindow::MenuWindow(MainWindow * parent):
     matchLauncherLayout = new QGridLayout(matchLauncherWidget);
 
     //---------------------------OPPONENT CHOICE-------------------
-    QVector<QString> connectedList;
-    connectedList.push_back("Romain");
-    connectedList.push_back("Nikita");
-    connectedList.push_back("Bruno");
     list = new QComboBox(matchLauncherWidget);
-    list->addItem("Choisissez un adversaire");
-    list->insertSeparator(1);
+    this->askConnectedListRefresh();
 
-    for (int i = 0; i < connectedList.size(); ++i) {
-        list->addItem(QString(connectedList[i]));
-    }
     QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
     QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(startMatch()));
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
-    QObject::connect(refreshButton, SIGNAL(clicked()), this, SLOT(refreshConnectedList()));
+    QObject::connect(refreshButton, SIGNAL(clicked()), this, SLOT(askConnectedListRefresh()));
 
     matchLauncherLayout->addWidget(list, 0, 0, 1, 3);
     matchLauncherLayout->addWidget(startMatchButton, 1, 0, 1, 4);
@@ -73,13 +65,13 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
 
     //------------------DISCONNECT BUTTON---------------------------
-    disconnectButton = new QPushButton("Se deconnecter");
+    disconnectButton = new QPushButton("Quitter");
     disconnectButton->setMinimumHeight(60);
     connect(disconnectButton, SIGNAL(clicked()), this, SLOT(logOut()));
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_,SIGNAL(userList(vector<string>)),this,SLOT(refreshConnectedList(vector<string>)));
+    QObject::connect(parent_,SIGNAL(userList(std::vector<std::string>*)),this,SLOT(refreshConnectedList(std::vector<std::string>*)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
     QWidget * temp = new QWidget;
@@ -116,7 +108,6 @@ bool MenuWindow::isActive(){
 }
 
 void MenuWindow::enable(){
-    cout<<"Menu is activating..."<<endl;
     active = true;
 }
 void MenuWindow::disable(){
@@ -137,7 +128,7 @@ void MenuWindow::startMatch() {
 void MenuWindow::logOut() {
     //TODO : DISCONNECT CLIENT FROM SERVER
     if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous déconnecter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
-        parent_->setNextScreen(LOGINMENUSTATE);
+        parent_->close();
     }
 
 }
@@ -146,15 +137,19 @@ void MenuWindow::auctionHouse() {
     parent_->setNextScreen(AUCTIONHOUSESTATE);
 }
 
-void MenuWindow::refreshConnectedList(vector<string> connectedList) {
+void MenuWindow::refreshConnectedList(vector<string>* connectedList) {
     list->clear();
     list->addItem("Choisissez un adversaire");
     list->insertSeparator(1);
 
 
-    for (int i = 0; i < (int)connectedList.size(); ++i) {
-        list->addItem(QString::fromStdString(connectedList[i]));
+    for (int i = 0; i < (int)connectedList->size(); ++i) {
+        list->addItem(QString::fromStdString((*connectedList)[i]));
     }
 
+    delete connectedList;
+}
 
+void MenuWindow::askConnectedListRefresh(){
+    sviews::userlist(parent_->getSocket());
 }

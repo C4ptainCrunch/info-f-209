@@ -38,7 +38,7 @@ signals:
     void loginSuccess();
     void loginFailure(int);
     void registerSuccess();
-    void userList(vector<string>);
+    void userList(std::vector<std::string>*);
     void registerFailure(int);
     void newDefi(std::string username);
     void refreshField(Case grid_[WIDTH][LENGTH]);

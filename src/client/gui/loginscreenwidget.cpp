@@ -87,22 +87,40 @@ void loginScreenWidget::logIn() {
     else {
         //TODO VERIFY ID/PASSWORD
         sviews::login(parent_->getSocket(), username.toStdString(), password.toStdString());
-        connectButton->setDisabled(true);
-        connectButton->setStyleSheet("color : black;");
-        registerButton->setDisabled(true);
-        creditsButton->setDisabled(true);
-
-        //parent_->setNextScreen(MAINMENUSTATE);
-        //else {QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");}
+        this->disableButtons();
     }
 }
 
+void loginScreenWidget::disableButtons(){
+
+    connectButton->setDisabled(true);
+    registerButton->setDisabled(true);
+    creditsButton->setDisabled(true);
+
+    connectButton->setStyleSheet("color : black;");
+    registerButton->setStyleSheet("color : black;");
+    creditsButton->setStyleSheet("color : black;");
+}
+void loginScreenWidget::enableButtons(){
+
+    connectButton->setEnabled(true);
+    registerButton->setEnabled(true);
+    creditsButton->setEnabled(true);
+
+    connectButton->setStyleSheet("color : white;");
+    registerButton->setStyleSheet("color : white;");
+    creditsButton->setStyleSheet("color : white;");
+}
+
+
 void loginScreenWidget::acceptLogin(){
+    this->enableButtons();
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
 void loginScreenWidget::refuseLogin(int errorCode){
-    if (errorCode == 300){
+    this->enableButtons();
+    if (errorCode == 301){
         QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
     }
     else if (errorCode == 401){
@@ -116,10 +134,12 @@ void loginScreenWidget::refuseLogin(int errorCode){
 }
 
 void loginScreenWidget::acceptRegister(){
+    this->enableButtons();
     parent_->setNextScreen(MAINMENUSTATE);
 }
 
 void loginScreenWidget::refuseRegister(int errorCode){
+    this->enableButtons();
     if (errorCode == 402){
         QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
     }
@@ -130,7 +150,10 @@ void loginScreenWidget::refuseRegister(int errorCode){
 }
 
 void loginScreenWidget::registerUser(){
+
+    this->disableButtons();
     registerButton->setStyleSheet("color : black;");
+
     QDialog* dialog = new QDialog(this);
     dialog->setWindowTitle("Nouveau compte");
 

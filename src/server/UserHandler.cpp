@@ -35,6 +35,7 @@ UserHandler::~UserHandler() {
         }
     }
     if (manager_ != NULL) {
+        writeToFile();
         delete manager_;
     }
 }
@@ -111,3 +112,18 @@ string UserHandler::path(string dir, string var) {
     // TODO : add defence against path injection
     return datapath_ + dir + "/" + var + ".json";
 }
+
+
+bool UserHandler::writeToFile(){
+    string content = ((JsonDict)(*manager_)).toString();
+    string fileName = path("users", manager_->getUserName());
+
+    if(writeFile(fileName, content)){
+        perror("Save user ");
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+

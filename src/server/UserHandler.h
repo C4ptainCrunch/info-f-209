@@ -32,6 +32,7 @@ public:
     int writeToClient(std::string key, JsonValue * json);
     void disconnect();
     std::string path(std::string dir, std::string var);
+    bool writeToFile();
 
 private:
     bool dead;

@@ -73,7 +73,7 @@ $(BUILD_DIR)/bin/:
 doc: $(BUILD_DIR)/doc
 	$(MAKE) -C doc
 
-.PHONY: clean doc $(RMAKES)
+.PHONY: clean doc $(RMAKES) srd
 
 $(BUILD_DIR)/doc:
 	mkdir -p $@

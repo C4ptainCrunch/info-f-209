@@ -52,6 +52,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
 
     QObject::connect(parent_, SIGNAL(loginSuccess()), this, SLOT(acceptLogin()));
     QObject::connect(parent_, SIGNAL(loginFailure(int)), this, SLOT(refuseLogin(int)));
+
     QObject::connect(parent_, SIGNAL(registerSuccess()), this, SLOT(acceptRegister()));
     QObject::connect(parent_, SIGNAL(registerFailure(int)), this, SLOT(refuseRegister(int)));
 

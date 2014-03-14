@@ -1,11 +1,13 @@
 #include "Item.h"
 
+using namespace std;
+
 Item::Item() {}
 
 Item::Item(JsonValue * json) {
     JsonDict * item_dict = JDICT(json);
     if (item_dict == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Item initialized from non dict");
     }
 }
 

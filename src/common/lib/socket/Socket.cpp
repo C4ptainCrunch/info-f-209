@@ -98,6 +98,9 @@ void Socket::setFd(const int fd) {
 
 
 Socket::Socket(string hostname, int port) {
+    pthread_mutex_init(&write_lock, NULL);
+    pthread_mutex_init(&read_lock, NULL);
+
     int sockfd;
     struct sockaddr_in their_addr;
     struct hostent * he;

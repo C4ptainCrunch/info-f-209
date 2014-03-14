@@ -21,23 +21,37 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
     mainWidget->setFixedWidth(1280);
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
 
+
     //--------------------TEAM DISPLAY-----------------------------
-    int playersNumber = 7;
+
+
+    vector<NonFieldPlayer *> playerList = parent_->getPlayers();
+    int playersNumber = playerList.size();
     QTableWidget * playersDisplayer = new QTableWidget(playersNumber, 6, mainWidget);
-    //QTableWidgetItem* items[7][5];
-    if (playersNumber < 7) {}
+    for (int i = 0; i < playersNumber; ++i) {
+        playersDisplayer->setItem(i, 0, new QTableWidgetItem(QString::number(playerList[i]->getSpeed())));
+        playersDisplayer->setItem(i, 1, new QTableWidgetItem(QString::number(playerList[i]->getForce())));
+        playersDisplayer->setItem(i, 2, new QTableWidgetItem(QString::number(playerList[i]->getAgility())));
+        playersDisplayer->setItem(i, 3, new QTableWidgetItem(QString::number(playerList[i]->getReflexes())));
+        playersDisplayer->setItem(i, 4, new QTableWidgetItem(QString::number(playerList[i]->getPassPrecision())));
+        QString iswounded;
+        if (playerList[i]->isWounded()) {
+            iswounded = "Blessé";
+        }
+        else {
+            iswounded = "Non Blessé";
+        }
+        playersDisplayer->setItem(i, 5, new QTableWidgetItem(iswounded));
+        playersDisplayer->setVerticalHeaderItem(i, new QTableWidgetItem("Joueur " + QString::number(i + 1)));
+    }
+
     int tableheight = 300;
     int tableWidth =  600;
 
-    QTableWidgetItem * item = new QTableWidgetItem();
-    playersDisplayer->setItem(0, 0, item);
     playersDisplayer->setSelectionMode(QAbstractItemView::NoSelection);
     playersDisplayer->setEditTriggers(QAbstractItemView::EditTriggers(0));
-    //QString path = QCoreApplication::applicationDirPath() + "/images/wood.jpg";
     playersDisplayer->setStyleSheet("QHeaderView::section { background-color : rgb(139,69,19); color:white;}");
-    playersDisplayer->setVerticalHeaderItem(0, new QTableWidgetItem("Joueur 1"));
     playersDisplayer->setHorizontalHeaderLabels(QString("Vitesse;Force;Agilité;Reflexes;Précision;État").split(";"));
-    item->setText("Hello world!");
     mainWidget->setFixedSize(tableWidth, tableheight);
 
     QPushButton * backButton = new QPushButton("Retour", mainWidget);
@@ -56,6 +70,7 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
 
 
 }
+
 
 void TeamHandlingWidget::backToMenu() {
     parent_->setNextScreen(MAINMENUSTATE);

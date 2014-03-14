@@ -37,7 +37,7 @@ Manager::Manager(JsonValue * json) {
     }
     string password = *password_string;
 
-    new (this) Manager(name, username, password, club);
+    new (this)Manager(name, username, password, club);
 }
 
 Manager::~Manager() {}

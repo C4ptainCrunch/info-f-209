@@ -22,6 +22,10 @@ void signup(Socket * s, string username, string name, string password) {
     writeToServer(s, "register", answer.toString());
 }
 
+void playerlist(Socket * s) {
+    writeToServer(s, "playerlist", "true");
+}
+
 void userlist(Socket * s) {
     writeToServer(s, "userlist", "true");
 }

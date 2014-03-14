@@ -21,23 +21,23 @@ Manager::Manager(JsonValue * json) {
 
     JsonString * name_string = JSTRING((*manager)["name"]);
     if (name_string == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Manager : missing name");
     }
     string name = *name_string;
 
     JsonString * username_string = JSTRING((*manager)["username"]);
     if (username_string == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Manager : missing username");
     }
     string username = *username_string;
 
-    JsonString * password_string = JSTRING((*manager)["password"]);
+    JsonString * password_string = JSTRING((*manager)["hash"]);
     if (password_string == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError("Manager : missing hash");
     }
     string password = *password_string;
 
-    Manager(name, username, password, club);
+    new (this) Manager(name, username, password, club);
 }
 
 Manager::~Manager() {}

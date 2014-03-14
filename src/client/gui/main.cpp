@@ -23,6 +23,13 @@ void * start_loop(void * arg) {
 }
 
 int main(int argc, char * argv[]) {
+    const char *slash = strrchr(argv[0], '/');
+    if (slash){
+        std::string clientdir(argv[0], slash-argv[0]);
+        chdir(clientdir.c_str());
+        has_chdir = true;
+    }
+
     QApplication app(argc, argv);
 
     MainWindow * window = new MainWindow();

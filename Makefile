@@ -25,7 +25,7 @@ client: $(BUILD_DIR)/bin/client
 	./build/bin/client bill.lan
 
 server: $(BUILD_DIR)/bin/server
-	./build/bin/server -c ./server-config.json
+	./build/bin/server
 
 $(BUILD_DIR)/bin/images:
 	cp -r src/client/gui/images $(BUILD_DIR)/bin/

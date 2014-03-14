@@ -5,6 +5,12 @@
 using namespace std;
 
 int main(int argc, char * argv[]) {
+    const char *slash = strrchr(argv[0], '/');
+    if (slash){
+        std::string clientdir(argv[0], slash-argv[0]);
+        chdir(clientdir.c_str());
+    }
+
     string configfile;
     if (argc == 1) {
         configfile = "../../server-config.json";
@@ -34,12 +40,18 @@ int main(int argc, char * argv[]) {
     }
     JsonInt * port_p = JINT((*dict)["port"]);
     JsonString * data_p = JSTRING((*dict)["datapath"]);
-    if ((port_p == NULL) || (data_p == NULL)) {
+    string datapath;
+    if (port_p == NULL) {
         printf("Error while parsing configuration file");
         exit(0);
     }
+    if (data_p != NULL){
+        datapath = *data_p;
+    }
+    else {
+        datapath = "../../data/";
+    }
     int port = *port_p;
-    string datapath = *data_p;
 
     int sockfd; // socket to bind to
 

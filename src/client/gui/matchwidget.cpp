@@ -48,15 +48,6 @@ MatchWidget::MatchWidget(QWidget * parent):
 
     //---------------------FIELD CONTAINER WIDGET--------------------------
     fieldWidget  = new QFrame(mainWidget);
-    //fieldWidget->setLineWidth(2);
-    //fieldWidget->setFrameStyle(QFrame::Box);
-    /*
-       QPalette* palette = new QPalette();
-       palette->setBrush(QPalette::Foreground,QBrush(QImage("images/wood.jpg")));
-       palette->setColor(QPalette::Background,Qt::white);
-       fieldWidget->setPalette(*palette);
-       fieldWidget->setAutoFillBackground( true );
-     */
 
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
@@ -147,17 +138,8 @@ MatchWidget::MatchWidget(QWidget * parent):
         }
         pair = !pair;
     }
-    //cout<<"coucou";
-    //cout<<"CACA"<<endl;
     label->setPixmap(*pixmap);
 
-
-    //mainLayout->addWidget(fieldWidget,1,1);
-    //cout<<"ICI"<<endl;
-    //mainWidget->setLayout(mainLayout);
-    //cout<<"LA"<<endl;
-    //fieldWidget->move(200,200);
-    grid_[13][49] = 7;
     //refreshField();
     mainWidget->show();
 

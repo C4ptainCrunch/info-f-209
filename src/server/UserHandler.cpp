@@ -66,7 +66,6 @@ int UserHandler::writeToClient(std::string key, JsonValue * json) {
 
 void UserHandler::disconnect() {
     dead = true;
-    s_->write("diconnect:true");
 }
 
 int UserHandler::loop() {

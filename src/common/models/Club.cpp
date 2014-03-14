@@ -57,8 +57,13 @@ Club::Club(JsonValue * json) {
     for (int i = 0; i < player_list->size(); i++) {
         players.push_back(new NonFieldPlayer((*player_list)[i]));
     }
-    Club(money, installations, team, players);
+    for(int i = 0; i < 7; i++){
+        if (team_->getPlayer(i) != NULL){
+            players.push_back(team_->getPlayer(i));
+        }
+    }
 
+    new (this) Club(money, installations, team, players);
 }
 
 Club::Club(int money, Installation * installations, Team & team, vector<NonFieldPlayer *> players): money_(money), players_(players) {
@@ -114,25 +119,31 @@ Installation * Club::getInstallations() {
 }
 
 
-Club::operator JsonValue() const {
+Club::operator JsonDict() const {
     JsonDict r;
 
     r.add("money", new JsonInt(money_));
 
-    JsonValue * team = new JsonValue(*team_);
+    JsonDict * team = new JsonDict(*team_);
     r.add("team", team);
 
     JsonList * installations = new JsonList();
     for (int i = 0; i < 5; i++) {
-        JsonValue * install = new JsonValue(installations_[i]);
+        JsonDict * install = new JsonDict(installations_[i]);
         installations->add(install);
     }
     r.add("installations", installations);
 
     JsonList * players = new JsonList();
     for (int i = 0; i < players_.size(); i++) {
-        JsonValue * player = new JsonValue(*(players_[i]));
-        players->add(player);
+        bool present = false;
+        for(int j = 0; (j < 7) && (!present) ; j++){
+            present = players_[i] == team_->getPlayer(j);
+        }
+        if(!present){
+            JsonDict * player = new JsonDict(*(players_[i]));
+            players->add(player);
+        }
     }
     r.add("players", players);
 

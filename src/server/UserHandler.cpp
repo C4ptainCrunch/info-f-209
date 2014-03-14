@@ -14,6 +14,7 @@ const map<string, view_ptr> UserHandler::viewmap = {
 };
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
+    pthread_mutex_init(&ready_lock, NULL);
     handlers_list_ = handlers_list;
     datapath_ = datapath;
     s_ = NULL;
@@ -36,6 +37,7 @@ UserHandler::~UserHandler() {
         }
     }
     if (manager_ != NULL) {
+        writeToFile();
         delete manager_;
     }
 }
@@ -67,7 +69,6 @@ int UserHandler::writeToClient(std::string key, JsonValue * json) {
 
 void UserHandler::disconnect() {
     dead = true;
-    s_->write("diconnect:true");
 }
 
 int UserHandler::loop() {
@@ -113,3 +114,18 @@ string UserHandler::path(string dir, string var) {
     // TODO : add defence against path injection
     return datapath_ + dir + "/" + var + ".json";
 }
+
+
+bool UserHandler::writeToFile(){
+    string content = ((JsonDict)(*manager_)).toString();
+    string fileName = path("users", manager_->getUserName());
+
+    if(writeFile(fileName, content)){
+        perror("Save user ");
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+

@@ -119,7 +119,7 @@ void NonFieldPlayer::setVocation(int vocation) {
     vocation_ = vocation;
 }
 
-NonFieldPlayer::operator JsonValue() const {
+NonFieldPlayer::operator JsonDict() const {
     JsonDict r;
     r.add("vocation", new JsonInt(vocation_));
     r.add("speed", new JsonInt(speed_));
@@ -133,7 +133,7 @@ NonFieldPlayer::operator JsonValue() const {
 
     JsonList * inventory = new JsonList();
     for (int i = 0; i < inventory_.size(); i++) {
-        JsonValue * item = new JsonValue(inventory_[i]);
+        JsonDict * item = new JsonDict(inventory_[i]);
         inventory->add(item);
     }
     r.add("inventory", inventory);

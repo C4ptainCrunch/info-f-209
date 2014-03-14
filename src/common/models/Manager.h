@@ -19,7 +19,7 @@ public:
     std::string getName();
     bool isReady();
     void setReadyState(bool state);
-    operator JsonValue() const;
+    operator JsonDict() const;
     bool isFree();
     void setFreeState(bool state);
 

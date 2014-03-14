@@ -14,7 +14,7 @@ Installation::Installation(JsonValue * json) {
         throw ModelUnserializationError();
     }
 
-    Installation((int) *level);
+    new (this) Installation((int) *level);
 }
 
 Installation::~Installation() {}
@@ -31,7 +31,7 @@ int Installation::getLevel() {
     return level_;
 }
 
-Installation::operator JsonValue() const {
+Installation::operator JsonDict() const {
     JsonDict r;
 
     r.add("level", new JsonInt(level_));

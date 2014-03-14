@@ -76,7 +76,7 @@ Manager::operator JsonDict() const {
     r.add("name", new JsonString(name_));
     r.add("username", new JsonString(userName_));
     r.add("hash", new JsonString(hash_));
-    JsonValue * club = new JsonValue(club_);
+    JsonValue * club = new JsonDict(club_);
     r.add("club", club);
 
     return r;

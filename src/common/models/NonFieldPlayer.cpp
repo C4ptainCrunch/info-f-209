@@ -133,7 +133,7 @@ NonFieldPlayer::operator JsonDict() const {
 
     JsonList * inventory = new JsonList();
     for (int i = 0; i < inventory_.size(); i++) {
-        JsonValue * item = new JsonValue(inventory_[i]);
+        JsonDict * item = new JsonDict(inventory_[i]);
         inventory->add(item);
     }
     r.add("inventory", inventory);

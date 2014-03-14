@@ -81,7 +81,7 @@ Team::operator JsonDict() const {
     JsonList * players = new JsonList();
     for (int i = 0; i < 7; i++) {
         if (players_[i] != NULL) {
-            JsonValue * item = new JsonValue(*(players_[i]));
+            JsonDict * item = new JsonDict(*(players_[i]));
             players->add(item);
         }
         else {

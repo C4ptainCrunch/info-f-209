@@ -119,19 +119,19 @@ Club::operator JsonDict() const {
 
     r.add("money", new JsonInt(money_));
 
-    JsonValue * team = new JsonValue(*team_);
+    JsonDict * team = new JsonDict(*team_);
     r.add("team", team);
 
     JsonList * installations = new JsonList();
     for (int i = 0; i < 5; i++) {
-        JsonValue * install = new JsonValue(installations_[i]);
+        JsonDict * install = new JsonDict(installations_[i]);
         installations->add(install);
     }
     r.add("installations", installations);
 
     JsonList * players = new JsonList();
     for (int i = 0; i < players_.size(); i++) {
-        JsonValue * player = new JsonValue(*(players_[i]));
+        JsonDict * player = new JsonDict(*(players_[i]));
         players->add(player);
     }
     r.add("players", players);

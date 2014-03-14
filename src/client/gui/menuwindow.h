@@ -10,8 +10,11 @@
 #include <QHBoxLayout>
 #include <QWidget>
 #include <QString>
+#include <string>
+#include <vector>
 #include <QComboBox>
 #include <iostream>
+
 
 class MainWindow;
 
@@ -19,7 +22,7 @@ class MainWindow;
 class MenuWindow: public QWidget {
     Q_OBJECT
 public:
-    explicit MenuWindow(MainWindow *parent=0);
+    explicit MenuWindow(MainWindow * parent=0);
 
     QGridLayout * mainLayout;
     QGridLayout * matchLauncherLayout;
@@ -33,19 +36,24 @@ public:
     QPushButton * infrastructureButton;
     QPushButton * auctionHouseButton;
     QPushButton * teamHandlingButton;
+    bool isActive();
+    void enable();
+    void disable();
 
 signals:
 
 public slots:
-    void refreshConnectedList();
+    void refreshConnectedList(std::vector<std::string> * connectedList);
     void logOut();
     void startMatch();
     void handlePlayers();
     void auctionHouse();
     void infrastructures();
+    void askConnectedListRefresh();
 
 private:
     MainWindow * parent_;
+    bool active;
 
 };
 

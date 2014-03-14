@@ -18,6 +18,6 @@ string Quaffle::getName() {
     return "Q";
 }
 
-Way Quaffle::getWay() const{
+Way Quaffle::getWay() const {
     return thrownWay;
 }

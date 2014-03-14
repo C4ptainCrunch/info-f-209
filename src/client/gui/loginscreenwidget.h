@@ -12,23 +12,35 @@
 #include <QFrame>
 #include <menuwindow.h>
 
+#include "../send-views/views.h"
+
 class MainWindow;
 
 class loginScreenWidget: public QWidget {
     Q_OBJECT
 public:
     explicit loginScreenWidget(MainWindow * parent=0);
+    void enableButtons();
+    void disableButtons();
 
 signals:
 
 public slots:
-    void checkIdPresence();
+    void logIn();
     void registerUser();
     void showCredits();
     void exit();
+    void acceptLogin();
+    void refuseLogin(int errorCode);
+    void refuseRegister(int errorCode);
+    void acceptRegister();
 
 private:
     QLineEdit * usernameLine;
+    QPushButton * connectButton;
+    QPushButton * creditsButton;
+    QPushButton * registerButton;
+    QPushButton * quitButton;
     QLineEdit * passLine;
     MainWindow * parent_;
 

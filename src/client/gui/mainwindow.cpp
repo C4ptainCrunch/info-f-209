@@ -5,7 +5,9 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget * parent):
     QWidget(parent) {
+    s_ = 0;
     cout << QCoreApplication::applicationDirPath().toStdString() << endl;
+
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
 
@@ -24,6 +26,9 @@ MainWindow::MainWindow(QWidget * parent):
     loginScreenWidget * login = new loginScreenWidget(this);
     login->show();
 
+    //-----------------SIGNAUX----------------------------
+    QObject::connect(this, SIGNAL(newDefi(std::string)), this, SLOT(getDefi(std::string)));
+
 
 }
 
@@ -31,7 +36,7 @@ MainWindow::~MainWindow()
 {}
 
 void MainWindow::setNextScreen(int nextState) {
-    cout<<nextState;
+    cout << nextState;
     switch (nextState) {
         case LOGINMENUSTATE: {
             loginScreenWidget * login = new loginScreenWidget(this);
@@ -43,16 +48,17 @@ void MainWindow::setNextScreen(int nextState) {
             MenuWindow * menu = new MenuWindow(this);
             currentWidget = menu;
             menu->show();
+            menu->enable();
             break;
 
         }
-        case AUCTIONHOUSESTATE:{
+        case AUCTIONHOUSESTATE: {
             AuctionHouseWidget * auctionHouse = new AuctionHouseWidget(this);
             currentWidget = auctionHouse;
             auctionHouse->show();
             break;
         }
-        case TEAMHANDLINGSTATE:{
+        case TEAMHANDLINGSTATE: {
             TeamHandlingWidget * teamHandling = new TeamHandlingWidget(this);
             currentWidget = teamHandling;
             teamHandling->show();
@@ -64,7 +70,7 @@ void MainWindow::setNextScreen(int nextState) {
             match->show();
             break;
         }
-        case INFRASTRUCTURESTATE:{
+        case INFRASTRUCTURESTATE: {
             InfrastructureWidget * infrastructure = new InfrastructureWidget(this);
             currentWidget = infrastructure;
             infrastructure->show();
@@ -74,6 +80,11 @@ void MainWindow::setNextScreen(int nextState) {
     }
 
 }
+
+QWidget * MainWindow::getCurrentWidget() {
+    return currentWidget;
+}
+
 
 void QWidget::closeEvent(QCloseEvent * event) {
     event->accept();
@@ -87,4 +98,22 @@ void QWidget::closeEvent(QCloseEvent * event) {
         event->ignore();
        }
      */
+}
+
+void MainWindow::getDefi(string username) {
+    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
+    if (accept == QMessageBox::Yes) {
+        //TODO lanch match
+    }
+    else if (accept == QMessageBox::No) {
+        //TODO say no to server
+    }
+}
+
+void MainWindow::setSocket(Socket * s) {
+    s_ = s;
+}
+
+Socket * MainWindow::getSocket() {
+    return s_;
 }

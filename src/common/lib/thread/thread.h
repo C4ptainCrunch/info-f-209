@@ -8,8 +8,8 @@
 
 class Thread {
 public:
-    Thread(void *(*routine) (void *), void * p = NULL);
-    void* join();
+    Thread(void * (* routine) (void *), void * p=NULL);
+    void * join();
 
 private:
     pthread_t tid;

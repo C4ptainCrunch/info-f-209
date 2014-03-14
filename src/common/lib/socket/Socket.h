@@ -21,6 +21,7 @@ public:
     Socket();
     ~Socket();
     Socket(const int fd);
+    Socket(std::string hostname, int port);
     virtual int write(std::string message);
     virtual int read(std::string & message);
     virtual int getFd() const;

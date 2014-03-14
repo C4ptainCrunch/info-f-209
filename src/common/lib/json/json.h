@@ -50,8 +50,7 @@ private:
 };
 
 class JsonDict: public JsonValue {
-public:
-    ~JsonDict();
+public: ~JsonDict();
     static JsonDict * fromString(std::string message, int & i);
     static JsonDict * fromString(std::string message);
 
@@ -68,8 +67,7 @@ private:
 };
 
 class JsonList: public JsonValue {
-public:
-    ~JsonList();
+public: ~JsonList();
     static JsonList * fromString(std::string message, int & i);
     static JsonList * fromString(std::string message);
 

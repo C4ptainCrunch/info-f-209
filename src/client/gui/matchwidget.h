@@ -16,8 +16,9 @@
 #include <iostream>
 
 #include "hexagon.h"
+#include <../../common/models/Case.h>
+#include "../../common/lib/socket/Socket.h"
 
-enum { WIDTH = 30, LENGHT = 64};
 
 class MainWindow;
 
@@ -26,13 +27,13 @@ class MatchWidget: public QWidget {
 public:
     explicit MatchWidget(QWidget * parent=0);
     void mousePressEvent(QMouseEvent *);
-    void generateGrid() ;
-    void refreshField();
+    void generateGrid();
     ~MatchWidget();
 
 signals:
 
 public slots:
+    void refreshField(Case grid[WIDTH][LENGTH]);
 
 private:
     MainWindow * parent_;
@@ -40,7 +41,7 @@ private:
     QLabel * ownScore;
     QLabel * opponentScore;
     QFrame * fieldWidget;
-    int grid_[WIDTH][LENGHT];
+    int grid_[WIDTH][LENGTH];
 
 };
 

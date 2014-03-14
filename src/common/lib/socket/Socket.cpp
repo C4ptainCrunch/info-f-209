@@ -14,7 +14,6 @@ Socket::Socket(const int fd) {
 }
 
 Socket::~Socket() {
-    cout << "capout" << endl;
     if (fd_ != 0) {
         close(fd_);
     }
@@ -67,7 +66,6 @@ int Socket::read(string & message) {
     while (!isComplete) {
         int len;
         len = recv(fd_, buffer, sizeof(buffer) - 1, 0);
-        cout << "BUFFER : " << buffer << endl;
         if (len == -1) {
             return -1; // socket error, could not read
         }

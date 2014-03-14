@@ -10,3 +10,11 @@ void sendFail(UserHandler * handler, int errorcode, string topic, string message
     answer.add("code", new JsonInt(errorcode));
     handler->writeToClient(topic, &answer);
 }
+
+bool isInConnectedList(std::vector<UserHandler *> * listUserHandler, string userName){
+    bool ret = false;
+    for(int i = 0; i < listUserHandler->size() && !ret; i++){
+        ret = listUserHandler->at(i)->getManager()->getUserName() == userName;
+    }
+    return ret;
+}

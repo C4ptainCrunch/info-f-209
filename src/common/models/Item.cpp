@@ -11,7 +11,7 @@ Item::Item(JsonValue * json) {
 
 Item::~Item() {}
 
-Item::operator JsonValue() const {
+Item::operator JsonDict() const {
     JsonDict r;
     return r;
 }

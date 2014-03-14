@@ -10,7 +10,7 @@ public:
     Item();
     Item(JsonValue * json);
     ~Item();
-    operator JsonValue() const;
+    operator JsonDict() const;
 };
 
 #endif // ITEM_H

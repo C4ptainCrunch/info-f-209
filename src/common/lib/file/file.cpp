@@ -26,7 +26,7 @@ int readFile(const string & filename, string & content) {
 }
 
 int writeFile(const string & filename, string & content) {
-    int fd = open(filename.c_str(), O_WRONLY, O_CREAT);
+    int fd = open(filename.c_str(), O_WRONLY | O_CREAT, 0600);
 
     if (fd >= 0) {
         size_t index = 0;

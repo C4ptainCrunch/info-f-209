@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void * print_message(void*) {
+void * print_message(void *) {
 
     cout << "Threading" << endl;
     sleep(1);

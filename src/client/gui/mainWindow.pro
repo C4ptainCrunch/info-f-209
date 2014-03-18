@@ -5,10 +5,13 @@
 #-------------------------------------------------
 
 QT       += core gui
+CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = mainWindow
+DESTDIR = ../../../build
+
+TARGET = bin/client
 TEMPLATE = app
 
 
@@ -20,7 +23,9 @@ SOURCES += main.cpp\
     hexagon.cpp \
     teamhandlingwidget.cpp \
     auctionhousewidget.cpp \
-    infrastructurewidget.cpp
+    infrastructurewidget.cpp\
+    ../receive-views/serverhandler.cpp\
+    ../receive-views/views.cpp
 
 HEADERS  += mainwindow.h \
     menuwindow.h \
@@ -29,10 +34,21 @@ HEADERS  += mainwindow.h \
     hexagon.h \
     teamhandlingwidget.h \
     auctionhousewidget.h \
-    infrastructurewidget.h
+    infrastructurewidget.h\
+    ../receive-views/serverhandler.h\
+    ../receive-views/views.h
 
 FORMS    +=
 
 OTHER_FILES += \
     ../build-mainWindow-Desktop-Release/stylesheets/stylesheet.qss \
     stylesheets/stylesheet.qss
+
+LIBS+= $$DESTDIR/libjson.a $$DESTDIR/libsocket.a $$DESTDIR/libexception.a $$DESTDIR/client-send-views.a $$DESTDIR/libthread.a $$DESTDIR/models.a
+
+
+OBJECTS_DIR = $$DESTDIR/qclient/
+MOC_DIR = $$DESTDIR/qclient/.moc
+RCC_DIR = $$DESTDIR/qclient/.rcc
+UI_DIR = $$DESTDIR/qclient/.ui
+

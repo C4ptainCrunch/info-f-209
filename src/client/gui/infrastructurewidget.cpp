@@ -5,9 +5,8 @@
 #include <iostream>
 using namespace std;
 
-InfrastructureWidget::InfrastructureWidget(MainWindow *parent) :
-    QWidget(parent),parent_(parent)
-{
+InfrastructureWidget::InfrastructureWidget(MainWindow * parent):
+    QWidget(parent), parent_(parent) {
 
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
@@ -27,36 +26,36 @@ InfrastructureWidget::InfrastructureWidget(MainWindow *parent) :
 
     //------------------------INFIRMARY BUTTON ----------------------------
     QPushButton * infirmaryButton = new QPushButton(mainWidget);
-    infirmaryButton->setFixedSize(128,128);
+    infirmaryButton->setFixedSize(128, 128);
     infirmaryButton->setStyleSheet("background-image : url(images/infirmaryLogo.jpg);");
-    connect(infirmaryButton,SIGNAL(clicked()),this,SLOT(setInfirmary()));
+    connect(infirmaryButton, SIGNAL(clicked()), this, SLOT(setInfirmary()));
 
     //---------------------TRAINING FIELD BUTTON ----------------------------
     QPushButton * trainingFieldButton = new QPushButton(mainWidget);
-    trainingFieldButton->setFixedSize(128,128);
+    trainingFieldButton->setFixedSize(128, 128);
     trainingFieldButton->setStyleSheet("background-image : url(images/trainingFieldLogo.jpg);");
-    connect(trainingFieldButton,SIGNAL(clicked()),this,SLOT(setTrainingField()));
+    connect(trainingFieldButton, SIGNAL(clicked()), this, SLOT(setTrainingField()));
 
     //-------------------------FIELD BUTTON ---------------------------------
     QPushButton * fieldButton = new QPushButton(mainWidget);
-    fieldButton->setFixedSize(128,128);
+    fieldButton->setFixedSize(128, 128);
     fieldButton->setStyleSheet("background-image : url(images/fieldLogo.jpg);");
-    connect(fieldButton,SIGNAL(clicked()),this,SLOT(setField()));
+    connect(fieldButton, SIGNAL(clicked()), this, SLOT(setField()));
 
     //-------------------------FIELD BUTTON ---------------------------------
     QPushButton * candyShopButton = new QPushButton(mainWidget);
-    candyShopButton->setFixedSize(128,128);
+    candyShopButton->setFixedSize(128, 128);
     candyShopButton->setStyleSheet("background-image : url(images/candyShopLogo.jpg);");
-    connect(candyShopButton,SIGNAL(clicked()),this,SLOT(setCandyShop()));
+    connect(candyShopButton, SIGNAL(clicked()), this, SLOT(setCandyShop()));
 
     //-------------------------FIELD BUTTON ---------------------------------
     QPushButton * fanShopButton = new QPushButton(mainWidget);
-    fanShopButton->setFixedSize(128,128);
+    fanShopButton->setFixedSize(128, 128);
     fanShopButton->setStyleSheet("background-image : url(images/fanShopLogo.jpg);");
-    connect(fanShopButton,SIGNAL(clicked()),this,SLOT(setFanShop()));
+    connect(fanShopButton, SIGNAL(clicked()), this, SLOT(setFanShop()));
     //---------------------------LABEL---------------------------------------
     currentInfrastructureWidget = new QWidget(mainWidget);
-    currentInfrastructureWidget->setFixedSize(600,100);
+    currentInfrastructureWidget->setFixedSize(600, 100);
     currentInfrastructureWidget->setStyleSheet("background-image : url(images/wood.jpg); border: 2px solid darkbrown; border-radius: 10px; padding: 0 8px;");
     currentInfrastructure = new QLabel(currentInfrastructureWidget);
     currentInfrastructure->setFixedWidth(600);
@@ -75,21 +74,21 @@ InfrastructureWidget::InfrastructureWidget(MainWindow *parent) :
     buttonsLayout->addWidget(fanShopButton);
 
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
-    QPushButton * backButton = new QPushButton("Retour",mainWidget);
-    connect(backButton,SIGNAL(clicked()),this,SLOT(backToMenu()));
-    backButton->setFixedSize(100,50);
+    QPushButton * backButton = new QPushButton("Retour", mainWidget);
+    connect(backButton, SIGNAL(clicked()), this, SLOT(backToMenu()));
+    backButton->setFixedSize(100, 50);
     QWidget * temp2 = new QWidget(mainWidget);
-    temp2->setFixedSize(100,100);
+    temp2->setFixedSize(100, 100);
 
-    mainLayout->addWidget(backButton,0,0);
-    mainLayout->addWidget(currentInfrastructureWidget,0,1);
-    mainLayout->addWidget(temp2,3,2);
-    mainLayout->addLayout(buttonsLayout,1,1);
+    mainLayout->addWidget(backButton, 0, 0);
+    mainLayout->addWidget(currentInfrastructureWidget, 0, 1);
+    mainLayout->addWidget(temp2, 3, 2);
+    mainLayout->addLayout(buttonsLayout, 1, 1);
 
 
 }
 
-void InfrastructureWidget::setTrainingField(){
+void InfrastructureWidget::setTrainingField() {
     currentInfrastructure->hide();
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Terrain d'entrainement");
@@ -97,7 +96,7 @@ void InfrastructureWidget::setTrainingField(){
     currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
-void InfrastructureWidget::setInfirmary(){
+void InfrastructureWidget::setInfirmary() {
     currentInfrastructure->hide();
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Infirmerie");
@@ -105,7 +104,7 @@ void InfrastructureWidget::setInfirmary(){
     currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
-void InfrastructureWidget::setField(){
+void InfrastructureWidget::setField() {
     currentInfrastructure->hide();
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Terrain");
@@ -113,7 +112,7 @@ void InfrastructureWidget::setField(){
     currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
-void InfrastructureWidget::setFanShop(){
+void InfrastructureWidget::setFanShop() {
     currentInfrastructure->hide();
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Fanshop");
@@ -121,7 +120,7 @@ void InfrastructureWidget::setFanShop(){
     currentInfrastructure->setStyleSheet("color : white; font-size : 50px;");
     currentInfrastructure->show();
 }
-void InfrastructureWidget::setCandyShop(){
+void InfrastructureWidget::setCandyShop() {
     currentInfrastructure->hide();
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setText("Magasin de bonbons");
@@ -130,6 +129,6 @@ void InfrastructureWidget::setCandyShop(){
     currentInfrastructure->show();
 }
 
-void InfrastructureWidget::backToMenu(){
+void InfrastructureWidget::backToMenu() {
     parent_->setNextScreen(MAINMENUSTATE);
 }

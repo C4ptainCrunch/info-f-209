@@ -6,9 +6,11 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <pthread.h>
 
 #include "../common/lib/socket/Socket.h"
 #include "../common/models/Manager.h"
+#include "../common/lib/exception/BadRequest.h"
 #include "helpers.h"
 
 class UserHandler;
@@ -20,7 +22,7 @@ class UserHandler {
 public:
     UserHandler(std::vector<UserHandler *> * handlers_list, std::string datapath);
     ~UserHandler();
-    void start(const int fd, std::thread * handling_thread);
+    void start(Socket * fd, std::thread * handling_thread);
     bool isReady();
     int loop();
 
@@ -30,6 +32,7 @@ public:
     int writeToClient(std::string key, JsonValue * json);
     void disconnect();
     std::string path(std::string dir, std::string var);
+    bool writeToFile();
 
 private:
     bool dead;
@@ -38,6 +41,7 @@ private:
     std::thread * handling_thread_;
     std::vector<UserHandler *> * handlers_list_;
     std::string datapath_;
+    pthread_mutex_t ready_lock;
 
     void handleMessage(std::string message);
 

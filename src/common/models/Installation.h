@@ -14,7 +14,7 @@ public:
     virtual void improve();
     virtual int improvePrice();
     virtual int getLevel();
-    operator JsonValue() const;
+    operator JsonDict() const;
 
 protected:
     int level_;

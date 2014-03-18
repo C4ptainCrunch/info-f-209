@@ -13,7 +13,7 @@ public:
     NonFieldPlayer();
     ~NonFieldPlayer();
     NonFieldPlayer & operator=(const Player & player);
-    operator JsonValue() const;
+    operator JsonDict() const;
     int getLevel();
     void changeExperience(int deltaExperience);
     void levelUp();

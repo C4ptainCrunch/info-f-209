@@ -25,7 +25,6 @@ public:
     QPolygon hexagon_;
 
 protected:
-    void paintEvent(QShowEvent * event);
 
 private:
     int x_;

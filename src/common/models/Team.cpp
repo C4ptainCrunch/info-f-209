@@ -14,14 +14,14 @@ Team::Team(JsonValue * json) {
     NonFieldPlayer * players[7];
 
     if (team == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
     JsonList * players_list = JLIST((*team)["players"]);
     if (players_list == NULL) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
     if (players_list->size() != 7) {
-        throw ModelUnserializationError();
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
 
     for (int i = 0; i < 7; i++) {
@@ -76,12 +76,12 @@ void Team::swapPlayers(int pos1, int pos2) {
     players_[pos2] = tempPlayer;
 }
 
-Team::operator JsonValue() const {
+Team::operator JsonDict() const {
     JsonDict r;
     JsonList * players = new JsonList();
     for (int i = 0; i < 7; i++) {
         if (players_[i] != NULL) {
-            JsonValue * item = new JsonValue(*(players_[i]));
+            JsonDict * item = new JsonDict(*(players_[i]));
             players->add(item);
         }
         else {

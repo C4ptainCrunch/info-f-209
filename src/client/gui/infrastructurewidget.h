@@ -6,11 +6,10 @@
 
 class MainWindow;
 
-class InfrastructureWidget : public QWidget
-{
+class InfrastructureWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit InfrastructureWidget(MainWindow *parent = 0);
+    explicit InfrastructureWidget(MainWindow * parent=0);
 
 signals:
 
@@ -23,7 +22,7 @@ public slots:
     void backToMenu();
 
 private:
-    MainWindow* parent_;
+    MainWindow * parent_;
     QWidget * mainWidget;
     QWidget * currentInfrastructureWidget;
     QLabel * currentInfrastructure;

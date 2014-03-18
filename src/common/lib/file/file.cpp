@@ -26,36 +26,26 @@ int readFile(const string & filename, string & content) {
 }
 
 int writeFile(const string & filename, string & content) {
-    int fd = open(filename.c_str(), O_WRONLY, O_CREAT);
+    int fd = open(filename.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
     if (fd >= 0) {
-        size_t index = 0;
-        size_t delta;
+        int pos = 0;
 
-        do {
-            size_t write_len = 0;
+        while (pos < content.length()) {
+            const char * buffer = content.c_str();
+            int len = content.length();
 
-            delta = content.size() - index;
-            if (delta > BUFF_SIZE) {
-                delta = BUFF_SIZE;
-            }
-
-            const char * buffer = content.substr(index, delta).c_str();
-            write_len = write(fd, buffer, content.size());
-            if (write_len == -1) {
-                close(fd);
+            int size =  write(fd, buffer, len);
+            if (size == -1) {
                 return -1;
             }
-            if (write_len > 0) {
-                index += write_len;
-            }
-        } while (delta > 0);
-
+            pos += size;
+        }
+        close(fd);
         return 0;
     }
-    else {
-        return fd;
-    }
+    return fd;
+
 }
 
 bool fileExists(const std::string & filename) {

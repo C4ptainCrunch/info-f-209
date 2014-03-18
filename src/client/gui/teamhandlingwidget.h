@@ -1,6 +1,5 @@
-#ifndef AUCTIONHOUSEWIDGET_H
-#define AUCTIONHOUSEWIDGET_H
-
+#ifndef TEAMHANDLINGWIDGET_H
+#define TEAMHANDLINGWIDGET_H
 
 #include <QMainWindow>
 #include <QLineEdit>
@@ -14,14 +13,17 @@
 #include <QComboBox>
 #include <QTableWidget>
 #include <iostream>
+#include <../../common/models/NonFieldPlayer.h>
+#include <../send-views/views.h>
+
 
 class MainWindow;
 
-class AuctionHouseWidget : public QWidget
-{
+
+class TeamHandlingWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit AuctionHouseWidget(MainWindow *parent = 0);
+    explicit TeamHandlingWidget(MainWindow * parent=0);
 
 signals:
 
@@ -34,4 +36,4 @@ private:
 
 #include <mainwindow.h>
 
-#endif // AUCTIONHOUSEWIDGET_H
+#endif // TEAMHANDLINGWIDGET_H

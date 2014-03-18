@@ -4,34 +4,49 @@ using namespace std;
 
 
 #include "views/user.h"
+#include "views/management.h"
 
 const map<string, view_ptr> UserHandler::viewmap = {
     {"login", views::login},
     {"register", views::signup},
-    {"userlist", views::userlist}
+    {"userlist", views::userlist},
+    {"playerlist", views::playerlist}
 };
 
 UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
+    pthread_mutex_init(&ready_lock, NULL);
     handlers_list_ = handlers_list;
     datapath_ = datapath;
     s_ = NULL;
     manager_ = NULL;
 }
 
-void UserHandler::start(const int fd, thread * handling_thread) {
+void UserHandler::start(Socket * fd, thread * handling_thread) {
+    pthread_mutex_lock(&ready_lock);
     handling_thread_ = handling_thread;
-    s_ = new Socket(fd);
+    s_ = fd;
+    pthread_mutex_unlock(&ready_lock);
 }
 
 UserHandler::~UserHandler() {
     delete s_;
+    for (int i = 0; i < handlers_list_->size(); i++) {
+        if (handlers_list_->at(i) == this) {
+            handlers_list_->erase(handlers_list_->begin() + i);
+            break;
+        }
+    }
     if (manager_ != NULL) {
+        writeToFile();
         delete manager_;
     }
 }
 
 bool UserHandler::isReady() {
-    return s_ != NULL;
+    pthread_mutex_lock(&ready_lock);
+    bool ready = s_ != NULL;
+    pthread_mutex_unlock(&ready_lock);
+    return ready;
 }
 
 std::vector<UserHandler *> * UserHandler::getHandlers_listPtr() {
@@ -54,7 +69,6 @@ int UserHandler::writeToClient(std::string key, JsonValue * json) {
 
 void UserHandler::disconnect() {
     dead = true;
-    s_->write("diconnect:true");
 }
 
 int UserHandler::loop() {
@@ -99,4 +113,18 @@ void UserHandler::handleMessage(string message) {
 string UserHandler::path(string dir, string var) {
     // TODO : add defence against path injection
     return datapath_ + dir + "/" + var + ".json";
+}
+
+
+bool UserHandler::writeToFile() {
+    string content = ((JsonDict)(*manager_)).toString();
+    string fileName = path("users", manager_->getUserName());
+
+    if (writeFile(fileName, content)) {
+        perror("Save user ");
+        return false;
+    }
+    else {
+        return true;
+    }
 }

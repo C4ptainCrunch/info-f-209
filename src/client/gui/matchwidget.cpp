@@ -51,7 +51,7 @@ MatchWidget::MatchWidget(QWidget * parent):
 
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
-    QObject::connect(parent_, SIGNAL(refreshField(Case[][])), this, SLOT(refreshField(Case[][])));
+    QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
 
     //---------------------FIELD REPRESENTATION----------------------------
 
@@ -79,7 +79,8 @@ MatchWidget::MatchWidget(QWidget * parent):
     painter.setBrush(QBrush(Qt::darkGreen));
     Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
-
+    
+    //askMatchToServer();
     generateGrid();
 
     //TODO adapter aux modèles
@@ -144,6 +145,14 @@ MatchWidget::MatchWidget(QWidget * parent):
     mainWidget->show();
 
 
+}
+void askMatchToServer(){
+    //TODO
+}
+
+void setMatch(Match* match){
+    currentMatch = match;
+    refreshField(currentMatch->getGrid());
 }
 
 void MatchWidget::mousePressEvent(QMouseEvent * event) {

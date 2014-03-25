@@ -304,3 +304,7 @@ int Match::addPoint(bool guestTeam, int delta) {
     score_[guestTeam] += delta;
     return score_[guestTeam];
 }
+
+Case* Match::getGrid(){
+    return grid_;
+}

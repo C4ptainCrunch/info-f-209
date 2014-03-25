@@ -44,7 +44,7 @@ signals:
     void registerFailure(int);
     void newDefi(std::string username);
 
-    void refreshField(Case grid_[WIDTH][LENGTH]);
+    void setMatch(Match * match);
 
     void playerList(std::vector<NonFieldPlayer *> * players);
 

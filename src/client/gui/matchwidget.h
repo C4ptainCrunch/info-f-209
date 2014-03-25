@@ -29,11 +29,11 @@ public:
     void mousePressEvent(QMouseEvent *);
     void generateGrid();
     ~MatchWidget();
-
+    void askMatchToServer();
 signals:
 
 public slots:
-    void refreshField(Case grid[WIDTH][LENGTH]);
+    void setMatch(Match*);
 
 private:
     MainWindow * parent_;
@@ -41,7 +41,7 @@ private:
     QLabel * ownScore;
     QLabel * opponentScore;
     QFrame * fieldWidget;
-    int grid_[WIDTH][LENGTH];
+    Match* currentMatch;
 
 };
 

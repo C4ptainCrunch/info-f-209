@@ -14,6 +14,25 @@ Match::Match(Club & hostClub, Club & guestClub) {
     generateGrid();
 
 }
+
+Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH]) {
+    srand(time(NULL));
+    clubs_[host] = &hostClub;
+    clubs_[guest] = &guestClub;
+
+    goldenSnitch_ = goldenSnitch;
+    quaffle_ = quaffle;
+    budgers_[0] = budger1;
+    budgers_[1] = budger2;
+    for(int i; i<WIDTH; ++i){
+        for(int j; j<LENGTH; ++j){
+            grid_[i][j] = grid[i][j];
+        }
+    }
+
+
+}
+
 Match::Match(JsonValue *json){
 
 }

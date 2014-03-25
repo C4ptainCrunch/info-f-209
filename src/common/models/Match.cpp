@@ -305,6 +305,6 @@ int Match::addPoint(bool guestTeam, int delta) {
     return score_[guestTeam];
 }
 
-Case* Match::getGrid(){
-    return grid_;
+void Match::getGrid(Case grid[WIDTH][LENGTH]){
+    grid = grid_;
 }

@@ -36,7 +36,7 @@ public:
     void generateFieldPlayers();
     std::string print();    //FOR TESTS
     void generateGrid();    //TO SET PRIVATE AFTER TESTS
-    Case* getGrid();
+    void getGrid(Case grid[WIDTH][LENGTH]);
 
 private:
     bool endGame_ = false;

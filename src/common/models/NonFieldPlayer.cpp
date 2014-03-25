@@ -81,7 +81,7 @@ NonFieldPlayer::NonFieldPlayer(JsonValue * json) {
         inventory.push_back(Item((*item_list)[i]));
     }
 
-    NonFieldPlayer(vocation, speed, force, agility, reflexes, passPrecision,  wounded, inventory, level, experience);
+    new(this) NonFieldPlayer(vocation, speed, force, agility, reflexes, passPrecision,  wounded, inventory, level, experience);
 }
 
 NonFieldPlayer::~NonFieldPlayer() {}

@@ -3,6 +3,8 @@
 using namespace std;
 
 Match::Match(Club & hostClub, Club & guestClub) {
+    score_[0] = 0;
+    score_[1] = 0;
     srand(time(NULL));
     clubs_[host] = &hostClub;
     clubs_[guest] = &guestClub;
@@ -16,6 +18,8 @@ Match::Match(Club & hostClub, Club & guestClub) {
 }
 
 Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH]) {
+    score_[0] = 0;
+    score_[1] = 0;
     srand(time(NULL));
     clubs_[host] = &hostClub;
     clubs_[guest] = &guestClub;

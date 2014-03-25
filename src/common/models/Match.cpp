@@ -295,7 +295,7 @@ string Match::print() { //FOR TEST PURPOSES
                     c += "\033[0m";
                 }
                 else if (grid_[i][j].ball != 0) {
-                    c += "\033[1;93";
+                    c += "\033[1;93m";
                     c += grid_[i][j].ball->getName();
                     c += "\033[0m";
                     //<< typeid(grid_[i][j].ball).name();
@@ -328,5 +328,9 @@ int Match::addPoint(bool guestTeam, int delta) {
 }
 
 void Match::getGrid(Case grid[WIDTH][LENGTH]){
-    grid = grid_;
+    for(int i = 0; i < WIDTH; i++){
+        for(int j = 0; j<LENGTH; j++){
+            grid[i][j] = grid_[i][j];
+        }
+    }
 }

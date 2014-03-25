@@ -15,6 +15,7 @@ class Budger: public Ball {
 
 public:
     Budger();
+    Budger(int speed, Position position, Way hitWay);
     ~Budger();
     Position autoMove(const Case grid[WIDTH][LENGTH]);
     void isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
@@ -23,7 +24,7 @@ public:
     Way getHitWay() const;
 
 private:
-    Way hitWay;
+    Way hitWay_;
 };
 
 #endif // BUDGER_H

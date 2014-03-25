@@ -2,7 +2,9 @@
 
 using namespace std;
 
-Quaffle::Quaffle(): Ball(0), thrownWay() {}
+Quaffle::Quaffle(): Ball(0), thrownWay_() {}
+
+Quaffle::Quaffle(int speed, Position position, Way thrownWay): Ball(speed, position) ,thrownWay_(thrownWay) {}
 
 Quaffle::~Quaffle() {}
 
@@ -11,7 +13,7 @@ void Quaffle::thrown(const char direction, const int power, const Case grid[WIDT
     for (int i = 0; i < power; i++) {
         way.push_back(nextCase(position_, direction, grid));
     }
-    thrownWay = way;
+    thrownWay_ = way;
 }
 
 string Quaffle::getName() {
@@ -19,5 +21,5 @@ string Quaffle::getName() {
 }
 
 Way Quaffle::getWay() const {
-    return thrownWay;
+    return thrownWay_;
 }

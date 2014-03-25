@@ -22,6 +22,8 @@ FieldPlayer::FieldPlayer(NonFieldPlayer & nonFieldPlayer, int role, bool guest) 
 
 }
 
+FieldPlayer::FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest): Player(speed, force, agility, reflexes, passPrecision, wounded, inventory), role_(role), guest_(guest){}
+
 FieldPlayer & FieldPlayer::operator=(Player & player) {
     if (this != &player) {
         speed_ = player.getSpeed();

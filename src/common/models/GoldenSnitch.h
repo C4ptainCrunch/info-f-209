@@ -15,6 +15,7 @@ class GoldenSnitch: public Ball {
 public:
     GoldenSnitch();
     ~GoldenSnitch();
+    GoldenSnitch(int speed, Position position);
     Position autoMove(const Case grid[WIDTH][LENGTH]);
     std::string getName();
 };

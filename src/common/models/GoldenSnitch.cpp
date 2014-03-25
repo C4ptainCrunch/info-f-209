@@ -6,6 +6,8 @@ GoldenSnitch::GoldenSnitch(): Ball(42) {
     srand(time(NULL));
 }
 
+GoldenSnitch::GoldenSnitch(int speed, Position position): Ball(speed, position){ }
+
 GoldenSnitch::~GoldenSnitch() {}
 
 Position GoldenSnitch::autoMove(const Case grid[WIDTH][LENGTH]) {

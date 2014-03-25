@@ -12,13 +12,14 @@ class Quaffle: public Ball {
 
 public:
     Quaffle();
+    Quaffle(int speed, Position position, Way thrownWay);
     ~Quaffle();
     void thrown(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
     std::string getName();
     Way getWay() const;
 
 private:
-    Way thrownWay;
+    Way thrownWay_;
 };
 
 #endif // QUAFFLE_H

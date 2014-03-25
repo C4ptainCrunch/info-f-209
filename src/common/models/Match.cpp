@@ -17,9 +17,9 @@ Match::Match(Club & hostClub, Club & guestClub) {
 
 }
 
-Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH]) {
-    score_[0] = 0;
-    score_[1] = 0;
+Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH], int score[2], bool endGame) {
+    score_[0] = score[0];
+    score_[1] = score[1];
     srand(time(NULL));
     clubs_[host] = &hostClub;
     clubs_[guest] = &guestClub;
@@ -38,7 +38,6 @@ Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaff
 }
 
 Match::Match(JsonValue *json){
-
 }
 
 Match::~Match() {}

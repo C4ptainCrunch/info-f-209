@@ -24,6 +24,7 @@ class Match {
 
 public:
     Match(Club & hostClub, Club & guestClub);
+    Match(JsonValue *json);
     ~Match();
     void movePlayer(int fromX, int fromY, int toX, int toY);
     int * getScore();

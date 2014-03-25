@@ -14,6 +14,9 @@ Match::Match(Club & hostClub, Club & guestClub) {
     generateGrid();
 
 }
+Match::Match(JsonValue *json){
+
+}
 
 Match::~Match() {}
 

@@ -9,6 +9,7 @@ class FieldPlayer: public Player {
 
 public:
     FieldPlayer(int role, bool guest);
+    FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest);
     FieldPlayer();
     ~FieldPlayer();
     FieldPlayer(NonFieldPlayer & nonFieldPlayer, int role, bool guest);

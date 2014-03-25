@@ -3,6 +3,8 @@
 using namespace std;
 
 Match::Match(Club & hostClub, Club & guestClub) {
+    score_[0] = 0;
+    score_[1] = 0;
     srand(time(NULL));
     clubs_[host] = &hostClub;
     clubs_[guest] = &guestClub;
@@ -15,7 +17,9 @@ Match::Match(Club & hostClub, Club & guestClub) {
 
 }
 
-Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH]) {
+Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH], int score[2], bool endGame) {
+    score_[0] = score[0];
+    score_[1] = score[1];
     srand(time(NULL));
     clubs_[host] = &hostClub;
     clubs_[guest] = &guestClub;
@@ -24,8 +28,8 @@ Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaff
     quaffle_ = quaffle;
     budgers_[0] = budger1;
     budgers_[1] = budger2;
-    for(int i; i<WIDTH; ++i){
-        for(int j; j<LENGTH; ++j){
+    for(int i = 0; i<WIDTH; ++i){
+        for(int j = 0; j<LENGTH; ++j){
             grid_[i][j] = grid[i][j];
         }
     }
@@ -34,7 +38,6 @@ Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaff
 }
 
 Match::Match(JsonValue *json){
-
 }
 
 Match::~Match() {}
@@ -295,7 +298,7 @@ string Match::print() { //FOR TEST PURPOSES
                     c += "\033[0m";
                 }
                 else if (grid_[i][j].ball != 0) {
-                    c += "\033[1;93";
+                    c += "\033[1;93m";
                     c += grid_[i][j].ball->getName();
                     c += "\033[0m";
                     //<< typeid(grid_[i][j].ball).name();
@@ -328,5 +331,13 @@ int Match::addPoint(bool guestTeam, int delta) {
 }
 
 void Match::getGrid(Case grid[WIDTH][LENGTH]){
-    grid = grid_;
+    for(int i = 0; i < WIDTH; i++){
+        for(int j = 0; j<LENGTH; j++){
+            grid[i][j] = grid_[i][j];
+        }
+    }
+}
+
+Club * * Match::getClubs(){
+    return clubs_;
 }

@@ -17,18 +17,13 @@ public:
     Club * getClub();
     std::string getUserName();
     std::string getName();
-    bool isReady();
-    void setReadyState(bool state);
     operator JsonDict() const;
-    bool isFree();
-    void setFreeState(bool state);
 
 private:
     std::string name_;
     std::string userName_;
     std::string hash_;
     Club club_;
-    bool ready;
 
 };
 

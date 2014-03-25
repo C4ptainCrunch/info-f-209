@@ -13,9 +13,10 @@ const map<string, view_ptr> UserHandler::viewmap = {
     {"playerlist", views::playerlist}
 };
 
-UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
+UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, std::vector<Match *> * match_list, string datapath) {
     pthread_mutex_init(&ready_lock, NULL);
     handlers_list_ = handlers_list;
+    match_list_ = match_list;
     datapath_ = datapath;
     s_ = NULL;
     manager_ = NULL;
@@ -51,6 +52,10 @@ bool UserHandler::isReady() {
 
 std::vector<UserHandler *> * UserHandler::getHandlers_listPtr() {
     return handlers_list_;
+}
+
+std::vector<Match *> * UserHandler::getMatch_listPtr(){
+    return match_list_;
 }
 
 Manager * UserHandler::getManager() {
@@ -108,6 +113,21 @@ void UserHandler::handleMessage(string message) {
         answer.add("code", new JsonString(pe.what()));
         this->writeToClient("error", &answer);
     }
+}
+
+Match * UserHandler::getMatch(){
+    for(int i = 0; i < match_list_->size(); i++){
+        Match * m = match_list_->at(i);
+        if(m->getClubs()[0] == manager_->getClub() || m->getClubs()[1] == manager_->getClub()){
+            return m;
+        }
+    }
+
+    return NULL;
+}
+
+bool UserHandler::inMatch(){
+    return getMatch() != NULL;
 }
 
 string UserHandler::path(string dir, string var) {

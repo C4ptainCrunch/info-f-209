@@ -24,7 +24,7 @@ class Match {
 
 public:
     Match(Club & hostClub, Club & guestClub);
-    Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH]);
+    Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, Case grid[WIDTH][LENGTH], int score[2], bool endGame);
     Match(JsonValue *json);
     ~Match();
     void movePlayer(int fromX, int fromY, int toX, int toY);
@@ -37,8 +37,9 @@ public:
     void movePlayer(Position fromPos, Position toPos);
     void generateFieldPlayers();
     std::string print();    //FOR TESTS
-    void generateGrid();    //TO SET PRIVATE AFTER TESTS
+    void generateGrid();    // TODO : TO SET PRIVATE AFTER TESTS
     void getGrid(Case grid[WIDTH][LENGTH]);
+    Club * * getClubs();
 
 private:
     bool endGame_ = false;

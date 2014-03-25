@@ -37,8 +37,9 @@ public:
     void movePlayer(Position fromPos, Position toPos);
     void generateFieldPlayers();
     std::string print();    //FOR TESTS
-    void generateGrid();    //TO SET PRIVATE AFTER TESTS
+    void generateGrid();    // TODO : TO SET PRIVATE AFTER TESTS
     void getGrid(Case grid[WIDTH][LENGTH]);
+    Club * * getClubs();
 
 private:
     bool endGame_ = false;

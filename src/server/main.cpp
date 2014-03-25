@@ -58,12 +58,13 @@ int main(int argc, char * argv[]) {
     printf("Waiting for connections...\n");
 
     std::vector<UserHandler *> * handlers_list = new std::vector<UserHandler *>();
+    std::vector<Match *> * match_list = new std::vector<Match *>();
 
     while (1) {
         ClientSocket * client_socket = binded.accept_client();
         cout << "Got connection from " << client_socket->remote() << endl;
 
-        UserHandler * current_handler = new UserHandler(handlers_list, datapath);
+        UserHandler * current_handler = new UserHandler(handlers_list, match_list, datapath);
         std::thread * current_thread = new std::thread(thread_loop, current_handler);
 
         // TODO: should delete current_thread sometimes

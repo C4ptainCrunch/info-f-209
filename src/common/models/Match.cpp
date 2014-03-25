@@ -24,8 +24,8 @@ Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaff
     quaffle_ = quaffle;
     budgers_[0] = budger1;
     budgers_[1] = budger2;
-    for(int i; i<WIDTH; ++i){
-        for(int j; j<LENGTH; ++j){
+    for(int i = 0; i<WIDTH; ++i){
+        for(int j = 0; j<LENGTH; ++j){
             grid_[i][j] = grid[i][j];
         }
     }
@@ -329,4 +329,8 @@ int Match::addPoint(bool guestTeam, int delta) {
 
 void Match::getGrid(Case grid[WIDTH][LENGTH]){
     grid = grid_;
+}
+
+Club * * Match::getClubs(){
+    return clubs_;
 }

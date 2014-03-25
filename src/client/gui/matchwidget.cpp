@@ -59,8 +59,6 @@ MatchWidget::MatchWidget(QWidget * parent):
     QWidget * temp = new QWidget(fieldWidget);
 
     temp->setFixedSize((mainWidget->height() - WIDTH * 20) / 2, (mainWidget->width() - LENGTH * 20) / 2);
-    QLabel * label = new QLabel(fieldWidget);
-    QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     mainLayout->setRowMinimumHeight(0, 100);
     mainLayout->addWidget(temp, 0, 0);
     mainLayout->addWidget(fieldWidget, 1, 1);
@@ -72,228 +70,20 @@ MatchWidget::MatchWidget(QWidget * parent):
     QPushButton * surrenderButton = new QPushButton("Abandonner", mainWidget);
     surrenderButton->setMinimumHeight(30);
     mainLayout->addWidget(surrenderButton, 2, 3);
-
-    pixmap->fill(Qt::transparent);
-
-    QPainter painter(pixmap);
-    painter.setBrush(QBrush(Qt::darkGreen));
-    Hexagon hexagon[WIDTH][LENGTH];
-    QBrush * grass = new QBrush(QImage("images/grass.jpg"));
     
     //askMatchToServer();
-    generateGrid();
 
-    //TODO adapter aux modèles
+    refreshField();
 
-    double x = 0;
-    double y = 0;
-    bool pair = true;
-    for (int i = 0; i < WIDTH; ++i) {
-        //<<i<<endl;
-        for (int j = 0; j < LENGTH; ++j) {
-            //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
-            cout << grid_[i][j] << " ";
-            hexagon[i][j].setX(x);
-            hexagon[i][j].setY(y);
-            hexagon[i][j].setCorners();
-
-            x += 18;
-            painter.setBrush(*grass);
-            if (grid_[i][j] != 9) {
-                switch (grid_[i][j]) {
-                    case -1:
-                        painter.setBrush(QBrush(Qt::yellow));
-                        break;
-                    case 1:
-                        painter.setBrush(QBrush(Qt::red));
-                        break;
-                    case 2:
-                        painter.setBrush(QBrush(Qt::blue));
-                        break;
-                    case 3:
-                        painter.setBrush(QBrush(Qt::white));
-                        break;
-                    case 4:
-                        painter.setBrush(QBrush(Qt::black));
-                        break;
-                    case 5:
-                        painter.setBrush(QBrush(QColor("darkGrey")));
-                        break;
-                    case 6:
-                        painter.setBrush(QBrush(QColor("brown")));
-                        break;
-                    case 7:
-                        painter.setBrush(QBrush(QColor("darkRed")));
-                        break;
-                }
-                painter.drawPolygon(hexagon[i][j].hexagon_);
-            }
-        }
-        cout << endl;
-        y += 15;
-        if (pair) {
-            x = 35;
-        }
-        else {
-            x = 26;
-        }
-        pair = !pair;
-    }
-    label->setPixmap(*pixmap);
-
-    //refreshField();
+    Case grid[WIDTH][LENGTH];
+    currentMatch->getGrid(grid);
+    refreshField(grid);
     mainWidget->show();
 
 
 }
-void askMatchToServer(){
-    //TODO
-}
 
-void setMatch(Match* match){
-    currentMatch = match;
-    refreshField(currentMatch->getGrid());
-}
-
-void MatchWidget::mousePressEvent(QMouseEvent * event) {
-
-
-    double hexagonHeight = 18;
-    double hexagonWidth = 15;
-    double halfHeight = hexagonHeight / 2;
-    int startHeight = 103;
-    int startWidth = 144;
-    cout << "start : " << startHeight << endl;
-    cout << "ROW : " << (event->y() - 144) / 15 << " COL : " << (event->x() - 103) / 18 << endl;
-
-    if ((event->x() > startHeight) && (event->x() < 1200)) {
-        if ((event->y() > startWidth) && (event->y() < 580)) {
-
-            // These will represent which box the mouse is in, not which hexagon!
-            int row = (event->y() - startWidth) / hexagonWidth;
-            int column;
-
-            bool rowIsOdd = row % 2 == 0;
-
-            // Is the row an even number?
-            if (rowIsOdd) {
-                column = ((event->x() - startHeight) / hexagonHeight);
-            }
-            else {
-                column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
-            }
-            cout << "ROW : " << row << " COL : " << column << endl;
-            cout << grid_[row + 1][column] << endl;
-
-        }
-    }
-
-
-}
-
-void MatchWidget::generateGrid() {
-    /*
-     * TO REMOVE , HAVE TO USE THE ONE FROM MODELS
-     *
-     */
-
-
-    double diameterFactor = 46.0 / 100.0; // Normalement c'est la moitié de la longueur/largeur
-    int delta = 1 / 2; //Delta qui permet d'éviter les bugs lors de l'affichage de la matrice
-
-
-    for (int i = 0; i < WIDTH; ++i) {
-        for (int j = 0; j < LENGTH; ++j) {
-            grid_[i][j] = 0;
-            // equation d'une ellipse non centrée : (x-h)²/a² + (x-k)²/b²
-            //avec x = i, h et k sont les coord du centre, a et b les demi longueurs de l'ellipse
-            double result = pow(i - WIDTH / 2.0, 2) / pow(diameterFactor * WIDTH, 2);
-            result += pow(j - LENGTH / 2.0, 2) / pow(diameterFactor * LENGTH, 2);
-            if (i % 2 != 0) {
-                result -= delta;
-            }
-            if (result > 1) { //Si on est à l'extérieur de l'ellipse
-                grid_[i][j] = 9;
-            }
-
-
-            //----------------------------GOALS---------------------------------
-            if (i == WIDTH / 2) {
-                if (j == LENGTH / 15 + LENGTH / 20 or j == LENGTH * 14 / 15 - LENGTH / 20) {
-                    grid_[i][j] = -1; //goal central
-                }
-                else if (j == 2 * LENGTH / 15) {
-                    grid_[i][j] = 1;
-                }
-                else if (j == 13 * LENGTH / 15) {
-                    grid_[i][j] = 1;
-                }
-                else if (j == 7 * LENGTH / 30) {
-                    grid_[i][j] = 2;
-                }
-                else if (j == 23 * LENGTH / 30) {
-                    grid_[i][j] = 2;
-                }
-                else if (j == 5 * LENGTH / 30) {
-                    grid_[i][j] = 3;
-
-                }
-                else if (j == 25 * LENGTH / 30) {
-                    grid_[i][j] = 3;
-                }
-            }
-            else if (i == WIDTH / 2 - WIDTH / 15) {
-                if (j == 2 * LENGTH / 15 or j == 13 * LENGTH / 15) {
-                    grid_[i][j] = -1; //goals latéraux
-                }
-                else if (j == 5 * LENGTH / 30) {
-                    grid_[i][j] = 4;
-
-                }
-                else if (j == 25 * LENGTH / 30) {
-                    grid_[i][j] = 4;
-                }
-            }
-            else if (i == WIDTH / 2 + WIDTH / 15) {
-                if (j == 2 * LENGTH / 15 or j == 13 * LENGTH / 15) {
-                    grid_[i][j] = -1; //goals latéraux
-                }
-                else if (j == 5 * LENGTH / 30) {
-                    grid_[i][j] = 5;
-
-                }
-                else if (j == 25 * LENGTH / 30) {
-                    grid_[i][j] = 5;
-                }
-            }
-            else if (i == WIDTH / 2 - WIDTH / 30) {
-                if (j == 6 * LENGTH / 30) {
-                    grid_[i][j] = 6;
-
-                }
-                else if (j == 24 * LENGTH / 30) {
-                    grid_[i][j] = 6;
-                }
-
-            }
-            else if (i == WIDTH / 2 + WIDTH / 30) {
-                if (j == 6 * LENGTH / 30) {
-                    grid_[i][j] = 7;
-
-                }
-                else if (j == 24 * LENGTH / 30) {
-                    grid_[i][j] = 7;
-                }
-            }
-
-            //cout<<grid_[i][j];
-        }
-        //cout<<endl;
-    }
-
-}
-
-void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]) {
+void MatchWidget::refreshField(Case grid[WIDTH][LENGTH], Position highlightedCase) {
 
     QLabel * label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
@@ -319,6 +109,12 @@ void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]) {
             x += 18;
             painter.setBrush(*grass);
             if (grid_[i][j] != 9) {
+                if(i== highlightedCase.x and j==highlightedCase.y){
+                    painter.setOpacity(0.6);
+                }
+                else{
+                    painter.setOpacity(1.0);
+                }
                 switch (grid_[i][j]) {
                     case -1:
                         painter.setBrush(QBrush(Qt::yellow));
@@ -363,3 +159,63 @@ void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]) {
 }
 
 MatchWidget::~MatchWidget() {}
+
+void askMatchToServer(){
+    //TODO
+}
+
+void setMatch(Match* match){
+    currentMatch = match;
+
+    Case grid[WIDTH][LENGTH];
+    currentMatch->getGrid(grid);
+    refreshField(grid);
+}
+
+Position MatchWidget::getCase(QMouseEvent * event){
+
+    double hexagonHeight = 18;
+    double hexagonWidth = 15;
+    double halfHeight = hexagonHeight / 2;
+    int startHeight = 103;
+    int startWidth = 144;
+    cout << "start : " << startHeight << endl;
+    cout << "ROW : " << (event->y() - 144) / 15 << " COL : " << (event->x() - 103) / 18 << endl;
+
+    if ((event->x() > startHeight) && (event->x() < 1200)) {
+        if ((event->y() > startWidth) && (event->y() < 580)) {
+
+            // These will represent which box the mouse is in, not which hexagon!
+            int row = (event->y() - startWidth) / hexagonWidth;
+            int column;
+
+            bool rowIsOdd = row % 2 == 0;
+
+            // Is the row an even number?
+            if (rowIsOdd) {
+                column = ((event->x() - startHeight) / hexagonHeight);
+            }
+            else {
+                column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
+            }
+            cout << "ROW : " << row << " COL : " << column << endl;
+            cout << grid_[row + 1][column] << endl;
+
+        }
+    }
+    Position mouseCase;
+    mouseCase.x = row+1;
+    mouseCase.y = column;
+    return mouseCase;
+}
+
+
+void MatchWidget::mousePressEvent(QMouseEvent * event) {
+    Position clickedCase = getCase(event);
+    Case grid[WIDTH][LENGTH];
+    currentMatch->getGrid(grid);
+    refreshField(grid,clickedCase);
+
+
+
+}

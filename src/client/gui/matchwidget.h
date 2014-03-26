@@ -16,8 +16,9 @@
 #include <iostream>
 
 #include "hexagon.h"
-#include <../../common/models/Case.h>
+#include "../../common/models/Case.h"
 #include "../../common/lib/socket/Socket.h"
+#include "../../common/models/Match.h"
 
 
 class MainWindow;
@@ -30,6 +31,7 @@ public:
     void generateGrid();
     ~MatchWidget();
     void askMatchToServer();
+    void refreshField(Case grid[WIDTH][LENGTH], Position highlightedCase = Position());
 signals:
 
 public slots:
@@ -42,6 +44,7 @@ private:
     QLabel * opponentScore;
     QFrame * fieldWidget;
     Match* currentMatch;
+    Case grid[WIDTH][LENGTH];
 
 };
 

@@ -31,3 +31,4 @@ void Hexagon::setCorners() {
     hexagon_ = QPolygon(corners);
 
 }
+

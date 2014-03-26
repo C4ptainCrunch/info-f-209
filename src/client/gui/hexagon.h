@@ -22,6 +22,7 @@ public:
     void setCorners();
     void setX(int x);
     void setY(int y);
+    void enterEvent ( QEvent * event );
     QPolygon hexagon_;
 
 protected:

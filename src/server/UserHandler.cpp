@@ -13,11 +13,9 @@ const map<string, view_ptr> UserHandler::viewmap = {
     {"playerlist", views::playerlist}
 };
 
-UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, std::vector<Match *> * match_list, string datapath) {
+UserHandler::UserHandler(struct server_shared_data * shared_data) {
     pthread_mutex_init(&ready_lock, NULL);
-    handlers_list_ = handlers_list;
-    match_list_ = match_list;
-    datapath_ = datapath;
+    shared_data_ = shared_data;
     s_ = NULL;
     manager_ = NULL;
 }
@@ -31,9 +29,9 @@ void UserHandler::start(Socket * fd, thread * handling_thread) {
 
 UserHandler::~UserHandler() {
     delete s_;
-    for (int i = 0; i < handlers_list_->size(); i++) {
-        if (handlers_list_->at(i) == this) {
-            handlers_list_->erase(handlers_list_->begin() + i);
+    for (int i = 0; i < shared_data_->handlers_list.size(); i++) {
+        if (shared_data_->handlers_list.at(i) == this) {
+            shared_data_->handlers_list.erase(shared_data_->handlers_list.begin() + i);
             break;
         }
     }
@@ -50,12 +48,12 @@ bool UserHandler::isReady() {
     return ready;
 }
 
-std::vector<UserHandler *> * UserHandler::getHandlers_listPtr() {
-    return handlers_list_;
+std::vector<UserHandler *> &UserHandler::getHandlers_list() {
+    return shared_data_->handlers_list;
 }
 
-std::vector<Match *> * UserHandler::getMatch_listPtr(){
-    return match_list_;
+std::vector<Match *> &UserHandler::getMatch_list(){
+    return shared_data_->match_list;
 }
 
 Manager * UserHandler::getManager() {
@@ -63,9 +61,9 @@ Manager * UserHandler::getManager() {
 }
 
 UserHandler * UserHandler::findHandler(string username) {
-    for(int i = 0; i < handlers_list_->size(); i++){
-        if(handlers_list_->at(i)->getManager()->getUserName() == username){
-            return handlers_list_->at(i);
+    for(int i = 0; i < shared_data_->handlers_list.size(); i++){
+        if(shared_data_->handlers_list.at(i)->getManager()->getUserName() == username){
+            return shared_data_->handlers_list.at(i);
         }
     }
     return NULL;
@@ -125,8 +123,8 @@ void UserHandler::handleMessage(string message) {
 }
 
 Match * UserHandler::getMatch(){
-    for(int i = 0; i < match_list_->size(); i++){
-        Match * m = match_list_->at(i);
+    for(int i = 0; i < shared_data_->match_list.size(); i++){
+        Match * m = shared_data_->match_list.at(i);
         if(m->getClubs()[0] == manager_->getClub() || m->getClubs()[1] == manager_->getClub()){
             return m;
         }
@@ -141,7 +139,7 @@ bool UserHandler::inMatch(){
 
 string UserHandler::path(string dir, string var) {
     // TODO : add defence against path injection
-    return datapath_ + dir + "/" + var + ".json";
+    return shared_data_->datapath + dir + "/" + var + ".json";
 }
 
 

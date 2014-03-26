@@ -15,7 +15,8 @@ class Budger: public Ball {
 
 public:
     Budger();
-    Budger(int speed, Position position, Way hitWay);
+    Budger(int speed, Position position);
+    Budger(JsonValue * json);
     ~Budger();
     Position autoMove(const Case grid[WIDTH][LENGTH]);
     void isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]);

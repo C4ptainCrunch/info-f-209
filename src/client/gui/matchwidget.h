@@ -11,6 +11,7 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QFrame>
+#include <QTextEdit>
 #include <cmath>
 
 #include <iostream>
@@ -31,7 +32,8 @@ public:
     void generateGrid();
     ~MatchWidget();
     void askMatchToServer();
-    void refreshField(Case grid[WIDTH][LENGTH], Position highlightedCase = Position());
+    void refreshField(Position highlightedCase = Position());
+    Position getCase(QMouseEvent * event);
 signals:
 
 public slots:
@@ -43,8 +45,9 @@ private:
     QLabel * ownScore;
     QLabel * opponentScore;
     QFrame * fieldWidget;
-    Match* currentMatch;
-    Case grid[WIDTH][LENGTH];
+    Match* currentMatch_;
+    Case grid_[WIDTH][LENGTH];
+    QTextEdit* playerLabels_[2][4];
 
 };
 

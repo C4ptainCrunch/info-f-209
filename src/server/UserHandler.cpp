@@ -62,6 +62,15 @@ Manager * UserHandler::getManager() {
     return manager_;
 }
 
+UserHandler * UserHandler::findHandler(string username) {
+    for(int i = 0; i < handlers_list_->size(); i++){
+        if(handlers_list_->at(i)->getManager()->getUserName() == username){
+            return handlers_list_->at(i);
+        }
+    }
+    return NULL;
+}
+
 void UserHandler::setManager(Manager * manager) {
     if (manager_ == NULL) {
         manager_ = manager;

@@ -30,6 +30,7 @@ public:
     std::vector<UserHandler *> * getHandlers_listPtr();
     std::vector<Match *> * getMatch_listPtr();
     Manager * getManager();
+    UserHandler * findHandler(std::string);
     void setManager(Manager * manager);
     int writeToClient(std::string key, JsonValue * json);
     void disconnect();

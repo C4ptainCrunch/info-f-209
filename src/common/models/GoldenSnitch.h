@@ -16,6 +16,7 @@ public:
     GoldenSnitch();
     ~GoldenSnitch();
     GoldenSnitch(int speed, Position position);
+    GoldenSnitch(JsonValue * json);
     Position autoMove(const Case grid[WIDTH][LENGTH]);
     std::string getName();
 };

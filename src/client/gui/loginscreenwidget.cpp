@@ -127,6 +127,9 @@ void loginScreenWidget::refuseLogin(int errorCode) {
     else if (errorCode == 401) {
         QMessageBox::warning(this, "Identifiants Incorrects", "Mauvais mot de passe");
     }
+    else if (errorCode == 403) {
+        QMessageBox::warning(this, "Déjà connecté", "Ce compte est déjà connecté");
+    }
     else {
         QMessageBox::warning(this, "Identifiants Incorrects", "Tu n'as pas des projets à terminer?");
     }
@@ -143,6 +146,9 @@ void loginScreenWidget::refuseRegister(int errorCode) {
     this->enableButtons();
     if (errorCode == 402) {
         QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+    }
+    else if (errorCode == 403) {
+        QMessageBox::warning(this, "Déjà connecté", "Ce compte est déjà connecté");
     }
     else {
         QMessageBox::warning(this, "Identifiants Incorrects", "Le serveur ne comprend rien");

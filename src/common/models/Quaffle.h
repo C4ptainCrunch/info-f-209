@@ -12,7 +12,8 @@ class Quaffle: public Ball {
 
 public:
     Quaffle();
-    Quaffle(int speed, Position position, Way thrownWay);
+    Quaffle(JsonValue * json);
+    Quaffle(int speed, Position position);
     ~Quaffle();
     void thrown(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
     std::string getName();

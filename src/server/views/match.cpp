@@ -38,9 +38,7 @@ void accept_challenge(JsonValue * message, UserHandler * handler) {
     int challenge_id = getInt(dictMessage, "id");
     Challenge * challenge = NULL;
     int i;
-    cout << "plop" << endl;
-    for(i = 0; i < handler->getChalenge_list()->size() && challenge != NULL; i++){
-        cout << handler->getChalenge_list()->at(i).id  << endl;
+    for(i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++){
         if(handler->getChalenge_list()->at(i).id == challenge_id){
             challenge = &(handler->getChalenge_list()->at(i));
         }

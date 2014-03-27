@@ -1,5 +1,30 @@
 #include "Case.h"
 
+using namespace std;
+
+Case Case::fromJson(JsonValue * json){
+    JsonDict * case_dict = JDICT(json);
+    if (case_dict == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    JsonInt * type_int = JINT((*case_dict)["type"]);
+    if (type_int == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    int type = *type_int;
+
+    FieldPlayer * player = new FieldPlayer((*case_dict)["player"]);
+
+    Case newCase;
+    newCase.type = type;
+    newCase.player = player;
+    newCase.ball = 0;
+    return newCase;
+
+}
+
 Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]) {
     Position nextPosition;
     nextPosition.x = position.x;

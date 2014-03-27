@@ -33,6 +33,7 @@ Team::Team(JsonValue * json) {
             players[i] = new NonFieldPlayer(player_dict);
         }
     }
+    new (this)Team(players);
 
 }
 

@@ -47,7 +47,7 @@ Club::Club(JsonValue * json) {
         installations[i] = Installation(ins);
     }
 
-    Team team((*club)["team"]);
+    Team * team = new Team((*club)["team"]);
     JsonList * player_list = JLIST((*club)["players"]);
     if (player_list == NULL) {
         throw ModelUnserializationError("Missing list at key 'players' in Club");
@@ -57,20 +57,21 @@ Club::Club(JsonValue * json) {
     for (int i = 0; i < player_list->size(); i++) {
         players.push_back(new NonFieldPlayer((*player_list)[i]));
     }
-    for (int i = 0; i < 7; i++) {
-        if (team_->getPlayer(i) != NULL) {
-            players.push_back(team_->getPlayer(i));
-        }
-    }
+    //TODO uncomment
+    //for (int i = 0; i < 7; i++) {
+    //    if (team_->getPlayer(i) != NULL) {
+    //        players.push_back(team_->getPlayer(i));
+    //    }
+    //}
 
     new (this)Club(money, installations, team, players);
 }
 
-Club::Club(int money, Installation * installations, Team & team, vector<NonFieldPlayer *> players): money_(money), players_(players) {
+Club::Club(int money, Installation * installations, Team * team, vector<NonFieldPlayer *> players): money_(money), players_(players) {
     for (int i = 0; i < 5; ++i) {
         installations_[i] = installations[i];
     }
-    team_ = &team;
+    team_ = team;
 }
 
 Club::~Club() {}

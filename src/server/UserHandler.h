@@ -13,6 +13,7 @@
 #include "../common/models/Match.h"
 #include "../common/lib/exception/BadRequest.h"
 #include "helpers.h"
+#include "sharedData.h"
 
 class UserHandler;
 
@@ -21,15 +22,16 @@ typedef void (* view_ptr)(JsonValue *, UserHandler *);
 
 class UserHandler {
 public:
-    UserHandler(std::vector<UserHandler *> * handlers_list, std::vector<Match *> * match_list, std::string datapath);
+    UserHandler(struct server_shared_data * shared_data);
     ~UserHandler();
     void start(Socket * fd, std::thread * handling_thread);
     bool isReady();
     int loop();
 
-    std::vector<UserHandler *> * getHandlers_listPtr();
-    std::vector<Match *> * getMatch_listPtr();
+    std::vector<UserHandler *> &getHandlers_list();
+    std::vector<Match *> &getMatch_list();
     Manager * getManager();
+    UserHandler * findHandler(std::string);
     void setManager(Manager * manager);
     int writeToClient(std::string key, JsonValue * json);
     void disconnect();
@@ -43,9 +45,7 @@ private:
     Socket * s_;
     Manager * manager_;
     std::thread * handling_thread_;
-    std::vector<UserHandler *> * handlers_list_;
-    std::vector<Match *> * match_list_;
-    std::string datapath_;
+    struct server_shared_data * shared_data_;
     pthread_mutex_t ready_lock;
 
     void handleMessage(std::string message);

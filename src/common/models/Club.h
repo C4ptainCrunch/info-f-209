@@ -17,7 +17,7 @@ class Club {
 public:
     Club();
     Club(JsonValue * json);
-    Club(int money, Installation * installations, Team & team, std::vector<NonFieldPlayer *> players);
+    Club(int money, Installation * installations, Team * team, std::vector<NonFieldPlayer *> players);
     ~Club();
 
     int addMoney(const int deltaMoney);

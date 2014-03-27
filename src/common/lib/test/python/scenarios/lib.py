@@ -29,3 +29,11 @@ def coroutine(f):
     p.start()
 
     return p
+
+
+def force_login(s, name):
+    send(s, "login", {'username': name, 'password': name})
+    r = recv(s)
+    if not r[1]['success']:
+        send(s, "register", {'username': name, 'password': name, 'name': name * 2})
+        recv(s)

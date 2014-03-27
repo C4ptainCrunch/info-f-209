@@ -14,24 +14,18 @@ PORT = 5001
 def user1():
     with sock(HOST, PORT) as s:
         force_login(s, 'a')
-        sleep(0.5) # wait for the other user to conect
-        send(s, "challenge", {'other_username': 'fail'})
-        recv(s) # recive fail response
+        sleep(0.5)
         send(s, "challenge", {'other_username': 'b'})
-        sleep(0.5) # wait challenge accept
-        recv(s) # match_begin
+        sleep(0.5) # wait to accept
+        recv(s) # recieve begin_match
 
 
 def user2():
     with sock(HOST, PORT) as s:
         force_login(s, 'b')
         r = recv(s) # recieve challenge
-
-        send(s, 'accept_challenge', {'id': 10000}) # accept fake challenge
-        recv(s) # recive fail response
-
-        send(s, 'accept_challenge', {'id': r[1]['challenge_id']}) # accept real challenge
-        recv(s) # match_begin
+        send(s, 'accept_challenge', {'id': r[1]['challenge_id']})
+        recv(s) # recieve begin_match
 
 
 if __name__ == '__main__':

@@ -28,12 +28,13 @@ public:
     bool isReady();
     int loop();
 
-    std::vector<UserHandler *> &getHandlers_list();
-    std::vector<Match *> &getMatch_list();
-    std::vector<Challenge> &getChalenge_list();
+    std::vector<UserHandler *> * getHandlers_list();
+    std::vector<Match *> * getMatch_list();
+    std::vector<Challenge> * getChalenge_list();
     struct server_shared_data * getSharedData();
     Manager * getManager();
     UserHandler * findHandler(std::string);
+    UserHandler * findHandler(Manager *);
     void setManager(Manager * manager);
     int writeToClient(std::string key, JsonValue * json);
     void disconnect();

@@ -5,16 +5,15 @@ using namespace std;
 namespace views {
 
 void challenge(JsonValue * message, UserHandler * handler) {
-    JsonDict * dictMessage = JDICT(message);
-
-    if (dictMessage == NULL) {
-        throw BadRequest("Malformatted request. Need a JSON dict");
-    }
+    JsonDict * dictMessage = castDict(message);
 
     string other_username = getString(dictMessage, "other_username");
     UserHandler * other_handler = handler->findHandler(other_username);
     if(other_handler == NULL){
         return sendFail(handler, 301, "challenge", "User does not exist");
+    }
+    if(other_handler == handler){
+        return sendFail(handler, 999, "challenge", "You cannot challenge yourself");
     }
 
     server_shared_data * server_data = handler->getSharedData();
@@ -33,5 +32,29 @@ void challenge(JsonValue * message, UserHandler * handler) {
     payload->add("challenge_id", new JsonInt(current_challenge.id));
     other_handler->writeToClient("challenge", payload);
 }
+
+void accept_challenge(JsonValue * message, UserHandler * handler) {
+    JsonDict * dictMessage = castDict(message);
+    int challenge_id = getInt(dictMessage, "id");
+    Challenge * challenge = NULL;
+    int i;
+    for(i = 0; i < handler->getChalenge_list() && challenge != NULL; i++){
+        if(handler->getChalenge_list().at(i).id == challenge_id){
+            challenge = &(handler->getChalenge_list().at(i));
+        }
+    }
+    i--; // Decrement the last loop
+    if(challenge == NULL){
+        return sendFail(handler, 999, "challenge", "User does not exist");
+    }
+    if(challenge.opponents[0] != handler->getManager() && challenge.opponents[1] != handler->getManager()){
+        return sendFail(handler, 999, "challenge", "This challenge is not yours");
+    }
+
+    handler->getMatch_list().push_back(Match(challenge.opponents[0]->getClub(),challenge.opponents[1]->getClub()));
+    handler->getChalenge_list().erase(handler->getChalenge_list().begin, handler->getChalenge_list().begin + i);
+
+}
+
 
 } // end namespace

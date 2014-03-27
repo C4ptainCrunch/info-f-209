@@ -5,12 +5,15 @@ using namespace std;
 
 #include "views/user.h"
 #include "views/management.h"
+#include "views/match.h"
 
 const map<string, view_ptr> UserHandler::viewmap = {
     {"login", views::login},
     {"register", views::signup},
     {"userlist", views::userlist},
-    {"playerlist", views::playerlist}
+    {"playerlist", views::playerlist},
+    {"challenge", views::challenge},
+    {"accept_challenge", views::accept_challenge}
 };
 
 UserHandler::UserHandler(struct server_shared_data * shared_data) {

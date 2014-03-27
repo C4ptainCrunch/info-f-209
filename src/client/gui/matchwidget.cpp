@@ -185,8 +185,8 @@ void MatchWidget::setMatch(Match* match){
 }
 
 Position MatchWidget::getCase(QMouseEvent * event){
-    int row;
-    int column;
+    int row=0;
+    int column=0;
     double hexagonHeight = 18;
     double hexagonWidth = 15;
     double halfHeight = hexagonHeight / 2;

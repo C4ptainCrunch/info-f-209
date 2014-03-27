@@ -56,6 +56,14 @@ std::vector<Match *> &UserHandler::getMatch_list(){
     return shared_data_->match_list;
 }
 
+vector<Challenge> &UserHandler::getChalenge_list(){
+    return shared_data_->challenge_list;
+}
+
+struct server_shared_data * UserHandler::getSharedData(){
+    return shared_data_;
+}
+
 Manager * UserHandler::getManager() {
     return manager_;
 }

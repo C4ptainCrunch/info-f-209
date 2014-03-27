@@ -30,6 +30,8 @@ public:
 
     std::vector<UserHandler *> &getHandlers_list();
     std::vector<Match *> &getMatch_list();
+    std::vector<Challenge> &getChalenge_list();
+    struct server_shared_data * getSharedData();
     Manager * getManager();
     UserHandler * findHandler(std::string);
     void setManager(Manager * manager);

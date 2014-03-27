@@ -16,9 +16,21 @@ void challenge(JsonValue * message, UserHandler * handler) {
     if(other_handler == NULL){
         return sendFail(handler, 301, "challenge", "User does not exist");
     }
+
+    server_shared_data * server_data = handler->getSharedData();
+    Challenge current_challenge = {
+        server_data->last_challenge_id++,
+        {
+            handler->getManager(),
+            other_handler->getManager()
+        }
+    };
+    handler->getChalenge_list().push_back(current_challenge);
+
     JsonDict * payload = new JsonDict();
     payload->add("remote_username", new JsonString(handler->getManager()->getUserName()));
     payload->add("remote_name", new JsonString(handler->getManager()->getName()));
+    payload->add("challenge_id", new JsonInt(current_challenge.id));
     other_handler->writeToClient("challenge", payload);
 }
 

@@ -5,7 +5,7 @@ using namespace std;
 
 #include "views/user.h"
 #include "views/management.h"
-#include "views/match.h"
+#include "views/challenge.h"
 
 const map<string, view_ptr> UserHandler::viewmap = {
     {"login", views::login},

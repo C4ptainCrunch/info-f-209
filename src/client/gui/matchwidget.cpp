@@ -70,20 +70,18 @@ MatchWidget::MatchWidget(QWidget * parent):
     QPushButton * surrenderButton = new QPushButton("Abandonner", mainWidget);
     surrenderButton->setMinimumHeight(30);
     mainLayout->addWidget(surrenderButton, 2, 3);
-    
+
     //askMatchToServer();
 
-    refreshField();
 
-    Case grid[WIDTH][LENGTH];
-    currentMatch->getGrid(grid);
-    refreshField(grid);
+    currentMatch_->getGrid(grid_);
+    refreshField();
     mainWidget->show();
 
 
 }
 
-void MatchWidget::refreshField(Case grid[WIDTH][LENGTH], Position highlightedCase) {
+void MatchWidget::refreshField(Position highlightedCase) {
 
     QLabel * label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
@@ -100,51 +98,65 @@ void MatchWidget::refreshField(Case grid[WIDTH][LENGTH], Position highlightedCas
     for (int i = 0; i < WIDTH; ++i) {
         //cout<<i<<endl;
         for (int j = 0; j < LENGTH; ++j) {
-            //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
-            cout << grid_[i][j] << " ";
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
             hexagon[i][j].setCorners();
 
             x += 18;
-            painter.setBrush(*grass);
-            if (grid_[i][j] != 9) {
-                if(i== highlightedCase.x and j==highlightedCase.y){
-                    painter.setOpacity(0.6);
-                }
-                else{
-                    painter.setOpacity(1.0);
-                }
-                switch (grid_[i][j]) {
-                    case -1:
-                        painter.setBrush(QBrush(Qt::yellow));
-                        break;
-                    case 1:
-                        painter.setBrush(QBrush(Qt::red));
-                        break;
-                    case 2:
+            if (grid_[i][j].type == USABLE) {
+                if (grid_[i][j].player != 0) {
+                    if((int)i== highlightedCase.x and j==highlightedCase.y){
+                        painter.setOpacity(0.6);
+                    }
+                    else{
+                        painter.setOpacity(1.0);
+                    }
+                    if (!grid_[i][j].player->isInGuestTeam()) {
                         painter.setBrush(QBrush(Qt::blue));
-                        break;
-                    case 3:
-                        painter.setBrush(QBrush(Qt::white));
-                        break;
-                    case 4:
+                    }
+                    else {
+                        painter.setBrush(QBrush(Qt::red));
+                    }
+                    if (grid_[i][j].player->getRole() == KEEPER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QTextEdit("K",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x,y);
+                    }
+                    else if (grid_[i][j].player->getRole() == CHASER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QTextEdit("C",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x,y);
+                    }
+                    else if (grid_[i][j].player->getRole() == SEEKER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QTextEdit("S",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x,y);
+                    }
+                    else if (grid_[i][j].player->getRole() == BEATER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QTextEdit("B",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x,y);
+                    }
+                }
+                else if (grid_[i][j].ball != 0) {
+                    string ballName = grid_[i][j].ball->getName();
+                    if(ballName == "B"){
                         painter.setBrush(QBrush(Qt::black));
-                        break;
-                    case 5:
-                        painter.setBrush(QBrush(QColor("darkGrey")));
-                        break;
-                    case 6:
-                        painter.setBrush(QBrush(QColor("brown")));
-                        break;
-                    case 7:
-                        painter.setBrush(QBrush(QColor("darkRed")));
-                        break;
+                    }
+                    else if (ballName == "Q"){
+                        painter.setBrush(QBrush(Qt::red));
+                    }
+                    else{//ballName == "G")
+                        painter.setBrush(QBrush(Qt::yellow));
+                    }
+                    //<< typeid(grid_[i][j].ball).name();
+                }
+                else {
+                    painter.setBrush(*grass);
                 }
                 painter.drawPolygon(hexagon[i][j].hexagon_);
+
+            }
+            else if (grid_[i][j].type == GOAL) {
+                painter.setBrush(QBrush(QColor(171,171,171)));
             }
         }
-        cout << endl;
         y += 15;
         if (pair) {
             x = 35;
@@ -164,16 +176,17 @@ void askMatchToServer(){
     //TODO
 }
 
-void setMatch(Match* match){
-    currentMatch = match;
+void MatchWidget::setMatch(Match* match){
+    currentMatch_ = match;
 
     Case grid[WIDTH][LENGTH];
-    currentMatch->getGrid(grid);
-    refreshField(grid);
+    currentMatch_->getGrid(grid);
+    refreshField();
 }
 
 Position MatchWidget::getCase(QMouseEvent * event){
-
+    int row=0;
+    int column=0;
     double hexagonHeight = 18;
     double hexagonWidth = 15;
     double halfHeight = hexagonHeight / 2;
@@ -186,9 +199,7 @@ Position MatchWidget::getCase(QMouseEvent * event){
         if ((event->y() > startWidth) && (event->y() < 580)) {
 
             // These will represent which box the mouse is in, not which hexagon!
-            int row = (event->y() - startWidth) / hexagonWidth;
-            int column;
-
+            row = (event->y() - startWidth) / hexagonWidth;
             bool rowIsOdd = row % 2 == 0;
 
             // Is the row an even number?
@@ -199,7 +210,7 @@ Position MatchWidget::getCase(QMouseEvent * event){
                 column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
             }
             cout << "ROW : " << row << " COL : " << column << endl;
-            cout << grid_[row + 1][column] << endl;
+            //cout << grid_[row + 1][column] << endl;
 
         }
     }
@@ -212,9 +223,8 @@ Position MatchWidget::getCase(QMouseEvent * event){
 
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
     Position clickedCase = getCase(event);
-    Case grid[WIDTH][LENGTH];
-    currentMatch->getGrid(grid);
-    refreshField(grid,clickedCase);
+    currentMatch_->getGrid(grid_);
+    refreshField(clickedCase);
 
 
 

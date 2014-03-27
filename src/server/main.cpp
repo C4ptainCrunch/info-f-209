@@ -2,6 +2,7 @@
 #include "../common/lib/file/file.h"
 #include "../common/lib/socket/BindSocket.h"
 #include "server.h"
+#include "sharedData.h"
 
 using namespace std;
 
@@ -57,21 +58,25 @@ int main(int argc, char * argv[]) {
     BindSocket binded = BindSocket("", port);
     printf("Waiting for connections...\n");
 
-    std::vector<UserHandler *> * handlers_list = new std::vector<UserHandler *>();
-    std::vector<Match *> * match_list = new std::vector<Match *>();
+    struct server_shared_data shared_data = {
+        .handlers_list = {},
+        .match_list = {},
+        .datapath = datapath,
+        .challenge_list = {},
+        .last_challenge_id = 0,
+    };
 
     while (1) {
         ClientSocket * client_socket = binded.accept_client();
         cout << "Got connection from " << client_socket->remote() << endl;
 
-        UserHandler * current_handler = new UserHandler(handlers_list, match_list, datapath);
+        UserHandler * current_handler = new UserHandler(&shared_data);
         std::thread * current_thread = new std::thread(thread_loop, current_handler);
 
         // TODO: should delete current_thread sometimes
         current_handler->start(client_socket, current_thread);
-        handlers_list->push_back(current_handler);
+        shared_data.handlers_list.push_back(current_handler);
     }
-    delete handlers_list;
 
     return 0;
 }

@@ -14,7 +14,7 @@ void login(JsonValue * message, UserHandler * handler) {
     string username = getString(dictMessage, "username");
     string password = getString(dictMessage, "password");
 
-    if (isInConnectedList(handler->getHandlers_listPtr(), username)) {
+    if (isInConnectedList(&handler->getHandlers_list(), username)) {
         return sendFail(handler, 403, "login", "Already logged");
     }
 
@@ -57,7 +57,7 @@ void signup(JsonValue * message, UserHandler * handler) {
     string password = getString(dictMessage, "password");
     string name = getString(dictMessage, "name");
 
-    if (isInConnectedList(handler->getHandlers_listPtr(), username)) {
+    if (isInConnectedList(&handler->getHandlers_list(), username)) {
         return sendFail(handler, 403, "login", "Already logged");
     }
     string filename = handler->path("users", username);
@@ -78,7 +78,7 @@ void signup(JsonValue * message, UserHandler * handler) {
 
 void userlist(JsonValue * message, UserHandler * handler) {
     JsonList answer;
-    std::vector<UserHandler *> handlers_vector = *(handler->getHandlers_listPtr());
+    std::vector<UserHandler *> handlers_vector = handler->getHandlers_list();
 
     for (int i = 0; i < handlers_vector.size(); i++) {
         Manager * manager = handlers_vector[i]->getManager();

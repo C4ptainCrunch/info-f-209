@@ -23,6 +23,7 @@ public:
     void hitPlayer(Player * player, int power);
     std::string getName();
     Way getHitWay() const;
+    operator JsonDict() const;
 
 private:
     Way hitWay_;

@@ -13,7 +13,8 @@ const map<string, view_ptr> UserHandler::viewmap = {
     {"userlist", views::userlist},
     {"playerlist", views::playerlist},
     {"challenge", views::challenge},
-    {"accept_challenge", views::accept_challenge}
+    {"accept_challenge", views::accept_challenge},
+    {"refuse_challenge", views::refuse_challenge}
 };
 
 UserHandler::UserHandler(struct server_shared_data * shared_data) {

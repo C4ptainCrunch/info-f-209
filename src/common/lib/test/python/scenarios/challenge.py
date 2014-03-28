@@ -14,11 +14,12 @@ PORT = 5001
 def user1():
     with sock(HOST, PORT) as s:
         force_login(s, 'a')
-        sleep(0.5) # wait for the other user to conect
+        sleep(0.2) # wait for the other user to conect
         send(s, "challenge", {'other_username': 'fail'})
         recv(s) # recive fail response
         send(s, "challenge", {'other_username': 'b'})
-        sleep(0.5) # wait challenge accept
+        recv(s) # challenge refused
+        send(s, "challenge", {'other_username': 'b'})
         recv(s) # match_begin
 
 
@@ -30,7 +31,11 @@ def user2():
         send(s, 'accept_challenge', {'id': 10000}) # accept fake challenge
         recv(s) # recive fail response
 
-        send(s, 'accept_challenge', {'id': r[1]['challenge_id']}) # accept real challenge
+        send(s, 'refuse_challenge', {'id': r[1]['challenge_id']}) # refuse real challenge
+
+        r = recv(s) # recieve challenge
+        send(s, 'accept_challenge', {'id': r[1]['challenge_id']}) # refuse real challenge
+
         recv(s) # match_begin
 
 

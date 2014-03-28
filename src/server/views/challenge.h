@@ -14,6 +14,7 @@ class UserHandler;
 namespace views {
 void challenge(JsonValue * message, UserHandler * handler);
 void accept_challenge(JsonValue * message, UserHandler * handler);
+void refuse_challenge(JsonValue * message, UserHandler * handler);
 }
 
 #include "../UserHandler.h"

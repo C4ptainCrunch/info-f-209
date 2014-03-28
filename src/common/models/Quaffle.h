@@ -15,6 +15,7 @@ public:
     Quaffle(JsonValue * json);
     Quaffle(int speed, Position position);
     ~Quaffle();
+    operator JsonDict() const;
     void thrown(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
     std::string getName();
     Way getWay() const;

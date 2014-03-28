@@ -60,3 +60,13 @@ string Quaffle::getName() {
 Way Quaffle::getWay() const {
     return thrownWay_;
 }
+
+Quaffle::operator JsonDict() const {
+    JsonDict r;
+    r.add("speed", new JsonInt(speed_));
+    JsonList * position = new JsonList();
+    position->add(new JsonInt(position_.x));
+    position->add(new JsonInt(position_.y));
+    r.add("position", position);
+    return r;
+}

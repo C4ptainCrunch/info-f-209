@@ -15,6 +15,7 @@
 #include <QComboBox>
 #include <iostream>
 
+#include "../../common/models/Match.h"
 
 class MainWindow;
 
@@ -45,11 +46,12 @@ signals:
 public slots:
     void refreshConnectedList(std::vector<std::string> * connectedList);
     void logOut();
-    void startMatch();
+    void startMatch(Match * startingMatch);
     void handlePlayers();
     void auctionHouse();
     void infrastructures();
     void askConnectedListRefresh();
+    void sendChallenge();
 
 private:
     MainWindow * parent_;

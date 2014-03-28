@@ -31,7 +31,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     this->askConnectedListRefresh();
 
     QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
-    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(startMatch()));
+    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
@@ -71,7 +71,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_, SIGNAL(setMatch(Match * match);),this,SLOT(startMatch()));
+    QObject::connect(parent_, SIGNAL(startMatch(Match * match)),this,SLOT(startMatch()));
     QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
@@ -119,9 +119,13 @@ void MenuWindow::infrastructures() {
 
 }
 
+void MenuWindow::sendChallenge(){
+    string opponent = list->currentText().toStdString();
+    sviews::challenge(parent_->getSocket(), opponent);
+}
 
-void MenuWindow::startMatch() {
-    parent_->setNextScreen(MATCHSTATE);
+void MenuWindow::startMatch(Match * startingMatch) {
+    parent_->setNextScreen(MATCHSTATE, startingMatch);
 }
 
 void MenuWindow::logOut() {

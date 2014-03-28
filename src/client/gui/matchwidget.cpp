@@ -4,8 +4,10 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(QWidget * parent):
+MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
     QWidget(parent) {
+    //-----------------------MATCH INITIALISATION-----------------------
+    currentMatch_ = startingMatch;
 
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);

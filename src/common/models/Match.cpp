@@ -234,7 +234,6 @@ void Match::moveBalls(bool & moved, int turnNumber) {
         }
     }
 
-    //QUAFFLE
 
 }
 

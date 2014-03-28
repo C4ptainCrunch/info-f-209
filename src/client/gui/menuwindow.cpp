@@ -71,6 +71,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
+    QObject::connect(parent_, SIGNAL(setMatch(Match * match);),this,SLOT(startMatch()));
     QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------

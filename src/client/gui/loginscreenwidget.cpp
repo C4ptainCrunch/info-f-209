@@ -86,7 +86,6 @@ void loginScreenWidget::logIn() {
         QMessageBox::warning(this, "Champs Vides", "Vous n'avez pas fourni de nom d'utilisateur et de mot de passe");
     }
     else {
-        //TODO VERIFY ID/PASSWORD
         sviews::login(parent_->getSocket(), username.toStdString(), password.toStdString());
         this->disableButtons();
     }

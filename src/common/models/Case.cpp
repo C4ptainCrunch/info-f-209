@@ -25,6 +25,13 @@ Case Case::fromJson(JsonValue * json){
 
 }
 
+Case::operator JsonDict() const {
+    JsonDict r;
+    r.add("type", new JsonInt(type));
+    r.add("player", new JsonDict(*player));
+    return r;
+}
+
 Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]) {
     Position nextPosition;
     nextPosition.x = position.x;

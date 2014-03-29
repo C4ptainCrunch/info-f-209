@@ -18,6 +18,8 @@ struct Case {
     int type;
     FieldPlayer * player = 0;
     Ball * ball = 0;
+
+    operator JsonDict() const;
 };
 
 Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]);

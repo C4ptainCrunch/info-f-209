@@ -131,3 +131,25 @@ void FieldPlayer::setRole(int role) {
 int FieldPlayer::getRole() {
     return role_;
 }
+
+FieldPlayer::operator JsonDict() const {
+    JsonDict r;
+    r.add("speed", new JsonInt(speed_));
+    r.add("force", new JsonInt(force_));
+    r.add("agility", new JsonInt(agility_));
+    r.add("reflexes", new JsonInt(reflexes_));
+    r.add("passPrecision", new JsonInt(passPrecision_));
+    r.add("wounded", new JsonBool(wounded_));
+
+    r.add("role", new JsonInt(role_));
+    r.add("guest", new JsonBool(guest_));
+
+    JsonList * inventory = new JsonList();
+    for (int i = 0; i < inventory_.size(); i++) {
+        JsonDict * item = new JsonDict(inventory_[i]);
+        inventory->add(item);
+    }
+    r.add("inventory", inventory);
+
+    return r;
+}

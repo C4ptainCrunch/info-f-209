@@ -24,6 +24,7 @@ public:
     bool isInGuestTeam();
     int getRole();
     void setRole(int role);
+    operator JsonDict() const;
 private:
     bool guest_;
     int role_;

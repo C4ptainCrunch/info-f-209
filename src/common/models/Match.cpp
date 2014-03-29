@@ -392,3 +392,29 @@ void Match::getGrid(Case grid[WIDTH][LENGTH]){
 Club * * Match::getClubs(){
     return clubs_;
 }
+
+Match::operator JsonDict() const {
+    JsonDict r;
+
+    r.add("hostClub", new JsonDict(*(clubs_[0])));
+    r.add("guestClub", new JsonDict(*(clubs_[1])));
+    r.add("goldenSnitch", new JsonDict(goldenSnitch_));
+    r.add("quaffle", new JsonDict(quaffle_));
+    r.add("budger1", new JsonDict(budgers_[0]));
+    r.add("budger2", new JsonDict(budgers_[1]));
+    r.add("score1", new JsonInt(score_[0]));
+    r.add("score2", new JsonInt(score_[1]));
+    r.add("endGame", new JsonBool(endGame_));
+
+    JsonList * grid_WIDTH = new JsonList();
+    for(int i = 0; i< WIDTH; i++){
+        JsonList * grid_LENGTH = new JsonList();
+        for(int j = 0; j < LENGTH; j++){
+            grid_LENGTH->add(new JsonDict(grid_[i][j]));
+        }
+        grid_WIDTH->add(grid_LENGTH);
+    }
+    r.add("grid", grid_WIDTH);
+
+    return r;
+}

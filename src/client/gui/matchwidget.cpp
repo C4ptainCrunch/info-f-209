@@ -83,7 +83,7 @@ MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
 
 }
 
-void MatchWidget::refreshField(Position highlightedCase) {
+void MatchWidget::refreshField() {
 
     QLabel * label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
@@ -107,7 +107,7 @@ void MatchWidget::refreshField(Position highlightedCase) {
             x += 18;
             if (grid_[i][j].type == USABLE) {
                 if (grid_[i][j].player != 0) {
-                    if((int)i== highlightedCase.x and j==highlightedCase.y){
+                    if(isCaseHighlighted(i,j)){
                         painter.setOpacity(0.6);
                     }
                     else{
@@ -172,6 +172,15 @@ void MatchWidget::refreshField(Position highlightedCase) {
     mainWidget->show();
 }
 
+bool MatchWidget::isCaseHighlighted(unsigned x, unsigned y){
+    for (size_t i = 0; i<highlightedCases.size(); ++i){
+        if(highlightedCases[i].x == x && highlightedCases[i].y == y){
+            return true;
+        }
+    }
+    return false;
+}
+
 MatchWidget::~MatchWidget() {}
 
 void askMatchToServer(){
@@ -224,9 +233,15 @@ Position MatchWidget::getCase(QMouseEvent * event){
 
 
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
-    Position clickedCase = getCase(event);
-    currentMatch_->getGrid(grid_);
-    refreshField(clickedCase);
+    if(event->button() == Qt::RightButton){
+        highlightedCases.clear();
+        refreshField();
+    }
+    else{
+        highlightedCases.push_back(getCase(event));
+        currentMatch_->getGrid(grid_);
+        refreshField();
+    }
 
 
 

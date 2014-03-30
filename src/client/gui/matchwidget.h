@@ -32,8 +32,9 @@ public:
     void generateGrid();
     ~MatchWidget();
     void askMatchToServer();
-    void refreshField(Position highlightedCase = Position());
+    void refreshField();
     Position getCase(QMouseEvent * event);
+    bool isCaseHighlighted(unsigned i, unsigned j);
 signals:
 
 public slots:
@@ -48,6 +49,8 @@ private:
     Match* currentMatch_;
     Case grid_[WIDTH][LENGTH];
     QTextEdit* playerLabels_[2][4];
+    vector<Position> highlightedCases;
+    bool playerSelected = false;
 
 };
 

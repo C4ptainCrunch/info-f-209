@@ -129,10 +129,8 @@ void MenuWindow::startMatch(Match * startingMatch) {
 }
 
 void MenuWindow::logOut() {
-    //TODO : DISCONNECT CLIENT FROM SERVER
-    if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous déconnecter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
-        parent_->close();
-    }
+    parent_->close();
+
 
 }
 

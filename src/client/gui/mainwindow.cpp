@@ -67,6 +67,7 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
             break;
         }
         case MATCHSTATE: {
+            cout<<this<<endl;
             MatchWidget * match = new MatchWidget(startingMatch, this);
             currentWidget = match;
             match->show();

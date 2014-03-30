@@ -4,7 +4,6 @@ using namespace std;
 
 MenuWindow::MenuWindow(MainWindow * parent):
     QWidget(parent), parent_(parent) {
-    cout << "FENETRE ACTIVE : " << this->isActiveWindow() << endl;
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
@@ -120,8 +119,15 @@ void MenuWindow::infrastructures() {
 }
 
 void MenuWindow::sendChallenge(){
+    Club* club1 = new Club();
+    Club* club2 = new Club();
+
+    parent_->setNextScreen(MATCHSTATE, new Match(*club1,*club2));
+    /*
+     * PLEASE UNCOMMENT ME, I BEG YOU
     string opponent = list->currentText().toStdString();
     sviews::challenge(parent_->getSocket(), opponent);
+    */
 }
 
 void MenuWindow::startMatch(Match * startingMatch) {

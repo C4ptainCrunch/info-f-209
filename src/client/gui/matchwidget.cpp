@@ -29,7 +29,7 @@ MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
 
     //------------------------SCORE SETTINGS--------------------------------
     QLabel * ownScore = new QLabel("VOUS : 0", mainWidget);
-    ownScore->setFixedSize(200, 75);
+    ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
     ownScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
@@ -40,7 +40,7 @@ MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
     ownScore->show();
 
     opponentScore = new QLabel("ADVERSAIRE : 0", mainWidget);
-    opponentScore->setFixedSize(200, 75);
+    opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
     opponentScore->setWordWrap(true);
@@ -94,6 +94,8 @@ void MatchWidget::refreshField() {
     Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
 
+    int xlabelDifference = 22;
+    int ylabelDifference = 7;
     double x = 0;
     double y = 0;
     bool pair = true;
@@ -120,20 +122,20 @@ void MatchWidget::refreshField() {
                         painter.setBrush(QBrush(Qt::red));
                     }
                     if (grid_[i][j].player->getRole() == KEEPER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QTextEdit("K",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == CHASER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QTextEdit("C",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == SEEKER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QTextEdit("S",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == BEATER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QTextEdit("B",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QLabel("B",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                 }
                 else if (grid_[i][j].ball != 0) {
@@ -157,6 +159,7 @@ void MatchWidget::refreshField() {
             }
             else if (grid_[i][j].type == GOAL) {
                 painter.setBrush(QBrush(QColor(171,171,171)));
+                painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
         y += 15;

@@ -34,7 +34,7 @@ int main(int argc, char * argv[]) {
     MainWindow * window = new MainWindow();
 
     string hostname = "localhost";
-    int port = 5000;
+    int port = 9000;
     if (argc == 2) {
         hostname = argv[1];
     }

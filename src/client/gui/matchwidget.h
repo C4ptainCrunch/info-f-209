@@ -48,7 +48,7 @@ private:
     QFrame * fieldWidget;
     Match* currentMatch_;
     Case grid_[WIDTH][LENGTH];
-    QTextEdit* playerLabels_[2][4];
+    QLabel* playerLabels_[2][4];
     vector<Position> highlightedCases;
     bool playerSelected = false;
 

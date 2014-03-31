@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{float}
+\usepackage{titling}
 
 % Glossaire:
 \usepackage[acronym,toc,nopostdot, nonumberlist]{glossaries}
@@ -22,15 +23,22 @@
 \renewcommand{\glsdisplayfirst}[4]{\gloss{#1#4}}
 
 
+
 \makeindex
 \indexsetup{level=\chapter}
 \setcounter{secnumdepth}{4}
 
-\title{Quiddich live : \\Software requirements document}
-\author{Bruno Rocha Pereira \and Jérome Vial \and Cédric Strebelle \and
-Romain Fontaine \and Tsotne Shonia \and Nikita Marchant}
+\title{Quiddich Live Manager 2014 : \\Software requirements document}
+\author{Bruno Rocha Pereira \and Romain Fontaine \and Nikita Marchant \and
+ \\Avec la participation de : \\ Jérome Vial \\ Tsotne Shonia \\ Cédric Strebelle }
 \date{\today}
 
+\setlength{\droptitle}{-100pt}
+\renewcommand{\maketitlehooka}{
+    \begin{center}
+        \includegraphics{logoulb.jpg}
+    \end{center}
+}
 % Début du document
 \begin{document}
 
@@ -81,6 +89,10 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
     \item[2.1] (12/03/14) : Correction du diagramme de classe général - Bruno
     \item[2.2] (13/03/14) : Ajout du paragraphe "Idées de fonctionnalités" - Bruno
+    \item[3.0] (/03/14) : \textbf{Délivrable pour la partie 3 - Equipe}
+    
+    \item[3.1] (31/03/14) : Modification de la page de garde - Bruno
+    
 
 
 \end{description}

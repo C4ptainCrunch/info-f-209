@@ -9,7 +9,7 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{float}
-\usepackage{titling}
+\usepackage{fancyhdr}
 
 % Glossaire:
 \usepackage[acronym,toc,nopostdot, nonumberlist]{glossaries}
@@ -33,14 +33,12 @@
  \\Avec la participation de : \\ Jérome Vial \\ Tsotne Shonia \\ Cédric Strebelle }
 \date{\today}
 
-\setlength{\droptitle}{-100pt}
-\renewcommand{\maketitlehooka}{
-    \begin{center}
-        \includegraphics{logoulb.jpg}
-    \end{center}
-}
 % Début du document
 \begin{document}
+\fancypagestyle{empty}{%
+  \fancyhf{}% Clear header/footer
+  \fancyhead[L]{\includegraphics[scale=0.5]{logoulb.jpg}}% Your logo/image
+}
 
 \maketitle
 \tableofcontents

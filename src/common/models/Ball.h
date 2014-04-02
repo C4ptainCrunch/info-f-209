@@ -8,6 +8,7 @@
 class Ball {
 
 public:
+    Ball();
     Ball(int speed);
     Ball(int speed, Position position);
     virtual ~Ball();

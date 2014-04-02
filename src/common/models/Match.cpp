@@ -34,10 +34,61 @@ Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaff
         }
     }
 
-
+    Position pos = goldenSnitch_.getPosition();
+    grid_[pos.x][pos.y].ball = &goldenSnitch_;
+    pos = quaffle_.getPosition();
+    grid_[pos.x][pos.y].ball = &quaffle_;
+    pos = budgers_[0].getPosition();
+    grid_[pos.x][pos.y].ball = &budgers_[0];
+    pos = budgers_[1].getPosition();
+    grid_[pos.x][pos.y].ball = &budgers_[1];
 }
 
 Match::Match(JsonValue *json){
+    JsonDict * match = JDICT(json);
+
+    if (match == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    Club hostClub =  Club((*match)["hostClub"]);
+    Club guestClub =  Club((*match)["guestClub"]);
+
+    GoldenSnitch goldenSnitch((*match)["goldenSnitch"]);
+    Quaffle quaffle((*match)["quaffle"]);
+    Budger budger1((*match)["budger1"]);
+    Budger budger2((*match)["budger2"]);
+
+    JsonInt * score1 = JINT((*match)["score1"]);
+    JsonInt * score2 = JINT((*match)["score2"]);
+
+    if (score1 == NULL || score2 == NULL){
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+    int score[] = { *score1, *score2};
+
+    JsonBool * endGame_bool = JBOOL((*match)["endGame"]);
+    if (endGame_bool == NULL){
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+    bool endGame = *endGame_bool;
+
+    JsonList * grid_WIDTH = JLIST((*match)["grid"]);
+    if (grid_WIDTH == NULL){
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+    Case grid[WIDTH][LENGTH];
+    for(int i = 0; i < WIDTH; i++){
+        JsonList * grid_LENGTH = JLIST((*grid_WIDTH)[i]);
+        if (grid_LENGTH == NULL){
+            throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+        }
+        for(int j = 0; i < LENGTH; i++){
+            grid[i][j] = Case::fromJson((*grid_LENGTH)[j]);
+        }
+    }
+
+    new (this)Match(hostClub, guestClub, goldenSnitch, quaffle, budger1, budger2, grid, score, endGame);
 }
 
 Match::~Match() {}
@@ -339,4 +390,39 @@ void Match::getGrid(Case grid[WIDTH][LENGTH]){
 
 Club * * Match::getClubs(){
     return clubs_;
+}
+
+Match::operator JsonDict() const {
+    JsonDict r;
+
+    r.add("hostClub", new JsonDict(*(clubs_[0])));
+    r.add("guestClub", new JsonDict(*(clubs_[1])));
+    r.add("goldenSnitch", new JsonDict(goldenSnitch_));
+    r.add("quaffle", new JsonDict(quaffle_));
+    r.add("budger1", new JsonDict(budgers_[0]));
+    r.add("budger2", new JsonDict(budgers_[1]));
+    r.add("score1", new JsonInt(score_[0]));
+    r.add("score2", new JsonInt(score_[1]));
+    r.add("endGame", new JsonBool(endGame_));
+
+    JsonList * grid_WIDTH = new JsonList();
+    for(int i = 0; i< WIDTH; i++){
+        JsonList * grid_LENGTH = new JsonList();
+        for(int j = 0; j < LENGTH; j++){
+            grid_LENGTH->add(new JsonDict(grid_[i][j]));
+        }
+        grid_WIDTH->add(grid_LENGTH);
+    }
+    r.add("grid", grid_WIDTH);
+
+    return r;
+}
+
+bool Match::isGuest(Club * club){
+    if(clubs_[guest] == club){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

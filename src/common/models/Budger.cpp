@@ -1,10 +1,50 @@
 #include "Budger.h"
 
+using namespace std;
+
 Budger::Budger(): Ball(4), hitWay_() {
     srand(time(NULL));
 }
 
-Budger::Budger(int speed, Position position, Way hitWay): Ball(speed, position), hitWay_(hitWay) {}
+Budger::Budger(int speed, Position position): Ball(speed, position) {}
+
+Budger::Budger(JsonValue * json) {
+
+    JsonDict* ball_dict = JDICT(json);
+    if (ball_dict == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    JsonInt * speed_int = JINT((*ball_dict)["speed"]);
+    if (speed_int == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    int speed = *speed_int;
+
+    JsonList * position_list = JLIST((*ball_dict)["position"]);
+    if (position_list == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    JsonInt * x_int = JINT((*position_list)[0]);
+    JsonInt * y_int = JINT((*position_list)[1]);
+
+    if (x_int == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    if (y_int == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    Position position;
+    position.x = *x_int;
+    position.y = *y_int;
+
+    new (this)Budger(speed, position);
+}
+
 
 Budger::~Budger() {}
 
@@ -50,4 +90,14 @@ std::string Budger::getName() {
 
 Way Budger::getHitWay() const {
     return hitWay_;
+}
+
+Budger::operator JsonDict() const {
+    JsonDict r;
+    r.add("speed", new JsonInt(speed_));
+    JsonList * position = new JsonList();
+    position->add(new JsonInt(position_.x));
+    position->add(new JsonInt(position_.y));
+    r.add("position", position);
+    return r;
 }

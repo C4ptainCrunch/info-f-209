@@ -14,9 +14,12 @@ typedef std::vector<Position> Way;
 enum { WIDTH = 30, LENGTH = 64};
 
 struct Case {
+    static Case fromJson(JsonValue * json);
     int type;
     FieldPlayer * player = 0;
     Ball * ball = 0;
+
+    operator JsonDict() const;
 };
 
 Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]);

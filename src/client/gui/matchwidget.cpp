@@ -4,8 +4,9 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
+MatchWidget::MatchWidget(Match *startingMatch, MainWindow * parent):
     QWidget(parent) {
+    parent_ = parent;
     //-----------------------MATCH INITIALISATION-----------------------
     currentMatch_ = startingMatch;
 
@@ -18,7 +19,6 @@ MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
     QLabel * image = new QLabel(this);
     image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/Quidditch_pitch_hogwarts.jpg"));
     layout->addWidget(image);
-    //this->setLayout(layout);
 
 
     //---------------------MAIN CONTAINER WIDGET---------------------------
@@ -54,8 +54,7 @@ MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
 
-    //QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
-    //^TODO Fix
+    QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
 
     //---------------------FIELD REPRESENTATION----------------------------
 
@@ -190,10 +189,12 @@ void askMatchToServer(){
 }
 
 void MatchWidget::setCurrentMatch(Match* match){
+
     currentMatch_ = match;
 
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);
+
     refreshField();
 }
 
@@ -241,6 +242,7 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
         Position clickedCase = getCase(event);
         if (highlightedCases.empty() or isCloseCase(clickedCase,highlightedCases[highlightedCases.size()-1],0)){
             highlightedCases.push_back(clickedCase);
+            cout<<highlightedCases.size()<<endl;
         }
         refreshField();
     }

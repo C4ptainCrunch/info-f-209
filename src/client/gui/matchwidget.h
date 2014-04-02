@@ -27,7 +27,7 @@ class MainWindow;
 class MatchWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit MatchWidget(Match *startingMatch,QWidget * parent=0);
+    explicit MatchWidget(Match *startingMatch,MainWindow * parent=0);
     void mousePressEvent(QMouseEvent *);
     void generateGrid();
     ~MatchWidget();

@@ -65,7 +65,7 @@ void accept_challenge(JsonValue * message, UserHandler * handler) {
         other_handler = handler->findHandler(challenge->opponents[0]);
     }
 
-    JsonNull payload = JsonNull();
+    JsonDict payload = (JsonDict) *match;
     other_handler->writeToClient("match_begin", &payload);
     handler->writeToClient("match_begin", &payload);
 

@@ -1,6 +1,7 @@
 #include "Case.h"
-
 using namespace std;
+
+
 
 Case Case::fromJson(JsonValue * json){
     JsonDict * case_dict = JDICT(json);
@@ -30,6 +31,15 @@ Case::operator JsonDict() const {
     r.add("type", new JsonInt(type));
     r.add("player", new JsonDict(*player));
     return r;
+}
+
+bool isCloseCase(Position position1, Position position2, const Case grid[WIDTH][LENGTH]){
+    for (int i = 0; i<6; ++i){
+        if (position2 == nextCase(position1,i,grid)){
+            return true;
+        }
+    }
+    return false;
 }
 
 Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]) {

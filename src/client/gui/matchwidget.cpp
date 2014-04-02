@@ -239,11 +239,20 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
         refreshField();
     }
     else{
-        highlightedCases.push_back(getCase(event));
-        currentMatch_->getGrid(grid_);
+        Position clickedCase = getCase(event);
+        if (highlightedCases.empty() or isCloseCase(clickedCase,highlightedCases[highlightedCases.size()-1],0)){
+            highlightedCases.push_back(clickedCase);
+        }
         refreshField();
     }
+}
 
+void MatchWidget::nextPlayer(){
+    chosenWays.push_back(highlightedCases);
+    highlightedCases.clear();
+    refreshField();
+}
 
-
+void MatchWidget::endTurn(){
+    //sviews::endTurn(chosenWays)
 }

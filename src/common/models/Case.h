@@ -23,5 +23,6 @@ struct Case {
 };
 
 Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGTH]);
+bool isCloseCase(Position position1, Position position2, const Case grid[WIDTH][LENGTH]);
 
 #endif // CASE_H

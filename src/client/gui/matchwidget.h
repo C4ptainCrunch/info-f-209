@@ -39,6 +39,8 @@ signals:
 
 public slots:
     void setMatch(Match*);
+    void nextPlayer();
+    void endTurn();
 
 private:
     MainWindow * parent_;
@@ -49,7 +51,8 @@ private:
     Match* currentMatch_;
     Case grid_[WIDTH][LENGTH];
     QLabel* playerLabels_[2][4];
-    vector<Position> highlightedCases;
+    Way highlightedCases;
+    std::vector<Way> chosenWays;
     bool playerSelected = false;
 
 };

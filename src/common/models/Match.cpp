@@ -340,3 +340,12 @@ void Match::getGrid(Case grid[WIDTH][LENGTH]){
 Club * * Match::getClubs(){
     return clubs_;
 }
+
+bool Match::isGuest(Club * club){
+    if(clubs_[guest] == club){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

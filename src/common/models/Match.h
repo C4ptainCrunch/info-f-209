@@ -40,6 +40,7 @@ public:
     void generateGrid();    // TODO : TO SET PRIVATE AFTER TESTS
     void getGrid(Case grid[WIDTH][LENGTH]);
     Club * * getClubs();
+    bool isGuest(Club * clubs);
 
 private:
     bool endGame_ = false;

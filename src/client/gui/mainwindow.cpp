@@ -113,16 +113,18 @@ void MainWindow::recievePlayers(std::vector<NonFieldPlayer *> * players) {
 
 vector<NonFieldPlayer *> MainWindow::getPlayers() {
     return playersList;
-
 }
+
+
 
 void MainWindow::getDefi(string username) {
     int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
     if (accept == QMessageBox::Yes) {
-        //TODO lanch match
+        sviews::acceptChallenge(this->s_, username);
     }
     else if (accept == QMessageBox::No) {
-        //TODO say no to server
+        sviews::refuseChallenge(this->s_, username);
+
     }
 }
 

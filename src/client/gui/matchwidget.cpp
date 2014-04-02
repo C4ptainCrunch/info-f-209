@@ -101,7 +101,6 @@ void MatchWidget::refreshField() {
     double y = 0;
     bool pair = true;
     for (int i = 0; i < WIDTH; ++i) {
-        //cout<<i<<endl;
         for (int j = 0; j < LENGTH; ++j) {
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
@@ -190,7 +189,7 @@ void askMatchToServer(){
     //TODO
 }
 
-void MatchWidget::setMatch(Match* match){
+void MatchWidget::setCurrentMatch(Match* match){
     currentMatch_ = match;
 
     Case grid[WIDTH][LENGTH];

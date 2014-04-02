@@ -42,6 +42,7 @@ public:
     Club * * getClubs();
     operator JsonDict() const;
     bool isGuest(Club * clubs);
+    void setWays(bool isGuest, Way playerWays[7]);
 
 private:
     bool endGame_ = false;
@@ -52,6 +53,7 @@ private:
     GoldenSnitch goldenSnitch_;
     Quaffle quaffle_;
     Budger budgers_[2];
+    Way playerWays_[2][7];
 };
 
 #endif // MATCH_H

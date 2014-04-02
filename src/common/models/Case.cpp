@@ -16,7 +16,13 @@ Case Case::fromJson(JsonValue * json){
 
     int type = *type_int;
 
-    FieldPlayer * player = new FieldPlayer((*case_dict)["player"]);
+    FieldPlayer * player;
+    if(JNULL((*case_dict)["player"]) == NULL){
+        player = new FieldPlayer((*case_dict)["player"]);
+    }
+    else{
+        player = NULL;
+    }
 
     Case newCase;
     newCase.type = type;
@@ -29,7 +35,12 @@ Case Case::fromJson(JsonValue * json){
 Case::operator JsonDict() const {
     JsonDict r;
     r.add("type", new JsonInt(type));
-    r.add("player", new JsonDict(*player));
+    if(player != NULL){
+        r.add("player", new JsonDict(*player));
+    }
+    else{
+        r.add("player", new JsonNull());
+    }
     return r;
 }
 

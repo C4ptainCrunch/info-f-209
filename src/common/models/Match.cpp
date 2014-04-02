@@ -426,3 +426,9 @@ bool Match::isGuest(Club * club){
         return false;
     }
 }
+
+void Match::setWays(bool isGuest, Way playerWays[7]){
+    for(int i = 0; i < 7; i++){
+        playerWays_[isGuest][i] = playerWays[i];
+    }
+}

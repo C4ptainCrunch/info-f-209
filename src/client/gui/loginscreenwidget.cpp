@@ -74,7 +74,7 @@ void loginScreenWidget::showCredits() {
                              "Librairie graphique utilisée : Qt 5.2.1\n"
                              "Background : http://fanzone.potterish.com/wp-content/gallery/video-game-hp6-playstation-3/edp_ps3_screencap_02.jpg\n"
                              "Dans le cadre du cours INFO-F-209\n"
-                             "En fait, Quidditch c'est uidditch fait par Qt");
+                             "En fait, Quidditch c'est du uidditch revisité par Qt");
 
 }
 
@@ -198,6 +198,9 @@ void loginScreenWidget::registerUser() {
         newName = newManagerName->text();
 
         sviews::signup(parent_->getSocket(), newID.toStdString(), newName.toStdString(), newPW.toStdString());
+    }
+    else{
+        this->enableButtons();
     }
 }
 

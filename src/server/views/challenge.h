@@ -1,5 +1,5 @@
-#ifndef SVIEWMATCH_H
-#define SVIEWMATCH_H
+#ifndef SVIEWCHALLENGE_H
+#define SVIEWCHALLENGE_H
 
 #include <cstdlib>
 #include <vector>
@@ -19,4 +19,4 @@ void refuse_challenge(JsonValue * message, UserHandler * handler);
 
 #include "../UserHandler.h"
 
-#endif // SVIEWMATCH_H
+#endif // SVIEWCHALLENGE_H

@@ -46,7 +46,7 @@ Case::operator JsonDict() const {
 
 bool isCloseCase(Position position1, Position position2, const Case grid[WIDTH][LENGTH]){
     for (int i = 0; i<6; ++i){
-        if (position2 == nextCase(position1,i,grid)){
+        if (position1 == nextCase(position2,i,grid)){
             return true;
         }
     }
@@ -89,9 +89,12 @@ Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGT
             }
             break;
     }
-    if (grid[nextPosition.x][nextPosition.y].type == VOID) {
-        nextPosition.x = position.x;
-        nextPosition.y = position.y;
+    if (grid != 0)
+    {
+        if (grid[nextPosition.x][nextPosition.y].type == VOID) {
+            nextPosition.x = position.x;
+            nextPosition.y = position.y;
+        }
     }
     return nextPosition;
 }

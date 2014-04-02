@@ -19,7 +19,6 @@ MatchWidget::MatchWidget(Match *startingMatch, MainWindow * parent):
     QLabel * image = new QLabel(this);
     image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/Quidditch_pitch_hogwarts.jpg"));
     layout->addWidget(image);
-    //this->setLayout(layout);
 
 
     //---------------------MAIN CONTAINER WIDGET---------------------------
@@ -243,6 +242,7 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
         Position clickedCase = getCase(event);
         if (highlightedCases.empty() or isCloseCase(clickedCase,highlightedCases[highlightedCases.size()-1],0)){
             highlightedCases.push_back(clickedCase);
+            cout<<highlightedCases.size()<<endl;
         }
         refreshField();
     }

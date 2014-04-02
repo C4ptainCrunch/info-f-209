@@ -8,7 +8,7 @@ from time import sleep
 from lib import sock, send, recv, coroutine, force_login
 
 HOST = 'localhost'
-PORT = 5001
+PORT = 9001
 
 
 def user1():

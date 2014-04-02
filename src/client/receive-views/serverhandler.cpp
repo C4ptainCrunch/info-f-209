@@ -7,7 +7,8 @@ const map<string, view_ptr> ServerHandler::viewmap = {
     {"login", rviews::login},
     {"register", rviews::signup},
     {"userlist", rviews::userlist},
-    {"playerlist", rviews::playerlist}
+    {"playerlist", rviews::playerlist},
+    {"startMatch", rviews::startMatch}
 };
 
 ServerHandler::ServerHandler(string host, const int port, MainWindow * window) {

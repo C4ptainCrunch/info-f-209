@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     auctionhousewidget.cpp \
     infrastructurewidget.cpp\
     ../receive-views/serverhandler.cpp\
-    ../receive-views/views.cpp
+    ../receive-views/views.cpp\
+
 
 HEADERS  += mainwindow.h \
     menuwindow.h \

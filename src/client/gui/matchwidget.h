@@ -38,7 +38,7 @@ public:
 signals:
 
 public slots:
-    void setMatch(Match*);
+    void setCurrentMatch(Match*);
     void nextPlayer();
     void endTurn();
 

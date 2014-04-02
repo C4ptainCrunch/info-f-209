@@ -69,8 +69,9 @@ void startMatch(JsonValue * message, ServerHandler * handler){
 
     if (listMessage == NULL) {
         throw BadRequest("Malformatted request. Need a JSON list");
-    }  
-    Match * match = nullptr; ////TODO =get( *listMessage);
+    }
+    
+    Match * match = new Match(listMessage);
     emit handler->getWindow()->startMatch(match);
 
 }

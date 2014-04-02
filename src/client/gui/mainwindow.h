@@ -18,6 +18,7 @@
 #include <auctionhousewidget.h>
 #include <infrastructurewidget.h>
 #include <../../common/models/Case.h>
+#include <../send-views/views.h>
 
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5, INFRASTRUCTURESTATE = 6};
 
@@ -43,6 +44,7 @@ signals:
     void userList(std::vector<std::string> *);
     void registerFailure(int);
     void newDefi(std::string username);
+    void setMatch(Match* match);
 
     void startMatch(Match * match);
 

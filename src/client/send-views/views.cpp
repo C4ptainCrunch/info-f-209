@@ -36,4 +36,16 @@ void userlist(Socket * s) {
     writeToServer(s, "userlist", "true");
 }
 
+void acceptChallenge(Socket * s, string opponent){
+    JsonDict answer;
+    answer.add("other_username", new JsonString(opponent));
+    writeToServer(s, "accept_challenge", answer.toString());
+}
+
+void refuseChallenge(Socket * s, string opponent){
+    JsonDict answer;
+    answer.add("other_username", new JsonString(opponent));
+    writeToServer(s, "refuse_challenge", answer.toString());
+}
+
 }

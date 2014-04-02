@@ -4,7 +4,6 @@ using namespace std;
 
 MenuWindow::MenuWindow(MainWindow * parent):
     QWidget(parent), parent_(parent) {
-    cout << "FENETRE ACTIVE : " << this->isActiveWindow() << endl;
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
@@ -31,7 +30,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     this->askConnectedListRefresh();
 
     QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
-    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(startMatch()));
+    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
@@ -71,6 +70,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
+    QObject::connect(parent_, SIGNAL(startMatch(Match *)),this,SLOT(startMatch(Match *)));
     QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
@@ -118,16 +118,26 @@ void MenuWindow::infrastructures() {
 
 }
 
+void MenuWindow::sendChallenge(){
+    Club* club1 = new Club();
+    Club* club2 = new Club();
 
-void MenuWindow::startMatch() {
-    parent_->setNextScreen(MATCHSTATE);
+    parent_->setNextScreen(MATCHSTATE, new Match(*club1,*club2));
+
+    /*
+     * PLEASE UNCOMMENT ME, I BEG YOU
+    string opponent = list->currentText().toStdString();
+    sviews::challenge(parent_->getSocket(), opponent);
+    */
+}
+
+void MenuWindow::startMatch(Match * startingMatch) {
+    parent_->setNextScreen(MATCHSTATE, startingMatch);
 }
 
 void MenuWindow::logOut() {
-    //TODO : DISCONNECT CLIENT FROM SERVER
-    if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous déconnecter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
-        parent_->close();
-    }
+    parent_->close();
+
 
 }
 

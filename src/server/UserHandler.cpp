@@ -5,12 +5,16 @@ using namespace std;
 
 #include "views/user.h"
 #include "views/management.h"
+#include "views/challenge.h"
 
 const map<string, view_ptr> UserHandler::viewmap = {
     {"login", views::login},
     {"register", views::signup},
     {"userlist", views::userlist},
-    {"playerlist", views::playerlist}
+    {"playerlist", views::playerlist},
+    {"challenge", views::challenge},
+    {"accept_challenge", views::accept_challenge},
+    {"refuse_challenge", views::refuse_challenge}
 };
 
 UserHandler::UserHandler(struct server_shared_data * shared_data) {
@@ -48,12 +52,20 @@ bool UserHandler::isReady() {
     return ready;
 }
 
-std::vector<UserHandler *> &UserHandler::getHandlers_list() {
-    return shared_data_->handlers_list;
+std::vector<UserHandler *> * UserHandler::getHandlers_list() {
+    return &(shared_data_->handlers_list);
 }
 
-std::vector<Match *> &UserHandler::getMatch_list(){
-    return shared_data_->match_list;
+std::vector<Match *> * UserHandler::getMatch_list(){
+    return &(shared_data_->match_list);
+}
+
+vector<Challenge> * UserHandler::getChalenge_list(){
+    return &(shared_data_->challenge_list);
+}
+
+struct server_shared_data * UserHandler::getSharedData(){
+    return shared_data_;
 }
 
 Manager * UserHandler::getManager() {
@@ -63,6 +75,15 @@ Manager * UserHandler::getManager() {
 UserHandler * UserHandler::findHandler(string username) {
     for(int i = 0; i < shared_data_->handlers_list.size(); i++){
         if(shared_data_->handlers_list.at(i)->getManager()->getUserName() == username){
+            return shared_data_->handlers_list.at(i);
+        }
+    }
+    return NULL;
+}
+
+UserHandler * UserHandler::findHandler(Manager * manager){
+    for(int i = 0; i < shared_data_->handlers_list.size(); i++){
+        if(shared_data_->handlers_list.at(i)->getManager() == manager){
             return shared_data_->handlers_list.at(i);
         }
     }

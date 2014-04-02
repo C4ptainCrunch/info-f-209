@@ -41,6 +41,7 @@ public:
     void getGrid(Case grid[WIDTH][LENGTH]);
     Club * * getClubs();
     operator JsonDict() const;
+    bool isGuest(Club * clubs);
 
 private:
     bool endGame_ = false;

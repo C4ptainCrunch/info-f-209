@@ -10,5 +10,7 @@ std::string getString(JsonList * list, int i);
 bool getBool(JsonDict * dict, std::string key);
 JsonList * getList(JsonDict * dict, std::string key);
 int getInt(JsonDict * dict, std::string key);
+JsonDict * castDict(JsonValue * val);
+
 
 #endif

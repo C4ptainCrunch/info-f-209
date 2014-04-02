@@ -22,6 +22,12 @@ void signup(Socket * s, string username, string name, string password) {
     writeToServer(s, "register", answer.toString());
 }
 
+void challenge(Socket * s, string opponent){
+    JsonDict answer;
+    answer.add("other_username", new JsonString(opponent));
+    writeToServer(s, "challenge", answer.toString());
+}
+
 void playerlist(Socket * s) {
     writeToServer(s, "playerlist", "true");
 }

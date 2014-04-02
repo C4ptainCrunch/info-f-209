@@ -4,8 +4,10 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(QWidget * parent):
+MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
     QWidget(parent) {
+    //-----------------------MATCH INITIALISATION-----------------------
+    currentMatch_ = startingMatch;
 
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
@@ -27,7 +29,7 @@ MatchWidget::MatchWidget(QWidget * parent):
 
     //------------------------SCORE SETTINGS--------------------------------
     QLabel * ownScore = new QLabel("VOUS : 0", mainWidget);
-    ownScore->setFixedSize(200, 75);
+    ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
     ownScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
@@ -38,7 +40,7 @@ MatchWidget::MatchWidget(QWidget * parent):
     ownScore->show();
 
     opponentScore = new QLabel("ADVERSAIRE : 0", mainWidget);
-    opponentScore->setFixedSize(200, 75);
+    opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
     opponentScore->setWordWrap(true);
@@ -51,7 +53,9 @@ MatchWidget::MatchWidget(QWidget * parent):
 
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
-    QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
+
+    //QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
+    //^TODO Fix
 
     //---------------------FIELD REPRESENTATION----------------------------
 
@@ -81,17 +85,18 @@ MatchWidget::MatchWidget(QWidget * parent):
 
 }
 
-void MatchWidget::refreshField(Position highlightedCase) {
+void MatchWidget::refreshField() {
 
     QLabel * label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);
 
     QPainter painter(pixmap);
-    painter.setBrush(QBrush(Qt::darkGreen));
     Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
 
+    int xlabelDifference = 22;
+    int ylabelDifference = 7;
     double x = 0;
     double y = 0;
     bool pair = true;
@@ -105,7 +110,7 @@ void MatchWidget::refreshField(Position highlightedCase) {
             x += 18;
             if (grid_[i][j].type == USABLE) {
                 if (grid_[i][j].player != 0) {
-                    if((int)i== highlightedCase.x and j==highlightedCase.y){
+                    if(isCaseHighlighted(i,j)){
                         painter.setOpacity(0.6);
                     }
                     else{
@@ -118,20 +123,20 @@ void MatchWidget::refreshField(Position highlightedCase) {
                         painter.setBrush(QBrush(Qt::red));
                     }
                     if (grid_[i][j].player->getRole() == KEEPER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QTextEdit("K",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == CHASER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QTextEdit("C",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == SEEKER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QTextEdit("S",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == BEATER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QTextEdit("B",fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x,y);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QLabel("B",fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x-xlabelDifference,y-ylabelDifference);
                     }
                 }
                 else if (grid_[i][j].ball != 0) {
@@ -145,7 +150,6 @@ void MatchWidget::refreshField(Position highlightedCase) {
                     else{//ballName == "G")
                         painter.setBrush(QBrush(Qt::yellow));
                     }
-                    //<< typeid(grid_[i][j].ball).name();
                 }
                 else {
                     painter.setBrush(*grass);
@@ -155,6 +159,7 @@ void MatchWidget::refreshField(Position highlightedCase) {
             }
             else if (grid_[i][j].type == GOAL) {
                 painter.setBrush(QBrush(QColor(171,171,171)));
+                painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
         y += 15;
@@ -168,6 +173,15 @@ void MatchWidget::refreshField(Position highlightedCase) {
     }
     label->setPixmap(*pixmap);
     mainWidget->show();
+}
+
+bool MatchWidget::isCaseHighlighted(unsigned x, unsigned y){
+    for (size_t i = 0; i<highlightedCases.size(); ++i){
+        if(highlightedCases[i].x == x && highlightedCases[i].y == y){
+            return true;
+        }
+    }
+    return false;
 }
 
 MatchWidget::~MatchWidget() {}
@@ -192,8 +206,6 @@ Position MatchWidget::getCase(QMouseEvent * event){
     double halfHeight = hexagonHeight / 2;
     int startHeight = 103;
     int startWidth = 144;
-    cout << "start : " << startHeight << endl;
-    cout << "ROW : " << (event->y() - 144) / 15 << " COL : " << (event->x() - 103) / 18 << endl;
 
     if ((event->x() > startHeight) && (event->x() < 1200)) {
         if ((event->y() > startWidth) && (event->y() < 580)) {
@@ -222,9 +234,15 @@ Position MatchWidget::getCase(QMouseEvent * event){
 
 
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
-    Position clickedCase = getCase(event);
-    currentMatch_->getGrid(grid_);
-    refreshField(clickedCase);
+    if(event->button() == Qt::RightButton){
+        highlightedCases.clear();
+        refreshField();
+    }
+    else{
+        highlightedCases.push_back(getCase(event));
+        currentMatch_->getGrid(grid_);
+        refreshField();
+    }
 
 
 

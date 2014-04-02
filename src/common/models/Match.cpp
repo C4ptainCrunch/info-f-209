@@ -285,7 +285,6 @@ void Match::moveBalls(bool & moved, int turnNumber) {
         }
     }
 
-    //QUAFFLE
 
 }
 
@@ -417,4 +416,13 @@ Match::operator JsonDict() const {
     r.add("grid", grid_WIDTH);
 
     return r;
+}
+
+bool Match::isGuest(Club * club){
+    if(clubs_[guest] == club){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

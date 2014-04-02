@@ -123,6 +123,7 @@ void MenuWindow::sendChallenge(){
     Club* club2 = new Club();
 
     parent_->setNextScreen(MATCHSTATE, new Match(*club1,*club2));
+
     /*
      * PLEASE UNCOMMENT ME, I BEG YOU
     string opponent = list->currentText().toStdString();

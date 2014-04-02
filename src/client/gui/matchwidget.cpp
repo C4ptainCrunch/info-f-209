@@ -53,7 +53,9 @@ MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
 
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
-    QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
+
+    //QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
+    //^TODO Fix
 
     //---------------------FIELD REPRESENTATION----------------------------
 
@@ -90,7 +92,6 @@ void MatchWidget::refreshField() {
     pixmap->fill(Qt::transparent);
 
     QPainter painter(pixmap);
-    painter.setBrush(QBrush(Qt::darkGreen));
     Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
 
@@ -149,7 +150,6 @@ void MatchWidget::refreshField() {
                     else{//ballName == "G")
                         painter.setBrush(QBrush(Qt::yellow));
                     }
-                    //<< typeid(grid_[i][j].ball).name();
                 }
                 else {
                     painter.setBrush(*grass);
@@ -206,8 +206,6 @@ Position MatchWidget::getCase(QMouseEvent * event){
     double halfHeight = hexagonHeight / 2;
     int startHeight = 103;
     int startWidth = 144;
-    cout << "start : " << startHeight << endl;
-    cout << "ROW : " << (event->y() - 144) / 15 << " COL : " << (event->x() - 103) / 18 << endl;
 
     if ((event->x() > startHeight) && (event->x() < 1200)) {
         if ((event->y() > startWidth) && (event->y() < 580)) {

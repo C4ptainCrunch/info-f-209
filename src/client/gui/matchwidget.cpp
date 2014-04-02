@@ -4,8 +4,9 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
+MatchWidget::MatchWidget(Match *startingMatch, MainWindow * parent):
     QWidget(parent) {
+    parent_ = parent;
     //-----------------------MATCH INITIALISATION-----------------------
     currentMatch_ = startingMatch;
 
@@ -54,8 +55,7 @@ MatchWidget::MatchWidget(Match *startingMatch, QWidget * parent):
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
 
-    //QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
-    //^TODO Fix
+    QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
 
     //---------------------FIELD REPRESENTATION----------------------------
 
@@ -190,10 +190,12 @@ void askMatchToServer(){
 }
 
 void MatchWidget::setCurrentMatch(Match* match){
+
     currentMatch_ = match;
 
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);
+
     refreshField();
 }
 

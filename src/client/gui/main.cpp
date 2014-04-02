@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
     handler.connect_socket();
 
     window->show();
-    //emit window->setNextScreen(MAINMENUSTATE);
+    emit window->setNextScreen(MAINMENUSTATE);
     Thread loopThread = Thread(start_loop, (void *)&handler);
 
     return app.exec();

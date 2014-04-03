@@ -48,4 +48,12 @@ void refuseChallenge(Socket * s, string opponent){
     writeToServer(s, "refuse_challenge", answer.toString());
 }
 
+void endTurn(Socket * s,vector<Way> chosenWays){
+    writeToServer(s,"end_turn", "true");
+}
+
+void surrender(Socket * s){
+    writeToServer(s, "surrender", "true");
+}
+
 }

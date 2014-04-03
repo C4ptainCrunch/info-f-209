@@ -52,3 +52,24 @@ bool fileExists(const std::string & filename) {
     access(filename.c_str(), F_OK);
     return errno != ENOENT;
 }
+
+
+bool createDir(string dirname){
+    size_t start = 0, pos;
+    std::string dir;
+    int ret;
+    if(dirname[dirname.size() - 1] != '/'){
+        dirname += '/'; // add a trailing / if not present
+    }
+
+    while((pos = dirname.find_first_of('/', start)) != std::string::npos){
+        dir = dirname.substr(0, pos);
+        start = pos + 1;
+        if(dir.size() == 0) continue; // if leading / first time is 0 length
+        ret = mkdir(dir.c_str(), 0700);
+        if(ret != 0 && errno != EEXIST){
+            return false;
+        }
+    }
+    return ret == 0 || errno == EEXIST;
+}

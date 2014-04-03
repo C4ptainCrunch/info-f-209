@@ -49,7 +49,18 @@ void refuseChallenge(Socket * s, string opponent){
 }
 
 void endTurn(Socket * s,vector<Way> chosenWays){
-    writeToServer(s,"end_turn", "true");
+    JsonList message;
+    for(int i = 0; i < chosenWays.size(); i++){
+        JsonList * way_list = new JsonList();
+        for(int j = 0; j < chosenWays[i].size(); j++){
+            JsonList * pos_list = new JsonList();
+            pos_list->add(new JsonInt(chosenWays[i][j].x));
+            pos_list->add(new JsonInt(chosenWays[i][j].y));
+            way_list->add(pos_list);
+        }
+        message.add(way_list);
+    }
+    writeToServer(s,"end_turn", message.toString());
 }
 
 void surrender(Socket * s){

@@ -4,7 +4,7 @@ using namespace std;
 
 namespace views {
 
-void new_ways(JsonValue * message, UserHandler * handler){
+void end_turn(JsonValue * message, UserHandler * handler){
     JsonList * listMessage = JLIST(message);
     if (listMessage == NULL) {
         throw BadRequest("Malformatted request. Need a JSON dict");

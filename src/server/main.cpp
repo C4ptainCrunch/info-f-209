@@ -53,6 +53,14 @@ int main(int argc, char * argv[]) {
     else {
         datapath = "../../data/";
     }
+    if(datapath[datapath.size() - 1] != '/'){
+        datapath += "/";
+    }
+
+    if(!fileExists(datapath + "users/")){
+        createDir(datapath + "users/");
+    }
+
     int port = *port_p;
 
     BindSocket binded = BindSocket("", port);

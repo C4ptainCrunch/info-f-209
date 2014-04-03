@@ -2,12 +2,14 @@
 
 using namespace std;
 
-Match::Match(Club & hostClub, Club & guestClub) {
+Match::Match(Club * hostClub, Club * guestClub) {
     score_[0] = 0;
     score_[1] = 0;
     srand(time(NULL));
-    clubs_[host] = &hostClub;
-    clubs_[guest] = &guestClub;
+    clubs_[host] = hostClub;
+    cout << hostClub << endl;
+    clubs_[guest] = guestClub;
+    cout << guestClub << endl;
 
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();
@@ -17,12 +19,12 @@ Match::Match(Club & hostClub, Club & guestClub) {
 
 }
 
-Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame) {
+Match::Match(Club * hostClub, Club * guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame) {
     score_[0] = score[0];
     score_[1] = score[1];
     srand(time(NULL));
-    clubs_[host] = &hostClub;
-    clubs_[guest] = &guestClub;
+    clubs_[host] = hostClub;
+    clubs_[guest] = guestClub;
 
     goldenSnitch_ = goldenSnitch;
     quaffle_ = quaffle;
@@ -81,8 +83,8 @@ Match::Match(JsonValue * json) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
 
-    Club hostClub =  Club((*match)["hostClub"]);
-    Club guestClub =  Club((*match)["guestClub"]);
+    Club * hostClub = new Club((*match)["hostClub"]);
+    Club * guestClub = new Club((*match)["guestClub"]);
 
     GoldenSnitch goldenSnitch((*match)["goldenSnitch"]);
     Quaffle quaffle((*match)["quaffle"]);

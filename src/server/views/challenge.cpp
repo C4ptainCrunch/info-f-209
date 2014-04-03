@@ -53,7 +53,7 @@ void accept_challenge(JsonValue * message, UserHandler * handler) {
         return sendFail(handler, 999, "challenge", "This challenge is not yours");
     }
 
-    Match * match = new Match(*(challenge->opponents[0]->getClub()), *(challenge->opponents[1]->getClub()));
+    Match * match = new Match(challenge->opponents[0]->getClub(), challenge->opponents[1]->getClub());
     handler->getMatch_list()->push_back(match);
     handler->getChalenge_list()->erase(handler->getChalenge_list()->begin() + i);
 

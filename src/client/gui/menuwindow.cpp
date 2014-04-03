@@ -122,7 +122,7 @@ void MenuWindow::sendChallenge() {
     Club * club1 = new Club();
     Club * club2 = new Club();
 
-    parent_->setNextScreen(MATCHSTATE, new Match(*club1, *club2));
+    parent_->setNextScreen(MATCHSTATE, new Match(club1, club2));
 
     /*
      * PLEASE UNCOMMENT ME, I BEG YOU

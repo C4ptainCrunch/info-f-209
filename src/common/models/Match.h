@@ -23,8 +23,8 @@ enum { host = 0, guest = 1};
 class Match {
 
 public:
-    Match(Club & hostClub, Club & guestClub);
-    Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame);
+    Match(Club * hostClub, Club * guestClub);
+    Match(Club * hostClub, Club * guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame);
     Match(JsonValue * json);
     ~Match();
     void movePlayer(int fromX, int fromY, int toX, int toY);

@@ -40,6 +40,7 @@ public slots:
     void setCurrentMatch(Match*);
     void nextPlayer();
     void endTurn();
+    void surrender();
 
 private:
     MainWindow * parent_;

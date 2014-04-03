@@ -47,6 +47,7 @@ signals:
     void setMatch(Match* match);
 
     void startMatch(Match * match);
+    void updateMatch(Match * match);
 
     void playerList(std::vector<NonFieldPlayer *> * players);
 

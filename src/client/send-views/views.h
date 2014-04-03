@@ -17,6 +17,7 @@ void challenge(Socket * s, std::string username);
 void refuseChallenge(Socket * s, std::string opponent);
 void acceptChallenge(Socket * s, std::string opponent);
 void endTurn(Socket * s,std::vector<Way> chosenWays);
+void surrender(Socket * s);
 }
 
 

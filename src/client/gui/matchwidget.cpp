@@ -235,7 +235,7 @@ Position MatchWidget::getCase(QMouseEvent * event){
 }
 
 void MatchWidget::endTurn(){
-    sviews::endturn(parent_->getSocket(), chosenWays);
+    sviews::endTurn(parent_->getSocket(), chosenWays);
 
 }
 

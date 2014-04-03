@@ -54,15 +54,15 @@ private:
 #define ASSERT_EQUAL(value1, value2, message) assertEqual(value1, value2, message, __LINE__, __FILE__, __func__)
 //#define ASSERT_EQUAL(value1, value2) ASSERT_EQUAL(value1, value2, "")
 
-#define ASSERT_RAISE(function, type, message)\
-    bool exept = false;\
-    try{\
-        function;\
-    }\
-    catch(type){\
-        exept = true;\
-    }\
-    assert(exept, message,__LINE__, __FILE__, __func__);
+#define ASSERT_RAISE(function, type, message) \
+    bool exept = false; \
+    try { \
+        function; \
+    } \
+    catch (type) { \
+        exept = true; \
+    } \
+    assert(exept, message, __LINE__, __FILE__, __func__);
 
 
 void assert(bool value, std::string message="", int line=-1, std::string file="", std::string func="");

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void test_assert_raise(){
+void test_assert_raise() {
     ASSERT_RAISE(throw 1, ..., "test");
 }
 

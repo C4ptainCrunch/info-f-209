@@ -43,10 +43,15 @@ int main(int argc, char * argv[]) {
     }
     ServerHandler handler = ServerHandler(hostname, port, window);
 
-    handler.connect_socket();
-
     window->show();
-    emit window->setNextScreen(MAINMENUSTATE);
+    if (! handler.connect_socket()){
+        perror("string vide");
+        cout << errno << endl;
+        QMessageBox::critical(window, "Erreur", "Impossible de se connecter au serveur");
+        exit(1);
+    }
+
+    //emit window->setNextScreen(MAINMENUSTATE);
     Thread loopThread = Thread(start_loop, (void *)&handler);
 
     return app.exec();

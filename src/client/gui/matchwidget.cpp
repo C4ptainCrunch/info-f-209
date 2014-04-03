@@ -83,16 +83,18 @@ MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
 
 
     currentMatch_->getGrid(grid_);
+    label = 0;
     refreshField();
-    mainWidget->show();
 
+    mainWidget->show();
 
 }
 
 void MatchWidget::refreshField(int a, int b) {
-
-    QLabel * label = new QLabel(fieldWidget);
-
+    this->hide();
+    cout<<"PRINTIN"<<endl;
+    //delete label;
+    label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);
 
@@ -104,6 +106,7 @@ void MatchWidget::refreshField(int a, int b) {
     int ylabelDifference = 7;
     double x = 0;
     double y = 0;
+    string color;
     bool pair = true;
     bool highlighted;
     for (int i = 0; i < WIDTH; ++i) {
@@ -117,20 +120,25 @@ void MatchWidget::refreshField(int a, int b) {
             if (grid_[i][j].type == USABLE) {
                 painter.setBrush(QBrush(Qt::yellow));
                 if (isCaseHighlighted(i, j)) {
-                    cout<<"HIGHLIGHTED : "<<i<<":"<<j<<endl;
                     highlighted = true;
+                    color = "yellow";
                 }
                 else if(i==a && j==b){
                     painter.setBrush(QBrush(Qt::blue));
+
+                    color = "blue";
                 }
                 else{
-                    cout<<i<<":"<<j<<endl;
                     if (grid_[i][j].player != 0) {
                             if (!grid_[i][j].player->isInGuestTeam()) {
                                 painter.setBrush(QBrush(Qt::blue));
+
+                                color = "blue";
                             }
                             else {
                                 painter.setBrush(QBrush(Qt::red));
+
+                                color = "red";
                             }
                         if (grid_[i][j].player->getRole() == KEEPER) {
                             playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K", fieldWidget);
@@ -141,7 +149,6 @@ void MatchWidget::refreshField(int a, int b) {
                             playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
                         }
                         else if (grid_[i][j].player->getRole() == SEEKER) {
-                            cout<< "SEEKER is in i : "<<i<<" j : "<<j<<endl;
                             playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S", fieldWidget);
                             playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x - xlabelDifference, y - ylabelDifference);
                         }
@@ -154,23 +161,28 @@ void MatchWidget::refreshField(int a, int b) {
                         string ballName = grid_[i][j].ball->getName();
                         if (ballName == "B") {
                             painter.setBrush(QBrush(Qt::black));
+
+                            color = "black";
                         }
                         else if (ballName == "Q") {
                             painter.setBrush(QBrush(Qt::red));
+                            color = "red";
                         }
                         else { //ballName == "G")
                             painter.setBrush(QBrush(Qt::yellow));
+
+                            color = "yellow";
                         }
                     }
                     else {
                         if(!highlighted){
                             painter.setBrush(*grass);
+                            color = "grass";
                         }
                     }
                 }
                 
                 if(highlighted){
-                    cout<<"J'affiche l'highlighté"<<endl;
                     painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
                 else{
@@ -192,7 +204,8 @@ void MatchWidget::refreshField(int a, int b) {
         pair = !pair;
     }
     label->setPixmap(*pixmap);
-    mainWidget->show();
+
+    this->show();
 }
 
 
@@ -259,24 +272,18 @@ void MatchWidget::surrender() {
     sviews::surrender(parent_->getSocket());
 }
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
-    cout<<event->x()<<endl;
     if (event->button() == Qt::RightButton) {
         highlightedCases.clear();
         refreshField();
     }
     else {
         Position clickedCase = getCase(event);
-        cout << clickedCase.x <<" / "<<clickedCase.y<<endl;
         if (highlightedCases.empty() or isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
             highlightedCases.push_back(clickedCase);
         }
-        /*
-        cout << "highlightedCases : ";
-        for (int i = 0; i <highlightedCases.size();++i){
-            cout<<" x:"<<highlightedCases[i].x<<" y:"<<highlightedCases[i].y<< endl;
-        }
-        */
-        refreshField(20,20);
+        refreshField();
+
+
     }
 }
 

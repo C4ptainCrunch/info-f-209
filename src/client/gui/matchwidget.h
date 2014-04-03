@@ -46,6 +46,7 @@ private:
     MainWindow * parent_;
     QWidget * mainWidget;
     QLabel * ownScore;
+    QLabel * label = NULL;
     QLabel * opponentScore;
     QFrame * fieldWidget;
     Match * currentMatch_;

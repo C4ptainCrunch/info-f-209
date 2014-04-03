@@ -11,6 +11,12 @@ CLIENT_DEPS=$(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexce
 
 RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libtest.a
 
+ifeq ($(shell uname),Darwin)
+	START_CLIENT=@open ./build/bin/client.app || true
+else
+	START_CLIENT=@./build/bin/client || true
+endif
+
 all: $(addprefix $(BUILD_DIR)/bin/,$(EXECUTABLES))
 
 $(BUILD_DIR)/bin/server: $(SERVER_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/../server-config.json
@@ -22,10 +28,12 @@ $(BUILD_DIR)/bin/client: $(CLIENT_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/bin/ima
 	$(MAKE) -C src/client/gui/
 
 client: $(BUILD_DIR)/bin/client
-	./build/bin/client
+	@echo "===============\nStarting client\n===============\n"
+	$(START_CLIENT)
 
 server: $(BUILD_DIR)/bin/server
-	./build/bin/server
+	@echo "===============\nStarting server\n===============\n"
+	@./build/bin/server || true
 
 $(BUILD_DIR)/bin/images:
 	cp -r src/client/gui/images $(BUILD_DIR)/bin/

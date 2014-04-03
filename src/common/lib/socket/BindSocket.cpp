@@ -13,13 +13,11 @@ BindSocket::BindSocket(std::string hostname, int port) {
 
     if ((sockfd = socket(PF_INET,
                          SOCK_STREAM, 0)) == -1) {
-        perror("Serveur: socket");
-        throw 1;
+        throw SocketError("socket : " + std::string(strerror(errno)));
     }
 
     if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1) {
-        perror("Serveur: setsockopt");
-        throw 1;
+        throw SocketError("setsockopt : " + std::string(strerror(errno)));
     }
 
     my_addr.sin_family = AF_INET;
@@ -28,13 +26,11 @@ BindSocket::BindSocket(std::string hostname, int port) {
     memset(&(my_addr.sin_zero), '\0', 8);
 
     if (bind(sockfd, (struct sockaddr *)&my_addr, sizeof(struct sockaddr)) == -1) {
-        perror("Serveur: bind");
-        throw 1;
+        throw SocketError("bind : " + std::string(strerror(errno)));
     }
 
     if (listen(sockfd, BACKLOG) == -1) {
-        perror("Serveur: listen");
-        throw 1;
+        throw SocketError("listen : " + std::string(strerror(errno)));
     }
 
     fd_ = sockfd;

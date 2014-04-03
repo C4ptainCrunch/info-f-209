@@ -31,9 +31,9 @@ public:
     void mousePressEvent(QMouseEvent *);
     void generateGrid();
     ~MatchWidget();
-    void refreshField();
+    void refreshField(int a = 0, int b = 0);
     Position getCase(QMouseEvent * event);
-    bool isCaseHighlighted(unsigned i, unsigned j);
+    bool isCaseHighlighted(unsigned a, unsigned b);
 signals:
 
 public slots:

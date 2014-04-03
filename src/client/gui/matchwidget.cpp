@@ -89,9 +89,10 @@ MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
 
 }
 
-void MatchWidget::refreshField() {
+void MatchWidget::refreshField(int a, int b) {
 
     QLabel * label = new QLabel(fieldWidget);
+
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);
 
@@ -104,61 +105,77 @@ void MatchWidget::refreshField() {
     double x = 0;
     double y = 0;
     bool pair = true;
+    bool highlighted;
     for (int i = 0; i < WIDTH; ++i) {
         for (int j = 0; j < LENGTH; ++j) {
+            highlighted = false;
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
             hexagon[i][j].setCorners();
 
             x += 18;
             if (grid_[i][j].type == USABLE) {
-                if (grid_[i][j].player != 0) {
-                    if (isCaseHighlighted(i, j)) {
-                        painter.setOpacity(0.6);
+                painter.setBrush(QBrush(Qt::yellow));
+                if (isCaseHighlighted(i, j)) {
+                    cout<<"HIGHLIGHTED : "<<i<<":"<<j<<endl;
+                    highlighted = true;
+                }
+                else if(i==a && j==b){
+                    painter.setBrush(QBrush(Qt::blue));
+                }
+                else{
+                    cout<<i<<":"<<j<<endl;
+                    if (grid_[i][j].player != 0) {
+                            if (!grid_[i][j].player->isInGuestTeam()) {
+                                painter.setBrush(QBrush(Qt::blue));
+                            }
+                            else {
+                                painter.setBrush(QBrush(Qt::red));
+                            }
+                        if (grid_[i][j].player->getRole() == KEEPER) {
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K", fieldWidget);
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x - xlabelDifference, y - ylabelDifference);
+                        }
+                        else if (grid_[i][j].player->getRole() == CHASER) {
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C", fieldWidget);
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
+                        }
+                        else if (grid_[i][j].player->getRole() == SEEKER) {
+                            cout<< "SEEKER is in i : "<<i<<" j : "<<j<<endl;
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S", fieldWidget);
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x - xlabelDifference, y - ylabelDifference);
+                        }
+                        else if (grid_[i][j].player->getRole() == BEATER) {
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QLabel("B", fieldWidget);
+                            playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x - xlabelDifference, y - ylabelDifference);
+                        }
+                    }
+                    else if (grid_[i][j].ball != 0) {
+                        string ballName = grid_[i][j].ball->getName();
+                        if (ballName == "B") {
+                            painter.setBrush(QBrush(Qt::black));
+                        }
+                        else if (ballName == "Q") {
+                            painter.setBrush(QBrush(Qt::red));
+                        }
+                        else { //ballName == "G")
+                            painter.setBrush(QBrush(Qt::yellow));
+                        }
                     }
                     else {
-                        painter.setOpacity(1.0);
-                    }
-                    if (!grid_[i][j].player->isInGuestTeam()) {
-                        painter.setBrush(QBrush(Qt::blue));
-                    }
-                    else {
-                        painter.setBrush(QBrush(Qt::red));
-                    }
-                    if (grid_[i][j].player->getRole() == KEEPER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K", fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x - xlabelDifference, y - ylabelDifference);
-                    }
-                    else if (grid_[i][j].player->getRole() == CHASER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C", fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
-                    }
-                    else if (grid_[i][j].player->getRole() == SEEKER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S", fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x - xlabelDifference, y - ylabelDifference);
-                    }
-                    else if (grid_[i][j].player->getRole() == BEATER) {
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QLabel("B", fieldWidget);
-                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x - xlabelDifference, y - ylabelDifference);
+                        if(!highlighted){
+                            painter.setBrush(*grass);
+                        }
                     }
                 }
-                else if (grid_[i][j].ball != 0) {
-                    string ballName = grid_[i][j].ball->getName();
-                    if (ballName == "B") {
-                        painter.setBrush(QBrush(Qt::black));
-                    }
-                    else if (ballName == "Q") {
-                        painter.setBrush(QBrush(Qt::red));
-                    }
-                    else { //ballName == "G")
-                        painter.setBrush(QBrush(Qt::yellow));
-                    }
+                
+                if(highlighted){
+                    cout<<"J'affiche l'highlighté"<<endl;
+                    painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
-                else {
-                    painter.setBrush(*grass);
+                else{
+                    painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
-                painter.drawPolygon(hexagon[i][j].hexagon_);
-
             }
             else if (grid_[i][j].type == GOAL) {
                 painter.setBrush(QBrush(QColor(171, 171, 171)));
@@ -179,9 +196,10 @@ void MatchWidget::refreshField() {
 }
 
 
-bool MatchWidget::isCaseHighlighted(unsigned x, unsigned y) {
+bool MatchWidget::isCaseHighlighted(unsigned a, unsigned b) {
     for (size_t i = 0; i < highlightedCases.size(); ++i) {
-        if ((highlightedCases[i].x == x) && (highlightedCases[i].y == y)) {
+        //cout<<" x:"<<highlightedCases[i].x<<" y:"<<highlightedCases[i].y<<" a:"<<a<<" b:"<<b<< endl;
+        if ((highlightedCases[i].x == a) && (highlightedCases[i].y == b)) {
             return true;
         }
     }
@@ -223,7 +241,6 @@ Position MatchWidget::getCase(QMouseEvent * event) {
             else {
                 column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
             }
-            cout << "ROW : " << row << " COL : " << column << endl;
             //cout << grid_[row + 1][column] << endl;
         }
     }
@@ -242,17 +259,24 @@ void MatchWidget::surrender() {
     sviews::surrender(parent_->getSocket());
 }
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
+    cout<<event->x()<<endl;
     if (event->button() == Qt::RightButton) {
         highlightedCases.clear();
         refreshField();
     }
     else {
         Position clickedCase = getCase(event);
+        cout << clickedCase.x <<" / "<<clickedCase.y<<endl;
         if (highlightedCases.empty() or isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
             highlightedCases.push_back(clickedCase);
-            cout << highlightedCases.size() << endl;
         }
-        refreshField();
+        /*
+        cout << "highlightedCases : ";
+        for (int i = 0; i <highlightedCases.size();++i){
+            cout<<" x:"<<highlightedCases[i].x<<" y:"<<highlightedCases[i].y<< endl;
+        }
+        */
+        refreshField(20,20);
     }
 }
 

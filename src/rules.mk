@@ -36,4 +36,4 @@ $(BUILD_DIR)/tests/:
 	mkdir -p $@
 
 $(BUILD_DIR)/%.a:
-	$(MAKE) -C $(ROOT) $@
+	@$(MAKE) -C $(ROOT) $@

@@ -1,12 +1,10 @@
-#include "server.h"
+#include "client_loop.h"
 
 using namespace std;
 
 
-void thread_loop(UserHandler * handler) {
-    while (!handler->isReady()) {
-        usleep(10000);
-    }
+void * client_loop(void * arg) {
+    UserHandler * handler = (UserHandler *) arg;
     try {
         handler->loop();
     }
@@ -33,4 +31,6 @@ void thread_loop(UserHandler * handler) {
     }
     delete handler;
     cout << "Client disconnected." << endl;
+
+    return 0;
 }

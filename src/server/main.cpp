@@ -1,7 +1,8 @@
 #include "../common/lib/json/json.h"
 #include "../common/lib/file/file.h"
 #include "../common/lib/socket/BindSocket.h"
-#include "server.h"
+#include "../common/lib/thread/thread.h"
+#include "client_loop.h"
 #include "sharedData.h"
 
 using namespace std;
@@ -88,11 +89,10 @@ int main(int argc, char * argv[]) {
         ClientSocket * client_socket = binded->accept_client();
         cout << "Got connection from " << client_socket->remote() << endl;
 
-        UserHandler * current_handler = new UserHandler(&shared_data);
-        std::thread * current_thread = new std::thread(thread_loop, current_handler);
+        UserHandler * current_handler = new UserHandler(&shared_data, client_socket);
+        new Thread(client_loop, current_handler);
+        // TODO : delete thread when thread.dead()
 
-        // TODO: should delete current_thread sometimes
-        current_handler->start(client_socket, current_thread);
         shared_data.handlers_list.push_back(current_handler);
     }
     // TODO: delete binded

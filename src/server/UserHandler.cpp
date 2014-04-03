@@ -19,18 +19,10 @@ const map<string, view_ptr> UserHandler::viewmap = {
     {"new_ways", views::new_ways}
 };
 
-UserHandler::UserHandler(struct server_shared_data * shared_data) {
-    pthread_mutex_init(&ready_lock, NULL);
+UserHandler::UserHandler(struct server_shared_data * shared_data, Socket * socket) {
     shared_data_ = shared_data;
-    s_ = NULL;
+    s_ = socket;
     manager_ = NULL;
-}
-
-void UserHandler::start(Socket * fd, thread * handling_thread) {
-    pthread_mutex_lock(&ready_lock);
-    handling_thread_ = handling_thread;
-    s_ = fd;
-    pthread_mutex_unlock(&ready_lock);
 }
 
 UserHandler::~UserHandler() {
@@ -47,12 +39,6 @@ UserHandler::~UserHandler() {
     }
 }
 
-bool UserHandler::isReady() {
-    pthread_mutex_lock(&ready_lock);
-    bool ready = s_ != NULL;
-    pthread_mutex_unlock(&ready_lock);
-    return ready;
-}
 
 std::vector<UserHandler *> * UserHandler::getHandlers_list() {
     return &(shared_data_->handlers_list);

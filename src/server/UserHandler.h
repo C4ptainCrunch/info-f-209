@@ -2,7 +2,6 @@
 #define HANDLE_H
 
 #include <vector>
-#include <thread>
 #include <string>
 #include <map>
 #include <iostream>
@@ -22,10 +21,8 @@ typedef void (* view_ptr)(JsonValue *, UserHandler *);
 
 class UserHandler {
 public:
-    UserHandler(struct server_shared_data * shared_data);
+    UserHandler(struct server_shared_data * shared_data, Socket * socket);
     ~UserHandler();
-    void start(Socket * fd, std::thread * handling_thread);
-    bool isReady();
     int loop();
 
     std::vector<UserHandler *> * getHandlers_list();
@@ -47,9 +44,7 @@ private:
     bool dead;
     Socket * s_;
     Manager * manager_;
-    std::thread * handling_thread_;
     struct server_shared_data * shared_data_;
-    pthread_mutex_t ready_lock;
 
     void handleMessage(std::string message);
 

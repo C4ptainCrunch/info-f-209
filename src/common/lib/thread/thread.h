@@ -10,6 +10,7 @@ class Thread {
 public:
     Thread(void * (* routine) (void *), void * p=NULL);
     void * join();
+    bool alive();
 
 private:
     pthread_t tid;

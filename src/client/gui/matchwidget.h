@@ -11,13 +11,15 @@
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QFrame>
+#include <QTextEdit>
 #include <cmath>
 
 #include <iostream>
 
 #include "hexagon.h"
-#include <../../common/models/Case.h>
+#include "../../common/models/Case.h"
 #include "../../common/lib/socket/Socket.h"
+#include "../../common/models/Match.h"
 
 
 class MainWindow;
@@ -25,15 +27,20 @@ class MainWindow;
 class MatchWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit MatchWidget(QWidget * parent=0);
+    explicit MatchWidget(Match * startingMatch, MainWindow * parent=0);
     void mousePressEvent(QMouseEvent *);
     void generateGrid();
     ~MatchWidget();
-
+    void refreshField();
+    Position getCase(QMouseEvent * event);
+    bool isCaseHighlighted(unsigned i, unsigned j);
 signals:
 
 public slots:
-    void refreshField(Case grid[WIDTH][LENGTH]);
+    void setCurrentMatch(Match *);
+    void nextPlayer();
+    void endTurn();
+    void surrender();
 
 private:
     MainWindow * parent_;
@@ -41,7 +48,12 @@ private:
     QLabel * ownScore;
     QLabel * opponentScore;
     QFrame * fieldWidget;
-    int grid_[WIDTH][LENGTH];
+    Match * currentMatch_;
+    Case grid_[WIDTH][LENGTH];
+    QLabel * playerLabels_[2][4];
+    Way highlightedCases;
+    std::vector<Way> chosenWays;
+    bool playerSelected = false;
 
 };
 

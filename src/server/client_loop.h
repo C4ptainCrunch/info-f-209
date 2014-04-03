@@ -7,7 +7,6 @@
 #include <arpa/inet.h>
 
 #include <string>
-#include <thread>
 #include <vector>
 #include <iostream>
 
@@ -16,6 +15,6 @@
 
 int main(int argc, char * argv[]);
 
-void thread_loop(UserHandler * handler);
+void * client_loop(void *);
 
 #endif // SERVER_H

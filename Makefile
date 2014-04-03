@@ -6,10 +6,16 @@ CODE=$(call rwildcard, src/, *.cpp *.h)
 
 EXECUTABLES=server client
 
-SERVER_DEPS=$(BUILD_DIR)/server.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/models.a $(BUILD_DIR)/libexception.a
+SERVER_DEPS=$(BUILD_DIR)/server.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/models.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libthread.a
 CLIENT_DEPS=$(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/client-send-views.a $(BUILD_DIR)/libthread.a $(BUILD_DIR)/models.a
 
 RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libtest.a
+
+ifeq ($(shell uname),Darwin)
+	START_CLIENT=@open ./build/bin/client.app || true
+else
+	START_CLIENT=@./build/bin/client || true
+endif
 
 all: $(addprefix $(BUILD_DIR)/bin/,$(EXECUTABLES))
 
@@ -19,13 +25,15 @@ $(BUILD_DIR)/bin/server: $(SERVER_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/../serv
 $(BUILD_DIR)/bin/client: $(CLIENT_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/bin/images $(BUILD_DIR)/bin/stylesheets
 	rm -f src/client/gui/Makefile
 	cd src/client/gui/; qmake; cd -
-	$(MAKE) -C src/client/gui/
+	@$(MAKE) -C src/client/gui/
 
 client: $(BUILD_DIR)/bin/client
-	./build/bin/client
+	@echo "===============\nStarting client\n===============\n"
+	$(START_CLIENT)
 
 server: $(BUILD_DIR)/bin/server
-	./build/bin/server
+	@echo "===============\nStarting server\n===============\n"
+	@./build/bin/server || true
 
 $(BUILD_DIR)/bin/images:
 	cp -r src/client/gui/images $(BUILD_DIR)/bin/
@@ -38,40 +46,40 @@ $(BUILD_DIR)/../server-config.json: | $(BUILD_DIR)/bin/
 	cp src/server/config.json.example $@
 
 $(BUILD_DIR)/server.a:
-	$(MAKE) -C src/server
+	@$(MAKE) -C src/server
 
 $(BUILD_DIR)/models.a:
-	$(MAKE) -C src/common/models
+	@$(MAKE) -C src/common/models
 
 $(BUILD_DIR)/server-views.a:
-	$(MAKE) -C src/server/views
+	@$(MAKE) -C src/server/views
 
 $(BUILD_DIR)/libjson.a:
-	$(MAKE) -C src/common/lib/json
+	@$(MAKE) -C src/common/lib/json
 
 $(BUILD_DIR)/libfile.a:
-	$(MAKE) -C src/common/lib/file
+	@$(MAKE) -C src/common/lib/file
 
 $(BUILD_DIR)/libsocket.a:
-	$(MAKE) -C src/common/lib/socket
+	@$(MAKE) -C src/common/lib/socket
 
 $(BUILD_DIR)/libexception.a:
-	$(MAKE) -C src/common/lib/exception
+	@$(MAKE) -C src/common/lib/exception
 
 $(BUILD_DIR)/libtest.a:
-	$(MAKE) -C src/common/lib/test
+	@$(MAKE) -C src/common/lib/test
 
 $(BUILD_DIR)/libthread.a:
-	$(MAKE) -C src/common/lib/thread/
+	@$(MAKE) -C src/common/lib/thread/
 
 $(BUILD_DIR)/client-send-views.a:
-	$(MAKE) -C src/client/send-views
+	@$(MAKE) -C src/client/send-views
 
 $(BUILD_DIR)/bin/:
 	mkdir -p $@
 
 doc: $(BUILD_DIR)/doc
-	$(MAKE) -C doc
+	@$(MAKE) -C doc
 
 .PHONY: clean doc $(RMAKES) srd
 
@@ -89,11 +97,11 @@ normalize-clean:
 	find . -name "*.unc-backup\~" -exec rm {} \;
 
 srd:
-	$(MAKE) -C srd/
+	@$(MAKE) -C srd/
 
 srd-clear:
-	$(MAKE) -C srd/ clean
+	@$(MAKE) -C srd/ clean
 
 srd-clean:
-	$(MAKE) -C srd/ clean
+	@$(MAKE) -C srd/ clean
 	rm -f srd/srd.pdf

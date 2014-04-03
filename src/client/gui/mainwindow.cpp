@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget * parent):
 MainWindow::~MainWindow()
 {}
 
-void MainWindow::setNextScreen(int nextState) {
+void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
     cout << nextState;
     switch (nextState) {
         case LOGINMENUSTATE: {
@@ -67,8 +67,10 @@ void MainWindow::setNextScreen(int nextState) {
             break;
         }
         case MATCHSTATE: {
-            MatchWidget * match = new MatchWidget(this);
+            cout << "MatchWidget" << endl;
+            MatchWidget * match = new MatchWidget(startingMatch, this);
             currentWidget = match;
+            cout << "allo" << endl;
             match->show();
             break;
         }
@@ -111,16 +113,17 @@ void MainWindow::recievePlayers(std::vector<NonFieldPlayer *> * players) {
 
 vector<NonFieldPlayer *> MainWindow::getPlayers() {
     return playersList;
-
 }
+
 
 void MainWindow::getDefi(string username) {
     int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
     if (accept == QMessageBox::Yes) {
-        //TODO lanch match
+        sviews::acceptChallenge(this->s_, username);
     }
     else if (accept == QMessageBox::No) {
-        //TODO say no to server
+        sviews::refuseChallenge(this->s_, username);
+
     }
 }
 

@@ -1,7 +1,9 @@
 #include "../common/lib/json/json.h"
 #include "../common/lib/file/file.h"
 #include "../common/lib/socket/BindSocket.h"
-#include "server.h"
+#include "../common/lib/thread/thread.h"
+#include "client_loop.h"
+#include "sharedData.h"
 
 using namespace std;
 
@@ -52,25 +54,47 @@ int main(int argc, char * argv[]) {
     else {
         datapath = "../../data/";
     }
+    if (datapath[datapath.size() - 1] != '/') {
+        datapath += "/";
+    }
+    bool createok = true;
+    if (!fileExists(datapath + "users/")) {
+        createok = createDir(datapath + "users/");
+    }
+    if (!createok) {
+        cout << "The data dir (" << datapath << ") could not be created" << endl;
+        return -1;
+    }
+
     int port = *port_p;
+    BindSocket * binded;
+    try {
+        binded = new BindSocket("", port);
+    }
+    catch (const SocketError & so) {
+        cout << so.what() << endl << "Exiting now." << endl;
+        return -1;
+    }
+    cout << "Waiting for connections..." << endl;;
 
-    BindSocket binded = BindSocket("", port);
-    printf("Waiting for connections...\n");
-
-    std::vector<UserHandler *> * handlers_list = new std::vector<UserHandler *>();
+    struct server_shared_data shared_data = {
+        .handlers_list = vector<UserHandler *>(),
+        .match_list = vector<Match *>(),
+        .datapath = datapath,
+        .challenge_list = vector<struct Challenge>(),
+        .last_challenge_id = 0,
+    };
 
     while (1) {
-        ClientSocket * client_socket = binded.accept_client();
+        ClientSocket * client_socket = binded->accept_client();
         cout << "Got connection from " << client_socket->remote() << endl;
 
-        UserHandler * current_handler = new UserHandler(handlers_list, datapath);
-        std::thread * current_thread = new std::thread(thread_loop, current_handler);
+        UserHandler * current_handler = new UserHandler(&shared_data, client_socket);
+        new Thread(client_loop, current_handler);
+        // TODO : delete thread when thread.dead()
 
-        // TODO: should delete current_thread sometimes
-        current_handler->start(client_socket, current_thread);
-        handlers_list->push_back(current_handler);
+        shared_data.handlers_list.push_back(current_handler);
     }
-    delete handlers_list;
-
+    // TODO: delete binded
     return 0;
 }

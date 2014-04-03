@@ -74,7 +74,7 @@ void loginScreenWidget::showCredits() {
                              "Librairie graphique utilisée : Qt 5.2.1\n"
                              "Background : http://fanzone.potterish.com/wp-content/gallery/video-game-hp6-playstation-3/edp_ps3_screencap_02.jpg\n"
                              "Dans le cadre du cours INFO-F-209\n"
-                             "En fait, Quidditch c'est uidditch fait par Qt");
+                             "En fait, Quidditch c'est du uidditch revisité par Qt");
 
 }
 
@@ -86,7 +86,6 @@ void loginScreenWidget::logIn() {
         QMessageBox::warning(this, "Champs Vides", "Vous n'avez pas fourni de nom d'utilisateur et de mot de passe");
     }
     else {
-        //TODO VERIFY ID/PASSWORD
         sviews::login(parent_->getSocket(), username.toStdString(), password.toStdString());
         this->disableButtons();
     }
@@ -127,6 +126,9 @@ void loginScreenWidget::refuseLogin(int errorCode) {
     else if (errorCode == 401) {
         QMessageBox::warning(this, "Identifiants Incorrects", "Mauvais mot de passe");
     }
+    else if (errorCode == 403) {
+        QMessageBox::warning(this, "Déjà connecté", "Ce compte est déjà connecté");
+    }
     else {
         QMessageBox::warning(this, "Identifiants Incorrects", "Tu n'as pas des projets à terminer?");
     }
@@ -143,6 +145,9 @@ void loginScreenWidget::refuseRegister(int errorCode) {
     this->enableButtons();
     if (errorCode == 402) {
         QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+    }
+    else if (errorCode == 403) {
+        QMessageBox::warning(this, "Déjà connecté", "Ce compte est déjà connecté");
     }
     else {
         QMessageBox::warning(this, "Identifiants Incorrects", "Le serveur ne comprend rien");
@@ -193,6 +198,9 @@ void loginScreenWidget::registerUser() {
         newName = newManagerName->text();
 
         sviews::signup(parent_->getSocket(), newID.toStdString(), newName.toStdString(), newPW.toStdString());
+    }
+    else {
+        this->enableButtons();
     }
 }
 

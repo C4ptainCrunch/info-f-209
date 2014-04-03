@@ -4,9 +4,7 @@ using namespace std;
 
 Player::Player(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, vector<Item> inventory): speed_(speed), force_(force), agility_(agility), reflexes_(reflexes), passPrecision_(passPrecision), wounded_(wounded), inventory_(inventory) {}
 
-Player::Player(): speed_(1), force_(1), agility_(1), reflexes_(1), passPrecision_(1), wounded_(false) {
-    inventory_ = std::vector<Item>();
-}
+Player::Player(): speed_(1), force_(1), agility_(1), reflexes_(1), passPrecision_(1), wounded_(false), inventory_() {}
 
 Player::~Player() {}
 
@@ -71,11 +69,12 @@ Item Player::removeItem(string itemType) {
     return Item();
 }
 
-Item Player::removeItem(unsigned int position) {
-    Item * tempItem = &(inventory_[position]);
-    inventory_.at(position) = Item();
-    return *tempItem;
-}
+//Item Player::removeItem(unsigned int position) {
+//    //TODO fix this shit
+//    Item * tempItem = &(inventory_[position]);
+//    inventory_.at(position) = Item();
+//    return *tempItem;
+//}
 
 void Player::addToInventory(Item newItem, int pos) {
     //TODO

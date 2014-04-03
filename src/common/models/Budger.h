@@ -15,15 +15,18 @@ class Budger: public Ball {
 
 public:
     Budger();
+    Budger(int speed, Position position);
+    Budger(JsonValue * json);
     ~Budger();
     Position autoMove(const Case grid[WIDTH][LENGTH]);
     void isHit(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
     void hitPlayer(Player * player, int power);
     std::string getName();
     Way getHitWay() const;
+    operator JsonDict() const;
 
 private:
-    Way hitWay;
+    Way hitWay_;
 };
 
 #endif // BUDGER_H

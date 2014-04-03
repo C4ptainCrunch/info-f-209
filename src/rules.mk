@@ -2,7 +2,7 @@ SOURCES=$(filter-out test.cpp,$(wildcard *.cpp))
 HEADERS=$(wildcard *.h)
 OBJECTS=$(addprefix $(BUILD_DIR)/$(NAME)/,$(subst .cpp,.o,$(SOURCES)))
 A=$(BUILD_DIR)/$(NAME).a
-DEPSA=$(addsuffix .a,$(addprefix $(BUILD_DIR)/,$(DEPS) $(NAME) libtest))
+DEPSA=$(addsuffix .a,$(addprefix $(BUILD_DIR)/,$(NAME) $(DEPS) libtest))
 
 
 .PHONY: all clean
@@ -36,4 +36,4 @@ $(BUILD_DIR)/tests/:
 	mkdir -p $@
 
 $(BUILD_DIR)/%.a:
-	$(MAKE) -C $(ROOT) $@
+	@$(MAKE) -C $(ROOT) $@

@@ -1,9 +1,16 @@
 #include "Ball.h"
 
+Ball::Ball(): speed_(0) {
+    position_.y = 0;
+    position_.y = 0;
+}
+
 Ball::Ball(int speed): speed_(speed) {
     position_.x = 0;
     position_.y = 0;
 }
+
+Ball::Ball(int speed, Position position): speed_(speed), position_(position) {}
 
 Ball::~Ball() {}
 

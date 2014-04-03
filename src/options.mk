@@ -16,8 +16,11 @@ ifndef LDFLAGS
 	LDFLAGS=
 endif
 
-CFLAGS+= -std=c++11 -pthread
-LDFLAGS+= -pthread
+CFLAGS+= -std=c++11
+ifneq ($(shell uname),Darwin)
+	LDFLAGS+= -pthread
+	CFLAGS+= -pthread
+endif
 
 ifneq ($(D), 0)
  	CFLAGS+= -ggdb

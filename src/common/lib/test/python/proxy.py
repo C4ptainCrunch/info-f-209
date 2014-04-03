@@ -9,7 +9,7 @@ import select
 import time
 import sys
 
-BUFFER_LEN = 4096
+BUFFER_LEN = 4096 * 10
 WAIT = 0.0001
 
 

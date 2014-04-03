@@ -2,13 +2,9 @@
 
 using namespace std;
 
-NonFieldPlayer::NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level, int experience): level_(level), experience_(experience), vocation_(vocation) {
-    Player(speed, force, agility, reflexes, passPrecision, wounded, inventory);
-}
+NonFieldPlayer::NonFieldPlayer(int vocation, int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int level, int experience): level_(level), experience_(experience), vocation_(vocation), Player(speed, force, agility, reflexes, passPrecision, wounded, inventory) {}
 
-NonFieldPlayer::NonFieldPlayer(): level_(1), experience_(0), vocation_(0) {
-    Player();
-}
+NonFieldPlayer::NonFieldPlayer(): level_(1), experience_(0), vocation_(0), Player() {}
 
 NonFieldPlayer::NonFieldPlayer(JsonValue * json) {
     JsonDict * player_dict = JDICT(json);
@@ -81,7 +77,7 @@ NonFieldPlayer::NonFieldPlayer(JsonValue * json) {
         inventory.push_back(Item((*item_list)[i]));
     }
 
-    NonFieldPlayer(vocation, speed, force, agility, reflexes, passPrecision,  wounded, inventory, level, experience);
+    new (this)NonFieldPlayer(vocation, speed, force, agility, reflexes, passPrecision,  wounded, inventory, level, experience);
 }
 
 NonFieldPlayer::~NonFieldPlayer() {}

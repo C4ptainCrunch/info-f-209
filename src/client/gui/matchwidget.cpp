@@ -4,8 +4,11 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(QWidget * parent):
+MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
     QWidget(parent) {
+    parent_ = parent;
+    //-----------------------MATCH INITIALISATION-----------------------
+    currentMatch_ = startingMatch;
 
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
@@ -16,7 +19,6 @@ MatchWidget::MatchWidget(QWidget * parent):
     QLabel * image = new QLabel(this);
     image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/Quidditch_pitch_hogwarts.jpg"));
     layout->addWidget(image);
-    //this->setLayout(layout);
 
 
     //---------------------MAIN CONTAINER WIDGET---------------------------
@@ -27,7 +29,7 @@ MatchWidget::MatchWidget(QWidget * parent):
 
     //------------------------SCORE SETTINGS--------------------------------
     QLabel * ownScore = new QLabel("VOUS : 0", mainWidget);
-    ownScore->setFixedSize(200, 75);
+    ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
     ownScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
@@ -38,7 +40,7 @@ MatchWidget::MatchWidget(QWidget * parent):
     ownScore->show();
 
     opponentScore = new QLabel("ADVERSAIRE : 0", mainWidget);
-    opponentScore->setFixedSize(200, 75);
+    opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
     opponentScore->setWordWrap(true);
@@ -49,9 +51,11 @@ MatchWidget::MatchWidget(QWidget * parent):
     //---------------------FIELD CONTAINER WIDGET--------------------------
     fieldWidget  = new QFrame(mainWidget);
 
+
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
-    QObject::connect(parent_, SIGNAL(refreshField(Case[][])), this, SLOT(refreshField(Case[][])));
+    QObject::connect(parent_, SIGNAL(setMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
+
 
     //---------------------FIELD REPRESENTATION----------------------------
 
@@ -59,8 +63,6 @@ MatchWidget::MatchWidget(QWidget * parent):
     QWidget * temp = new QWidget(fieldWidget);
 
     temp->setFixedSize((mainWidget->height() - WIDTH * 20) / 2, (mainWidget->width() - LENGTH * 20) / 2);
-    QLabel * label = new QLabel(fieldWidget);
-    QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     mainLayout->setRowMinimumHeight(0, 100);
     mainLayout->addWidget(temp, 0, 0);
     mainLayout->addWidget(fieldWidget, 1, 1);
@@ -73,62 +75,96 @@ MatchWidget::MatchWidget(QWidget * parent):
     surrenderButton->setMinimumHeight(30);
     mainLayout->addWidget(surrenderButton, 2, 3);
 
+    //----------------------BUTTONS SIGNALS CONNECT-------------------------
+    QObject::connect(turnEndButton, SIGNAL(clicked()), this, SLOT(endTurn()));
+    QObject::connect(surrenderButton, SIGNAL(clicked()), this, SLOT(surrender()));
+
+    //askMatchToServer();
+
+
+    currentMatch_->getGrid(grid_);
+    refreshField();
+    mainWidget->show();
+
+
+}
+
+void MatchWidget::refreshField() {
+
+    QLabel * label = new QLabel(fieldWidget);
+    QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);
 
     QPainter painter(pixmap);
-    painter.setBrush(QBrush(Qt::darkGreen));
     Hexagon hexagon[WIDTH][LENGTH];
     QBrush * grass = new QBrush(QImage("images/grass.jpg"));
 
-    generateGrid();
-
-    //TODO adapter aux modèles
-
+    int xlabelDifference = 22;
+    int ylabelDifference = 7;
     double x = 0;
     double y = 0;
     bool pair = true;
     for (int i = 0; i < WIDTH; ++i) {
-        //<<i<<endl;
         for (int j = 0; j < LENGTH; ++j) {
-            //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
-            cout << grid_[i][j] << " ";
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
             hexagon[i][j].setCorners();
 
             x += 18;
-            painter.setBrush(*grass);
-            if (grid_[i][j] != 9) {
-                switch (grid_[i][j]) {
-                    case -1:
-                        painter.setBrush(QBrush(Qt::yellow));
-                        break;
-                    case 1:
-                        painter.setBrush(QBrush(Qt::red));
-                        break;
-                    case 2:
+            if (grid_[i][j].type == USABLE) {
+                if (grid_[i][j].player != 0) {
+                    if (isCaseHighlighted(i, j)) {
+                        painter.setOpacity(0.6);
+                    }
+                    else {
+                        painter.setOpacity(1.0);
+                    }
+                    if (!grid_[i][j].player->isInGuestTeam()) {
                         painter.setBrush(QBrush(Qt::blue));
-                        break;
-                    case 3:
-                        painter.setBrush(QBrush(Qt::white));
-                        break;
-                    case 4:
-                        painter.setBrush(QBrush(Qt::black));
-                        break;
-                    case 5:
-                        painter.setBrush(QBrush(QColor("darkGrey")));
-                        break;
-                    case 6:
-                        painter.setBrush(QBrush(QColor("brown")));
-                        break;
-                    case 7:
-                        painter.setBrush(QBrush(QColor("darkRed")));
-                        break;
+                    }
+                    else {
+                        painter.setBrush(QBrush(Qt::red));
+                    }
+                    if (grid_[i][j].player->getRole() == KEEPER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x - xlabelDifference, y - ylabelDifference);
+                    }
+                    else if (grid_[i][j].player->getRole() == CHASER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
+                    }
+                    else if (grid_[i][j].player->getRole() == SEEKER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x - xlabelDifference, y - ylabelDifference);
+                    }
+                    else if (grid_[i][j].player->getRole() == BEATER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QLabel("B", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x - xlabelDifference, y - ylabelDifference);
+                    }
                 }
+                else if (grid_[i][j].ball != 0) {
+                    string ballName = grid_[i][j].ball->getName();
+                    if (ballName == "B") {
+                        painter.setBrush(QBrush(Qt::black));
+                    }
+                    else if (ballName == "Q") {
+                        painter.setBrush(QBrush(Qt::red));
+                    }
+                    else { //ballName == "G")
+                        painter.setBrush(QBrush(Qt::yellow));
+                    }
+                }
+                else {
+                    painter.setBrush(*grass);
+                }
+                painter.drawPolygon(hexagon[i][j].hexagon_);
+
+            }
+            else if (grid_[i][j].type == GOAL) {
+                painter.setBrush(QBrush(QColor(171, 171, 171)));
                 painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
-        cout << endl;
         y += 15;
         if (pair) {
             x = 35;
@@ -139,31 +175,45 @@ MatchWidget::MatchWidget(QWidget * parent):
         pair = !pair;
     }
     label->setPixmap(*pixmap);
-
-    //refreshField();
     mainWidget->show();
-
-
 }
 
-void MatchWidget::mousePressEvent(QMouseEvent * event) {
+
+bool MatchWidget::isCaseHighlighted(unsigned x, unsigned y) {
+    for (size_t i = 0; i < highlightedCases.size(); ++i) {
+        if ((highlightedCases[i].x == x) && (highlightedCases[i].y == y)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+MatchWidget::~MatchWidget() {}
 
 
+void MatchWidget::setCurrentMatch(Match * match) {
+
+    currentMatch_ = match;
+    Case grid[WIDTH][LENGTH];
+    currentMatch_->getGrid(grid);
+
+    refreshField();
+}
+
+Position MatchWidget::getCase(QMouseEvent * event) {
+    int row = 0;
+    int column = 0;
     double hexagonHeight = 18;
     double hexagonWidth = 15;
     double halfHeight = hexagonHeight / 2;
     int startHeight = 103;
     int startWidth = 144;
-    cout << "start : " << startHeight << endl;
-    cout << "ROW : " << (event->y() - 144) / 15 << " COL : " << (event->x() - 103) / 18 << endl;
 
     if ((event->x() > startHeight) && (event->x() < 1200)) {
         if ((event->y() > startWidth) && (event->y() < 580)) {
 
             // These will represent which box the mouse is in, not which hexagon!
-            int row = (event->y() - startWidth) / hexagonWidth;
-            int column;
-
+            row = (event->y() - startWidth) / hexagonWidth;
             bool rowIsOdd = row % 2 == 0;
 
             // Is the row an even number?
@@ -174,183 +224,40 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
                 column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
             }
             cout << "ROW : " << row << " COL : " << column << endl;
-            cout << grid_[row + 1][column] << endl;
-
+            //cout << grid_[row + 1][column] << endl;
         }
     }
+    Position mouseCase;
+    mouseCase.x = row + 1;
+    mouseCase.y = column;
+    return mouseCase;
+}
 
+void MatchWidget::endTurn() {
+    sviews::endTurn(parent_->getSocket(), chosenWays);
 
 }
 
-void MatchWidget::generateGrid() {
-    /*
-     * TO REMOVE , HAVE TO USE THE ONE FROM MODELS
-     *
-     */
-
-
-    double diameterFactor = 46.0 / 100.0; // Normalement c'est la moitié de la longueur/largeur
-    int delta = 1 / 2; //Delta qui permet d'éviter les bugs lors de l'affichage de la matrice
-
-
-    for (int i = 0; i < WIDTH; ++i) {
-        for (int j = 0; j < LENGTH; ++j) {
-            grid_[i][j] = 0;
-            // equation d'une ellipse non centrée : (x-h)²/a² + (x-k)²/b²
-            //avec x = i, h et k sont les coord du centre, a et b les demi longueurs de l'ellipse
-            double result = pow(i - WIDTH / 2.0, 2) / pow(diameterFactor * WIDTH, 2);
-            result += pow(j - LENGTH / 2.0, 2) / pow(diameterFactor * LENGTH, 2);
-            if (i % 2 != 0) {
-                result -= delta;
-            }
-            if (result > 1) { //Si on est à l'extérieur de l'ellipse
-                grid_[i][j] = 9;
-            }
-
-
-            //----------------------------GOALS---------------------------------
-            if (i == WIDTH / 2) {
-                if (j == LENGTH / 15 + LENGTH / 20 or j == LENGTH * 14 / 15 - LENGTH / 20) {
-                    grid_[i][j] = -1; //goal central
-                }
-                else if (j == 2 * LENGTH / 15) {
-                    grid_[i][j] = 1;
-                }
-                else if (j == 13 * LENGTH / 15) {
-                    grid_[i][j] = 1;
-                }
-                else if (j == 7 * LENGTH / 30) {
-                    grid_[i][j] = 2;
-                }
-                else if (j == 23 * LENGTH / 30) {
-                    grid_[i][j] = 2;
-                }
-                else if (j == 5 * LENGTH / 30) {
-                    grid_[i][j] = 3;
-
-                }
-                else if (j == 25 * LENGTH / 30) {
-                    grid_[i][j] = 3;
-                }
-            }
-            else if (i == WIDTH / 2 - WIDTH / 15) {
-                if (j == 2 * LENGTH / 15 or j == 13 * LENGTH / 15) {
-                    grid_[i][j] = -1; //goals latéraux
-                }
-                else if (j == 5 * LENGTH / 30) {
-                    grid_[i][j] = 4;
-
-                }
-                else if (j == 25 * LENGTH / 30) {
-                    grid_[i][j] = 4;
-                }
-            }
-            else if (i == WIDTH / 2 + WIDTH / 15) {
-                if (j == 2 * LENGTH / 15 or j == 13 * LENGTH / 15) {
-                    grid_[i][j] = -1; //goals latéraux
-                }
-                else if (j == 5 * LENGTH / 30) {
-                    grid_[i][j] = 5;
-
-                }
-                else if (j == 25 * LENGTH / 30) {
-                    grid_[i][j] = 5;
-                }
-            }
-            else if (i == WIDTH / 2 - WIDTH / 30) {
-                if (j == 6 * LENGTH / 30) {
-                    grid_[i][j] = 6;
-
-                }
-                else if (j == 24 * LENGTH / 30) {
-                    grid_[i][j] = 6;
-                }
-
-            }
-            else if (i == WIDTH / 2 + WIDTH / 30) {
-                if (j == 6 * LENGTH / 30) {
-                    grid_[i][j] = 7;
-
-                }
-                else if (j == 24 * LENGTH / 30) {
-                    grid_[i][j] = 7;
-                }
-            }
-
-            //cout<<grid_[i][j];
-        }
-        //cout<<endl;
+void MatchWidget::surrender() {
+    sviews::surrender(parent_->getSocket());
+}
+void MatchWidget::mousePressEvent(QMouseEvent * event) {
+    if (event->button() == Qt::RightButton) {
+        highlightedCases.clear();
+        refreshField();
     }
-
+    else {
+        Position clickedCase = getCase(event);
+        if (highlightedCases.empty() or isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
+            highlightedCases.push_back(clickedCase);
+            cout << highlightedCases.size() << endl;
+        }
+        refreshField();
+    }
 }
 
-void MatchWidget::refreshField(Case grid[WIDTH][LENGTH]) {
-
-    QLabel * label = new QLabel(fieldWidget);
-    QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
-    pixmap->fill(Qt::transparent);
-
-    QPainter painter(pixmap);
-    painter.setBrush(QBrush(Qt::darkGreen));
-    Hexagon hexagon[WIDTH][LENGTH];
-    QBrush * grass = new QBrush(QImage("images/grass.jpg"));
-
-    double x = 0;
-    double y = 0;
-    bool pair = true;
-    for (int i = 0; i < WIDTH; ++i) {
-        //cout<<i<<endl;
-        for (int j = 0; j < LENGTH; ++j) {
-            //cout<<"MAX : "<<WIDTH<<" "<<LENGTH<<" X : "<<i<<" Y : "<<j<<endl;
-            cout << grid_[i][j] << " ";
-            hexagon[i][j].setX(x);
-            hexagon[i][j].setY(y);
-            hexagon[i][j].setCorners();
-
-            x += 18;
-            painter.setBrush(*grass);
-            if (grid_[i][j] != 9) {
-                switch (grid_[i][j]) {
-                    case -1:
-                        painter.setBrush(QBrush(Qt::yellow));
-                        break;
-                    case 1:
-                        painter.setBrush(QBrush(Qt::red));
-                        break;
-                    case 2:
-                        painter.setBrush(QBrush(Qt::blue));
-                        break;
-                    case 3:
-                        painter.setBrush(QBrush(Qt::white));
-                        break;
-                    case 4:
-                        painter.setBrush(QBrush(Qt::black));
-                        break;
-                    case 5:
-                        painter.setBrush(QBrush(QColor("darkGrey")));
-                        break;
-                    case 6:
-                        painter.setBrush(QBrush(QColor("brown")));
-                        break;
-                    case 7:
-                        painter.setBrush(QBrush(QColor("darkRed")));
-                        break;
-                }
-                painter.drawPolygon(hexagon[i][j].hexagon_);
-            }
-        }
-        cout << endl;
-        y += 15;
-        if (pair) {
-            x = 35;
-        }
-        else {
-            x = 26;
-        }
-        pair = !pair;
-    }
-    label->setPixmap(*pixmap);
-    mainWidget->show();
+void MatchWidget::nextPlayer() {
+    chosenWays.push_back(highlightedCases);
+    highlightedCases.clear();
+    refreshField();
 }
-
-MatchWidget::~MatchWidget() {}

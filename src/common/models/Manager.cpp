@@ -1,9 +1,7 @@
 #include "Manager.h"
 using namespace std;
 
-Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club), hash_(password) {
-    ready = true;
-}
+Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club), hash_(password) {}
 
 Manager::Manager(JsonValue * json) {
     JsonDict * manager = JDICT(json);
@@ -60,14 +58,6 @@ string Manager::getUserName() {
 
 string Manager::getName() {
     return name_;
-}
-
-bool Manager::isReady() {
-    return ready;
-}
-
-void Manager::setReadyState(bool state) {
-    ready = state;
 }
 
 Manager::operator JsonDict() const {

@@ -2,6 +2,7 @@
 #define BSOCKET_H
 
 #include "Socket.h"
+#include "../exception/SocketError.h"
 
 #include "helpers.h"
 

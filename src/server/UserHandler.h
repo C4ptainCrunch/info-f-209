@@ -2,7 +2,6 @@
 #define HANDLE_H
 
 #include <vector>
-#include <thread>
 #include <string>
 #include <map>
 #include <iostream>
@@ -10,8 +9,10 @@
 
 #include "../common/lib/socket/Socket.h"
 #include "../common/models/Manager.h"
+#include "../common/models/Match.h"
 #include "../common/lib/exception/BadRequest.h"
 #include "helpers.h"
+#include "sharedData.h"
 
 class UserHandler;
 
@@ -20,28 +21,30 @@ typedef void (* view_ptr)(JsonValue *, UserHandler *);
 
 class UserHandler {
 public:
-    UserHandler(std::vector<UserHandler *> * handlers_list, std::string datapath);
+    UserHandler(struct server_shared_data * shared_data, Socket * socket);
     ~UserHandler();
-    void start(Socket * fd, std::thread * handling_thread);
-    bool isReady();
     int loop();
 
-    std::vector<UserHandler *> * getHandlers_listPtr();
+    std::vector<UserHandler *> * getHandlers_list();
+    std::vector<Match *> * getMatch_list();
+    std::vector<Challenge> * getChalenge_list();
+    struct server_shared_data * getSharedData();
     Manager * getManager();
+    UserHandler * findHandler(std::string);
+    UserHandler * findHandler(Manager *);
     void setManager(Manager * manager);
     int writeToClient(std::string key, JsonValue * json);
     void disconnect();
     std::string path(std::string dir, std::string var);
     bool writeToFile();
+    Match * getMatch();
+    bool inMatch();
 
 private:
     bool dead;
     Socket * s_;
     Manager * manager_;
-    std::thread * handling_thread_;
-    std::vector<UserHandler *> * handlers_list_;
-    std::string datapath_;
-    pthread_mutex_t ready_lock;
+    struct server_shared_data * shared_data_;
 
     void handleMessage(std::string message);
 

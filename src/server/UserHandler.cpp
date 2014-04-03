@@ -5,34 +5,31 @@ using namespace std;
 
 #include "views/user.h"
 #include "views/management.h"
+#include "views/challenge.h"
+#include "views/match.h"
 
 const map<string, view_ptr> UserHandler::viewmap = {
     {"login", views::login},
     {"register", views::signup},
     {"userlist", views::userlist},
-    {"playerlist", views::playerlist}
+    {"playerlist", views::playerlist},
+    {"challenge", views::challenge},
+    {"accept_challenge", views::accept_challenge},
+    {"refuse_challenge", views::refuse_challenge},
+    {"end_turn", views::end_turn}
 };
 
-UserHandler::UserHandler(std::vector<UserHandler *> * handlers_list, string datapath) {
-    pthread_mutex_init(&ready_lock, NULL);
-    handlers_list_ = handlers_list;
-    datapath_ = datapath;
-    s_ = NULL;
+UserHandler::UserHandler(struct server_shared_data * shared_data, Socket * socket) {
+    shared_data_ = shared_data;
+    s_ = socket;
     manager_ = NULL;
-}
-
-void UserHandler::start(Socket * fd, thread * handling_thread) {
-    pthread_mutex_lock(&ready_lock);
-    handling_thread_ = handling_thread;
-    s_ = fd;
-    pthread_mutex_unlock(&ready_lock);
 }
 
 UserHandler::~UserHandler() {
     delete s_;
-    for (int i = 0; i < handlers_list_->size(); i++) {
-        if (handlers_list_->at(i) == this) {
-            handlers_list_->erase(handlers_list_->begin() + i);
+    for (int i = 0; i < shared_data_->handlers_list.size(); i++) {
+        if (shared_data_->handlers_list.at(i) == this) {
+            shared_data_->handlers_list.erase(shared_data_->handlers_list.begin() + i);
             break;
         }
     }
@@ -42,19 +39,43 @@ UserHandler::~UserHandler() {
     }
 }
 
-bool UserHandler::isReady() {
-    pthread_mutex_lock(&ready_lock);
-    bool ready = s_ != NULL;
-    pthread_mutex_unlock(&ready_lock);
-    return ready;
+
+std::vector<UserHandler *> * UserHandler::getHandlers_list() {
+    return &(shared_data_->handlers_list);
 }
 
-std::vector<UserHandler *> * UserHandler::getHandlers_listPtr() {
-    return handlers_list_;
+std::vector<Match *> * UserHandler::getMatch_list() {
+    return &(shared_data_->match_list);
+}
+
+vector<Challenge> * UserHandler::getChalenge_list() {
+    return &(shared_data_->challenge_list);
+}
+
+struct server_shared_data * UserHandler::getSharedData() {
+    return shared_data_;
 }
 
 Manager * UserHandler::getManager() {
     return manager_;
+}
+
+UserHandler * UserHandler::findHandler(string username) {
+    for (int i = 0; i < shared_data_->handlers_list.size(); i++) {
+        if (shared_data_->handlers_list.at(i)->getManager()->getUserName() == username) {
+            return shared_data_->handlers_list.at(i);
+        }
+    }
+    return NULL;
+}
+
+UserHandler * UserHandler::findHandler(Manager * manager) {
+    for (int i = 0; i < shared_data_->handlers_list.size(); i++) {
+        if (shared_data_->handlers_list.at(i)->getManager() == manager) {
+            return shared_data_->handlers_list.at(i);
+        }
+    }
+    return NULL;
 }
 
 void UserHandler::setManager(Manager * manager) {
@@ -110,9 +131,24 @@ void UserHandler::handleMessage(string message) {
     }
 }
 
+Match * UserHandler::getMatch() {
+    for (int i = 0; i < shared_data_->match_list.size(); i++) {
+        Match * m = shared_data_->match_list.at(i);
+        if ((m->getClubs()[0] == manager_->getClub()) || (m->getClubs()[1] == manager_->getClub())) {
+            return m;
+        }
+    }
+
+    return NULL;
+}
+
+bool UserHandler::inMatch() {
+    return getMatch() != NULL;
+}
+
 string UserHandler::path(string dir, string var) {
     // TODO : add defence against path injection
-    return datapath_ + dir + "/" + var + ".json";
+    return shared_data_->datapath + dir + "/" + var + ".json";
 }
 
 

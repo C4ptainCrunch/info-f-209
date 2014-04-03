@@ -22,7 +22,7 @@ void signup(Socket * s, string username, string name, string password) {
     writeToServer(s, "register", answer.toString());
 }
 
-void challenge(Socket * s, string opponent){
+void challenge(Socket * s, string opponent) {
     JsonDict answer;
     answer.add("other_username", new JsonString(opponent));
     writeToServer(s, "challenge", answer.toString());
@@ -36,23 +36,23 @@ void userlist(Socket * s) {
     writeToServer(s, "userlist", "true");
 }
 
-void acceptChallenge(Socket * s, string opponent){
+void acceptChallenge(Socket * s, string opponent) {
     JsonDict answer;
     answer.add("other_username", new JsonString(opponent));
     writeToServer(s, "accept_challenge", answer.toString());
 }
 
-void refuseChallenge(Socket * s, string opponent){
+void refuseChallenge(Socket * s, string opponent) {
     JsonDict answer;
     answer.add("other_username", new JsonString(opponent));
     writeToServer(s, "refuse_challenge", answer.toString());
 }
 
-void endTurn(Socket * s,vector<Way> chosenWays){
+void endTurn(Socket * s, vector<Way> chosenWays) {
     JsonList message;
-    for(int i = 0; i < chosenWays.size(); i++){
+    for (int i = 0; i < chosenWays.size(); i++) {
         JsonList * way_list = new JsonList();
-        for(int j = 0; j < chosenWays[i].size(); j++){
+        for (int j = 0; j < chosenWays[i].size(); j++) {
             JsonList * pos_list = new JsonList();
             pos_list->add(new JsonInt(chosenWays[i][j].x));
             pos_list->add(new JsonInt(chosenWays[i][j].y));
@@ -60,10 +60,10 @@ void endTurn(Socket * s,vector<Way> chosenWays){
         }
         message.add(way_list);
     }
-    writeToServer(s,"end_turn", message.toString());
+    writeToServer(s, "end_turn", message.toString());
 }
 
-void surrender(Socket * s){
+void surrender(Socket * s) {
     writeToServer(s, "surrender", "true");
 }
 

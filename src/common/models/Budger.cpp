@@ -10,7 +10,7 @@ Budger::Budger(int speed, Position position): Ball(speed, position) {}
 
 Budger::Budger(JsonValue * json) {
 
-    JsonDict* ball_dict = JDICT(json);
+    JsonDict * ball_dict = JDICT(json);
     if (ball_dict == NULL) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }

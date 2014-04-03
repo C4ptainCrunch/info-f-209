@@ -2,8 +2,7 @@
 using namespace std;
 
 
-
-Case Case::fromJson(JsonValue * json){
+Case Case::fromJson(JsonValue * json) {
     JsonDict * case_dict = JDICT(json);
     if (case_dict == NULL) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
@@ -17,10 +16,10 @@ Case Case::fromJson(JsonValue * json){
     int type = *type_int;
 
     FieldPlayer * player;
-    if(JNULL((*case_dict)["player"]) == NULL){
+    if (JNULL((*case_dict)["player"]) == NULL) {
         player = new FieldPlayer((*case_dict)["player"]);
     }
-    else{
+    else {
         player = NULL;
     }
 
@@ -35,18 +34,18 @@ Case Case::fromJson(JsonValue * json){
 Case::operator JsonDict() const {
     JsonDict r;
     r.add("type", new JsonInt(type));
-    if(player != NULL){
+    if (player != NULL) {
         r.add("player", new JsonDict(*player));
     }
-    else{
+    else {
         r.add("player", new JsonNull());
     }
     return r;
 }
 
-bool isCloseCase(Position position1, Position position2, const Case grid[WIDTH][LENGTH]){
-    for (int i = 0; i<6; ++i){
-        if (position1 == nextCase(position2,i,grid)){
+bool isCloseCase(Position position1, Position position2, const Case grid[WIDTH][LENGTH]) {
+    for (int i = 0; i < 6; ++i) {
+        if (position1 == nextCase(position2, i, grid)) {
             return true;
         }
     }
@@ -89,8 +88,7 @@ Position nextCase(Position position, int direction, const Case grid[WIDTH][LENGT
             }
             break;
     }
-    if (grid != 0)
-    {
+    if (grid != 0) {
         if (grid[nextPosition.x][nextPosition.y].type == VOID) {
             nextPosition.x = position.x;
             nextPosition.y = position.y;

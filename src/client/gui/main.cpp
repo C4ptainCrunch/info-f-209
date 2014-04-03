@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) {
     ServerHandler handler = ServerHandler(hostname, port, window);
 
     window->show();
-    if (! handler.connect_socket()){
+    if (!handler.connect_socket()) {
         perror("string vide");
         cout << errno << endl;
         QMessageBox::critical(window, "Erreur", "Impossible de se connecter au serveur");

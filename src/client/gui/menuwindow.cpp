@@ -70,7 +70,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_, SIGNAL(startMatch(Match *)),this,SLOT(startMatch(Match *)));
+    QObject::connect(parent_, SIGNAL(startMatch(Match *)), this, SLOT(startMatch(Match *)));
     QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
@@ -118,17 +118,17 @@ void MenuWindow::infrastructures() {
 
 }
 
-void MenuWindow::sendChallenge(){
-    Club* club1 = new Club();
-    Club* club2 = new Club();
+void MenuWindow::sendChallenge() {
+    Club * club1 = new Club();
+    Club * club2 = new Club();
 
-    parent_->setNextScreen(MATCHSTATE, new Match(*club1,*club2));
+    parent_->setNextScreen(MATCHSTATE, new Match(*club1, *club2));
 
     /*
      * PLEASE UNCOMMENT ME, I BEG YOU
-    string opponent = list->currentText().toStdString();
-    sviews::challenge(parent_->getSocket(), opponent);
-    */
+       string opponent = list->currentText().toStdString();
+       sviews::challenge(parent_->getSocket(), opponent);
+     */
 }
 
 void MenuWindow::startMatch(Match * startingMatch) {

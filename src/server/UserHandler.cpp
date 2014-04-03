@@ -44,15 +44,15 @@ std::vector<UserHandler *> * UserHandler::getHandlers_list() {
     return &(shared_data_->handlers_list);
 }
 
-std::vector<Match *> * UserHandler::getMatch_list(){
+std::vector<Match *> * UserHandler::getMatch_list() {
     return &(shared_data_->match_list);
 }
 
-vector<Challenge> * UserHandler::getChalenge_list(){
+vector<Challenge> * UserHandler::getChalenge_list() {
     return &(shared_data_->challenge_list);
 }
 
-struct server_shared_data * UserHandler::getSharedData(){
+struct server_shared_data * UserHandler::getSharedData() {
     return shared_data_;
 }
 
@@ -61,17 +61,17 @@ Manager * UserHandler::getManager() {
 }
 
 UserHandler * UserHandler::findHandler(string username) {
-    for(int i = 0; i < shared_data_->handlers_list.size(); i++){
-        if(shared_data_->handlers_list.at(i)->getManager()->getUserName() == username){
+    for (int i = 0; i < shared_data_->handlers_list.size(); i++) {
+        if (shared_data_->handlers_list.at(i)->getManager()->getUserName() == username) {
             return shared_data_->handlers_list.at(i);
         }
     }
     return NULL;
 }
 
-UserHandler * UserHandler::findHandler(Manager * manager){
-    for(int i = 0; i < shared_data_->handlers_list.size(); i++){
-        if(shared_data_->handlers_list.at(i)->getManager() == manager){
+UserHandler * UserHandler::findHandler(Manager * manager) {
+    for (int i = 0; i < shared_data_->handlers_list.size(); i++) {
+        if (shared_data_->handlers_list.at(i)->getManager() == manager) {
             return shared_data_->handlers_list.at(i);
         }
     }
@@ -131,10 +131,10 @@ void UserHandler::handleMessage(string message) {
     }
 }
 
-Match * UserHandler::getMatch(){
-    for(int i = 0; i < shared_data_->match_list.size(); i++){
+Match * UserHandler::getMatch() {
+    for (int i = 0; i < shared_data_->match_list.size(); i++) {
         Match * m = shared_data_->match_list.at(i);
-        if(m->getClubs()[0] == manager_->getClub() || m->getClubs()[1] == manager_->getClub()){
+        if ((m->getClubs()[0] == manager_->getClub()) || (m->getClubs()[1] == manager_->getClub())) {
             return m;
         }
     }
@@ -142,7 +142,7 @@ Match * UserHandler::getMatch(){
     return NULL;
 }
 
-bool UserHandler::inMatch(){
+bool UserHandler::inMatch() {
     return getMatch() != NULL;
 }
 

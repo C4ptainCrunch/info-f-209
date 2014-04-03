@@ -47,7 +47,7 @@ int getInt(JsonDict * dict, std::string key) {
     return (int) *int_ptr;
 }
 
-JsonDict * castDict(JsonValue * val){
+JsonDict * castDict(JsonValue * val) {
     JsonDict * dictMessage = JDICT(val);
 
     if (dictMessage == NULL) {

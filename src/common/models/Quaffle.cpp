@@ -4,11 +4,11 @@ using namespace std;
 
 Quaffle::Quaffle(): Ball(0), thrownWay_() {}
 
-Quaffle::Quaffle(int speed, Position position): Ball(speed, position) ,thrownWay_() {}
+Quaffle::Quaffle(int speed, Position position): Ball(speed, position), thrownWay_() {}
 
 Quaffle::Quaffle(JsonValue * json) {
 
-    JsonDict* ball_dict = JDICT(json);
+    JsonDict * ball_dict = JDICT(json);
     if (ball_dict == NULL) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }

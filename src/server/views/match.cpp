@@ -4,19 +4,19 @@ using namespace std;
 
 namespace views {
 
-void end_turn(JsonValue * message, UserHandler * handler){
+void end_turn(JsonValue * message, UserHandler * handler) {
     JsonList * listMessage = JLIST(message);
     if (listMessage == NULL) {
         throw BadRequest("Malformatted request. Need a JSON dict");
     }
     Way playerWays[7];
-    for(int i = 0; i < listMessage->size() && i < 7; i++){
+    for (int i = 0; i < listMessage->size() && i < 7; i++) {
         JsonList * way = JLIST((*listMessage)[i]);
         if (way == NULL) {
             throw BadRequest("Malformatted request. Need a JSON dict");
         }
         Way newWay;
-        for(int j = 0; j < way->size(); j++){
+        for (int j = 0; j < way->size(); j++) {
             JsonList * listPos = JLIST((*way)[j]);
             if (listPos == NULL) {
                 throw BadRequest("Malformatted request. Need a JSON dict");
@@ -24,7 +24,7 @@ void end_turn(JsonValue * message, UserHandler * handler){
             Position pos;
             JsonInt * intX = JINT((*listPos)[0]);
             JsonInt * intY = JINT((*listPos)[1]);
-            if (intX == NULL || intY == NULL) {
+            if ((intX == NULL) || (intY == NULL)) {
                 throw BadRequest("Malformatted request. Need a JSON dict");
             }
             pos.x = *intX;
@@ -33,7 +33,7 @@ void end_turn(JsonValue * message, UserHandler * handler){
         }
         playerWays[i] = newWay;
     }
-    for(int i = listMessage->size(); i < 7; i++){
+    for (int i = listMessage->size(); i < 7; i++) {
         playerWays[i] = Way();
     }
 

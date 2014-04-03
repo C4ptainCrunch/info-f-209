@@ -67,10 +67,10 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
             break;
         }
         case MATCHSTATE: {
-            cout<<"MatchWidget"<<endl;
+            cout << "MatchWidget" << endl;
             MatchWidget * match = new MatchWidget(startingMatch, this);
             currentWidget = match;
-            cout<<"allo"<<endl;
+            cout << "allo" << endl;
             match->show();
             break;
         }
@@ -114,7 +114,6 @@ void MainWindow::recievePlayers(std::vector<NonFieldPlayer *> * players) {
 vector<NonFieldPlayer *> MainWindow::getPlayers() {
     return playersList;
 }
-
 
 
 void MainWindow::getDefi(string username) {

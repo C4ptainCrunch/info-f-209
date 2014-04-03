@@ -54,28 +54,28 @@ int main(int argc, char * argv[]) {
     else {
         datapath = "../../data/";
     }
-    if(datapath[datapath.size() - 1] != '/'){
+    if (datapath[datapath.size() - 1] != '/') {
         datapath += "/";
     }
     bool createok = true;
-    if(!fileExists(datapath + "users/")){
+    if (!fileExists(datapath + "users/")) {
         createok = createDir(datapath + "users/");
     }
-    if(!createok){
+    if (!createok) {
         cout << "The data dir (" << datapath << ") could not be created" << endl;
         return -1;
     }
 
-    int port = * port_p;
+    int port = *port_p;
     BindSocket * binded;
-    try{
+    try {
         binded = new BindSocket("", port);
     }
-    catch(const SocketError & so){
+    catch (const SocketError & so) {
         cout << so.what() << endl << "Exiting now." << endl;
         return -1;
     }
-    cout <<"Waiting for connections..." << endl;;
+    cout << "Waiting for connections..." << endl;;
 
     struct server_shared_data shared_data = {
         .handlers_list = vector<UserHandler *>(),

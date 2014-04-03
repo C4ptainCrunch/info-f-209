@@ -10,7 +10,7 @@ Ball::Ball(int speed): speed_(speed) {
     position_.y = 0;
 }
 
-Ball::Ball(int speed, Position position): speed_(speed), position_(position) { }
+Ball::Ball(int speed, Position position): speed_(speed), position_(position) {}
 
 Ball::~Ball() {}
 

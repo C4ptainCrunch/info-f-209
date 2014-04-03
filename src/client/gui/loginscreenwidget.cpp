@@ -199,7 +199,7 @@ void loginScreenWidget::registerUser() {
 
         sviews::signup(parent_->getSocket(), newID.toStdString(), newName.toStdString(), newPW.toStdString());
     }
-    else{
+    else {
         this->enableButtons();
     }
 }

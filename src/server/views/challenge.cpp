@@ -9,10 +9,10 @@ void challenge(JsonValue * message, UserHandler * handler) {
 
     string other_username = getString(dictMessage, "other_username");
     UserHandler * other_handler = handler->findHandler(other_username);
-    if(other_handler == NULL){
+    if (other_handler == NULL) {
         return sendFail(handler, 301, "challenge", "User does not exist");
     }
-    if(other_handler == handler){
+    if (other_handler == handler) {
         return sendFail(handler, 999, "challenge", "You cannot challenge yourself");
     }
 
@@ -23,7 +23,7 @@ void challenge(JsonValue * message, UserHandler * handler) {
         server_data->last_challenge_id++,
         {
             handler->getManager(),
-            other_handler->getManager()
+              other_handler->getManager()
         }
     };
     handler->getChalenge_list()->push_back(current_challenge);
@@ -40,32 +40,32 @@ void accept_challenge(JsonValue * message, UserHandler * handler) {
     int challenge_id = getInt(dictMessage, "id");
     Challenge * challenge = NULL;
     int i;
-    for(i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++){
-        if(handler->getChalenge_list()->at(i).id == challenge_id){
+    for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
+        if (handler->getChalenge_list()->at(i).id == challenge_id) {
             challenge = &(handler->getChalenge_list()->at(i));
         }
     }
     i--; // Decrement the last loop
-    if(challenge == NULL){
+    if (challenge == NULL) {
         return sendFail(handler, 999, "challenge", "Challenge does not exist");
     }
-    if(challenge->opponents[0] != handler->getManager() && challenge->opponents[1] != handler->getManager()){
+    if ((challenge->opponents[0] != handler->getManager()) && (challenge->opponents[1] != handler->getManager())) {
         return sendFail(handler, 999, "challenge", "This challenge is not yours");
     }
 
-    Match * match = new Match(*(challenge->opponents[0]->getClub()),*(challenge->opponents[1]->getClub()));
+    Match * match = new Match(*(challenge->opponents[0]->getClub()), *(challenge->opponents[1]->getClub()));
     handler->getMatch_list()->push_back(match);
     handler->getChalenge_list()->erase(handler->getChalenge_list()->begin() + i);
 
     UserHandler * other_handler;
-    if(challenge->opponents[0] == handler->getManager()){
+    if (challenge->opponents[0] == handler->getManager()) {
         other_handler = handler->findHandler(challenge->opponents[1]);
     }
-    else{
+    else {
         other_handler = handler->findHandler(challenge->opponents[0]);
     }
 
-    JsonDict payload = (JsonDict) *match;
+    JsonDict payload = (JsonDict) * match;
     other_handler->writeToClient("match_begin", &payload);
     handler->writeToClient("match_begin", &payload);
 
@@ -76,25 +76,25 @@ void refuse_challenge(JsonValue * message, UserHandler * handler) {
     int challenge_id = getInt(dictMessage, "id");
     Challenge * challenge = NULL;
     int i;
-    for(i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++){
-        if(handler->getChalenge_list()->at(i).id == challenge_id){
+    for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
+        if (handler->getChalenge_list()->at(i).id == challenge_id) {
             challenge = &(handler->getChalenge_list()->at(i));
         }
     }
     i--; // Decrement the last loop
-    if(challenge == NULL){
+    if (challenge == NULL) {
         return sendFail(handler, 999, "challenge", "Challenge does not exist");
     }
-    if(challenge->opponents[0] != handler->getManager() && challenge->opponents[1] != handler->getManager()){
+    if ((challenge->opponents[0] != handler->getManager()) && (challenge->opponents[1] != handler->getManager())) {
         return sendFail(handler, 999, "challenge", "This challenge is not yours");
     }
 
 
     UserHandler * other_handler;
-    if(challenge->opponents[0] == handler->getManager()){
+    if (challenge->opponents[0] == handler->getManager()) {
         other_handler = handler->findHandler(challenge->opponents[1]);
     }
-    else{
+    else {
         other_handler = handler->findHandler(challenge->opponents[0]);
     }
 

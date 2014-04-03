@@ -74,7 +74,7 @@ Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaff
     grid_[pos.x][pos.y].ball = &budgers_[1];
 }
 
-Match::Match(JsonValue *json){
+Match::Match(JsonValue * json) {
     JsonDict * match = JDICT(json);
 
     if (match == NULL) {
@@ -92,31 +92,31 @@ Match::Match(JsonValue *json){
     JsonInt * score1 = JINT((*match)["score1"]);
     JsonInt * score2 = JINT((*match)["score2"]);
 
-    if (score1 == NULL || score2 == NULL){
+    if ((score1 == NULL) || (score2 == NULL)) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
-    int score[] = { *score1, *score2};
+    int score[] = {*score1, *score2};
 
     JsonBool * endGame_bool = JBOOL((*match)["endGame"]);
-    if (endGame_bool == NULL){
+    if (endGame_bool == NULL) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
     bool endGame = *endGame_bool;
     new (this)Match(hostClub, guestClub, goldenSnitch, quaffle, budger1, budger2, score, endGame);
 
     JsonList * grid_list = JLIST((*match)["grid"]);
-    if (grid_list == NULL){
+    if (grid_list == NULL) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
 
-    for(int i = 0; i < grid_list->size(); i++){
+    for (int i = 0; i < grid_list->size(); i++) {
         JsonDict * kase = JDICT((*grid_list)[i]);
-        if (kase == NULL){
+        if (kase == NULL) {
             throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
         }
         JsonInt * x_int = JINT((*kase)["x"]);
         JsonInt * y_int = JINT((*kase)["y"]);
-        if (x_int == NULL && y_int == NULL){
+        if ((x_int == NULL) && (y_int == NULL)) {
             throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
         }
         int x = *x_int;
@@ -415,15 +415,15 @@ int Match::addPoint(bool guestTeam, int delta) {
     return score_[guestTeam];
 }
 
-void Match::getGrid(Case grid[WIDTH][LENGTH]){
-    for(int i = 0; i < WIDTH; i++){
-        for(int j = 0; j<LENGTH; j++){
+void Match::getGrid(Case grid[WIDTH][LENGTH]) {
+    for (int i = 0; i < WIDTH; i++) {
+        for (int j = 0; j < LENGTH; j++) {
             grid[i][j] = grid_[i][j];
         }
     }
 }
 
-Club * * Match::getClubs(){
+Club * * Match::getClubs() {
     return clubs_;
 }
 
@@ -441,9 +441,9 @@ Match::operator JsonDict() const {
     r.add("endGame", new JsonBool(endGame_));
 
     JsonList * grid = new JsonList();
-    for(int i = 0; i< WIDTH; i++){
-        for(int j = 0; j < LENGTH; j++){
-            if(grid_[i][j].player != NULL){
+    for (int i = 0; i < WIDTH; i++) {
+        for (int j = 0; j < LENGTH; j++) {
+            if (grid_[i][j].player != NULL) {
                 JsonDict * kase = new JsonDict();
                 kase->add("x", new JsonInt(i));
                 kase->add("y", new JsonInt(j));
@@ -457,17 +457,17 @@ Match::operator JsonDict() const {
     return r;
 }
 
-bool Match::isGuest(Club * club){
-    if(clubs_[guest] == club){
+bool Match::isGuest(Club * club) {
+    if (clubs_[guest] == club) {
         return true;
     }
-    else{
+    else {
         return false;
     }
 }
 
-void Match::setWays(bool isGuest, Way playerWays[7]){
-    for(int i = 0; i < 7; i++){
+void Match::setWays(bool isGuest, Way playerWays[7]) {
+    for (int i = 0; i < 7; i++) {
         playerWays_[isGuest][i] = playerWays[i];
     }
 }

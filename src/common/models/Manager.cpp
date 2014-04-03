@@ -1,8 +1,7 @@
 #include "Manager.h"
 using namespace std;
 
-Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club), hash_(password) {
-}
+Manager::Manager(string name, string userName, string password, Club club): name_(name), userName_(userName), club_(club), hash_(password) {}
 
 Manager::Manager(JsonValue * json) {
     JsonDict * manager = JDICT(json);

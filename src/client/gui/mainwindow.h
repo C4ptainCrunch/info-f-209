@@ -44,7 +44,7 @@ signals:
     void userList(std::vector<std::string> *);
     void registerFailure(int);
     void newDefi(std::string username);
-    void setMatch(Match* match);
+    void setMatch(Match * match);
 
     void startMatch(Match * match);
     void updateMatch(Match * match);
@@ -52,7 +52,7 @@ signals:
     void playerList(std::vector<NonFieldPlayer *> * players);
 
 public slots:
-    void setNextScreen(int nextState, Match * startingMatch = 0);
+    void setNextScreen(int nextState, Match * startingMatch=0);
     void getDefi(std::string username);
     void recievePlayers(std::vector<NonFieldPlayer *> * players);
 

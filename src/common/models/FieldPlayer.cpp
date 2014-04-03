@@ -24,7 +24,7 @@ FieldPlayer::FieldPlayer(NonFieldPlayer & nonFieldPlayer, int role, bool guest) 
 
 }
 
-FieldPlayer::FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest): Player(speed, force, agility, reflexes, passPrecision, wounded, inventory), role_(role), guest_(guest){}
+FieldPlayer::FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest): Player(speed, force, agility, reflexes, passPrecision, wounded, inventory), role_(role), guest_(guest) {}
 
 FieldPlayer::FieldPlayer(JsonValue * json) {
     JsonDict * player_dict = JDICT(json);
@@ -86,13 +86,13 @@ FieldPlayer::FieldPlayer(JsonValue * json) {
     int role = *role_int;
 
     JsonBool * guest_bool = JBOOL((*player_dict)["guest"]);
-    if (guest_bool == NULL){
+    if (guest_bool == NULL) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
 
     bool guest = *guest_bool;
 
-    new(this) FieldPlayer(speed, force, agility, reflexes, passPrecision, wounded, inventory, role, guest);
+    new (this)FieldPlayer(speed, force, agility, reflexes, passPrecision, wounded, inventory, role, guest);
 }
 
 FieldPlayer & FieldPlayer::operator=(Player & player) {

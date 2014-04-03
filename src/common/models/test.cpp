@@ -16,7 +16,7 @@ void test_Match_getGrid() {
     ASSERT_NOT_NULL(grid, "Grid is null");
 }
 
-void test_Match_json(){
+void test_Match_json() {
     Club club1;
     Club club2;
     Match match(club1, club2);
@@ -26,7 +26,7 @@ void test_Match_json(){
 }
 
 #define TESTVEC {T(test_Match_getGrid), \
-    T(test_Match_json)\
+                 T(test_Match_json) \
 }
 
 TEST();

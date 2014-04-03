@@ -6,7 +6,7 @@ Thread::Thread(void * (* routine) (void *), void * p) {
     pthread_create(&tid, NULL, routine, p);
 }
 
-bool Thread::alive(){
+bool Thread::alive() {
     return pthread_kill(tid, 0) == 0;
 }
 

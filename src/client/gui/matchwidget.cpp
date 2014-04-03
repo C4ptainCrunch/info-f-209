@@ -51,10 +51,11 @@ MatchWidget::MatchWidget(Match *startingMatch, MainWindow * parent):
     //---------------------FIELD CONTAINER WIDGET--------------------------
     fieldWidget  = new QFrame(mainWidget);
 
+
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
-
     QObject::connect(parent_, SIGNAL(setMatch(Match*)), this, SLOT(setCurrentMatch(Match*)));
+
 
     //---------------------FIELD REPRESENTATION----------------------------
 
@@ -73,6 +74,10 @@ MatchWidget::MatchWidget(Match *startingMatch, MainWindow * parent):
     QPushButton * surrenderButton = new QPushButton("Abandonner", mainWidget);
     surrenderButton->setMinimumHeight(30);
     mainLayout->addWidget(surrenderButton, 2, 3);
+
+    //----------------------BUTTONS SIGNALS CONNECT-------------------------
+    QObject::connect(turnEndButton,SIGNAL(clicked()),this,SLOT(endTurn()));
+    QObject::connect(surrenderButton,SIGNAL(clicked()),this,SLOT(surrender()));
 
     //askMatchToServer();
 
@@ -173,6 +178,7 @@ void MatchWidget::refreshField() {
     mainWidget->show();
 }
 
+
 bool MatchWidget::isCaseHighlighted(unsigned x, unsigned y){
     for (size_t i = 0; i<highlightedCases.size(); ++i){
         if(highlightedCases[i].x == x && highlightedCases[i].y == y){
@@ -184,14 +190,11 @@ bool MatchWidget::isCaseHighlighted(unsigned x, unsigned y){
 
 MatchWidget::~MatchWidget() {}
 
-void askMatchToServer(){
-    //TODO
-}
+
 
 void MatchWidget::setCurrentMatch(Match* match){
 
     currentMatch_ = match;
-
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);
 
@@ -223,7 +226,6 @@ Position MatchWidget::getCase(QMouseEvent * event){
             }
             cout << "ROW : " << row << " COL : " << column << endl;
             //cout << grid_[row + 1][column] << endl;
-
         }
     }
     Position mouseCase;
@@ -232,7 +234,14 @@ Position MatchWidget::getCase(QMouseEvent * event){
     return mouseCase;
 }
 
+void MatchWidget::endTurn(){
+    sviews::endTurn(parent_->getSocket(), chosenWays);
 
+}
+
+void MatchWidget::surrender(){
+    sviews::surrender(parent_->getSocket());
+}
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
     if(event->button() == Qt::RightButton){
         highlightedCases.clear();
@@ -254,6 +263,3 @@ void MatchWidget::nextPlayer(){
     refreshField();
 }
 
-void MatchWidget::endTurn(){
-    //sviews::endTurn(chosenWays)
-}

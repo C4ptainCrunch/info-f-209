@@ -12,7 +12,7 @@
 class UserHandler;
 
 namespace views {
-void new_ways(JsonValue * message, UserHandler * handler);
+void end_turn(JsonValue * message, UserHandler * handler);
 }
 
 #include "../UserHandler.h"

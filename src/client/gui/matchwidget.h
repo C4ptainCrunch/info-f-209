@@ -31,7 +31,6 @@ public:
     void mousePressEvent(QMouseEvent *);
     void generateGrid();
     ~MatchWidget();
-    void askMatchToServer();
     void refreshField();
     Position getCase(QMouseEvent * event);
     bool isCaseHighlighted(unsigned i, unsigned j);
@@ -41,6 +40,7 @@ public slots:
     void setCurrentMatch(Match*);
     void nextPlayer();
     void endTurn();
+    void surrender();
 
 private:
     MainWindow * parent_;

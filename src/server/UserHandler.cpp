@@ -16,7 +16,7 @@ const map<string, view_ptr> UserHandler::viewmap = {
     {"challenge", views::challenge},
     {"accept_challenge", views::accept_challenge},
     {"refuse_challenge", views::refuse_challenge},
-    {"new_ways", views::new_ways}
+    {"end_turn", views::end_turn}
 };
 
 UserHandler::UserHandler(struct server_shared_data * shared_data, Socket * socket) {

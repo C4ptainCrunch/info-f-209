@@ -73,7 +73,17 @@ void startMatch(JsonValue * message, ServerHandler * handler){
     
     Match * match = new Match(listMessage);
     emit handler->getWindow()->startMatch(match);
+}
 
+void updateMatch(JsonValue * message, ServerHandler * handler){
+    JsonDict * listMessage = JDICT(message);
+
+    if (listMessage == NULL) {
+        throw BadRequest("Malformatted request. Need a JSON list");
+    }
+    
+    Match * match = new Match(listMessage);
+    emit handler->getWindow()->updateMatch(match);
 }
 
 }

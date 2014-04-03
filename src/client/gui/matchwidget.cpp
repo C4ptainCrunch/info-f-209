@@ -90,10 +90,8 @@ MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
 
 }
 
-void MatchWidget::refreshField(int a, int b) {
+void MatchWidget::refreshField() {
     this->hide();
-    cout<<"PRINTIN"<<endl;
-    //delete label;
     label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);
@@ -122,11 +120,6 @@ void MatchWidget::refreshField(int a, int b) {
                 if (isCaseHighlighted(i, j)) {
                     highlighted = true;
                     color = "yellow";
-                }
-                else if(i==a && j==b){
-                    painter.setBrush(QBrush(Qt::blue));
-
-                    color = "blue";
                 }
                 else{
                     if (grid_[i][j].player != 0) {
@@ -190,7 +183,7 @@ void MatchWidget::refreshField(int a, int b) {
                 }
             }
             else if (grid_[i][j].type == GOAL) {
-                painter.setBrush(QBrush(QColor(171, 171, 171)));
+                painter.setBrush(QBrush(QColor(64, 64, 72)));
                 painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
@@ -271,6 +264,7 @@ void MatchWidget::endTurn() {
 void MatchWidget::surrender() {
     sviews::surrender(parent_->getSocket());
 }
+
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
     if (event->button() == Qt::RightButton) {
         highlightedCases.clear();
@@ -282,8 +276,6 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
             highlightedCases.push_back(clickedCase);
         }
         refreshField();
-
-
     }
 }
 

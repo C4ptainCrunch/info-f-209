@@ -67,11 +67,9 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
             break;
         }
         case MATCHSTATE: {
-            cout << "MatchWidget" << endl;
             MatchWidget * match = new MatchWidget(startingMatch, this);
             currentWidget = match;
-            cout << "allo" << endl;
-            match->show();
+            //match->show();
             break;
         }
         case INFRASTRUCTURESTATE: {

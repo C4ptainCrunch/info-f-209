@@ -78,10 +78,10 @@ int main(int argc, char * argv[]) {
     cout <<"Waiting for connections..." << endl;;
 
     struct server_shared_data shared_data = {
-        .handlers_list = {},
-        .match_list = {},
+        .handlers_list = vector<UserHandler *>(),
+        .match_list = vector<Match *>(),
         .datapath = datapath,
-        .challenge_list = {},
+        .challenge_list = vector<struct Challenge>(),
         .last_challenge_id = 0,
     };
 

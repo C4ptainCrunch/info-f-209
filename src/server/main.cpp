@@ -56,15 +56,25 @@ int main(int argc, char * argv[]) {
     if(datapath[datapath.size() - 1] != '/'){
         datapath += "/";
     }
-
+    bool createok = true;
     if(!fileExists(datapath + "users/")){
-        createDir(datapath + "users/");
+        createok = createDir(datapath + "users/");
+    }
+    if(!createok){
+        cout << "The data dir (" << datapath << ") could not be created" << endl;
+        return -1;
     }
 
-    int port = *port_p;
-
-    BindSocket binded = BindSocket("", port);
-    printf("Waiting for connections...\n");
+    int port = * port_p;
+    BindSocket * binded;
+    try{
+        binded = new BindSocket("", port);
+    }
+    catch(const SocketError & so){
+        cout << so.what() << endl << "Exiting now." << endl;
+        return -1;
+    }
+    cout <<"Waiting for connections..." << endl;;
 
     struct server_shared_data shared_data = {
         .handlers_list = {},
@@ -75,7 +85,7 @@ int main(int argc, char * argv[]) {
     };
 
     while (1) {
-        ClientSocket * client_socket = binded.accept_client();
+        ClientSocket * client_socket = binded->accept_client();
         cout << "Got connection from " << client_socket->remote() << endl;
 
         UserHandler * current_handler = new UserHandler(&shared_data);
@@ -85,6 +95,6 @@ int main(int argc, char * argv[]) {
         current_handler->start(client_socket, current_thread);
         shared_data.handlers_list.push_back(current_handler);
     }
-
+    // TODO: delete binded
     return 0;
 }

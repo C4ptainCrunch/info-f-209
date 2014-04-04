@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget * parent):
     login->show();
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
-    QObject::connect(this, SIGNAL(newDefi(std::string)), this, SLOT(getDefi(std::string)));
+    QObject::connect(this, SIGNAL(newDefi(std::string *)), this, SLOT(getDefi(std::string *)));
 
     QObject::connect(this, SIGNAL(playerList(std::vector<NonFieldPlayer *> *)), this, SLOT(recievePlayers(std::vector<NonFieldPlayer *> *)));
 
@@ -114,15 +114,16 @@ vector<NonFieldPlayer *> MainWindow::getPlayers() {
 }
 
 
-void MainWindow::getDefi(string username) {
-    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
+void MainWindow::getDefi(string * username) {
+    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(*username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
     if (accept == QMessageBox::Yes) {
-        sviews::acceptChallenge(this->s_, username);
+        sviews::acceptChallenge(this->s_, *username);
     }
     else if (accept == QMessageBox::No) {
-        sviews::refuseChallenge(this->s_, username);
-
+        sviews::refuseChallenge(this->s_, *username);
     }
+    delete username;
+    username = NULL;
 }
 
 void MainWindow::setSocket(Socket * s) {

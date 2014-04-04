@@ -67,7 +67,7 @@ void playerlist(JsonValue * message, ServerHandler * handler) {
 void challenge(JsonValue  * message, ServerHandler * handler){
     JsonDict * listMessage = castDict(message);
 
-    string opponentName = getString(listMessage, "remote_name");
+    string *opponentName = new string (getString(listMessage, "remote_name"));
     emit handler->getWindow()->newDefi(opponentName);
 
 }

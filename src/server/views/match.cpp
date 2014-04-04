@@ -43,4 +43,36 @@ void end_turn(JsonValue * message, UserHandler * handler) {
     match->setWays(isGuest, playerWays);
 }
 
+void surrender(JsonValue* message, UserHandler * handler) {
+    JsonDict * dictMessage = castDict(message);
+    int challenge_id = getInt(dictMessage, "id");
+    Challenge * challenge = NULL;
+    int i;
+
+    for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
+        if (handler->getChalenge_list()->at(i).id == challenge_id) {
+            challenge = &(handler->getChalenge_list()->at(i));
+        }
+    }
+    i--; // Decrement the last loop
+    if (challenge == NULL) {
+        return sendFail(handler, 406, "challenge", "Challenge does not exist");
+    }
+    if ((challenge->opponents[0] != handler->getManager()) && (challenge->opponents[1] != handler->getManager())) {
+        return sendFail(handler, 407, "challenge", "This challenge is not yours");
+    }
+
+
+    UserHandler * other_handler;
+    if (challenge->opponents[0] == handler->getManager()) {
+        other_handler = handler->findHandler(challenge->opponents[1]);
+    }
+    else {
+        other_handler = handler->findHandler(challenge->opponents[0]);
+    }
+
+    handler->writeToClient("end_match", new JsonInt(EndMatch::SURRENDER_LOSE));
+    other_handler->writeToClient("end_match", new JsonInt(EndMatch::SURRENDER_WIN));
+}
+
 }

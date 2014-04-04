@@ -20,6 +20,8 @@ enum { KEEPER = 0, CHASER = 1, BEATER = 2, SEEKER = 3}; // 1 KEEPER, 3 CHASERS, 
 
 enum { host = 0, guest = 1};
 
+enum EndMatch { WIN, LOSE, SURRENDER_WIN, SURRENDER_LOSE};
+
 class Match {
 
 public:

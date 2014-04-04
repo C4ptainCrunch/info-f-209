@@ -41,6 +41,14 @@ void end_turn(JsonValue * message, UserHandler * handler) {
     Match * match = handler->getMatch();
     bool isGuest = match->isGuest(club);
     match->setWays(isGuest, playerWays);
+    if(match->setReady(isGuest)){
+        if(match->newTurn()){
+            //TODO fin
+        }
+        else{
+            //TODO send
+        }
+    }
 }
 
 void surrender(JsonValue* message, UserHandler * handler) {

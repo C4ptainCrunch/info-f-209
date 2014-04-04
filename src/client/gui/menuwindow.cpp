@@ -167,26 +167,20 @@ void MenuWindow::auctionHouse() {
 }
 
 void MenuWindow::refreshConnectedList(vector<string> * connectedList) {
-    cout << "JE RECOIS LA LISTE DES CONNECTES" << endl;
     list->clear();
     list->addItem("Choisissez un adversaire");
     list->insertSeparator(1);
 
 
     for (int i = 0; i < (int)connectedList->size(); ++i) {
-        cout << "refreshConnectedList i :" << i << endl;
         string mess = (*connectedList)[i];
-        cout << "list: " << mess << endl;
         list->addItem(QString::fromStdString(mess));
     }
 
     delete connectedList;
     connectedList = NULL;
-    cout<<"C'EST RAFRAICHI"<<endl;
 }
 
 void MenuWindow::askConnectedListRefresh() {
-    cout << "JE DEMANDE LA LISTE DES CONNECTES" << endl;
     sviews::userlist(parent_->getSocket());
-    cout<<"C'EST DEMANDE"<<endl;
 }

@@ -39,6 +39,7 @@ public:
     vector<NonFieldPlayer *> getPlayers();
     bool isFirstMenu();
     void setFirstMenu(bool menu);
+    void closeEvent(QCloseEvent * event);
 
 signals:
     void loginSuccess();
@@ -51,6 +52,7 @@ signals:
     void endMatch(int signal);
     void startMatch(Match * match, bool isGuest,int matchID);
     void updateMatch(Match * match);
+
 
     void playerList(std::vector<NonFieldPlayer *> * players);
 

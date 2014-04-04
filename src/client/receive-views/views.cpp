@@ -37,7 +37,6 @@ void signup(JsonValue * message, ServerHandler * handler) {
 }
 
 void userlist(JsonValue * message, ServerHandler * handler) {
-    cout<<__FILE__<<__LINE__<<"IM IN USERLIST"<<endl;
     JsonList * listMessage = JLIST(message);
 
     if (listMessage == NULL) {
@@ -89,7 +88,6 @@ void startMatch(JsonValue * message, ServerHandler * handler) {
 }
 
 void updateMatch(JsonValue * message, ServerHandler * handler) {
-    cout<<"UPDATE MATCH"<<endl;
     JsonDict * listMessage = JDICT(message);
 
     if (listMessage == NULL) {

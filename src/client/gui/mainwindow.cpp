@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget * parent):
     s_ = 0;
     menu_ = NULL;
     match_ = NULL;
-    cout << QCoreApplication::applicationDirPath().toStdString() << endl;
 
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
@@ -96,7 +95,7 @@ QWidget * MainWindow::getCurrentWidget() {
 }
 
 
-void QWidget::closeEvent(QCloseEvent * event) {
+void MainWindow::closeEvent(QCloseEvent * event) {
     event->accept();
     if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous Quitter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
         event->accept();

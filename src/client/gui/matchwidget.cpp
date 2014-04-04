@@ -27,7 +27,8 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
 
     //------------------------SCORE SETTINGS--------------------------------
-    QLabel * ownScore = new QLabel("VOUS : 0", mainWidget);
+    int playerScore = currentMatch_->getScore()[0];
+    ownScore = new QLabel("VOUS : "+ QString::fromStdString(std::to_string(playerScore)), mainWidget);
     ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
@@ -38,7 +39,8 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     ownScore->move(100, 50);
     ownScore->show();
 
-    opponentScore = new QLabel("ADVERSAIRE : 0", mainWidget);
+    int otherScore = currentMatch_->getScore()[1];
+    opponentScore = new QLabel("ADVERSAIRE : "+ QString::fromStdString(std::to_string(otherScore)), mainWidget);
     opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
@@ -92,6 +94,9 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
 void MatchWidget::refreshField() {
     this->hide();
+    ownScore->setText("VOUS : "+ QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
+    opponentScore->setText("ADVERSAIRE : "+ QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
+
     label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);

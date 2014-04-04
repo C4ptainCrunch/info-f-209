@@ -44,8 +44,11 @@ void end_turn(JsonValue * message, UserHandler * handler) {
 }
 
 void surrender(JsonValue* message, UserHandler * handler) {
-    JsonDict * dictMessage = castDict(message);
-    int challenge_id = getInt(dictMessage, "id");
+    JsonInt * id_int = JINT(message);
+    if (id_int == NULL) {
+        throw BadRequest("Malformatted request. Need a JSON int");
+    }
+    int challenge_id = *id_int;
     Challenge * challenge = NULL;
     int i;
 

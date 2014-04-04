@@ -20,6 +20,7 @@
 #include <../../common/models/Case.h>
 #include <../send-views/views.h>
 
+
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5, INFRASTRUCTURESTATE = 6};
 
 
@@ -43,17 +44,17 @@ signals:
     void registerSuccess();
     void userList(std::vector<std::string> *);
     void registerFailure(int);
-    void newDefi(std::string username);
+    void newDefi(std::string * username, int matchID);
     void setMatch(Match * match);
 
-    void startMatch(Match * match);
+    void startMatch(Match * match, bool isGuest);
     void updateMatch(Match * match);
 
     void playerList(std::vector<NonFieldPlayer *> * players);
 
 public slots:
-    void setNextScreen(int nextState, Match * startingMatch=0);
-    void getDefi(std::string username);
+    void setNextScreen(int nextState, Match * startingMatch=0, bool isGuest = false);
+    void getDefi(std::string * username, int matchID);
     void recievePlayers(std::vector<NonFieldPlayer *> * players);
 
 

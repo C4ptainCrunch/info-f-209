@@ -4,9 +4,8 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
-    QWidget(parent) {
-    parent_ = parent;
+MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, MainWindow * parent):
+    QWidget(parent), parent_(parent), isGuest_(isGuest) {
     //-----------------------MATCH INITIALISATION-----------------------
     currentMatch_ = startingMatch;
 
@@ -123,7 +122,7 @@ void MatchWidget::refreshField() {
                 }
                 else{
                     if (grid_[i][j].player != 0) {
-                            if (!grid_[i][j].player->isInGuestTeam()) {
+                            if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
                                 painter.setBrush(QBrush(Qt::blue));
 
                                 color = "blue";

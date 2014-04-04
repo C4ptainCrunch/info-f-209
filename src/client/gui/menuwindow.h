@@ -46,7 +46,7 @@ signals:
 public slots:
     void refreshConnectedList(std::vector<std::string> * connectedList);
     void logOut();
-    void startMatch(Match * startingMatch);
+    void startMatch(Match * startingMatch, bool isGuest);
     void handlePlayers();
     void auctionHouse();
     void infrastructures();

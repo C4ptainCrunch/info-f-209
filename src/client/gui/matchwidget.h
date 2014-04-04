@@ -27,7 +27,7 @@ class MainWindow;
 class MatchWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit MatchWidget(Match * startingMatch, MainWindow * parent=0);
+    explicit MatchWidget(Match * startingMatch, bool isGuest, MainWindow * parent=0);
     void mousePressEvent(QMouseEvent *);
     void generateGrid();
     ~MatchWidget();
@@ -54,7 +54,7 @@ private:
     QLabel * playerLabels_[2][4];
     Way highlightedCases;
     std::vector<Way> chosenWays;
-    bool playerSelected = false;
+    bool isGuest_;
 
 };
 

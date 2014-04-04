@@ -25,10 +25,7 @@ public:
     virtual void setReflexes(int reflexes);
     virtual void setPassPrecision(int passPrecision);
     virtual void setWoundState(bool woundState);
-    Item removeItem(std::string itemType);
-    //Item removeItem(unsigned int position);
-    virtual void addToInventory(Item newItem, int pos);
-
+    
 protected:
     int speed_;
     int force_;

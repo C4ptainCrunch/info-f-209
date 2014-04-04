@@ -3,6 +3,7 @@ TEX_FILES = *.aux *.log  *.out *.lof *.lot *.toc *.xdy
 TEX = pdflatex -interaction=batchmode
 DIASSOURCES=$(realpath $(wildcard ./uml/*.dia))
 DIAOUT=$(subst .dia,.eps,$(DIASSOURCES))
+TOPDF=$(wildcard ./uml/*-eps-converted-to.pdf)
 
 RED=\e[0;31m
 NC=\e[0m
@@ -42,7 +43,7 @@ $(DIAOUT):
 	dia -e $@ $(subst .eps,.dia,$@)
 
 clean-diagrams:
-	rm -rf $(DIAOUT)
+	rm -rf $(DIAOUT) $(TOPDF)
 
 .PHONY: clean all
 

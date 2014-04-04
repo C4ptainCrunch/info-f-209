@@ -37,6 +37,8 @@ public:
     Socket * getSocket();
     void askPlayers();
     vector<NonFieldPlayer *> getPlayers();
+    bool isFirstMenu();
+    void setFirstMenu(bool menu);
 
 signals:
     void loginSuccess();
@@ -64,6 +66,10 @@ private:
     QWidget * currentWidget;
     Socket * s_;
     std::vector<NonFieldPlayer *> playersList;
+    bool firstMenu = true;
+    MenuWindow * menu_;
+    MatchWidget * match_;
+
 
 };
 

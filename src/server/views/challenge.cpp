@@ -69,7 +69,7 @@ void accept_challenge(JsonValue * message, UserHandler * handler) {
     payload.add("guest", new JsonBool(false));
     other_handler->writeToClient("startMatch", &payload);
     JsonDict second_payload = (JsonDict) * match;
-    payload.add("guest", new JsonBool(true));
+    second_payload.add("guest", new JsonBool(true));
     handler->writeToClient("startMatch", &second_payload);
 
 }

@@ -107,7 +107,6 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             }
 
             JsonDict payload = (JsonDict) * match;
-            cout << match->print()<<endl;
             handler->writeToClient("updateMatch", &payload);
             other_handler->writeToClient("updateMatch", &payload);
         }

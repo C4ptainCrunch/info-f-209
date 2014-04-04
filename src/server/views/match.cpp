@@ -76,6 +76,8 @@ void surrender(JsonValue* message, UserHandler * handler) {
 
     handler->writeToClient("end_match", new JsonInt(EndMatch::SURRENDER_LOSE));
     other_handler->writeToClient("end_match", new JsonInt(EndMatch::SURRENDER_WIN));
+
+    handler->getChalenge_list()->erase(handler->getChalenge_list()->begin() + i);
 }
 
 }

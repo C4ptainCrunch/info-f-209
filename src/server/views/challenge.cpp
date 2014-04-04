@@ -55,7 +55,7 @@ void accept_challenge(JsonValue * message, UserHandler * handler) {
 
     Match * match = new Match(challenge->opponents[0]->getClub(), challenge->opponents[1]->getClub());
     handler->getMatch_list()->push_back(match);
-    handler->getChalenge_list()->erase(handler->getChalenge_list()->begin() + i);
+    //handler->getChalenge_list()->erase(handler->getChalenge_list()->begin() + i);
 
     UserHandler * other_handler;
     if (challenge->opponents[0] == handler->getManager()) {

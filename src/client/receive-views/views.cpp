@@ -71,8 +71,10 @@ void startMatch(JsonValue * message, ServerHandler * handler) {
         throw BadRequest("Malformatted request. Need a JSON list");
     }
 
+    bool isGuest = getBool(listMessage, "guest");
+
     Match * match = new Match(listMessage);
-    emit handler->getWindow()->startMatch(match);
+    emit handler->getWindow()->startMatch(match, isGuest);
 }
 
 void updateMatch(JsonValue * message, ServerHandler * handler) {

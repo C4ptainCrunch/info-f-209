@@ -1,5 +1,5 @@
-build/
-data/
+/build/
+/data/
 *config.json
 
 #####################

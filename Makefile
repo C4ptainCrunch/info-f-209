@@ -48,6 +48,7 @@ $(BUILD_DIR)/../server-config.json: | $(BUILD_DIR)/bin/
 	cp default/config/server.json $@
 
 init:
+	mkdir -p data
 	cp -r default/data/* data
 
 $(BUILD_DIR)/server.a:

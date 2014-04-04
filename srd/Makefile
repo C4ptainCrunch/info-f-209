@@ -1,6 +1,9 @@
 GLOSSARY_FILES = *.idx *.ist *.alg *.glg *.glo *.gls *.acn *.acr *.ilg *.ind
 TEX_FILES = *.aux *.log  *.out *.lof *.lot *.toc *.xdy
 TEX = pdflatex -interaction=batchmode
+DIASSOURCES=$(realpath $(wildcard ./uml/*.dia))
+DIAOUT=$(subst .dia,.eps,$(DIASSOURCES))
+TOPDF=$(wildcard ./uml/*-eps-converted-to.pdf)
 
 RED=\e[0;31m
 NC=\e[0m
@@ -9,7 +12,7 @@ all: srd.pdf
 	@echo -e "$(RED) fin $(NC)"
 
 clean:
-	rm -f ${GLOSSARY_FILES} ${TEX_FILES}
+	rm -f ${GLOSSARY_FILES} ${TEX_FILES} srd.synctex.gz
 
 %.pdf: %.tex %.glg2 %.idn
 	@echo -e "$(RED) make pdf $(NC)"
@@ -34,7 +37,13 @@ clean:
 	@echo -e "$(RED) make index $(NC)"
 	makeindex -q $(subst .tex,,$<)
 
+diagrams: $(DIAOUT)
 
+$(DIAOUT):
+	dia -e $@ $(subst .eps,.dia,$@)
+
+clean-diagrams:
+	rm -rf $(DIAOUT) $(TOPDF)
 
 .PHONY: clean all
 

@@ -103,34 +103,34 @@ void MatchWidget::refreshField() {
     int ylabelDifference = 7;
     double x = 0;
     double y = 0;
-    string color;
     bool pair = true;
     bool highlighted;
+    bool chosen;
     for (int i = 0; i < WIDTH; ++i) {
         for (int j = 0; j < LENGTH; ++j) {
             highlighted = false;
+            chosen = false;
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
             hexagon[i][j].setCorners();
 
             x += 18;
             if (grid_[i][j].type == USABLE) {
-                painter.setBrush(QBrush(QColor(71,158,158)));
                 if (isCaseHighlighted(i, j)) {
+                    painter.setBrush(QBrush(QColor(71,158,158)));
                     highlighted = true;
-                    color = "yellow";
+                }
+                else if(isInChosenWays(i,j)){
+                    painter.setBrush(QBrush(QColor(85,18,201)));
+                    chosen = true;
                 }
                 if (grid_[i][j].player != 0) {
-                    if(!highlighted){
+                    if(!highlighted && !chosen){
                         if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
                             painter.setBrush(QBrush(Qt::blue));
-
-                            color = "blue";
                         }
                         else {
                             painter.setBrush(QBrush(Qt::red));
-
-                            color = "red";
                         }
                     }
                     if (grid_[i][j].player->getRole() == KEEPER) {
@@ -154,23 +154,17 @@ void MatchWidget::refreshField() {
                     string ballName = grid_[i][j].ball->getName();
                     if (ballName == "B") {
                         painter.setBrush(QBrush(Qt::black));
-
-                        color = "black";
                     }
                     else if (ballName == "Q") {
                         painter.setBrush(QBrush(QColor(140,52,52)));
-                        color = "red";
                     }
-                    else { //ballName == "G")
+                    else { //ballName == "G"
                         painter.setBrush(QBrush(Qt::yellow));
-
-                        color = "yellow";
                     }
                 }
                 else {
-                    if(!highlighted){
+                    if(!highlighted && !chosen){
                         painter.setBrush(*grass);
-                        color = "grass";
                     }
                 }
                 if(highlighted){
@@ -199,6 +193,16 @@ void MatchWidget::refreshField() {
     this->show();
 }
 
+bool MatchWidget::isInChosenWays(unsigned x, unsigned y){
+    for (int i = 0; i<chosenWays.size();++i){
+        for (int j = 0; j<chosenWays[i].size();++j){
+            if(chosenWays[i][j].x == x && chosenWays[i][j].y == y){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 bool MatchWidget::isCaseHighlighted(unsigned a, unsigned b) {
     for (size_t i = 0; i < highlightedCases.size(); ++i) {
@@ -256,6 +260,7 @@ Position MatchWidget::getCase(QMouseEvent * event) {
 
 void MatchWidget::endTurn() {
     sviews::endTurn(parent_->getSocket(), chosenWays);
+    chosenWays.clear();
 
 }
 
@@ -280,6 +285,9 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
         else{
             if(isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
                 highlightedCases.push_back(clickedCase);
+            }
+            else if(highlightedCases[highlightedCases.size() - 1] == clickedCase){
+                emit this->nextPlayer();
             }
         }
         refreshField();

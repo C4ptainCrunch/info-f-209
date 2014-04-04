@@ -19,6 +19,8 @@ endif
 
 all: $(addprefix $(BUILD_DIR)/bin/,$(EXECUTABLES))
 
+server-needs: $(BUILD_DIR)/../server-config.json
+
 $(BUILD_DIR)/bin/server: $(SERVER_DEPS) | $(BUILD_DIR)/bin/ $(BUILD_DIR)/../server-config.json
 	$(CXX) $(LDFLAGS) -o $@ $^
 
@@ -43,7 +45,11 @@ $(BUILD_DIR)/bin/stylesheets:
 
 
 $(BUILD_DIR)/../server-config.json: | $(BUILD_DIR)/bin/
-	cp src/server/config.json.example $@
+	cp default/config/server.json $@
+
+init:
+	mkdir -p data
+	cp -r default/data/* data
 
 $(BUILD_DIR)/server.a:
 	@$(MAKE) -C src/server

@@ -1,0 +1,114 @@
+{
+    "club": {
+        "installations": [
+            {
+                "level": 1
+            },
+            {
+                "level": 1
+            },
+            {
+                "level": 1
+            },
+            {
+                "level": 1
+            },
+            {
+                "level": 1
+            }
+        ],
+        "money": 0,
+        "players": [],
+        "team": {
+            "players": [
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 1,
+                    "speed": 1,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 1,
+                    "speed": 1,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 1,
+                    "speed": 1,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 1,
+                    "speed": 1,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 1,
+                    "speed": 1,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 1,
+                    "speed": 1,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 1,
+                    "speed": 1,
+                    "vocation": 0,
+                    "wounded": false
+                }
+            ]
+        }
+    },
+    "hash": "pass1",
+    "name": "Player number one",
+    "username": "player1"
+}

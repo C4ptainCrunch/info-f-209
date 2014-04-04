@@ -330,7 +330,8 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     }
 
     //GOLDENSNITCH
-    nextBallPos = goldenSnitch_.autoMove(grid_);
+    //ïnextBallPos = goldenSnitch_.autoMove(grid_);
+    nextBallPos = goldenSnitch_.getPosition();
     grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
     goldenSnitch_.setPosition(nextBallPos.x, nextBallPos.y);
     grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;

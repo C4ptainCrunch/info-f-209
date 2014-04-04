@@ -64,18 +64,3 @@ void Player::setWoundState(bool woundState) {
     wounded_ = woundState;
 }
 
-Item Player::removeItem(string itemType) {
-    //TODO convert string to position
-    return Item();
-}
-
-//Item Player::removeItem(unsigned int position) {
-//    //TODO fix this shit
-//    Item * tempItem = &(inventory_[position]);
-//    inventory_.at(position) = Item();
-//    return *tempItem;
-//}
-
-void Player::addToInventory(Item newItem, int pos) {
-    //TODO
-}

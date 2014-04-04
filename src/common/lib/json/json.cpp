@@ -276,8 +276,12 @@ void JsonInt::setValue(int val) {
 }
 
 void JsonInt::setValue(string val) {
-    // TODO : catch exception
-    value = stoi(val);
+    try{
+        value = stoi(val);
+    }
+    catch(out_of_range){
+        throw ParseError("Int too big to be parsed");
+    }
 }
 
 JsonInt::operator string() const {

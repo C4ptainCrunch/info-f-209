@@ -20,6 +20,8 @@
 #include <../../common/models/Case.h>
 #include <../send-views/views.h>
 
+Q_DECLARE_METATYPE (std::string)
+
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5, INFRASTRUCTURESTATE = 6};
 
 

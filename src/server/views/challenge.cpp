@@ -13,7 +13,7 @@ void challenge(JsonValue * message, UserHandler * handler) {
         return sendFail(handler, 301, "challenge", "User does not exist");
     }
     if (other_handler == handler) {
-        return sendFail(handler, 999, "challenge", "You cannot challenge yourself");
+        return sendFail(handler, 405, "challenge", "You cannot challenge yourself");
     }
 
     // TODO : should test if the remote user has already a challenge
@@ -47,10 +47,10 @@ void accept_challenge(JsonValue * message, UserHandler * handler) {
     }
     i--; // Decrement the last loop
     if (challenge == NULL) {
-        return sendFail(handler, 999, "challenge", "Challenge does not exist");
+        return sendFail(handler, 406, "challenge", "Challenge does not exist");
     }
     if ((challenge->opponents[0] != handler->getManager()) && (challenge->opponents[1] != handler->getManager())) {
-        return sendFail(handler, 999, "challenge", "This challenge is not yours");
+        return sendFail(handler, 407, "challenge", "This challenge is not yours");
     }
 
     Match * match = new Match(challenge->opponents[0]->getClub(), challenge->opponents[1]->getClub());
@@ -86,10 +86,10 @@ void refuse_challenge(JsonValue * message, UserHandler * handler) {
     }
     i--; // Decrement the last loop
     if (challenge == NULL) {
-        return sendFail(handler, 999, "challenge", "Challenge does not exist");
+        return sendFail(handler, 406, "challenge", "Challenge does not exist");
     }
     if ((challenge->opponents[0] != handler->getManager()) && (challenge->opponents[1] != handler->getManager())) {
-        return sendFail(handler, 999, "challenge", "This challenge is not yours");
+        return sendFail(handler, 407, "challenge", "This challenge is not yours");
     }
 
 

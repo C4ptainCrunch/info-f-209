@@ -157,7 +157,6 @@ size_t JsonDict::size() {
 }
 
 JsonValue * JsonDict::operator[](const string & str) {
-    // TODO : Should make a copy ?
     return this->dict[str];
 }
 

@@ -30,7 +30,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     this->askConnectedListRefresh();
 
     QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
-    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
+
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
@@ -46,6 +46,9 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
 
     matchLauncherWidget->setLayout(matchLauncherLayout);
+
+    //--------------------CHALLENGE BUTTON--------------------------
+    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
 
     //-------------------AUCTIONHOUSE BUTTON-------------------------
     auctionHouseButton = new QPushButton("Encheres");
@@ -70,7 +73,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_, SIGNAL(startMatch(Match *)), this, SLOT(startMatch(Match *)));
+    QObject::connect(parent_, SIGNAL(startMatch(Match *,bool)), this, SLOT(startMatch(Match *,bool)));
     QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
@@ -130,7 +133,7 @@ void MenuWindow::sendChallenge() {
 }
 
 void MenuWindow::startMatch(Match * startingMatch, bool isGuest) {
-    parent_->setNextScreen(MATCHSTATE, startingMatch);
+    parent_->setNextScreen(MATCHSTATE, startingMatch, isGuest);
 }
 
 void MenuWindow::logOut() {

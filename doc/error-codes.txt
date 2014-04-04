@@ -1,0 +1,13 @@
+100 Malfromatted
+200 OK
+300 Not exist
+    301 User does not exist
+400 Bad
+    401 Bad password
+    402 User exists
+    403 Already logged
+    405 You cannot challenge yourself
+    406 Challenge does not exist
+    407 This challenge is not yours
+500 Server Error
+    501 Disk error

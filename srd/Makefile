@@ -11,7 +11,7 @@ all: srd.pdf
 	@echo -e "$(RED) fin $(NC)"
 
 clean:
-	rm -f ${GLOSSARY_FILES} ${TEX_FILES}
+	rm -f ${GLOSSARY_FILES} ${TEX_FILES} srd.synctex.gz
 
 %.pdf: %.tex %.glg2 %.idn
 	@echo -e "$(RED) make pdf $(NC)"

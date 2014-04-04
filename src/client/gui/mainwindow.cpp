@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget * parent):
 MainWindow::~MainWindow()
 {}
 
-void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
+void MainWindow::setNextScreen(int nextState, Match * startingMatch, bool isGuest) {
     cout << nextState;
     switch (nextState) {
         case LOGINMENUSTATE: {
@@ -67,7 +67,7 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
             break;
         }
         case MATCHSTATE: {
-            MatchWidget * match = new MatchWidget(startingMatch, this);
+            MatchWidget * match = new MatchWidget(startingMatch, isGuest, this);
             currentWidget = match;
             //match->show();
             break;

@@ -131,7 +131,7 @@ void MenuWindow::sendChallenge() {
      */
 }
 
-void MenuWindow::startMatch(Match * startingMatch) {
+void MenuWindow::startMatch(Match * startingMatch, bool isGuest) {
     parent_->setNextScreen(MATCHSTATE, startingMatch);
 }
 

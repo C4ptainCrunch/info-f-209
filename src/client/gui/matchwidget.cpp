@@ -4,9 +4,8 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
-    QWidget(parent) {
-    parent_ = parent;
+MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, MainWindow * parent):
+    QWidget(parent), parent_(parent), isGuest_(isGuest) {
     //-----------------------MATCH INITIALISATION-----------------------
     currentMatch_ = startingMatch;
 

@@ -46,13 +46,13 @@ signals:
     void newDefi(std::string username);
     void setMatch(Match * match);
 
-    void startMatch(Match * match);
+    void startMatch(Match * match, bool isGuest);
     void updateMatch(Match * match);
 
     void playerList(std::vector<NonFieldPlayer *> * players);
 
 public slots:
-    void setNextScreen(int nextState, Match * startingMatch=0);
+    void setNextScreen(int nextState, Match * startingMatch=0, bool isGuest = false);
     void getDefi(std::string username);
     void recievePlayers(std::vector<NonFieldPlayer *> * players);
 

@@ -27,7 +27,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //---------------------------OPPONENT CHOICE-------------------
     list = new QComboBox(matchLauncherWidget);
-    this->askConnectedListRefresh();
+    //this->askConnectedListRefresh();
 
     QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
 
@@ -147,16 +147,21 @@ void MenuWindow::auctionHouse() {
 }
 
 void MenuWindow::refreshConnectedList(vector<string> * connectedList) {
+    cout << "NEW REFRESH LIST" << endl;
     list->clear();
     list->addItem("Choisissez un adversaire");
     list->insertSeparator(1);
 
 
     for (int i = 0; i < (int)connectedList->size(); ++i) {
-        list->addItem(QString::fromStdString((*connectedList)[i]));
+        cout << "refreshConnectedList i :" << i << endl;
+        string mess = (*connectedList)[i];
+        cout << "list: " << mess << endl;
+        list->addItem(QString::fromStdString(mess));
     }
 
     delete connectedList;
+    connectedList = NULL;
 }
 
 void MenuWindow::askConnectedListRefresh() {

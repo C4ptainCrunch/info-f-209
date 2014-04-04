@@ -115,65 +115,64 @@ void MatchWidget::refreshField() {
 
             x += 18;
             if (grid_[i][j].type == USABLE) {
-                painter.setBrush(QBrush(Qt::yellow));
+                painter.setBrush(QBrush(QColor(71,158,158)));
                 if (isCaseHighlighted(i, j)) {
                     highlighted = true;
                     color = "yellow";
                 }
-                else{
-                    if (grid_[i][j].player != 0) {
-                            if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
-                                painter.setBrush(QBrush(Qt::blue));
+                if (grid_[i][j].player != 0) {
+                    if(!highlighted){
+                        if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
+                            painter.setBrush(QBrush(Qt::blue));
 
-                                color = "blue";
-                            }
-                            else {
-                                painter.setBrush(QBrush(Qt::red));
-
-                                color = "red";
-                            }
-                        if (grid_[i][j].player->getRole() == KEEPER) {
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K", fieldWidget);
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x - xlabelDifference, y - ylabelDifference);
+                            color = "blue";
                         }
-                        else if (grid_[i][j].player->getRole() == CHASER) {
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C", fieldWidget);
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
-                        }
-                        else if (grid_[i][j].player->getRole() == SEEKER) {
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S", fieldWidget);
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x - xlabelDifference, y - ylabelDifference);
-                        }
-                        else if (grid_[i][j].player->getRole() == BEATER) {
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QLabel("B", fieldWidget);
-                            playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x - xlabelDifference, y - ylabelDifference);
-                        }
-                    }
-                    else if (grid_[i][j].ball != 0) {
-                        string ballName = grid_[i][j].ball->getName();
-                        if (ballName == "B") {
-                            painter.setBrush(QBrush(Qt::black));
-
-                            color = "black";
-                        }
-                        else if (ballName == "Q") {
+                        else {
                             painter.setBrush(QBrush(Qt::red));
+
                             color = "red";
                         }
-                        else { //ballName == "G")
-                            painter.setBrush(QBrush(Qt::yellow));
-
-                            color = "yellow";
-                        }
                     }
-                    else {
-                        if(!highlighted){
-                            painter.setBrush(*grass);
-                            color = "grass";
-                        }
+                    if (grid_[i][j].player->getRole() == KEEPER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x - xlabelDifference, y - ylabelDifference);
+                    }
+                    else if (grid_[i][j].player->getRole() == CHASER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
+                    }
+                    else if (grid_[i][j].player->getRole() == SEEKER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER] = new QLabel("S", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][SEEKER]->move(x - xlabelDifference, y - ylabelDifference);
+                    }
+                    else if (grid_[i][j].player->getRole() == BEATER) {
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER] = new QLabel("B", fieldWidget);
+                        playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x - xlabelDifference, y - ylabelDifference);
                     }
                 }
-                
+                else if (grid_[i][j].ball != 0) {
+                    string ballName = grid_[i][j].ball->getName();
+                    if (ballName == "B") {
+                        painter.setBrush(QBrush(Qt::black));
+
+                        color = "black";
+                    }
+                    else if (ballName == "Q") {
+                        painter.setBrush(QBrush(QColor(140,52,52)));
+                        color = "red";
+                    }
+                    else { //ballName == "G")
+                        painter.setBrush(QBrush(Qt::yellow));
+
+                        color = "yellow";
+                    }
+                }
+                else {
+                    if(!highlighted){
+                        painter.setBrush(*grass);
+                        color = "grass";
+                    }
+                }
                 if(highlighted){
                     painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
@@ -271,8 +270,17 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
     }
     else {
         Position clickedCase = getCase(event);
-        if (highlightedCases.empty() or isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
-            highlightedCases.push_back(clickedCase);
+        if (highlightedCases.empty()){
+            int i = clickedCase.x;
+            int j = clickedCase.y;
+            if(grid_[i][j].player!= 0 && grid_[i][j].player->isInGuestTeam() == isGuest_){
+                highlightedCases.push_back(clickedCase);
+            }
+        }
+        else{
+            if(isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
+                highlightedCases.push_back(clickedCase);
+            }
         }
         refreshField();
     }

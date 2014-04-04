@@ -35,6 +35,8 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     usernameLine = userLine_;
     passLine = passLine_;
 
+    QObject::connect(passLine_,SIGNAL(returnPressed()),this, SLOT(logIn()));
+
     //-------------------------------BUTTONS---------------------------
     creditsButton = new QPushButton("Credits", fields);
     QObject::connect(creditsButton, SIGNAL(clicked()), this, SLOT(showCredits()));

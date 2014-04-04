@@ -1,5 +1,5 @@
-#ifndef SVIEWMANAGEMENT_H
-#define SVIEWMANAGEMENT_H
+#ifndef SERVVIEWMANAGEMENT_H
+#define SERVVIEWMANAGEMENT_H
 
 #include <cstdlib>
 #include <vector>
@@ -19,4 +19,4 @@ void playerlist(JsonValue * message, UserHandler * handler);
 #include "../../common/lib/file/file.h"
 #include "../../common/models/Manager.h"
 
-#endif // SVIEWMANAGEMENT_H
+#endif

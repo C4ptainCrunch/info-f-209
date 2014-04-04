@@ -1,5 +1,5 @@
-#ifndef SVIEWUSER_H
-#define SVIEWUSER_H
+#ifndef SERV_VIEWUSER_H
+#define SERV_VIEWUSER_H
 
 #include <cstdlib>
 #include <vector>
@@ -21,4 +21,4 @@ void userlist(JsonValue * message, UserHandler * handler);
 #include "../../common/lib/file/file.h"
 #include "../../common/models/Manager.h"
 
-#endif // SVIEWUSER_H
+#endif

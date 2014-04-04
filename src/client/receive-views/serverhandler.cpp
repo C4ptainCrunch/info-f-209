@@ -40,14 +40,14 @@ bool ServerHandler::connect_socket() {
 
 void ServerHandler::send(string message) {
     if (s_ == NULL) {
-        throw 1;
+        throw SocketError("Unitialized socket");
     }
     s_->write(message);
 }
 
 int ServerHandler::recieve(string & message) {
     if (s_ == NULL) {
-        throw 1;
+        throw SocketError("Unitialized socket");
     }
     return s_->read(message);
 }

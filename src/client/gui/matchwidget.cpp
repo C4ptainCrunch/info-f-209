@@ -266,10 +266,8 @@ void MatchWidget::endTurn() {
 }
 
 void MatchWidget::surrender() {
-    cout<<"SURRENDER INCOMING"<<endl;
-    cout<<matchID_<<endl;
     sviews::surrenders(parent_->getSocket(), matchID_);
-    cout<<"HUH"<<endl;
+
 }
 
 void MatchWidget::mousePressEvent(QMouseEvent * event) {

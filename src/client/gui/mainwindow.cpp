@@ -6,6 +6,8 @@ using namespace std;
 MainWindow::MainWindow(QWidget * parent):
     QWidget(parent) {
     s_ = 0;
+    menu_ = NULL;
+    match_ = NULL;
     cout << QCoreApplication::applicationDirPath().toStdString() << endl;
 
     //----------------TITLE SETTINGS-----------------------
@@ -38,7 +40,6 @@ MainWindow::~MainWindow()
 {}
 
 void MainWindow::setNextScreen(int nextState, Match * startingMatch, bool isGuest, int matchID) {
-    cout << nextState;
     switch (nextState) {
         case LOGINMENUSTATE: {
             loginScreenWidget * login = new loginScreenWidget(this);
@@ -47,10 +48,13 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch, bool isGues
             break;
         }
         case MAINMENUSTATE: {
-            MenuWindow * menu = new MenuWindow(this);
-            currentWidget = menu;
-            menu->show();
-            menu->enable();
+            if (menu_ != NULL){
+                delete menu_;
+                menu_ = NULL;
+            }
+            menu_ = new MenuWindow(this);
+            //currentWidget = menu;
+            menu_->show();
             break;
 
         }
@@ -67,8 +71,12 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch, bool isGues
             break;
         }
         case MATCHSTATE: {
-            MatchWidget * match = new MatchWidget(startingMatch, isGuest, matchID, this);
-            currentWidget = match;
+            if (match_ != NULL){
+                delete match_;
+                match_ = NULL;
+            }
+            match_ = new MatchWidget(startingMatch, isGuest, matchID, this);
+            //currentWidget = match;
             //match->show();
             break;
         }
@@ -130,4 +138,12 @@ void MainWindow::setSocket(Socket * s) {
 
 Socket * MainWindow::getSocket() {
     return s_;
+}
+
+bool MainWindow::isFirstMenu(){
+    return firstMenu;
+}
+
+void MainWindow::setFirstMenu(bool menu){
+    firstMenu = menu;
 }

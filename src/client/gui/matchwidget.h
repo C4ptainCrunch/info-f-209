@@ -34,6 +34,7 @@ public:
     void refreshField();
     Position getCase(QMouseEvent * event);
     bool isCaseHighlighted(unsigned a, unsigned b);
+    bool isInChosenWays(unsigned x, unsigned y);
 signals:
 
 public slots:

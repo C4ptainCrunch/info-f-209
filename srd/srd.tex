@@ -29,8 +29,7 @@
 \setcounter{secnumdepth}{4}
 
 \title{Quiddich Live Manager 2014 : \\Software requirements document}
-\author{Bruno Rocha Pereira \and Romain Fontaine \and Nikita Marchant \and
- \\Avec la participation de : \\ Jérome Vial \\ Tsotne Shonia \\ Cédric Strebelle }
+\author{Bruno Rocha Pereira \and Romain Fontaine \and Nikita Marchant}
 \date{\today}
 
 % Début du document
@@ -90,6 +89,13 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[3.0] (/03/14) : \textbf{Délivrable pour la partie 3 - Equipe}
     
     \item[3.1] (31/03/14) : Modification de la page de garde - Bruno
+    \item[3.2] (01/04/14) : Correction des component diagrams - Bruno
+    \item[3.3] (04/04/14) : Ajout des nouveaux diagrammes de classe - Romain
+    \item[3.4] (04/04/14) : Ajout des nouveaux use-case diagrams - Bruno
+    \item[3.5] (04/04/14) : Ajout du sequence diagram - Nikita
+    \item[3.6] (04/04/14) : Ré-organisation du document et suppression des parties obsolètes - Nikita
+    
+    \item[4.0] (07/04/14) : \textbf{Délivrable pour la partie 4 - Equipe}
     
 
 
@@ -103,12 +109,13 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 \subsection{Inscription (fig \ref{diag-use-inscription})}
 
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[height=250pt]{uml/id.png}
-        \caption{\label{diag-use-inscription} Système d'identification}
-    \end{center}
-\end{figure}
+% TODO
+%\begin{figure}[H]
+%    \begin{center}
+%        \includegraphics[height=250pt]{uml/id.png}
+%        \caption{\label{diag-use-inscription} Système d'identification}
+%    \end{center}
+%\end{figure}
 
 \begin{description}
     \item[Cas général  :] L'\gls{utilisateur} doit pouvoir s'inscrire (s'enregistrer) sur le \gls{serveur} avec un nom d'\gls{utilisateur} unique et un mot de passe.
@@ -127,12 +134,13 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 \subsection{Gérer le \gls{club} (en phase de management)}
 
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[height=250pt]{uml/mngClub.png}
-        \caption{\label{diag-use-management} Gestion d'un \gls{club} pendant la phase de management}
-    \end{center}
-\end{figure}
+%\begin{figure}[H]
+%    \begin{center}
+%        \includegraphics[height=250pt]{uml/mngClub.png}
+%        \caption{\label{diag-use-management} Gestion d'un \gls{club} pendant la phase de management}
+%    \end{center}
+%\end{figure}
+% TODO
 
 \subsection{Améliorer les bâtiments}
 \begin{description}
@@ -178,13 +186,14 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[Post Condition :] L'\gls{utilisateur} obtiendra de l'argent. Son \gls{equipe} sera modifiée.
 \end{description}
 
-\subsection{Jouer en tournoi}
-\begin{figure}[H]
-    \begin{center}
-        \caption{\label{diag-use-championship} Diagramme d'utilisation : gestion des tournois}
-        \includegraphics[height=250pt]{uml/usrTournoi.png}
-    \end{center}
-\end{figure}
+%\subsection{Jouer en tournoi}
+%\begin{figure}[H]
+%    \begin{center}
+%        \caption{\label{diag-use-championship} Diagramme d'utilisation : gestion des tournois}
+%        \includegraphics[height=250pt]{uml/usrTournoi.png}
+%    \end{center}
+%\end{figure}
+% TODO
 \subsection{S'inscrire en tournoi}
 \begin{description}
     \item[Cas général :] L'\gls{utilisateur} doit pouvoir s'inscrire à un tournoi dont la date limite des inscriptions n'est pas encore passée.
@@ -302,12 +311,13 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \end{description}
 
 \subsection{Gestion de tournois}
-\begin{figure}[H]
-    \caption{\label{1} Gestion de tournois.}
-    \begin{center}
-        \includegraphics[height=250pt]{uml/servTournoi.png}
-    \end{center}
-\end{figure}
+%\begin{figure}[H]
+%    \caption{\label{1} Gestion de tournois.}
+%    \begin{center}
+%        \includegraphics[height=250pt]{uml/servTournoi.png}
+%    \end{center}
+%\end{figure}
+% TODO
 \subsection{Créer un tournoi}
 \begin{description}
     \item[Cas général :] Le système doit créer les tournois avec un certain intervalle de temps, où les \glspl{utilisateur} pourront s'inscrire et devront s'affronter durant des matches organisés dans les stades des \glspl{club}.
@@ -346,12 +356,13 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 \subsection{Divers}
 \subsection{Sauvegarder}
-\begin{figure}[h]
-    \caption{\label{1} Sauvegarde}
-    \begin{center}
-        \includegraphics[height=250pt]{uml/svg.png}
-    \end{center}
-\end{figure}
+%\begin{figure}[h]
+%    \caption{\label{1} Sauvegarde}
+%    \begin{center}
+%        \includegraphics[height=250pt]{uml/svg.png}
+%    \end{center}
+%\end{figure}
+% TODO
 \begin{description}
     \item[Cas général :] Le système doit sauvegarder tout changement effectué au \gls{club} durant la phase management ainsi qu'après une partie.
     \item[Pré Condition  :] Une modification du \gls{club} en phase management, ou une fin de match.
@@ -414,14 +425,6 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \begin{figure}[H]
     %\vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[scale = 0.77]{uml/auctionHouseActivityDiagram.eps}
-    }
-    \caption{\label{3} Diagramme d'activité représentant le déroulement d'une enchère}
-\end{figure}
-
-\begin{figure}[H]
-    %\vspace*{-3cm}
-    \makebox[\linewidth]{
         \includegraphics[scale = 0.3]{uml/matchActivityDiagram.eps}
     }
     \caption{\label{3} Diagramme d'activité représentant le déroulement d'un match}
@@ -438,29 +441,32 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 %DIAGRAMES DE COMPOSANTS
 \subsection{Diagrammes de composants}
 
-\begin{figure}[H]
-    %\vspace*{-3cm}
-    \makebox[\linewidth]{
-        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsModels.png}
-    }
-    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/json et models}
-\end{figure}
+%\begin{figure}[H]
+%    %\vspace*{-3cm}
+%    \makebox[\linewidth]{
+%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsModels.png}
+%    }
+%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/json et models}
+%\end{figure}
+% TODO
 
-\begin{figure}[H]
-    %\vspace*{-3cm}
-    \makebox[\linewidth]{
-        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsServer.png}
-    }
-    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire server}
-\end{figure}
+%\begin{figure}[H]
+%    %\vspace*{-3cm}
+%    \makebox[\linewidth]{
+%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsServer.png}
+%    }
+%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire server}
+%\end{figure}
+% TODO
 
-\begin{figure}[H]
-    %\vspace*{-3cm}
-    \makebox[\linewidth]{
-        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsViews.png}
-    }
-    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/file et views}
-\end{figure}
+%\begin{figure}[H]
+%    %\vspace*{-3cm}
+%    \makebox[\linewidth]{
+%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsViews.png}
+%    }
+%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/file et views}
+%\end{figure}
+% TODO
 
 
 

@@ -9,7 +9,8 @@ const map<string, view_ptr> ServerHandler::viewmap = {
     {"userlist", rviews::userlist},
     {"playerlist", rviews::playerlist},
     {"startMatch", rviews::startMatch},
-    {"challenge", rviews::challenge}
+    {"challenge", rviews::challenge},
+    {"end_match", rviews::endMatch}
 };
 
 ServerHandler::ServerHandler(string host, const int port, MainWindow * window) {
@@ -56,6 +57,7 @@ void ServerHandler::handleMessage(string message) {
     message = split_message(&key, message);
     try {
         try {
+            cout<<key<<endl;
             ServerHandler::viewmap.at (key)(JsonValue::fromString(message), this);
         }
         catch (const std::out_of_range & oor) {

@@ -73,7 +73,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_, SIGNAL(startMatch(Match *,bool)), this, SLOT(startMatch(Match *,bool)));
+    QObject::connect(parent_, SIGNAL(startMatch(Match *,bool,int)), this, SLOT(startMatch(Match *,bool,int)));
     QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
 
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
@@ -132,8 +132,8 @@ void MenuWindow::sendChallenge() {
 
 }
 
-void MenuWindow::startMatch(Match * startingMatch, bool isGuest) {
-    parent_->setNextScreen(MATCHSTATE, startingMatch, isGuest);
+void MenuWindow::startMatch(Match * startingMatch, bool isGuest, int matchID) {
+    parent_->setNextScreen(MATCHSTATE, startingMatch, isGuest, matchID);
 }
 
 void MenuWindow::logOut() {

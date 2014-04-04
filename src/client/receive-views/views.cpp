@@ -81,9 +81,10 @@ void startMatch(JsonValue * message, ServerHandler * handler) {
     }
 
     bool isGuest = getBool(listMessage, "guest");
+    int matchID = getInt(listMessage, "id");
 
     Match * match = new Match(listMessage);
-    emit handler->getWindow()->startMatch(match, isGuest);
+    emit handler->getWindow()->startMatch(match, isGuest, matchID);
 }
 
 void updateMatch(JsonValue * message, ServerHandler * handler) {
@@ -95,6 +96,17 @@ void updateMatch(JsonValue * message, ServerHandler * handler) {
 
     Match * match = new Match(listMessage);
     emit handler->getWindow()->updateMatch(match);
+}
+
+void endMatch(JsonValue * message, ServerHandler * handler){
+    JsonInt * result_int = JINT(message);
+
+    if (result_int == NULL) {
+        throw BadRequest("Malformatted request. Need a JSON int");
+    }
+
+    int result = *result_int;
+    emit handler->getWindow()->endMatch(result);
 }
 
 }

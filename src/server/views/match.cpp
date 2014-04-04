@@ -51,17 +51,21 @@ void surrender(JsonValue* message, UserHandler * handler) {
     int challenge_id = *id_int;
     Challenge * challenge = NULL;
     int i;
-
+    cout<<"TAILLE : "<<handler->getChalenge_list()->size() <<endl;
     for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
+        cout<<"i : "<<i<<endl;
         if (handler->getChalenge_list()->at(i).id == challenge_id) {
             challenge = &(handler->getChalenge_list()->at(i));
+            cout<<challenge<<endl;
         }
     }
     i--; // Decrement the last loop
     if (challenge == NULL) {
+        cout<<"Challenge does not exist"<<endl;
         return sendFail(handler, 406, "challenge", "Challenge does not exist");
     }
     if ((challenge->opponents[0] != handler->getManager()) && (challenge->opponents[1] != handler->getManager())) {
+        cout<<"Challenge is not yours"<<endl;
         return sendFail(handler, 407, "challenge", "This challenge is not yours");
     }
 

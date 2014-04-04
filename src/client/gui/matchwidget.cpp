@@ -4,8 +4,8 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, MainWindow * parent):
-    QWidget(parent), parent_(parent), isGuest_(isGuest) {
+MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainWindow * parent):
+    QWidget(parent), parent_(parent), isGuest_(isGuest), matchID_(matchID) {
     //-----------------------MATCH INITIALISATION-----------------------
     currentMatch_ = startingMatch;
 
@@ -51,9 +51,6 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, MainWindow * paren
     fieldWidget  = new QFrame(mainWidget);
 
 
-    //----------------------CUSTOM SIGNALS CONNECT-------------------------
-
-    QObject::connect(parent_, SIGNAL(setMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
 
 
     //---------------------FIELD REPRESENTATION----------------------------
@@ -78,6 +75,10 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, MainWindow * paren
     QObject::connect(turnEndButton, SIGNAL(clicked()), this, SLOT(endTurn()));
     QObject::connect(surrenderButton, SIGNAL(clicked()), this, SLOT(surrender()));
 
+    //----------------------CUSTOM SIGNALS CONNECT-------------------------
+
+    QObject::connect(parent_, SIGNAL(setMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
+    QObject::connect(parent_, SIGNAL(endMatch(int)), this, SLOT(endMatch(int)));
     //askMatchToServer();
 
 
@@ -265,7 +266,10 @@ void MatchWidget::endTurn() {
 }
 
 void MatchWidget::surrender() {
-    sviews::surrender(parent_->getSocket());
+    cout<<"SURRENDER INCOMING"<<endl;
+    cout<<matchID_<<endl;
+    sviews::surrenders(parent_->getSocket(), matchID_);
+    cout<<"HUH"<<endl;
 }
 
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
@@ -292,6 +296,24 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
         }
         refreshField();
     }
+}
+
+void MatchWidget::endMatch(int signal){
+    QString message;
+    switch(signal){
+        case EndMatch::WIN:
+            message = "Vous avez gagné!";
+        case EndMatch::LOSE:
+            message = "Vous avez perdu.";
+        case EndMatch::SURRENDER_WIN:
+            message = "Vous avez gagné. Votre adversaire a abandonné";
+        case EndMatch::SURRENDER_LOSE:
+            message = "Votre adversaire vous remercie d'avoir abandonné";
+    }
+    QMessageBox::information(this,"Fin du match",message,QMessageBox::Ok);
+    parent_->setNextScreen(MAINMENUSTATE);
+
+
 }
 
 void MatchWidget::nextPlayer() {

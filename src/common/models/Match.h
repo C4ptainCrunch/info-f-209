@@ -33,7 +33,7 @@ public:
     int * getScore();
     int addPoint(bool guestTeam, int delta=1);
     void moveBalls(bool & moved, int turnNumber);
-    void newTurn(Way playerWays[14]);
+    bool newTurn();
     void resolveConflict(Position nextPosition[14], Way playerWays[14], int indexOne, int turnNumber);
     int findIndex(Position nextPosition[14], Position position);
     void movePlayer(Position fromPos, Position toPos);

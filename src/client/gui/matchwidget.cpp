@@ -207,7 +207,6 @@ bool MatchWidget::isInChosenWays(unsigned x, unsigned y){
 
 bool MatchWidget::isCaseHighlighted(unsigned a, unsigned b) {
     for (size_t i = 0; i < highlightedCases.size(); ++i) {
-        //cout<<" x:"<<highlightedCases[i].x<<" y:"<<highlightedCases[i].y<<" a:"<<a<<" b:"<<b<< endl;
         if ((highlightedCases[i].x == a) && (highlightedCases[i].y == b)) {
             return true;
         }
@@ -219,10 +218,14 @@ MatchWidget::~MatchWidget() {}
 
 
 void MatchWidget::setCurrentMatch(Match * match) {
-    cout<<"SETCURRENTMATCH"<<endl;
     currentMatch_ = match;
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);
+    for (int i = 0; i<WIDTH;++i){
+        for (int j = 0; j<LENGTH;++j){
+            grid_[i][j] = grid[i][j];
+        }
+    }
 
     refreshField();
 }
@@ -250,7 +253,6 @@ Position MatchWidget::getCase(QMouseEvent * event) {
             else {
                 column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
             }
-            //cout << grid_[row + 1][column] << endl;
         }
     }
     Position mouseCase;

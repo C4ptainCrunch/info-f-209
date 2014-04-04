@@ -58,12 +58,12 @@ void signup(JsonValue * message, UserHandler * handler) {
     string name = getString(dictMessage, "name");
 
     if (isInConnectedList(handler->getHandlers_list(), username)) {
-        return sendFail(handler, 403, "login", "Already logged");
+        return sendFail(handler, 403, "register", "Already logged");
     }
     string filename = handler->path("users", username);
 
     if (fileExists(filename)) {
-        return sendFail(handler, 402, "login", "User already exists");
+        return sendFail(handler, 402, "register", "User already exists");
     }
 
     Manager * manager = new Manager(name, username, password);

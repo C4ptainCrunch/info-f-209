@@ -7,9 +7,7 @@ Match::Match(Club * hostClub, Club * guestClub) {
     score_[1] = 0;
     srand(time(NULL));
     clubs_[host] = hostClub;
-    cout << hostClub << endl;
     clubs_[guest] = guestClub;
-    cout << guestClub << endl;
 
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();

@@ -19,7 +19,6 @@ ServerHandler::ServerHandler(string host, const int port, MainWindow * window) {
 }
 
 ServerHandler::~ServerHandler() {
-    cout << "BOUM: "  << endl;
     if (s_ != NULL) {
         delete s_;
     }

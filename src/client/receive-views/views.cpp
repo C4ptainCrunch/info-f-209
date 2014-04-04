@@ -89,6 +89,7 @@ void startMatch(JsonValue * message, ServerHandler * handler) {
 }
 
 void updateMatch(JsonValue * message, ServerHandler * handler) {
+    cout<<"UPDATE MATCH"<<endl;
     JsonDict * listMessage = JDICT(message);
 
     if (listMessage == NULL) {

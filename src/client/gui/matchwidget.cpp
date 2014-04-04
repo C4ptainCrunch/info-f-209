@@ -77,7 +77,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
     //----------------------CUSTOM SIGNALS CONNECT-------------------------
 
-    QObject::connect(parent_, SIGNAL(setMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
+    QObject::connect(parent_, SIGNAL(updateMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
     QObject::connect(parent_, SIGNAL(endMatch(int)), this, SLOT(endMatch(int)));
     //askMatchToServer();
 
@@ -219,7 +219,7 @@ MatchWidget::~MatchWidget() {}
 
 
 void MatchWidget::setCurrentMatch(Match * match) {
-
+    cout<<"SETCURRENTMATCH"<<endl;
     currentMatch_ = match;
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);

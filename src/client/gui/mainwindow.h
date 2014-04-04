@@ -47,7 +47,7 @@ signals:
     void userList(std::vector<std::string> *);
     void registerFailure(int);
     void newDefi(std::string * username, int matchID);
-    void setMatch(Match * match);
+    //void setMatch(Match * match);
     void endMatch(int signal);
     void startMatch(Match * match, bool isGuest,int matchID);
     void updateMatch(Match * match);

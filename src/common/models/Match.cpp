@@ -14,6 +14,8 @@ Match::Match(Club * hostClub, Club * guestClub) {
     budgers_[0] = Budger();
     budgers_[1] = Budger();
     generateGrid();
+    ready_[0] = false;
+    ready_[1] = false;
 
 }
 
@@ -72,6 +74,8 @@ Match::Match(Club * hostClub, Club * guestClub, GoldenSnitch goldenSnitch, Quaff
     grid_[pos.x][pos.y].ball = &budgers_[0];
     pos = budgers_[1].getPosition();
     grid_[pos.x][pos.y].ball = &budgers_[1];
+    ready_[0] = false;
+    ready_[1] = false;
 }
 
 Match::Match(JsonValue * json) {
@@ -124,6 +128,8 @@ Match::Match(JsonValue * json) {
 
         grid_[x][y] = Case::fromJson((*kase)["case"]);
     }
+    ready_[0] = false;
+    ready_[1] = false;
 }
 
 Match::~Match() {}
@@ -470,4 +476,14 @@ void Match::setWays(bool isGuest, Way playerWays[7]) {
     for (int i = 0; i < 7; i++) {
         playerWays_[isGuest][i] = playerWays[i];
     }
+}
+
+bool Match::setReady(bool isGuest){
+    ready_[isGuest] = true;
+    if(ready_[!isGuest]){
+        ready_[0] = false;
+        ready_[1] = false;
+        return true;
+    }
+    return false;
 }

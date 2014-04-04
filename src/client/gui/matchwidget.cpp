@@ -303,12 +303,16 @@ void MatchWidget::endMatch(int signal){
     switch(signal){
         case EndMatch::WIN:
             message = "Vous avez gagné!";
+            break;
         case EndMatch::LOSE:
             message = "Vous avez perdu.";
+            break;
         case EndMatch::SURRENDER_WIN:
             message = "Vous avez gagné. Votre adversaire a abandonné";
+            break;
         case EndMatch::SURRENDER_LOSE:
             message = "Votre adversaire vous remercie d'avoir abandonné";
+            break;
     }
     QMessageBox::information(this,"Fin du match",message,QMessageBox::Ok);
     parent_->setNextScreen(MAINMENUSTATE);

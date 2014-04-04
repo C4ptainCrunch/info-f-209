@@ -28,6 +28,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     fields->setFixedHeight(250);
     fields->setFixedWidth(150);
     QLineEdit * userLine_ = new QLineEdit("username", fields);
+    userLine_->setSelection(0,10);
 
     QLineEdit * passLine_ = new QLineEdit("password", fields);
     passLine_->setEchoMode(QLineEdit::Password); // Display bullets instead of char

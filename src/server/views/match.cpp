@@ -69,7 +69,7 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             }
             else {
                 other_handler = handler;
-                handler = handler->findHandler(challenge->opponents[0]);
+                handler = handler->findHandler(challenge->opponents[1]);
             }
 
             if(match->getScore()[0] > match->getScore()[1]){
@@ -86,7 +86,36 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             cout << "END" << endl;
         }
         else{
-            //TODO send
+            // updateMatch(json Match)
+            Challenge * challenge = NULL;
+            int i;
+            for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
+                if (handler->getChalenge_list()->at(i).opponents[0] == handler->getManager() || handler->getChalenge_list()->at(i).opponents[1] == handler->getManager()) {
+                    challenge = &(handler->getChalenge_list()->at(i));
+                    cout<<challenge<<endl;
+                }
+            }
+            i--; // Decrement the last loop
+            if (challenge == NULL) {
+                cout<<"Challenge does not exist"<<endl;
+                return sendFail(handler, 406, "challenge", "Challenge does not exist");
+            }
+            if ((challenge->opponents[0] != handler->getManager()) && (challenge->opponents[1] != handler->getManager())) {
+                cout<<"Challenge is not yours"<<endl;
+                return sendFail(handler, 407, "challenge", "This challenge is not yours");
+            }
+
+
+            UserHandler * other_handler;
+            if (challenge->opponents[0] == handler->getManager()) {
+                other_handler = handler->findHandler(challenge->opponents[1]);
+            }
+            else {
+                other_handler = handler->findHandler(challenge->opponents[0]);
+            }
+
+            handler->writeToClient("updateMatch", new JsonValue( * match));
+            other_handler->writeToClient("updateMatch", new JsonValue( * match));
         }
     }
 }

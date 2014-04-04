@@ -114,8 +114,9 @@ void end_turn(JsonValue * message, UserHandler * handler) {
                 other_handler = handler->findHandler(challenge->opponents[0]);
             }
 
-            handler->writeToClient("updateMatch", new JsonValue( * match));
-            other_handler->writeToClient("updateMatch", new JsonValue( * match));
+            JsonDict payload = (JsonDict) * match;
+            handler->writeToClient("updateMatch", &payload);
+            other_handler->writeToClient("updateMatch", &payload);
         }
     }
 }

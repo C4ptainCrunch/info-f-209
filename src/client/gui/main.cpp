@@ -51,7 +51,7 @@ int main(int argc, char * argv[]) {
         exit(1);
     }
 
-    emit window->setNextScreen(MAINMENUSTATE);
+    //emit window->setNextScreen(MAINMENUSTATE);
     Thread loopThread = Thread(start_loop, (void *)&handler);
 
     return app.exec();

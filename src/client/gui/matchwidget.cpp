@@ -122,7 +122,7 @@ void MatchWidget::refreshField() {
                 }
                 else{
                     if (grid_[i][j].player != 0) {
-                            if (!grid_[i][j].player->isInGuestTeam()) {
+                            if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
                                 painter.setBrush(QBrush(Qt::blue));
 
                                 color = "blue";

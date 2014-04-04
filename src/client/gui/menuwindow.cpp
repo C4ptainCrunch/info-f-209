@@ -122,13 +122,11 @@ void MenuWindow::sendChallenge() {
     Club * club1 = new Club();
     Club * club2 = new Club();
 
-    parent_->setNextScreen(MATCHSTATE, new Match(club1, club2));
+    //parent_->setNextScreen(MATCHSTATE, new Match(club1, club2), true);
 
-    /*
-     * PLEASE UNCOMMENT ME, I BEG YOU
-       string opponent = list->currentText().toStdString();
-       sviews::challenge(parent_->getSocket(), opponent);
-     */
+     string opponent = list->currentText().toStdString();
+     sviews::challenge(parent_->getSocket(), opponent);
+
 }
 
 void MenuWindow::startMatch(Match * startingMatch, bool isGuest) {

@@ -1,5 +1,5 @@
-#ifndef CLIENT_RECIEVE_VIEWS_H
-#define CLIENT_RECIEVE_VIEWS_H
+#ifndef RECIEVE_SERVER_HANDLER
+#define RECIEVE_SERVER_HANDLER
 
 #include <iostream>
 #include <string>
@@ -28,6 +28,7 @@
 #include "../../common/lib/socket/Socket.h"
 #include "../../common/lib/json/json.h"
 #include "../../common/lib/exception/BadRequest.h"
+#include "../../common/lib/exception/SocketError.h"
 #include "../../common/lib/json/helpers.h"
 #include "views.h"
 #include "../gui/mainwindow.h"
@@ -58,5 +59,4 @@ private:
 };
 
 std::string split_message(std::string * key, std::string message);
-//CLIENT_RECIEVE_VIEWS_H
 #endif

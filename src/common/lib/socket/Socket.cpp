@@ -29,13 +29,11 @@ Socket::Socket(string hostname, int port) {
     struct hostent * he;
 
     if ((he = gethostbyname(hostname.c_str())) == NULL) {
-        perror("Client: gethostbyname");
-        throw 1;
+        throw SocketError("gethostbyname : " + std::string(strerror(errno)));
     }
 
     if ((sockfd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
-        perror("Client: socket");
-        throw 1;
+        throw SocketError("socket : " + std::string(strerror(errno)));
     }
 
     their_addr.sin_family = AF_INET;
@@ -45,8 +43,7 @@ Socket::Socket(string hostname, int port) {
 
 
     if (connect(sockfd, (struct sockaddr *)&their_addr, sizeof(struct sockaddr)) == -1) {
-        perror("Client: connect");
-        throw 1;
+        throw SocketError("connect : " + std::string(strerror(errno)));
     }
 
     buffer[0] = '\0';

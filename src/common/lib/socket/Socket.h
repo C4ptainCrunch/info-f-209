@@ -13,6 +13,8 @@
 #include <string>
 #include <string.h>
 
+#include "../exception/SocketError.h"
+
 
 #define SBUFF_SIZE 32
 #define MESSAGE_END "\n\n"

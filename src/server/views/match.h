@@ -1,5 +1,5 @@
-#ifndef SVIEWMATCH_H
-#define SVIEWMATCH_H
+#ifndef SERV_VIEWMATCH_H
+#define SERV_VIEWMATCH_H
 
 #include <cstdlib>
 #include <vector>
@@ -18,4 +18,4 @@ void surrender(JsonValue* message, UserHandler * handler);
 
 #include "../UserHandler.h"
 
-#endif // SVIEWMATCH_H
+#endif

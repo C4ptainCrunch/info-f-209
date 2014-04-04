@@ -1,5 +1,5 @@
-#ifndef BADREQUEST
-#define BADREQUEST
+#ifndef SOCKETERROR
+#define SOCKETERROR
 
 #include <iostream>
 #include <sstream>

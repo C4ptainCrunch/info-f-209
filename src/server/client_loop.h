@@ -1,5 +1,5 @@
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef CLIENT_LOOP
+#define CLIENT_LOOP
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,4 +17,4 @@ int main(int argc, char * argv[]);
 
 void * client_loop(void *);
 
-#endif // SERVER_H
+#endif

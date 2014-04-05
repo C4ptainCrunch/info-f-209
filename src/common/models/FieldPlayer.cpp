@@ -2,16 +2,16 @@
 
 using namespace std;
 
-FieldPlayer::FieldPlayer(int role, bool guest): role_(role), guest_(guest) {}
+FieldPlayer::FieldPlayer(int role, bool guest): role_(role), guest_(guest), hasQuaffle_(false) {}
 
-FieldPlayer::FieldPlayer(): role_(0) {
+FieldPlayer::FieldPlayer(): role_(0), hasQuaffle_(false){
     guest_ = false;
 
 }
 
 FieldPlayer::~FieldPlayer() {}
 
-FieldPlayer::FieldPlayer(NonFieldPlayer & nonFieldPlayer, int role, bool guest) {
+FieldPlayer::FieldPlayer(NonFieldPlayer & nonFieldPlayer, int role, bool guest):  hasQuaffle_(false){
     speed_ = nonFieldPlayer.getSpeed();
     force_ = nonFieldPlayer.getForce();
     agility_ = nonFieldPlayer.getAgility();
@@ -24,7 +24,7 @@ FieldPlayer::FieldPlayer(NonFieldPlayer & nonFieldPlayer, int role, bool guest) 
 
 }
 
-FieldPlayer::FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest): Player(speed, force, agility, reflexes, passPrecision, wounded, inventory), role_(role), guest_(guest) {}
+FieldPlayer::FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest, bool hasQuaffle): Player(speed, force, agility, reflexes, passPrecision, wounded, inventory), role_(role), guest_(guest), hasQuaffle_(hasQuaffle){}
 
 FieldPlayer::FieldPlayer(JsonValue * json) {
     JsonDict * player_dict = JDICT(json);
@@ -92,7 +92,14 @@ FieldPlayer::FieldPlayer(JsonValue * json) {
 
     bool guest = *guest_bool;
 
-    new (this)FieldPlayer(speed, force, agility, reflexes, passPrecision, wounded, inventory, role, guest);
+    JsonBool * hasQuaffle_bool = JBOOL((*player_dict)["hasQuaffle"]);
+    if (hasQuaffle_bool == NULL) {
+        throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
+    }
+
+    bool hasQuaffle = *hasQuaffle_bool;
+
+    new (this)FieldPlayer(speed, force, agility, reflexes, passPrecision, wounded, inventory, role, guest, hasQuaffle);
 }
 
 FieldPlayer & FieldPlayer::operator=(Player & player) {
@@ -143,6 +150,7 @@ FieldPlayer::operator JsonDict() const {
 
     r.add("role", new JsonInt(role_));
     r.add("guest", new JsonBool(guest_));
+    r.add("hasQuaffle", new JsonBool(hasQuaffle_));
 
     JsonList * inventory = new JsonList();
     for (int i = 0; i < inventory_.size(); i++) {
@@ -152,4 +160,12 @@ FieldPlayer::operator JsonDict() const {
     r.add("inventory", inventory);
 
     return r;
+}
+
+bool FieldPlayer::hasQuaffle() const{
+    return hasQuaffle_;
+}
+
+void FieldPlayer::setHasQuaffle(bool hasQuaffle){
+    hasQuaffle_ = hasQuaffle;
 }

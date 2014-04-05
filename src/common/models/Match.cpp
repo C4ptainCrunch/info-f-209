@@ -342,6 +342,31 @@ void Match::moveBalls(bool & moved, int turnNumber) {
         }
     }
 
+    //QUAFFLE
+    Way quaffleWay = quaffle_.getWay();
+    Position quafflePos = quaffle_.getPosition();
+    if(quaffleWay.size() > 0){
+        Position nexPos = quaffleWay[0];
+        if(grid_[nexPos.x][nexPos.y].ball == 0){
+            grid_[nexPos.x][nexPos.y].ball = &quaffle_;
+            grid_[quafflePos.x][quafflePos.y].ball = 0;
+            quaffle_.setPosition(nexPos);
+            quafflePos = nexPos;
+            quaffleWay.erase(quaffleWay.begin());
+        }
+        else{
+            quaffleWay.pop_back();
+        }
+        quaffle_.setWay(quaffleWay);
+    }
+    if(grid_[quafflePos.x][quafflePos.y].player != 0){
+        if(grid_[quafflePos.x][quafflePos.y].player->getRole() == CHASER){
+            grid_[quafflePos.x][quafflePos.y].player->setHasQuaffle(true);
+            quaffle_.setPosition(0, 0);
+        }
+    }
+
+
 
 }
 
@@ -394,7 +419,12 @@ string Match::print() { //FOR TEST PURPOSES
                         c += "G ";
                     }
                     else if (grid_[i][j].player->getRole() == CHASER) {
-                        c += "P ";
+                        if(grid_[i][j].player->hasQuaffle()){
+                            c += "P\\";
+                        }
+                        else{
+                            c += "P ";
+                        }
                     }
                     else if (grid_[i][j].player->getRole() == SEEKER) {
                         c += "A ";

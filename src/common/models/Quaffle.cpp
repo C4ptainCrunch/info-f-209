@@ -61,6 +61,10 @@ Way Quaffle::getWay() const {
     return thrownWay_;
 }
 
+void Quaffle::setWay(Way way){
+    thrownWay_ = way;
+}
+
 Quaffle::operator JsonDict() const {
     JsonDict r;
     r.add("speed", new JsonInt(speed_));

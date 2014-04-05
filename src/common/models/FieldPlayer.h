@@ -9,7 +9,7 @@ class FieldPlayer: public Player {
 
 public:
     FieldPlayer(int role, bool guest);
-    FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest);
+    FieldPlayer(int speed, int force, int agility, int reflexes, int passPrecision, bool wounded, std::vector<Item> inventory, int role, bool guest, bool hasQuaffle);
     FieldPlayer();
     FieldPlayer(JsonValue * json);
     ~FieldPlayer();
@@ -25,9 +25,12 @@ public:
     int getRole();
     void setRole(int role);
     operator JsonDict() const;
+    bool hasQuaffle() const;
+    void setHasQuaffle(bool hasQuaffle);
 private:
     bool guest_;
     int role_;
+    bool hasQuaffle_;
 
 };
 

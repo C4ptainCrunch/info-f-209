@@ -19,6 +19,7 @@ public:
     void thrown(const char direction, const int power, const Case grid[WIDTH][LENGTH]);
     std::string getName();
     Way getWay() const;
+    void setWay(Way way);
 
 private:
     Way thrownWay_;

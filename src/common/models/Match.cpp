@@ -268,7 +268,7 @@ void Match::generateGrid() {
 }
 
 void Match::movePlayer(Position fromPos, Position toPos) {
-    grid_[toPos.x][toPos.y].player = grid_[fromPos.x][toPos.y].player;
+    grid_[toPos.x][toPos.y].player = grid_[fromPos.x][fromPos.y].player;
     grid_[fromPos.x][fromPos.y].player = 0;
 }
 
@@ -315,6 +315,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     for (int i = 0; i < 2; ++i) {
         nextBallPos = budgers_[i].autoMove(grid_);
         grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
+        budgers_[i].setPosition(nextBallPos.x, nextBallPos.y);
         grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
         if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
             // TODO set direction and power for isHit and hitPlayer.
@@ -331,6 +332,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     //GOLDENSNITCH
     nextBallPos = goldenSnitch_.autoMove(grid_);
     grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
+    goldenSnitch_.setPosition(nextBallPos.x, nextBallPos.y);
     grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
     if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
         if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == SEEKER) {

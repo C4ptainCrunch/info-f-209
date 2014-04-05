@@ -62,25 +62,17 @@ void end_turn(JsonValue * message, UserHandler * handler) {
                 return sendFail(handler, 407, "challenge", "This challenge is not yours");
             }
 
-
-            UserHandler * other_handler;
-            if (challenge->opponents[0] == handler->getManager()) {
-                other_handler = handler->findHandler(challenge->opponents[1]);
-            }
-            else {
-                other_handler = handler;
-                handler = handler->findHandler(challenge->opponents[1]);
-            }
-
+            UserHandler * guestHandler = handler->findHandler(challenge->opponents[1]);
+            UserHandler * hostHandler = handler->findHandler(challenge->opponents[0]);
             if(match->getScore()[0] > match->getScore()[1]){
                 //Host win
-                handler->writeToClient("end_match", new JsonInt(EndMatch::WIN));
-                other_handler->writeToClient("end_match", new JsonInt(EndMatch::LOSE));
+                hostHandler->writeToClient("end_match", new JsonInt(EndMatch::WIN));
+                guestHandler->writeToClient("end_match", new JsonInt(EndMatch::LOSE));
             }
             else{
                 //Guest win
-                handler->writeToClient("end_match", new JsonInt(EndMatch::LOSE));
-                other_handler->writeToClient("end_match", new JsonInt(EndMatch::WIN));
+                hostHandler->writeToClient("end_match", new JsonInt(EndMatch::LOSE));
+                guestHandler->writeToClient("end_match", new JsonInt(EndMatch::WIN));
             }
             handler->getChalenge_list()->erase(handler->getChalenge_list()->begin() + i);
             cout << "END" << endl;

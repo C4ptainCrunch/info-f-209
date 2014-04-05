@@ -92,8 +92,8 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
 void MatchWidget::refreshField() {
     this->hide();
-    ownScore->setText("VOUS : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
-    opponentScore->setText("ADVERSAIRE : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
+    ownScore->setText("VOUS : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[isGuest_])));
+    opponentScore->setText("ADVERSAIRE : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[!isGuest_])));
 
     label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);

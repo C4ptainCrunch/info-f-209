@@ -272,7 +272,7 @@ void Match::movePlayer(Position fromPos, Position toPos) {
     grid_[fromPos.x][fromPos.y].player = 0;
     if(grid_[toPos.x][toPos.y].player->hasQuaffle()){
         if(grid_[toPos.x][toPos.y].type == GOAL){
-            if(toPos.y < WIDTH / 2){
+            if(toPos.y > WIDTH / 2){
                 score_[0]+=10;
             }
             else{
@@ -381,7 +381,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
         }
     }
     if(grid_[quafflePos.x][quafflePos.y].type == GOAL){
-        if(quafflePos.y < WIDTH / 2){
+        if(quafflePos.y > WIDTH / 2){
             score_[0]+=10;
         }
         else{

@@ -4,9 +4,8 @@
 
 using namespace std;
 
-MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
-    QWidget(parent) {
-    parent_ = parent;
+MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainWindow * parent):
+    QWidget(parent), parent_(parent), isGuest_(isGuest), matchID_(matchID) {
     //-----------------------MATCH INITIALISATION-----------------------
     currentMatch_ = startingMatch;
 
@@ -28,7 +27,8 @@ MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
 
     //------------------------SCORE SETTINGS--------------------------------
-    QLabel * ownScore = new QLabel("VOUS : 0", mainWidget);
+    int playerScore = currentMatch_->getScore()[0];
+    ownScore = new QLabel("VOUS : "+ QString::fromStdString(std::to_string(playerScore)), mainWidget);
     ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
@@ -39,7 +39,8 @@ MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
     ownScore->move(100, 50);
     ownScore->show();
 
-    opponentScore = new QLabel("ADVERSAIRE : 0", mainWidget);
+    int otherScore = currentMatch_->getScore()[1];
+    opponentScore = new QLabel("ADVERSAIRE : "+ QString::fromStdString(std::to_string(otherScore)), mainWidget);
     opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
@@ -52,9 +53,6 @@ MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
     fieldWidget  = new QFrame(mainWidget);
 
 
-    //----------------------CUSTOM SIGNALS CONNECT-------------------------
-
-    QObject::connect(parent_, SIGNAL(setMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
 
 
     //---------------------FIELD REPRESENTATION----------------------------
@@ -79,19 +77,27 @@ MatchWidget::MatchWidget(Match * startingMatch, MainWindow * parent):
     QObject::connect(turnEndButton, SIGNAL(clicked()), this, SLOT(endTurn()));
     QObject::connect(surrenderButton, SIGNAL(clicked()), this, SLOT(surrender()));
 
+    //----------------------CUSTOM SIGNALS CONNECT-------------------------
+
+    QObject::connect(parent_, SIGNAL(updateMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
+    QObject::connect(parent_, SIGNAL(endMatch(int)), this, SLOT(endMatch(int)));
     //askMatchToServer();
 
 
     currentMatch_->getGrid(grid_);
+    label = 0;
     refreshField();
-    mainWidget->show();
 
+    mainWidget->show();
 
 }
 
 void MatchWidget::refreshField() {
+    this->hide();
+    ownScore->setText("VOUS : "+ QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
+    opponentScore->setText("ADVERSAIRE : "+ QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
 
-    QLabel * label = new QLabel(fieldWidget);
+    label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
     pixmap->fill(Qt::transparent);
 
@@ -104,26 +110,34 @@ void MatchWidget::refreshField() {
     double x = 0;
     double y = 0;
     bool pair = true;
+    bool highlighted;
+    bool chosen;
     for (int i = 0; i < WIDTH; ++i) {
         for (int j = 0; j < LENGTH; ++j) {
+            highlighted = false;
+            chosen = false;
             hexagon[i][j].setX(x);
             hexagon[i][j].setY(y);
             hexagon[i][j].setCorners();
 
             x += 18;
             if (grid_[i][j].type == USABLE) {
+                if (isCaseHighlighted(i, j)) {
+                    painter.setBrush(QBrush(QColor(71,158,158)));
+                    highlighted = true;
+                }
+                else if(isInChosenWays(i,j)){
+                    painter.setBrush(QBrush(QColor(85,18,201)));
+                    chosen = true;
+                }
                 if (grid_[i][j].player != 0) {
-                    if (isCaseHighlighted(i, j)) {
-                        painter.setOpacity(0.6);
-                    }
-                    else {
-                        painter.setOpacity(1.0);
-                    }
-                    if (!grid_[i][j].player->isInGuestTeam()) {
-                        painter.setBrush(QBrush(Qt::blue));
-                    }
-                    else {
-                        painter.setBrush(QBrush(Qt::red));
+                    if(!highlighted && !chosen){
+                        if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
+                            painter.setBrush(QBrush(Qt::blue));
+                        }
+                        else {
+                            painter.setBrush(QBrush(Qt::red));
+                        }
                     }
                     if (grid_[i][j].player->getRole() == KEEPER) {
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER] = new QLabel("K", fieldWidget);
@@ -148,20 +162,26 @@ void MatchWidget::refreshField() {
                         painter.setBrush(QBrush(Qt::black));
                     }
                     else if (ballName == "Q") {
-                        painter.setBrush(QBrush(Qt::red));
+                        painter.setBrush(QBrush(QColor(140,52,52)));
                     }
-                    else { //ballName == "G")
+                    else { //ballName == "G"
                         painter.setBrush(QBrush(Qt::yellow));
                     }
                 }
                 else {
-                    painter.setBrush(*grass);
+                    if(!highlighted && !chosen){
+                        painter.setBrush(*grass);
+                    }
                 }
-                painter.drawPolygon(hexagon[i][j].hexagon_);
-
+                if(highlighted){
+                    painter.drawPolygon(hexagon[i][j].hexagon_);
+                }
+                else{
+                    painter.drawPolygon(hexagon[i][j].hexagon_);
+                }
             }
             else if (grid_[i][j].type == GOAL) {
-                painter.setBrush(QBrush(QColor(171, 171, 171)));
+                painter.setBrush(QBrush(QColor(64, 64, 72)));
                 painter.drawPolygon(hexagon[i][j].hexagon_);
             }
         }
@@ -175,13 +195,24 @@ void MatchWidget::refreshField() {
         pair = !pair;
     }
     label->setPixmap(*pixmap);
-    mainWidget->show();
+
+    this->show();
 }
 
+bool MatchWidget::isInChosenWays(unsigned x, unsigned y){
+    for (int i = 0; i<chosenWays.size();++i){
+        for (int j = 0; j<chosenWays[i].size();++j){
+            if(chosenWays[i][j].x == x && chosenWays[i][j].y == y){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
-bool MatchWidget::isCaseHighlighted(unsigned x, unsigned y) {
+bool MatchWidget::isCaseHighlighted(unsigned a, unsigned b) {
     for (size_t i = 0; i < highlightedCases.size(); ++i) {
-        if ((highlightedCases[i].x == x) && (highlightedCases[i].y == y)) {
+        if ((highlightedCases[i].x == a) && (highlightedCases[i].y == b)) {
             return true;
         }
     }
@@ -192,10 +223,14 @@ MatchWidget::~MatchWidget() {}
 
 
 void MatchWidget::setCurrentMatch(Match * match) {
-
     currentMatch_ = match;
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);
+    for (int i = 0; i<WIDTH;++i){
+        for (int j = 0; j<LENGTH;++j){
+            grid_[i][j] = grid[i][j];
+        }
+    }
 
     refreshField();
 }
@@ -223,8 +258,6 @@ Position MatchWidget::getCase(QMouseEvent * event) {
             else {
                 column = ((event->x() - startHeight + halfHeight) / hexagonHeight);
             }
-            cout << "ROW : " << row << " COL : " << column << endl;
-            //cout << grid_[row + 1][column] << endl;
         }
     }
     Position mouseCase;
@@ -235,12 +268,15 @@ Position MatchWidget::getCase(QMouseEvent * event) {
 
 void MatchWidget::endTurn() {
     sviews::endTurn(parent_->getSocket(), chosenWays);
+    chosenWays.clear();
 
 }
 
 void MatchWidget::surrender() {
-    sviews::surrender(parent_->getSocket());
+    sviews::surrenders(parent_->getSocket(), matchID_);
+
 }
+
 void MatchWidget::mousePressEvent(QMouseEvent * event) {
     if (event->button() == Qt::RightButton) {
         highlightedCases.clear();
@@ -248,12 +284,45 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
     }
     else {
         Position clickedCase = getCase(event);
-        if (highlightedCases.empty() or isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
-            highlightedCases.push_back(clickedCase);
-            cout << highlightedCases.size() << endl;
+        if (highlightedCases.empty()){
+            int i = clickedCase.x;
+            int j = clickedCase.y;
+            if(grid_[i][j].player!= 0 && grid_[i][j].player->isInGuestTeam() == isGuest_){
+                highlightedCases.push_back(clickedCase);
+            }
+        }
+        else{
+            if(isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
+                highlightedCases.push_back(clickedCase);
+            }
+            else if(highlightedCases[highlightedCases.size() - 1] == clickedCase){
+                emit this->nextPlayer();
+            }
         }
         refreshField();
     }
+}
+
+void MatchWidget::endMatch(int signal){
+    QString message;
+    switch(signal){
+        case EndMatch::WIN:
+            message = "Vous avez gagné!";
+            break;
+        case EndMatch::LOSE:
+            message = "Vous avez perdu.";
+            break;
+        case EndMatch::SURRENDER_WIN:
+            message = "Vous avez gagné. Votre adversaire a abandonné";
+            break;
+        case EndMatch::SURRENDER_LOSE:
+            message = "Votre adversaire vous remercie d'avoir abandonné";
+            break;
+    }
+    QMessageBox::information(this,"Fin du match",message,QMessageBox::Ok);
+    parent_->setNextScreen(MAINMENUSTATE);
+
+
 }
 
 void MatchWidget::nextPlayer() {

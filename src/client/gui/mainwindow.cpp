@@ -6,7 +6,8 @@ using namespace std;
 MainWindow::MainWindow(QWidget * parent):
     QWidget(parent) {
     s_ = 0;
-    cout << QCoreApplication::applicationDirPath().toStdString() << endl;
+    menu_ = NULL;
+    match_ = NULL;
 
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
@@ -27,7 +28,7 @@ MainWindow::MainWindow(QWidget * parent):
     login->show();
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
-    QObject::connect(this, SIGNAL(newDefi(std::string)), this, SLOT(getDefi(std::string)));
+    QObject::connect(this, SIGNAL(newDefi(std::string *,int)), this, SLOT(getDefi(std::string *,int)));
 
     QObject::connect(this, SIGNAL(playerList(std::vector<NonFieldPlayer *> *)), this, SLOT(recievePlayers(std::vector<NonFieldPlayer *> *)));
 
@@ -37,8 +38,7 @@ MainWindow::MainWindow(QWidget * parent):
 MainWindow::~MainWindow()
 {}
 
-void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
-    cout << nextState;
+void MainWindow::setNextScreen(int nextState, Match * startingMatch, bool isGuest, int matchID) {
     switch (nextState) {
         case LOGINMENUSTATE: {
             loginScreenWidget * login = new loginScreenWidget(this);
@@ -47,10 +47,13 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
             break;
         }
         case MAINMENUSTATE: {
-            MenuWindow * menu = new MenuWindow(this);
-            currentWidget = menu;
-            menu->show();
-            menu->enable();
+            if (menu_ != NULL){
+                delete menu_;
+                menu_ = NULL;
+            }
+            menu_ = new MenuWindow(this);
+            //currentWidget = menu;
+            menu_->show();
             break;
 
         }
@@ -67,11 +70,13 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch) {
             break;
         }
         case MATCHSTATE: {
-            cout << "MatchWidget" << endl;
-            MatchWidget * match = new MatchWidget(startingMatch, this);
-            currentWidget = match;
-            cout << "allo" << endl;
-            match->show();
+            if (match_ != NULL){
+                delete match_;
+                match_ = NULL;
+            }
+            match_ = new MatchWidget(startingMatch, isGuest, matchID, this);
+            //currentWidget = match;
+            //match->show();
             break;
         }
         case INFRASTRUCTURESTATE: {
@@ -90,7 +95,7 @@ QWidget * MainWindow::getCurrentWidget() {
 }
 
 
-void QWidget::closeEvent(QCloseEvent * event) {
+void MainWindow::closeEvent(QCloseEvent * event) {
     event->accept();
     if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous Quitter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
         event->accept();
@@ -105,9 +110,7 @@ void MainWindow::askPlayers() {
 }
 
 void MainWindow::recievePlayers(std::vector<NonFieldPlayer *> * players) {
-    cout << "REAL SIZE : " << players->size() << endl;
     playersList = *players;
-    cout << "DAMN SIZE : " << playersList.size() << endl;
     this->setNextScreen(TEAMHANDLINGSTATE);
 }
 
@@ -116,15 +119,16 @@ vector<NonFieldPlayer *> MainWindow::getPlayers() {
 }
 
 
-void MainWindow::getDefi(string username) {
-    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
+void MainWindow::getDefi(string * username, int matchID) {
+    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(*username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
     if (accept == QMessageBox::Yes) {
-        sviews::acceptChallenge(this->s_, username);
+        sviews::acceptChallenge(this->s_, *username, matchID);
     }
     else if (accept == QMessageBox::No) {
-        sviews::refuseChallenge(this->s_, username);
-
+        sviews::refuseChallenge(this->s_, *username, matchID);
     }
+    delete username;
+    username = NULL;
 }
 
 void MainWindow::setSocket(Socket * s) {
@@ -133,4 +137,12 @@ void MainWindow::setSocket(Socket * s) {
 
 Socket * MainWindow::getSocket() {
     return s_;
+}
+
+bool MainWindow::isFirstMenu(){
+    return firstMenu;
+}
+
+void MainWindow::setFirstMenu(bool menu){
+    firstMenu = menu;
 }

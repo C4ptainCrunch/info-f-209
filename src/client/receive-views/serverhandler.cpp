@@ -8,7 +8,10 @@ const map<string, view_ptr> ServerHandler::viewmap = {
     {"register", rviews::signup},
     {"userlist", rviews::userlist},
     {"playerlist", rviews::playerlist},
-    {"startMatch", rviews::startMatch}
+    {"startMatch", rviews::startMatch},
+    {"challenge", rviews::challenge},
+    {"end_match", rviews::endMatch},
+    {"updateMatch", rviews::updateMatch}
 };
 
 ServerHandler::ServerHandler(string host, const int port, MainWindow * window) {
@@ -19,7 +22,6 @@ ServerHandler::ServerHandler(string host, const int port, MainWindow * window) {
 }
 
 ServerHandler::~ServerHandler() {
-    cout << "BOUM: "  << endl;
     if (s_ != NULL) {
         delete s_;
     }
@@ -38,14 +40,14 @@ bool ServerHandler::connect_socket() {
 
 void ServerHandler::send(string message) {
     if (s_ == NULL) {
-        throw 1;
+        throw SocketError("Unitialized socket");
     }
     s_->write(message);
 }
 
 int ServerHandler::recieve(string & message) {
     if (s_ == NULL) {
-        throw 1;
+        throw SocketError("Unitialized socket");
     }
     return s_->read(message);
 }

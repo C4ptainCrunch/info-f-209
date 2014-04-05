@@ -86,15 +86,20 @@ int main(int argc, char * argv[]) {
     };
 
     while (1) {
+        vector<Thread> thread_pool = vector<Thread>();
         ClientSocket * client_socket = binded->accept_client();
         cout << "Got connection from " << client_socket->remote() << endl;
 
         UserHandler * current_handler = new UserHandler(&shared_data, client_socket);
-        new Thread(client_loop, current_handler);
-        // TODO : delete thread when thread.dead()
+        thread_pool.push_back(Thread(client_loop, current_handler));
 
         shared_data.handlers_list.push_back(current_handler);
+
+        for(int i = 0; i < thread_pool.size(); i++){
+            if(!thread_pool.at(i).alive()){
+                thread_pool.erase(thread_pool.begin() + i);
+            }
+        }
     }
-    // TODO: delete binded
     return 0;
 }

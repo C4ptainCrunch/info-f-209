@@ -2,27 +2,29 @@
 
 using namespace std;
 
-Match::Match(Club & hostClub, Club & guestClub) {
+Match::Match(Club * hostClub, Club * guestClub) {
     score_[0] = 0;
     score_[1] = 0;
     srand(time(NULL));
-    clubs_[host] = &hostClub;
-    clubs_[guest] = &guestClub;
+    clubs_[host] = hostClub;
+    clubs_[guest] = guestClub;
 
     goldenSnitch_ = GoldenSnitch();
     quaffle_ = Quaffle();
     budgers_[0] = Budger();
     budgers_[1] = Budger();
     generateGrid();
+    ready_[0] = false;
+    ready_[1] = false;
 
 }
 
-Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame) {
+Match::Match(Club * hostClub, Club * guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame) {
     score_[0] = score[0];
     score_[1] = score[1];
     srand(time(NULL));
-    clubs_[host] = &hostClub;
-    clubs_[guest] = &guestClub;
+    clubs_[host] = hostClub;
+    clubs_[guest] = guestClub;
 
     goldenSnitch_ = goldenSnitch;
     quaffle_ = quaffle;
@@ -72,6 +74,8 @@ Match::Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaff
     grid_[pos.x][pos.y].ball = &budgers_[0];
     pos = budgers_[1].getPosition();
     grid_[pos.x][pos.y].ball = &budgers_[1];
+    ready_[0] = false;
+    ready_[1] = false;
 }
 
 Match::Match(JsonValue * json) {
@@ -81,8 +85,8 @@ Match::Match(JsonValue * json) {
         throw ModelUnserializationError(string(__FUNCTION__) + " in " + string(__FILE__) + ":" + to_string(__LINE__));
     }
 
-    Club hostClub =  Club((*match)["hostClub"]);
-    Club guestClub =  Club((*match)["guestClub"]);
+    Club * hostClub = new Club((*match)["hostClub"]);
+    Club * guestClub = new Club((*match)["guestClub"]);
 
     GoldenSnitch goldenSnitch((*match)["goldenSnitch"]);
     Quaffle quaffle((*match)["quaffle"]);
@@ -124,6 +128,8 @@ Match::Match(JsonValue * json) {
 
         grid_[x][y] = Case::fromJson((*kase)["case"]);
     }
+    ready_[0] = false;
+    ready_[1] = false;
 }
 
 Match::~Match() {}
@@ -262,18 +268,25 @@ void Match::generateGrid() {
 }
 
 void Match::movePlayer(Position fromPos, Position toPos) {
-    grid_[toPos.x][toPos.y].player = grid_[fromPos.x][toPos.y].player;
+    grid_[toPos.x][toPos.y].player = grid_[fromPos.x][fromPos.y].player;
     grid_[fromPos.x][fromPos.y].player = 0;
 }
 
-void Match::newTurn(Way playerWays[14]) {
+bool Match::newTurn() {
+    Way playerWays[14];
+    for(int i =0; i< 7; i++){
+        playerWays[i] = playerWays_[0][i];
+    }
+    for(int i =0; i< 7; i++){
+        playerWays[i+7] = playerWays_[1][i];
+    }
     bool moved = true;
     int turnNumber = 0;
     while (moved && !endGame_) {
         moved = false;
         Position nextPosition[14];
         for (int i = 0; i < 14; ++i) {
-            if (playerWays[i].size() > 1) {
+            if (playerWays[i].size() > turnNumber+1) {
                 if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0) {
                     nextPosition[i] = playerWays[i][turnNumber + 1];
                     movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
@@ -287,6 +300,13 @@ void Match::newTurn(Way playerWays[14]) {
         moveBalls(moved, turnNumber);
         ++turnNumber;
     }
+    for(int i =0; i< 7; i++){
+        playerWays_[0][i] = Way();
+    }
+    for(int i =0; i< 7; i++){
+        playerWays_[1][i] = Way();
+    }
+    return endGame_;
 }
 
 void Match::moveBalls(bool & moved, int turnNumber) {
@@ -295,6 +315,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     for (int i = 0; i < 2; ++i) {
         nextBallPos = budgers_[i].autoMove(grid_);
         grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
+        budgers_[i].setPosition(nextBallPos.x, nextBallPos.y);
         grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
         if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
             // TODO set direction and power for isHit and hitPlayer.
@@ -311,6 +332,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     //GOLDENSNITCH
     nextBallPos = goldenSnitch_.autoMove(grid_);
     grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
+    goldenSnitch_.setPosition(nextBallPos.x, nextBallPos.y);
     grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
     if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
         if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == SEEKER) {
@@ -470,4 +492,14 @@ void Match::setWays(bool isGuest, Way playerWays[7]) {
     for (int i = 0; i < 7; i++) {
         playerWays_[isGuest][i] = playerWays[i];
     }
+}
+
+bool Match::setReady(bool isGuest){
+    ready_[isGuest] = true;
+    if(ready_[!isGuest]){
+        ready_[0] = false;
+        ready_[1] = false;
+        return true;
+    }
+    return false;
 }

@@ -4,6 +4,9 @@ using namespace std;
 
 MenuWindow::MenuWindow(MainWindow * parent):
     QWidget(parent), parent_(parent) {
+    bool firstMenu = parent_->isFirstMenu();
+    parent_->setFirstMenu(false);
+    cout<<"PREMIER MENU : "<<firstMenu;
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
@@ -27,13 +30,16 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //---------------------------OPPONENT CHOICE-------------------
     list = new QComboBox(matchLauncherWidget);
-    this->askConnectedListRefresh();
+    //this->askConnectedListRefresh();
 
     QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
-    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
+
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
+    //if(firstMenu){
+        QObject::disconnect(refreshButton,0,0,0);
+    //}
     QObject::connect(refreshButton, SIGNAL(clicked()), this, SLOT(askConnectedListRefresh()));
 
     matchLauncherLayout->addWidget(list, 0, 0, 1, 3);
@@ -47,32 +53,54 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     matchLauncherWidget->setLayout(matchLauncherLayout);
 
+    //--------------------CHALLENGE BUTTON--------------------------
+    //if(firstMenu){
+        QObject::disconnect(startMatchButton,0,0,0);
+    //}
+    QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
+
     //-------------------AUCTIONHOUSE BUTTON-------------------------
     auctionHouseButton = new QPushButton("Encheres");
     auctionHouseButton->setMinimumHeight(60);
-    connect(auctionHouseButton, SIGNAL(clicked()), this, SLOT(auctionHouse()));
+    //if(firstMenu){
+        QObject::disconnect(auctionHouseButton,0,0,0);
+        connect(auctionHouseButton, SIGNAL(clicked()), this, SLOT(auctionHouse()));
+    //}
 
     //-----------------TEAM HANDLING BUTTON--------------------------
     teamHandlingButton = new QPushButton("Gestion de Team");
     teamHandlingButton->setMinimumHeight(60);
+    //if(!firstMenu){
+    QObject::disconnect(teamHandlingButton,0,0,0);
+
     connect(teamHandlingButton, SIGNAL(clicked()), this, SLOT(handlePlayers()));
 
     //-----------------INFRASTRUCTURE BUTTON--------------------------
     infrastructureButton = new QPushButton("Infrastructures");
     infrastructureButton->setMinimumHeight(60);
-    connect(infrastructureButton, SIGNAL(clicked()), this, SLOT(infrastructures()));
+    //if(firstMenu){
 
+        QObject::disconnect(infrastructureButton,0,0,0);
+        connect(infrastructureButton, SIGNAL(clicked()), this, SLOT(infrastructures()));
+    //}
 
     //------------------DISCONNECT BUTTON---------------------------
     disconnectButton = new QPushButton("Quitter");
     disconnectButton->setMinimumHeight(60);
-    connect(disconnectButton, SIGNAL(clicked()), this, SLOT(logOut()));
+    //if(firstMenu){
+
+        QObject::disconnect(disconnectButton,0,0,0);
+        connect(disconnectButton, SIGNAL(clicked()), this, SLOT(logOut()));
+    //}
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
-    QObject::connect(parent_, SIGNAL(startMatch(Match *)), this, SLOT(startMatch(Match *)));
-    QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
-
+    //if(firstMenu){
+        QObject::disconnect(parent_, SIGNAL(startMatch(Match *,bool,int)),0,0);
+        //QObject::disconnect(0,0,this,SLOT(refreshConnectedList(std::vector<std::string> *)));
+        QObject::connect(parent_, SIGNAL(startMatch(Match *,bool,int)), this, SLOT(startMatch(Match *,bool,int)));
+        QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
+    //}
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
     QWidget * temp = new QWidget;
     temp->setFixedHeight(20);
@@ -119,20 +147,13 @@ void MenuWindow::infrastructures() {
 }
 
 void MenuWindow::sendChallenge() {
-    Club * club1 = new Club();
-    Club * club2 = new Club();
+     string opponent = list->currentText().toStdString();
+     sviews::challenge(parent_->getSocket(), opponent);
 
-    parent_->setNextScreen(MATCHSTATE, new Match(*club1, *club2));
-
-    /*
-     * PLEASE UNCOMMENT ME, I BEG YOU
-       string opponent = list->currentText().toStdString();
-       sviews::challenge(parent_->getSocket(), opponent);
-     */
 }
 
-void MenuWindow::startMatch(Match * startingMatch) {
-    parent_->setNextScreen(MATCHSTATE, startingMatch);
+void MenuWindow::startMatch(Match * startingMatch, bool isGuest, int matchID) {
+    parent_->setNextScreen(MATCHSTATE, startingMatch, isGuest, matchID);
 }
 
 void MenuWindow::logOut() {
@@ -152,10 +173,12 @@ void MenuWindow::refreshConnectedList(vector<string> * connectedList) {
 
 
     for (int i = 0; i < (int)connectedList->size(); ++i) {
-        list->addItem(QString::fromStdString((*connectedList)[i]));
+        string mess = (*connectedList)[i];
+        list->addItem(QString::fromStdString(mess));
     }
 
     delete connectedList;
+    connectedList = NULL;
 }
 
 void MenuWindow::askConnectedListRefresh() {

@@ -1,5 +1,5 @@
-#ifndef Shop_h
-#define Shop_h
+#ifndef SHOP_H
+#define SHOP_H
 
 #include "Installation.h"
 #include <string>
@@ -18,4 +18,4 @@ protected:
     std::string name_;
 };
 
-#endif // Shop_h
+#endif // SHOP_H

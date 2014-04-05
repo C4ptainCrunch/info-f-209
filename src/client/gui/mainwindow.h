@@ -20,6 +20,7 @@
 #include <../../common/models/Case.h>
 #include <../send-views/views.h>
 
+
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5, INFRASTRUCTURESTATE = 6};
 
 
@@ -36,6 +37,9 @@ public:
     Socket * getSocket();
     void askPlayers();
     vector<NonFieldPlayer *> getPlayers();
+    bool isFirstMenu();
+    void setFirstMenu(bool menu);
+    void closeEvent(QCloseEvent * event);
 
 signals:
     void loginSuccess();
@@ -43,17 +47,18 @@ signals:
     void registerSuccess();
     void userList(std::vector<std::string> *);
     void registerFailure(int);
-    void newDefi(std::string username);
-    void setMatch(Match * match);
-
-    void startMatch(Match * match);
+    void newDefi(std::string * username, int matchID);
+    //void setMatch(Match * match);
+    void endMatch(int signal);
+    void startMatch(Match * match, bool isGuest,int matchID);
     void updateMatch(Match * match);
+
 
     void playerList(std::vector<NonFieldPlayer *> * players);
 
 public slots:
-    void setNextScreen(int nextState, Match * startingMatch=0);
-    void getDefi(std::string username);
+    void setNextScreen(int nextState, Match * startingMatch=0, bool isGuest = false, int matchID = -1);
+    void getDefi(std::string * username, int matchID);
     void recievePlayers(std::vector<NonFieldPlayer *> * players);
 
 
@@ -63,6 +68,10 @@ private:
     QWidget * currentWidget;
     Socket * s_;
     std::vector<NonFieldPlayer *> playersList;
+    bool firstMenu = true;
+    MenuWindow * menu_;
+    MatchWidget * match_;
+
 
 };
 

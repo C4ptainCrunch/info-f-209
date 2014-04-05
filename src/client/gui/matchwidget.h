@@ -27,13 +27,14 @@ class MainWindow;
 class MatchWidget: public QWidget {
     Q_OBJECT
 public:
-    explicit MatchWidget(Match * startingMatch, MainWindow * parent=0);
+    explicit MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainWindow * parent=0);
     void mousePressEvent(QMouseEvent *);
     void generateGrid();
     ~MatchWidget();
     void refreshField();
     Position getCase(QMouseEvent * event);
-    bool isCaseHighlighted(unsigned i, unsigned j);
+    bool isCaseHighlighted(unsigned a, unsigned b);
+    bool isInChosenWays(unsigned x, unsigned y);
 signals:
 
 public slots:
@@ -41,11 +42,13 @@ public slots:
     void nextPlayer();
     void endTurn();
     void surrender();
+    void endMatch(int signal);
 
 private:
     MainWindow * parent_;
     QWidget * mainWidget;
     QLabel * ownScore;
+    QLabel * label = NULL;
     QLabel * opponentScore;
     QFrame * fieldWidget;
     Match * currentMatch_;
@@ -53,7 +56,8 @@ private:
     QLabel * playerLabels_[2][4];
     Way highlightedCases;
     std::vector<Way> chosenWays;
-    bool playerSelected = false;
+    bool isGuest_;
+    int matchID_;
 
 };
 

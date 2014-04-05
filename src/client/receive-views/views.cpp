@@ -64,6 +64,15 @@ void playerlist(JsonValue * message, ServerHandler * handler) {
     emit handler->getWindow()->playerList(plist);
 }
 
+void challenge(JsonValue  * message, ServerHandler * handler){
+    JsonDict * listMessage = castDict(message);
+
+    string *opponentName = new string (getString(listMessage, "remote_name"));
+    int matchID = getInt(listMessage, "challenge_id");
+    emit handler->getWindow()->newDefi(opponentName, matchID);
+
+}
+
 void startMatch(JsonValue * message, ServerHandler * handler) {
     JsonDict * listMessage = JDICT(message);
 
@@ -71,8 +80,11 @@ void startMatch(JsonValue * message, ServerHandler * handler) {
         throw BadRequest("Malformatted request. Need a JSON list");
     }
 
+    bool isGuest = getBool(listMessage, "guest");
+    int matchID = getInt(listMessage, "id");
+
     Match * match = new Match(listMessage);
-    emit handler->getWindow()->startMatch(match);
+    emit handler->getWindow()->startMatch(match, isGuest, matchID);
 }
 
 void updateMatch(JsonValue * message, ServerHandler * handler) {
@@ -84,6 +96,17 @@ void updateMatch(JsonValue * message, ServerHandler * handler) {
 
     Match * match = new Match(listMessage);
     emit handler->getWindow()->updateMatch(match);
+}
+
+void endMatch(JsonValue * message, ServerHandler * handler){
+    JsonInt * result_int = JINT(message);
+
+    if (result_int == NULL) {
+        throw BadRequest("Malformatted request. Need a JSON int");
+    }
+
+    int result = *result_int;
+    emit handler->getWindow()->endMatch(result);
 }
 
 }

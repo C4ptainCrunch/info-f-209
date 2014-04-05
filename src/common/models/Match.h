@@ -20,18 +20,20 @@ enum { KEEPER = 0, CHASER = 1, BEATER = 2, SEEKER = 3}; // 1 KEEPER, 3 CHASERS, 
 
 enum { host = 0, guest = 1};
 
+enum EndMatch { WIN, LOSE, SURRENDER_WIN, SURRENDER_LOSE};
+
 class Match {
 
 public:
-    Match(Club & hostClub, Club & guestClub);
-    Match(Club & hostClub, Club & guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame);
+    Match(Club * hostClub, Club * guestClub);
+    Match(Club * hostClub, Club * guestClub, GoldenSnitch goldenSnitch, Quaffle quaffle, Budger budger1, Budger budger2, int score[2], bool endGame);
     Match(JsonValue * json);
     ~Match();
     void movePlayer(int fromX, int fromY, int toX, int toY);
     int * getScore();
     int addPoint(bool guestTeam, int delta=1);
     void moveBalls(bool & moved, int turnNumber);
-    void newTurn(Way playerWays[14]);
+    bool newTurn();
     void resolveConflict(Position nextPosition[14], Way playerWays[14], int indexOne, int turnNumber);
     int findIndex(Position nextPosition[14], Position position);
     void movePlayer(Position fromPos, Position toPos);
@@ -43,6 +45,7 @@ public:
     operator JsonDict() const;
     bool isGuest(Club * clubs);
     void setWays(bool isGuest, Way playerWays[7]);
+    bool setReady(bool isGuest);
 
 private:
     bool endGame_ = false;
@@ -54,6 +57,7 @@ private:
     Quaffle quaffle_;
     Budger budgers_[2];
     Way playerWays_[2][7];
+    bool ready_[2];
 };
 
 #endif // MATCH_H

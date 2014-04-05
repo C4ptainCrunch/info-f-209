@@ -15,10 +15,8 @@ using namespace std;
 void * start_loop(void * arg) {
     ServerHandler * handler = (ServerHandler *) arg;
     handler->loop();
-    perror("string vide");
-    cout << errno << endl;
     QMessageBox::critical(handler->getWindow(), "Erreur", "Le serveur s'est déconnecté");
-    exit(1);
+    QApplication::quit();
     return 0;
 }
 
@@ -45,13 +43,11 @@ int main(int argc, char * argv[]) {
 
     window->show();
     if (!handler.connect_socket()) {
-        perror("string vide");
-        cout << errno << endl;
         QMessageBox::critical(window, "Erreur", "Impossible de se connecter au serveur");
-        exit(1);
+        QApplication::quit();
+        return -1;
     }
 
-    //emit window->setNextScreen(MAINMENUSTATE);
     Thread loopThread = Thread(start_loop, (void *)&handler);
 
     return app.exec();

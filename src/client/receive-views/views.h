@@ -16,6 +16,9 @@ void signup(JsonValue * message, ServerHandler * handler);
 void userlist(JsonValue * message, ServerHandler * handler);
 void playerlist(JsonValue * message, ServerHandler * handler);
 void startMatch(JsonValue * message, ServerHandler * handler);
+void challenge(JsonValue* message, ServerHandler * handler);
+void endMatch(JsonValue * message, ServerHandler * handler);
+void updateMatch(JsonValue * message, ServerHandler * handler);
 }
 
 #include "serverhandler.h"

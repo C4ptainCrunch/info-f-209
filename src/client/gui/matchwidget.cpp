@@ -142,6 +142,14 @@ void MatchWidget::refreshField() {
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x - xlabelDifference, y - ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == CHASER) {
+                        if(grid_[i][j].player->hasQuaffle()){
+                            if(grid_[i][j].player->isInGuestTeam() == isGuest_){
+                                painter.setBrush(QBrush(QColor(0, 100, 0)));
+                            }
+                            else{
+                                painter.setBrush(QBrush(QColor(255, 120, 31)));
+                            }
+                        }
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C", fieldWidget);
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
                     }

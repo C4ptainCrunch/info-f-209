@@ -49,7 +49,6 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
                 if ((handler->getChalenge_list()->at(i).opponents[0] == handler->getManager()) || (handler->getChalenge_list()->at(i).opponents[1] == handler->getManager())) {
                     challenge = &(handler->getChalenge_list()->at(i));
-                    cout << challenge << endl;
                 }
             }
             i--; // Decrement the last loop
@@ -75,7 +74,6 @@ void end_turn(JsonValue * message, UserHandler * handler) {
                 guestHandler->writeToClient("end_match", new JsonInt(EndMatch::WIN));
             }
             handler->getChalenge_list()->erase(handler->getChalenge_list()->begin() + i);
-            cout << "END" << endl;
         }
         else {
             // updateMatch(json Match)
@@ -84,7 +82,6 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
                 if ((handler->getChalenge_list()->at(i).opponents[0] == handler->getManager()) || (handler->getChalenge_list()->at(i).opponents[1] == handler->getManager())) {
                     challenge = &(handler->getChalenge_list()->at(i));
-                    cout << challenge << endl;
                 }
             }
             i--; // Decrement the last loop
@@ -109,7 +106,6 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             JsonDict payload = (JsonDict) * match;
             handler->writeToClient("updateMatch", &payload);
             other_handler->writeToClient("updateMatch", &payload);
-            cout << match->print() << endl;
         }
     }
 }
@@ -122,12 +118,9 @@ void surrender(JsonValue * message, UserHandler * handler) {
     int challenge_id = *id_int;
     Challenge * challenge = NULL;
     int i;
-    cout << "TAILLE : " << handler->getChalenge_list()->size() << endl;
     for (i = 0; i < handler->getChalenge_list()->size() && challenge == NULL; i++) {
-        cout << "i : " << i << endl;
         if (handler->getChalenge_list()->at(i).id == challenge_id) {
             challenge = &(handler->getChalenge_list()->at(i));
-            cout << challenge << endl;
         }
     }
     i--; // Decrement the last loop

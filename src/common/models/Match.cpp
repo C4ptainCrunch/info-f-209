@@ -377,6 +377,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     if(grid_[quafflePos.x][quafflePos.y].player != 0){
         if(grid_[quafflePos.x][quafflePos.y].player->getRole() == CHASER){
             grid_[quafflePos.x][quafflePos.y].player->setHasQuaffle(true);
+            grid_[quafflePos.x][quafflePos.y].ball = 0;
             quaffle_.setPosition(0, 0);
         }
     }

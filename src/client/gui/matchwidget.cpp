@@ -28,7 +28,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
     //------------------------SCORE SETTINGS--------------------------------
     int playerScore = currentMatch_->getScore()[0];
-    ownScore = new QLabel("VOUS : "+ QString::fromStdString(std::to_string(playerScore)), mainWidget);
+    ownScore = new QLabel("VOUS : " + QString::fromStdString(std::to_string(playerScore)), mainWidget);
     ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
@@ -40,7 +40,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     ownScore->show();
 
     int otherScore = currentMatch_->getScore()[1];
-    opponentScore = new QLabel("ADVERSAIRE : "+ QString::fromStdString(std::to_string(otherScore)), mainWidget);
+    opponentScore = new QLabel("ADVERSAIRE : " + QString::fromStdString(std::to_string(otherScore)), mainWidget);
     opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
@@ -51,8 +51,6 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
     //---------------------FIELD CONTAINER WIDGET--------------------------
     fieldWidget  = new QFrame(mainWidget);
-
-
 
 
     //---------------------FIELD REPRESENTATION----------------------------
@@ -94,8 +92,8 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
 void MatchWidget::refreshField() {
     this->hide();
-    ownScore->setText("VOUS : "+ QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
-    opponentScore->setText("ADVERSAIRE : "+ QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
+    ownScore->setText("VOUS : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
+    opponentScore->setText("ADVERSAIRE : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[0])));
 
     label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
@@ -123,15 +121,15 @@ void MatchWidget::refreshField() {
             x += 18;
             if (grid_[i][j].type == USABLE) {
                 if (isCaseHighlighted(i, j)) {
-                    painter.setBrush(QBrush(QColor(71,158,158)));
+                    painter.setBrush(QBrush(QColor(71, 158, 158)));
                     highlighted = true;
                 }
-                else if(isInChosenWays(i,j)){
-                    painter.setBrush(QBrush(QColor(85,18,201)));
+                else if (isInChosenWays(i, j)) {
+                    painter.setBrush(QBrush(QColor(85, 18, 201)));
                     chosen = true;
                 }
                 if (grid_[i][j].player != 0) {
-                    if(!highlighted && !chosen){
+                    if (!highlighted && !chosen) {
                         if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
                             painter.setBrush(QBrush(Qt::blue));
                         }
@@ -162,21 +160,21 @@ void MatchWidget::refreshField() {
                         painter.setBrush(QBrush(Qt::black));
                     }
                     else if (ballName == "Q") {
-                        painter.setBrush(QBrush(QColor(140,52,52)));
+                        painter.setBrush(QBrush(QColor(140, 52, 52)));
                     }
                     else { //ballName == "G"
                         painter.setBrush(QBrush(Qt::yellow));
                     }
                 }
                 else {
-                    if(!highlighted && !chosen){
+                    if (!highlighted && !chosen) {
                         painter.setBrush(*grass);
                     }
                 }
-                if(highlighted){
+                if (highlighted) {
                     painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
-                else{
+                else {
                     painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
             }
@@ -199,10 +197,10 @@ void MatchWidget::refreshField() {
     this->show();
 }
 
-bool MatchWidget::isInChosenWays(unsigned x, unsigned y){
-    for (int i = 0; i<chosenWays.size();++i){
-        for (int j = 0; j<chosenWays[i].size();++j){
-            if(chosenWays[i][j].x == x && chosenWays[i][j].y == y){
+bool MatchWidget::isInChosenWays(unsigned x, unsigned y) {
+    for (int i = 0; i < chosenWays.size(); ++i) {
+        for (int j = 0; j < chosenWays[i].size(); ++j) {
+            if ((chosenWays[i][j].x == x) && (chosenWays[i][j].y == y)) {
                 return true;
             }
         }
@@ -226,8 +224,8 @@ void MatchWidget::setCurrentMatch(Match * match) {
     currentMatch_ = match;
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);
-    for (int i = 0; i<WIDTH;++i){
-        for (int j = 0; j<LENGTH;++j){
+    for (int i = 0; i < WIDTH; ++i) {
+        for (int j = 0; j < LENGTH; ++j) {
             grid_[i][j] = grid[i][j];
         }
     }
@@ -284,18 +282,18 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
     }
     else {
         Position clickedCase = getCase(event);
-        if (highlightedCases.empty()){
+        if (highlightedCases.empty()) {
             int i = clickedCase.x;
             int j = clickedCase.y;
-            if(grid_[i][j].player!= 0 && grid_[i][j].player->isInGuestTeam() == isGuest_){
+            if ((grid_[i][j].player != 0) && (grid_[i][j].player->isInGuestTeam() == isGuest_)) {
                 highlightedCases.push_back(clickedCase);
             }
         }
-        else{
-            if(isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
+        else {
+            if (isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
                 highlightedCases.push_back(clickedCase);
             }
-            else if(highlightedCases[highlightedCases.size() - 1] == clickedCase){
+            else if (highlightedCases[highlightedCases.size() - 1] == clickedCase) {
                 emit this->nextPlayer();
             }
         }
@@ -303,9 +301,9 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
     }
 }
 
-void MatchWidget::endMatch(int signal){
+void MatchWidget::endMatch(int signal) {
     QString message;
-    switch(signal){
+    switch (signal) {
         case EndMatch::WIN:
             message = "Vous avez gagné!";
             break;
@@ -319,7 +317,7 @@ void MatchWidget::endMatch(int signal){
             message = "Votre adversaire vous remercie d'avoir abandonné";
             break;
     }
-    QMessageBox::information(this,"Fin du match",message,QMessageBox::Ok);
+    QMessageBox::information(this, "Fin du match", message, QMessageBox::Ok);
     parent_->setNextScreen(MAINMENUSTATE);
 
 

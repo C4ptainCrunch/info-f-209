@@ -6,7 +6,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     QWidget(parent), parent_(parent) {
     bool firstMenu = parent_->isFirstMenu();
     parent_->setFirstMenu(false);
-    cout<<"PREMIER MENU : "<<firstMenu;
+    cout << "PREMIER MENU : " << firstMenu;
     //-------------------------SIZE SETTINGS---------------------------
     this->setFixedHeight(720);
     this->setFixedWidth(1280);
@@ -38,7 +38,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
     QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
     //if(firstMenu){
-        QObject::disconnect(refreshButton,0,0,0);
+    QObject::disconnect(refreshButton, 0, 0, 0);
     //}
     QObject::connect(refreshButton, SIGNAL(clicked()), this, SLOT(askConnectedListRefresh()));
 
@@ -55,7 +55,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //--------------------CHALLENGE BUTTON--------------------------
     //if(firstMenu){
-        QObject::disconnect(startMatchButton,0,0,0);
+    QObject::disconnect(startMatchButton, 0, 0, 0);
     //}
     QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
 
@@ -63,15 +63,15 @@ MenuWindow::MenuWindow(MainWindow * parent):
     auctionHouseButton = new QPushButton("Encheres");
     auctionHouseButton->setMinimumHeight(60);
     //if(firstMenu){
-        QObject::disconnect(auctionHouseButton,0,0,0);
-        connect(auctionHouseButton, SIGNAL(clicked()), this, SLOT(auctionHouse()));
+    QObject::disconnect(auctionHouseButton, 0, 0, 0);
+    connect(auctionHouseButton, SIGNAL(clicked()), this, SLOT(auctionHouse()));
     //}
 
     //-----------------TEAM HANDLING BUTTON--------------------------
     teamHandlingButton = new QPushButton("Gestion de Team");
     teamHandlingButton->setMinimumHeight(60);
     //if(!firstMenu){
-    QObject::disconnect(teamHandlingButton,0,0,0);
+    QObject::disconnect(teamHandlingButton, 0, 0, 0);
 
     connect(teamHandlingButton, SIGNAL(clicked()), this, SLOT(handlePlayers()));
 
@@ -80,8 +80,8 @@ MenuWindow::MenuWindow(MainWindow * parent):
     infrastructureButton->setMinimumHeight(60);
     //if(firstMenu){
 
-        QObject::disconnect(infrastructureButton,0,0,0);
-        connect(infrastructureButton, SIGNAL(clicked()), this, SLOT(infrastructures()));
+    QObject::disconnect(infrastructureButton, 0, 0, 0);
+    connect(infrastructureButton, SIGNAL(clicked()), this, SLOT(infrastructures()));
     //}
 
     //------------------DISCONNECT BUTTON---------------------------
@@ -89,17 +89,17 @@ MenuWindow::MenuWindow(MainWindow * parent):
     disconnectButton->setMinimumHeight(60);
     //if(firstMenu){
 
-        QObject::disconnect(disconnectButton,0,0,0);
-        connect(disconnectButton, SIGNAL(clicked()), this, SLOT(logOut()));
+    QObject::disconnect(disconnectButton, 0, 0, 0);
+    connect(disconnectButton, SIGNAL(clicked()), this, SLOT(logOut()));
     //}
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
 
     //if(firstMenu){
-        QObject::disconnect(parent_, SIGNAL(startMatch(Match *,bool,int)),0,0);
-        //QObject::disconnect(0,0,this,SLOT(refreshConnectedList(std::vector<std::string> *)));
-        QObject::connect(parent_, SIGNAL(startMatch(Match *,bool,int)), this, SLOT(startMatch(Match *,bool,int)));
-        QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
+    QObject::disconnect(parent_, SIGNAL(startMatch(Match *, bool, int)), 0, 0);
+    //QObject::disconnect(0,0,this,SLOT(refreshConnectedList(std::vector<std::string> *)));
+    QObject::connect(parent_, SIGNAL(startMatch(Match *, bool, int)), this, SLOT(startMatch(Match *, bool, int)));
+    QObject::connect(parent_, SIGNAL(userList(std::vector<std::string> *)), this, SLOT(refreshConnectedList(std::vector<std::string> *)));
     //}
     //----------------USELESS WIDGETS FOR A BETTER GUI---------------
     QWidget * temp = new QWidget;
@@ -147,8 +147,8 @@ void MenuWindow::infrastructures() {
 }
 
 void MenuWindow::sendChallenge() {
-     string opponent = list->currentText().toStdString();
-     sviews::challenge(parent_->getSocket(), opponent);
+    string opponent = list->currentText().toStdString();
+    sviews::challenge(parent_->getSocket(), opponent);
 
 }
 

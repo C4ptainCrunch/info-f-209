@@ -63,4 +63,3 @@ void Player::setPassPrecision(int passPrecision) {
 void Player::setWoundState(bool woundState) {
     wounded_ = woundState;
 }
-

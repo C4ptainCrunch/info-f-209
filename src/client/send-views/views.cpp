@@ -66,7 +66,7 @@ void endTurn(Socket * s, vector<Way> chosenWays) {
 }
 
 void surrenders(Socket * s, int matchID) {
-    cout<<"SURREND? "<<matchID<<endl;
+    cout << "SURREND? " << matchID << endl;
     JsonInt message = JsonInt(matchID);
 
     writeToServer(s, "surrender", message.toString());

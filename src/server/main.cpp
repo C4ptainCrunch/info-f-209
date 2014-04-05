@@ -95,8 +95,8 @@ int main(int argc, char * argv[]) {
 
         shared_data.handlers_list.push_back(current_handler);
 
-        for(int i = 0; i < thread_pool.size(); i++){
-            if(!thread_pool.at(i).alive()){
+        for (int i = 0; i < thread_pool.size(); i++) {
+            if (!thread_pool.at(i).alive()) {
                 thread_pool.erase(thread_pool.begin() + i);
             }
         }

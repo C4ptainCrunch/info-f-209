@@ -274,11 +274,11 @@ void Match::movePlayer(Position fromPos, Position toPos) {
 
 bool Match::newTurn() {
     Way playerWays[14];
-    for(int i =0; i< 7; i++){
+    for (int i = 0; i < 7; i++) {
         playerWays[i] = playerWays_[0][i];
     }
-    for(int i =0; i< 7; i++){
-        playerWays[i+7] = playerWays_[1][i];
+    for (int i = 0; i < 7; i++) {
+        playerWays[i + 7] = playerWays_[1][i];
     }
     bool moved = true;
     int turnNumber = 0;
@@ -286,7 +286,7 @@ bool Match::newTurn() {
         moved = false;
         Position nextPosition[14];
         for (int i = 0; i < 14; ++i) {
-            if (playerWays[i].size() > turnNumber+1) {
+            if (playerWays[i].size() > turnNumber + 1) {
                 if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0) {
                     nextPosition[i] = playerWays[i][turnNumber + 1];
                     movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
@@ -300,10 +300,10 @@ bool Match::newTurn() {
         moveBalls(moved, turnNumber);
         ++turnNumber;
     }
-    for(int i =0; i< 7; i++){
+    for (int i = 0; i < 7; i++) {
         playerWays_[0][i] = Way();
     }
-    for(int i =0; i< 7; i++){
+    for (int i = 0; i < 7; i++) {
         playerWays_[1][i] = Way();
     }
     return endGame_;
@@ -494,9 +494,9 @@ void Match::setWays(bool isGuest, Way playerWays[7]) {
     }
 }
 
-bool Match::setReady(bool isGuest){
+bool Match::setReady(bool isGuest) {
     ready_[isGuest] = true;
-    if(ready_[!isGuest]){
+    if (ready_[!isGuest]) {
         ready_[0] = false;
         ready_[1] = false;
         return true;

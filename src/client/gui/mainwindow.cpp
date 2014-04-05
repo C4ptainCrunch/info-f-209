@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget * parent):
     login->show();
 
     //-----------------------CUSTOM SIGNALS CONNECTION--------------------
-    QObject::connect(this, SIGNAL(newDefi(std::string *,int)), this, SLOT(getDefi(std::string *,int)));
+    QObject::connect(this, SIGNAL(newDefi(std::string *, int)), this, SLOT(getDefi(std::string *, int)));
 
     QObject::connect(this, SIGNAL(playerList(std::vector<NonFieldPlayer *> *)), this, SLOT(recievePlayers(std::vector<NonFieldPlayer *> *)));
 
@@ -47,7 +47,7 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch, bool isGues
             break;
         }
         case MAINMENUSTATE: {
-            if (menu_ != NULL){
+            if (menu_ != NULL) {
                 delete menu_;
                 menu_ = NULL;
             }
@@ -70,7 +70,7 @@ void MainWindow::setNextScreen(int nextState, Match * startingMatch, bool isGues
             break;
         }
         case MATCHSTATE: {
-            if (match_ != NULL){
+            if (match_ != NULL) {
                 delete match_;
                 match_ = NULL;
             }
@@ -139,10 +139,10 @@ Socket * MainWindow::getSocket() {
     return s_;
 }
 
-bool MainWindow::isFirstMenu(){
+bool MainWindow::isFirstMenu() {
     return firstMenu;
 }
 
-void MainWindow::setFirstMenu(bool menu){
+void MainWindow::setFirstMenu(bool menu) {
     firstMenu = menu;
 }

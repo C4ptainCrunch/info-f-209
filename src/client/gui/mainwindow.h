@@ -50,14 +50,14 @@ signals:
     void newDefi(std::string * username, int matchID);
     //void setMatch(Match * match);
     void endMatch(int signal);
-    void startMatch(Match * match, bool isGuest,int matchID);
+    void startMatch(Match * match, bool isGuest, int matchID);
     void updateMatch(Match * match);
 
 
     void playerList(std::vector<NonFieldPlayer *> * players);
 
 public slots:
-    void setNextScreen(int nextState, Match * startingMatch=0, bool isGuest = false, int matchID = -1);
+    void setNextScreen(int nextState, Match * startingMatch=0, bool isGuest=false, int matchID=-1);
     void getDefi(std::string * username, int matchID);
     void recievePlayers(std::vector<NonFieldPlayer *> * players);
 

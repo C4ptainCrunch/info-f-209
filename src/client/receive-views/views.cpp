@@ -64,10 +64,10 @@ void playerlist(JsonValue * message, ServerHandler * handler) {
     emit handler->getWindow()->playerList(plist);
 }
 
-void challenge(JsonValue  * message, ServerHandler * handler){
+void challenge(JsonValue  * message, ServerHandler * handler) {
     JsonDict * listMessage = castDict(message);
 
-    string *opponentName = new string (getString(listMessage, "remote_name"));
+    string * opponentName = new string(getString(listMessage, "remote_name"));
     int matchID = getInt(listMessage, "challenge_id");
     emit handler->getWindow()->newDefi(opponentName, matchID);
 
@@ -98,7 +98,7 @@ void updateMatch(JsonValue * message, ServerHandler * handler) {
     emit handler->getWindow()->updateMatch(match);
 }
 
-void endMatch(JsonValue * message, ServerHandler * handler){
+void endMatch(JsonValue * message, ServerHandler * handler) {
     JsonInt * result_int = JINT(message);
 
     if (result_int == NULL) {

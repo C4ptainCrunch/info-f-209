@@ -25,7 +25,7 @@ public:
     virtual void setReflexes(int reflexes);
     virtual void setPassPrecision(int passPrecision);
     virtual void setWoundState(bool woundState);
-    
+
 protected:
     int speed_;
     int force_;

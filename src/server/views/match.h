@@ -13,7 +13,7 @@ class UserHandler;
 
 namespace views {
 void end_turn(JsonValue * message, UserHandler * handler);
-void surrender(JsonValue* message, UserHandler * handler);
+void surrender(JsonValue * message, UserHandler * handler);
 }
 
 #include "../UserHandler.h"

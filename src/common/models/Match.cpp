@@ -270,6 +270,21 @@ void Match::generateGrid() {
 void Match::movePlayer(Position fromPos, Position toPos) {
     grid_[toPos.x][toPos.y].player = grid_[fromPos.x][fromPos.y].player;
     grid_[fromPos.x][fromPos.y].player = 0;
+    if(grid_[toPos.x][toPos.y].player->hasQuaffle()){
+        if(grid_[toPos.x][toPos.y].type == GOAL){
+            if(toPos.y < WIDTH / 2){
+                score_[0]+=10;
+            }
+            else{
+                score_[1]+=10;
+            }
+            int j = LENGTH / 2;
+            int i = 3 * WIDTH / 5;
+            grid_[i][j].ball = &quaffle_;
+            quaffle_.setPosition(i, j);
+            grid_[toPos.x][toPos.y].player->setHasQuaffle(false);
+        }
+    }
 }
 
 bool Match::newTurn() {
@@ -365,8 +380,19 @@ void Match::moveBalls(bool & moved, int turnNumber) {
             quaffle_.setPosition(0, 0);
         }
     }
-
-
+    if(grid_[quafflePos.x][quafflePos.y].type == GOAL){
+        if(quafflePos.y < WIDTH / 2){
+            score_[0]+=10;
+        }
+        else{
+            score_[1]+=10;
+        }
+        int j = LENGTH / 2;
+        int i = 3 * WIDTH / 5;
+        grid_[i][j].ball = &quaffle_;
+        quaffle_.setPosition(i, j);
+        grid_[quafflePos.x][quafflePos.y].player->setHasQuaffle(false);
+    }
 
 }
 
@@ -379,6 +405,8 @@ void Match::resolveConflict(Position nextPosition[14], Way playerWays[14], int i
     }
     else if (playerOne->getForce() < playerTwo->getForce()) {
         int indexTwo = findIndex(nextPosition, playerWays[indexOne][turnNumber + 1]);
+        playerTwo->setHasQuaffle(playerOne->hasQuaffle());
+        playerOne->setHasQuaffle(false);
         // Faire reculer le joueur qui etait avancé et qui doit retourner à la position précédente
         nextPosition[indexTwo] = playerWays[indexTwo][turnNumber];
         movePlayer(playerWays[indexTwo][turnNumber + 1], playerWays[indexTwo][turnNumber]);

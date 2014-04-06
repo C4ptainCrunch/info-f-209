@@ -12,7 +12,7 @@ CLIENT_DEPS=$(BUILD_DIR)/libjson.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexce
 RMAKES=$(BUILD_DIR)/server.a $(BUILD_DIR)/models.a $(BUILD_DIR)/server-views.a $(BUILD_DIR)/libjson.a $(BUILD_DIR)/libfile.a $(BUILD_DIR)/libsocket.a $(BUILD_DIR)/libexception.a $(BUILD_DIR)/libtest.a
 
 ifeq ($(shell uname),Darwin)
-	START_CLIENT=@open ./build/bin/client.app || true
+	START_CLIENT=@./build/bin/client.app/Contents/MacOS/client || true
 else
 	START_CLIENT=@./build/bin/client || true
 endif

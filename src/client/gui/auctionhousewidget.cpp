@@ -9,7 +9,7 @@ AuctionHouseWidget::AuctionHouseWidget(MainWindow * parent):
     //----------------------BACKGROUND SETTINGS---------------------------
     QVBoxLayout * layout = new QVBoxLayout;
     QLabel * image = new QLabel(this);
-    image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/Quidditch_pitch_hogwarts.jpg"));
+    image->setPixmap(QPixmap(ROOT_DIR + "/images/Quidditch_pitch_hogwarts.jpg"));
     layout->addWidget(image);
     this->setLayout(layout);
 

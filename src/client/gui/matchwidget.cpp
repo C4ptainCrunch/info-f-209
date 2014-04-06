@@ -16,7 +16,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     //----------------------BACKGROUND SETTINGS---------------------------
     QVBoxLayout * layout = new QVBoxLayout;
     QLabel * image = new QLabel(this);
-    image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/Quidditch_pitch_hogwarts.jpg"));
+    image->setPixmap(QPixmap(ROOT_DIR + "/images/Quidditch_pitch_hogwarts.jpg"));
     layout->addWidget(image);
 
 
@@ -101,7 +101,7 @@ void MatchWidget::refreshField() {
 
     QPainter painter(pixmap);
     Hexagon hexagon[WIDTH][LENGTH];
-    QBrush * grass = new QBrush(QImage("images/grass.jpg"));
+    QBrush * grass = new QBrush(QImage(ROOT_DIR + "/images/grass.jpg"));
 
     int xlabelDifference = 22;
     int ylabelDifference = 7;

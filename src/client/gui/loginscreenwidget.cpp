@@ -13,7 +13,7 @@ loginScreenWidget::loginScreenWidget(MainWindow * parent):
     //-------------------------BACKGROUND SETTINGS---------------------------
     QVBoxLayout * layout = new QVBoxLayout;
     QLabel * image = new QLabel(this);
-    image->setPixmap(QPixmap(QCoreApplication::applicationDirPath() + "/images/loginScreen2.png"));
+    image->setPixmap(QPixmap(ROOT_DIR + "/images/loginScreen2.png"));
     layout->addWidget(image);
     this->setLayout(layout);
 

@@ -20,6 +20,11 @@
 #include <../../common/models/Case.h>
 #include <../send-views/views.h>
 
+#ifdef __APPLE__
+#define ROOT_DIR QCoreApplication::applicationDirPath() + "/../../.."
+#else
+#define ROOT_DIR QCoreApplication::applicationDirPath()
+#endif
 
 enum {LOGINMENUSTATE = 1, MAINMENUSTATE = 2, AUCTIONHOUSESTATE = 3, TEAMHANDLINGSTATE = 4, MATCHSTATE = 5, INFRASTRUCTURESTATE = 6};
 

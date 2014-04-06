@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget * parent):
     this->setFixedWidth(1280);
 
     //----------------STYLE SETTINGS-----------------------
-    QFile File(QCoreApplication::applicationDirPath() + "/stylesheets/stylesheet.qss");
+    QFile File(ROOT_DIR + "/stylesheets/stylesheet.qss");
     File.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(File.readAll());
 

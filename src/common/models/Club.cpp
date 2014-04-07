@@ -57,12 +57,11 @@ Club::Club(JsonValue * json) {
     for (int i = 0; i < player_list->size(); i++) {
         players.push_back(new NonFieldPlayer((*player_list)[i]));
     }
-    //TODO uncomment
-    //for (int i = 0; i < 7; i++) {
-    //    if (team_->getPlayer(i) != NULL) {
-    //        players.push_back(team_->getPlayer(i));
-    //    }
-    //}
+    for (int i = 0; i < 7; i++) {
+        if (team->getPlayer(i) != NULL) {
+            players.push_back(team->getPlayer(i));
+        }
+    }
 
     new (this)Club(money, installations, team, players);
 }

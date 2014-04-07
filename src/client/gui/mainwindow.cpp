@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget * parent):
 
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
+    this->setWindowIcon(QIcon(QPixmap(ROOT_DIR + "/logo.jpg")));
 
     //-----------------SIZE SETTINGS-----------------------
     this->setFixedHeight(720);
@@ -97,7 +98,7 @@ QWidget * MainWindow::getCurrentWidget() {
 
 void MainWindow::closeEvent(QCloseEvent * event) {
     event->accept();
-    if (QMessageBox::question(this, tr("Déconnexion"), tr("Voulez-vous vraiment vous Quitter?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
+    if (QMessageBox::question(this, tr("Disconnection"), tr("Do you really want to quit?"), QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes) == QMessageBox::Yes) {
         event->accept();
     }
     else {
@@ -120,7 +121,7 @@ vector<NonFieldPlayer *> MainWindow::getPlayers() {
 
 
 void MainWindow::getDefi(string * username, int matchID) {
-    int accept = QMessageBox::question(this, "Défi", QString::fromStdString(*username) + " vous défie.\nAcceptez-vous le défi?", QMessageBox::Yes | QMessageBox::No);
+    int accept = QMessageBox::question(this, "Challenge", QString::fromStdString(*username) + " is challenging you.\nDo you accept the challenge?", QMessageBox::Yes | QMessageBox::No);
     if (accept == QMessageBox::Yes) {
         sviews::acceptChallenge(this->s_, *username, matchID);
     }

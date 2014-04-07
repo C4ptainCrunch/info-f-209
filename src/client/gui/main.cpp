@@ -15,7 +15,7 @@ using namespace std;
 void * start_loop(void * arg) {
     ServerHandler * handler = (ServerHandler *) arg;
     handler->loop();
-    QMessageBox::critical(handler->getWindow(), "Erreur", "Le serveur s'est déconnecté");
+    QMessageBox::critical(handler->getWindow(), "Error", "Server disconnected");
     QApplication::quit();
     return 0;
 }
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
 
     window->show();
     if (!handler.connect_socket()) {
-        QMessageBox::critical(window, "Erreur", "Impossible de se connecter au serveur");
+        QMessageBox::critical(window, "Error", "Cannot connect to server");
         QApplication::quit();
         return -1;
     }

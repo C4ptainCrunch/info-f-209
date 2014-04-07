@@ -27,13 +27,13 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
     //---------------------------OPPONENT CHOICE-------------------
     list = new QComboBox(matchLauncherWidget);
+    list->addItem("Refresh list of connected opponents ->");
 
-
-    QPushButton * startMatchButton = new QPushButton("DEFIER", matchLauncherWidget);
+    QPushButton * startMatchButton = new QPushButton("CHALLENGE!", matchLauncherWidget);
 
     startMatchButton->setMinimumHeight(40);
     startMatchButton->setStyleSheet(" font-weight: bold; font-size: 18pt;");
-    QPushButton * refreshButton = new QPushButton("Rafraichir", matchLauncherWidget);
+    QPushButton * refreshButton = new QPushButton("Refresh", matchLauncherWidget);
 
     QObject::disconnect(refreshButton, 0, 0, 0);
 
@@ -57,7 +57,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     QObject::connect(startMatchButton, SIGNAL(clicked()), this, SLOT(sendChallenge()));
 
     //-------------------AUCTIONHOUSE BUTTON-------------------------
-    auctionHouseButton = new QPushButton("Encheres");
+    auctionHouseButton = new QPushButton("Auction House");
     auctionHouseButton->setMinimumHeight(60);
 
     QObject::disconnect(auctionHouseButton, 0, 0, 0);
@@ -65,7 +65,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
 
 
     //-----------------TEAM HANDLING BUTTON--------------------------
-    teamHandlingButton = new QPushButton("Gestion de Team");
+    teamHandlingButton = new QPushButton("Team Handling");
     teamHandlingButton->setMinimumHeight(60);
 
     QObject::disconnect(teamHandlingButton, 0, 0, 0);
@@ -82,7 +82,7 @@ MenuWindow::MenuWindow(MainWindow * parent):
     //}
 
     //------------------DISCONNECT BUTTON---------------------------
-    disconnectButton = new QPushButton("Quitter");
+    disconnectButton = new QPushButton("Quit");
     disconnectButton->setMinimumHeight(60);
     //if(firstMenu){
 
@@ -164,7 +164,7 @@ void MenuWindow::auctionHouse() {
 
 void MenuWindow::refreshConnectedList(vector<string> * connectedList) {
     list->clear();
-    list->addItem("Choisissez un adversaire");
+    list->addItem("Choose an opponent :");
     list->insertSeparator(1);
 
 

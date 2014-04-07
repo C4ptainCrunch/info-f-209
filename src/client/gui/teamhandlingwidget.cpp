@@ -51,7 +51,7 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
     playersDisplayer->setSelectionMode(QAbstractItemView::NoSelection);
     playersDisplayer->setEditTriggers(QAbstractItemView::EditTriggers(0));
     playersDisplayer->setStyleSheet("QHeaderView::section { background-color : rgb(139,69,19); color:white;}");
-    playersDisplayer->setHorizontalHeaderLabels(QString("Vitesse;Force;Agilité;Reflexes;Précision;État").split(";"));
+    playersDisplayer->setHorizontalHeaderLabels(QString("Speed;Force;Agility;Reflexes;Precision;State").split(";"));
     mainWidget->setFixedSize(tableWidth, tableheight);
 
     QPushButton * backButton = new QPushButton("Retour", mainWidget);

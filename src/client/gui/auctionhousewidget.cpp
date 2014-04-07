@@ -27,7 +27,7 @@ AuctionHouseWidget::AuctionHouseWidget(MainWindow * parent):
                            "border-style: solid;"
                            "border-width: 3px;"
                            "border-radius: 7px; border : 4px solid black; background : url(images/wood.jpg);");
-    QLabel * textMessage = new QLabel("Le système d'enchères est en construction!\n                         Revenez plus tard!", mainWidget);
+    QLabel * textMessage = new QLabel("Auction House is in construction!\n                         Come back later!", mainWidget);
     textMessage->setStyleSheet("color : white; font-size : 20px;");
     textMessage->setFixedWidth(570);
     textMessage->setFixedHeight(100);
@@ -37,7 +37,7 @@ AuctionHouseWidget::AuctionHouseWidget(MainWindow * parent):
 
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
 
-    QPushButton * backButton = new QPushButton("Retour", mainWidget);
+    QPushButton * backButton = new QPushButton("Back", mainWidget);
     backButton->setMinimumHeight(60);
     connect(backButton, SIGNAL(clicked()), this, SLOT(backToMenu()));
 

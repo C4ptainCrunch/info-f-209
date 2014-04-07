@@ -86,7 +86,7 @@ void loginScreenWidget::logIn() {
     QString username = usernameLine->text();
     QString password = passLine->text();
     if ((username.isEmpty() && password.isEmpty())or((username == "username") && (password == "password"))) {
-        QMessageBox::warning(this, "Champs Vides", "Vous n'avez pas fourni de nom d'utilisateur et de mot de passe");
+        QMessageBox::warning(this, "Empty Fields", "No username and password given.");
     }
     else {
         sviews::login(parent_->getSocket(), username.toStdString(), password.toStdString());
@@ -124,16 +124,16 @@ void loginScreenWidget::acceptLogin() {
 void loginScreenWidget::refuseLogin(int errorCode) {
     this->enableButtons();
     if (errorCode == 301) {
-        QMessageBox::warning(this, "Identifiants Incorrects", "Veuillez entrer les identifiants d'un compte enregistré");
+        QMessageBox::warning(this, "Incorrect identifiers", "Please enter identifiers of a registered account");
     }
     else if (errorCode == 401) {
-        QMessageBox::warning(this, "Identifiants Incorrects", "Mauvais mot de passe");
+        QMessageBox::warning(this, "Incorrect identifiers", "Wrong password");
     }
     else if (errorCode == 403) {
-        QMessageBox::warning(this, "Déjà connecté", "Ce compte est déjà connecté");
+        QMessageBox::warning(this, "Already connected", "This account is already logged in");
     }
     else {
-        QMessageBox::warning(this, "Identifiants Incorrects", "Tu n'as pas des projets à terminer?");
+        QMessageBox::warning(this, "Incorrect identifiers", "Unknown error");
     }
 
     connectButton->setStyleSheet("color : white;");
@@ -147,13 +147,13 @@ void loginScreenWidget::acceptRegister() {
 void loginScreenWidget::refuseRegister(int errorCode) {
     this->enableButtons();
     if (errorCode == 402) {
-        QMessageBox::warning(this, "Identifiants Incorrects", "Ce compte est déjà enregistré! Veuillez choisir un nouvel identifiant");
+        QMessageBox::warning(this, "Incorrect identifiers", "This account is already registered! Please choose another username");
     }
     else if (errorCode == 403) {
-        QMessageBox::warning(this, "Déjà connecté", "Ce compte est déjà connecté");
+        QMessageBox::warning(this, "Already connected", "This account is already logged in");
     }
     else {
-        QMessageBox::warning(this, "Identifiants Incorrects", "Le serveur ne comprend rien");
+        QMessageBox::warning(this, "Incorrect identifiers", "Server unknown error");
     }
     registerButton->setStyleSheet("color : white;");
 }
@@ -164,21 +164,21 @@ void loginScreenWidget::registerUser() {
     registerButton->setStyleSheet("color : black;");
 
     QDialog * dialog = new QDialog(this);
-    dialog->setWindowTitle("Nouveau compte");
+    dialog->setWindowTitle("New Account");
 
     QFormLayout form(dialog);
 
     QLineEdit * newUserName = new QLineEdit(dialog);
-    QString label = QString("Nom de compte : ");
+    QString label = QString("Username : ");
     form.addRow(label, newUserName);
 
     QLineEdit * newPassword = new QLineEdit(dialog);
     newPassword->setEchoMode(QLineEdit::Password);
-    QString label2 = QString("Mot de passe : ");
+    QString label2 = QString("Password : ");
     form.addRow(label2, newPassword);
 
     QLineEdit * newManagerName = new QLineEdit(dialog);
-    QString label3 = QString("Nom de manager : ");
+    QString label3 = QString("Manager name : ");
     form.addRow(label3, newManagerName);
 
 

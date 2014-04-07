@@ -28,7 +28,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
     //------------------------SCORE SETTINGS--------------------------------
     int playerScore = currentMatch_->getScore()[0];
-    ownScore = new QLabel("VOUS : " + QString::fromStdString(std::to_string(playerScore)), mainWidget);
+    ownScore = new QLabel("YOU : " + QString::fromStdString(std::to_string(playerScore)), mainWidget);
     ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
@@ -40,7 +40,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     ownScore->show();
 
     int otherScore = currentMatch_->getScore()[1];
-    opponentScore = new QLabel("ADVERSAIRE : " + QString::fromStdString(std::to_string(otherScore)), mainWidget);
+    opponentScore = new QLabel("OPPONENT : " + QString::fromStdString(std::to_string(otherScore)), mainWidget);
     opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
@@ -63,11 +63,11 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     mainLayout->addWidget(temp, 0, 0);
     mainLayout->addWidget(fieldWidget, 1, 1);
 
-    turnEndButton = new QPushButton("Fin du tour", mainWidget);
+    turnEndButton = new QPushButton("End of turn", mainWidget);
     turnEndButton->setMinimumHeight(30);
     mainLayout->addWidget(turnEndButton, 2, 2);
 
-    QPushButton * surrenderButton = new QPushButton("Abandonner", mainWidget);
+    QPushButton * surrenderButton = new QPushButton("Surrender", mainWidget);
     surrenderButton->setMinimumHeight(30);
     mainLayout->addWidget(surrenderButton, 2, 3);
 
@@ -81,7 +81,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     QObject::connect(parent_, SIGNAL(endMatch(int)), this, SLOT(endMatch(int)));
 
 
-
+    //--------------------------START------------------------------
     currentMatch_->getGrid(grid_);
     label = 0;
     refreshField();
@@ -92,8 +92,8 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
 void MatchWidget::refreshField() {
     this->hide();
-    ownScore->setText("VOUS : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[isGuest_])));
-    opponentScore->setText("ADVERSAIRE : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[!isGuest_])));
+    ownScore->setText("YOU : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[isGuest_])));
+    opponentScore->setText("OPPONENT : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[!isGuest_])));
 
     label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);
@@ -317,19 +317,19 @@ void MatchWidget::endMatch(int signal) {
     QString message;
     switch (signal) {
         case EndMatch::WIN:
-            message = "Vous avez gagné!";
+            message = "You have won! Congratulations";
             break;
         case EndMatch::LOSE:
-            message = "Vous avez perdu.";
+            message = "You have lost.";
             break;
         case EndMatch::SURRENDER_WIN:
-            message = "Vous avez gagné. Votre adversaire a abandonné";
+            message = "You have won! Your opponent surrendered";
             break;
         case EndMatch::SURRENDER_LOSE:
-            message = "Votre adversaire vous remercie d'avoir abandonné";
+            message = "You have surrendered. Your opponent thanks you.";
             break;
     }
-    QMessageBox::information(this, "Fin du match", message, QMessageBox::Ok);
+    QMessageBox::information(this, "End of match", message, QMessageBox::Ok);
     parent_->setNextScreen(MAINMENUSTATE);
 
 

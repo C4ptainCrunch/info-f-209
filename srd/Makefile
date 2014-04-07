@@ -13,7 +13,7 @@ ROOT=$(realpath .)/
 RED=\e[0;31m
 NC=\e[0m
 
-all: srd.pdf diagrams
+all: diagrams srd.pdf
 	@echo -e "$(RED) fin $(NC)"
 
 clean: clean-diagrams

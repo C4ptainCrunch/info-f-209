@@ -109,7 +109,7 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{uml/ConnectionUCD.eps}
+        \includegraphics[width=\textwidth]{uml/useCaseDiadrams/ConnectionUCD.eps}
         \caption{\label{diag-use-inscription} Système d'identification}
     \end{center}
 \end{figure}
@@ -136,7 +136,7 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{uml/MenuUCD.eps}
+        \includegraphics[width=\textwidth]{uml/useCaseDiadrams/MenuUCD.eps}
         \caption{Menu principal}
     \end{center}
 \end{figure}
@@ -144,7 +144,7 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \subsubsection{Gestion des infrastructures}
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{uml/InfrastructuresUCD.eps}
+        \includegraphics[width=\textwidth]{uml/useCaseDiadrams/InfrastructuresUCD.eps}
         \caption{Gestion des infrastructures}
     \end{center}
 \end{figure}
@@ -263,13 +263,63 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \section{Design et fonctionnement}
 \subsection{Diagrammes de classe}
 
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[height=430pt]{uml/classDiagrams/manager.eps}
+    }
+    \caption{Diagramme de classe : Manager}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/classDiagrams/match.eps}
+    }
+    \caption{Diagramme de classe : Match}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=270pt]{uml/classDiagrams/userHandler.eps}
+    }
+    \caption{Diagramme de classe : UserHandler}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[height=200pt]{uml/classDiagrams/Socket.eps}
+    }
+    \caption{Diagramme de classe : Socket}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/classDiagrams/json.eps}
+    }
+    \caption{Diagramme de classe : Json}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=270pt]{uml/classDiagrams/mainWindow.eps}
+    }
+    \caption{Diagramme de classe : mainWindow}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=220pt]{uml/classDiagrams/serverHandler.eps}
+    }
+    \caption{Diagramme de classe : ServerHandler}
+\end{figure}
+
+
 
 \subsection{Diagrammes d'activité}
 
 \begin{figure}[H]
     %\vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[height=280pt]{uml/generalActivityDiagram.eps}
+        \includegraphics[width=430pt]{uml/activityDiagrams/generalActivityDiagram.eps}
     }
     \caption{Diagramme d'activité}
 \end{figure}
@@ -277,48 +327,60 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \begin{figure}[H]
     %\vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[width=\textwidth]{uml/matchActivityDiagram.eps}
+        \includegraphics[width=410pt]{uml/activityDiagrams/challengeActivityDiagram.eps}
     }
-    \caption{\label{3} Diagramme d'activité représentant le déroulement d'un match}
+    \caption{\label{3} Diagramme d'activité représentant le lancement de défis}
 \end{figure}
 
 \begin{figure}[H]
     %\vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[scale = 0.24]{uml/globalActivityDiagram.eps}
+        \includegraphics[width=380pt]{uml/activityDiagrams/matchActivityDiagram.eps}
     }
-    \caption{\label{3} Diagramme d'activité représentant la procédure normale d'une partie de jeu}
+    \caption{\label{3} Diagramme d'activité représentant le déroulement d'un match}
 \end{figure}
 
 %DIAGRAMES DE COMPOSANTS
 \subsection{Diagrammes de composants}
 
-%\begin{figure}[H]
-%    %\vspace*{-3cm}
-%    \makebox[\linewidth]{
-%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsModels.png}
-%    }
-%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/json et models}
-%\end{figure}
-% TODO
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/inclusions.eps}
+    }
+    \caption{Diagramme de composants}
+\end{figure}
 
-%\begin{figure}[H]
-%    %\vspace*{-3cm}
-%    \makebox[\linewidth]{
-%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsServer.png}
-%    }
-%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire server}
-%\end{figure}
-% TODO
+\subsection{Diagrammes de séquence}
 
-%\begin{figure}[H]
-%    %\vspace*{-3cm}
-%    \makebox[\linewidth]{
-%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsViews.png}
-%    }
-%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/file et views}
-%\end{figure}
-% TODO
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/sequence/loginseq.eps}
+    }
+    \caption{Diagramme de séquence : connexion}
+\end{figure}
+
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=440pt]{uml/sequence/matchseq.eps}
+    }
+    \caption{Diagramme de séquence : enregistrement}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/sequence/challengeseq.eps}
+    }
+    \caption{Diagramme de séquence : défi}
+\end{figure}
+
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/sequence/matchseq.eps}
+    }
+    \caption{Diagramme de séquence : match}
+\end{figure}
 
 
 

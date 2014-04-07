@@ -297,16 +297,18 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
     }
     else {
         Position clickedCase = getCase(event);
+        int i = clickedCase.x;
+        int j = clickedCase.y;
         if (highlightedCases.empty()) {
-            int i = clickedCase.x;
-            int j = clickedCase.y;
             if ((grid_[i][j].player != 0) && (grid_[i][j].player->isInGuestTeam() == isGuest_)) {
                 highlightedCases.push_back(clickedCase);
             }
         }
         else {
             if (isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
-                highlightedCases.push_back(clickedCase);
+                if ((unsigned)grid_[highlightedCases[0].x][highlightedCases[0].y].player->getSpeed() >= highlightedCases.size()){
+                    highlightedCases.push_back(clickedCase);
+                }
             }
             else if (highlightedCases[highlightedCases.size() - 1] == clickedCase) {
                 emit this->nextPlayer();

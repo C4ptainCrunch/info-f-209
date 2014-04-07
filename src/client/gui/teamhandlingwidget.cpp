@@ -39,7 +39,7 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
             iswounded = "Wounded";
         }
         else {
-            iswounded = "Not wounded";
+            iswounded = "OK";
         }
         playersDisplayer->setItem(i, 5, new QTableWidgetItem(iswounded));
         playersDisplayer->setVerticalHeaderItem(i, new QTableWidgetItem("Joueur " + QString::number(i + 1)));
@@ -48,7 +48,8 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
     int tableheight = 300;
     int tableWidth =  600;
 
-    //playersDisplayer->setSelectionMode(QAbstractItemView::NoSelection);
+    playersDisplayer->setSelectionBehavior(QAbstractItemView::SelectItems);
+    playersDisplayer->setSelectionMode(QAbstractItemView::SingleSelection);
     playersDisplayer->setEditTriggers(QAbstractItemView::EditTriggers(0));
     playersDisplayer->setStyleSheet("QHeaderView::section { background-color : rgb(139,69,19); color:white;}");
     playersDisplayer->setHorizontalHeaderLabels(QString("Speed;Force;Agility;Reflexes;Precision;State").split(";"));

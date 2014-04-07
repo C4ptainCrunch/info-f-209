@@ -168,6 +168,28 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[Post Condition :] L'\gls{utilisateur} sera déclaré comme perdant.
 \end{description}
 
+\subsection{Gestion des défis}
+\subsubsection{Défier un utilisateur}
+\begin{description}
+    \item[Cas général :] L'\gls{utilisateur} peut défier un autre utilisateur au choix parmi un liste d'utilisateurs connectés au serveur
+    \item[Pré Condition  :] L'\gls{utilisateur} ainsi que l'autre utilisateur doivent être connectés et ne pas jouer de match,
+    \item[Post Condition :] L'\gls{utilisateur} l'utilisateur adverse reçoit une notification de défi
+\end{description}
+
+\subsubsection{Accepter un défi}
+\begin{description}
+    \item[Cas général :] L'\gls{utilisateur} reçoit une notification lui demandant d'accepter un défi et il l'accepte
+    \item[Pré Condition  :] L'\gls{utilisateur} doit avoir été défié par un autre utilisateur
+    \item[Post Condition :] L'\gls{utilisateur} un match est créé et les deux utilisateurs commencent à jouer
+\end{description}
+
+\subsubsection{Refuser un défi}
+\begin{description}
+    \item[Cas général :] L'\gls{utilisateur} reçoit une notification lui demandant d'accepter un défi et il le refuse
+    \item[Pré Condition  :] L'\gls{utilisateur} doit avoir été défié par un autre utilisateur
+    \item[Post Condition :] Les deux utilisateurs repassent en phase de management normale.
+\end{description}
+
 % fin de "Exigences fonctionnelles"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -231,17 +253,6 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \begin{description}
     \item[Cas général :] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain ovale (pendant la phase de match), sous forme de cases hexagonales.
 \end{description}
-
-\subsection{Gestion des défis}
-\subsubsection{Défier un utilisateur}
-
-\subsubsection{Accepter un défi}
-
-
-\subsubsection{Refuser un défi}
-
-
-\subsubsection{Démarrer un match}
 
 
 \subsection{Divers}

@@ -1,10 +1,11 @@
 GLOSSARY_FILES = *.idx *.ist *.alg *.glg *.glo *.gls *.acn *.acr *.ilg *.ind
 TEX_FILES = *.aux *.log  *.out *.lof *.lot *.toc *.xdy
 TEX = pdflatex -interaction=batchmode
-DIASSOURCES=$(realpath $(wildcard ./uml/*.dia))
+DIASSOURCES=$(wildcard ./uml/*/*.dia)
 DIAOUT=$(subst .dia,.eps,$(DIASSOURCES))
 DOTS=$(wildcard ./uml/*.dot) $(wildcard ./uml/*.neato)
 TOPDF=$(wildcard ./uml/*-eps-converted-to.pdf)
+ROOT=$(realpath .)/
 
 RED=\e[0;31m
 NC=\e[0m
@@ -40,9 +41,8 @@ clean:
 
 diagrams: $(DIAOUT) $(DOTS)
 
-$(DIAOUT):
-	dia -e $@ $(subst .eps,.dia,$@)
-
+%.eps: %.dia
+	dia -e $(ROOT)$@ $(ROOT)$<
 
 %.eps: %.neato
 	neato -Teps $< > $@

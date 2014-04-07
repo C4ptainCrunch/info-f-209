@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QCloseEvent>
 #include <QCoreApplication>
+#include <QDir>
 #include <vector>
 #include <menuwindow.h>
 #include <loginscreenwidget.h>

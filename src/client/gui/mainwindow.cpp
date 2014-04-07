@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget * parent):
 
     //----------------TITLE SETTINGS-----------------------
     this->setWindowTitle("Quidditch Manager 2014");
-    this->setWindowIcon(QIcon(QPixmap(ROOT_DIR + "/logo.jpg")));
+    this->setWindowIcon(QIcon(QDir::currentPath() + "/images/logo.png"));
 
     //-----------------SIZE SETTINGS-----------------------
     this->setFixedHeight(720);

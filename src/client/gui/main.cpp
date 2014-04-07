@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QPixmap>
 #include <iostream>
+
 #include <menuwindow.h>
 #include "../receive-views/serverhandler.h"
 #include "../../common/lib/thread/thread.h"

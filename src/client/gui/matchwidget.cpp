@@ -27,26 +27,28 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
 
     //------------------------SCORE SETTINGS--------------------------------
-    int playerScore = currentMatch_->getScore()[0];
-    ownScore = new QLabel("YOU : " + QString::fromStdString(std::to_string(playerScore)), mainWidget);
+    int playerScore = currentMatch_->getScore()[isGuest_];
+    int mult;
+    isGuest_ ? mult = 10 : mult = 1;
+    ownScore = new QLabel("You : " + QString::fromStdString(std::to_string(playerScore)), mainWidget);
     ownScore->setFixedSize(250, 75);
     QFont font;
     font.setPointSize(17);
-    ownScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
+    ownScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : rgb(102,102,255);");
     ownScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
     ownScore->setWordWrap(true);
     ownScore->setFont(font);
-    ownScore->move(100, 50);
+    ownScore->move(100 * mult, 50);
     ownScore->show();
 
-    int otherScore = currentMatch_->getScore()[1];
-    opponentScore = new QLabel("OPPONENT : " + QString::fromStdString(std::to_string(otherScore)), mainWidget);
+    int otherScore = currentMatch_->getScore()[!isGuest_];
+    opponentScore = new QLabel("Opponent : " + QString::fromStdString(std::to_string(otherScore)), mainWidget);
     opponentScore->setFixedSize(250, 75);
     opponentScore->setAlignment(Qt::AlignBottom | Qt::AlignJustify);
-    opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : red;");
+    opponentScore->setStyleSheet(" font-weight: bold; font-size: 18pt; color : rgb(255, 71, 25);");
     opponentScore->setWordWrap(true);
     opponentScore->setFont(font);
-    opponentScore->move(1000, 50);
+    opponentScore->move(1000 / mult, 50);
     opponentScore->show();
 
     //---------------------FIELD CONTAINER WIDGET--------------------------
@@ -92,8 +94,8 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
 void MatchWidget::refreshField() {
     this->hide();
-    ownScore->setText("YOU : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[isGuest_])));
-    opponentScore->setText("OPPONENT : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[!isGuest_])));
+    ownScore->setText("You : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[isGuest_])));
+    opponentScore->setText("Opponent : " + QString::fromStdString(std::to_string(currentMatch_->getScore()[!isGuest_])));
 
     label = new QLabel(fieldWidget);
     QPixmap * pixmap = new QPixmap(LENGTH * 20, WIDTH * 17);

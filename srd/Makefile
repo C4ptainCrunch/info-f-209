@@ -1,17 +1,22 @@
 GLOSSARY_FILES = *.idx *.ist *.alg *.glg *.glo *.gls *.acn *.acr *.ilg *.ind
 TEX_FILES = *.aux *.log  *.out *.lof *.lot *.toc *.xdy
 TEX = pdflatex -interaction=batchmode
-DIASSOURCES=$(realpath $(wildcard ./uml/*.dia))
+
+DIASSOURCES=$(wildcard ./uml/*/*.dia) $(wildcard ./uml/*.dia)
 DIAOUT=$(subst .dia,.eps,$(DIASSOURCES))
-TOPDF=$(wildcard ./uml/*-eps-converted-to.pdf)
+
+DOTSOURCE=$(wildcard ./uml/*/*.dot) $(wildcard ./uml/*/*.neato) $(wildcard ./uml/*.dot) $(wildcard ./uml/*.neato)
+DOTOUT=$(subst .neato,.eps,$(subst .dot,.eps,$(DOTSOURCE)))
+
+ROOT=$(realpath .)/
 
 RED=\e[0;31m
 NC=\e[0m
 
-all: srd.pdf
+all: diagrams srd.pdf
 	@echo -e "$(RED) fin $(NC)"
 
-clean:
+clean: clean-diagrams
 	rm -f ${GLOSSARY_FILES} ${TEX_FILES} srd.synctex.gz
 
 %.pdf: %.tex %.glg2 %.idn
@@ -37,13 +42,23 @@ clean:
 	@echo -e "$(RED) make index $(NC)"
 	makeindex -q $(subst .tex,,$<)
 
-diagrams: $(DIAOUT)
+diagrams: $(DIAOUT) $(DOTOUT)
 
-$(DIAOUT):
-	dia -e $@ $(subst .eps,.dia,$@)
+%.eps: %.dia
+	dia -e $(ROOT)$@ $(ROOT)$<
+
+%.eps: %.neato
+	neato -Teps $< > $@
+
+%.eps: %.dot
+	dot -Teps $< > $@
 
 clean-diagrams:
-	rm -rf $(DIAOUT) $(TOPDF)
+	find . -name "*-eps-converted-to.pdf" -exec rm -rf {} \;
+	find . -name "*.eps" -exec rm -rf {} \;
+
+debug:
+	@echo $(DOTOUT)
 
 .PHONY: clean all
 

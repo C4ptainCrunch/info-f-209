@@ -25,7 +25,6 @@ public:
     Socket(const int fd);
     Socket(std::string hostname, int port);
     ~Socket();
-    virtual void mutex_init();
     virtual int write(std::string message);
     virtual int read(std::string & message);
     virtual int getFd() const;
@@ -35,6 +34,7 @@ protected:
     char buffer[SBUFF_SIZE];
     int fd_;
     virtual std::string popFromBuffer();
+    virtual void mutex_init();
     pthread_mutex_t read_lock;
     pthread_mutex_t write_lock;
 

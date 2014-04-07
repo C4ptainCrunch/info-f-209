@@ -28,17 +28,15 @@
 \indexsetup{level=\chapter}
 \setcounter{secnumdepth}{4}
 
-\title{Quiddich Live Manager 2014 : \\Software requirements document}
+\title{Quidditch Manager 2014 : \\Software requirements document\\ \includegraphics[width=\textwidth]{logo.png}}
 \author{Bruno Rocha Pereira \and Romain Fontaine \and Nikita Marchant}
 \date{\today}
 
-% Début du document
 \begin{document}
-\fancypagestyle{empty}{%
-  \fancyhf{}% Clear header/footer
-  \fancyhead[L]{\includegraphics[scale=0.5]{logoulb.jpg}}% Your logo/image
+\fancypagestyle{empty}{
+  \fancyhf{}
+  \fancyhead[L]{\includegraphics[scale=0.5]{logoulb.jpg}}
 }
-
 \maketitle
 \tableofcontents
 \clearpage
@@ -46,7 +44,7 @@
 
 \chapter{Introduction}
 \section{But du projet}
-Le but du projet d'année en BA2 en sciences informatiques est le développement d'une application de jeu multijoueur en ligne.
+Le but du projet d'année en BA2 en sciences informatiques est le développement d'une application de jeu multi-joueur en ligne.
 Il consiste en l'implémentation d'un jeu de Quidditch, sport tiré de la saga Harry Potter de J.K.Rowling.
 
 
@@ -94,6 +92,11 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[3.4] (04/04/14) : Ajout des nouveaux use-case diagrams - Bruno
     \item[3.5] (04/04/14) : Ajout du sequence diagram - Nikita
     \item[3.6] (04/04/14) : Ré-organisation du document et suppression des parties obsolètes ou non implémentées - Nikita
+	\item[3.6] (07/04/14) : Corrections orthographiques - Nikita
+	\item[3.7] (07/04/14) : Ajout de nouveaux diagrammes d'activité - Nikita
+	\item[3.8] (07/04/14) : Ajout de diagrammes de classe - Romain
+	\item[3.9] (07/04/14) : Ajout de diagrammes de séquence - Nikita
+	\item[3.10] (07/04/14) : Correction de la mise en page - Nikita
     
     \item[4.0] (07/04/14) : \textbf{Délivrable pour la partie 4 - Equipe}
     
@@ -109,7 +112,7 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{uml/ConnectionUCD.eps}
+        \includegraphics[width=\textwidth]{uml/useCaseDiadrams/ConnectionUCD.eps}
         \caption{\label{diag-use-inscription} Système d'identification}
     \end{center}
 \end{figure}
@@ -131,6 +134,25 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[Cas Exceptionnel :] L'authentification échouera et l'\gls{utilisateur} sera invité à recommencer si le mot de passe ne correspond pas au nom d'\gls{utilisateur}, ou cet \gls{utilisateur} n'existe sur le \gls{serveur}.
 \end{description}
 
+\subsection{Gestion du club}
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{uml/useCaseDiadrams/MenuUCD.eps}
+        \caption{Menu principal}
+    \end{center}
+\end{figure}
+
+\subsubsection{Gestion des infrastructures}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{uml/useCaseDiadrams/InfrastructuresUCD.eps}
+        \caption{Gestion des infrastructures}
+    \end{center}
+\end{figure}
+
+
 \subsection{Jouer à un match}
 \subsubsection{Jouer un tour}
 \begin{description}
@@ -146,13 +168,35 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[Post Condition :] L'\gls{utilisateur} sera déclaré comme perdant.
 \end{description}
 
+\subsection{Gestion des défis}
+\subsubsection{Défier un utilisateur}
+\begin{description}
+    \item[Cas général :] L'\gls{utilisateur} peut défier un autre utilisateur au choix parmi un liste d'utilisateurs connectés au serveur
+    \item[Pré Condition  :] L'\gls{utilisateur} ainsi que l'autre utilisateur doivent être connectés et ne pas jouer de match,
+    \item[Post Condition :] L'\gls{utilisateur} l'utilisateur adverse reçoit une notification de défi
+\end{description}
+
+\subsubsection{Accepter un défi}
+\begin{description}
+    \item[Cas général :] L'\gls{utilisateur} reçoit une notification lui demandant d'accepter un défi et il l'accepte
+    \item[Pré Condition  :] L'\gls{utilisateur} doit avoir été défié par un autre utilisateur
+    \item[Post Condition :] L'\gls{utilisateur} un match est créé et les deux utilisateurs commencent à jouer
+\end{description}
+
+\subsubsection{Refuser un défi}
+\begin{description}
+    \item[Cas général :] L'\gls{utilisateur} reçoit une notification lui demandant d'accepter un défi et il le refuse
+    \item[Pré Condition  :] L'\gls{utilisateur} doit avoir été défié par un autre utilisateur
+    \item[Post Condition :] Les deux utilisateurs repassent en phase de management normale.
+\end{description}
+
 % fin de "Exigences fonctionnelles"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Exigences non fonctionnelles}
 \begin{itemize}
     \item La machine hébergeant le \gls{client} ainsi que le \gls{serveur} doivent être en mesure de communiquer en permanence via un réseau capable de transporter des paquets \textbf{TCP/IP}
-    \item Le réseau décrit ci-dessus doit pourvoir une latence raisonnablement faible (c'est à dire moins de 500ms pour un aller retour) et dispoer du port 9000/tcp ouvert en sortie pour le serveur et en entrée pour le client.
+    \item Le réseau décrit ci-dessus doit pourvoir une latence raisonnablement faible (c'est à dire moins de 500ms pour un aller retour) et disposer du port 9000/tcp ouvert en sortie pour le serveur et en entrée pour le client.
     \item Les machines exécutant le \gls{client} doivent être équipées d'un écran, d'un clavier et d'une souris et être capables d'afficher des images en mode graphique ainsi qu'au minimum 80 caractères de large en mode console. Elles devront aussi avoir au minimum disposer de 128MB de mémoire vive ainsi que 128MB d'espace disque.
 \end{itemize}
 
@@ -161,9 +205,9 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 
 \section{Exigences de domaine}
 \begin{itemize}
-    \item Le jeu doit être multijoueur, les différents \glspl{utilisateur} connectés sur un même \gls{serveur} doivent pourvoir interagir entre eux.
+    \item Le jeu doit être multi-joueur, les différents \glspl{utilisateur} connectés sur un même \gls{serveur} doivent pourvoir interagir entre eux.
     \item Le monde doit être persistent : il doit continuer d'évoluer, même en l'absence d'un ou plusieurs \glspl{utilisateur}.
-    \item Une \gls{equipe} de Quiddich doit comporter 7 \glspl{joueur} au maximum, sans compter les remplaçants.
+    \item Une \gls{equipe} de Quidditch doit comporter 7 \glspl{joueur} au maximum, sans compter les remplaçants.
     \item Un \gls{joueur} blessé/mort ne peut être remplacé en plein match.
     \item Un match nécessite trois balles : Un souaffle, deux cognards et un vif d'or. Le terrain doit comporter deux buts, fait chacun de trois anneaux, et placé aux deux extrémités.
     \item Pour participer à un match, chaque \gls{joueur} doit posséder un balai.
@@ -210,17 +254,6 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
     \item[Cas général :] Le système doit fournir à l'\gls{utilisateur} une représentation du terrain ovale (pendant la phase de match), sous forme de cases hexagonales.
 \end{description}
 
-\subsection{Gestion des défis}
-\subsubsection{Défier un utilisateur}
-
-\subsubsection{Accepter un défi}
-
-
-\subsubsection{Refuser un défi}
-
-
-\subsubsection{Démarrer un match}
-
 
 \subsection{Divers}
 \subsubsection{Sauvegarder}
@@ -244,90 +277,124 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \section{Design et fonctionnement}
 \subsection{Diagrammes de classe}
 
-\newpage
 \begin{figure}[H]
-    \vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[scale = 0.4]{uml/generalClassDiagram.png}
+        \includegraphics[height=430pt]{uml/classDiagrams/manager.eps}
     }
-    \caption{\label{3} Diagramme de classe représentant toutes les structures de données}
-\end{figure}
-\newpage
-
-\begin{figure}[H]
-    \vspace*{-3cm}
-    \makebox[\linewidth]{
-        \includegraphics[scale = 0.38]{uml/matchClassDiagram.png}
-    }
-    \caption{\label{3} Diagramme de classe représentant les structures de données intervenant pour un match}
-\end{figure}
-
-\newpage
-\begin{figure}[H]
-    \vspace*{-3cm}
-    \makebox[\linewidth]{
-        \includegraphics[scale = 0.77]{uml/serverClassDiagram.png}
-    }
-    \caption{\label{3} Diagramme de classe représentant les structures de données intervenant pour la partie serveur}
+    \caption{Diagramme de classe : Manager}
 \end{figure}
 
 \begin{figure}[H]
-    \vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[scale=0.5]{uml/clientClassDiagram.png}
+        \includegraphics[width=430pt]{uml/classDiagrams/match.eps}
     }
-    \caption{\label{3} Diagramme de classe représentant les structures de données intervenant pour la partie client}
+    \caption{Diagramme de classe : Match}
 \end{figure}
 
-%\newpage
-%DIAGRAMMES D ACTIVITE
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=270pt]{uml/classDiagrams/userHandler.eps}
+    }
+    \caption{Diagramme de classe : UserHandler}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[height=200pt]{uml/classDiagrams/socket.eps}
+    }
+    \caption{Diagramme de classe : Socket}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/classDiagrams/json.eps}
+    }
+    \caption{Diagramme de classe : Json}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=270pt]{uml/classDiagrams/mainWindow.eps}
+    }
+    \caption{Diagramme de classe : mainWindow}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=220pt]{uml/classDiagrams/serverHandler.eps}
+    }
+    \caption{Diagramme de classe : ServerHandler}
+\end{figure}
+
+
+
 \subsection{Diagrammes d'activité}
 
 \begin{figure}[H]
     %\vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[width=\textwidth]{uml/matchActivityDiagram.eps}
+        \includegraphics[width=430pt]{uml/activityDiagrams/generalActivityDiagram.eps}
     }
-    \caption{\label{3} Diagramme d'activité représentant le déroulement d'un match}
+    \caption{Diagramme d'activité}
 \end{figure}
 
 \begin{figure}[H]
     %\vspace*{-3cm}
     \makebox[\linewidth]{
-        \includegraphics[scale = 0.24]{uml/globalActivityDiagram.eps}
+        \includegraphics[width=410pt]{uml/activityDiagrams/challengeActivityDiagram.eps}
     }
-    \caption{\label{3} Diagramme d'activité représentant la procédure normale d'une partie de jeu}
+    \caption{\label{3} Diagramme d'activité représentant le lancement de défis}
+\end{figure}
+
+\begin{figure}[H]
+    %\vspace*{-3cm}
+    \makebox[\linewidth]{
+        \includegraphics[width=380pt]{uml/activityDiagrams/matchActivityDiagram.eps}
+    }
+    \caption{\label{3} Diagramme d'activité représentant le déroulement d'un match}
 \end{figure}
 
 %DIAGRAMES DE COMPOSANTS
 \subsection{Diagrammes de composants}
 
-%\begin{figure}[H]
-%    %\vspace*{-3cm}
-%    \makebox[\linewidth]{
-%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsModels.png}
-%    }
-%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/json et models}
-%\end{figure}
-% TODO
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/inclusions.eps}
+    }
+    \caption{Diagramme de composants}
+\end{figure}
 
-%\begin{figure}[H]
-%    %\vspace*{-3cm}
-%    \makebox[\linewidth]{
-%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsServer.png}
-%    }
-%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire server}
-%\end{figure}
-% TODO
+\subsection{Diagrammes de séquence}
 
-%\begin{figure}[H]
-%    %\vspace*{-3cm}
-%    \makebox[\linewidth]{
-%        \includegraphics[scale = 0.50]{uml/DiagrammeComposantsViews.png}
-%    }
-%    \caption{\label{3} Diagramme de composants représentant les dépendances au sein du répertoire lib/file et views}
-%\end{figure}
-% TODO
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/sequence/loginseq.eps}
+    }
+    \caption{Diagramme de séquence : connexion}
+\end{figure}
+
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=440pt]{uml/sequence/matchseq.eps}
+    }
+    \caption{Diagramme de séquence : enregistrement}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/sequence/challengeseq.eps}
+    }
+    \caption{Diagramme de séquence : défi}
+\end{figure}
+
+
+\begin{figure}[H]
+    \makebox[\linewidth]{
+        \includegraphics[width=430pt]{uml/sequence/matchseq.eps}
+    }
+    \caption{Diagramme de séquence : match}
+\end{figure}
 
 
 
@@ -336,12 +403,12 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \section{Qt}
 \subsection{Avantages}
 \begin{itemize}
-    \item Qt est une librairie complête et possède une documentation énorme. De ce fait, il sera facile de trouver réponse à nos questions.
+    \item Qt est une librairie complète et possède une documentation énorme. De ce fait, il sera facile de trouver réponse à nos questions.
     \item Qt est une librairie utilisée depuis 1995 et le projet est toujours actif et maintenu par une grande société (Nokia), on peut donc la considérer comme stable.
     \item Qt est écrit en C++ et donc nativement adapté pour ce langage.
     \item Qt est OpenSource (sous license GNU LGPL).
     \item Qt permet d'utiliser le framework QgraphicsView, facile d'utilisation et complet, permettant de dessiner aisément ce que l'on veut.
-    \item On peut utiliser Qt Creator pour cette librairie graphique, IDE fournissant une autocomplétion pour tous les modules de Qt et possédant une aide disponible intrinsèque.
+    \item On peut utiliser Qt Creator pour cette librairie graphique, IDE fournissant une auto-complétion pour tous les modules de Qt et possédant une aide disponible intrinsèque.
 \end{itemize}
 \subsection{Inconvénients}
 \begin{itemize}
@@ -355,11 +422,11 @@ En ce qui concerne la gestion du \gls{club}, l'\gls{utilisateur} aura la possibi
 \end{itemize}
 \subsection{Inconvénients}
 \begin{itemize}
-    \item Documentation non complête
+    \item Documentation non complète
     \item Pas d'IDE fourni par l'équipe en charge du projet GTK+
 \end{itemize}
 \section{Conclusion}
-Nous utiliserons donc Qt, de par la présence et la simplicité d'utilisation de son IDE \textit{Qt Creator} et par la richesse de la documentation qui l'accompagne. La stabilité de cette API fut également un élément influencant notre choix.
+Nous utiliserons donc Qt, de par la présence et la simplicité d'utilisation de son IDE \textit{Qt Creator} et par la richesse de la documentation qui l'accompagne. La stabilité de cette API fut également un élément influençant notre choix.
 
 \chapter{Idées d'ajout de fonctionnalités}
 \section{A finir}

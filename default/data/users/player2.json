@@ -5,7 +5,7 @@
                 "level": 1
             },
             {
-                "level": 1
+                "level": 2
             },
             {
                 "level": 1
@@ -14,7 +14,7 @@
                 "level": 1
             },
             {
-                "level": 1
+                "level": 5
             }
         ],
         "money": 0,
@@ -22,14 +22,38 @@
         "team": {
             "players": [
                 {
-                    "agility": 1,
-                    "experience": 0,
+                    "agility": 3,
+                    "experience": 1,
                     "force": 1,
                     "inventory": [],
                     "level": 1,
                     "passPrecision": 1,
-                    "reflexes": 1,
-                    "speed": 1,
+                    "reflexes": 6,
+                    "speed": 10,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 7,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 3,
+                    "speed": 10,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 16,
+                    "inventory": [],
+                    "level": 1,
+                    "passPrecision": 1,
+                    "reflexes": 11,
+                    "speed": 10,
                     "vocation": 0,
                     "wounded": false
                 },
@@ -41,7 +65,19 @@
                     "level": 1,
                     "passPrecision": 1,
                     "reflexes": 1,
-                    "speed": 1,
+                    "speed": 10,
+                    "vocation": 0,
+                    "wounded": false
+                },
+                {
+                    "agility": 1,
+                    "experience": 0,
+                    "force": 1,
+                    "inventory": [],
+                    "level": 4,
+                    "passPrecision": 1,
+                    "reflexes": 6,
+                    "speed": 10,
                     "vocation": 0,
                     "wounded": false
                 },
@@ -53,55 +89,19 @@
                     "level": 1,
                     "passPrecision": 1,
                     "reflexes": 1,
-                    "speed": 1,
+                    "speed": 10,
                     "vocation": 0,
                     "wounded": false
                 },
                 {
                     "agility": 1,
                     "experience": 0,
-                    "force": 1,
+                    "force": 2,
                     "inventory": [],
-                    "level": 1,
+                    "level": 10,
                     "passPrecision": 1,
                     "reflexes": 1,
-                    "speed": 1,
-                    "vocation": 0,
-                    "wounded": false
-                },
-                {
-                    "agility": 1,
-                    "experience": 0,
-                    "force": 1,
-                    "inventory": [],
-                    "level": 1,
-                    "passPrecision": 1,
-                    "reflexes": 1,
-                    "speed": 1,
-                    "vocation": 0,
-                    "wounded": false
-                },
-                {
-                    "agility": 1,
-                    "experience": 0,
-                    "force": 1,
-                    "inventory": [],
-                    "level": 1,
-                    "passPrecision": 1,
-                    "reflexes": 1,
-                    "speed": 1,
-                    "vocation": 0,
-                    "wounded": false
-                },
-                {
-                    "agility": 1,
-                    "experience": 0,
-                    "force": 1,
-                    "inventory": [],
-                    "level": 1,
-                    "passPrecision": 1,
-                    "reflexes": 1,
-                    "speed": 1,
+                    "speed": 10,
                     "vocation": 0,
                     "wounded": false
                 }

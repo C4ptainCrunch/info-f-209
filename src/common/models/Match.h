@@ -38,8 +38,8 @@ public:
     int findIndex(Position nextPosition[14], Position position);
     void movePlayer(Position fromPos, Position toPos);
     void generateFieldPlayers();
-    std::string print();    //FOR TESTS
-    void generateGrid();    // TODO : TO SET PRIVATE AFTER TESTS
+    std::string print();
+    void generateGrid();
     void getGrid(Case grid[WIDTH][LENGTH]);
     Club * * getClubs();
     operator JsonDict() const;

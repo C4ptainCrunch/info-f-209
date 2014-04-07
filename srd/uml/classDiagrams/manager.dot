@@ -1,0 +1,108 @@
+digraph Manager {
+	graph [bb="0,0,284,1392"];
+	node [fontname=Helvetica,
+		fontsize=12,
+		label="\N",
+		shape=record
+	];
+	edge [fontname=Helvetica,
+		fontsize=12,
+		labelfontname=Helvetica,
+		labelfontsize=12,
+		labeldistance=1.5
+	];
+	Manager	 [color=black,
+		fillcolor=white,
+		fontcolor=black,
+		label="{Manager\n|- name_\l- userName_\l- hash_\l|+ Manager()\l+ Manager(Json)\l+ ~Manager()\l+ checkPassword()\l+ changePassword()\l\
++ operator JsonDict()\l}",
+		pos="128,97",
+		rects="62,172.5,194,193.5 62,125.5,194,172.5 62,0.5,194,125.5",
+		style=filled,
+		width=1.8333];
+	Club	 [URL="$class_club.html",
+		color=black,
+		fillcolor=white,
+		label="{Club\n|- money_\l|+ Club()\l+ Club(Json)\l+ ~Club()\l+ addMoney()\l+ \
+operator JsonDict()\l+ addNonFieldPlayer()\l+ removeNonFieldPlayer()\l+ addInstallation()\l}",
+		pos="128,367",
+		rects="48.5,468.5,207.5,489.5 48.5,434.5,207.5,468.5 48.5,244.5,207.5,434.5",
+		style=filled,
+		width=2.2014];
+	Club -> Manager	 [arrowhead=odiamond,
+		headlabel="1",
+		taillabel="1",
+		label=" -club_",
+		lp="146.5,219",
+		pos="e,128,193.85 128,244.16 128,231.5 128,218.71 128,206.22",
+		style=solid];
+	Installation	 [URL="$class_installation.html",
+		color=black,
+		fillcolor=white,
+		label="{Installation\n|# level_\l# baseprice_\l# powerprice_\l|+ Installation()\l+ Installation(Json)\l+ ~Installation()\l+ improve()\l+ improvePrice()\l+ \
+operator JsonDict()\l}",
+		pos="66,637",
+		rects="0,699.5,132,720.5 0,652.5,132,699.5 0,553.5,132,652.5",
+		style=filled,
+		width=1.8333];
+	Installation -> Club	 [arrowhead=odiamond,
+		headlabel="1",
+		taillabel="5",
+		label=" -installations_",
+		lp="130.5,515",
+		pos="e,96.307,489.7 82.164,553.24 85.293,538.16 88.646,522.59 92,508 92.495,505.85 92.999,503.68 93.51,501.49",
+		style=solid];
+	Team	 [URL="$class_team.html",
+		color=black,
+		fillcolor=white,
+		label="{Team\n||+ Team()\l+ Team(Json)\l+ ~Team()\l+ \
+swapPlayers()\l+ operator JsonDict()\l}",
+		pos="216,637",
+		rects="150,712.5,282,733.5 150,691.5,282,712.5 150,540.5,282,691.5",
+		style=filled,
+		width=1.8333];
+	Team -> Club	 [arrowhead=odiamond,
+		headlabel="1",
+		taillabel="1",	
+		label=" -team_",
+		lp="198.5,515",
+		pos="e,168,489.82 184.6,540.38 180.44,527.71 176.12,514.53 171.79,501.37",
+		style=solid];
+	NonFieldPlayer	 [URL="$class_non_field_player.html",
+		color=black,
+		fillcolor=white,
+		label="{NonFieldPlayer\n|- level_\l- experience_\l- vocation_\l|+ NonFieldPlayer()\l+ NonFieldPlayer(Json)\l+ ~NonFieldPlayer()\l+ \
+operator=()\l+ operator JsonDict()\l+ changeExperience()\l+ levelUp()\l}",
+		pos="216,894",
+		rects="147.5,982.5,284.5,1003.5 147.5,935.5,284.5,982.5 147.5,784.5,284.5,935.5",
+		style=filled,
+		width=1.8958];
+	NonFieldPlayer -> Team	 [arrowhead=odiamond,
+		headlabel="1",
+		taillabel="7",
+		label=" -players_",
+		lp="242.5,759",
+		pos="e,216,733.51 216,784.49 216,771.65 216,758.54 216,745.71",
+		style=solid];
+
+	NonFieldPlayer -> Club	 [arrowhead=odiamond,
+		headlabel="1",
+		taillabel="*",
+		label=" -players_",
+		lp="242.5,759",
+		pos="e,216,733.51 216,784.49 216,771.65 216,758.54 216,745.71",
+		style=solid];
+
+	Player	 [URL="$class_player.html",
+		color=black,
+		fillcolor=white,
+		label="{Player\n|# speed_\l# force_\l# agility_\l# reflexes_\l# passPrecision_\l# wounded_\l# inventory_\l|+ Player()\l+ ~Player()\l}",
+		pos="216,1217",
+		rects="149,1370.5,283,1391.5 149,1271.5,283,1370.5 149,1042.5,283,1271.5",
+		style=filled,
+		width=1.8611];
+	Player -> NonFieldPlayer	 [arrowtail=onormal,
+		dir=back,
+		pos="s,216,1042.3 216,1032.2 216,1022.5 216,1012.9 216,1003.6",
+		style=solid];
+}

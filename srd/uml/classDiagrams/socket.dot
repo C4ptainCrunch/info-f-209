@@ -1,0 +1,48 @@
+digraph Socket {
+	graph [bb="0,0,229,334"];
+	node [fontname=Helvetica,
+		fontsize=12,
+		label="\N",
+		shape=record
+	];
+	edge [fontname=Helvetica,
+		fontsize=12,
+		labelfontname=Helvetica,
+		labelfontsize=12
+	];
+	Socket	 [color=black,
+		fillcolor=white,
+		fontcolor=black,
+		label="{Socket\n|# buffer\l# fd_\l# read_lock\l# write_lock\l|+ Socket()\l+ ~Socket()\l- mutex_init()\l+ write()\l+ \
+read()\l# popFromBuffer()\l}",
+		pos="115,224",
+		rects="56,312.5,174,333.5 56,252.5,174,312.5 56,114.5,174,252.5",
+		style=filled,
+		width=1.6389];
+	BindSocket	 [URL="$class_bind_socket.html",
+		color=black,
+		fillcolor=white,
+		label="{BindSocket\n||+ BindSocket()\l+ accept_client()\l}",
+		pos="53,39",
+		rects="-0.5,56,106.5,77 -0.5,35,106.5,56 -0.5,1,106.5,35",
+		style=filled,
+		width=1.4792];
+	Socket -> BindSocket	 [arrowtail=onormal,
+		color=black,
+		dir=back,
+		pos="s,78.218,114.43 74.994,104.92 71.674,95.12 68.505,85.766 65.659,77.364",
+		style=solid];
+	ClientSocket	 [URL="$class_client_socket.html",
+		color=black,
+		fillcolor=white,
+		label="{ClientSocket\n|- remote_addr_\l|+ ClientSocket()\l+ remote()\l}",
+		pos="177,39",
+		rects="124.5,56,229.5,77 124.5,35,229.5,56 124.5,1,229.5,35",
+		style=filled,
+		width=1.4514];
+	Socket -> ClientSocket	 [arrowtail=onormal,
+		color=black,
+		dir=back,
+		pos="s,151.78,114.43 155.01,104.92 158.33,95.12 161.49,85.766 164.34,77.364",
+		style=solid];
+}

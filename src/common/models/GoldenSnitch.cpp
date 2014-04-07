@@ -2,7 +2,7 @@
 
 using namespace std;
 
-GoldenSnitch::GoldenSnitch(): Ball(0) {
+GoldenSnitch::GoldenSnitch(): Ball(20) {
     srand(time(NULL));
 }
 

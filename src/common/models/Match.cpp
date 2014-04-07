@@ -302,14 +302,17 @@ bool Match::newTurn() {
         Position nextPosition[14];
         for (int i = 0; i < 14; ++i) {
             if (playerWays[i].size() > turnNumber + 1) {
-                if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0) {
-                    nextPosition[i] = playerWays[i][turnNumber + 1];
-                    movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
+                FieldPlayer * player = grid_[playerWays[i][turnNumber].x][playerWays[i][turnNumber].y].player;
+                if(player->getSpeed() > turnNumber){
+                    if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0) {
+                        nextPosition[i] = playerWays[i][turnNumber + 1];
+                        movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
+                    }
+                    else {
+                        resolveConflict(nextPosition, playerWays, i, turnNumber);
+                    }
+                    moved = true;
                 }
-                else {
-                    resolveConflict(nextPosition, playerWays, i, turnNumber);
-                }
-                moved = true;
             }
         }
         moveBalls(moved, turnNumber);
@@ -328,33 +331,39 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     //BUDGERS
     Position nextBallPos;
     for (int i = 0; i < 2; ++i) {
-        nextBallPos = budgers_[i].autoMove(grid_);
-        grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
-        budgers_[i].setPosition(nextBallPos.x, nextBallPos.y);
-        grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
-        if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
-            // TODO set direction and power for isHit and hitPlayer.
-            if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == BEATER) {
-                int direction = rand() % 6;
-                budgers_[i].isHit(direction, grid_[nextBallPos.x][nextBallPos.y].player->getForce(), grid_);
+        if(turnNumber < budgers_[i].getSpeed()){
+            nextBallPos = budgers_[i].autoMove(grid_);
+            grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
+            budgers_[i].setPosition(nextBallPos.x, nextBallPos.y);
+            grid_[nextBallPos.x][nextBallPos.y].ball = &budgers_[i];
+            if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
+                // TODO set direction and power for isHit and hitPlayer.
+                if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == BEATER) {
+                    int direction = rand() % 6;
+                    budgers_[i].isHit(direction, grid_[nextBallPos.x][nextBallPos.y].player->getForce(), grid_);
+                }
+                else {
+                    budgers_[i].hitPlayer(grid_[nextBallPos.x][nextBallPos.y].player, 0);
+                }
             }
-            else {
-                budgers_[i].hitPlayer(grid_[nextBallPos.x][nextBallPos.y].player, 0);
-            }
+            moved = true;
         }
     }
 
     //GOLDENSNITCH
-    nextBallPos = goldenSnitch_.autoMove(grid_);
-    grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
-    goldenSnitch_.setPosition(nextBallPos.x, nextBallPos.y);
-    grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
-    if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
-        if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == SEEKER) {
-            endGame_ = true;
-            // TODO vérifier pour les 150
-            addPoint(grid_[nextBallPos.x][nextBallPos.y].player->isInGuestTeam(), 150);
+    if(turnNumber < goldenSnitch_.getSpeed()){
+        nextBallPos = goldenSnitch_.autoMove(grid_);
+        grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
+        goldenSnitch_.setPosition(nextBallPos.x, nextBallPos.y);
+        grid_[nextBallPos.x][nextBallPos.y].ball = &goldenSnitch_;
+        if (grid_[nextBallPos.x][nextBallPos.y].player != 0) {
+            if (grid_[nextBallPos.x][nextBallPos.y].player->getRole() == SEEKER) {
+                endGame_ = true;
+                // TODO vérifier pour les 150
+                addPoint(grid_[nextBallPos.x][nextBallPos.y].player->isInGuestTeam(), 150);
+            }
         }
+        moved = true;
     }
 
     //QUAFFLE

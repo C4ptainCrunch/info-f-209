@@ -36,7 +36,7 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             pos.y = *intY;
             newWay.push_back(pos);
         }
-        if(newWay.size()>0 && grid[newWay[i].x][newWay[i].y].player->isInGuestTeam() == isGuest){
+        if(newWay.size()>0 && grid[newWay[0].x][newWay[0].y].player->isInGuestTeam() == isGuest){
             playerWays[i] = newWay;
         }
         else{

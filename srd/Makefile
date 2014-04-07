@@ -3,6 +3,7 @@ TEX_FILES = *.aux *.log  *.out *.lof *.lot *.toc *.xdy
 TEX = pdflatex -interaction=batchmode
 DIASSOURCES=$(realpath $(wildcard ./uml/*.dia))
 DIAOUT=$(subst .dia,.eps,$(DIASSOURCES))
+DOTS=$(wildcard ./uml/*.dot) $(wildcard ./uml/*.neato)
 TOPDF=$(wildcard ./uml/*-eps-converted-to.pdf)
 
 RED=\e[0;31m
@@ -37,10 +38,17 @@ clean:
 	@echo -e "$(RED) make index $(NC)"
 	makeindex -q $(subst .tex,,$<)
 
-diagrams: $(DIAOUT)
+diagrams: $(DIAOUT) $(DOTS)
 
 $(DIAOUT):
 	dia -e $@ $(subst .eps,.dia,$@)
+
+
+%.eps: %.neato
+	neato -Teps $< > $@
+
+%.eps: %.dot
+	dot -Teps $< > $@
 
 clean-diagrams:
 	rm -rf $(DIAOUT) $(TOPDF)

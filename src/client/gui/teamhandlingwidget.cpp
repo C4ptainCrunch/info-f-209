@@ -36,10 +36,10 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
         playersDisplayer->setItem(i, 4, new QTableWidgetItem(QString::number(playerList[i]->getPassPrecision())));
         QString iswounded;
         if (playerList[i]->isWounded()) {
-            iswounded = "Blessé";
+            iswounded = "Wounded";
         }
         else {
-            iswounded = "Non Blessé";
+            iswounded = "Not wounded";
         }
         playersDisplayer->setItem(i, 5, new QTableWidgetItem(iswounded));
         playersDisplayer->setVerticalHeaderItem(i, new QTableWidgetItem("Joueur " + QString::number(i + 1)));
@@ -48,13 +48,18 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
     int tableheight = 300;
     int tableWidth =  600;
 
-    playersDisplayer->setSelectionMode(QAbstractItemView::NoSelection);
+    //playersDisplayer->setSelectionMode(QAbstractItemView::NoSelection);
     playersDisplayer->setEditTriggers(QAbstractItemView::EditTriggers(0));
     playersDisplayer->setStyleSheet("QHeaderView::section { background-color : rgb(139,69,19); color:white;}");
     playersDisplayer->setHorizontalHeaderLabels(QString("Speed;Force;Agility;Reflexes;Precision;State").split(";"));
     mainWidget->setFixedSize(tableWidth, tableheight);
 
-    QPushButton * backButton = new QPushButton("Retour", mainWidget);
+    QPushButton * trainButton = new QPushButton("Train", mainWidget);
+    trainButton->setMinimumHeight(40);
+    trainButton->setStyleSheet("font-size : 30px;");
+    //connect(trainButton, SIGNAL(clicked()), this, SLOT(train()));
+
+    QPushButton * backButton = new QPushButton("Back", mainWidget);
     backButton->setMinimumHeight(40);
     connect(backButton, SIGNAL(clicked()), this, SLOT(backToMenu()));
 
@@ -64,6 +69,7 @@ TeamHandlingWidget::TeamHandlingWidget(MainWindow * parent):
     QHeaderView * header2 = playersDisplayer->verticalHeader();
     header2->setSectionResizeMode(QHeaderView::Stretch);
 
+    mainLayout->addWidget(trainButton);
     mainLayout->addWidget(playersDisplayer);
     mainLayout->addWidget(backButton);
     mainWidget->move(parent_->width() / 2 - tableWidth / 2, parent_->height() / 2 - tableheight / 2);

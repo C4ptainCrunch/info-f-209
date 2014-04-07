@@ -47,6 +47,7 @@ public slots:
 private:
     MainWindow * parent_;
     QWidget * mainWidget;
+    QPushButton * turnEndButton;
     QLabel * ownScore;
     QLabel * label = NULL;
     QLabel * opponentScore;

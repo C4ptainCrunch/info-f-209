@@ -63,7 +63,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
     mainLayout->addWidget(temp, 0, 0);
     mainLayout->addWidget(fieldWidget, 1, 1);
 
-    QPushButton * turnEndButton = new QPushButton("Fin du tour", mainWidget);
+    turnEndButton = new QPushButton("Fin du tour", mainWidget);
     turnEndButton->setMinimumHeight(30);
     mainLayout->addWidget(turnEndButton, 2, 2);
 
@@ -79,7 +79,7 @@ MatchWidget::MatchWidget(Match * startingMatch, bool isGuest, int matchID, MainW
 
     QObject::connect(parent_, SIGNAL(updateMatch(Match *)), this, SLOT(setCurrentMatch(Match *)));
     QObject::connect(parent_, SIGNAL(endMatch(int)), this, SLOT(endMatch(int)));
-    //askMatchToServer();
+
 
 
     currentMatch_->getGrid(grid_);
@@ -229,6 +229,8 @@ MatchWidget::~MatchWidget() {}
 
 
 void MatchWidget::setCurrentMatch(Match * match) {
+    turnEndButton->setEnabled(true);
+    turnEndButton->setStyleSheet("color : white;");
     currentMatch_ = match;
     Case grid[WIDTH][LENGTH];
     currentMatch_->getGrid(grid);
@@ -273,6 +275,8 @@ Position MatchWidget::getCase(QMouseEvent * event) {
 }
 
 void MatchWidget::endTurn() {
+    turnEndButton->setDisabled(true);
+    turnEndButton->setStyleSheet("color : black;");
     sviews::endTurn(parent_->getSocket(), chosenWays);
     chosenWays.clear();
 

@@ -303,7 +303,7 @@ bool Match::newTurn() {
         for (int i = 0; i < 14; ++i) {
             if (playerWays[i].size() > turnNumber + 1) {
                 FieldPlayer * player = grid_[playerWays[i][turnNumber].x][playerWays[i][turnNumber].y].player;
-                if(player->getSpeed() > turnNumber){
+                if(player->getSpeed() > turnNumber && isCloseCase(playerWays[i][turnNumber], playerWays[i][turnNumber + 1], 0)){
                     if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0) {
                         nextPosition[i] = playerWays[i][turnNumber + 1];
                         movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
@@ -312,6 +312,9 @@ bool Match::newTurn() {
                         resolveConflict(nextPosition, playerWays, i, turnNumber);
                     }
                     moved = true;
+                }
+                else{
+                    playerWays[i] = Way();
                 }
             }
         }

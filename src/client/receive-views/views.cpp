@@ -44,7 +44,7 @@ void userlist(JsonValue * message, ServerHandler * handler) {
     }
 
     vector<string> * ulist = new vector<string>;
-    for (int i = 0; i < listMessage->size(); i++) {
+    for (size_t i = 0; i < listMessage->size(); i++) {
         ulist->push_back(getString(listMessage, i));
     }
     emit handler->getWindow()->userList(ulist);
@@ -58,7 +58,7 @@ void playerlist(JsonValue * message, ServerHandler * handler) {
     }
 
     vector<NonFieldPlayer *> * plist = new vector<NonFieldPlayer *>;
-    for (int i = 0; i < listMessage->size(); i++) {
+    for (size_t i = 0; i < listMessage->size(); i++) {
         plist->push_back(new NonFieldPlayer((*listMessage)[i]));
     }
     emit handler->getWindow()->playerList(plist);

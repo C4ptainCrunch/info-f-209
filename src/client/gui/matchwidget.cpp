@@ -209,8 +209,8 @@ void MatchWidget::refreshField() {
 }
 
 bool MatchWidget::isInChosenWays(unsigned x, unsigned y) {
-    for (int i = 0; i < chosenWays.size(); ++i) {
-        for (int j = 0; j < chosenWays[i].size(); ++j) {
+    for (size_t i = 0; i < chosenWays.size(); ++i) {
+        for (size_t j = 0; j < chosenWays[i].size(); ++j) {
             if ((chosenWays[i][j].x == x) && (chosenWays[i][j].y == y)) {
                 return true;
             }

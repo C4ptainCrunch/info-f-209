@@ -57,6 +57,7 @@ InfrastructureWidget::InfrastructureWidget(MainWindow * parent):
     currentInfrastructureWidget = new QWidget(mainWidget);
     currentInfrastructureWidget->setFixedSize(600, 100);
     currentInfrastructureWidget->setStyleSheet("background-image : url(images/wood.jpg); border: 2px solid darkbrown; border-radius: 10px; padding: 0 8px;");
+
     currentInfrastructure = new QLabel(currentInfrastructureWidget);
     currentInfrastructure->setFixedWidth(600);
     currentInfrastructure->setFixedHeight(100);
@@ -73,6 +74,14 @@ InfrastructureWidget::InfrastructureWidget(MainWindow * parent):
     buttonsLayout->addWidget(candyShopButton);
     buttonsLayout->addWidget(fanShopButton);
 
+    QPushButton * upgradeButton = new QPushButton("Upgrade",mainWidget);
+    upgradeButton->setFixedHeight(50);
+    QPushButton * downgradeButton = new QPushButton("Downgrade",mainWidget);
+    downgradeButton->setFixedHeight(50);
+    QHBoxLayout * gradeButtonsLayout = new QHBoxLayout();
+    gradeButtonsLayout->addWidget(upgradeButton);
+    gradeButtonsLayout->addWidget(downgradeButton);
+
     QGridLayout * mainLayout = new QGridLayout(mainWidget);
     QPushButton * backButton = new QPushButton("Back", mainWidget);
     connect(backButton, SIGNAL(clicked()), this, SLOT(backToMenu()));
@@ -84,6 +93,7 @@ InfrastructureWidget::InfrastructureWidget(MainWindow * parent):
     mainLayout->addWidget(currentInfrastructureWidget, 0, 1);
     mainLayout->addWidget(temp2, 3, 2);
     mainLayout->addLayout(buttonsLayout, 1, 1);
+    mainLayout->addLayout(gradeButtonsLayout, 2, 1);
 
 
 }

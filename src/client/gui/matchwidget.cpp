@@ -135,18 +135,18 @@ void MatchWidget::refreshField() {
                 if (grid_[i][j].player != 0) {
                     if (!highlighted && !chosen) {
                         if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
-                            if(grid_[i][j].player->hasQuaffle()){
+                            if (grid_[i][j].player->hasQuaffle()) {
                                 painter.setBrush(QBrush(QColor(0, 100, 0)));
                             }
-                            else{
+                            else {
                                 painter.setBrush(QBrush(Qt::blue));
                             }
                         }
                         else {
-                            if(grid_[i][j].player->hasQuaffle()){
+                            if (grid_[i][j].player->hasQuaffle()) {
                                 painter.setBrush(QBrush(QColor(255, 120, 31)));
                             }
-                            else{
+                            else {
                                 painter.setBrush(QBrush(Qt::red));
                             }
                         }
@@ -168,7 +168,7 @@ void MatchWidget::refreshField() {
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x - xlabelDifference, y - ylabelDifference);
                     }
                 }
-                else if (grid_[i][j].ball != 0 && !highlighted && !chosen) {
+                else if ((grid_[i][j].ball != 0) && !highlighted && !chosen) {
                     string ballName = grid_[i][j].ball->getName();
                     if (ballName == "B") {
                         painter.setBrush(QBrush(Qt::black));
@@ -189,7 +189,7 @@ void MatchWidget::refreshField() {
                     painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
             }
-            else if (grid_[i][j].type == GOAL && !highlighted && !chosen) {
+            else if ((grid_[i][j].type == GOAL) && !highlighted && !chosen) {
                 painter.setBrush(QBrush(QColor(64, 64, 72)));
                 painter.drawPolygon(hexagon[i][j].hexagon_);
             }
@@ -306,7 +306,7 @@ void MatchWidget::mousePressEvent(QMouseEvent * event) {
         }
         else {
             if (isCloseCase(clickedCase, highlightedCases[highlightedCases.size() - 1], 0)) {
-                if ((unsigned)grid_[highlightedCases[0].x][highlightedCases[0].y].player->getSpeed() >= highlightedCases.size()){
+                if ((unsigned)grid_[highlightedCases[0].x][highlightedCases[0].y].player->getSpeed() >= highlightedCases.size()) {
                     highlightedCases.push_back(clickedCase);
                 }
             }

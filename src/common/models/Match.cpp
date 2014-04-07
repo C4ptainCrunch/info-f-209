@@ -270,13 +270,13 @@ void Match::generateGrid() {
 void Match::movePlayer(Position fromPos, Position toPos) {
     grid_[toPos.x][toPos.y].player = grid_[fromPos.x][fromPos.y].player;
     grid_[fromPos.x][fromPos.y].player = 0;
-    if(grid_[toPos.x][toPos.y].player->hasQuaffle()){
-        if(grid_[toPos.x][toPos.y].type == GOAL){
-            if(toPos.y > WIDTH / 2){
-                score_[0]+=10;
+    if (grid_[toPos.x][toPos.y].player->hasQuaffle()) {
+        if (grid_[toPos.x][toPos.y].type == GOAL) {
+            if (toPos.y > WIDTH / 2) {
+                score_[0] += 10;
             }
-            else{
-                score_[1]+=10;
+            else {
+                score_[1] += 10;
             }
             int j = LENGTH / 2;
             int i = 3 * WIDTH / 5;
@@ -303,7 +303,7 @@ bool Match::newTurn() {
         for (int i = 0; i < 14; ++i) {
             if (playerWays[i].size() > turnNumber + 1) {
                 FieldPlayer * player = grid_[playerWays[i][turnNumber].x][playerWays[i][turnNumber].y].player;
-                if(player->getSpeed() > turnNumber && isCloseCase(playerWays[i][turnNumber], playerWays[i][turnNumber + 1], 0)){
+                if ((player->getSpeed() > turnNumber) && isCloseCase(playerWays[i][turnNumber], playerWays[i][turnNumber + 1], 0)) {
                     if (grid_[playerWays[i][turnNumber + 1].x][playerWays[i][turnNumber + 1].y].player == 0) {
                         nextPosition[i] = playerWays[i][turnNumber + 1];
                         movePlayer(playerWays[i][turnNumber], playerWays[i][turnNumber + 1]);
@@ -313,7 +313,7 @@ bool Match::newTurn() {
                     }
                     moved = true;
                 }
-                else{
+                else {
                     playerWays[i] = Way();
                 }
             }
@@ -334,7 +334,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     //BUDGERS
     Position nextBallPos;
     for (int i = 0; i < 2; ++i) {
-        if(turnNumber < budgers_[i].getSpeed()){
+        if (turnNumber < budgers_[i].getSpeed()) {
             nextBallPos = budgers_[i].autoMove(grid_);
             grid_[budgers_[i].getPosition().x][budgers_[i].getPosition().y].ball = 0;
             budgers_[i].setPosition(nextBallPos.x, nextBallPos.y);
@@ -354,7 +354,7 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     }
 
     //GOLDENSNITCH
-    if(turnNumber < goldenSnitch_.getSpeed()){
+    if (turnNumber < goldenSnitch_.getSpeed()) {
         nextBallPos = goldenSnitch_.autoMove(grid_);
         grid_[goldenSnitch_.getPosition().x][goldenSnitch_.getPosition().y].ball = 0;
         goldenSnitch_.setPosition(nextBallPos.x, nextBallPos.y);
@@ -372,33 +372,33 @@ void Match::moveBalls(bool & moved, int turnNumber) {
     //QUAFFLE
     Way quaffleWay = quaffle_.getWay();
     Position quafflePos = quaffle_.getPosition();
-    if(quaffleWay.size() > 0){
+    if (quaffleWay.size() > 0) {
         Position nexPos = quaffleWay[0];
-        if(grid_[nexPos.x][nexPos.y].ball == 0){
+        if (grid_[nexPos.x][nexPos.y].ball == 0) {
             grid_[nexPos.x][nexPos.y].ball = &quaffle_;
             grid_[quafflePos.x][quafflePos.y].ball = 0;
             quaffle_.setPosition(nexPos);
             quafflePos = nexPos;
             quaffleWay.erase(quaffleWay.begin());
         }
-        else{
+        else {
             quaffleWay.pop_back();
         }
         quaffle_.setWay(quaffleWay);
     }
-    if(grid_[quafflePos.x][quafflePos.y].player != 0){
-        if(grid_[quafflePos.x][quafflePos.y].player->getRole() == CHASER){
+    if (grid_[quafflePos.x][quafflePos.y].player != 0) {
+        if (grid_[quafflePos.x][quafflePos.y].player->getRole() == CHASER) {
             grid_[quafflePos.x][quafflePos.y].player->setHasQuaffle(true);
             grid_[quafflePos.x][quafflePos.y].ball = 0;
             quaffle_.setPosition(0, 0);
         }
     }
-    if(grid_[quafflePos.x][quafflePos.y].type == GOAL){
-        if(quafflePos.y > WIDTH / 2){
-            score_[0]+=10;
+    if (grid_[quafflePos.x][quafflePos.y].type == GOAL) {
+        if (quafflePos.y > WIDTH / 2) {
+            score_[0] += 10;
         }
-        else{
-            score_[1]+=10;
+        else {
+            score_[1] += 10;
         }
         int j = LENGTH / 2;
         int i = 3 * WIDTH / 5;
@@ -460,10 +460,10 @@ string Match::print() { //FOR TEST PURPOSES
                         c += "G ";
                     }
                     else if (grid_[i][j].player->getRole() == CHASER) {
-                        if(grid_[i][j].player->hasQuaffle()){
+                        if (grid_[i][j].player->hasQuaffle()) {
                             c += "P\\";
                         }
-                        else{
+                        else {
                             c += "P ";
                         }
                     }

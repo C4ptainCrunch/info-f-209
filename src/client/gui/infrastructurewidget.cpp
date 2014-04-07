@@ -74,9 +74,9 @@ InfrastructureWidget::InfrastructureWidget(MainWindow * parent):
     buttonsLayout->addWidget(candyShopButton);
     buttonsLayout->addWidget(fanShopButton);
 
-    QPushButton * upgradeButton = new QPushButton("Upgrade",mainWidget);
+    QPushButton * upgradeButton = new QPushButton("Upgrade", mainWidget);
     upgradeButton->setFixedHeight(50);
-    QPushButton * downgradeButton = new QPushButton("Downgrade",mainWidget);
+    QPushButton * downgradeButton = new QPushButton("Downgrade", mainWidget);
     downgradeButton->setFixedHeight(50);
     QHBoxLayout * gradeButtonsLayout = new QHBoxLayout();
     gradeButtonsLayout->addWidget(upgradeButton);

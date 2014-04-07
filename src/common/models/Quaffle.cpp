@@ -61,7 +61,7 @@ Way Quaffle::getWay() const {
     return thrownWay_;
 }
 
-void Quaffle::setWay(Way way){
+void Quaffle::setWay(Way way) {
     thrownWay_ = way;
 }
 

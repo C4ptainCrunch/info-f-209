@@ -10,6 +10,11 @@ void end_turn(JsonValue * message, UserHandler * handler) {
         throw BadRequest("Malformatted request. Need a JSON dict");
     }
     Way playerWays[7];
+    Match * match = handler->getMatch();
+    Club * club = handler->getManager()->getClub();
+    bool isGuest = match->isGuest(club);
+    Case grid[WIDTH][LENGTH];
+    match->getGrid(grid);
     for (int i = 0; i < listMessage->size() && i < 7; i++) {
         JsonList * way = JLIST((*listMessage)[i]);
         if (way == NULL) {
@@ -31,15 +36,17 @@ void end_turn(JsonValue * message, UserHandler * handler) {
             pos.y = *intY;
             newWay.push_back(pos);
         }
-        playerWays[i] = newWay;
+        if(newWay.size()>0 && grid[newWay[i].x][newWay[i].y].player->isInGuestTeam() == isGuest){
+            playerWays[i] = newWay;
+        }
+        else{
+            playerWays[i] = Way();
+        }
     }
     for (int i = listMessage->size(); i < 7; i++) {
         playerWays[i] = Way();
     }
 
-    Club * club = handler->getManager()->getClub();
-    Match * match = handler->getMatch();
-    bool isGuest = match->isGuest(club);
     match->setWays(isGuest, playerWays);
     if (match->setReady(isGuest)) {
         if (match->newTurn()) {

@@ -119,22 +119,34 @@ void MatchWidget::refreshField() {
             hexagon[i][j].setCorners();
 
             x += 18;
+            if (isCaseHighlighted(i, j)) {
+                painter.setBrush(QBrush(QColor(71, 158, 158)));
+                highlighted = true;
+                painter.drawPolygon(hexagon[i][j].hexagon_);
+            }
+            else if (isInChosenWays(i, j)) {
+                painter.setBrush(QBrush(QColor(85, 18, 201)));
+                chosen = true;
+                painter.drawPolygon(hexagon[i][j].hexagon_);
+            }
             if (grid_[i][j].type == USABLE) {
-                if (isCaseHighlighted(i, j)) {
-                    painter.setBrush(QBrush(QColor(71, 158, 158)));
-                    highlighted = true;
-                }
-                else if (isInChosenWays(i, j)) {
-                    painter.setBrush(QBrush(QColor(85, 18, 201)));
-                    chosen = true;
-                }
                 if (grid_[i][j].player != 0) {
                     if (!highlighted && !chosen) {
                         if (grid_[i][j].player->isInGuestTeam() == isGuest_) {
-                            painter.setBrush(QBrush(Qt::blue));
+                            if(grid_[i][j].player->hasQuaffle()){
+                                painter.setBrush(QBrush(QColor(0, 100, 0)));
+                            }
+                            else{
+                                painter.setBrush(QBrush(Qt::blue));
+                            }
                         }
                         else {
-                            painter.setBrush(QBrush(Qt::red));
+                            if(grid_[i][j].player->hasQuaffle()){
+                                painter.setBrush(QBrush(QColor(255, 120, 31)));
+                            }
+                            else{
+                                painter.setBrush(QBrush(Qt::red));
+                            }
                         }
                     }
                     if (grid_[i][j].player->getRole() == KEEPER) {
@@ -142,14 +154,6 @@ void MatchWidget::refreshField() {
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][KEEPER]->move(x - xlabelDifference, y - ylabelDifference);
                     }
                     else if (grid_[i][j].player->getRole() == CHASER) {
-                        if(grid_[i][j].player->hasQuaffle()){
-                            if(grid_[i][j].player->isInGuestTeam() == isGuest_){
-                                painter.setBrush(QBrush(QColor(0, 100, 0)));
-                            }
-                            else{
-                                painter.setBrush(QBrush(QColor(255, 120, 31)));
-                            }
-                        }
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER] = new QLabel("C", fieldWidget);
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][CHASER]->move(x - xlabelDifference, y - ylabelDifference);
                     }
@@ -162,7 +166,7 @@ void MatchWidget::refreshField() {
                         playerLabels_[grid_[i][j].player->isInGuestTeam()][BEATER]->move(x - xlabelDifference, y - ylabelDifference);
                     }
                 }
-                else if (grid_[i][j].ball != 0) {
+                else if (grid_[i][j].ball != 0 && !highlighted && !chosen) {
                     string ballName = grid_[i][j].ball->getName();
                     if (ballName == "B") {
                         painter.setBrush(QBrush(Qt::black));
@@ -179,14 +183,11 @@ void MatchWidget::refreshField() {
                         painter.setBrush(*grass);
                     }
                 }
-                if (highlighted) {
-                    painter.drawPolygon(hexagon[i][j].hexagon_);
-                }
-                else {
+                if (!highlighted && !chosen) {
                     painter.drawPolygon(hexagon[i][j].hexagon_);
                 }
             }
-            else if (grid_[i][j].type == GOAL) {
+            else if (grid_[i][j].type == GOAL && !highlighted && !chosen) {
                 painter.setBrush(QBrush(QColor(64, 64, 72)));
                 painter.drawPolygon(hexagon[i][j].hexagon_);
             }

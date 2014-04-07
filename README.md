@@ -1,5 +1,3 @@
-#Read Me
-
 ##Compilation
 
 Dans le dossier root, exécutez la commande:
@@ -14,7 +12,7 @@ Dans le dossier root, exécutez la commande:
 
     make client
 
-Si vous désirez changez l'host(adresse du serveur), executer la commande /build/bin/client hostname
+Si vous désirez changez l'host(adresse du serveur), executer la commande ./build/bin/client hostname
 ###Serveur
 Exécutez la commande:
 
@@ -41,10 +39,17 @@ Pour nettoyer les fichiers générés par les compilations, exécutez la command
     make clean
 
 ###Divers
-Par défaut, le serveur tourne sur le port 5000. Pour le modifier, appelez le client avec comme premier paramètre le hostname et comme second paramètre le port.
+Par défaut, le serveur tourne sur le port 9000. Pour le modifier, appelez le client avec comme premier paramètre le hostname et comme second paramètre le port.
 Pour le serveur, modifiez le fichier `serveurconfig.json` .
 
 Pour exécutez les tests, allez dans le dossier à tester et exécutez la commande :
 
     make test
 
+Pour initialiser le serveur avec des données de test, exécutez la commande :
+
+    make init
+
+Les utilisateurs suivant seront donc dès lors disponnibles :
+ * 'player1' avec le mot de passe 'pass1'
+ * 'player2' avec le mot de passe 'pass2'

@@ -1,3 +1,24 @@
+# Quiddich Manager 2014
+
+Quiddich Manager 2014 is a university project part of the BA2 cursus in Computer Science at [ULB](http://www.ulb.ac.be/) (Course info-f-209)
+
+The goal was to write in groups of 6 (our was 3) a client-server multiplayer Quiddich game in C++ with no external libs (apart for the GUI)
+
+## Team
+* Bruno Rocha Pereira
+* Romain Fontaine
+* Nikita Marchant
+
+# License
+
+    The MIT License (MIT)
+    Copyright (c) 2013-2014
+    nimarcha@ulb.ac.be rfontain@ulb.ac.be brochape@ulb.ac.be
+
+
+
+# How To
+
 ##Compilation
 
 Dans le dossier root, exécutez la commande:
